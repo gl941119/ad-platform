@@ -3,6 +3,10 @@ import router from '@/router'
 import store from '@/store'
 import App from './App'
 
+import './utils/element';
+import './assets/css/reset.css';
+
+Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

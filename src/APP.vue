@@ -1,9 +1,19 @@
 <template>
-  <div>APP</div>
+    <div id="app">
+        <header-com></header-com>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-}
+    import headerCom from '@/components/header';
+    export default {
+        name: 'app',
+        data() {
+            return {};
+        },
+        components: {
+            'header-com': headerCom
+        }
+    }
 </script>
