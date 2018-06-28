@@ -1,11 +1,23 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+const IndexCom = () =>
+    import ('@/pages/index/index');
+
+Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes: [
-  ]
+    routes: [
+        {
+            path: '/',
+            redirect: {name: 'index'},
+        },
+        {
+            path: '/index',
+            name: 'index',
+            component: IndexCom,
+        },
+    ]
 })
 
-export default router
+export default router;
