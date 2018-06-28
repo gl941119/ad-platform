@@ -13,11 +13,11 @@
 
 <script>
     import {swiper,swiperSlide} from 'vue-awesome-swiper';
-    const img1 = require('../assets/imgs/thumbs/thumb1.jpg')
-    const img2 = require('../assets/imgs/thumbs/thumb2.jpg')
-    const img3 = require('../assets/imgs/thumbs/thumb3.jpg')
-    const img4 = require('../assets/imgs/thumbs/thumb4.jpg')
-    const img5 = require('../assets/imgs/thumbs/thumb5.jpg')
+    const img1 = require('../assets/imgs/thumbs/thumb1.jpg');
+    const img2 = require('../assets/imgs/thumbs/thumb2.jpg');
+    const img3 = require('../assets/imgs/thumbs/thumb3.jpg');
+    const img4 = require('../assets/imgs/thumbs/thumb4.jpg');
+    const img5 = require('../assets/imgs/thumbs/thumb5.jpg');
     let img = [img1, img2, img3, img4, img5];
     export default {
         data() {

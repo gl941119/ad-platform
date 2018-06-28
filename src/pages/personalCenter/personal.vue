@@ -4,7 +4,7 @@
 			<el-aside width="225px" class="bierinc-main-container-aside">
 				<div class="logo">
 					<div class="logo_box">
-						<img class="logo_img" src="../../assets/imgs/surmon-3.png" />
+						<img class="logo_img" src="../../assets/imgs/thumbs/thumb3.jpg" />
 						<p class="username">用户名</p>
 					</div>
 				</div>
