@@ -7,6 +7,10 @@ const PersonalCenter = () =>
 	import('@/pages/personalCenter/personal');
 const Purse = () =>
 	import('@/pages/personalCenter/purse/purse');
+const Revenue = () =>
+	import('@/pages/personalCenter/advertisingRevenue/revenue');
+const Main = () =>
+	import('@/pages/personalCenter/main/main');
 
 Vue.use(VueRouter);
 
@@ -23,17 +27,29 @@ const router = new VueRouter({
 			component: IndexCom,
 		},
 		{
-			path: '/personalCenter',
+			path: '/personalCenter',//个人中心
 			name: 'personalCenter',
 			component: PersonalCenter,
 			redirect: {
 				name: 'purse'
 			},
-			children: [{
-				path: 'purse',
-				name: 'purse',
-				component: Purse,
-			}, ],
+			children: [
+				{
+					path: 'purse',//钱包
+					name: 'purse',
+					component: Purse,
+				},
+				{
+					path: 'revenue',//广告收益账户
+					name: 'revenue',
+					component: Revenue,
+				},
+				{
+					path: 'main',//广告主账户
+					name: 'main',
+					component: Main,
+				},
+			],
 		}
 	]
 })
