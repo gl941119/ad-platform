@@ -14,16 +14,16 @@ npm start
 
 
 ### build for production with minification
-````bash
+```bash
 # build dependencies
 npm run dll
 
 # dist
 npm run build
-````
+```
 
 # build for production and view the bundle analyzer report
-````bash
+```bash
 # analyzer
 npm run build --report
 
