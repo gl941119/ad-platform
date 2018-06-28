@@ -5,18 +5,19 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   entry: {
     vue: ['vue/dist/vue.esm.js', 'vue-router', 'vuex', 'axios'],
-    // ui: ['element-ui', 'echarts']
+    ui: ['element-ui']
   },
   output: {
     path: path.join(__dirname, '../dll'),
     filename: '[name].dll.js',
     library: '[name]'
-  },
+    },
+  devtool: '#source-map',
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
         parallel: true,
-        sourceMap: false,
+        sourceMap: true,
         cache: true
       })
     ]
