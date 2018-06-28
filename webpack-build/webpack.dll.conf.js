@@ -5,7 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   entry: {
     vue: ['vue/dist/vue.esm.js', 'vue-router', 'vuex', 'axios'],
-    ui: ['element-ui']
+    ui: ['element-ui', 'vue-awesome-swiper']
   },
   output: {
     path: path.join(__dirname, '../dll'),
