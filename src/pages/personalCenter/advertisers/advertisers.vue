@@ -30,6 +30,8 @@
 			<h5>项目情况</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>项目名称</label>
+				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>项目简介</label>
@@ -42,19 +44,9 @@
 			<li class="newCrowdfunding_item_li">
 				<label>技术</label>
 			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>官网</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>白皮书地址</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
-			<h5>代币发行</h5>
+			<h5>代币信息</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>英文简写</label>
 				<el-input placeholder="请输入内容" v-model="input10" clearable>
@@ -73,52 +65,22 @@
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
 			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>本轮众筹标题</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>发行总量</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>众筹总量</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>本轮次发行量</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>众筹价格</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>目标货币</label>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>发行硬顶</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>发行软顶</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label>本轮众筹时间</label>
-			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
-			<h5>合规性文件</h5>
+			<h5>相关链接</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>相关牌照</label>
+				<label>官网</label>
+				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>白皮书地址</label>
+				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input>
 				<el-input placeholder="请输入内容" v-model="input10" clearable>
 				</el-input>
 			</li>

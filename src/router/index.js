@@ -21,6 +21,8 @@ const Project = () =>
 	import('@/pages/personalCenter/crowdfundingProject/project.vue');
 const NewProject = () =>
 	import('@/pages/personalCenter/crowdfundingProject/newCrowdfunding.vue');
+const Advertisers = () =>
+	import('@/pages/personalCenter/advertisers/advertisers');
 	
 Vue.use(VueRouter);
 
@@ -83,6 +85,11 @@ const router = new VueRouter({
 					path: 'newCrowdfunding',//申请新的众筹
 					name: 'newCrowdfunding',
 					component: NewProject,
+				},
+				{
+					path: 'advertisers',//广告主-广告投放管理
+					name: 'advertisers',
+					component: Advertisers,
 				},
 			],
 		}

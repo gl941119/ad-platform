@@ -20,7 +20,7 @@
 					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'settings'}">账号设置</router-link>
 				</ul>
 				<ul class="bierinc-main-container-aside-menu">
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">广告方</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'advertisers'}">广告方</router-link>
 					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'project'}">众筹项目方</router-link>
 					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">投资人</router-link>
 					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">合伙人</router-link>
