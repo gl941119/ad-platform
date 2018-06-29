@@ -14,7 +14,7 @@
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
 					<li class="withdraw_item_li"><label>可用金额</label><span>1111111111</span></li>
-					<li class="withdraw_item_li"><label>手续费</label<span>11111111</span></li>
+					<li class="withdraw_item_li"><label>手续费</label><span>11111111</span></li>
 			<li class="withdraw_item_li">
 				<span>广告收益账户</span>《===》<span>我的钱包</span>
 			</li>
@@ -31,7 +31,9 @@
 			</div>
 		</div>
 		<div class="advertising_revenu_account_flow">
-			<div class="advertising_revenu_account_flow_title">账户流水</div>
+			<div>
+				<div class="advertising_revenu_account_flow_title">账户流水</div>
+			</div>
 			<el-table border :data="flowData" style="width: 100%">
 				<el-table-column prop="date" label="时间">
 				</el-table-column>
