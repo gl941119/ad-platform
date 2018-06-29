@@ -9,3 +9,7 @@
     line-height: $headerBarHeight;
     font-size: $headerFontSize;
 }
+@mixin body-center($width: $contentWidth) {
+    width: $width;
+    margin: 0 auto;
+}
