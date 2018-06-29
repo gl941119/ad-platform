@@ -11,13 +11,17 @@
               <crowdsale-item :is-event-over="true" ></crowdsale-item>
               <crowdsale-item :is-event-over="false" ></crowdsale-item>
           </div>
-          <div class="plat-index-item-ad"></div>
+          <div class="platform-index-item-ad">
+              <div class="platform-index-item-ad-title">项目</div>
+              <advert-item></advert-item>
+          </div>
       </div>
   </div>
 </template>
 <script>
     import customCarouselCom from '@/components/custom-carousel';
     import crowdsaleItemCom from '@/components/index-com/crowdsale-item';
+    import advertItemCom from '@/components/index-com/advert-item';
     export default {
         data() {
             return {}
@@ -25,6 +29,7 @@
         components: {
             'custom-carousel': customCarouselCom,
             'crowdsale-item': crowdsaleItemCom,
+            'advert-item': advertItemCom,
         }
     }
 </script>
@@ -59,9 +64,16 @@
         }
         &-item {
             @include body-center();
-            @include content-flex();
+            @include content-flex(flex-start, flex-start);
             &-crowdsale {
                 width: $crowdsaleWidth;
+                &-title {
+                    @extend %platform-index-title;
+                }
+            }
+            &-ad {
+                margin-left: 43px;
+                flex: 1;
                 &-title {
                     @extend %platform-index-title;
                 }

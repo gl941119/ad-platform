@@ -13,3 +13,13 @@
     width: $width;
     margin: 0 auto;
 }
+%text-abstract {
+    color: $crowdsaleAbstractColor;
+    font-size: $crowdsaleAdFontSize;
+    line-height: 20px;
+}
+@mixin item-title($flag: true) {
+    @if $flag {font-weight: bold;}
+    font-size: $headerFontSize;
+    color: $crowdsaleTitleColor;
+}

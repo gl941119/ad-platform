@@ -63,9 +63,7 @@ export default {
     &-title {
         @include content-flex();
         height: 25px;
-        font-weight: bold;
-        font-size: $headerFontSize;
-        color: $crowdsaleTitleColor;
+        @include item-title();
         &-border {
             height: 100%;
             border: 1px solid #E2E2E2;
@@ -85,14 +83,12 @@ export default {
         line-height: 17px;
     }
     &-abstract {
-        color: $crowdsaleAbstractColor;
-        font-size: $crowdsaleAdFontSize;
-        line-height: 20px;
+        @extend %text-abstract;
     }
     &-list {
         @include content-flex();
         height: 73px;
-        margin-top: 32px;
+        margin-top: 16px;
         &-left {
             width: 226px;
             height: 100%;
