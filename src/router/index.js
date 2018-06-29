@@ -10,8 +10,18 @@ const Purse = () =>
 const Revenue = () =>
 	import('@/pages/personalCenter/advertisingRevenue/revenue');
 const Main = () =>
-	import('@/pages/personalCenter/main/main');
-
+	import('@/pages/personalCenter/masterAccount/main');
+const Crowdfunding = () =>
+	import('@/pages/personalCenter/myCrowdfunding/crowdfunding');
+const Invite = () =>
+	import('@/pages/personalCenter/invite/invite');
+const Settings = () =>
+	import('@/pages/personalCenter/accountSettings/settings.vue');
+const Project = () =>
+	import('@/pages/personalCenter/crowdfundingProject/project.vue');
+const NewProject = () =>
+	import('@/pages/personalCenter/crowdfundingProject/newCrowdfunding.vue');
+	
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -48,6 +58,31 @@ const router = new VueRouter({
 					path: 'main',//广告主账户
 					name: 'main',
 					component: Main,
+				},
+				{
+					path: 'crowdfunding',//我的众筹
+					name: 'crowdfunding',
+					component: Crowdfunding,
+				},
+				{
+					path: 'invite',//邀请用户
+					name: 'invite',
+					component: Invite,
+				},
+				{
+					path: 'settings',//账号设置
+					name: 'settings',
+					component: Settings,
+				},
+				{
+					path: 'project',//众筹项目方
+					name: 'project',
+					component: Project,
+				},
+				{
+					path: 'newCrowdfunding',//申请新的众筹
+					name: 'newCrowdfunding',
+					component: NewProject,
 				},
 			],
 		}

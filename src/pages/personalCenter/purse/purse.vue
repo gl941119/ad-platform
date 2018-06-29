@@ -18,13 +18,23 @@
 	</div>
 </template>
 <script>
-	/*export default {
-					data() {
-						return {
+	export default {
+		data() {
+			return {
+				accountData: [],
+				currentPage: 0,
+				pageSizes: 5,
+			}
+		},
+		methods: {
+			handleCurrentChange(page) {
+				this.pageSizes = page;
+			},
+			handleSizeChange(page) {
 
-						}
-					},
-				};*/
+			},
+		}
+	};
 </script>
 <style lang="scss" scoped>
 	.balance {
