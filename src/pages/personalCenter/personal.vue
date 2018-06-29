@@ -9,23 +9,23 @@
 					</div>
 				</div>
 				<ul class="bierinc-main-container-aside-menu">
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'home':'tikhome' }">钱包</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'bulletin':'tikbulletin' }">广告收益账户</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'feedback':'tikfeedback' }">广告主账户</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'purse'}">钱包</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'revenue'}">广告收益账户</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">广告主账户</router-link>
 				</ul>
 				<ul class="bierinc-main-container-aside-menu">
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'home':'tikhome' }">我的众筹</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'bulletin':'tikbulletin' }">我的投票</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'feedback':'tikfeedback' }">邀请用户</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'feedback':'tikfeedback' }">账号设置</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'crowdfunding'}">我的众筹</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">我的投票</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'invite'}">邀请用户</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'settings'}">账号设置</router-link>
 				</ul>
 				<ul class="bierinc-main-container-aside-menu">
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'home':'tikhome' }">广告方</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'bulletin':'tikbulletin' }">众筹项目方</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'feedback':'tikfeedback' }">投资人</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'home':'tikhome' }">合伙人</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'bulletin':'tikbulletin' }">交易所</router-link>
-					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: platform==='amazon'?'feedback':'tikfeedback' }">媒体</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">广告方</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'project'}">众筹项目方</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">投资人</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">合伙人</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>
+					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>
 				</ul>
 				<div class="bierinc-main-container-aside-menu-li">退出登录</div>
 			</el-aside>

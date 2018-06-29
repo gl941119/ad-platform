@@ -1,32 +1,49 @@
 <template>
-	<div class="advertising_revenue">
+	<div class="master_account">
 		<div class="advertising_revenue_top">
-			<h3>BRB</h3>
+			<h3>AFD</h3>
 			<ul class="advertising_revenue_top_item">
-				<li class="advertising_revenue_top_item_li active">3245.61254234 BRB</li>
-				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>冻结 1000.61254223 BRB</li>
+				<li class="advertising_revenue_top_item_li active">3245.61254234 AFD</li>
+				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>冻结 1000.61254223 AFD</li>
 			</ul>
-			<div class="advertising_revenue_top_money" @click="withdraw()">提现</div>
+			<div class="advertising_revenue_top_money" @click="recharge()">充值</div>
 		</div>
-		<!--提現-->
-		<div class="withdraw" v-if="withdrawView">
+		<!--充值-->
+		<!--<div class="withdraw" v-if="rechargeView">
 			<div class="withdraw_box">
-				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
+				<span class="withdraw_box_back" @click="recharge"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>可用金额</label><span>1111111111</span></li>
-					<li class="withdraw_item_li"><label>手续费</label<span>11111111</span></li>
-			<li class="withdraw_item_li">
-				<span>广告收益账户</span>《===》<span>我的钱包</span>
-			</li>
-			<li class="withdraw_item_li"><label>提现金额：</label>
+					<li class="withdraw_item_li"><label>钱包地址：</label>
 						<el-input placeholder="请输入内容" v-model="input" clearable>
 						</el-input>
 					</li>
-					<li class="withdraw_item_li"><label>交易密码：</label>
-						<el-input placeholder="请输入内容" type="password" v-model="input1" clearable>
+					<li class="withdraw_item_li"><label style="width: 100px;">二维码：</label>
+						<div class="img">
+							<img src="../../../assets/imgs/swiper-img/swiper2.jpg" />
+						</div>
+					</li>
+					<button class="right_now" style=";position:absolute;top: 238px;">好的</button>
+				</ul>
+			</div>
+		</div>-->
+		<div class="withdraw" v-if="rechargeView">
+			<div class="withdraw_box">
+				<span class="withdraw_box_back" @click="recharge"><i class="el-icon-close"></i></span>
+				<ul class="withdraw_item">
+					<li class="withdraw_item_li"><label>收款账户：</label>
+						<el-input placeholder="请输入内容" v-model="input" clearable>
 						</el-input>
 					</li>
-					<button class="right_now">提现</button>
+					<li class="withdraw_item_li" style="height: 126px;"><label style="width: 100px;">可用余额：</label>
+						<div class="img">
+							<img src="../../../assets/imgs/swiper-img/swiper2.jpg" />
+						</div>
+					</li>
+					<li class="withdraw_item_li"><label style="width: 100px;">可用余额：</label>
+						<span>111111111111111111111</span>
+					</li>
+					<p>充值金额到账后，相应金额会自动出现在广告主账户中</p>
+					<button class="right_now" style=";position:absolute;top: 278px;">好的</button>
 				</ul>
 			</div>
 		</div>
@@ -56,7 +73,7 @@
 				flowData: [],
 				currentPage: 0,
 				pageSizes: 5,
-				withdrawView: false
+				rechargeView: false,
 			}
 		},
 		methods: {
@@ -66,9 +83,9 @@
 			handleSizeChange(page) {
 
 			},
-			withdraw() {
-				this.withdrawView = !this.withdrawView;
-			},
+			recharge() {
+				this.rechargeView = !this.rechargeView;
+			}
 		}
 	}
 </script>
@@ -77,11 +94,11 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
 	.advertising_revenue_top {
-		margin: 30px 0px;
 		h3 {
 			font-size: 24px;
 			margin-bottom: 30px;
 		}
+		margin: 30px 0px;
 		.advertising_revenue_top_item {
 			float: left;
 			color: #ececec;
@@ -89,8 +106,6 @@
 			.advertising_revenue_top_item_li {
 				float: left;
 				margin: 0 5px;
-				height: 30px;
-				line-height: 30px;
 				.advertising_revenue_top_item_li_line {
 					margin-right: 5px;
 				}
@@ -111,14 +126,9 @@
 		color: #000000;
 	}
 	
-	.advertising_revenu_account_flow {
-		overflow: hidden;
-		clear: both;
-	}
-	
 	.advertising_revenu_account_flow_title {
+		margin-bottom: 30px;
 		clear: both;
-		margin: 30px 0;
 	}
 	
 	.advertising_revenu_account_flow_data_pages {
