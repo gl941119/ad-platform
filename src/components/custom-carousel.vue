@@ -1,11 +1,7 @@
 <template>
   <div class="custom-carousel">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-        <swiper-slide class="slide-4"></swiper-slide>
-        <swiper-slide class="slide-5"></swiper-slide>
+        <swiper-slide v-for="img in swiperImg" :key="img"><img :src="img"></swiper-slide>
       </swiper>
     <div class="swiper-pagination"></div>
   </div>
@@ -13,6 +9,11 @@
 
 <script>
     import {swiper,swiperSlide} from 'vue-awesome-swiper';
+    const swiperImg1 = require('../assets/imgs/swiper-img/swiper1.jpg');
+    const swiperImg2 = require('../assets/imgs/swiper-img/swiper2.jpg');
+    const swiperImg3 = require('../assets/imgs/swiper-img/swiper3.jpg');
+    const swiperImg4 = require('../assets/imgs/swiper-img/swiper4.jpg');
+    const swiperImg5 = require('../assets/imgs/swiper-img/swiper5.jpg');
     const img1 = require('../assets/imgs/thumbs/thumb1.jpg');
     const img2 = require('../assets/imgs/thumbs/thumb2.jpg');
     const img3 = require('../assets/imgs/thumbs/thumb3.jpg');
@@ -22,8 +23,8 @@
     export default {
         data() {
             return {
+                swiperImg: [swiperImg1, swiperImg2, swiperImg3, swiperImg4, swiperImg5],
                 swiperOptionTop: {
-                    spaceBetween: 10,
                     autoplay: {
                         disableOnInteraction: false,
                     },
@@ -80,24 +81,5 @@
     }
     .swiper-pagination-bullet.swiper-pagination-bullet-active img {
         box-shadow: 5px 5px 8px #555;
-    }
-    .swiper-slide {
-        background-size: cover;
-        background-position: center;
-        &.slide-1 {
-            background-image: url('../assets/imgs/swiper-img/swiper1.jpg');
-        }
-        &.slide-2 {
-            background-image: url('../assets/imgs/swiper-img/swiper2.jpg');
-        }
-        &.slide-3 {
-            background-image: url('../assets/imgs/swiper-img/swiper3.jpg');
-        }
-        &.slide-4 {
-            background-image: url('../assets/imgs/swiper-img/swiper4.jpg');
-        }
-        &.slide-5 {
-            background-image: url('../assets/imgs/swiper-img/swiper5.jpg');
-        }
     }
 </style>
