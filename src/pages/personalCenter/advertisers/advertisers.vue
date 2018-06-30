@@ -116,9 +116,10 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
 				<div>
-					<el-checkbox-group v-model="checked" size="medium" max="4">
+					<!--<el-checkbox-group v-model="checked" size="medium" max="4">
 						<el-checkbox-button class="withdraw_box_element" v-for="item in elements" :label="item" :key="item">{{item}}</el-checkbox-button>
-					</el-checkbox-group>
+					</el-checkbox-group>-->
+					<conceptCom></conceptCom>
 				</div>
 			</div>
 		</div>
@@ -161,8 +162,9 @@
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<i v-if="!imageUrl" class="el-icon-plus"></i>
 					</el-upload>
-					<el-dialog :visible.sync="dialogVisible"><!--:src="dialogImageUrl"-->
-						<img width="50%"  alt="">
+					<el-dialog :visible.sync="dialogVisible">
+						<!--:src="dialogImageUrl"-->
+						<img width="50%" alt="">
 					</el-dialog>
 				</div>
 			</li>
@@ -190,6 +192,7 @@
 </template>
 
 <script>
+	import conceptCom from '@/components/personal-com/concept';
 	export default {
 		data() {
 			return {
@@ -205,15 +208,18 @@
 					dept: '',
 					intro: '',
 				},
-				imageUrl:'',
+				imageUrl: '',
 				input10: '',
 				textarea3: '',
 				concept: false,
-				technology:false,
-				elements: ["111", "2222", "3333",'444444444','4444444444','33333333333333'],
-				checked:['111'],
+				technology: false,
+				elements: ["111", "2222", "3333", '444444444', '4444444444', '33333333333333'],
+				checked: ['111'],
 			}
 		},
+		components: {
+            conceptCom,
+        },
 		methods: {
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
@@ -223,7 +229,12 @@
 			},
 			deletedCore(value) { //核心团队
 				console.log(value)
-				this.coreTeam.splice(value, 1);
+				var length = this.coreTeam.length;
+				if(length<=1){
+					alert("不要删了o，再删就没有了")
+				}else{
+					this.coreTeam.splice(value, 1);
+				}
 			},
 			addConsultant() { //顾问团队
 				var tmpPersions = this.consultantTeam;
@@ -233,7 +244,12 @@
 			},
 			deletedConsultant(value) { //顾问团队
 				console.log(value)
-				this.consultantTeam.splice(value, 1);
+				var length = this.consultantTeam.length;
+				if(length<=1){
+					alert("不要删了o，再删就没有了")
+				}else{
+					this.consultantTeam.splice(value, 1);
+				}
 			},
 			handleRemoveLogo(file, fileList) { //头像
 				console.log(file, fileList);
@@ -242,8 +258,8 @@
 				this.dialogImageUrl = file.url;
 				this.dialogVisible = true;
 			},
-			getLogo(){
-				
+			getLogo() {
+
 			},
 			beforeAvatarUpload(file) { //头像文件限制
 				//console.log("beforeAvatarUpload file:",file)
@@ -263,7 +279,7 @@
 			conceptFun() { //概念弹出窗
 				this.concept = !this.concept;
 			},
-			technologyFun(){
+			technologyFun() {
 				this.technology = !this.technology;
 			}
 		}
@@ -322,5 +338,11 @@
 				}
 			}
 		}
+	}
+	
+	.el-checkbox-button.is-checked .el-checkbox-button__inner {
+		background: #fff;
+		border: 1px solid #dcdfe6;
+		border-radius: 20px;
 	}
 </style>
