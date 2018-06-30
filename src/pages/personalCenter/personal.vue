@@ -61,6 +61,10 @@
 			}
 		}
 	}
+	.el-container{
+		width: 1200px;
+		margin: 0 auto;
+	}
 	.bierinc-main-container-aside-menu{
 		margin-bottom: 20px;
 	}
