@@ -27,7 +27,7 @@
         data() {
             return {}
         },
-        created() {
+        mounted () {
             this.getData()
         },
         components: {

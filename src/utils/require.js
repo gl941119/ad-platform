@@ -1,12 +1,10 @@
 import Vue from 'vue';
 import axios from 'axios';
 import qs from 'qs';
-import {Loading} from 'element-ui';
+import { Loading } from 'element-ui';
 import ajaxURL from '../config';
 import config from './config';
 
-// axios.defaults.baseURL = config.url.localTestUrl;
-console.log('process.env.NODE_ENV_>', process.env.NODE_ENV);
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.url.localTestUrl : config.url.productUrl;
 
 let loadingInstance;
@@ -36,26 +34,47 @@ axios.interceptors.response.use(data => {
 async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     type = type.toUpperCase();
     url = ajaxURL[url];
+    let token = store.state.token || Cache.getSession('bier_token');
+
     if (type === 'GET') {
-        return axios.get(url, {params: data});
+        return axios.get(url, {
+            params: data
+        });
     } else if (type === 'POST') {
         if (isJson) {
-            return axios.post(url, data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            return token ? axios.post(url, data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        token,
+                    },
+                }) :
+                axios.post(url, data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
         }
-        return axios.post(url, qs.stringify(data));
+        return token ? axios.post(url, qs.stringify(data), {
+            headers: {token},
+        }) : axios.post(url, qs.stringify(data));
     }
 }
+
+/**
+ * require
+ * @param {Object} params -> (url: String, [data: Object, type: 'POST'(default)/'GET', flag: Boolean])
+ * @param params.url -> config define String, required
+ * @param params.data -> require data object
+ * @param params.type -> require method, default 'POST'
+ * @param params.flag -> json require, default false
+ */
 function requestHandle(params) {
-    let {url, data, type, flag} = params;
+    let { url, data, type, flag } = params;
     return new Promise((resolve, reject) => {
         ajaxRequest(url, data, type, flag).then(
             res => {
-                let {data, success, total, message} = res.data;
-    
+                let { data, success, total, message } = res.data;
+
                 // console.log('requestHandle-[%s]->', url, res.data);
                 if (success === 1) {
                     resolve(res.data);
@@ -69,7 +88,6 @@ function requestHandle(params) {
             }
         );
     })
-    
 }
 
 export default requestHandle;

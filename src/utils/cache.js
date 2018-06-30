@@ -1,5 +1,5 @@
 /**
- * 
+ * bier_token     ->     token
  */
 export default {
     getSession(name) {

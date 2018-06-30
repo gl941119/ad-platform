@@ -4,9 +4,24 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    list: [1, 2, 4]
-  },
-  mutations: {},
-  actions: {}
-})
+    state: {
+        id: undefined,
+        uid: undefined,
+        username: undefined,
+        token: undefined,
+    },
+    mutations: {
+        setUserId(state, val) {
+            state.id = val;
+        },
+        setUserUId(state, val) {
+            state.uid = val;
+        },
+        setUserName(state, val) {
+            state.username = val;
+        },
+        setToken(state, val) {
+            state.token = val;
+        },
+    },
+});
