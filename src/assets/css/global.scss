@@ -18,6 +18,13 @@
     font-size: $crowdsaleAdFontSize;
     line-height: 20px;
 }
+%platform-title {
+    font-size: $crowdsaleFontSize;
+    color: $crowdsaleFontColor;
+    font-weight: bold;
+    font-family: semibold;
+    line-height: 28px;
+}
 @mixin item-title($flag: true) {
     @if $flag {font-weight: bold;}
     font-size: $headerFontSize;

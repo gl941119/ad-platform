@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 const IndexCom = () =>
 	import('@/pages/index/index');
+const CrowdSaleCom = () =>
+	import('@/pages/crowdsale-detail/crowdsale');
 const PersonalCenter = () =>
 	import('@/pages/personalCenter/personal');
 const Purse = () =>
@@ -37,6 +39,11 @@ const router = new VueRouter({
 			path: '/index',
 			name: 'index',
 			component: IndexCom,
+		},
+		{
+			path: '/crowdsale',
+			name: 'crowdsale',
+			component: CrowdSaleCom,
 		},
 		{
 			path: '/personalCenter',//个人中心

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import axios from 'axios';
 import qs from 'qs';
+import store from '../store';
+import Cache from './cache';
 import { Loading } from 'element-ui';
 import ajaxURL from '../config';
 import config from './config';

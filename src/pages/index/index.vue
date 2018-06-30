@@ -10,9 +10,13 @@
               <div class="platform-index-item-crowdsale-title">众筹</div>
               <crowdsale-item :is-event-over="true" ></crowdsale-item>
               <crowdsale-item :is-event-over="false" ></crowdsale-item>
+              <learn-more></learn-more>
           </div>
           <div class="platform-index-item-ad">
               <div class="platform-index-item-ad-title">项目</div>
+              <advert-item></advert-item>
+              <advert-item></advert-item>
+              <advert-item></advert-item>
               <advert-item></advert-item>
           </div>
       </div>
@@ -22,6 +26,7 @@
     import customCarouselCom from '@/components/custom-carousel';
     import crowdsaleItemCom from '@/components/index-com/crowdsale-item';
     import advertItemCom from '@/components/index-com/advert-item';
+    import learnMoreCom from '@/components/index-com/learn-more';
     import Request from '../../utils/require.js';
     export default {
         data() {
@@ -34,6 +39,7 @@
             'custom-carousel': customCarouselCom,
             'crowdsale-item': crowdsaleItemCom,
             'advert-item': advertItemCom,
+            'learn-more': learnMoreCom,
         },
         methods: {
             getData(){
@@ -48,11 +54,7 @@
     @import '../../assets/css/variable.scss';
     @import '../../assets/css/global.scss';
     %platform-index-title {
-        font-size: $crowdsaleFontSize;
-        color: $crowdsaleFontColor;
-        font-weight: bold;
-        font-family: semibold;
-        line-height: 28px;
+        @extend %platform-title;
         padding: 17px 0 10px;
     }
 
