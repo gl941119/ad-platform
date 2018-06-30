@@ -15,10 +15,10 @@
 				<ul class="withdraw_item">
 					<li class="withdraw_item_li"><label>可用金额</label><span>1111111111</span></li>
 					<li class="withdraw_item_li"><label>手续费</label><span>11111111</span></li>
-			<li class="withdraw_item_li">
-				<span>广告收益账户</span>《===》<span>我的钱包</span>
-			</li>
-			<li class="withdraw_item_li"><label>提现金额：</label>
+					<li class="withdraw_item_li">
+						<span>广告收益账户</span>《===》<span>我的钱包</span>
+					</li>
+					<li class="withdraw_item_li"><label>提现金额：</label>
 						<el-input placeholder="请输入内容" v-model="input" clearable>
 						</el-input>
 					</li>
@@ -31,8 +31,10 @@
 			</div>
 		</div>
 		<div class="advertising_revenu_account_flow">
-			<div>
+			<div class="advertising_revenu_account_flow_time">
 				<div class="advertising_revenu_account_flow_title">账户流水</div>
+				<el-date-picker v-model="daysRange" :default-value="staticDays" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" >
+				</el-date-picker>
 			</div>
 			<el-table border :data="flowData" style="width: 100%">
 				<el-table-column prop="date" label="时间">
@@ -56,14 +58,22 @@
 		data() {
 			return {
 				flowData: [],
+				daysRange: [],
 				currentPage: 0,
 				pageSizes: 5,
-				withdrawView: false
+				withdrawView: false,
+				staticDays:new Date(),
 			}
+		},
+		mounted(){
+			this.init();
 		},
 		methods: {
 			handleCurrentChange(page) {
 				this.pageSizes = page;
+			},
+			init(){
+				
 			},
 			handleSizeChange(page) {
 
@@ -116,14 +126,13 @@
 	.advertising_revenu_account_flow {
 		overflow: hidden;
 		clear: both;
-	}
-	
-	.advertising_revenu_account_flow_title {
-		clear: both;
-		margin: 30px 0;
-	}
-	
-	.advertising_revenu_account_flow_data_pages {
-		margin-top: 30px;
+		.advertising_revenu_account_flow_time {}
+		.advertising_revenu_account_flow_title {
+			clear: both;
+			margin: 30px 0;
+		}
+		.advertising_revenu_account_flow_data_pages {
+			margin-top: 30px;
+		}
 	}
 </style>

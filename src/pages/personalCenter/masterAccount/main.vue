@@ -49,6 +49,8 @@
 		</div>
 		<div class="advertising_revenu_account_flow">
 			<div class="advertising_revenu_account_flow_title">账户流水</div>
+			<el-date-picker v-model="daysRange" :default-value="staticDays" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" >
+				</el-date-picker>
 			<el-table border :data="flowData" style="width: 100%">
 				<el-table-column prop="date" label="时间">
 				</el-table-column>
@@ -74,6 +76,8 @@
 				currentPage: 0,
 				pageSizes: 5,
 				rechargeView: false,
+				daysRange: [],
+				staticDays:new Date(),
 			}
 		},
 		methods: {
