@@ -11,6 +11,7 @@ import {
     Radio,
     Checkbox,
     CheckboxGroup,
+    CheckboxButton,
     Select,
     Option,
     OptionGroup,
@@ -50,6 +51,7 @@ Vue.use(InputNumber);
 Vue.use(Radio);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
+Vue.use(CheckboxButton);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(OptionGroup);

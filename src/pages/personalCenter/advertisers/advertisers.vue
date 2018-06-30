@@ -19,11 +19,71 @@
 				<el-input placeholder="请输入内容" v-model="input10" clearable>
 				</el-input>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li coreMembers">
 				<label>核心团队成员</label>
+				<div class="newCrowdfunding_item_li_coreTeamMembers">
+					<div v-for="(person,index) in coreTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
+							1
+						</el-aside>
+						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
+							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+									<label>全名</label>
+									<el-input placeholder="请输入内容" v-model="coreTeam[index].name" clearable>
+									</el-input>
+								</li>
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+									<label>头衔</label>
+									<el-input placeholder="请输入内容" v-model="coreTeam[index].dept" clearable>
+									</el-input>
+								</li>
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+									<label>简介</label>
+									<el-input placeholder="请输入内容" v-model="coreTeam[index].intro" clearable>
+									</el-input>
+								</li>
+								<div style="display: flex;flex-direction: column;">
+									<button style="margin: 10px 0;" @click="addCore">添加</button>
+									<button @click="deletedCore(index)">删除</button>
+								</div>
+							</ol>
+						</div>
+					</div>
+				</div>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>顾问团队</label>
+				<div class="newCrowdfunding_item_li_coreTeamMembers">
+					<div v-for="(person,index) in consultantTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
+							1
+						</el-aside>
+						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
+							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+									<label>全名</label>
+									<el-input placeholder="请输入内容" v-model="consultantTeam[index].name" clearable>
+									</el-input>
+								</li>
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+									<label>头衔</label>
+									<el-input placeholder="请输入内容" v-model="consultantTeam[index].dept" clearable>
+									</el-input>
+								</li>
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+									<label>简介</label>
+									<el-input placeholder="请输入内容" v-model="consultantTeam[index].intro" clearable>
+									</el-input>
+								</li>
+								<div style="display: flex;flex-direction: column;">
+									<button style="margin: 10px 0;" @click="addConsultant">添加</button>
+									<button @click="deletedConsultant(index)">删除</button>
+								</div>
+							</ol>
+						</div>
+					</div>
+				</div>
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
@@ -40,11 +100,40 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>概念</label>
+				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input>
+				<i class="el-icon-circle-plus" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>技术</label>
+				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input>
+				<i class="el-icon-circle-plus" @click="technologyFun"></i>
 			</li>
 		</ul>
+		<!--概念-->
+		<div v-if="concept" class="withdraw">
+			<div class="withdraw_box">
+				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
+				<div>
+					<!--<el-checkbox-group v-model="checked" size="medium" max="4">
+						<el-checkbox-button class="withdraw_box_element" v-for="item in elements" :label="item" :key="item">{{item}}</el-checkbox-button>
+					</el-checkbox-group>-->
+					<conceptCom></conceptCom>
+				</div>
+			</div>
+		</div>
+		<!--技术-->
+		<div v-if="technology" class="withdraw">
+			<div class="withdraw_box">
+				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
+				<el-input placeholder="请输入技术" v-model="input10" clearable>
+				</el-input>
+				<el-input placeholder="请输入技术" v-model="input10" clearable>
+				</el-input>
+				<button class="right_now" style=";position:absolute;top: 278px;">好的</button>
+			</div>
+		</div>
 		<ul class="newCrowdfunding_item">
 			<h5>代币信息</h5>
 			<li class="newCrowdfunding_item_li">
@@ -64,6 +153,20 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
+				<div class="">
+					<!--<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+						<img v-if="imageUrl" :src="imageUrl" class="avatar">
+						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+					</el-upload>-->
+					<el-upload class="avatar-uploader" list-type="picture-card" name="file" :show-file-list="false" action="#" :on-change="getLogo" :auto-upload="false" :on-preview="handlePictureCardPreview" :on-remove="handleRemoveLogo" :before-upload="beforeAvatarUpload">
+						<img v-if="imageUrl" :src="imageUrl" class="avatar">
+						<i v-if="!imageUrl" class="el-icon-plus"></i>
+					</el-upload>
+					<el-dialog :visible.sync="dialogVisible">
+						<!--:src="dialogImageUrl"-->
+						<img width="50%" alt="">
+					</el-dialog>
+				</div>
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
@@ -79,8 +182,8 @@
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
-				</el-input>
+				<label><el-input placeholder="请输入内容" v-model="input10" clearable>
+				</el-input></label>
 				<el-input placeholder="请输入内容" v-model="input10" clearable>
 				</el-input>
 			</li>
@@ -89,45 +192,157 @@
 </template>
 
 <script>
+	import conceptCom from '@/components/personal-com/concept';
 	export default {
 		data() {
 			return {
-				newPerson: {
+				coreTeam: [{}],
+				consultantTeam: [{}],
+				newCore: {
 					name: '',
 					dept: '',
 					intro: '',
 				},
+				newConsultant: {
+					name: '',
+					dept: '',
+					intro: '',
+				},
+				imageUrl: '',
+				input10: '',
+				textarea3: '',
+				concept: false,
+				technology: false,
+				elements: ["111", "2222", "3333", '444444444', '4444444444', '33333333333333'],
+				checked: ['111'],
 			}
 		},
+		components: {
+            conceptCom,
+        },
 		methods: {
-			add() {
-				/*var tmpPersions = this.splContacts;
-				tmpPersions.push(this.newPerson);
-				this.newPerson = {};
-				this.splContacts = tmpPersions;*/
+			addCore() { //核心团队
+				var tmpPersions = this.coreTeam;
+				tmpPersions.push(this.newCore);
+				this.newCore = {};
+				this.coreTeam = tmpPersions;
 			},
-			deleted(value) {
-				/*console.log("deleted:", this.splContacts, value)
-				this.splContacts.splice(value, 1);*/
+			deletedCore(value) { //核心团队
+				console.log(value)
+				var length = this.coreTeam.length;
+				if(length<=1){
+					alert("不要删了o，再删就没有了")
+				}else{
+					this.coreTeam.splice(value, 1);
+				}
 			},
+			addConsultant() { //顾问团队
+				var tmpPersions = this.consultantTeam;
+				tmpPersions.push(this.newConsultant);
+				this.newConsultant = {};
+				this.consultantTeam = tmpPersions;
+			},
+			deletedConsultant(value) { //顾问团队
+				console.log(value)
+				var length = this.consultantTeam.length;
+				if(length<=1){
+					alert("不要删了o，再删就没有了")
+				}else{
+					this.consultantTeam.splice(value, 1);
+				}
+			},
+			handleRemoveLogo(file, fileList) { //头像
+				console.log(file, fileList);
+			},
+			handlePictureCardPreview(file) { //头像
+				this.dialogImageUrl = file.url;
+				this.dialogVisible = true;
+			},
+			getLogo() {
+
+			},
+			beforeAvatarUpload(file) { //头像文件限制
+				//console.log("beforeAvatarUpload file:",file)
+				const isJPG = file.type === 'image/jpeg';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+				console.log("beforeAvatarUpload:", file, isJPG, isLt2M)
+				if(!isJPG) {
+					this.$message.error('上传头像图片只能是 JPG 格式!');
+					return false;
+				}
+				if(!isLt2M) {
+					this.$message.error('上传头像图片大小不能超过 2MB!');
+					return false;
+				}
+				return isJPG && isLt2M;
+			},
+			conceptFun() { //概念弹出窗
+				this.concept = !this.concept;
+			},
+			technologyFun() {
+				this.technology = !this.technology;
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.newCrowdfunding{
-		.newCrowdfunding_item{
-			h5{
+	@import '../../../assets/css/global.scss';
+	@import '../../../assets/css/variable.scss';
+	@import '../../../assets/css/withdraw.scss';
+	.newCrowdfunding {
+		&_item {
+			h5 {
 				font-size: 18px;
 				margin: 5px 0;
 			}
-			.newCrowdfunding_item_li{
+			&_li {
 				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
 				margin: 10px 0;
-				label{
+				font-size: 14px;
+				font-family: PingFangSC-Regular;
+				color: rgba(96, 98, 102, 1);
+				line-height: 20px;
+				label {
 					width: 150px;
+				}
+				&_coreTeamMembers {
+					width: 418px;
+					border-radius: 4px;
+					border: 1px solid rgba(102, 102, 102, 1);
+					&_member {
+						width: 418px;
+						height: 138px;
+						border-radius: 4px;
+						display: flex;
+						&_info {
+							&_item {
+								overflow: hidden;
+								&_li {
+									float: left;
+									width: 150px;
+									padding: 0 5px 0 10px;
+									box-sizing: border-box;
+									label {
+										font-size: 14px;
+										font-family: PingFangSC-Regular;
+										color: rgba(96, 98, 102, 1);
+										line-height: 20px;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
+	}
+	
+	.el-checkbox-button.is-checked .el-checkbox-button__inner {
+		background: #fff;
+		border: 1px solid #dcdfe6;
+		border-radius: 20px;
 	}
 </style>

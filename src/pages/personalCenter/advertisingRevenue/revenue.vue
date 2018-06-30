@@ -33,8 +33,10 @@
 		<div class="advertising_revenu_account_flow">
 			<div class="advertising_revenu_account_flow_time">
 				<div class="advertising_revenu_account_flow_title">账户流水</div>
-				<el-date-picker v-model="daysRange" :default-value="staticDays" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" >
-				</el-date-picker>
+				<div class="advertising_revenu_account_flow_date">
+					<el-date-picker v-model="daysRange" :default-value="staticDays" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
+					</el-date-picker>
+				</div>
 			</div>
 			<el-table border :data="flowData" style="width: 100%">
 				<el-table-column prop="date" label="时间">
@@ -54,6 +56,7 @@
 	</div>
 </template>
 <script>
+	import Request from '../../../utils/require.js';
 	export default {
 		data() {
 			return {
@@ -62,18 +65,40 @@
 				currentPage: 0,
 				pageSizes: 5,
 				withdrawView: false,
-				staticDays:new Date(),
+				staticDays: new Date(),
 			}
 		},
-		mounted(){
-			this.init();
+		mounted() {
+			this.BasicInformation();
+			this.revenueData();
 		},
 		methods: {
+			BasicInformation(){
+				Request({
+					url: 'QueryRevenueBasicInformation',
+					data: {
+						accountId:1
+					},
+					type: 'get'
+				}).then(res => {
+					console.log('QueryRevenueBasicInformation res_>', res);
+				})
+			},
+			revenueData() {
+				Request({
+					url: 'QueryRevenueAccountFlow',
+					data: {
+						incomeId: 1,
+						page: this.currentPage,
+						pageSize: this.pageSizes
+					},
+					type: 'get'
+				}).then(res => {
+					console.log('QueryRevenueAccount res_>', res);
+				})
+			},
 			handleCurrentChange(page) {
 				this.pageSizes = page;
-			},
-			init(){
-				
 			},
 			handleSizeChange(page) {
 
@@ -88,51 +113,5 @@
 	@import '../../../assets/css/global.scss';
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
-	.advertising_revenue_top {
-		margin: 30px 0px;
-		h3 {
-			font-size: 24px;
-			margin-bottom: 30px;
-		}
-		.advertising_revenue_top_item {
-			float: left;
-			color: #ececec;
-			margin-right: 20px;
-			.advertising_revenue_top_item_li {
-				float: left;
-				margin: 0 5px;
-				height: 30px;
-				line-height: 30px;
-				.advertising_revenue_top_item_li_line {
-					margin-right: 5px;
-				}
-			}
-		}
-		.advertising_revenue_top_money {
-			float: left;
-			padding: 0 20px;
-			margin: 0 10px;
-			height: 30px;
-			line-height: 30px;
-			border: 1px solid #333333;
-			border-radius: 5px;
-		}
-	}
-	
-	.active {
-		color: #000000;
-	}
-	
-	.advertising_revenu_account_flow {
-		overflow: hidden;
-		clear: both;
-		.advertising_revenu_account_flow_time {}
-		.advertising_revenu_account_flow_title {
-			clear: both;
-			margin: 30px 0;
-		}
-		.advertising_revenu_account_flow_data_pages {
-			margin-top: 30px;
-		}
-	}
+	@import '../../../assets/css/newProject.scss';
 </style>

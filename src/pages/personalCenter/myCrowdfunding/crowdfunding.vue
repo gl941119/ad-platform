@@ -3,16 +3,16 @@
 		<div class="advertising_revenu_account_flow">
 			<p class="my_crowdfunding_title">我参与的众筹</p>
 			<p class="my_crowdfunding_title_intro">所有众筹成功后相应的币会直接充值到您的BierWallet中，未成功的相关款项会原路返回</p>
-			<el-table border :data="flowData" style="width: 100%" @sort-change="sortChange" :default-sort = "{prop: 'date', order: 'descending'}">
-				<el-table-column prop="date" label="Token名称">
+			<el-table border :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort = "{prop: 'date', order: 'descending'}">
+				<el-table-column prop="tradingId" label="Token名称">
 				</el-table-column>
-				<el-table-column prop="name" label="描述" width="300">
+				<el-table-column prop="proDesc" label="描述" width="300">
 				</el-table-column>
-				<el-table-column prop="province" sortable label="支付价格">
+				<el-table-column prop="price" sortable label="支付价格">
 				</el-table-column>
-				<el-table-column prop="city" label="状态">
+				<el-table-column prop="status" label="状态">
 				</el-table-column>
-				<el-table-column prop="city" label="状态更新时间">
+				<el-table-column prop="updateTime" label="状态更新时间">
 				</el-table-column>
 			</el-table>
 			<div class="my_crowdfunding_data_pages">
@@ -23,15 +23,32 @@
 	</div>
 </template>
 <script>
+	import Request from '../../../utils/require.js';
 	export default {
 		data() {
 			return {
-				flowData: [],
+				crowdfundingData: [],
 				currentPage: 0,
 				pageSizes:5
 			}
 		},
+		mounted() {
+			this.crowdfunding();
+		},
 		methods:{
+			crowdfunding(){
+				Request({
+					url: 'QueryMyCrowdfunding',
+					data: {
+						accountId:1,
+						page:this.currentPage,
+						pageSize:this.pageSizes
+					},
+					type: 'post'
+				}).then(res => {
+					console.log('QueryMyCrowdfunding res_>', res);
+				})
+			},
 			sortChange(){
 				
 			},
