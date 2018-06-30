@@ -22,14 +22,25 @@
     import customCarouselCom from '@/components/custom-carousel';
     import crowdsaleItemCom from '@/components/index-com/crowdsale-item';
     import advertItemCom from '@/components/index-com/advert-item';
+    import Request from '../../utils/require.js';
     export default {
         data() {
             return {}
+        },
+        created() {
+            this.getData()
         },
         components: {
             'custom-carousel': customCarouselCom,
             'crowdsale-item': crowdsaleItemCom,
             'advert-item': advertItemCom,
+        },
+        methods: {
+            getData(){
+                Request({url: 'QueryCrowdSale', type: 'get'}).then(res => {
+                    console.log('QueryCrowdSale res_>', res);
+                })
+            }
         }
     }
 </script>
