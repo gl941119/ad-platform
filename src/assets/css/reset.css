@@ -20,6 +20,7 @@ a, blockquote, body, button, code, dd, div, dl, dt, em, fieldset, form, h1, h2, 
   margin: 0;
   padding: 0;
   border: 0;
+  outline:none;
 }
 h1, h2, h3, h4, h5, h6{
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
