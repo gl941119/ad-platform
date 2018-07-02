@@ -33,7 +33,7 @@
             return {}
         },
         mounted () {
-            this.getData()
+            // this.getData()
         },
         components: {
             'custom-carousel': customCarouselCom,

@@ -23,16 +23,17 @@
         </div>
         <div class="ad-crowdsale-box">
             <div class="ad-crowdsale-box-content">
-                <crowdsale-item></crowdsale-item>
-                <crowdsale-item></crowdsale-item>
-                <crowdsale-item></crowdsale-item>
-                <crowdsale-item></crowdsale-item>
+                <crowdsale-detial></crowdsale-detial>
+                <crowdsale-detial></crowdsale-detial>
+                <crowdsale-detial></crowdsale-detial>
+                <crowdsale-detial></crowdsale-detial>
+                <crowdsale-detial></crowdsale-detial>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import crowdsaleItemCom from '@/components/detail-com/crowdsale-item'
+    import crowdsaleDetialCom from '@/components/detail-com/crowdsale-detail'
     const headerImg = require('../../assets/imgs/detail-img/crowdsale.png');
     export default {
         data() {
@@ -58,7 +59,7 @@
             }
         },
         components: {
-            'crowdsale-item': crowdsaleItemCom,
+            'crowdsale-detial': crowdsaleDetialCom,
         }
     }
 </script>
@@ -99,7 +100,7 @@
             padding: 10px 0 100px;
             &-content {
                 @include body-center();
-                @include content-flex(space-between, flex-start);
+                @include content-flex(flex-start, flex-start);
                 flex-wrap: wrap;
             }
         }
