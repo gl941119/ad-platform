@@ -9,7 +9,9 @@
             <div class="advert-item-middle-title clearfix">
                 <div class="advert-item-middle-title-text">BTC/比特币</div>
                 <div class="advert-item-middle-title-symbol">bit coin</div>
-                <div class="advert-item-middle-title-icon"></div>
+                <div class="advert-item-middle-title-icon">
+                    <i class="custom-element-icon-hot"></i>
+                </div>
             </div>
             <div class="advert-item-middle-divide"></div>
             <div class="advert-item-middle-text">
@@ -71,6 +73,7 @@ export default {
     &-middle {
         &-title {
             padding-top: 3px;
+            width: 311px;
             &-text {
                 float: left;
                 @include item-title();
@@ -82,6 +85,7 @@ export default {
             }
             &-icon {
                 float: right;
+                color: #FF2400;
             }
         }
         &-divide {

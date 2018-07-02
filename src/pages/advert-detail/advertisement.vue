@@ -29,7 +29,6 @@
     </div>
 </template>
 <script>
-    import advertItemCom from '@/components/index-com/advert-item';
     const headerImg = require('../../assets/imgs/detail-img/advertisement.jpg');
     const thumb1 = require('../../assets/imgs/detail-img/dis-thumb1.jpg');
     const thumb2 = require('../../assets/imgs/detail-img/dis-thumb2.jpg');
@@ -60,9 +59,6 @@
                 value: ''
             }
         },
-        components: {
-            'advert-item': advertItemCom,
-        }
     }
 </script>
 <style lang="scss" scoped>
