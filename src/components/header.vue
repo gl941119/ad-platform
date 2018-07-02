@@ -5,13 +5,13 @@
             <div class="header-content-tab clearfix">
                 <div class="header-content-tab-left">
                     <router-link class="header-content-tab-left-menu"
-                                 :to="{ name: 'home' }">首页</router-link>
+                                 :to="{ name: 'index' }">首页</router-link>
                     <router-link class="header-content-tab-left-menu"
-                                 :to="{ name: 'home' }">众筹</router-link>
+                                 :to="{ name: 'crowdsale' }">众筹</router-link>
                     <router-link class="header-content-tab-left-menu"
-                                 :to="{ name: 'home' }">项目</router-link>
-                    <router-link class="header-content-tab-left-menu"
-                                 :to="{ name: 'home' }">媒体</router-link>
+                                 :to="{ name: 'advertisement' }">项目</router-link>
+                    <!-- <router-link class="header-content-tab-left-menu"
+                                 :to="{ name: 'news' }">媒体</router-link> -->
                     <!-- <router-link class="header-content-tab-left-menu"
                                 :to="{ name: 'home' }">周末狂欢夜</router-link> -->
                 </div>
@@ -62,5 +62,8 @@
             }
         }
     }
+}
+.router-link-active {
+    background: #333;
 }
 </style>

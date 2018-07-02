@@ -1,5 +1,5 @@
 <template>
-    <div class="advert-item">
+    <div :class="{'white-back': isWhiteBack}" class="advert-item">
         <div class="advert-item-left">
             <div class="advert-item-left-logo">
             </div>
@@ -30,6 +30,7 @@
 </template>
 <script>
 export default {
+    props: ['isWhiteBack'],
     data(){
         return {
             advertValue: '',
@@ -47,6 +48,10 @@ export default {
     padding: 0 18px 12px 0;
     background: $crowdsaleBackGround;
     margin-bottom: 14px;
+    &.white-back {
+        background: #fff;
+        margin-bottom: 16px;
+    }
     &-left {
         width: 79px;
         &-logo {

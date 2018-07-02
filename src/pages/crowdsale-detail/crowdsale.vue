@@ -23,11 +23,11 @@
         </div>
         <div class="ad-crowdsale-box">
             <div class="ad-crowdsale-box-content">
-                <crowdsale-detial></crowdsale-detial>
-                <crowdsale-detial></crowdsale-detial>
-                <crowdsale-detial></crowdsale-detial>
-                <crowdsale-detial></crowdsale-detial>
-                <crowdsale-detial></crowdsale-detial>
+                <crowdsale-detial :is-over="false"></crowdsale-detial>
+                <crowdsale-detial :is-over="true"></crowdsale-detial>
+                <crowdsale-detial :is-over="false"></crowdsale-detial>
+                <crowdsale-detial :is-over="true"></crowdsale-detial>
+                <crowdsale-detial :is-over="false"></crowdsale-detial>
             </div>
         </div>
     </div>

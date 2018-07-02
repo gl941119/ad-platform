@@ -68,26 +68,28 @@
                 <span>5,000,000 BRB</span>
             </div>
             <div class="crowdsale-detail-specific-text">
-                <span>本轮发行数量：</span>
+                <span>众筹价格：</span>
                 <span>5,000,000 BRB</span>
             </div>
             <div class="crowdsale-detail-specific-text">
-                <span>本轮发行数量：</span>
-                <span>5,000,000 BRB</span>
+                <span>抢购开始时间：</span>
+                <span>2018-07-01 20:00:00</span>
             </div>
             <div class="crowdsale-detail-specific-text">
-                <span>本轮发行数量：</span>
-                <span>5,000,000 BRB</span>
+                <span>抢购介绍时间：</span>
+                <span>2018-07-02 20:00:00</span>
             </div>
         </div>
     </div>
     <div class="crowdsale-footer">
-        <el-button class="crowdsale-footer-btn">默认按钮</el-button>
+        <el-button v-if="isOver" :class="{'reserve-btn':!isOver}" class="crowdsale-footer-btn">开始预约</el-button>
+        <el-button v-if="!isOver" :class="{'reserve-btn':!isOver}" class="crowdsale-footer-btn">已经结束</el-button>
     </div>
 </div>  
 </template>
 <script>
     export default {
+        props: ['isOver'],
         data() {
             return {
                 options: [{
@@ -108,7 +110,7 @@
                 }],
                 value: ''
             }
-        }
+        },
     }
 </script>
 <style lang="scss" scoped>
@@ -238,6 +240,9 @@
                 background: #FF9500;
                 color: #fff;
                 border-radius: 0;
+                &.reserve-btn {
+                        background: #999;
+                    }
             }
         }
     }

@@ -5,6 +5,8 @@ const IndexCom = () =>
 	import('@/pages/index/index');
 const CrowdSaleCom = () =>
 	import('@/pages/crowdsale-detail/crowdsale');
+const AdvertisementCom = () =>
+	import('@/pages/advert-detail/advertisement');
 const PersonalCenter = () =>
 	import('@/pages/personalCenter/personal');
 const Purse = () =>
@@ -44,6 +46,11 @@ const router = new VueRouter({
 			path: '/crowdsale',
 			name: 'crowdsale',
 			component: CrowdSaleCom,
+		},
+		{
+			path: '/advertisement',
+			name: 'advertisement',
+			component: AdvertisementCom,
 		},
 		{
 			path: '/personalCenter',//个人中心
