@@ -116,9 +116,6 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
 				<div>
-					<!--<el-checkbox-group v-model="checked" size="medium" max="4">
-						<el-checkbox-button class="withdraw_box_element" v-for="item in elements" :label="item" :key="item">{{item}}</el-checkbox-button>
-					</el-checkbox-group>-->
 					<conceptCom></conceptCom>
 				</div>
 			</div>
@@ -215,6 +212,7 @@
 				technology: false,
 				elements: ["111", "2222", "3333", '444444444', '4444444444', '33333333333333'],
 				checked: ['111'],
+				dialogVisible: false,
 			}
 		},
 		components: {
@@ -290,59 +288,5 @@
 	@import '../../../assets/css/global.scss';
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
-	.newCrowdfunding {
-		&_item {
-			h5 {
-				font-size: 18px;
-				margin: 5px 0;
-			}
-			&_li {
-				display: flex;
-				flex-direction: row;
-				justify-content: flex-start;
-				margin: 10px 0;
-				font-size: 14px;
-				font-family: PingFangSC-Regular;
-				color: rgba(96, 98, 102, 1);
-				line-height: 20px;
-				label {
-					width: 150px;
-				}
-				&_coreTeamMembers {
-					width: 418px;
-					border-radius: 4px;
-					border: 1px solid rgba(102, 102, 102, 1);
-					&_member {
-						width: 418px;
-						height: 138px;
-						border-radius: 4px;
-						display: flex;
-						&_info {
-							&_item {
-								overflow: hidden;
-								&_li {
-									float: left;
-									width: 150px;
-									padding: 0 5px 0 10px;
-									box-sizing: border-box;
-									label {
-										font-size: 14px;
-										font-family: PingFangSC-Regular;
-										color: rgba(96, 98, 102, 1);
-										line-height: 20px;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	.el-checkbox-button.is-checked .el-checkbox-button__inner {
-		background: #fff;
-		border: 1px solid #dcdfe6;
-		border-radius: 20px;
-	}
+	@import '../../../assets/css/newProjectDetails.scss';
 </style>
