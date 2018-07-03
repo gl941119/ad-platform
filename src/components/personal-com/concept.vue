@@ -1,45 +1,43 @@
 <template>
 	<div class="concept">
 		<div class="concept-personal">
-			<el-button :class="{'button-selected': item.isSelected}" class="concept-personal-button" @click="checked(item,index)" v-for="(item, index) in concept" :key="index" size="small" round>{{item.label}}</el-button>
+			<el-button :class="{'button-selected': item.isSelected}" class="concept-personal-button" @click="checked(item,index)" v-for="(item, index) in concept" :key="index" size="small" round>{{item.name}}</el-button>
 		</div>
 	</div>
 </template>
 
 <script>
+	import Request from '../../utils/require.js';
 	export default {
+		props:["listenCondept"],
 		data() {
 			return {
-				concept: [{
-					label: '1111111',
-					isSelected: false
-				}, {
-					label: '22222',
-					isSelected: false
-				}, {
-					label: '33333',
-					isSelected: false
-				}, {
-					label: '555555',
-					isSelected: false
-				}, {
-					label: '44444',
-					isSelected: false
-				}],
+				concept: [],
 				checkedData: [],
 			}
 		},
 		mounted() {
-
+			this.conceptData();
 		},
 		methods: {
+			conceptData() {
+				Request({
+					url: 'QueryConcept',
+					type: 'get'
+				}).then(res => {
+					res.data.forEach(item => {
+						item.isSelected = false;
+					})
+					this.concept = res.data;
+				})
+			},
 			checked(item, index) {
 				var length = this.checkedData.length;
-				console.log(length);
 				item.isSelected = !item.isSelected;
 				if(item.isSelected) {
 					if(length < 4) {
-						this.checkedData.push(item);
+						this.checkedData.push(item.id);
+						this.$emit('listenCondept',this.checkedData)
 					} else {
 						item.isSelected = false;
 						this.$message('最多四个哦，不能再多了');

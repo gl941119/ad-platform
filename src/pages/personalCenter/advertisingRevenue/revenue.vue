@@ -3,7 +3,7 @@
 		<div class="advertising_revenue_top">
 			<h3>BRB</h3>
 			<ul class="advertising_revenue_top_item">
-				<li class="advertising_revenue_top_item_li active">3245.61254234 BRB</li>
+				<li class="advertising_revenue_top_item_li active">{{balance}} BRB</li>
 				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>冻结 1000.61254223 BRB</li>
 			</ul>
 			<div class="advertising_revenue_top_money" @click="withdraw()">提现</div>
@@ -16,7 +16,7 @@
 					<li class="withdraw_item_li"><label>可用金额</label><span>1111111111</span></li>
 					<li class="withdraw_item_li"><label>手续费</label><span>11111111</span></li>
 					<li class="withdraw_item_li">
-						<span>广告收益账户</span>《===》<span>我的钱包</span>
+						<span>广告收益账户</span><i class="custom-element-icon-zhuan-money">---</i><span>我的钱包</span>
 					</li>
 					<li class="withdraw_item_li"><label>提现金额：</label>
 						<el-input placeholder="请输入内容" v-model="input" clearable>
@@ -34,23 +34,32 @@
 			<div class="advertising_revenu_account_flow_time">
 				<div class="advertising_revenu_account_flow_title">账户流水</div>
 				<div class="advertising_revenu_account_flow_date">
-					<el-date-picker v-model="daysRange" :default-value="staticDays" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
+					<el-date-picker v-model="value1" type="date" placeholder="选择日期">
+					</el-date-picker>
+					<el-date-picker v-model="value1" type="date" placeholder="选择日期">
 					</el-date-picker>
 				</div>
 			</div>
 			<el-table border :data="flowData" style="width: 100%">
-				<el-table-column prop="date" label="时间">
+				<el-table-column prop="createTime" label="时间">
 				</el-table-column>
-				<el-table-column prop="name" label="描述" width="300">
+				<el-table-column prop="desc" label="描述" width="300">
 				</el-table-column>
-				<el-table-column prop="province" label="流向">
+				<el-table-column prop="flowType" label="流向">
 				</el-table-column>
-				<el-table-column prop="city" label="金额（BRB）">
+				<el-table-column prop="money" label="金额（BRB）">
 				</el-table-column>
 			</el-table>
 			<div class="advertising_revenu_account_flow_data_pages">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSizes" layout="sizes, prev, pager, next, jumper">
-				</el-pagination>
+				 <el-pagination
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page="currentPage"
+			      :page-sizes="[10, 20, 30, 40, 50]"
+			      :page-size="size"
+			      layout="sizes, prev, pager, next, jumper"
+			      :total="total">
+			    </el-pagination>
 			</div>
 		</div>
 	</div>
@@ -61,9 +70,11 @@
 		data() {
 			return {
 				flowData: [],
-				daysRange: [],
-				currentPage: 0,
-				pageSizes: 5,
+				balance: '',
+				value1: '',
+				currentPage: 1,
+				size: 5,
+				total:100,
 				withdrawView: false,
 				staticDays: new Date(),
 			}
@@ -73,15 +84,15 @@
 			this.revenueData();
 		},
 		methods: {
-			BasicInformation(){
+			BasicInformation() {
 				Request({
 					url: 'QueryRevenueBasicInformation',
 					data: {
-						accountId:1
+						accountId: 1
 					},
 					type: 'get'
 				}).then(res => {
-					console.log('QueryRevenueBasicInformation res_>', res);
+					this.balance = res.data.balance;
 				})
 			},
 			revenueData() {
@@ -94,14 +105,17 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log('QueryRevenueAccount res_>', res);
+					this.flowData = res.data;
+					this.total = res.total;
 				})
 			},
 			handleCurrentChange(page) {
-				this.pageSizes = page;
+				this.currentPage = page;
+				this.revenueData();
 			},
 			handleSizeChange(page) {
-
+				this.size = page;
+				this.revenueData();
 			},
 			withdraw() {
 				this.withdrawView = !this.withdrawView;

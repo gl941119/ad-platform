@@ -1,6 +1,6 @@
 <template>
 	<div class="newCrowdfunding">
-		<h3>众筹申请</h3>
+		<h3>项目内容</h3>
 		<p>请尽可能详细得填写相关资料，以便投资委员会合理地评估贵项目（评估期间双方都应严格遵守保密义务）</p>
 		<ul class="newCrowdfunding_item">
 			<h5>团队</h5>
