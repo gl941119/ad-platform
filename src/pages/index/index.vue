@@ -3,13 +3,24 @@
       <custom-carousel></custom-carousel>
       <div class="platform-index-bull">
           <div class="platform-index-bull-block">行情播报</div>
-          <div class="platform-index-bull-content"></div>
+          <div class="platform-index-bull-content">
+            <swiper :options="swiperOptions" class="platform-index-bull-content-swiper" ref="swiperBulls">
+                <swiper-slide v-for="(data, index) in bullsData" :key="index">
+                    <div class="swiper-text">
+                        <div class="swiper-line" v-for="item in bullsData[index]" :key="item.id">
+                            <span>{{item.symbol}}指数</span>
+                            <span>${{item.price}} /</span>
+                            <span :style="{color: item.percent_change_24h>=0?'#3da283':'#e50000'}">{{item.percent_change_24h}}%</span>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper>
+          </div>
       </div>
       <div class="platform-index-item">
           <div class="platform-index-item-crowdsale">
               <div class="platform-index-item-crowdsale-title">众筹</div>
-              <crowdsale-item :is-event-over="true" ></crowdsale-item>
-              <crowdsale-item :is-event-over="false" ></crowdsale-item>
+              <crowdsale-item v-for="(crowdsale, i) in crowdsaleItemdata" :key="i" :crowdsale-datas="crowdsale" :system-time="sysTime"></crowdsale-item>
               <learn-more></learn-more>
           </div>
           <div class="platform-index-item-ad">
@@ -28,12 +39,34 @@
     import advertItemCom from '@/components/index-com/advert-item';
     import learnMoreCom from '@/components/index-com/learn-more';
     import Request from '../../utils/require.js';
+    import axios from 'axios';
     export default {
         data() {
-            return {}
+            return {
+                swiperOptions: {
+                    autoplay: {
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    },
+                    loop: true,
+                    simulateTouch: false,
+                    init: false,
+                },
+                bullsData: [],
+                crowdsaleItemdata: [],
+                sysTime: undefined,
+            }
         },
-        mounted () {
-            // this.getData()
+        mounted() {
+            Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo()])
+            .then(() => {
+                this.swiper.init();
+            })
+        },
+        computed: {
+            swiper() {
+		      return this.$refs.swiperBulls.swiper;
+		    }
         },
         components: {
             'custom-carousel': customCarouselCom,
@@ -43,9 +76,54 @@
         },
         methods: {
             getData(){
-                Request({url: 'QueryCrowdSale', type: 'get'}).then(res => {
-                    console.log('QueryCrowdSale res_>', res);
-                })
+                return new Promise(resolve => {
+                    Request({url: 'QueryCrowdSale', type: 'get'}).then(res => {
+                        console.log('QueryCrowdSale res_>', res);
+                        this.crowdsaleItemdata = res.data;
+                        resolve();
+                    })
+                });
+            },
+            getAdvertInfo(){
+                return new Promise((resolve, reject) => {
+                    Request({url: 'QueryAdvertInfo', type: 'get'}).then(res => {
+                        console.log('QueryAdvertInfo_>', res);
+                        resolve();
+                    })
+                });
+            },
+            getBulls(){
+                return new Promise((resolve, reject) => {
+                    axios.get('https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=id&structure=array').then(res => {
+                        this.bullsData = this.handleBullsData(res.data.data);
+                        resolve()
+                    }).catch(e => {
+                        console.error('bulls_>', e);
+                        reject(e)
+                    })
+                });
+            },
+            getSystemTime(){
+                return new Promise((resolve, reject) => {
+                    Request({url: 'GetSystemTime', type: 'get'}).then(res => {
+                        this.sysTime = res.data;
+                        resolve()
+                    })
+                });
+            },
+            handleBullsData(data){
+                let bullsData = [];
+                let oneLine = [];
+                for(let i=0, len=data.length; i<len; i++){
+                    let {id, symbol, quotes: {USD: {price, percent_change_24h}}} = data[i];
+                    oneLine.push({id, symbol, price, percent_change_24h});
+                    if((i + 1) % 4 === 0){
+                        bullsData.push(oneLine);
+                        oneLine = [];
+                    }
+                }
+                bullsData.push(oneLine);
+                return bullsData;
             }
         }
     }
@@ -73,6 +151,26 @@
                 font-size: $headerFontSize;
                 color: #e5e5e5;
                 box-shadow: 3px 3px 10px $bullBlockColor;
+            }
+            &-content {
+                flex: 1;
+                height: 100%;
+                &-swiper {
+                    width: 1070px;
+                    height: 100%;
+                    & .swiper-slide {
+                        width: 100%;
+                        height: 100%;
+                        & .swiper-text {
+                            @include content-flex(space-around);
+                            height: 100%;
+                            & .swiper-line {
+                                font-size: 18px;
+                                color: #666;
+                            }
+                        }
+                    }
+                }
             }
         }
         &-item {

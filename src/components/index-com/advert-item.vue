@@ -27,6 +27,10 @@
                     :value="item.value">
                 </el-option>
             </el-select>
+            <div class="advert-item-right-icons">
+                <i class="custom-element-icon-fenxiang"></i>
+                <i class="custom-element-icon-duihua"></i>
+            </div>
         </div>
     </div>
 </template>
@@ -106,6 +110,14 @@ export default {
             & input {
                 width: 153px;
                 height: 34px;
+            }
+        }
+        &-icons {
+            color: #aaa;
+            margin-top: 29px;
+            @include content-flex(flex-end, flex-start);
+            & i {
+                margin-left: 20px;
             }
         }
     }
