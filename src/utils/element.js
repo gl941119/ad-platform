@@ -38,6 +38,7 @@ import {
     Loading,
     MessageBox,
     Message,
+    Collapse 
 } from 'element-ui';
 
 Vue.use(Pagination);
@@ -75,6 +76,7 @@ Vue.use(Header);
 Vue.use(Aside);
 Vue.use(Main);
 Vue.use(Footer);
+Vue.use(Collapse);
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$confirm = MessageBox.confirm;
