@@ -1,41 +1,41 @@
 <template>
     <div class="crowdsale-item">
         <div class="crowdsale-item-title">
-            <span>品牌规划的投入和策略</span>
+            <span>{{crowdsaleDatas.title}}</span>
             <span class="crowdsale-item-title-border"></span>
             <span class="crowdsale-item-title-ad">广告</span>
         </div>
         <p class="crowdsale-item-sn">
             <span>项目编号：</span>
-            <span>BR1806536</span>
+            <span>{{crowdsaleDatas.proNum}}</span>
         </p>
         <p class="crowdsale-item-abstract">
-            通常情况下，高端品牌的优势都是比较大的，这也为企业的经营和发展带来了很大的优势，不过，还是要充分考虑到品牌形象的维护，因为这对企业的发展所起到的积极作用是不言而喻的。
+            {{crowdsaleDatas.proDesc}}
         </p>
         <div class="crowdsale-item-list">
             <div class="crowdsale-item-list-left">
                 <div class="crowdsale-item-list-left-label">
-                    <span>2018世界杯</span>
+                    <span>{{crowdsaleDatas.concept1Id}}</span>
                 </div>
                 <div class="crowdsale-item-list-left-label">
-                    <span>超级去中心化式交易</span>
+                    <span>{{crowdsaleDatas.concept2Id}}</span>
                 </div>
                 <div class="crowdsale-item-list-left-label">
-                    <span>Dapp去中心化</span>
+                    <span>{{crowdsaleDatas.concept3Id}}</span>
                 </div>
                 <div class="crowdsale-item-list-left-label">
-                    <span>比特币山寨</span>
+                    <span>{{crowdsaleDatas.concept4Id}}</span>
                 </div>
                 <div class="crowdsale-item-list-left-label">
                     <span>本轮发行：</span>
-                    <span>21,000,000</span>
+                    <span>{{crowdsaleDatas.currCirculation}}</span>
                 </div>
             </div>
             <div class="crowdsale-item-list-right">
                 <div v-show="!isEventOver" :class="{'event-over': isEventOver}" class="crowdsale-item-list-right-content">
-                    <div>剩余时间</div>
+                    <div>{{showText}}</div>
                     <div class="crowdsale-item-list-right-content-divide"></div>
-                    <div>12:07:18</div>
+                    <div>{{remainTime}}</div>
                 </div>
                 <div v-show="isEventOver" :class="{'event-over': isEventOver}" class="crowdsale-item-list-right-content">
                     已结束
@@ -45,11 +45,50 @@
     </div>
 </template>
 <script>
+import Utils from '../../utils/util.js';
+import Request from '../../utils/require.js';
 export default {
-    props: ['isEventOver'],
+    props: ['crowdsaleDatas', 'systemTime'],
     data (){
-        return {}
-    }
+        return {
+            isEventOver: false,
+            showText: '',
+            remainTime: '',
+            utils: new Utils(),
+        }
+    },
+    mounted() {
+        this.handleTime(this.crowdsaleDatas, this.systemTime);
+        this.countDown(this.crowdsaleDatas);
+    },
+    methods: {
+        handleTime(data, systemTime){
+            let {startTime, endTime} = data;
+            let startDiff = systemTime - startTime; // 即将开始
+            let endDiff = endTime - systemTime; // 剩余时间
+            this.isEventOver = endDiff < 0; // true -> 已结束
+
+            if(startDiff < 0){
+                this.showText = '即将开始';
+                let dayArr = this.utils.formatDuring(-startDiff);
+                this.remainTime = dayArr[0] > 0 ? dayArr[0] + '天':`${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+            }else if(startDiff>0&&endDiff > 0){
+                let dayArr = this.utils.formatDuring(endDiff);
+                this.showText = '剩余时间';
+                this.remainTime = dayArr[0] >= 0 ? dayArr[0] + '天':`${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+            }
+        },
+        countDown(data){
+            let sysTime = this.systemTime;
+            this.timer = setInterval(() => {
+                this.handleTime(data, sysTime);
+                sysTime += 1000;
+            }, 1000);
+        },
+    },
+    destroyed() {
+        this.timer && clearInterval(this.timer);
+    },
 }
 </script>
 <style lang="scss" scoped>
@@ -84,6 +123,7 @@ export default {
     }
     &-abstract {
         @extend %text-abstract;
+        height: 60px;
     }
     &-list {
         @include content-flex();

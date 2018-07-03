@@ -101,4 +101,18 @@ export default class Util {
         }
         return result;
     }
+
+    // 毫秒数 转 天 小时 分钟 秒
+    formatDuring(mss) {
+        try {
+            var days = parseInt(mss / (1000 * 60 * 60 * 24));
+            var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = parseInt(((mss % (1000 * 60)) / 1000));
+            return [this._check(days), this._check(hours), this._check(minutes), this._check(seconds)];
+        } catch (error) {
+            console.error('formatDuring error_>', error);
+            return [];
+        }
+    }
 }
