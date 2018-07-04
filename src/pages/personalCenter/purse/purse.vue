@@ -7,8 +7,8 @@
 				<p>这意味着：1、ETH钱包地址将可以用于接收基于ERC20协议的平台代币AFDT。2、如果您需要投放广告，则需要从本地址向平台充值以便核对</p>
 				<div class="purse_address">
 					<label style="width: 160px;">ETH 钱包地址</label>
-					<el-input></el-input>
-					<button class="purse_address_bind">绑定</button>
+					<el-input v-model="purseAddress"></el-input>
+					<button class="purse_address_bind" @click="bind">绑定</button>
 				</div>
 			</div>
 			<div class="balance">
@@ -18,14 +18,32 @@
 	</div>
 </template>
 <script>
+	import Request from '../../../utils/require.js';
 	export default {
 		data() {
 			return {
-				
+				purseAddress:'',
 			}
 		},
 		methods: {
-			
+			bind(){
+				Request({
+					url: 'QueryBindWalletAddress',
+					data: {
+						id: 5,
+						walletAddress:this.purseAddress
+					},
+					type: 'post',
+					flag:true,
+				}).then(res => {
+					console.log(res);
+					if(res.data.success == 1){
+						this.$message('绑定成功');
+					}else{
+						this.$message('绑定失败');
+					}
+				})
+			}
 		}
 	};
 </script>

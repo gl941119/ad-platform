@@ -6,17 +6,17 @@
 			<h5>团队</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>团队名称</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamName" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>团队联系方式</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamContact" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamContact">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>主要成员所在地</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -30,17 +30,17 @@
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>全名</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].name" >
+									<el-input placeholder="请输入内容" v-model="coreTeam[index].name">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>头衔</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].title" >
+									<el-input placeholder="请输入内容" v-model="coreTeam[index].title">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>简介</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].desc" >
+									<el-input placeholder="请输入内容" v-model="coreTeam[index].desc">
 									</el-input>
 								</li>
 								<div style="display: flex;flex-direction: column;">
@@ -63,17 +63,17 @@
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>全名</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].name" >
+									<el-input placeholder="请输入内容" v-model="consultantTeam[index].name">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>头衔</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].title" >
+									<el-input placeholder="请输入内容" v-model="consultantTeam[index].title">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>简介</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].desc" >
+									<el-input placeholder="请输入内容" v-model="consultantTeam[index].desc">
 									</el-input>
 								</li>
 								<div style="display: flex;flex-direction: column;">
@@ -90,7 +90,7 @@
 			<h5>项目情况</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>项目名称</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.proName" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.proName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -100,26 +100,26 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>概念</label>
-				<el-input placeholder="请输入内容" >
+				<el-input placeholder="请输入内容">
 				</el-input>
 				<span v-for="(item, index) in checkedData" :key="index">{{item.value}}</span>
 				<i class="el-icon-circle-plus" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>技术</label>
-				<el-input placeholder="请输入内容" >
+				<el-input placeholder="请输入内容">
 				</el-input>
 				{{newCrowdfunding.technology1}}{{newCrowdfunding.technology2}}
 				<i class="el-icon-circle-plus" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>官网</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.website" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.website">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>白皮书地址</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper">
 				</el-input>
 			</li>
 		</ul>
@@ -136,9 +136,9 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology1" >
+				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology1">
 				</el-input>
-				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology2" >
+				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology2">
 				</el-input>
 				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">好的</button>
 			</div>
@@ -147,17 +147,17 @@
 			<h5>代币发行</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>英文简写</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>中文简写</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>英文全名</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -169,37 +169,42 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>本轮众筹标题</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.title" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.title">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>发行总量</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.circulation" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.circulation">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>众筹总量</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.totalCrowdfund" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.totalCrowdfund">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>本轮次发行量</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.currCirculation" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.currCirculation">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>众筹价格</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.price" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.price">
+				</el-input>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>最大购买数量</label>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.mostNumber">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>目标货币</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.targetCurrency" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.targetCurrency">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>发行硬顶</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.topLimit" >
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.topLimit">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -220,8 +225,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>相关牌照</label>
 				<div>
-					<el-upload class="upload-demo" action=""
-						 :on-change="getFile" :on-remove="handleRemove" multiple>
+					<el-upload class="upload-demo" action="" :on-change="getFile" :on-remove="handleRemove" multiple>
 						<el-button size="small" type="primary">上传</el-button>
 					</el-upload>
 				</div>
@@ -234,11 +238,22 @@
 <script>
 	import conceptCom from '@/components/personal-com/concept';
 	import Request from '../../../utils/require.js';
+	import Utils from '../../../utils/util.js';
 	export default {
 		data() {
 			return {
-				coreTeam: [{}],
-				consultantTeam: [{}],
+				coreTeam: [{
+					accountId: 1,
+					name: '',
+					title: '',
+					desc: '',
+				}],
+				consultantTeam: [{
+					accountId: 1,
+					name: '',
+					title: '',
+					desc: '',
+				}],
 				newCore: {
 					accountId: 1,
 					name: '',
@@ -252,7 +267,7 @@
 					desc: '',
 				},
 				newCrowdfunding: {
-					accountId: '', //用户id
+					accountId: 1, //用户id
 					teamName: "", //团队名称
 					teamContact: "", //团队联系方式
 					teamLocation: "", //团队所在地
@@ -275,18 +290,20 @@
 					currCirculation: '', //本轮发行量
 					mostNumber: '', //单账号 最大购买数量
 					price: "", //众筹价格
-					targetCurrency: "1", //目标货币
+					targetCurrency: "", //目标货币
 					topLimit: '', //发行上限
 					lowLimit: '', //发行下限
 					license: "", //相关牌照
+					mostNumber: '', //单账号 最大购买数量
 				},
 				checkedData: [],
 				concept: false,
 				technology: false,
-				fileUrl: '',//相关牌照地址
-				imageUrl: '',//logo地址
-				timeInterval: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-				fileList:[],
+				fileUrl: '', //相关牌照地址
+				imageUrl: '', //logo地址
+				timeInterval: [],
+				fileList: [],
+				util: new Utils()
 			}
 		},
 		components: {
@@ -294,6 +311,8 @@
 		},
 		methods: {
 			submit() {
+				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
+				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
 				Request({
 					url: 'QueryNewCrowdfunding',
 					data: {
@@ -303,10 +322,10 @@
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						concept1Id: this.checkedData[0].id || '',
-						concept2Id: this.checkedData[1].id || '',
-						concept3Id: this.checkedData[2].id || '',
-						concept4Id: this.checkedData[3].id || '',
+						concept1Id: this.checkedData[0].id,
+						concept2Id: this.checkedData[1].id,
+						concept3Id: this.checkedData[2].id,
+						concept4Id: this.checkedData[3].id,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -321,11 +340,12 @@
 						currCirculation: this.newCrowdfunding.currCirculation,
 						mostNumber: this.newCrowdfunding.mostNumber,
 						price: this.newCrowdfunding.price,
+						mostNumber: this.newCrowdfunding.mostNumber,
 						targetCurrency: this.newCrowdfunding.targetCurrency,
 						topLimit: this.newCrowdfunding.topLimit,
 						lowLimit: this.newCrowdfunding.lowLimit,
-						startTime: this.timeInterval[0],
-						endTime: this.timeInterval[1],
+						startTime: startTime,
+						endTime: endTime,
 						license: this.fileUrl,
 						crowdTeamMembers: this.coreTeam,
 						crowdTeamConsultants: this.consultantTeam
@@ -334,7 +354,7 @@
 					flag: true
 				}).then(res => {
 					console.log(res);
-					if(res.data.success == 1){
+					if(res.data.success == 1) {
 						this.$message('添加成功');
 					}
 				})
@@ -399,7 +419,7 @@
 			handleRemove(file, fileList) {
 				console.log(file, fileList);
 			},
-			getFile(file){
+			getFile(file) {
 				console.log(file);
 				this.fileUrl = file.url;
 			}

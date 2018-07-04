@@ -1,254 +1,297 @@
 <template>
 	<div class="accountSettings">
-		<h3 id="shou-feng-qin-xiao-guo">设置信息</h3>
-		<div class="demo-block demo-box demo-zh-CN demo-collapse">
-			<div class="source">
-				<div role="tablist" aria-multiselectable="true" class="el-collapse">
-					<div class="el-collapse-item">
-						<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
-							<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
-								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(1)"></i> 头像
-								<span>更改</span>
-							</div>
-						</div>
-						<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-							<div class="el-collapse-item__content">
-								<div>
-									<img src="../../../assets/imgs/detail-img/dis-thumb3.jpg" />
-								</div>
-								<div>
-									<img v-for="(item,index) in imgData" :src="item.src" />
+		<div class="accountSettings_content">
+			<h3 id="shou-feng-qin-xiao-guo">设置信息</h3>
+			<div class="demo-block demo-box demo-zh-CN demo-collapse">
+				<div class="source">
+					<div role="tablist" aria-multiselectable="true" class="el-collapse">
+						<div class="el-collapse-item">
+							<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
+								<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
+									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(1)"></i> 头像
+									<span class="el-collapse-item__header_span" @click="checked(1)">更改</span>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="el-collapse-item">
-						<div role="tab" aria-controls="el-collapse-content-1977" aria-describedby="el-collapse-content-1977">
-							<div role="button" id="el-collapse-head-1977" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(2)"></i> 昵称
-								<span>修改</span>
-							</div>
-						</div>
-						<div role="tabpanel" :class="{'button-selected': nickname}" aria-hidden="true" aria-labelledby="el-collapse-head-1977" id="el-collapse-content-1977" class="el-collapse-item__wrap">
-							<div class="el-collapse-item__content">
-								<div class="el-collapse-item__content-box">
-									<h3>修改昵称</h3>
-									<el-input placeholder="请输入你的昵称"></el-input>
-									<div class="el-collapse-item__content-box_buttonBox">
-										<button>确定</button>
-										<button>取消</button>
+							<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
+								<div class="el-collapse-item__content">
+									<div class="el-collapse-item__content_img">
+										<img src="../../../assets/imgs/avatar/头像.svg" />
+									</div>
+									<div class="el-collapse-item__content_imgs">
+										<img src="../../../assets/imgs/avatar/头像.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 10.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 11.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 12.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 13.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 14.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 15.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 16.svg" />
+										<img src="../../../assets/imgs/avatar/头像_copy 17.svg" />
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="el-collapse-item">
-						<div role="tab" aria-controls="el-collapse-content-5256" aria-describedby="el-collapse-content-5256">
-							<div role="button" id="el-collapse-head-5256" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(3)"></i> 邮箱
-								<span>绑定</span>
+						<div class="el-collapse-item">
+							<div role="tab" aria-controls="el-collapse-content-1977" aria-describedby="el-collapse-content-1977">
+								<div role="button" id="el-collapse-head-1977" tabindex="0" class="el-collapse-item__header">
+									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(2)"></i> 昵称
+									<span class="el-collapse-item__header_span" @click="checked(2)">修改</span>
+								</div>
 							</div>
-						</div>
-						<div role="tabpanel" :class="{'button-selected': email}" aria-hidden="true" aria-labelledby="el-collapse-head-5256" id="el-collapse-content-5256" class="el-collapse-item__wrap">
-							<div class="el-collapse-item__content">
-								<div class="el-collapse-item__content-box max">
-									<h3>绑定邮箱</h3>
-									<p>
-										<el-input placeholder="请输入你的邮箱"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="请输入你的验证码"></el-input>
-									</p>
-									<div class="el-collapse-item__content-box_buttonBox">
-										<button>确定</button>
+							<div role="tabpanel" :class="{'button-selected': nickname}" aria-hidden="true" aria-labelledby="el-collapse-head-1977" id="el-collapse-content-1977" class="el-collapse-item__wrap">
+								<div class="el-collapse-item__content">
+									<div class="el-collapse-item__content-box">
+										<h3>修改昵称</h3>
+										<el-input placeholder="请输入你的昵称" v-model="nickName"></el-input>
+										<div class="el-collapse-item__content-box_buttonBox">
+											<button>确定</button>
+											<button @click="cancel">取消</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="el-collapse-item">
-						<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
-							<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(4)"></i> 密码
-								<span>更改</span>
+						<div class="el-collapse-item">
+							<div role="tab" aria-controls="el-collapse-content-5256" aria-describedby="el-collapse-content-5256">
+								<div role="button" id="el-collapse-head-5256" tabindex="0" class="el-collapse-item__header">
+									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(3)"></i> 邮箱
+									<span class="el-collapse-item__header_span" @click="checked(3)">绑定</span>
+								</div>
 							</div>
-						</div>
-						<div role="tabpanel" :class="{'button-selected': password}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
-							<div class="el-collapse-item__content">
-								<div class="el-collapse-item__content-box bindEmail">
-									<h3>绑定邮箱</h3>
-									<p>
-										<el-input placeholder="旧密码"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="新密码"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="确认新密码"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="请输入你的验证码"></el-input>
-									</p>
-									<div class="el-collapse-item__content-box_buttonBox">
-										<button>确定</button>
+							<div role="tabpanel" :class="{'button-selected': email}" aria-hidden="true" aria-labelledby="el-collapse-head-5256" id="el-collapse-content-5256" class="el-collapse-item__wrap">
+								<div class="el-collapse-item__content">
+									<div class="el-collapse-item__content-box max">
+										<h3>绑定邮箱</h3>
+										<p>
+											<el-input placeholder="请输入你的邮箱" v-model="bindEmail"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="请输入你的验证码" v-model="nickName"></el-input>
+											<div class="el-button-getCode">
+												<span>|</span>
+												<button class="el-button-getCode_button">获取邮箱验证码</button>
+											</div>
+										</p>
+										<div class="el-collapse-item__content-box_buttonBox">
+											<button>确定</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="el-collapse-item">
-						<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
-							<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(5)"></i> 交易密码
-								<span>更改</span>
+						<div class="el-collapse-item">
+							<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
+								<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
+									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(4)"></i> 密码
+									<span class="el-collapse-item__header_span" @click="checked(4)">更改</span>
+								</div>
 							</div>
-						</div>
-						<div role="tabpanel" :class="{'button-selected': transactionPassword}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
-							<div class="el-collapse-item__content">
-								<div class="el-collapse-item__content-box bindEmail">
-									<h3>更改交易密码</h3>
-									<p>
-										<el-input placeholder="旧交易密码"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="新交易密码"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="确认新交易密码"></el-input>
-									</p>
-									<p>
-										<el-input placeholder="请输入你的验证码"></el-input>
-									</p>
-									<div class="el-collapse-item__content-box_buttonBox">
-										<button>确定</button>
+							<div role="tabpanel" :class="{'button-selected': password}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
+								<div class="el-collapse-item__content">
+									<div class="el-collapse-item__content-box bindEmail">
+										<h3>绑定邮箱</h3>
+										<p>
+											<el-input placeholder="旧密码" v-model="nickName"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="新密码" v-model="nickName"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="确认新密码" v-model="nickName"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="请输入你的验证码"></el-input>
+											<div class="el-button-getCode password">
+												<span>|</span>
+												<button class="el-button-getCode_button">获取邮箱验证码</button>
+											</div>
+										</p>
+										<div class="el-collapse-item__content-box_buttonBox">
+											<button>确定</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="el-collapse-item">
-						<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
-							<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(6)"></i> Telegram
-								<span>绑定</span>
+						<div class="el-collapse-item">
+							<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
+								<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
+									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(5)"></i> 交易密码
+									<span class="el-collapse-item__header_span" @click="checked(5)">更改</span>
+								</div>
+							</div>
+							<div role="tabpanel" :class="{'button-selected': transactionPassword}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
+								<div class="el-collapse-item__content">
+									<div class="el-collapse-item__content-box bindEmail">
+										<h3>更改交易密码</h3>
+										<p>
+											<el-input placeholder="旧交易密码"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="新交易密码"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="确认新交易密码"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="请输入你的验证码"></el-input>
+											<div class="el-button-getCode password">
+												<span>|</span>
+												<button class="el-button-getCode_button">获取邮箱验证码</button>
+											</div>
+										</p>
+										<div class="el-collapse-item__content-box_buttonBox">
+											<button>确定</button>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div role="tabpanel" :class="{'button-selected': telegram}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
-							<div class="el-collapse-item__content">
-								<ul class="el-collapse-item__content_item">
-									<li class="el-collapse-item__content_item_li">新浪微博
-										<a>去绑定</a>
-									</li>
-									<li class="el-collapse-item__content_item_li">腾讯qq
-										<a>去绑定</a>
-									</li>
-									<li class="el-collapse-item__content_item_li">飞机
-										<a>去绑定</a>
-									</li>
-									<li class="el-collapse-item__content_item_li">微信
-										<a>去绑定</a>
-									</li>
-									<li class="el-collapse-item__content_item_li">小鸟
-										<a>去绑定</a>
-									</li>
-									<li class="el-collapse-item__content_item_li">f
-										<a>去绑定</a>
-									</li>
-								</ul>
+						<div class="el-collapse-item">
+							<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
+								<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
+									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(6)"></i> Telegram
+									<span class="el-collapse-item__header_span" @click="checked(6)">绑定</span>
+								</div>
+							</div>
+							<div role="tabpanel" :class="{'button-selected': telegram}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
+								<div class="el-collapse-item__content">
+									<ul class="el-collapse-item__content_item">
+										<li class="el-collapse-item__content_item_li">新浪微博
+											<a>去绑定</a>
+										</li>
+										<li class="el-collapse-item__content_item_li">腾讯qq
+											<a>去绑定</a>
+										</li>
+										<li class="el-collapse-item__content_item_li">飞机
+											<a>去绑定</a>
+										</li>
+										<li class="el-collapse-item__content_item_li">微信
+											<a>去绑定</a>
+										</li>
+										<li class="el-collapse-item__content_item_li">小鸟
+											<a>去绑定</a>
+										</li>
+										<li class="el-collapse-item__content_item_li">f
+											<a>去绑定</a>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<h3 id="shou-feng-qin-xiao-guo">身份验证</h3>
-		<div class="demo-block demo-box demo-zh-CN demo-collapse">
-			<div class="el-collapse-item">
-				<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
-					<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
-						<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(7)"></i>填写认证信息
+			<h3 id="shou-feng-qin-xiao-guo">身份验证</h3>
+			<div class="demo-block demo-box demo-zh-CN demo-collapse">
+				<div class="el-collapse-item">
+					<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
+						<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
+							<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(7)"></i>填写认证信息
+						</div>
 					</div>
-				</div>
-				<ul class="el-collapse-item__content_authentication" :class="{'button-selected': certificationInformation}">
-					<li class="el-collapse-item__content_authentication_li">
-						<div class="el-collapse-item__content_authentication_li_box">
-							<div class="el-collapse-item__content_authentication_li_box_one">
-								<p class="el-collapse-item__content_authentication_li_box_one_title">填写国家或地区</p>
-								<el-select v-model="value4" clearable placeholder="请选择">
-									<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-									</el-option>
-								</el-select>
-							</div>
-						</div>
-					</li>
-					<li class="el-collapse-item__content_authentication_li">
-						<div class="el-collapse-item__content_authentication_li_box">
-							<div class="el-collapse-item__content_authentication_li_box_one exec">
-								<p class="el-collapse-item__content_authentication_li_box_one_title">身份文件类型</p>
-								<el-select v-model="value4" clearable placeholder="请选择">
-									<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-									</el-option>
-								</el-select>
-							</div>
-							<div class="el-collapse-item__content_authentication_li_box_one exec">
-								<p class="el-collapse-item__content_authentication_li_box_one_title">身份文件号码</p>
-								<el-select v-model="value4" clearable placeholder="请选择">
-									<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-									</el-option>
-								</el-select>
-							</div>
-						</div>
-					</li>
-					<li class="el-collapse-item__content_authentication_li">
-						<div class="el-collapse-item__content_authentication_li_box">
-							<div class="el-collapse-item__content_authentication_li_box_one">
-								<p class="el-collapse-item__content_authentication_li_box_one_title">姓名</p>
-								<div class="el-collapse-item__content_authentication_li_box_one_name">
-									<el-input></el-input>
+					<ul class="el-collapse-item__content_authentication" :class="{'button-selected': certificationInformation}">
+						<li class="el-collapse-item__content_authentication_li">
+							<div class="el-collapse-item__content_authentication_li_box">
+								<div class="el-collapse-item__content_authentication_li_box_one">
+									<p class="el-collapse-item__content_authentication_li_box_one_title">填写国家或地区</p>
+									<el-select v-model="country" clearable placeholder="请选择">
+										<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
 								</div>
 							</div>
-						</div>
-					</li>
-					<li class="el-collapse-item__content_authentication_li last">
-						<h4 class="el-collapse-item__content_authentication_li_identityUpload">身份文件人像页</h4>
-						<div>
-							<el-upload class="upload-demo" drag action="#" multiple>
-								<i class="el-icon-upload"></i>
-								<div class="el-upload__text">上传</div>
-								<div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-							</el-upload>
-						</div>
-						<div class="el-collapse-item__content_authentication_li_precautions">
-							<p class="el-collapse-item__content_authentication_li_precautions_title">注意事项</p>
-							<ol class="el-collapse-item__content_authentication_li_precautions_item">
-								<li class="el-collapse-item__content_authentication_li_precautions_item_li">1.请确保你使用的证件真实可信</li>
-								<li class="el-collapse-item__content_authentication_li_precautions_item_li">2.你要手持身份证，距离面部7公分</li>
-								<li class="el-collapse-item__content_authentication_li_precautions_item_li">3.进行肩部以上的手持证件照拍摄</li>
-								<li class="el-collapse-item__content_authentication_li_precautions_item_li">4.你现在使用的证件在有效期内</li>
-							</ol>
-						</div>
-					</li>
-				</ul>
-				<button :class="{'button-selected': certificationInformation}" class="commit">提交验证</button>
+						</li>
+						<li class="el-collapse-item__content_authentication_li">
+							<div class="el-collapse-item__content_authentication_li_box">
+								<div class="el-collapse-item__content_authentication_li_box_one exec">
+									<p class="el-collapse-item__content_authentication_li_box_one_title">身份文件类型</p>
+									<el-select v-model="idType" clearable placeholder="请选择">
+										<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</div>
+								<div class="el-collapse-item__content_authentication_li_box_one exec">
+									<p class="el-collapse-item__content_authentication_li_box_one_title">身份文件号码</p>
+									<el-input v-model="idNum"></el-input>
+								</div>
+							</div>
+						</li>
+						<li class="el-collapse-item__content_authentication_li">
+							<div class="el-collapse-item__content_authentication_li_box">
+								<div class="el-collapse-item__content_authentication_li_box_one">
+									<p class="el-collapse-item__content_authentication_li_box_one_title">姓名</p>
+									<div class="el-collapse-item__content_authentication_li_box_one_name">
+										<el-input v-model="realName"></el-input>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="el-collapse-item__content_authentication_li last">
+							<h4 class="el-collapse-item__content_authentication_li_identityUpload">身份文件人像页</h4>
+							<div>
+								<el-upload class="avatar-uploader" action="" :show-file-list="false" :on-change="getImg" :before-upload="beforeAvatarUpload">
+									<img v-if="imageUrl" :src="imageUrl" class="avatar">
+									<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+								</el-upload>
+							</div>
+							<div class="el-collapse-item__content_authentication_li_precautions">
+								<p class="el-collapse-item__content_authentication_li_precautions_title">注意事项</p>
+								<ol class="el-collapse-item__content_authentication_li_precautions_item">
+									<li class="el-collapse-item__content_authentication_li_precautions_item_li">1.请确保你使用的证件真实可信</li>
+									<li class="el-collapse-item__content_authentication_li_precautions_item_li">2.你要手持身份证，距离面部7公分</li>
+									<li class="el-collapse-item__content_authentication_li_precautions_item_li">3.进行肩部以上的手持证件照拍摄</li>
+									<li class="el-collapse-item__content_authentication_li_precautions_item_li">4.你现在使用的证件在有效期内</li>
+								</ol>
+							</div>
+						</li>
+					</ul>
+					<button :class="{'button-selected': certificationInformation}" class="commit" @click="authentication">提交验证</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import Request from '../../../utils/require.js';
 	export default {
 		data() {
 			return {
 				fileList: [],
 				value4: '',
 				options: [],
-				imgData: [{
-					src: '../../../assets/imgs/detail-img/dis-thumb3.jpg'
+				/*imgData: [{
+					src: '../../../assets/imgs/avatar/头像.svg',
 				}, {
-					src: '../../../assets/imgs/detail-img/dis-thumb3.jpg'
+					src: '../../../assets/imgs/avatar/头像_copy 5.svg'
 				}, {
-					src: '../../../assets/imgs/detail-img/dis-thumb3.jpg'
-				}],
+					src: '../../../assets/imgs/avatar/头像_copy 22.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 21.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 20.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 10.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 19.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 18.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 17.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 16.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 15.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 14.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 13.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 12.svg'
+				}, {
+					src: '../../../assets/imgs/avatar/头像_copy 11.svg'
+				}],*/
 				headPortrait: false,
 				nickname: false,
 				email: false,
@@ -256,20 +299,91 @@
 				transactionPassword: false,
 				telegram: false,
 				certificationInformation: false,
+				bindEmail: "",
+				headUrl: "",
+				id: 0,
+				nickName: "",
+				passwordValue: "",
+				tradePassword: "",
+				/*身份验证*/
+				country: "",
+				countryData: [{
+					value: '中国',
+					label: '中国'
+				}, {
+					value: '大中国',
+					label: '大中国'
+				}, {
+					value: '大中华',
+					label: '大中华'
+				}, {
+					value: '俄罗斯',
+					label: '俄罗斯'
+				}, {
+					value: '巴基斯坦',
+					label: '巴基斯坦'
+				}],
+				idNum: "",
+				idType: "",
+				idTypeData: [{
+					value: '身份证',
+					label: '身份证'
+				}, {
+					value: '脸',
+					label: '脸'
+				}],
+				realName: "",
+				imageUrl: '',
 			}
 		},
 		mounted() {
 
 		},
 		methods: {
-			handleRemove(file, fileList) {
-				console.log(file, fileList);
+			cancel() { //取消修改昵称
+
 			},
-			handlePreview(file) {
+			authentication() {
+				Request({
+					url: 'QueryAuthentication',
+					data: {
+						id: 1,
+						country: this.country,
+						idType: this.idType,
+						idNum: this.idNum,
+						realName: this.realName,
+						idImg: this.imageUrl
+					},
+					type: 'post',
+					flag: true
+				}).then(res => {
+					console.log(res);
+					if(res.data.success == 1) {
+						this.$message('认证成功');
+					} else {
+						this.$message('认证失败');
+					}
+				})
+			},
+			getImg(file) {
+				this.imageUrl = file.url;
 				console.log(file);
 			},
-			beforeRemove(file, fileList) {
-				return this.$confirm(`确定移除 ${ file.name }？`);
+			//			handleAvatarSuccess(res, file) {
+			//				console.log(file)
+			////				this.imageUrl = URL.createObjectURL(file.raw);
+			//			},
+			beforeAvatarUpload(file) {
+				const isJPG = file.type === 'image/jpeg';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+
+				if(!isJPG) {
+					this.$message.error('上传头像图片只能是 JPG 格式!');
+				}
+				if(!isLt2M) {
+					this.$message.error('上传头像图片大小不能超过 2MB!');
+				}
+				return isJPG && isLt2M;
 			},
 			checked(value) {
 				switch(value) {
@@ -305,8 +419,10 @@
 <style lang="scss" scoped>
 	.accountSettings {
 		padding: 0 28px;
-		#shou-feng-qin-xiao-guo{
-			margin: 20px 0 30px 0;
+		&_content {
+			#shou-feng-qin-xiao-guo {
+				margin: 20px 0 30px 0;
+			}
 		}
 	}
 	
@@ -321,20 +437,31 @@
 		font-weight: 400;
 		color: #1f2f3d;
 	}
+	
 	.el-collapse-item__header.is-active {
 		border-bottom-color: transparent;
 	}
+	
 	.el-collapse-item__header {
 		height: 48px;
 		line-height: 48px;
 		background-color: #fff;
-		color: #303133;
 		cursor: pointer;
 		border-bottom: 1px solid #ebeef5;
 		font-size: 13px;
 		font-weight: 500;
+		font-size: 18px;
+		color: rgba(96, 98, 102, 1);
 		transition: border-bottom-color .3s;
 		outline: none;
+		position: relative;
+		&_span {
+			position: absolute;
+			top: 0px;
+			right: 45px;
+			font-size: 18px;
+			color: rgba(96, 98, 102, 1);
+		}
 	}
 	
 	.el-collapse-item__wrap {
@@ -364,6 +491,16 @@
 		background: rgba(245, 245, 245, 1);
 		padding-top: 20px;
 		box-sizing: border-box;
+		&_img {
+			float: left;
+		}
+		&_imgs {
+			float: left;
+			width: 530px;
+			height: 330px;
+			background: rgba(255, 255, 255, 1);
+			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+		}
 		&_authentication {
 			border: 1px solid rgba(228, 231, 237, 1);
 			display: none;
@@ -430,6 +567,7 @@
 			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
 			margin: 0 auto;
 			padding: 30px;
+			position: relative;
 			h3 {
 				text-align: center;
 				margin-bottom: 10px;
@@ -493,5 +631,50 @@
 	
 	.button-selected {
 		display: block;
+	}
+	
+	.avatar-uploader .el-upload {
+		border: 1px dashed #d9d9d9;
+		border-radius: 6px;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.avatar-uploader .el-upload:hover {
+		border-color: #409EFF;
+	}
+	
+	.avatar-uploader-icon {
+		font-size: 28px;
+		color: #8c939d;
+		width: 300px;
+		height: 200px;
+		line-height: 178px;
+		text-align: center;
+		border: 1px solid #EEEEEE;
+	}
+	
+	.avatar {
+		width: 300px;
+		height: 200px;
+		display: block;
+	}
+	
+	.el-button-getCode {
+		position: absolute;
+		top: 123px;
+		right: 45px;
+		font-size: 14px;
+		color: rgba(255, 149, 0, 1);
+		&_button {
+			background: #ffffff;
+			font-size: 14px;
+			color: rgba(255, 149, 0, 1);
+		}
+	}
+	
+	.password {
+		top: 223px;
 	}
 </style>

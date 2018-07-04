@@ -339,6 +339,8 @@
 					console.log(res);
 					if(res.data.success == 1){
 						this.$message('添加成功');
+					}else if(res.data.success == 0){
+						this.$message('您已经存在广告，无法再次申请');
 					}
 				})
 			},
