@@ -115,4 +115,33 @@ export default class Util {
             return [];
         }
     }
+
+    /**
+     * 剩余时间和状态
+     * @param {Object} data {startTime: timestamp, endTime: timestamp}
+     * @param {Date} systemTime timestamp
+     * @returns {Object} { isOver: Boolean/true->已结束, showText: 1->未开始/2->正在开始, remainTime: String }
+     */
+    handleTime(data, systemTime) {
+        let {
+            startTime,
+            endTime
+        } = data;
+        let startDiff = systemTime - startTime; // 即将开始
+        let endDiff = endTime - systemTime; // 剩余时间
+        let isOver = endDiff < 0; // true -> 已结束
+        let showText = 0;
+        let remainTime = undefined;
+        console.log('diff___>', startDiff, endDiff, new Date(startTime), new Date(systemTime), new Date(endTime));
+        if (startDiff < 0) {
+            showText = 1;
+            let dayArr = this.formatDuring(-startDiff);
+            remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+        } else if (startDiff > 0 && endDiff > 0) {
+            let dayArr = this.formatDuring(endDiff);
+            showText = 2;
+            remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+        }
+        return {isOver, showText, remainTime}
+    }
 }

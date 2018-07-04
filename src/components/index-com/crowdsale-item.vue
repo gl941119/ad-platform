@@ -45,138 +45,131 @@
     </div>
 </template>
 <script>
-import Utils from '../../utils/util.js';
-import Request from '../../utils/require.js';
-export default {
-    props: ['crowdsaleDatas', 'systemTime'],
-    data (){
-        return {
-            isEventOver: false,
-            showText: '',
-            remainTime: '',
-            utils: new Utils(),
-        }
-    },
-    mounted() {
-        this.handleTime(this.crowdsaleDatas, this.systemTime);
-        this.countDown(this.crowdsaleDatas);
-    },
-    methods: {
-        handleTime(data, systemTime){
-            let {startTime, endTime} = data;
-            let startDiff = systemTime - startTime; // 即将开始
-            let endDiff = endTime - systemTime; // 剩余时间
-            this.isEventOver = endDiff < 0; // true -> 已结束
-
-            if(startDiff < 0){
-                this.showText = '即将开始';
-                let dayArr = this.utils.formatDuring(-startDiff);
-                this.remainTime = dayArr[0] > 0 ? dayArr[0] + '天':`${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
-            }else if(startDiff>0&&endDiff > 0){
-                let dayArr = this.utils.formatDuring(endDiff);
-                this.showText = '剩余时间';
-                this.remainTime = dayArr[0] >= 0 ? dayArr[0] + '天':`${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+    import Utils from '../../utils/util.js';
+    export default {
+        props: ['crowdsaleDatas', 'systemTime'],
+        data() {
+            return {
+                isEventOver: false,
+                showText: '',
+                remainTime: '',
+                utils: new Utils(),
             }
         },
-        countDown(data){
-            let sysTime = this.systemTime;
-            this.timer = setInterval(() => {
-                this.handleTime(data, sysTime);
-                sysTime += 1000;
-            }, 1000);
+        mounted() {
+            this.handleTime(this.crowdsaleDatas, this.systemTime);
+            this.countDown(this.crowdsaleDatas);
         },
-    },
-    destroyed() {
-        this.timer && clearInterval(this.timer);
-    },
-}
+        methods: {
+            handleTime(data, systemTime) {
+                let {
+                    isOver,
+                    showText,
+                    remainTime
+                } = this.utils.handleTime(data, systemTime);
+                this.isEventOver = isOver;
+                this.showText = showText === 1 ? '即将开始' : '剩余时间';
+                this.remainTime = remainTime;
+            },
+            countDown(data) {
+                let sysTime = this.systemTime;
+                this.timer = setInterval(() => {
+                    this.handleTime(data, sysTime);
+                    sysTime += 1000;
+                }, 1000);
+            },
+        },
+        destroyed() {
+            this.timer && clearInterval(this.timer);
+        },
+    }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/css/variable.scss';
-@import '../../assets/css/global.scss';
-.crowdsale-item {
-    padding: 16px;
-    width: crowdsaleItemWidth;
-    background: $crowdsaleBackGround;
-    margin-bottom: 14px;
-    &-title {
-        @include content-flex();
-        height: 25px;
-        @include item-title();
-        &-border {
-            height: 100%;
-            border: 1px solid #E2E2E2;
-            margin-left: 32px;
-            margin-right: 10px;
-        }
-        &-ad {
-           font-size: $crowdsaleAdFontSize;
-           color: #000;
-           font-weight: normal; 
-        }
-    }
-    &-sn {
-        color: $crowdsaleSNColor;
-        font-size: $crowdsaleAdFontSize;
-        margin-bottom: 10px;
-        line-height: 17px;
-    }
-    &-abstract {
-        @extend %text-abstract;
-        height: 60px;
-    }
-    &-list {
-        @include content-flex();
-        height: 73px;
-        margin-top: 16px;
-        &-left {
-            width: 226px;
-            height: 100%;
+    @import '../../assets/css/variable.scss';
+    @import '../../assets/css/global.scss';
+    .crowdsale-item {
+        padding: 16px;
+        width: crowdsaleItemWidth;
+        background: $crowdsaleBackGround;
+        margin-bottom: 14px;
+        &-title {
             @include content-flex();
-            flex-wrap: wrap;
-            &-label {
-                width: 112px;
-                background: #E0E0E0;
-                border-radius: 3px;
-                text-align: center;
-                margin-bottom: 5px;
-                & span {
-                    font-size: 12px;
-                    display: inline-block;
-                    transform: scale(0.85);
-                }
-                &:nth-child(2n) {
-                    margin-left: 2px;
-                }
-                &:last-child {
-                    width: 100%;
-                    margin: 0;
-                }
+            height: 25px;
+            @include item-title();
+            &-border {
+                height: 100%;
+                border: 1px solid #E2E2E2;
+                margin-left: 32px;
+                margin-right: 10px;
+            }
+            &-ad {
+                font-size: $crowdsaleAdFontSize;
+                color: #000;
+                font-weight: normal;
             }
         }
-        &-right {
-            height: 100%;
-            margin-left: 21px;
-            flex: 1;
-            &-content {
+        &-sn {
+            color: $crowdsaleSNColor;
+            font-size: $crowdsaleAdFontSize;
+            margin-bottom: 10px;
+            line-height: 17px;
+        }
+        &-abstract {
+            @extend %text-abstract;
+            height: 60px;
+        }
+        &-list {
+            @include content-flex();
+            height: 73px;
+            margin-top: 16px;
+            &-left {
+                width: 226px;
                 height: 100%;
-                background: #FF9500;
-                @include content-flex(center);
-                flex-direction: column;
-                color: #fff;
-                border-radius: 5px;
-                font-size: 18px;
-                &-divide {
-                    width: 63px;
-                    height: 1px;
-                    background: #fff;
-                    margin: 5px 0;
+                @include content-flex();
+                flex-wrap: wrap;
+                &-label {
+                    width: 112px;
+                    background: #E0E0E0;
+                    border-radius: 3px;
+                    text-align: center;
+                    margin-bottom: 5px;
+                    & span {
+                        font-size: 12px;
+                        display: inline-block;
+                        transform: scale(0.85);
+                    }
+                    &:nth-child(2n) {
+                        margin-left: 2px;
+                    }
+                    &:last-child {
+                        width: 100%;
+                        margin: 0;
+                    }
                 }
-                &.event-over {
-                    background: #999999;
+            }
+            &-right {
+                height: 100%;
+                margin-left: 21px;
+                flex: 1;
+                &-content {
+                    height: 100%;
+                    background: #FF9500;
+                    @include content-flex(center);
+                    flex-direction: column;
+                    color: #fff;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    &-divide {
+                        width: 63px;
+                        height: 1px;
+                        background: #fff;
+                        margin: 5px 0;
+                    }
+                    &.event-over {
+                        background: #999999;
+                    }
                 }
             }
         }
     }
-}
 </style>

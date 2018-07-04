@@ -11,55 +11,103 @@
                 </div>
             </div>
             <div class="ad-crowdsale-container-select">
-                <el-select size="mini" class="ad-crowdsale-container-select-left" v-model="value" placeholder="全部阶段">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                <el-select size="mini" class="ad-crowdsale-container-select-left" v-model="stageValue" placeholder="全部阶段">
+                    <el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
-                <el-select size="mini" class="ad-crowdsale-container-select-right" v-model="value" placeholder="全部阶段">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                <el-select size="mini" class="ad-crowdsale-container-select-right" v-model="conceptValue" placeholder="全部概念">
+                    <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
             </div>
         </div>
         <div class="ad-crowdsale-box">
             <div class="ad-crowdsale-box-content">
-                <crowdsale-detial :is-over="false"></crowdsale-detial>
-                <crowdsale-detial :is-over="true"></crowdsale-detial>
-                <crowdsale-detial :is-over="false"></crowdsale-detial>
-                <crowdsale-detial :is-over="true"></crowdsale-detial>
-                <crowdsale-detial :is-over="false"></crowdsale-detial>
+                <crowdsale-detial v-for="(detail, i) in crowdSaleDatas" :key="i" :detail-data="detail" :system-time="sysTime"></crowdsale-detial>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import crowdsaleDetialCom from '@/components/detail-com/crowdsale-detail'
+    import crowdsaleDetialCom from '@/components/detail-com/crowdsale-detail';
+    import Request from '../../utils/require.js';
+    import Config from '../../utils/config.js';
     const headerImg = require('../../assets/imgs/detail-img/crowdsale.png');
     export default {
         data() {
             return {
+                pageSize: Config.pageSize,
+                pageTotal: 0,
                 headerImg,
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                    }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                    }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                    }, {
-                    value: '选项4',
-                    label: '龙须面'
-                    }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
+                stateOptions: [{
+                    value: 0,
+                    label: '全部阶段'
+                }, {
+                    value: 1,
+                    label: '即将开始'
+                }, {
+                    value: 2,
+                    label: '进行中'
+                }, {
+                    value: 3,
+                    label: '已经结束'
                 }],
-                value: ''
+                conceptOptions: [],
+                stageValue: 0,
+                conceptValue: 0,
+                crowdSaleDatas: [],
+                sysTime: undefined,
             }
         },
         components: {
             'crowdsale-detial': crowdsaleDetialCom,
+        },
+        mounted() {
+            Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime()]).then(() => {
+            })
+        },
+        methods: {
+            getCrowdSaleInfo(state = 0, concept = 0, page = Config.pageStart) {
+                return new Promise((resolve, reject) => {
+                    Request({
+                            url: 'QueryCrowdSaleDetailInfo',
+                            data: {
+                                page,
+                                pageSize: this.pageSize,
+                                state,
+                                concept,
+                            },
+                            type: 'get'
+                        })
+                        .then(res => {
+                            this.crowdSaleDatas = res.data;
+                            resolve();
+                        })
+                });
+            },
+            getAllConcept(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'QueryAllConcept',
+                        type: 'get'
+                    }).then(res => {
+                        res.data.unshift({id: 0, name: "全部概念"});
+                        this.conceptOptions = res.data;
+                        resolve();
+                    })
+                });
+            },
+            getSystemTime() {
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'GetSystemTime',
+                        type: 'get'
+                    }).then(res => {
+                        this.sysTime = res.data;
+                        resolve()
+                    })
+                });
+            },
         }
     }
 </script>
@@ -87,7 +135,8 @@
             &-select {
                 height: 65px;
                 @include content-flex;
-                &-left, &-right {
+                &-left,
+                &-right {
                     width: 112px;
                 }
                 &-right {
