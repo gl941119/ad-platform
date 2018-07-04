@@ -3,8 +3,8 @@
 		<div class="advertising_revenu_account_flow">
 			<p class="my_crowdfunding_title">我参与的众筹</p>
 			<p class="my_crowdfunding_title_intro">所有众筹成功后相应的币会直接充值到您的BierWallet中，未成功的相关款项会原路返回</p>
-			<el-table border :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort = "{prop: 'date', order: 'descending'}">
-				<el-table-column prop="tradingId" label="Token名称">
+			<el-table border :data="crowdfundingData" style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
+				<el-table-column prop="shotEnName" label="Token名称">
 				</el-table-column>
 				<el-table-column prop="proDesc" label="描述" width="300">
 				</el-table-column>
@@ -16,8 +16,15 @@
 				</el-table-column>
 			</el-table>
 			<div class="my_crowdfunding_data_pages">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"  :page-size="pageSizes" layout="sizes, prev, pager, next, jumper">
-				</el-pagination>
+				<el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40, 50]"
+      :page-size="size"
+      layout="sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
 			</div>
 		</div>
 	</div>
@@ -28,8 +35,9 @@
 		data() {
 			return {
 				crowdfundingData: [],
-				currentPage: 0,
-				pageSizes:5
+				currentPage: 1,
+				size: 5,
+				total:0,
 			}
 		},
 		mounted() {
@@ -42,21 +50,22 @@
 					data: {
 						accountId:1,
 						page:this.currentPage,
-						pageSize:this.pageSizes
+						pageSize:this.size
 					},
-					type: 'post'
+					type: 'get'
 				}).then(res => {
+					this.crowdfundingData = res.data;
+					this.total = res.total;
 					console.log('QueryMyCrowdfunding res_>', res);
 				})
 			},
-			sortChange(){
-				
-			},
 			handleCurrentChange(page){
-				this.pageSizes = page;
+				this.currentPage = page;
+				this.crowdfunding();
 			},
 			handleSizeChange(page){
-				
+				this.size = page;
+				this.crowdfunding();
 			}
 		}
 	}

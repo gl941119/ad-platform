@@ -4,20 +4,20 @@
 		<div class="demo-block demo-box demo-zh-CN demo-collapse">
 			<div class="source">
 				<div role="tablist" aria-multiselectable="true" class="el-collapse">
-					<div class="el-collapse-item is-active">
+					<div class="el-collapse-item">
 						<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
-							<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing is-active">
-								<i class="el-collapse-item__arrow el-icon-arrow-down is-active"></i> 头像
+							<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
+								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(1)"></i> 头像
 								<span>更改</span>
 							</div>
 						</div>
-						<div role="tabpanel" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
+						<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
 							<div class="el-collapse-item__content">
 								<div>
-									<img src="../../../assets/imgs/detail-img/dis-thumb3.jpg"/>
+									<img src="../../../assets/imgs/detail-img/dis-thumb3.jpg" />
 								</div>
 								<div>
-									
+									<img v-for="(item,index) in imgData" :src="item.src" />
 								</div>
 							</div>
 						</div>
@@ -25,11 +25,11 @@
 					<div class="el-collapse-item">
 						<div role="tab" aria-controls="el-collapse-content-1977" aria-describedby="el-collapse-content-1977">
 							<div role="button" id="el-collapse-head-1977" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down"></i> 昵称
+								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(2)"></i> 昵称
 								<span>修改</span>
 							</div>
 						</div>
-						<div role="tabpanel" aria-hidden="true" aria-labelledby="el-collapse-head-1977" id="el-collapse-content-1977" class="el-collapse-item__wrap">
+						<div role="tabpanel" :class="{'button-selected': nickname}" aria-hidden="true" aria-labelledby="el-collapse-head-1977" id="el-collapse-content-1977" class="el-collapse-item__wrap">
 							<div class="el-collapse-item__content">
 								<div class="el-collapse-item__content-box">
 									<h3>修改昵称</h3>
@@ -45,11 +45,11 @@
 					<div class="el-collapse-item">
 						<div role="tab" aria-controls="el-collapse-content-5256" aria-describedby="el-collapse-content-5256">
 							<div role="button" id="el-collapse-head-5256" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down"></i> 邮箱
+								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(3)"></i> 邮箱
 								<span>绑定</span>
 							</div>
 						</div>
-						<div role="tabpanel" aria-hidden="true" aria-labelledby="el-collapse-head-5256" id="el-collapse-content-5256" class="el-collapse-item__wrap">
+						<div role="tabpanel" :class="{'button-selected': email}" aria-hidden="true" aria-labelledby="el-collapse-head-5256" id="el-collapse-content-5256" class="el-collapse-item__wrap">
 							<div class="el-collapse-item__content">
 								<div class="el-collapse-item__content-box max">
 									<h3>绑定邮箱</h3>
@@ -69,11 +69,11 @@
 					<div class="el-collapse-item">
 						<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
 							<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down"></i> 密码
+								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(4)"></i> 密码
 								<span>更改</span>
 							</div>
 						</div>
-						<div role="tabpanel" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
+						<div role="tabpanel" :class="{'button-selected': password}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
 							<div class="el-collapse-item__content">
 								<div class="el-collapse-item__content-box bindEmail">
 									<h3>绑定邮箱</h3>
@@ -99,11 +99,11 @@
 					<div class="el-collapse-item">
 						<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
 							<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down"></i> 交易密码
+								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(5)"></i> 交易密码
 								<span>更改</span>
 							</div>
 						</div>
-						<div role="tabpanel" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
+						<div role="tabpanel" :class="{'button-selected': transactionPassword}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
 							<div class="el-collapse-item__content">
 								<div class="el-collapse-item__content-box bindEmail">
 									<h3>更改交易密码</h3>
@@ -129,11 +129,11 @@
 					<div class="el-collapse-item">
 						<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
 							<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-								<i class="el-collapse-item__arrow el-icon-arrow-down"></i> Telegram
+								<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(6)"></i> Telegram
 								<span>绑定</span>
 							</div>
 						</div>
-						<div role="tabpanel" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
+						<div role="tabpanel" :class="{'button-selected': telegram}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
 							<div class="el-collapse-item__content">
 								<ul class="el-collapse-item__content_item">
 									<li class="el-collapse-item__content_item_li">新浪微博
@@ -163,13 +163,13 @@
 		</div>
 		<h3 id="shou-feng-qin-xiao-guo">身份验证</h3>
 		<div class="demo-block demo-box demo-zh-CN demo-collapse">
-			<div class="el-collapse-item is-active">
+			<div class="el-collapse-item">
 				<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
-					<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing is-active">
-						<i class="el-collapse-item__arrow el-icon-arrow-down is-active"></i>填写认证信息
+					<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
+						<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(7)"></i>填写认证信息
 					</div>
 				</div>
-				<ul class="el-collapse-item__content_authentication">
+				<ul class="el-collapse-item__content_authentication" :class="{'button-selected': certificationInformation}">
 					<li class="el-collapse-item__content_authentication_li">
 						<div class="el-collapse-item__content_authentication_li_box">
 							<div class="el-collapse-item__content_authentication_li_box_one">
@@ -229,9 +229,9 @@
 						</div>
 					</li>
 				</ul>
+				<button :class="{'button-selected': certificationInformation}" class="commit">提交验证</button>
 			</div>
 		</div>
-		<button class="commit">提交验证</button>
 	</div>
 </template>
 
@@ -242,6 +242,20 @@
 				fileList: [],
 				value4: '',
 				options: [],
+				imgData: [{
+					src: '../../../assets/imgs/detail-img/dis-thumb3.jpg'
+				}, {
+					src: '../../../assets/imgs/detail-img/dis-thumb3.jpg'
+				}, {
+					src: '../../../assets/imgs/detail-img/dis-thumb3.jpg'
+				}],
+				headPortrait: false,
+				nickname: false,
+				email: false,
+				password: false,
+				transactionPassword: false,
+				telegram: false,
+				certificationInformation: false,
 			}
 		},
 		mounted() {
@@ -256,7 +270,34 @@
 			},
 			beforeRemove(file, fileList) {
 				return this.$confirm(`确定移除 ${ file.name }？`);
-			}
+			},
+			checked(value) {
+				switch(value) {
+					case 1:
+						this.headPortrait = !this.headPortrait;
+						break;
+					case 2:
+						this.nickname = !this.nickname;
+						break;
+					case 3:
+						this.email = !this.email;
+						break;
+					case 4:
+						this.password = !this.password;
+						break;
+					case 5:
+						this.transactionPassword = !this.transactionPassword;
+						break;
+					case 6:
+						this.telegram = !this.telegram;
+						break;
+					case 7:
+						this.certificationInformation = !this.certificationInformation;
+						break;
+					default:
+						break;
+				}
+			},
 		}
 	}
 </script>
@@ -264,6 +305,9 @@
 <style lang="scss" scoped>
 	.accountSettings {
 		padding: 0 28px;
+		#shou-feng-qin-xiao-guo{
+			margin: 20px 0 30px 0;
+		}
 	}
 	
 	.page-component .content>h3 {
@@ -277,11 +321,9 @@
 		font-weight: 400;
 		color: #1f2f3d;
 	}
-	
 	.el-collapse-item__header.is-active {
 		border-bottom-color: transparent;
 	}
-	
 	.el-collapse-item__header {
 		height: 48px;
 		line-height: 48px;
@@ -301,6 +343,7 @@
 		overflow: hidden;
 		box-sizing: border-box;
 		border-bottom: 1px solid #ebeef5;
+		display: none;
 	}
 	
 	.el-collapse-item__arrow.is-active {
@@ -323,6 +366,8 @@
 		box-sizing: border-box;
 		&_authentication {
 			border: 1px solid rgba(228, 231, 237, 1);
+			display: none;
+			border-top: 0;
 			&_li {
 				display: block;
 				height: 144px;
@@ -435,6 +480,7 @@
 		left: 50%;
 		margin-left: -44px;
 	}
+	
 	.commit {
 		padding: 10px 17px;
 		background: rgba(255, 149, 0, 1);
@@ -442,5 +488,10 @@
 		font-size: 14px;
 		color: rgba(255, 255, 255, 1);
 		margin: 26px 0 0 144px;
+		display: none;
+	}
+	
+	.button-selected {
+		display: block;
 	}
 </style>

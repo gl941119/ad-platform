@@ -3,22 +3,33 @@
 		<div class="advertising_revenu_account_flow">
 			<p class="my_crowdfunding_title">我发起的众筹</p>
 			<router-link tag="p" :to="{ name: 'newCrowdfunding'}" class="my_crowdfunding_title_intro">申请新的众筹</router-link>
-			<el-table border :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort = "{prop: 'date', order: 'descending'}">
-				<el-table-column prop="date" label="Token名称">
+			<el-table border :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort="{prop: 'date', order: 'descending'}">
+				<el-table-column prop="shotEnName" label="Token名称">
 				</el-table-column>
 				<el-table-column prop="proDesc" label="描述" width="300">
 				</el-table-column>
-				<el-table-column prop="province" sortable label="硬顶/软顶">
+				<el-table-column label="硬顶/软顶">
+					<template slot-scope="scope">
+						{{scope.row.lowLimit}}/{{scope.row.topLimit}}
+					</template>
 				</el-table-column>
-				<el-table-column prop="city" label="完成度">
+				<el-table-column label="完成度">
+					<template slot-scope="scope">
+						{{scope.row.totalCrowdfund/scope.row.lowLimit | filter}}-{{scope.row.lowLimit}}
+					</template>
 				</el-table-column>
 				<el-table-column prop="city" label="状态">
+					<template slot-scope="scope">
+						<div v-if="scope.row.isCheck==0">已提交</div>
+						<div v-if="scope.row.isCheck==1">审核通过-即将开始</div>
+						<div v-if="scope.row.isCheck==2">审核未通过-<span>点击修改</span></div>
+					</template>
 				</el-table-column>
 				<el-table-column prop="updateTime" label="状态更新时间">
 				</el-table-column>
 			</el-table>
 			<div class="my_crowdfunding_data_pages">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"  :page-size="pageSizes" layout="sizes, prev, pager, next, jumper">
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40, 50]" :page-size="size" layout="sizes, prev, pager, next, jumper" :total="total">
 				</el-pagination>
 			</div>
 		</div>
@@ -29,37 +40,58 @@
 	export default {
 		data() {
 			return {
-				crowdfundingData: [],
-				currentPage: 0,
-				pageSizes:5
+				crowdfundingData: [{
+					totalCrowdfund: '3333',
+					lowLimit: '4345',
+				}, {
+					totalCrowdfund: '3333',
+					lowLimit: '1',
+				}],
+				currentPage: 1,
+				size: 5,
+				total: 0,
+				mathData: [],
 			}
 		},
-		mounted(){
+		mounted() {
 			this.crowdfunding();
 		},
-		methods:{
+		filters: {
+			filter: function(value) {
+				if(!value) return '';
+				var str = Number(value * 100).toFixed(0);
+				return str += "%";
+			}
+		},
+		methods: {
 			crowdfunding() {
 				Request({
 					url: 'QueryMyNewCrowdfunding',
 					data: {
 						accountId: 1,
 						page: this.currentPage,
-						pageSize: this.pageSizes
+						pageSize: this.size
 					},
 					type: 'get'
 				}).then(res => {
-					console.log('QueryMyNewCrowdfunding res_>', res);
+					this.crowdfundingData = res.data;
+					this.total = res.total;
 				})
 			},
-			sortChange(){
-				
+			persent() {
+
 			},
-			handleCurrentChange(page){
-				this.pageSizes = page;
+			handleCurrentChange(page) {
+				this.currentPage = page;
+				this.crowdfunding();
 			},
-			handleSizeChange(page){
-				
-			}
+			handleSizeChange(page) {
+				this.size = page;
+				this.crowdfunding();
+			},
+			sortChange() {
+
+			},
 		}
 	}
 </script>
@@ -68,6 +100,7 @@
 		margin-bottom: 30px;
 		float: right;
 	}
+	
 	.my_crowdfunding_data_pages {
 		margin-top: 30px;
 	}

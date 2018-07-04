@@ -8,7 +8,7 @@ export default new Vuex.Store({
         id: undefined,
         uid: undefined,
         username: undefined,
-        token: undefined,
+        token: '12132',
     },
     mutations: {
         setUserId(state, val) {

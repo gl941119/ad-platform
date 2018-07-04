@@ -37,11 +37,14 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     type = type.toUpperCase();
     url = ajaxURL[url];
     let token = store.state.token || Cache.getSession('bier_token');
+    console.log(token);
 
     if (type === 'GET') {
-        return axios.get(url, {
-            params: data
-        });
+        return token?axios.get(url, {
+            params: data,
+            headers: {token},
+        }):
+        axios.get(url, {params: data});
     } else if (type === 'POST') {
         if (isJson) {
             return token ? axios.post(url, data, {

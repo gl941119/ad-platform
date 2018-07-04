@@ -6,17 +6,17 @@
 			<h5>团队</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>团队名称</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamName" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>团队联系方式</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamContact" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>主要成员所在地</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -90,17 +90,18 @@
 			<h5>项目情况</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>项目名称</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.proName" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>项目简介</label>
-				<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="textarea3">
+				<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>概念</label>
 				<el-input placeholder="请输入内容" v-model="input10" clearable>
+					<span v-for="(item, index) in checkedData" :key="index">{{item}}</span>
 				</el-input>
 				<i class="el-icon-circle-plus" @click="conceptFun"></i>
 			</li>
@@ -112,12 +113,12 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>官网</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.website" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>白皮书地址</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper" clearable>
 				</el-input>
 			</li>
 		</ul>
@@ -126,7 +127,7 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
 				<div>
-					<conceptCom></conceptCom>
+					<conceptCom @listenCondept="listenCondept"></conceptCom>
 				</div>
 			</div>
 		</div>
@@ -145,17 +146,17 @@
 			<h5>代币发行</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>英文简写</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>中文简写</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>英文全名</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -172,40 +173,42 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>本轮众筹标题</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.title" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>发行总量</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.circulation" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>众筹总量</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.totalCrowdfund" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>本轮次发行量</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.currCirculation" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>众筹价格</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.price" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>目标货币</label>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.targetCurrency" clearable>
+				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>发行硬顶</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.topLimit" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>发行软顶</label>
-				<el-input placeholder="请输入内容" v-model="input10" clearable>
+				<el-input placeholder="请输入内容" v-model="newCrowdfunding.lowLimit" clearable>
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -227,11 +230,13 @@
 				</div>
 			</li>
 		</ul>
+		<button @click="submit">提交</button>
 	</div>
 </template>
 
 <script>
 	import conceptCom from '@/components/personal-com/concept';
+	import Request from '../../../utils/require.js';
 	export default {
 		data() {
 			return {
@@ -247,6 +252,56 @@
 					dept: '',
 					intro: '',
 				},
+				newCrowdfunding:{
+					accountId: '', //用户id
+					teamName: "", //团队名称
+					teamContact: "", //团队联系方式
+					teamLocation: "", //团队所在地
+					proName: "", //项目名称
+					proDesc: "", //项目简介
+					concept1Id: 1, //概念1 id
+					concept2Id: 2, //概念2 id
+					concept3Id: 3, //概念3 id
+					concept4Id: 4, //概念4 id
+					technology1: "", //技术1
+					technology2: "", //技术2
+					website: "", //官网
+					whitePaper: "", //白皮书地址
+					shotEnName: "", //英文简写
+					shotCnName: "", //中文简写
+					fullEnName: "", //英文全名
+					title: "", //众筹标题
+					logo: "", //logo地址
+					circulation: 1, //发行总量
+					totalCrowdfund: 2, //众筹总量
+					currCirculation: 3, //本轮发行量
+					mostNumber: 1, //单账号 最大购买数量
+					price: "",//众筹价格
+					targetCurrency: "1", //目标货币
+					topLimit: 0, //发行上限
+					lowLimit: 0, //发行下限
+					startTime: "2018-06-25 11:44:22", //开始时间
+					endTime: "2018-06-25 11:44:22", //结束时间
+					license: "", //相关牌照
+
+				},
+				crowdTeamConsultants: [ //众筹顾问团队
+					{
+						accountId: 1, //用户id
+						name: "",
+						title: "",
+						desc: "",
+					}
+				],
+				crowdTeamMembers: [ //众筹核心团队成员
+					{
+						accountId: 1, //用户id
+						name: "",
+						title: "",
+						desc: ""
+					}
+				],
+				checkedData: [],
 				concept: false,
 				technology: false,
 				input10: '',
@@ -256,9 +311,21 @@
 			}
 		},
 		components: {
-			conceptCom,
+			conceptCom, 
 		},
 		methods: {
+			submit(){
+				Request({
+					url: 'QueryConcept',
+					type: 'get'
+				}).then(res => {
+					console.log(res);
+				})
+			},
+			listenCondept(checkedData) {
+				this.checkedData = checkedData;
+				console.log(this.checkedData);
+			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
 				tmpPersions.push(this.newCore);
