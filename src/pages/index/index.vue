@@ -1,9 +1,9 @@
 <template>
-  <div class="platform-index">
-      <custom-carousel></custom-carousel>
-      <div class="platform-index-bull">
-          <div class="platform-index-bull-block">行情播报</div>
-          <div class="platform-index-bull-content">
+<div class="platform-index">
+    <custom-carousel></custom-carousel>
+    <div class="platform-index-bull">
+        <div class="platform-index-bull-block">行情播报</div>
+        <div class="platform-index-bull-content">
             <swiper :options="swiperOptions" class="platform-index-bull-content-swiper" ref="swiperBulls">
                 <swiper-slide v-for="(data, index) in bullsData" :key="index">
                     <div class="swiper-text">
@@ -15,23 +15,23 @@
                     </div>
                 </swiper-slide>
             </swiper>
-          </div>
-      </div>
-      <div class="platform-index-item">
-          <div class="platform-index-item-crowdsale">
-              <div class="platform-index-item-crowdsale-title">众筹</div>
-              <crowdsale-item v-for="(crowdsale, i) in crowdsaleItemdata" :key="i" :crowdsale-datas="crowdsale" :system-time="sysTime"></crowdsale-item>
-              <learn-more></learn-more>
-          </div>
-          <div class="platform-index-item-ad">
-              <div class="platform-index-item-ad-title">项目</div>
-              <advert-item></advert-item>
-              <advert-item></advert-item>
-              <advert-item></advert-item>
-              <advert-item></advert-item>
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
+    <div class="platform-index-item">
+        <div class="platform-index-item-crowdsale">
+            <div class="platform-index-item-crowdsale-title">众筹</div>
+            <crowdsale-item v-for="(crowdsale, i) in crowdsaleItemdata" :key="i" :crowdsale-datas="crowdsale" :system-time="sysTime">
+            </crowdsale-item>
+            <learn-more></learn-more>
+        </div>
+        <div class="platform-index-item-ad">
+            <div class="platform-index-item-ad-title">项目</div>
+            <advert-item v-for="(advert, _i) in advertItemDatas" :key="_i"
+                :advert-datas="advert" :system-tiem="sysTime">
+            </advert-item>
+        </div>
+    </div>
+</div>
 </template>
 <script>
     import customCarouselCom from '@/components/custom-carousel';
@@ -55,18 +55,19 @@
                 bullsData: [],
                 crowdsaleItemdata: [],
                 sysTime: undefined,
+                advertItemDatas: [],
             }
         },
         mounted() {
             Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo()])
-            .then(() => {
-                this.swiper.init();
-            })
+                .then(() => {
+                    this.swiper.init();
+                })
         },
         computed: {
             swiper() {
-		      return this.$refs.swiperBulls.swiper;
-		    }
+                return this.$refs.swiperBulls.swiper;
+            }
         },
         components: {
             'custom-carousel': customCarouselCom,
@@ -75,24 +76,31 @@
             'learn-more': learnMoreCom,
         },
         methods: {
-            getData(){
+            getData() {
                 return new Promise(resolve => {
-                    Request({url: 'QueryCrowdSale', type: 'get'}).then(res => {
-                        console.log('QueryCrowdSale res_>', res);
+                    Request({
+                        url: 'QueryCrowdSale',
+                        type: 'get'
+                    }).then(res => {
+                        // console.log('QueryCrowdSale res_>', res);
                         this.crowdsaleItemdata = res.data;
                         resolve();
                     })
                 });
             },
-            getAdvertInfo(){
+            getAdvertInfo() {
                 return new Promise((resolve, reject) => {
-                    Request({url: 'QueryAdvertInfo', type: 'get'}).then(res => {
+                    Request({
+                        url: 'QueryAdvertInfo',
+                        type: 'get'
+                    }).then(res => {
                         console.log('QueryAdvertInfo_>', res);
+                        this.advertItemDatas = res.data;
                         resolve();
                     })
                 });
             },
-            getBulls(){
+            getBulls() {
                 return new Promise((resolve, reject) => {
                     axios.get('https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=id&structure=array').then(res => {
                         this.bullsData = this.handleBullsData(res.data.data);
@@ -103,21 +111,38 @@
                     })
                 });
             },
-            getSystemTime(){
+            getSystemTime() {
                 return new Promise((resolve, reject) => {
-                    Request({url: 'GetSystemTime', type: 'get'}).then(res => {
+                    Request({
+                        url: 'GetSystemTime',
+                        type: 'get'
+                    }).then(res => {
                         this.sysTime = res.data;
                         resolve()
                     })
                 });
             },
-            handleBullsData(data){
+            handleBullsData(data) {
                 let bullsData = [];
                 let oneLine = [];
-                for(let i=0, len=data.length; i<len; i++){
-                    let {id, symbol, quotes: {USD: {price, percent_change_24h}}} = data[i];
-                    oneLine.push({id, symbol, price, percent_change_24h});
-                    if((i + 1) % 4 === 0){
+                for (let i = 0, len = data.length; i < len; i++) {
+                    let {
+                        id,
+                        symbol,
+                        quotes: {
+                            USD: {
+                                price,
+                                percent_change_24h
+                            }
+                        }
+                    } = data[i];
+                    oneLine.push({
+                        id,
+                        symbol,
+                        price,
+                        percent_change_24h
+                    });
+                    if ((i + 1) % 4 === 0) {
                         bullsData.push(oneLine);
                         oneLine = [];
                     }

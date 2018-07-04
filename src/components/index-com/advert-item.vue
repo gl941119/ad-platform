@@ -36,11 +36,19 @@
 </template>
 <script>
 export default {
-    props: ['isWhiteBack'],
+    props: ['advertDatas', 'systemTime', 'isWhiteBack'],
     data(){
         return {
             advertValue: '',
-            advertOptions: [{label: 'huobi', value: 1}, {label: 'binance', value: 2}, {label: 'okex', value: 3}],
+            // advertOptions: [{label: 'huobi', value: 1}, {label: 'binance', value: 2}, {label: 'okex', value: 3}],
+        }
+    },
+    computed: {
+        advertOptions(){
+            console.log('this.advert_>', this.advertDatas);
+            let {customAddress1, customAddress2, customAddress3, customAddress4,customAddress5, customAddress6, customAddress7, customAddress8, customWebsite1,customWebsite2,customWebsite3,customWebsite4,customWebsite5,customWebsite6,customWebsite7,customWebsite8} = this.advertDatas;
+            // return [{customAddress1, customWebsite1},{customAddress2,customWebsite2},{customAddress3,customWebsite3}, {customAddress4, customWebsite4}];
+            return [];
         }
     }
 }

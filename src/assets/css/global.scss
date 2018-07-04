@@ -30,3 +30,8 @@
     font-size: $headerFontSize;
     color: $crowdsaleTitleColor;
 }
+
+// modify crowdsale-detail select style
+.crowdsale-detail-head-right-select input.el-input__inner {
+    padding: 0 30px 0 10px;
+}

@@ -3,39 +3,38 @@
     <div class="crowdsale-detail">
         <div class="crowdsale-detail-head">
             <div class="crowdsale-detail-head-left">
-                BRB-大数据区块链广告平台-第二轮
+                {{detailData.title}}
                 <span>|</span>
                 <span>广告</span>
             </div>
             <div class="crowdsale-detail-head-right">
-                <el-select size="mini" class="crowdsale-detail-head-right-select" v-model="value" placeholder="全部阶段">
+                <el-select size="mini" class="crowdsale-detail-head-right-select" v-model="value" @change="crowdSaleSelect" placeholder="全部阶段">
                     <el-option v-for="detail in options" :key="detail.value" :label="detail.label" :value="detail.value">
                     </el-option>
                 </el-select>
                 <div class="crowdsale-detail-head-right-sn">
-                    <span>项目编号:</span>
-                    <span>BR1806536</span>
+                    <span>项目编号:</span><span>{{detailData.proNum}}</span>
                 </div>
             </div>
         </div>
         <p class="crowdsale-detail-content">
-            全球1.44亿币圈精准用户数据/AI机器人集群流量入口/做最大的区块链项目流量入口,全球1.44亿币圈精准用户数据/AI机器人集群流量入口/做最大的区块链项目流量入口,全球1.44亿币圈精准用户数据/AI机器人集群流量入口/做最大的区块链项目流量入口
+            {{detailData.proDesc}}
         </p>
         <div class="crowdsale-detail-label">
             <div class="crowdsale-detail-label-left">
                 <div class="crowdsale-detail-label-left-title">概念</div>
                 <div class="crowdsale-detail-label-left-list">
                     <div class="crowdsale-detail-label-left-list-tap">
-                        <span>大数据</span>
+                        <span>{{detailData.concept1Id}}</span>
                     </div>
                     <div class="crowdsale-detail-label-left-list-tap">
-                        <span>平台币</span>
+                        <span>{{detailData.concept2Id}}</span>
                     </div>
                     <div class="crowdsale-detail-label-left-list-tap">
-                        <span>Dapp</span>
+                        <span>{{detailData.concept3Id}}</span>
                     </div>
                     <div class="crowdsale-detail-label-left-list-tap">
-                        <span>比特币山寨</span>
+                        <span>{{detailData.concept4Id}}</span>
                     </div>
                 </div>
             </div>
@@ -43,10 +42,10 @@
                 <div class="crowdsale-detail-label-middle-title">发行</div>
                 <div class="crowdsale-detail-label-middle-list">
                     <div class="crowdsale-detail-label-middle-list-tap">
-                        <span>众筹1.05亿</span>
+                        <span>总量{{detailData.circulation}}</span>
                     </div>
                     <div class="crowdsale-detail-label-middle-list-tap">
-                        <span>平台币</span>
+                        <span>总价{{detailData.totalCrowdfund}}</span>
                     </div>
                 </div>
             </div>
@@ -54,10 +53,10 @@
                 <div class="crowdsale-detail-label-middle-title">技术</div>
                 <div class="crowdsale-detail-label-middle-list">
                     <div class="crowdsale-detail-label-middle-list-tap">
-                        <span>Ethereum</span>
+                        <span>{{detailData.technology1}}</span>
                     </div>
                     <div class="crowdsale-detail-label-middle-list-tap">
-                        <span>平台币</span>
+                        <span>{{detailData.technology2}}</span>
                     </div>
                 </div>
             </div>
@@ -65,52 +64,77 @@
         <div class="crowdsale-detail-specific">
             <div class="crowdsale-detail-specific-text">
                 <span>本轮发行数量：</span>
-                <span>5,000,000 BRB</span>
+                <span>{{detailData.currCirculation}} BRB</span>
             </div>
             <div class="crowdsale-detail-specific-text">
                 <span>众筹价格：</span>
-                <span>5,000,000 BRB</span>
+                <span>{{detailData.price}} BRB</span>
             </div>
             <div class="crowdsale-detail-specific-text">
                 <span>抢购开始时间：</span>
-                <span>2018-07-01 20:00:00</span>
+                <span>{{detailData.startTime | dateFormat('time')}}</span>
             </div>
             <div class="crowdsale-detail-specific-text">
                 <span>抢购介绍时间：</span>
-                <span>2018-07-02 20:00:00</span>
+                <span>{{detailData.endTime | dateFormat('time')}}</span>
             </div>
         </div>
     </div>
     <div class="crowdsale-footer">
-        <el-button v-if="isOver" :class="{'reserve-btn':!isOver}" class="crowdsale-footer-btn">开始预约</el-button>
-        <el-button v-if="!isOver" :class="{'reserve-btn':!isOver}" class="crowdsale-footer-btn">已经结束</el-button>
+        <el-button v-if="!isOver" :class="{'reserve-btn':isOver}" class="crowdsale-footer-btn">{{showText}}</el-button>
+        <el-button v-if="isOver" :class="{'reserve-btn':isOver}" class="crowdsale-footer-btn">已经结束</el-button>
     </div>
-</div>  
+</div>
 </template>
 <script>
+    import Utils from '../../utils/util.js';
     export default {
-        props: ['isOver'],
+        props: ['detailData', 'systemTime'],
         data() {
             return {
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                value: ''
+                value: 1,
+                isOver: false,
+                showText: '',
+                remainTime: '',
+                utils: new Utils(),
             }
         },
+        mounted() {
+            this.handleTime(this.detailData, this.systemTime)
+        },
+        computed: {
+            options() {
+                let {
+                    website,
+                    whitePaper
+                } = this.detailData;
+                return [{
+                    label: '查看白皮书',
+                    value: 1,
+                    site: whitePaper
+                }, {
+                    label: '访问官网',
+                    value: 2,
+                    site: website,
+                }];
+            },
+        },
+        methods: {
+            crowdSaleSelect(v) {
+                let sel = this.options.find(item => v === item.value);
+                console.log('options_>', v, sel);
+            },
+            handleTime(data, systemTime) {
+                let {
+                    isOver,
+                    showText,
+                    remainTime
+                } = this.utils.handleTime(data, systemTime);
+                this.isOver = isOver;
+                this.showText = showText === 1 ? '马上预约' : '马上抢购';
+                this.remainTime = remainTime;
+            },
+        }
     }
 </script>
 <style lang="scss" scoped>
@@ -154,15 +178,15 @@
                 height: 50px;
                 @include content-flex(space-between, flex-start);
                 &-left {
-                    width: 240px;
+                    width: 232px;
                     @extend %crowdsale-detail-title;
                 }
                 &-right {
-                    width: 120px;
+                    width: 126px;
                     text-align: right;
                     &-select {
                         display: inline-block;
-                        width: 98px;
+                        width: 105px;
                     }
                     &-sn {
                         margin-top: 5px;
@@ -241,8 +265,8 @@
                 color: #fff;
                 border-radius: 0;
                 &.reserve-btn {
-                        background: #999;
-                    }
+                    background: #999;
+                }
             }
         }
     }

@@ -2,6 +2,8 @@ export default {
     GetSystemTime: 'blockchainadvert/common/now-date',
     QueryCrowdSale: 'blockchainadvert/crowd-funding/home-page',
     QueryAdvertInfo: 'blockchainadvert/advertservice/home-page',
+    QueryCrowdSaleDetailInfo: 'blockchainadvert/crowd-funding/secondary',
+    QueryAllConcept: 'blockchainadvert/common/concept',
     /*收益账户*/
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',
