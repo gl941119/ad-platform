@@ -36,14 +36,17 @@
 				item.isSelected = !item.isSelected;
 				if(item.isSelected) {
 					if(length < 4) {
-						this.checkedData.push(item.id);
+						var obj={};
+						obj.id=item.id;
+						obj.value=item.name;
+						this.checkedData.push(obj);
 						this.$emit('listenCondept',this.checkedData)
 					} else {
 						item.isSelected = false;
 						this.$message('最多四个哦，不能再多了');
 					}
 				} else {
-					let _index = this.checkedData.findIndex(v => item.label === v.label);
+					let _index = this.checkedData.findIndex(v => item.name === v.name);
 					this.checkedData.splice(_index, 1)
 				}
 			},

@@ -16,4 +16,6 @@ export default {
     QueryConcept: 'blockchainadvert/common/concept',
     /*众筹项目方-申请新众筹*/
     QueryNewCrowdfunding: 'blockchainadvert/crowd-funding',
+    /*广告方-添加新项目*/
+    QueryNewProject: 'blockchainadvert/advertservice/advert',
 }
