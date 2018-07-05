@@ -3,7 +3,7 @@ import axios from 'axios';
 import qs from 'qs';
 import store from '../store';
 import Cache from './cache';
-import { Loading } from 'element-ui';
+import { Message, Loading } from 'element-ui';
 import ajaxURL from '../config';
 import config from './config';
 
@@ -37,7 +37,6 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     type = type.toUpperCase();
     url = ajaxURL[url];
     let token = store.state.token || Cache.getSession('bier_token');
-    console.log(token);
 
     if (type === 'GET') {
         return token?axios.get(url, {
@@ -84,7 +83,9 @@ function requestHandle(params) {
                 if (success === 1) {
                     resolve(res.data);
                 } else {
-                    resolve(res)
+                    Message.error({
+                        message,
+                    });
                 }
             },
             rej => {

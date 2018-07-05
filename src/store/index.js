@@ -6,19 +6,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         id: undefined,
-        uid: undefined,
         username: undefined,
-        token: '12132',
+        usernickname: undefined,
+        token: undefined,
     },
     mutations: {
         setUserId(state, val) {
             state.id = val;
         },
-        setUserUId(state, val) {
-            state.uid = val;
-        },
         setUserName(state, val) {
             state.username = val;
+        },
+        setUserNickName(state, val) {
+            state.usernickname = val;
         },
         setToken(state, val) {
             state.token = val;

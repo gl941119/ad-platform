@@ -132,7 +132,7 @@ export default class Util {
         let isOver = endDiff < 0; // true -> 已结束
         let showText = 0;
         let remainTime = undefined;
-        console.log('diff___>', startDiff, endDiff, new Date(startTime), new Date(systemTime), new Date(endTime));
+        // console.log('diff___>', startDiff, endDiff, new Date(startTime), new Date(systemTime), new Date(endTime));
         if (startDiff < 0) {
             showText = 1;
             let dayArr = this.formatDuring(-startDiff);
@@ -143,5 +143,23 @@ export default class Util {
             remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
         }
         return {isOver, showText, remainTime}
+    }
+
+    randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+    
+    /**
+     * 生成随机code
+     * @param {String} o -> code resource 
+     * @param {Number} len -> create code length
+     * @return {String}
+     */
+    makeCode(o, len) {
+        let code = '';
+        for (let i = 0; i < len; i++) {
+            code += o[this.randomNum(0, o.length)]
+        }
+        return code;
     }
 }

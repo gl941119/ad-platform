@@ -149,7 +149,7 @@
                 }
                 bullsData.push(oneLine);
                 return bullsData;
-            }
+            },
         }
     }
 </script>

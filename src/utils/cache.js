@@ -1,5 +1,8 @@
 /**
  * bier_token     ->     token
+ * bier_userid    ->     user id
+ * bier_username  ->     account
+ * bier_usernickname    ->      nickname
  */
 export default {
     getSession(name) {

@@ -4,6 +4,9 @@ export default {
     QueryAdvertInfo: 'blockchainadvert/advertservice/home-page',
     QueryCrowdSaleDetailInfo: 'blockchainadvert/crowd-funding/secondary',
     QueryAllConcept: 'blockchainadvert/common/concept',
+    // Login and Register
+    Register:'blockchainadvert/account/registered',
+    Login: 'blockchainadvert/account/accountLogin',
     /*收益账户*/
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',
