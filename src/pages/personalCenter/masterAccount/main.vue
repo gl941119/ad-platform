@@ -33,10 +33,11 @@
 			<div class="advertising_revenu_account_flow_time">
 				<div class="advertising_revenu_account_flow_title">账户流水</div>
 				<div class="advertising_revenu_account_flow_date">
-					<el-date-picker v-model="value1" type="date" placeholder="选择日期">
+					<el-date-picker v-model="startTime" type="date" placeholder="开始日期">
 					</el-date-picker>
-					<el-date-picker v-model="value1" type="date" placeholder="选择日期">
+					<el-date-picker v-model="endTime" type="date" placeholder="结束日期">
 					</el-date-picker>
+					<button @click="mainData">sousuo</button>
 				</div>
 			</div>
 			<el-table border :data="flowData" style="width: 100%">
@@ -50,44 +51,39 @@
 				</el-table-column>
 			</el-table>
 			<div class="advertising_revenu_account_flow_data_pages">
-				 <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[10, 20, 30, 40, 50]"
-      :page-size="size"
-      layout="sizes, prev, pager, next, jumper"
-      :total="total">
-    </el-pagination>
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40, 50]" :page-size="size" layout="sizes, prev, pager, next, jumper" :total="total">
+				</el-pagination>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import Request from '../../../utils/require.js'; 
+	import Request from '../../../utils/require.js';
+	import Utils from '../../../utils/util.js';
 	export default {
 		data() {
 			return {
 				flowData: [],
-				balance:'',
+				balance: '',
 				currentPage: 1,
 				size: 5,
-				total:0,
+				total: 0,
 				rechargeView: false,
-				value1:'',
-				staticDays: new Date('2017','3','28'),
+				startTime: '',
+				endTime: '',
+				util: new Utils(),
 			}
 		},
-		mounted(){
+		mounted() {
 			this.BasicInformation();
 			this.mainData();
 		},
 		methods: {
-			BasicInformation(){
+			BasicInformation() {
 				Request({
 					url: 'QueryMainBasicInformation',
 					data: {
-						accountId:1
+						accountId: 5
 					},
 					type: 'get'
 				}).then(res => {
@@ -95,12 +91,21 @@
 				})
 			},
 			mainData() {
+				if(this.startTime){
+					var startTime = this.util.format(this.startTime, 'yyyy-MM-dd HH:mm:ss');
+				}
+				if(this.endTime){
+					var endTime = this.util.format(this.endTime, 'yyyy-MM-dd HH:mm:ss');
+				}
 				Request({
 					url: 'QueryMainAccountFlow',
 					data: {
-						mainId: 2,
+						mainId: 1,
 						page: this.currentPage,
-						pageSize: this.size
+						pageSize: this.size,
+						flowType: 1,
+						startTime: startTime,
+						endTime: endTime
 					},
 					type: 'get'
 				}).then(res => {

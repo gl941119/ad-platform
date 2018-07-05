@@ -34,10 +34,11 @@
 			<div class="advertising_revenu_account_flow_time">
 				<div class="advertising_revenu_account_flow_title">账户流水</div>
 				<div class="advertising_revenu_account_flow_date">
-					<el-date-picker v-model="value1" type="date" placeholder="选择日期">
+					<el-date-picker v-model="startTime" type="date" placeholder="开始日期">
 					</el-date-picker>
-					<el-date-picker v-model="value1" type="date" placeholder="选择日期">
+					<el-date-picker v-model="endTime" type="date" placeholder="结束日期">
 					</el-date-picker>
+					<button @click="revenueData">sousuo</button>
 				</div>
 			</div>
 			<el-table border :data="flowData" style="width: 100%">
@@ -66,6 +67,7 @@
 </template>
 <script>
 	import Request from '../../../utils/require.js';
+	import Utils from '../../../utils/util.js';
 	export default {
 		data() {
 			return {
@@ -74,9 +76,11 @@
 				value1: '',
 				currentPage: 1,
 				size: 5,
-				total:100,
+				total:0,
 				withdrawView: false,
-				staticDays: new Date(),
+				startTime: '',
+				endTime: '',
+				util: new Utils(),
 			}
 		},
 		mounted() {
@@ -88,7 +92,7 @@
 				Request({
 					url: 'QueryRevenueBasicInformation',
 					data: {
-						accountId: 1
+						accountId: 5
 					},
 					type: 'get'
 				}).then(res => {
@@ -96,15 +100,25 @@
 				})
 			},
 			revenueData() {
+				if(this.startTime){
+					var startTime = this.util.format(this.startTime, 'yyyy-MM-dd HH:mm:ss');
+				}
+				if(this.endTime){
+					var endTime = this.util.format(this.endTime, 'yyyy-MM-dd HH:mm:ss');
+				}
 				Request({
 					url: 'QueryRevenueAccountFlow',
 					data: {
-						incomeId: 1,
+						incomeId: 2,
 						page: this.currentPage,
-						pageSize: this.pageSizes
+						pageSize: this.pageSizes,
+						flowType: 1,
+						startTime: startTime,
+						endTime: endTime
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res)
 					this.flowData = res.data;
 					this.total = res.total;
 				})
