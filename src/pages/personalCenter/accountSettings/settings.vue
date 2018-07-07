@@ -15,18 +15,10 @@
 							<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
 								<div class="el-collapse-item__content">
 									<div class="el-collapse-item__content_img">
-										<img src="../../../assets/imgs/avatar/头像.svg" />
+										
 									</div>
 									<div class="el-collapse-item__content_imgs">
-										<img src="../../../assets/imgs/avatar/头像.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 10.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 11.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 12.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 13.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 14.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 15.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 16.svg" />
-										<img src="../../../assets/imgs/avatar/头像_copy 17.svg" />
+										
 									</div>
 								</div>
 							</div>
