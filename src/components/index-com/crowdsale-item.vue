@@ -42,6 +42,9 @@
                 </div>
             </div>
         </div>
+        <div v-if="status===2" class="crowdsale-item-progress">
+            <el-progress :percentage="progress" :show-text="false" color="#FF9500"></el-progress>
+        </div>
     </div>
 </template>
 <script>
@@ -51,9 +54,11 @@
         data() {
             return {
                 isEventOver: false,
+                status: 0,
                 showText: '',
                 remainTime: '',
                 utils: new Utils(),
+                progress: 65,
             }
         },
         mounted() {
@@ -64,11 +69,12 @@
             handleTime(data, systemTime) {
                 let {
                     isOver,
-                    showText,
+                    status,
                     remainTime
                 } = this.utils.handleTime(data, systemTime);
                 this.isEventOver = isOver;
-                this.showText = showText === 1 ? '即将开始' : '剩余时间';
+                this.status = status;
+                this.showText = status === 1 ? '即将开始' : '剩余时间';
                 this.remainTime = remainTime;
             },
             countDown(data) {
@@ -170,6 +176,9 @@
                     }
                 }
             }
+        }
+        &-progress {
+            margin-top: 16px;
         }
     }
 </style>

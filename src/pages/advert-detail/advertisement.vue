@@ -9,7 +9,7 @@
             </div>
             <div class="advertisement-container-select">
                 <el-select size="mini" class="advertisement-container-select-left" v-model="value" placeholder="全部阶段">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    <el-option v-for="item in conceptOptions" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
             </div>
@@ -17,9 +17,7 @@
         <div class="advertisement-box">
             <div class="advertisement-box-content">
                 <div class="advertisement-box-content-item">
-                    <advert-item :is-white-back="true"></advert-item>
-                    <advert-item :is-white-back="true"></advert-item>
-                    <advert-item :is-white-back="true"></advert-item>
+                    <advert-item v-for="(advert, _i) in advertDatas" :key="_i" :advert-datas="advert" :system-tiem="sysTime" :is-white-back="true"></advert-item>
                 </div>
                 <div class="advertisement-box-content-imgs">
                     <img v-for="thumb in thumbImgs" :key="thumb" :src="thumb">
@@ -29,6 +27,7 @@
     </div>
 </template>
 <script>
+import Request from '../../utils/require.js';
     const headerImg = require('../../assets/imgs/detail-img/advertisement.jpg');
     const thumb1 = require('../../assets/imgs/detail-img/dis-thumb1.jpg');
     const thumb2 = require('../../assets/imgs/detail-img/dis-thumb2.jpg');
@@ -40,25 +39,53 @@
             return {
                 headerImg,
                 thumbImgs: [thumb1, thumb2, thumb3, thumb4, thumb5],
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                value: ''
+                conceptOptions: [],
+                advertDatas: [],
+                value: '',
+                sysTime: undefined,
             }
         },
+        mounted() {
+            Promise.all([this.getAdvertInfo(), this.getAllConcept(), this.getSystemTime()]).then(() => {
+            })
+        },
+        methods: {
+            getAllConcept(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'QueryAllConcept',
+                        type: 'get'
+                    }).then(res => {
+                        res.data.unshift({id: 0, name: "全部概念"});
+                        this.conceptOptions = res.data;
+                        resolve();
+                    })
+                });
+            },
+            getAdvertInfo(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'QueryAdvertDetailInfo',
+                        type: 'get'
+                    }).then(res => {
+                        this.advertDatas = res.data;
+                            console.log('advertDatas_>', this.advertDatas);
+                        reslove();
+                    })
+                });
+            },
+            getSystemTime() {
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'GetSystemTime',
+                        type: 'get'
+                    }).then(res => {
+                        this.sysTime = res.data;
+                        resolve()
+                    })
+                });
+            },
+        }
     }
 </script>
 <style lang="scss" scoped>
