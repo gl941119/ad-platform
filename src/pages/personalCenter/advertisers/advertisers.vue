@@ -86,6 +86,34 @@
 				</div>
 			</li>
 		</ul>
+		<!--<el-dialog :title="项目情况" :close-on-click-modal="false" :visible.sync="registerModel.registerVisible" width="360px">
+            <el-form class="register"  ref="registerModelForm" :rules="registerModel.rule">
+                <el-form-item label="项目名称"
+                              prop="email"
+                              :label-width="registerModel.formLabelWidth">
+                </el-form-item>
+                <el-form-item label="项目简介"
+                              prop="verifyCode"
+                              class="register-verify"
+                              :label-width="registerModel.formLabelWidth">
+                </el-form-item>
+                <el-form-item label="概念"
+                              prop="password"
+                              :label-width="registerModel.formLabelWidth">
+                </el-form-item>
+                <el-form-item label="技术"
+                              prop="passwordAgain"
+                              :label-width="registerModel.formLabelWidth">
+                </el-form-item>
+                <div class="register-foot">
+                    <el-button type="default"
+                            size="small"
+                            class="register-foot-btn"
+                            round
+                            @click="registerSubmit">注 册</el-button>
+                </div>
+            </el-form>
+        </el-dialog>-->
 		<ul class="newCrowdfunding_item">
 			<h5>项目情况</h5>
 			<li class="newCrowdfunding_item_li">
@@ -225,7 +253,12 @@
 
 <script>
 	import conceptCom from '@/components/personal-com/concept';
-	import Request from '../../../utils/require.js';
+	import customIdentifyCom from '@/components/common/custom-identify';
+    import Cache from '../../../utils/cache.js';
+    import Utils from '../../../utils/util.js';
+    import Request from '../../../utils/require.js';
+    import Config from '../../../utils/config.js';
+    import validateFun from '../../../utils/validate.js';
 	export default {
 		data() {
 			return {
