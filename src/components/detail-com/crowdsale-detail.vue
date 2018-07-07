@@ -62,21 +62,26 @@
             </div>
         </div>
         <div class="crowdsale-detail-specific">
-            <div class="crowdsale-detail-specific-text">
-                <span>本轮发行数量：</span>
-                <span>{{detailData.currCirculation}} BRB</span>
+            <div>
+                <div class="crowdsale-detail-specific-text">
+                    <span>本轮发行数量：</span>
+                    <span>{{detailData.currCirculation}} BRB</span>
+                </div>
+                <div class="crowdsale-detail-specific-text">
+                    <span>众筹价格：</span>
+                    <span>{{detailData.price}} BRB</span>
+                </div>
+                <div class="crowdsale-detail-specific-text">
+                    <span>抢购开始时间：</span>
+                    <span>{{detailData.startTime | dateFormat('time')}}</span>
+                </div>
+                <div class="crowdsale-detail-specific-text">
+                    <span>抢购介绍时间：</span>
+                    <span>{{detailData.endTime | dateFormat('time')}}</span>
+                </div>
             </div>
-            <div class="crowdsale-detail-specific-text">
-                <span>众筹价格：</span>
-                <span>{{detailData.price}} BRB</span>
-            </div>
-            <div class="crowdsale-detail-specific-text">
-                <span>抢购开始时间：</span>
-                <span>{{detailData.startTime | dateFormat('time')}}</span>
-            </div>
-            <div class="crowdsale-detail-specific-text">
-                <span>抢购介绍时间：</span>
-                <span>{{detailData.endTime | dateFormat('time')}}</span>
+            <div v-if="status===2">
+                <el-progress type="circle" :width="62" color="#FF9500" :percentage="25"></el-progress>
             </div>
         </div>
     </div>
@@ -96,6 +101,7 @@
                 isOver: false,
                 showText: '',
                 remainTime: '',
+                status: 0,
                 utils: new Utils(),
             }
         },
@@ -127,11 +133,12 @@
             handleTime(data, systemTime) {
                 let {
                     isOver,
-                    showText,
+                    status,
                     remainTime
                 } = this.utils.handleTime(data, systemTime);
                 this.isOver = isOver;
-                this.showText = showText === 1 ? '马上预约' : '马上抢购';
+                this.status = status;
+                this.showText = status === 1 ? '马上预约' : '马上抢购';
                 this.remainTime = remainTime;
             },
         }
@@ -247,6 +254,7 @@
             }
             &-specific {
                 padding-top: 16px;
+                @include content-flex(space-between, flex-end);
                 &-text {
                     font-size: 14px;
                     color: #666;

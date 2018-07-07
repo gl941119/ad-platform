@@ -7,4 +7,5 @@ export default {
     url,
     pageSize: 10, // 一页的数量
     pageStart: 1,
+    TelegramBot: 'hanguishuai_bot',
 };

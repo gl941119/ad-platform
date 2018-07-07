@@ -8,6 +8,8 @@ export default {
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',
+    SendVerifyCode: 'blockchainadvert/account/sendEmailCode',
+    TelegramAuthorizeCB: 'blockchainadvert/authorize/telegram',
     /*收益账户*/
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',

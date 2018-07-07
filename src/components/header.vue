@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="header-content">
-            <div class="header-content-logo">AFD</div>
+            <div class="header-content-logo"><img width="54" src="../assets/imgs/img/logo.png"></div>
             <div class="header-content-tab clearfix">
                 <div class="header-content-tab-left">
                     <router-link class="header-content-tab-left-menu"
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <el-dialog :title="'用户注册'" :lock-scroll="false" :close-on-click-modal="false" :visible.sync="registerModel.registerVisible" width="360px">
+        <el-dialog :title="'用户注册'" :close-on-click-modal="false" :visible.sync="registerModel.registerVisible" width="360px">
             <el-form class="register" :model="registerModel.form" ref="registerModelForm" :rules="registerModel.rule">
                 <el-form-item label="邮箱"
                               prop="email"
@@ -44,7 +44,8 @@
                               v-model="registerModel.form.verifyCode"></el-input>
                     <div class="register-verify-btn">
                         <span style="color:#909399;">|</span>
-                        <el-button type="text">发送验证码</el-button>
+                        <el-button @click="sendVerifyCode" v-if="disabled" type="text">发送验证码</el-button>
+                        <el-button v-else disabled type="text">(<span>{{num}}</span>s)后重试</el-button>
                     </div>
                 </el-form-item>
                 <el-form-item label="密码"
@@ -91,7 +92,7 @@
                 </div>
             </el-form>
         </el-dialog>
-        <el-dialog :title="'用户登录'" :lock-scroll="false" :close-on-click-modal="false" :visible.sync="loginModal.loginVisible" width="360px">
+        <el-dialog :title="'用户登录'" :close-on-click-modal="false" :visible.sync="loginModal.loginVisible" width="360px">
             <el-form class="login-modal" :model="loginModal.form" ref="loginModalForm">
                 <el-form-item label="账号"
                               prop="email"
@@ -133,6 +134,11 @@
                             round
                             @click="goToRegister">注 册</el-button>
                 </div>
+                <div class="register-foot">
+                    <telegram-login mode="callback"
+                        :telegram-login="telegramBot"
+                        @callback="callbackFunction"></telegram-login>
+                </div>
             </el-form>
         </el-dialog>
     </header>
@@ -142,6 +148,7 @@
     import Cache from '../utils/cache.js';
     import Utils from '../utils/util.js';
     import Request from '../utils/require.js';
+    import Config from '../utils/config.js';
     import validateFun from '../utils/validate.js';
     export default {
         data() {
@@ -157,6 +164,9 @@
                 code: '',
                 source: '0123456789',
                 codeLen: 4,
+                disabled: true,
+                num: 60,
+                telegramBot: Config.TelegramBot,
                 registerModel: {
                     registerVisible: false,
                     formLabelWidth: '6em',
@@ -213,6 +223,40 @@
             getUserName(){
                 this.userName = this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username')
             },
+            sendVerifyCode(){
+                if(this.registerModel.form.email){
+                    Request({
+                        url:'SendVerifyCode',
+                        data:{
+                            email: this.registerModel.form.email,
+                            codeType: 1,
+                        }
+                    }).then(res => {
+                        this.disabled = false;
+                        let timer = setInterval(() => {
+                            this.num--;
+                            if(this.num < 1){
+                                clearInterval(timer);
+                                this.disabled = true;
+                                this.num = 60;
+                            }
+                        }, 1000);
+                    })
+                } else {
+                    this.$message({message: 'email is empty', type: 'warning'})
+                }
+            },
+            callbackFunction(user){
+                console.log('hanguishuai_bot_>', user);
+                Request({
+                    url: 'TelegramAuthorizeCB',
+                    data: user,
+                    flag: true,
+                }).then(res => {
+                    console.log('TelegramAuthorize_>', res.data);
+                    this.handleLoginSucc(res.data);
+                })
+            },
             registerSubmit() {
                 let {
                     email,
@@ -231,8 +275,9 @@
                                 inviteCode
                             },
                             flag: true
-                        }, res => {
+                        }).then(res => {
                             this.registerModel.registerVisible = false;
+                            this.handleLoginFunc(email, password);
                             this.$message({
                                 message: res.message,
                                 type: 'success'
@@ -278,7 +323,6 @@
                     },
                     type: 'get'
                 }).then(res => {
-                    console.log('login_>', res);
                     this.handleLoginSucc(res.data);
                 })
             },
@@ -297,7 +341,9 @@
             },
             goToRegister() {
                 this.registerModel.registerVisible = true;
-                this.loginModal.loginVisible = false;
+                setTimeout(() => {
+                    this.loginModal.loginVisible = false;
+                }, 200);
             },
             changeCode() {
                 this.createCode(this.source, this.codeLen);

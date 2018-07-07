@@ -4,6 +4,7 @@ import store from '@/store'
 import App from './App'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import advertItemCom from '@/components/index-com/advert-item';
+import telegramLoginCom from '@/components/third-party/telegram-login';
 import filters from './filters'
 
 import './utils/element';
@@ -12,6 +13,7 @@ import 'swiper/dist/css/swiper.css';
 
 Vue.use(VueAwesomeSwiper);
 Vue.component('advert-item', advertItemCom); // 有多处用到，则注册全局组件
+Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 })
