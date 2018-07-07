@@ -23,7 +23,8 @@ const dictionary = {
 
 /**配置验证器 */
 const Veeconfig = {
-	errorBagName: 'errors', // change if property conflicts.
+    errorBagName: 'errors', // change if property conflicts.
+    fieldsBagName: 'fieldBags',
 	delay: 0,
 	locale: 'zh_CN',
 	dictionary: dictionary,
