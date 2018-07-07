@@ -44,7 +44,7 @@
 									</el-input>
 								</li>
 								<div style="display: flex;flex-direction: column;">
-									<button style="margin: 10px 0;" @click="addCore">添加</button>
+									<button style="margin: 10px 0;border-radius: 5px;" @click="addCore">添加</button>
 									<button @click="deletedCore(index)">删除</button>
 								</div>
 							</ol>
@@ -98,19 +98,17 @@
 				<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
 				</el-input>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label>概念</label>
-				<el-input placeholder="请输入内容">
+				<el-input v-model="conceptDatas" placeholder="请输入内容">
 				</el-input>
-				<span v-for="(item, index) in checkedData" :key="index">{{item.value}}</span>
-				<i class="el-icon-circle-plus" @click="conceptFun"></i>
+				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label>技术</label>
-				<el-input placeholder="请输入内容">
+				<el-input v-model="technologyDatas" placeholder="请输入内容">
 				</el-input>
-				{{newCrowdfunding.technology1}}{{newCrowdfunding.technology2}}
-				<i class="el-icon-circle-plus" @click="technologyFun"></i>
+				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
 			</li>
 		</ul>
 		<!--概念-->
@@ -285,6 +283,8 @@
 				concept: false,
 				technology: false,
 				imageUrl: '', //logo地址
+				conceptDatas: '',
+				technologyDatas: '',
 			}
 		},
 		components: {
@@ -317,35 +317,40 @@
 						listMermber: this.coreTeam,
 						listConsultants: this.consultantTeam,
 						customAddress1: this.newCrowdfunding.siteName1,
-						customWebsite1:this.newCrowdfunding.siteAddress1,
+						customWebsite1: this.newCrowdfunding.siteAddress1,
 						customAddress2: this.newCrowdfunding.siteName2,
-						customWebsite2:this.newCrowdfunding.siteAddress2,
+						customWebsite2: this.newCrowdfunding.siteAddress2,
 						customAddress3: this.newCrowdfunding.siteName3,
-						customWebsite3:this.newCrowdfunding.siteAddress3,
+						customWebsite3: this.newCrowdfunding.siteAddress3,
 						customAddress4: this.newCrowdfunding.siteName4,
-						customWebsite4:this.newCrowdfunding.siteAddress4,
+						customWebsite4: this.newCrowdfunding.siteAddress4,
 						customAddress5: this.newCrowdfunding.siteName5,
-						customWebsite5:this.newCrowdfunding.siteAddress5,
+						customWebsite5: this.newCrowdfunding.siteAddress5,
 						customAddress6: this.newCrowdfunding.siteName6,
-						customWebsite6:this.newCrowdfunding.siteAddress6,
+						customWebsite6: this.newCrowdfunding.siteAddress6,
 						customAddress7: this.newCrowdfunding.siteName7,
-						customWebsite7:this.newCrowdfunding.siteAddress7,
+						customWebsite7: this.newCrowdfunding.siteAddress7,
 						customAddress8: this.newCrowdfunding.siteName8,
-						customWebsite8:this.newCrowdfunding.siteAddress8,
+						customWebsite8: this.newCrowdfunding.siteAddress8,
 					},
 					type: 'post',
-					flag:true,
+					flag: true,
 				}).then(res => {
 					console.log(res);
-					if(res.data.success == 1){
+					if(res.data.success == 1) {
 						this.$message('添加成功');
-					}else if(res.data.success == 0){
+					} else if(res.data.success == 0) {
 						this.$message('您已经存在广告，无法再次申请');
 					}
 				})
 			},
 			listenCondept(checkedData) {
-				this.checkedData = checkedData;
+				var newCheckedData = [];
+				checkedData.forEach(function(item, index) {
+					newCheckedData.push(item.value);
+				})
+				this.conceptDatas = newCheckedData.join('-');
+				this.checkeData = checkedData;
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
@@ -401,6 +406,14 @@
 			},
 			technologyFun() {
 				this.technology = !this.technology;
+				var technologyArr = [];
+				if(this.newCrowdfunding.technology1) {
+					technologyArr.push(this.newCrowdfunding.technology1);
+				}
+				if(this.newCrowdfunding.technology2) {
+					technologyArr.push(this.newCrowdfunding.technology2);
+				}
+				this.technologyDatas = technologyArr.join('-');
 			}
 		}
 	}
@@ -437,5 +450,15 @@
 		width: 178px;
 		height: 178px;
 		display: block;
+	}
+	
+	.exec {
+		position: relative;
+	}
+	
+	.example {
+		position: absolute;
+		top: 14px;
+		right: 15px;
 	}
 </style>

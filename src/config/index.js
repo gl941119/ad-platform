@@ -7,6 +7,7 @@ export default {
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',
+    SignOut: 'blockchainadvert/account/signout',
     /*收益账户*/
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',
@@ -28,6 +29,7 @@ export default {
     QueryInviteData: 'blockchainadvert/account/getInvitePerson',//获取邀请用户
     /*账号设置*/
     QueryAccountSettings: 'blockchainadvert/account/modifyAccountMessage',//账号设置
+    QueryCode: 'blockchainadvert/account/getInviteCode',//获取验证码
     QueryAuthentication: 'blockchainadvert/account/idAuthentication',//身份验证
     /*获取钱包地址*/
     QueryBindWalletAddress: 'blockchainadvert/account/bindWalletAddress',
