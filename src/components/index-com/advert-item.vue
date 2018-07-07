@@ -3,26 +3,26 @@
         <div class="advert-item-left">
             <div class="advert-item-left-logo">
             </div>
-            <div class="advert-item-left-text">白皮书</div>
+            <div class="advert-item-left-text"><a :href="advertDatas.whitePaper" target="_blank">白皮书</a></div>
         </div>
         <div class="advert-item-middle">
             <div class="advert-item-middle-title clearfix">
-                <div class="advert-item-middle-title-text">BTC/比特币</div>
-                <div class="advert-item-middle-title-symbol">bit coin</div>
+                <div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}/{{advertDatas.shotCnName}}</div>
+                <div class="advert-item-middle-title-symbol">{{advertDatas.fullEnName}}</div>
                 <div class="advert-item-middle-title-icon">
                     <i class="custom-element-icon-hot"></i>
                 </div>
             </div>
             <div class="advert-item-middle-divide"></div>
             <div class="advert-item-middle-text">
-                从2017年初开始，各类代币持续升温，以纯数字资产交易平台的代表Poloniex为例，月访问量从2月份的7百万人次陡增至5月份的3千万人次，日均交易额达到50亿人民币。即使以交易手续费0.2%计算，日均收入也能达到1000万人民币，而且市场还在迅速扩大。
+                {{advertDatas.proDesc}}
             </div>
         </div>
         <div class="advert-item-right">
-            <el-select class="advert-item-right-select" v-model="advertValue" placeholder="去交易">
+            <el-select class="advert-item-right-select" @change="handleAdvertFunc" v-model="advertValue" placeholder="去交易">
                 <el-option
-                    v-for="item in advertOptions"
-                    :key="item.value"
+                    v-for="(item, index) in advertOptions"
+                    :key="index"
                     :label="item.label"
                     :value="item.value">
                 </el-option>
@@ -46,10 +46,14 @@ export default {
     computed: {
         advertOptions(){
             console.log('this.advert_>', this.advertDatas);
-            let {customAddress1, customAddress2, customAddress3, customAddress4,customAddress5, customAddress6, customAddress7, customAddress8, customWebsite1,customWebsite2,customWebsite3,customWebsite4,customWebsite5,customWebsite6,customWebsite7,customWebsite8} = this.advertDatas;
-            // return [{customAddress1, customWebsite1},{customAddress2,customWebsite2},{customAddress3,customWebsite3}, {customAddress4, customWebsite4}];
-            return [];
+            let {websiteResultList} = this.advertDatas;
+            return websiteResultList;
         }
+    },
+    methods: {
+        handleAdvertFunc(val){
+            console.log('handleAdvertFunc_>', val)
+        },
     }
 }
 </script>
@@ -79,7 +83,9 @@ export default {
             margin-top: 5px;
             text-align: center;
             font-size: $headerFontSize;
-            color: #47c3d3;
+            & a {
+                color: #47c3d3;
+            }
         }
     }
     &-middle {

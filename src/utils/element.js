@@ -30,6 +30,7 @@ import {
     Row,
     Col,
     Upload,
+    Progress,
     Container,
     Header,
     Aside,
@@ -71,6 +72,7 @@ Vue.use(FormItem);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Upload);
+Vue.use(Progress);
 Vue.use(Container);
 Vue.use(Header);
 Vue.use(Aside);

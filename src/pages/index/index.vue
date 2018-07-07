@@ -22,13 +22,15 @@
             <div class="platform-index-item-crowdsale-title">众筹</div>
             <crowdsale-item v-for="(crowdsale, i) in crowdsaleItemdata" :key="i" :crowdsale-datas="crowdsale" :system-time="sysTime">
             </crowdsale-item>
-            <learn-more></learn-more>
+            <learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more>
         </div>
         <div class="platform-index-item-ad">
             <div class="platform-index-item-ad-title">项目</div>
-            <advert-item v-for="(advert, _i) in advertItemDatas" :key="_i"
+            <advert-item v-for="(advert, _i) in totalAdvertItemDatas" :key="_i"
                 :advert-datas="advert" :system-tiem="sysTime">
             </advert-item>
+            <learn-more v-if="totalAdvertItemDatas.length<30" :type="2" @seemore="learnMoreItem"></learn-more>
+            <learn-more v-else :type="1" @seemore="toAdvertDetailPage"></learn-more>
         </div>
     </div>
 </div>
@@ -39,6 +41,7 @@
     import advertItemCom from '@/components/index-com/advert-item';
     import learnMoreCom from '@/components/index-com/learn-more';
     import Request from '../../utils/require.js';
+    import Config from '../../utils/config.js';
     import axios from 'axios';
     export default {
         data() {
@@ -56,6 +59,9 @@
                 crowdsaleItemdata: [],
                 sysTime: undefined,
                 advertItemDatas: [],
+                totalAdvertItemDatas: [],
+                page: Config.pageStart,
+                pageSize: Config.pageSize,
             }
         },
         mounted() {
@@ -88,17 +94,32 @@
                     })
                 });
             },
-            getAdvertInfo() {
+            getAdvertInfo(page = this.page, pageSize = this.pageSize) {
                 return new Promise((resolve, reject) => {
                     Request({
                         url: 'QueryAdvertInfo',
+                        data: {
+                            page,
+                            pageSize,
+                        },
                         type: 'get'
                     }).then(res => {
                         console.log('QueryAdvertInfo_>', res);
                         this.advertItemDatas = res.data;
+                        this.totalAdvertItemDatas.push(...this.advertItemDatas);
                         resolve();
                     })
                 });
+            },
+            toCrowdDetailPage(){
+                this.$router.push({name: 'crowdsale'});
+            },
+            learnMoreItem(){
+                this.page++;
+                this.getAdvertInfo(this.page);
+            },
+            toAdvertDetailPage(){
+                this.$router.push({name: 'advertisement'});
             },
             getBulls() {
                 return new Promise((resolve, reject) => {
