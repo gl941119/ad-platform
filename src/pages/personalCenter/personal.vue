@@ -5,7 +5,7 @@
 				<div class="logo">
 					<div class="logo_box">
 						<img class="logo_img" src="../../assets/imgs/thumbs/thumb3.jpg" />
-						<p class="username">用户名</p>
+						<p class="username">{{username}}</p>
 					</div>
 				</div>
 				<ul class="bierinc-main-container-aside-menu">
@@ -27,7 +27,7 @@
 					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>
 					<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>
 				</ul>
-				<div class="bierinc-main-container-aside-menu-li">退出登录</div>
+				<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
 			</el-aside>
 			<el-main class="bierinc-main-container-view">
 				<router-view :key="$route.name"></router-view>
@@ -37,6 +37,40 @@
 </template>
 
 <script>
+	import Cache from '../../utils/cache';
+	import Request from '../../utils/require';
+	export default {
+		data() {
+			return {
+				uid: this.$store.state.id || Cache.getSession('bier_userid'),
+				token: this.$store.state.token || Cache.getSession('bier_token'),
+				username: this.$store.state.username || Cache.getSession('bier_username')
+			};
+		},
+		computed: {
+			activeIndex() {
+				return this.$route.name;
+			},
+		},
+		methods: {
+			out() {
+				console.log(this.token)
+				Request({
+					url: 'SignOut',
+					type: 'get',
+					data: {
+						token: this.token
+					}
+				}).then(res => {
+					if(res.success) {
+						this.$router.push({
+							name: 'index'
+						});
+					}
+				})
+			}
+		}
+	};
 </script>
 
 <style lang="scss" scoped>
@@ -45,8 +79,8 @@
 		height: 190px;
 		text-align: center;
 		display: flex;
-		.logo_box{
-			margin:auto;
+		.logo_box {
+			margin: auto;
 			.logo_img {
 				width: 88px;
 				height: 88px;
@@ -61,14 +95,17 @@
 			}
 		}
 	}
-	.el-container{
+	
+	.el-container {
 		width: 1200px;
 		margin: 0 auto;
 	}
-	.bierinc-main-container-aside-menu{
+	
+	.bierinc-main-container-aside-menu {
 		margin-bottom: 20px;
 	}
-	.bierinc-main-container-aside-menu-li{
+	
+	.bierinc-main-container-aside-menu-li {
 		background: #000000;
 		text-align: center;
 		height: 65px;

@@ -98,19 +98,18 @@
 				<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
 				</el-input>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label>概念</label>
-				<el-input placeholder="请输入内容">
+				<el-input v-model="conceptDatas" placeholder="请输入内容">
 				</el-input>
-				<span v-for="(item, index) in checkedData" :key="index">{{item.value}}</span>
-				<i class="el-icon-circle-plus" @click="conceptFun"></i>
+				<!--<span v-for="(item, index) in checkedData" :key="index">{{item.value}}</span>-->
+				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec" >
 				<label>技术</label>
-				<el-input placeholder="请输入内容">
+				<el-input v-model="technologyDatas" placeholder="请输入内容">
 				</el-input>
-				{{newCrowdfunding.technology1}}{{newCrowdfunding.technology2}}
-				<i class="el-icon-circle-plus" @click="technologyFun"></i>
+				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>官网</label>
@@ -303,7 +302,9 @@
 				imageUrl: '', //logo地址
 				timeInterval: [],
 				fileList: [],
-				util: new Utils()
+				util: new Utils(),
+				conceptDatas: '',
+				technologyDatas: '',
 			}
 		},
 		components: {
@@ -360,7 +361,12 @@
 				})
 			},
 			listenCondept(checkedData) {
-				this.checkedData = checkedData;
+				var newCheckedData = [];
+				checkedData.forEach(function(item, index) {
+					newCheckedData.push(item.value);
+				})
+				this.conceptDatas = newCheckedData.join('-');
+				this.checkeData = checkedData;
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
@@ -397,6 +403,14 @@
 			},
 			technologyFun() {
 				this.technology = !this.technology;
+				var technologyArr = [];
+				if(this.newCrowdfunding.technology1) {
+					technologyArr.push(this.newCrowdfunding.technology1);
+				}
+				if(this.newCrowdfunding.technology2) {
+					technologyArr.push(this.newCrowdfunding.technology2);
+				}
+				this.technologyDatas = technologyArr.join('-');
 			},
 			getImg(file) {
 				console.log(file)
@@ -458,5 +472,15 @@
 		width: 178px;
 		height: 178px;
 		display: block;
+	}
+	
+	.exec {
+		position: relative;
+	}
+	
+	.example {
+		position: absolute;
+		top: 14px;
+		right: 15px;
 	}
 </style>
