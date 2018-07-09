@@ -15,10 +15,12 @@
 							<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
 								<div class="el-collapse-item__content">
 									<div class="el-collapse-item__content_img">
-										
+										<img :src="imgData[0]" />
 									</div>
 									<div class="el-collapse-item__content_imgs">
-										
+										<div class="el-collapse-item__content_imgs_box" v-for="(item, index) in imgData" :key="index">
+											<img @click="selectImg(item)" :src="item" />
+										</div>
 									</div>
 								</div>
 							</div>
@@ -59,13 +61,14 @@
 											<el-input placeholder="请输入你的邮箱" v-validate data-rules="required|email" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" v-model="bindEmail"></el-input>
 											<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 										</p>
-										<!--<p>
+										<p style="position: relative;">
 											<el-input placeholder="请输入你的验证码" v-model="code"></el-input>
 											<div class="el-button-getCode">
 												<span>|</span>
-												<button class="el-button-getCode_button" @click="getCode">获取邮箱验证码</button>
+												<el-button v-if="disabled" type="text" @click="getCode">获取邮箱验证码</el-button>
+												<el-button v-else disabled type="text">(<span>{{num}}</span>s)后重试</el-button>
 											</div>
-										</p>-->
+										</p>
 										<div class="el-collapse-item__content-box_buttonBox">
 											<button @click="toBindEmail">确定</button>
 										</div>
@@ -93,13 +96,13 @@
 										<p>
 											<el-input placeholder="确认新密码" v-model="oncePassword"></el-input>
 										</p>
-										<!--<p>
+										<p>
 											<el-input placeholder="请输入你的验证码" v-model="code"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
 												<button class="el-button-getCode_button" @click="getCode()">获取邮箱验证码</button>
 											</div>
-										</p>-->
+										</p>
 										<div class="el-collapse-item__content-box_buttonBox">
 											<button @click="changePassword">确定</button>
 										</div>
@@ -127,13 +130,13 @@
 										<p>
 											<el-input placeholder="确认新交易密码" v-model="onceTradePassword"></el-input>
 										</p>
-										<!--<p>
+										<p>
 											<el-input placeholder="请输入你的验证码" v-model="code"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
 												<button class="el-button-getCode_button" @click="getCode">获取邮箱验证码</button>
 											</div>
-										</p>-->
+										</p>
 										<div class="el-collapse-item__content-box_buttonBox">
 											<button @click="changeTradePassword">确定</button>
 										</div>
@@ -261,6 +264,7 @@
 </template>
 
 <script>
+	import Config from '../../../utils/config.js';
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	export default {
@@ -319,31 +323,62 @@
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				dialogVisible: false,
+				disabled: true,
+				num: '',
+				imgData: Config.headPortrait
 			}
 		},
 		mounted() {
 
 		},
 		methods: {
+			selectImg(url) {
+				Request({
+					url: 'QueryAccountSettings',
+					data: {
+						id: this.accountId,
+						headUrl: url,
+					},
+					type: 'post',
+					flag: true
+				}).then(res => {
+					console.log(res);
+					if(res.success == 1) {
+						this.$message('修改成功');
+					}
+				})
+			},
 			cancel() { //取消修改昵称
 				this.nickName = '';
 			},
 			getCode() {
-				Request({
-					url: 'QueryCode',
-					data: {
-						accountId: this.accountId,
-					},
-					type: 'get',
-					flag: true
-				}).then(res => {
-					console.log(res);
-					/*if(res.success == 1) {
-						this.$message('获取成功');
-					} else {
-						this.$message('获取失败');
-					}*/
-				})
+				if(this.bindEmail) {
+					Request({
+						url: 'QueryCode',
+						data: {
+							email: this.bindEmail,
+							codeType: 2,
+						},
+					}).then(res => {
+						console.log(res);
+						this.disabled = false;
+						let timer = setInterval(() => {
+							this.num--;
+							if(this.num < 1) {
+								clearInterval(timer);
+								this.disabled = true;
+								this.num = 60;
+							}
+						}, 1000);
+						/*if(res.success == 1) {
+							this.$message('获取成功');
+						} else {
+							this.$message('获取失败');
+						}*/
+					})
+				} else {
+					this.$message('绑定邮箱不能为空');
+				}
 			},
 			changeTradePassword() {
 				var reg = new RegExp();
@@ -594,6 +629,10 @@
 		box-sizing: border-box;
 		&_img {
 			float: left;
+			margin: 115px 80px 0 80px;
+			img{
+				border-radius: 50%;
+			}
 		}
 		&_imgs {
 			float: left;
@@ -601,6 +640,17 @@
 			height: 330px;
 			background: rgba(255, 255, 255, 1);
 			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+			padding-top: 6px;
+			&_box {
+				float: left;
+				width: 106px;
+				height: 106px;
+				img {
+					width: 106px;
+					height: 106px;
+					border-radius: 50%;
+				}
+			}
 		}
 		&_authentication {
 			border: 1px solid rgba(228, 231, 237, 1);
@@ -764,14 +814,15 @@
 	
 	.el-button-getCode {
 		position: absolute;
-		top: 123px;
+		top: 117px;
 		right: 45px;
 		font-size: 14px;
 		color: rgba(255, 149, 0, 1);
-		&_button {
+		button {
 			background: #ffffff;
 			font-size: 14px;
 			color: rgba(255, 149, 0, 1);
+			height: 38px;
 		}
 	}
 	
