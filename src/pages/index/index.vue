@@ -5,13 +5,11 @@
         <div class="platform-index-bull-block">行情播报</div>
         <div class="platform-index-bull-content">
             <swiper :options="swiperOptions" class="platform-index-bull-content-swiper" ref="swiperBulls">
-                <swiper-slide v-for="(data, index) in bullsData" :key="index">
+                <swiper-slide v-for="(item, index) in bullsData" :key="index">
                     <div class="swiper-text">
-                        <div class="swiper-line" v-for="item in bullsData[index]" :key="item.id">
-                            <span>{{item.symbol}}指数</span>
-                            <span>${{item.price}} /</span>
-                            <span :style="{color: item.percent_change_24h>=0?'#3da283':'#e50000'}">{{item.percent_change_24h}}%</span>
-                        </div>
+                        <span>{{item.symbol}}指数</span>
+                        <span>${{item.price}} /</span>
+                        <span :style="{color: item.percent_change_24h>=0?'#3da283':'#e50000'}">{{item.percent_change_24h}}%</span>
                     </div>
                 </swiper-slide>
             </swiper>
@@ -52,7 +50,9 @@
                         disableOnInteraction: false,
                     },
                     loop: true,
-                    simulateTouch: false,
+                    slidesPerView: 4,
+                    loopedSlides: 10,
+                    simulateTouch: true,
                     init: false,
                 },
                 bullsData: [],
@@ -145,7 +145,6 @@
             },
             handleBullsData(data) {
                 let bullsData = [];
-                let oneLine = [];
                 for (let i = 0, len = data.length; i < len; i++) {
                     let {
                         id,
@@ -157,18 +156,13 @@
                             }
                         }
                     } = data[i];
-                    oneLine.push({
+                    bullsData.push({
                         id,
                         symbol,
                         price,
                         percent_change_24h
                     });
-                    if ((i + 1) % 4 === 0) {
-                        bullsData.push(oneLine);
-                        oneLine = [];
-                    }
                 }
-                bullsData.push(oneLine);
                 return bullsData;
             },
         }
@@ -200,20 +194,17 @@
             }
             &-content {
                 flex: 1;
+                width: 1070px;
                 height: 100%;
                 &-swiper {
-                    width: 1070px;
                     height: 100%;
-                    & .swiper-slide {
-                        width: 100%;
+                    & .swiper-text {
                         height: 100%;
-                        & .swiper-text {
-                            @include content-flex(space-around);
-                            height: 100%;
-                            & .swiper-line {
-                                font-size: 18px;
-                                color: #666;
-                            }
+                        line-height: $bullHeight;
+                        text-align: center;
+                        & .swiper-line {
+                            font-size: 18px;
+                            color: #666;
                         }
                     }
                 }
