@@ -25,6 +25,12 @@
             <div class="ad-crowdsale-box-content">
                 <crowdsale-detial v-for="(detail, i) in crowdSaleDatas" :key="i" :detail-data="detail" :system-time="sysTime"></crowdsale-detial>
             </div>
+            <el-pagination class="ad-crowdsale-box-pagination"
+            background
+            layout="prev, pager, next"
+            :page-size="pageSize"
+            :total="pageTotal">
+        </el-pagination>
         </div>
     </div>
 </template>
@@ -82,6 +88,7 @@
                         })
                         .then(res => {
                             this.crowdSaleDatas = res.data;
+                            this.pageTotal = res.total;
                             resolve();
                         })
                 });
@@ -160,6 +167,9 @@
                 @include body-center();
                 @include content-flex(flex-start, flex-start);
                 flex-wrap: wrap;
+            }
+            &-pagination {
+                text-align: center;
             }
         }
     }

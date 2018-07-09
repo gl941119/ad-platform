@@ -28,6 +28,7 @@
 </template>
 <script>
 import Request from '../../utils/require.js';
+import Config from '../../utils/config.js';
     const headerImg = require('../../assets/imgs/detail-img/advertisement.jpg');
     const thumb1 = require('../../assets/imgs/detail-img/dis-thumb1.jpg');
     const thumb2 = require('../../assets/imgs/detail-img/dis-thumb2.jpg');
@@ -41,8 +42,11 @@ import Request from '../../utils/require.js';
                 thumbImgs: [thumb1, thumb2, thumb3, thumb4, thumb5],
                 conceptOptions: [],
                 advertDatas: [],
+                totalAdvertItemDatas: [],
                 value: '',
                 sysTime: undefined,
+                page: Config.pageStart,
+                pageSize: Config.pageSize,
             }
         },
         mounted() {
@@ -62,15 +66,20 @@ import Request from '../../utils/require.js';
                     })
                 });
             },
-            getAdvertInfo(){
+            getAdvertInfo(page = this.page, pageSize = this.pageSize) {
                 return new Promise((resolve, reject) => {
                     Request({
-                        url: 'QueryAdvertDetailInfo',
+                        url: 'QueryAdvertInfo',
+                        data: {
+                            page,
+                            pageSize,
+                        },
                         type: 'get'
                     }).then(res => {
+                        console.log('QueryAdvertInfo_>', res);
                         this.advertDatas = res.data;
-                            console.log('advertDatas_>', this.advertDatas);
-                        reslove();
+                        this.totalAdvertItemDatas.push(...this.advertItemDatas);
+                        resolve();
                     })
                 });
             },

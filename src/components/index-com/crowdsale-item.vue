@@ -59,7 +59,6 @@
         props: ['crowdsaleDatas', 'systemTime'],
         data() {
             return {
-                isEventOver: false,
                 status: 0,
                 showText: '',
                 remainTime: '',

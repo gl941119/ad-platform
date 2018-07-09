@@ -103,10 +103,12 @@
                 remainTime: '',
                 status: 0,
                 utils: new Utils(),
+                timer: undefined,
             }
         },
         mounted() {
-            this.handleTime(this.detailData, this.systemTime)
+            this.handleTime(this.detailData, this.systemTime);
+            this.countDown(this.detailData);
         },
         computed: {
             options() {
@@ -149,7 +151,17 @@
                 }
                 this.remainTime = remainTime;
             },
-        }
+            countDown(data) {
+                let sysTime = this.systemTime;
+                this.timer = setInterval(() => {
+                    this.handleTime(data, sysTime);
+                    sysTime += 1000;
+                }, 1000);
+            },
+        },
+        destroyed() {
+            this.timer && clearInterval(this.timer);
+        },
     }
 </script>
 <style lang="scss" scoped>
