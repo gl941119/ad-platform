@@ -32,19 +32,25 @@
                 </div>
             </div>
             <div class="crowdsale-item-list-right">
-                <div v-show="!isEventOver" :class="{'event-over': isEventOver}" class="crowdsale-item-list-right-content">
+                <div v-show="status===1" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
                     <div>{{showText}}</div>
                     <div class="crowdsale-item-list-right-content-divide"></div>
                     <div>{{remainTime}}</div>
                 </div>
-                <div v-show="isEventOver" :class="{'event-over': isEventOver}" class="crowdsale-item-list-right-content">
+                <div v-show="status===2" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
+                    <div>{{showText}}</div>
+                    <div class="crowdsale-item-list-right-content-divide"></div>
+                    <div>{{remainTime}}</div>
+                </div>
+                <div v-show="status===3" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
                     已结束
                 </div>
             </div>
         </div>
-        <div v-if="status===2" class="crowdsale-item-progress">
+        <div v-if="status===2||status===3" class="crowdsale-item-progress">
             <el-progress :percentage="progress" :show-text="false" color="#FF9500"></el-progress>
         </div>
+        <div v-else style="height:6px;margin-top:12px;"></div>
     </div>
 </template>
 <script>
@@ -68,13 +74,21 @@
         methods: {
             handleTime(data, systemTime) {
                 let {
-                    isOver,
                     status,
                     remainTime
                 } = this.utils.handleTime(data, systemTime);
-                this.isEventOver = isOver;
                 this.status = status;
-                this.showText = status === 1 ? '即将开始' : '剩余时间';
+                switch (status) {
+                    case 1:
+                        this.showText = '即将开始'
+                        break;
+                    case 2:
+                        this.showText = '立即抢购'
+                        break;
+                    case 3:
+                        this.showText = '已经结束'
+                        break;
+                }
                 this.remainTime = remainTime;
             },
             countDown(data) {
@@ -94,8 +108,8 @@
     @import '../../assets/css/variable.scss';
     @import '../../assets/css/global.scss';
     .crowdsale-item {
-        padding: 16px;
-        width: crowdsaleItemWidth;
+        padding: 15px 16px 12px;
+        width: $crowdsaleWidth;
         background: $crowdsaleBackGround;
         margin-bottom: 14px;
         &-title {
@@ -122,12 +136,13 @@
         }
         &-abstract {
             @extend %text-abstract;
-            height: 60px;
+            height: 56px;
+            line-height: 19px;
         }
         &-list {
             @include content-flex();
-            height: 73px;
-            margin-top: 16px;
+            height: 71px;
+            margin-top: 10px;
             &-left {
                 width: 226px;
                 height: 100%;
@@ -138,7 +153,7 @@
                     background: #E0E0E0;
                     border-radius: 3px;
                     text-align: center;
-                    margin-bottom: 5px;
+                    margin-bottom: 4px;
                     & span {
                         font-size: 12px;
                         display: inline-block;
@@ -178,7 +193,7 @@
             }
         }
         &-progress {
-            margin-top: 16px;
+            margin-top: 12px;
         }
     }
 </style>

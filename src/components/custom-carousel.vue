@@ -14,16 +14,11 @@
     const swiperImg3 = require('../assets/imgs/swiper-img/swiper3.jpg');
     const swiperImg4 = require('../assets/imgs/swiper-img/swiper4.jpg');
     const swiperImg5 = require('../assets/imgs/swiper-img/swiper5.jpg');
-    const img1 = require('../assets/imgs/thumbs/thumb1.jpg');
-    const img2 = require('../assets/imgs/thumbs/thumb2.jpg');
-    const img3 = require('../assets/imgs/thumbs/thumb3.jpg');
-    const img4 = require('../assets/imgs/thumbs/thumb4.jpg');
-    const img5 = require('../assets/imgs/thumbs/thumb5.jpg');
-    let img = [img1, img2, img3, img4, img5];
+    let swiperImg = [swiperImg1, swiperImg2, swiperImg3, swiperImg4, swiperImg5];
     export default {
         data() {
             return {
-                swiperImg: [swiperImg1, swiperImg2, swiperImg3, swiperImg4, swiperImg5],
+                swiperImg,
                 swiperOptionTop: {
                     autoplay: {
                         disableOnInteraction: false,
@@ -34,7 +29,7 @@
                         el: '.swiper-pagination',
                         clickable: true,
                         renderBullet: function (index, className) {
-                            return '<span class="' + className + '"><image src="' + img[index] + '"></span>';
+                            return '<span class="' + className + '"><image width="208" src="' + swiperImg[index] + '"></span>';
                         },
                     },
                 }
@@ -51,7 +46,7 @@
 @import '../assets/css/variable.scss';
     .custom-carousel {
         width: 100%;
-        height: $carouselHeight;
+        height: auto;
         position: relative;
     }
     .gallery-top {
@@ -61,8 +56,9 @@
     }
     .swiper-pagination{
         width: $contentWidth;
-        height: $thumbsHeight;
+        height: auto;
         position: absolute;
+        padding: 0 40px;
         bottom: 26px;
         left: 50%;
         transform: translate(-50%,0);
@@ -74,12 +70,12 @@
         background:none;
         opacity: 1;
         outline: none;
-        margin-right: 40px;
+        margin-right: 20px;
         &:last-child {
             margin-right: 0;
         }
     }
     .swiper-pagination-bullet.swiper-pagination-bullet-active img {
-        box-shadow: 5px 5px 8px #555;
+        box-shadow:  0 0 15px #fff;
     }
 </style>

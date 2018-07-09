@@ -11,11 +11,11 @@
                 </div>
             </div>
             <div class="ad-crowdsale-container-select">
-                <el-select size="mini" class="ad-crowdsale-container-select-left" v-model="stageValue" placeholder="全部阶段">
+                <el-select size="mini" @change="selectStage" class="ad-crowdsale-container-select-left" v-model="stageValue" placeholder="全部阶段">
                     <el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
-                <el-select size="mini" class="ad-crowdsale-container-select-right" v-model="conceptValue" placeholder="全部概念">
+                <el-select size="mini" @change="selectConcept" class="ad-crowdsale-container-select-right" v-model="conceptValue" placeholder="全部概念">
                     <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
@@ -55,6 +55,7 @@
                 conceptOptions: [],
                 stageValue: 0,
                 conceptValue: 0,
+                currpage: undefined,
                 crowdSaleDatas: [],
                 sysTime: undefined,
             }
@@ -107,6 +108,14 @@
                         resolve()
                     })
                 });
+            },
+            selectStage(val){
+                console.log("select_stageValue_>", this.stageValue, val);
+                getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
+            },
+            selectConcept(val){
+                console.log("select_conceptValue_>", this.conceptValue, val);
+                getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
             },
         }
     }

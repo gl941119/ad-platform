@@ -38,3 +38,7 @@
 .register-verify input.el-input__inner {
     padding-right: 95px;
 }
+.crowdsale-footer-btn.go-to-buy>span {
+    width: 100%;
+    @include content-flex(space-between);
+}

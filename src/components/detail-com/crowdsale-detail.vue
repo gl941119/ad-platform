@@ -80,14 +80,15 @@
                     <span>{{detailData.endTime | dateFormat('time')}}</span>
                 </div>
             </div>
-            <div v-if="status===2">
+            <div v-if="status===2||status===3">
                 <el-progress type="circle" :width="62" color="#FF9500" :percentage="25"></el-progress>
             </div>
         </div>
     </div>
     <div class="crowdsale-footer">
-        <el-button v-if="!isOver" :class="{'reserve-btn':isOver}" class="crowdsale-footer-btn">{{showText}}</el-button>
-        <el-button v-if="isOver" :class="{'reserve-btn':isOver}" class="crowdsale-footer-btn">已经结束</el-button>
+        <el-button v-if="status===1" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{remainTime}}{{showText}}</el-button>
+        <el-button v-if="status===2" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn go-to-buy"><span>剩余时间{{remainTime}}</span><span>{{showText}}</span></el-button>
+        <el-button v-if="status===3" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">已经结束</el-button>
     </div>
 </div>
 </template>
@@ -98,7 +99,6 @@
         data() {
             return {
                 value: 1,
-                isOver: false,
                 showText: '',
                 remainTime: '',
                 status: 0,
@@ -132,13 +132,21 @@
             },
             handleTime(data, systemTime) {
                 let {
-                    isOver,
                     status,
                     remainTime
                 } = this.utils.handleTime(data, systemTime);
-                this.isOver = isOver;
                 this.status = status;
-                this.showText = status === 1 ? '马上预约' : '马上抢购';
+                switch (status) {
+                    case 1:
+                        this.showText = '后即将开始'
+                        break;
+                    case 2:
+                        this.showText = '立即抢购'
+                        break;
+                    case 3:
+                        this.showText = '已经结束'
+                        break;
+                }
                 this.remainTime = remainTime;
             },
         }
@@ -274,6 +282,9 @@
                 border-radius: 0;
                 &.reserve-btn {
                     background: #999;
+                }
+                &.go-to-buy {
+                    @include content-flex();
                 }
             }
         }

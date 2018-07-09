@@ -115,6 +115,7 @@ export default {
         &-text {
             width: 493px;
             @extend %text-abstract;
+            height: 60px;
         }
     }
     &-right {
