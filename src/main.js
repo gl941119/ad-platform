@@ -5,7 +5,8 @@ import App from './App'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import advertItemCom from '@/components/index-com/advert-item';
 import telegramLoginCom from '@/components/third-party/telegram-login';
-import filters from './filters'
+import filters from './filters';
+import i18n from './i18n/i18n'
 
 import './utils/element';
 import './assets/css/reset.css';
@@ -25,5 +26,6 @@ new Vue({
     el: '#app',
     router,
     store,
+    i18n,
     render: h => h(App),
 })

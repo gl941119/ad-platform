@@ -19,10 +19,16 @@
 </template>
 <script>
 	import Request from '../../../utils/require.js';
+	import Cache from '../../../utils/cache.js';
 	export default {
 		data() {
 			return {
 				purseAddress:'',
+			}
+		},
+		computed: {
+			slangChange() {
+				return this.$store.state.slangChange || Cache.getLocal('bier_langChange');
 			}
 		},
 		methods: {
