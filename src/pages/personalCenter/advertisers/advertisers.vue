@@ -407,7 +407,7 @@
 				console.log(value)
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					alert("不要删了o，再删就没有了")
+					this.$message("不要删了o，再删就没有了");
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -422,7 +422,7 @@
 				console.log(value)
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					alert("不要删了o，再删就没有了")
+					this.$message("不要删了o，再删就没有了");
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}

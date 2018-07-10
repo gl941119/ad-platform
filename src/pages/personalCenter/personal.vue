@@ -4,7 +4,7 @@
 			<el-aside width="225px" class="bierinc-main-container-aside">
 				<div class="logo">
 					<div class="logo_box">
-						<img class="logo_img" src="../../assets/imgs/thumbs/thumb3.jpg" />
+						<img class="logo_img" :src="heardUrl" />
 						<p class="username">{{username}}</p>
 					</div>
 				</div>
@@ -44,7 +44,8 @@
 			return {
 				uid: this.$store.state.id || Cache.getSession('bier_userid'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
-				username: this.$store.state.username || Cache.getSession('bier_username')
+				username: this.$store.state.username || Cache.getSession('bier_username'),
+				heardUrl:this.$store.state.heardUrl || Cache.getSession('bier_heardUrl'),
 			};
 		},
 		computed: {
