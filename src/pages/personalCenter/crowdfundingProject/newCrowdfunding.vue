@@ -22,7 +22,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>核心团队成员</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in coreTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							1
 						</el-aside>
@@ -55,7 +55,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>顾问团队</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in consultantTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							1
 						</el-aside>
@@ -161,7 +161,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
-				<el-upload class="avatar-uploader" :show-file-list="false" action="" :on-change="getImg" :auto-upload="false">
+				<el-upload class="avatar-uploader" :show-file-list="false" action="" :on-change="getImg"  :auto-upload="false">
 					<img v-if="imageUrl" :src="imageUrl" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 				</el-upload>
@@ -192,7 +192,7 @@
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>最大购买数量</label>
+				<label>单账号兑换限制</label>
 				<el-input placeholder="请输入内容" v-model="newCrowdfunding.mostNumber">
 				</el-input>
 			</li>
@@ -224,7 +224,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>相关牌照</label>
 				<div>
-					<el-upload class="upload-demo" action="" :on-change="getFile" :on-remove="handleRemove" multiple>
+					<el-upload class="upload-demo" action="" :on-change="getFile" :auto-upload="false" :on-remove="handleRemove" multiple>
 						<el-button size="small" type="primary">上传</el-button>
 					</el-upload>
 				</div>
@@ -238,35 +238,36 @@
 	import conceptCom from '@/components/personal-com/concept';
 	import Request from '../../../utils/require.js';
 	import Utils from '../../../utils/util.js';
+	import Cache from '../../../utils/cache';
 	export default {
 		data() {
 			return {
 				coreTeam: [{
-					accountId: 1,
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				}],
 				consultantTeam: [{
-					accountId: 1,
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				}],
 				newCore: {
-					accountId: 1,
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				},
 				newConsultant: {
-					accountId: 1,
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				},
 				newCrowdfunding: {
-					accountId: 1, //用户id
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'), //用户id
 					teamName: "", //团队名称
 					teamContact: "", //团队联系方式
 					teamLocation: "", //团队所在地
@@ -293,14 +294,13 @@
 					topLimit: '', //发行上限
 					lowLimit: '', //发行下限
 					license: "", //相关牌照
-					mostNumber: '', //单账号 最大购买数量
 				},
 				checkedData: [],
 				concept: false,
 				technology: false,
 				fileUrl: '', //相关牌照地址
 				imageUrl: '', //logo地址
-				timeInterval: [],
+				timeInterval: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
 				fileList: [],
 				util: new Utils(),
 				conceptDatas: '',
@@ -314,19 +314,36 @@
 			submit() {
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
+				console.log(this.checkedData);
+				if(this.checkedData[0]){
+					console.log(this.checkedData[0].id)
+					var concept1Id = this.checkedData[0].id;
+				}
+				if(this.checkedData[1]){
+					console.log(this.checkedData[1].id)
+					var concept2Id = this.checkedData[1].id;
+				}
+				if(this.checkedData[2]){
+					console.log(this.checkedData[2].id)
+					var concept3Id = this.checkedData[2].id;
+				}
+				if(this.checkedData[3]){
+					console.log(this.checkedData[3].id)
+					var concept4Id = this.checkedData[3].id;
+				}
 				Request({
 					url: 'QueryNewCrowdfunding',
 					data: {
-						accountId: 1,
+						accountId: this.newCrowdfunding.accountId,
 						teamName: this.newCrowdfunding.teamName,
 						teamContact: this.newCrowdfunding.teamContact,
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						concept1Id: this.checkedData[0].id,
-						concept2Id: this.checkedData[1].id,
-						concept3Id: this.checkedData[2].id,
-						concept4Id: this.checkedData[3].id,
+						concept1Id: concept1Id,
+						concept2Id: concept2Id,
+						concept3Id: concept3Id,
+						concept4Id: concept4Id,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -355,7 +372,7 @@
 					flag: true
 				}).then(res => {
 					console.log(res);
-					if(res.data.success == 1) {
+					if(res.success == 1) {
 						this.$message('添加成功');
 					}
 				})
@@ -366,7 +383,7 @@
 					newCheckedData.push(item.value);
 				})
 				this.conceptDatas = newCheckedData.join('-');
-				this.checkeData = checkedData;
+				this.checkedData = checkedData;
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;

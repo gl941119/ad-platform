@@ -66,6 +66,9 @@
 						this.$router.push({
 							name: 'index'
 						});
+						Cache.removeSession('bier_username');
+						Cache.removeSession('bier_token');
+						Cache.removeSession('bier_userid');
 					}
 				})
 			}

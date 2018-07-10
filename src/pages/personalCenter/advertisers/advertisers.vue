@@ -22,7 +22,7 @@
 			<li class="newCrowdfunding_item_li coreMembers">
 				<label>核心团队成员</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in coreTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							1
 						</el-aside>
@@ -55,7 +55,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>顾问团队</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in consultantTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							1
 						</el-aside>
@@ -265,20 +265,20 @@
 				coreTeam: [{}],
 				consultantTeam: [{}],
 				newCore: {
-					accountId: 1,
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				},
 				newConsultant: {
-					accountId: 1,
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				},
 				imageUrl: '',
 				newCrowdfunding: {
-					accountId: '', //用户id
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'), //用户id
 					teamName: "", //团队名称
 					teamContact: "", //团队联系方式
 					teamLocation: "", //团队所在地
@@ -325,19 +325,31 @@
 		},
 		methods: {
 			submit() {
+				if(this.checkedData[0]){
+					var concept1Id = this.checkedData[0].id;
+				}
+				if(this.checkedData[1]){
+					var concept2Id = this.checkedData[1].id;
+				}
+				if(this.checkedData[2]){
+					var concept3Id = this.checkedData[2].id;
+				}
+				if(this.checkedData[3]){
+					var concept4Id = this.checkedData[3].id;
+				}
 				Request({
 					url: 'QueryNewProject',
 					data: {
-						accountId: 1,
+						accountId: this.accountId,
 						teamName: this.newCrowdfunding.teamName,
 						teamContact: this.newCrowdfunding.teamContact,
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						concept1Id: this.checkedData[0].id || '',
-						concept2Id: this.checkedData[1].id || '',
-						concept3Id: this.checkedData[2].id || '',
-						concept4Id: this.checkedData[3].id || '',
+						concept1Id: concept1Id,
+						concept2Id: concept2Id,
+						concept3Id: concept3Id,
+						concept4Id: concept4Id,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -370,7 +382,7 @@
 					flag: true,
 				}).then(res => {
 					console.log(res);
-					if(res.data.success == 1) {
+					if(res.success == 1) {
 						this.$message('添加成功');
 					} else if(res.data.success == 0) {
 						this.$message('您已经存在广告，无法再次申请');

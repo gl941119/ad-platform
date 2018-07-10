@@ -200,7 +200,6 @@
 						url: 'SendVerifyCode',
 						data: {
 							email: this.registerModel.form.email,
-							codeType: 1,
 						}
 					}).then(res => {
 						this.disabled = false;
@@ -298,6 +297,7 @@
 					type: 'get'
 				}).then(res => {
 					this.handleLoginSucc(res.data);
+					console.log('res--------',res);
 				})
 			},
 			handleLoginSucc(data) {
