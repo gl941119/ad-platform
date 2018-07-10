@@ -157,12 +157,16 @@
 						verifyCode: '',
 					}
 				},
-				userName: '',
 			}
-		},
-		mounted() {
-			this.getUserName()
-		},
+        },
+        computed: {
+            userName: {
+                get(){
+                return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
+                },
+                set(){}
+            }
+        },
 		methods: {
 			...mapMutations({
 				changeNamecom: 'changeNamecom'
@@ -192,7 +196,7 @@
 				});
 			},
 			getUserName() {
-				this.userName = this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username')
+				return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username')
 			},
 			sendVerifyCode() {
 				if(this.registerModel.form.email) {
@@ -316,7 +320,7 @@
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);
 				Cache.setSession('bier_token', token);
-				this.getUserName();
+				this.userName = this.getUserName();
 				this.dialogModalVisible = false;
 			},
 			goToRegister() {

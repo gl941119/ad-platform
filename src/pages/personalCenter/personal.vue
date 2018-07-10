@@ -63,15 +63,23 @@
 					}
 				}).then(res => {
 					if(res.success) {
+                        this.handleSignOut();
 						this.$router.push({
 							name: 'index'
 						});
-						Cache.removeSession('bier_username');
-						Cache.removeSession('bier_token');
-						Cache.removeSession('bier_userid');
 					}
 				})
-			}
+            },
+            handleSignOut(){
+                this.$store.commit('setUserId', undefined);
+				this.$store.commit('setUserName', undefined);
+				this.$store.commit('setUserNickName', undefined);
+                this.$store.commit('setToken', undefined);
+                Cache.removeSession('bier_username');
+                Cache.removeSession('bier_token');
+                Cache.removeSession('bier_userid');
+				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
+            }
 		}
 	};
 </script>
