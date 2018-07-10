@@ -20,9 +20,9 @@
 				</el-table-column>
 				<el-table-column prop="city" label="状态">
 					<template slot-scope="scope">
-						<div v-if="scope.row.isCheck==0">已提交</div>
-						<div v-if="scope.row.isCheck==1">审核通过-即将开始</div>
-						<div v-if="scope.row.isCheck==2">审核未通过-<span>点击修改</span></div>
+						<div v-if="scope.row.isCheck==0">待审核</div>
+						<div v-if="scope.row.isCheck==1">已上架</div>
+						<div v-if="scope.row.isCheck==2">审核未通过-<span @click="openDetail(scope.row.id,1)">点击修改</span></div>
 					</template>
 				</el-table-column>
 				<el-table-column prop="updateTime" label="状态更新时间">
@@ -78,8 +78,14 @@
 					this.total = res.total;
 				})
 			},
-			persent() {
-
+			openDetail(id, value) {
+				this.$router.push({
+					path: 'crowdfundingDetail/' + id + '/' + value,
+					params: {
+						id: id,
+						value: value,
+					}
+				});
 			},
 			handleCurrentChange(page) {
 				this.currentPage = page;

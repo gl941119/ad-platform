@@ -15,7 +15,7 @@
 							<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
 								<div class="el-collapse-item__content">
 									<div class="el-collapse-item__content_img">
-										<img :src="imgData[0]" />
+										<img :src="imgsrc" />
 									</div>
 									<div class="el-collapse-item__content_imgs">
 										<div class="el-collapse-item__content_imgs_box" v-for="(item, index) in imgData" :key="index">
@@ -325,11 +325,12 @@
 				dialogVisible: false,
 				disabled: true,
 				num: '',
-				imgData: Config.headPortrait
+				imgData: Config.headPortrait,
+				imgsrc:Config.headPortrait[0]
 			}
 		},
 		mounted() {
-
+			
 		},
 		methods: {
 			selectImg(url) {
@@ -345,6 +346,7 @@
 					console.log(res);
 					if(res.success == 1) {
 						this.$message('修改成功');
+						this.imgsrc = url;
 					}
 				})
 			},

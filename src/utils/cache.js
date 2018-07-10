@@ -3,6 +3,7 @@
  * bier_userid    ->     user id
  * bier_username  ->     account
  * bier_usernickname    ->      nickname
+ * bier_langChange    ->      langChange
  */
 export default {
     getSession(name) {
