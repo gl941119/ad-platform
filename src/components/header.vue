@@ -310,16 +310,20 @@
 					email,
 					nickname,
 					token,
-					phone
+					phone,
+					heardUrl
 				} = data;
 				this.$store.commit('setUserId', id);
 				this.$store.commit('setUserName', email);
 				this.$store.commit('setUserNickName', nickname);
 				this.$store.commit('setToken', token);
+				this.$store.commit('heardUrl', heardUrl);
+				
 				Cache.setSession('bier_userid', id);
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);
 				Cache.setSession('bier_token', token);
+				Cache.setSession('bier_heardUrl', heardUrl);
 				this.userName = this.getUserName();
 				this.dialogModalVisible = false;
 			},

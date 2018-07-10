@@ -10,6 +10,7 @@ export default new Vuex.Store({
 		usernickname: undefined,
 		token: undefined,
 		slangChange: 'en',
+		heardUrl:'',
 	},
 	mutations: {
 		setUserId(state, val) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
 		},
 		setToken(state, val) {
 			state.token = val;
+		},
+		setHeardUrl(state, val) {
+			state.heardUrl = val;
 		},
 		changeNamecom(state, val) {
 			console.log(state.slangChange)
