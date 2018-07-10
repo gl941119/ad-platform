@@ -78,7 +78,7 @@ import Config from '../../utils/config.js';
                     }).then(res => {
                         console.log('QueryAdvertInfo_>', res);
                         this.advertDatas = res.data;
-                        this.totalAdvertItemDatas.push(...this.advertItemDatas);
+                        this.totalAdvertItemDatas.push(...this.advertDatas);
                         resolve();
                     })
                 });

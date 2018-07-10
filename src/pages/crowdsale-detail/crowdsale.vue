@@ -118,11 +118,11 @@
             },
             selectStage(val){
                 console.log("select_stageValue_>", this.stageValue, val);
-                getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
+                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
             },
             selectConcept(val){
                 console.log("select_conceptValue_>", this.conceptValue, val);
-                getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
+                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
             },
         }
     }
