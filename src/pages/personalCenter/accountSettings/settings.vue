@@ -120,6 +120,25 @@
 							<div role="tabpanel" :class="{'button-selected': transactionPassword}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
 								<div class="el-collapse-item__content">
 									<div class="el-collapse-item__content-box bindEmail">
+										<h3>设置交易密码</h3>
+										<p>
+											<el-input placeholder="交易密码" v-model="tradePassword"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="确认交易密码" v-model="onceSetTradePassword"></el-input>
+										</p>
+										<p>
+											<el-input placeholder="请输入你的验证码" v-model="codeTradePassword"></el-input>
+											<div class="el-button-getCode password" style="top: 167px;height: 37px;overflow: hidden;">
+												<span>|</span>
+												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">获取邮箱验证码</button>
+											</div>
+										</p>
+										<div class="el-collapse-item__content-box_buttonBox">
+											<button @click="setTradePassword">确定</button>
+										</div>
+									</div>
+									<!--<div class="el-collapse-item__content-box bindEmail">
 										<h3>更改交易密码</h3>
 										<p>
 											<el-input placeholder="旧交易密码" v-model="oldTradePassword"></el-input>
@@ -140,7 +159,7 @@
 										<div class="el-collapse-item__content-box_buttonBox">
 											<button @click="changeTradePassword">确定</button>
 										</div>
-									</div>
+									</div>-->
 								</div>
 							</div>
 						</div>
@@ -287,6 +306,8 @@
 				oldPassword: "",
 				newPassword: "",
 				oncePassword: "",
+				tradePassword:'',
+				onceSetTradePassword:'',
 				oldTradePassword: "",
 				newTradePassword: "",
 				onceTradePassword: "",
@@ -339,6 +360,22 @@
 			
 		},
 		methods: {
+			setTradePassword(){
+				Request({
+					url: 'SetTradePassword',
+					data: {
+						verificationCode: this.codeTradePassword,
+						password: this.tradePassword,
+					},
+					type: 'post',
+					flag: true
+				}).then(res => {
+					console.log(res);
+					if(res.success){
+						this.$message('设置交易密码成功');
+					}
+				})
+			},
 			selectImg(url) {
 				Request({
 					url: 'QueryAccountSettings',
@@ -352,6 +389,8 @@
 					console.log(res);
 					if(res.success == 1) {
 						this.imgsrc = url;
+						this.$store.commit('heardUrl', url);
+						Cache.setSession('bier_heardUrl', url);
 						this.$message('修改成功');
 					}
 				})

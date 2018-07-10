@@ -63,10 +63,8 @@
 						token: this.token
 					}
 				}).then(res => {
+					console.log(res);
 					if(res.success) {
-						this.$router.push({
-							name: 'index'
-						});
 						Cache.removeSession('bier_username');
 						Cache.removeSession('bier_token');
 						Cache.removeSession('bier_userid');

@@ -35,6 +35,7 @@ export default {
     QueryCode: 'blockchainadvert/account/sendBindEmailCode',//获取验证码
     QueryPasswordCode: 'blockchainadvert/account/sendUpdateAccountCode',//获取验证码
     QueryAuthentication: 'blockchainadvert/account/idAuthentication',//身份验证
+    SetTradePassword: 'blockchainadvert/account/setTradePassword',//身份验证
     /*核心团队*/
     AddCoreMember: 'blockchainadvert/crowd-team-member',
     DeletedCoreMember: 'blockchainadvert/crowd-team-member/delete/crowd-id/id',
