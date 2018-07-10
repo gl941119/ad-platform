@@ -68,6 +68,7 @@
 <script>
 	import Request from '../../../utils/require.js';
 	import Utils from '../../../utils/util.js';
+	import Cache from '../../../utils/cache';
 	export default {
 		data() {
 			return {
@@ -81,6 +82,7 @@
 				startTime: '',
 				endTime: '',
 				util: new Utils(),
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		mounted() {
@@ -92,7 +94,7 @@
 				Request({
 					url: 'QueryRevenueBasicInformation',
 					data: {
-						accountId: 5
+						accountId: this.accountId
 					},
 					type: 'get'
 				}).then(res => {
@@ -109,7 +111,7 @@
 				Request({
 					url: 'QueryRevenueAccountFlow',
 					data: {
-						incomeId: 2,
+						incomeId: this.accountId,
 						page: this.currentPage,
 						pageSize: this.pageSizes,
 						flowType: 1,

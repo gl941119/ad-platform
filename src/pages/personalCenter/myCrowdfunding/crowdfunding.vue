@@ -31,6 +31,8 @@
 </template>
 <script>
 	import Request from '../../../utils/require.js';
+	import Cache from '../../../utils/cache';
+	import Config from '../../../utils/config.js';
 	export default {
 		data() {
 			return {
@@ -38,6 +40,7 @@
 				currentPage: 1,
 				size: 5,
 				total:0,
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		mounted() {
@@ -48,7 +51,7 @@
 				Request({
 					url: 'QueryMyCrowdfunding',
 					data: {
-						accountId:1,
+						accountId:this.accountId,
 						page:this.currentPage,
 						pageSize:this.size
 					},

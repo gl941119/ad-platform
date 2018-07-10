@@ -345,8 +345,8 @@
 				}).then(res => {
 					console.log(res);
 					if(res.success == 1) {
-						this.$message('修改成功');
 						this.imgsrc = url;
+						this.$message('修改成功');
 					}
 				})
 			},

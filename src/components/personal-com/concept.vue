@@ -40,7 +40,7 @@
 						obj.id=item.id;
 						obj.value=item.name;
 						this.checkedData.push(obj);
-						this.$emit('listenCondept',this.checkedData)
+						this.$emit('listenCondept',this.checkedData);
 					} else {
 						item.isSelected = false;
 						this.$message('最多四个哦，不能再多了');

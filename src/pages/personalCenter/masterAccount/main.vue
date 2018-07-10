@@ -60,6 +60,7 @@
 <script>
 	import Request from '../../../utils/require.js';
 	import Utils from '../../../utils/util.js';
+	import Cache from '../../../utils/cache';
 	export default {
 		data() {
 			return {
@@ -72,6 +73,7 @@
 				startTime: '',
 				endTime: '',
 				util: new Utils(),
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		mounted() {
@@ -83,11 +85,13 @@
 				Request({
 					url: 'QueryMainBasicInformation',
 					data: {
-						accountId: 5
+						accountId: this.accountId,
 					},
 					type: 'get'
 				}).then(res => {
-					this.balance = res.data.balance;
+					if(res.data){
+						this.balance = res.data.balance;
+					}
 				})
 			},
 			mainData() {
@@ -100,7 +104,7 @@
 				Request({
 					url: 'QueryMainAccountFlow',
 					data: {
-						mainId: 1,
+						mainId: this.accountId,
 						page: this.currentPage,
 						pageSize: this.size,
 						flowType: 1,
@@ -111,7 +115,6 @@
 				}).then(res => {
 					this.flowData = res.data;
 					this.total = res.total;
-					console.log('QueryMainAccountFlow res_>', res);
 				})
 			},
 			handleCurrentChange(page) {

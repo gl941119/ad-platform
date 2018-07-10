@@ -33,6 +33,8 @@
 </template>
 <script>
 	import Request from '../../../utils/require.js';
+	import Cache from '../../../utils/cache';
+	import Config from '../../../utils/config.js';
 	export default {
 		data() {
 			return {
@@ -40,7 +42,8 @@
 				inviteData: [],
 				currentPage: 0,
 				size: 5,
-				total:'',
+				total:0,
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		mounted() {
@@ -51,7 +54,7 @@
 				Request({
 					url: 'QueryInviteCode',
 					data: {
-						accountId: 5
+						accountId: this.accountId,
 					},
 					type: 'get'
 				}).then(res => {
@@ -69,7 +72,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.inviteData = res.data;
 					this.total = res.total;
 				})

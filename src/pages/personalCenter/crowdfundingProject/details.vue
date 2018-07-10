@@ -261,26 +261,25 @@
 		data() {
 			return {
 				coreTeam: [{
-					accountId: '',
-					number: '',
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				}],
 				consultantTeam: [{
-					accountId: '',
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				}],
 				newCore: {
-					accountId: '',
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
 				},
 				newConsultant: {
-					accountId: '',
+					accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 					name: '',
 					title: '',
 					desc: '',
