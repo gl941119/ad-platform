@@ -22,7 +22,7 @@
 			<li class="newCrowdfunding_item_li coreMembers">
 				<label>核心团队成员</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in coreTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							1
 						</el-aside>
@@ -55,7 +55,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>顾问团队</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in consultantTeam" class="newCrowdfunding_item_li_coreTeamMembers_member">
+					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							1
 						</el-aside>

@@ -97,10 +97,10 @@
 											<el-input placeholder="确认新密码" v-model="oncePassword"></el-input>
 										</p>
 										<p>
-											<el-input placeholder="请输入你的验证码" v-model="code"></el-input>
+											<el-input placeholder="请输入你的验证码" v-model="codePassword"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
-												<button class="el-button-getCode_button" @click="getCode()">获取邮箱验证码</button>
+												<button class="el-button-getCode_button" @click="getPasswordCode()">获取邮箱验证码</button>
 											</div>
 										</p>
 										<div class="el-collapse-item__content-box_buttonBox">
@@ -131,10 +131,10 @@
 											<el-input placeholder="确认新交易密码" v-model="onceTradePassword"></el-input>
 										</p>
 										<p>
-											<el-input placeholder="请输入你的验证码" v-model="code"></el-input>
+											<el-input placeholder="请输入你的验证码" v-model="codeTradePassword"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
-												<button class="el-button-getCode_button" @click="getCode">获取邮箱验证码</button>
+												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">获取邮箱验证码</button>
 											</div>
 										</p>
 										<div class="el-collapse-item__content-box_buttonBox">
@@ -291,6 +291,8 @@
 				newTradePassword: "",
 				onceTradePassword: "",
 				code: "",
+				codePassword:'',
+				codeTradePassword:'',
 				/*身份验证*/
 				country: "",
 				countryData: [{
@@ -324,7 +326,11 @@
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				dialogVisible: false,
 				disabled: true,
-				num: '',
+				disabledTradePassword: true,
+				disabledPassword: true,
+				num: 60,
+				numPassword:60,
+				numTradePassword:60,
 				imgData: Config.headPortrait,
 				imgsrc:Config.headPortrait[0]
 			}
@@ -359,7 +365,6 @@
 						url: 'QueryCode',
 						data: {
 							email: this.bindEmail,
-							codeType: 2,
 						},
 					}).then(res => {
 						console.log(res);
@@ -382,6 +387,54 @@
 					this.$message('绑定邮箱不能为空');
 				}
 			},
+			getPasswordCode() {
+					Request({
+						url: 'QueryPasswordCode',
+						data: {
+							codeType: 3,
+						},
+					}).then(res => {
+						console.log(res);
+						this.disabledPassword = false;
+						let timer = setInterval(() => {
+							this.numPassword--;
+							if(this.numPassword < 1) {
+								clearInterval(timer);
+								this.disabledPassword = true;
+								this.numPassword = 60;
+							}
+						}, 1000);
+						/*if(res.success == 1) {
+							this.$message('获取成功');
+						} else {
+							this.$message('获取失败');
+						}*/
+					})
+			},
+			getchangeTradePasswordCode() {
+					Request({
+						url: 'QueryPasswordCode',
+						data: {
+							codeType: 4,
+						},
+					}).then(res => {
+						console.log(res);
+						this.disabledTradePassword = false;
+						let timer = setInterval(() => {
+							this.TradePassword--;
+							if(this.numTradePassword < 1) {
+								clearInterval(timer);
+								this.disabledTradePassword = true;
+								this.numTradePassword = 60;
+							}
+						}, 1000);
+						/*if(res.success == 1) {
+							this.$message('获取成功');
+						} else {
+							this.$message('获取失败');
+						}*/
+					})
+			},
 			changeTradePassword() {
 				var reg = new RegExp();
 				var str = this.newTradePassword;
@@ -394,6 +447,7 @@
 								id: this.accountId,
 								tradePassword: this.newTradePassword,
 								oldTradePassword: this.oldTradePassword,
+								verificationCode:this.codeTradePassword,
 							},
 							type: 'post',
 							flag: true
@@ -421,6 +475,7 @@
 							id: this.accountId,
 							oldPassword: this.oldPassword,
 							password: this.newPassword,
+							verificationCode:this.codePassword,
 						},
 						type: 'post',
 						flag: true

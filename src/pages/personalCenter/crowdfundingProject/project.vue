@@ -36,7 +36,9 @@
 	</div>
 </template>
 <script>
-	import Request from '../../../utils/require.js';
+	import Cache from '../../../utils/cache';
+	import Request from '../../../utils/require';
+	import Utils from '../../../utils/util.js';
 	export default {
 		data() {
 			return {
@@ -51,6 +53,7 @@
 				size: 5,
 				total: 0,
 				mathData: [],
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		mounted() {
@@ -68,12 +71,13 @@
 				Request({
 					url: 'QueryMyNewCrowdfunding',
 					data: {
-						accountId: 1,
+						accountId: this.accountId,
 						page: this.currentPage,
 						pageSize: this.size
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res);
 					this.crowdfundingData = res.data;
 					this.total = res.total;
 				})

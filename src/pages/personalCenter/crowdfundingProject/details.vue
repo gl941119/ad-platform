@@ -17,7 +17,7 @@
 				</li>
 				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">核心团队成员</label>
-					<el-button type="text" @click="centerDialogVisible = true">点击打开核心团队成员</el-button>
+					<el-button type="text" @click="queryCore">点击打开核心团队成员</el-button>
 				</li>
 				<div class="project_review_details_item_li_info">
 					<el-dialog title="核心团队成员" :visible.sync="centerDialogVisible" size="small">
@@ -55,7 +55,7 @@
 				</div>
 				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">顾问团队</label>
-					<el-button type="text" @click="CrowdTeamDialogVisible = true">点击打开顾问团队成员</el-button>
+					<el-button type="text" @click="queryConsultant">点击打开顾问团队成员</el-button>
 				</li>
 				<div class="project_review_details_item_li_info">
 					<!--<el-table :show-header=false border :data="details.CrowdTeamConsultantsResult" style="width: 100%">
@@ -203,6 +203,10 @@
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.price"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
+					<label class="project_review_details_item_li_label">单账号兑换限制</label>
+					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.mostNumber"></el-input>
+				</li>
+				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">目标货币</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.targetCurrency"></el-input>
 				</li>
@@ -239,11 +243,6 @@
 					</div>
 				</li>
 			</ul>
-		</div>
-		<div v-if="disabled">
-			<button class="check" @click="passed">审核通过</button>
-			<button class="check" @click="notPassed">审核不通过</button>
-			<p>请在众筹合约部署完成后点击通过</p>
 		</div>
 		<div v-if="!disabled">
 			<button class="check" @click="changeDetails">保存修改</button>
@@ -311,22 +310,20 @@
 			queryDetails() {
 				var id = this.$route.params.id;
 				var value = this.$route.params.value;
-				console.log(this.$route);
 				if(value == 1) {
 					this.disabled = false;
 				} else {
 					this.disabled = true;
 				}
-				let params = {
+				Request({
 					url: 'QueryCrowdfundingDetails',
 					data: {
 						id: id
 					},
-					type: 'get',
-				}
-				Request.requestHandle(params, res => {
-					this.details = res.data;
+					type: 'get'
+				}).then(res => {
 					console.log(res);
+					this.details = res.data;
 					let {
 						concept1Id,
 						concept2Id,
@@ -342,15 +339,40 @@
 						technologyArr.push(res.data.technology2);
 					}
 					this.technologyDatas = technologyArr.join('-');
-					this.coreTeam = res.data.memberResults;
-					this.consultantTeam = res.data.consultantsResults;
 					this.timeInterval = [res.data.startTime, res.data.endTime];
-				});
+				})
+			},
+			queryCore() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'QueryCoreMember',
+					data: {
+						crowdId: id
+					},
+					type: 'get'
+				}).then(res => {
+					this.coreTeam = res.data;
+					this.centerDialogVisible = true;
+				})
+			},
+			queryConsultant() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'QueryConsultant',
+					data: {
+						crowdId: id
+					},
+					type: 'get'
+				}).then(res => {
+					console.log(res);
+					this.consultantTeam = res.data;
+					this.CrowdTeamDialogVisible = true;
+				})
 			},
 			changeDetails() {
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
-				let params = {
+				Request({
 					url: 'ChangeCrowdfundingDetails',
 					data: {
 						accountId: this.details.accountId,
@@ -387,45 +409,12 @@
 					},
 					type: 'put',
 					flag:true,
-				}
-				Request.requestHandle(params, res => {
+				}).then(res => {
 					if(res.success) {
 						this.queryDetails();
 						this.$message('修改成功');
 					}
-				});
-			},
-			passed() {
-				var id = this.$route.params.id;
-				let params = {
-					url: 'QueryCrowdfundingPass',
-					data: {
-						id: id
-					},
-					type: 'get',
-				}
-				Request.requestHandle(params, res => {
-					if(res.success == 1) {
-						this.$message('操作成功');
-						this.queryDetails();
-					}
-				});
-			},
-			notPassed() {
-				var id = this.$route.params.id;
-				let params = {
-					url: 'QueryCrowdfundingNotpass',
-					data: {
-						id: id
-					},
-					type: 'get',
-				}
-				Request.requestHandle(params, res => {
-					if(res.success == 1) {
-						this.$message('操作成功');
-						this.queryDetails();
-					}
-				});
+				})
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
@@ -444,7 +433,7 @@
 			},
 			saveLink() {
 				var id = this.$route.params.id;
-				let params = {
+				Request({
 					url: 'ChangeCoreMember',
 					data: {
 						id: this.multipleSelection[0].id,
@@ -456,18 +445,16 @@
 					},
 					type: 'put',
 					flag: true,
-				}
-				Request.requestHandle(params, res => {
-					console.log(res);
-					if(res.success == 1) {
+				}).then(res => {
+					if(res.success) {
 						this.$message('修改成功');
 						this.queryDetails();
 					}
-				});
+				})
 			},
 			addLink() {
 				var id = this.$route.params.id;
-				let params = {
+				Request({
 					url: 'AddCoreMember',
 					data: {
 						accountId: this.accountId,
@@ -477,18 +464,16 @@
 						title: this.multipleSelection[0].title
 					},
 					flag: true,
-				}
-				Request.requestHandle(params, res => {
-					console.log(res);
+				}).then(res => {
 					if(res.success == 1) {
 						this.$message('添加成功');
 						this.queryDetails();
 					}
-				});
+				})
 			},
 			deletedLink() {
 				var id = this.$route.params.id;
-				let params = {
+				Request({
 					url: 'DeletedCoreMember',
 					data: {
 						crowdId: this.multipleSelection[0].crowdId,
@@ -496,13 +481,12 @@
 					},
 					type: 'DELETE',
 					flag: true,
-				}
-				Request.requestHandle(params, res => {
+				}).then(res => {
 					if(res.success == 1) {
 						this.$message('删除成功');
 						this.queryDetails();
 					}
-				});
+				})
 			},
 			addConsultant() { //顾问团队
 				var tmpPersions = this.consultantTeam;
@@ -521,7 +505,7 @@
 			},
 			addLinkConsultant() {
 				var id = this.$route.params.id;
-				let params = {
+				Request({
 					url: 'addConsultant',
 					data: {
 						accountId: this.accountId,
@@ -531,18 +515,16 @@
 						title: this.multipleSelection[0].title
 					},
 					flag: true,
-				}
-				Request.requestHandle(params, res => {
-					console.log(res);
+				}).then(res => {
 					if(res.success == 1) {
-						this.$message('添加成功');
 						this.queryDetails();
+						this.$message('添加成功');
 					}
-				});
+				})
 			},
 			deletedLinkConsultant() {
 				var id = this.$route.params.id;
-				let params = {
+				Request({
 					url: 'deletedConsultant',
 					data: {
 						accountId: this.accountId,
@@ -553,17 +535,16 @@
 					},
 					type: 'DELETE',
 					flag: true,
-				}
-				Request.requestHandle(params, res => {
-					if(res.success == 1) {
-						this.$message('删除成功');
+				}).then(res => {
+					if(res.success) {
 						this.queryDetails();
+						this.$message('删除成功');
 					}
-				});
+				})
 			},
 			saveLinkConsultant() {
 				var id = this.$route.params.id;
-				let params = {
+				Request({
 					url: 'ChangeConsultant',
 					data: {
 						id: this.multipleSelection[0].id,
@@ -575,17 +556,16 @@
 					},
 					type: 'put',
 					flag: true,
-				}
-				Request.requestHandle(params, res => {
-					console.log(res);
-					if(res.success == 1) {
-						this.$message('修改成功');
+				}).then(res => {
+					if(res.success) {
 						this.queryDetails();
+						this.$message('修改成功');
 					}
-				});
+				})
 			},
 			handleSelectionChange(val) {
 				this.multipleSelection = val;
+				console.log(val)
 			},
 			handleAvatarSuccess(res, file) {
 //				this.details.logo = file.url;
