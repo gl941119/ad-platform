@@ -103,7 +103,7 @@ const router = new VueRouter({
 					component: NewProject,
 				},
 				{
-					path: 'crowdfundingDetail',//众筹详情
+					path: 'crowdfundingDetail/:id/:value',//众筹详情
 					name: 'crowdfundingDetail',
 					component: CrowdfundingDetail,
 				},

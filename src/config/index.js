@@ -34,6 +34,4 @@ export default {
     QueryAccountSettings: 'blockchainadvert/account/modifyAccountMessage',//账号设置
     QueryCode: 'blockchainadvert/account/sendEmailCode',//获取验证码
     QueryAuthentication: 'blockchainadvert/account/idAuthentication',//身份验证
-    /*获取钱包地址*/
-    QueryBindWalletAddress: 'blockchainadvert/account/bindWalletAddress',
 }

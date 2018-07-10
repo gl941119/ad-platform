@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="header-content">
-			<div class="header-content-logo"><img width="54" src="../assets/imgs/img/logo.png"></div>
+			<div class="header-content-logo"><img height="54" src="../assets/imgs/img/logo.png"></div>
 			<div class="header-content-tab clearfix">
 				<div class="header-content-tab-left">
 					<router-link class="header-content-tab-left-menu" :to="{ name: 'index' }">首页</router-link>
