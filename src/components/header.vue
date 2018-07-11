@@ -4,24 +4,24 @@
 			<div class="header-content-logo"><img height="54" src="../assets/imgs/img/logo.png"></div>
 			<div class="header-content-tab clearfix">
 				<div class="header-content-tab-left">
-					<router-link class="header-content-tab-left-menu" :to="{ name: 'index' }">首页</router-link>
-					<router-link class="header-content-tab-left-menu" :to="{ name: 'crowdsale' }">众筹</router-link>
-					<router-link class="header-content-tab-left-menu" :to="{ name: 'advertisement' }">项目</router-link>
+					<router-link class="header-content-tab-left-menu" :to="{ name: 'index' }">{{$t('header.home')}}</router-link>
+					<router-link class="header-content-tab-left-menu" :to="{ name: 'crowdsale' }">{{$t('header.daico')}}</router-link>
+					<router-link class="header-content-tab-left-menu" :to="{ name: 'advertisement' }">{{$t('header.project')}}</router-link>
 					<!-- <router-link class="header-content-tab-left-menu"
-                                    :to="{ name: 'news' }">媒体</router-link> -->
+                                    :to="{ name: 'news' }">{{$t('header.medium')}}</router-link> -->
 					<!-- <router-link class="header-content-tab-left-menu"
-                                    :to="{ name: 'home' }">周末狂欢夜</router-link> -->
+                                    :to="{ name: 'home' }">{{$t('header.sunday')}}</router-link> -->
 				</div>
 				<div class="header-content-tab-right">
 					<div class="header-content-tab-right-item">
 						<a href="javascript:;" @click="switchLang()" v-if="'en' == $i18n.locale">EN</a>
 						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;">biertalk</a><span>|</span></div>
+						<a href="javascript:;">{{$t('header.bierTalk')}}</a><span>|</span></div>
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;">帮助</a><span>|</span></div>
+						<a href="javascript:;">{{$t('header.help')}}</a><span>|</span></div>
 					<div class="header-content-tab-right-item">
-						<a v-if="!userName" @click="toLogin" href="javascript:;">登录</a>
+						<a v-if="!userName" @click="toLogin" href="javascript:;">{{$t('header.login')}}</a>
 						<a v-if="userName" @click="toPersonCenter" href="javascript:;">{{userName}}</a>
 					</div>
 				</div>
@@ -30,21 +30,21 @@
 		<el-dialog :title="title" :close-on-click-modal="false" :visible.sync="dialogModalVisible" width="360px">
 			<div v-show="!registerModel.registerVisible">
 				<el-form class="login-modal" :model="loginModal.form" ref="loginModalForm">
-					<el-form-item label="账号" prop="email" :label-width="loginModal.formLabelWidth">
-						<el-input placeholder="请输入账号" auto-complete="off" v-model="loginModal.form.email"></el-input>
+					<el-form-item label="$t('login.account')" prop="email" :label-width="loginModal.formLabelWidth">
+						<el-input placeholder="$t('login.enterAccount')" auto-complete="off" v-model="loginModal.form.email"></el-input>
 					</el-form-item>
-					<el-form-item label="密码" prop="passwordAgain" :label-width="loginModal.formLabelWidth">
-						<el-input placeholder="请输入密码" auto-complete="off" type="password" v-model="loginModal.form.password"></el-input>
+					<el-form-item label="$t('login.password')" prop="passwordAgain" :label-width="loginModal.formLabelWidth">
+						<el-input placeholder="$t('login.enterPassword')" auto-complete="off" type="password" v-model="loginModal.form.password"></el-input>
 					</el-form-item>
-					<el-form-item label="验证码" prop="verifyCode" class="login-verify" :label-width="loginModal.formLabelWidth">
-						<el-input placeholder="输入验证码" auto-complete="off" class="login-verify-input" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
+					<el-form-item label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="loginModal.formLabelWidth">
+						<el-input placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
 						<div class="login-verify-btn" @click="changeCode">
 							<custom-identify :identify-code="code" :content-width="120" :font-size-min="20"></custom-identify>
 						</div>
 					</el-form-item>
 					<div class="register-foot">
-						<el-button type="default" size="small" class="register-foot-btn" round @click="loginSubmit">登 录</el-button>
-						<el-button type="default" size="small" class="register-foot-btn" round @click="goToRegister">注 册</el-button>
+						<el-button type="default" size="small" class="register-foot-btn" round @click="loginSubmit">{{$t('login.login')}}</el-button>
+						<el-button type="default" size="small" class="register-foot-btn" round @click="goToRegister">{{$t('register.register')}}</el-button>
 					</div>
 					<div class="register-foot">
 						<telegram-login mode="callback" :telegram-login="telegramBot" @callback="callbackFunction"></telegram-login>
@@ -54,18 +54,18 @@
 
 			<div v-show="registerModel.registerVisible">
 				<el-form class="register" :model="registerModel.form" ref="registerModelForm" :rules="registerModel.rule">
-					<el-form-item label="邮箱" prop="email" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="请输入邮箱" auto-complete="off" v-model="registerModel.form.email"></el-input>
+					<el-form-item label="$t('register.registerEmail')" prop="email" :label-width="registerModel.formLabelWidth">
+						<el-input placeholder="$t('register.enterRegisterEmial')" auto-complete="off" v-model="registerModel.form.email"></el-input>
 					</el-form-item>
-					<el-form-item label="验证码" prop="verifyCode" class="register-verify" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="请输入验证码" auto-complete="off" v-model="registerModel.form.verifyCode"></el-input>
+					<el-form-item label="$t('register.registerCode')" prop="verifyCode" class="register-verify" :label-width="registerModel.formLabelWidth">
+						<el-input placeholder="$t('register.enterRegisterCode')" auto-complete="off" v-model="registerModel.form.verifyCode"></el-input>
 						<div class="register-verify-btn">
 							<span style="color:#909399;">|</span>
-							<el-button @click="sendVerifyCode" v-if="disabled" type="text">发送验证码</el-button>
-							<el-button v-else disabled type="text">(<span>{{num}}</span>s)后重试</el-button>
+							<el-button @click="sendVerifyCode" v-if="disabled" type="text">{{$t('register.sendCode')}}</el-button>
+							<el-button v-else disabled type="text">(<span>{{num}}</span>s){{$t('register.again')}}</el-button>
 						</div>
 					</el-form-item>
-					<el-form-item label="密码" prop="password" :label-width="registerModel.formLabelWidth">
+					<el-form-item label="$t('register.registerPassword')" prop="password" :label-width="registerModel.formLabelWidth">
 						<el-popover ref="popover" placement="right" width="200" trigger="focus">
 							<div>
 								<p>1、密码长度必须介于8到16个字符之间。</p>
@@ -73,21 +73,20 @@
 								<p>3、密码至少包含1个英文字母和1个数字字符。</p>
 								<p>4、密码不能与账号相同。</p>
 							</div>
-							<el-input placeholder="请输入密码" auto-complete="off" slot="reference" type="password" v-model="registerModel.form.password"></el-input>
+							<el-input placeholder="$t('register.enterRegisterPassword')" auto-complete="off" slot="reference" type="password" v-model="registerModel.form.password"></el-input>
 						</el-popover>
 					</el-form-item>
-					<el-form-item label="确认密码" prop="passwordAgain" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="请输入确认密码" auto-complete="off" type="password" v-model="registerModel.form.passwordAgain"></el-input>
+					<el-form-item label="$t('register.registerOncePassword')" prop="passwordAgain" :label-width="registerModel.formLabelWidth">
+						<el-input placeholder="$t('register.enterOncePassword')" auto-complete="off" type="password" v-model="registerModel.form.passwordAgain"></el-input>
 					</el-form-item>
-					<el-form-item label="邀请码" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="请输入邀请码,可选" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
+					<el-form-item label="$t('register.registerVerifyCode')" :label-width="registerModel.formLabelWidth">
+						<el-input placeholder="$t('register.registerInviteCode')" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
 					</el-form-item>
 					<div class="register-foot">
-						<el-button type="default" size="small" class="register-foot-btn" round @click="registerSubmit">注 册</el-button>
+						<el-button type="default" size="small" class="register-foot-btn" round @click="registerSubmit">{{$t('register.register')}}</el-button>
 					</div>
 				</el-form>
 			</div>
-
 		</el-dialog>
 	</header>
 </template>
@@ -170,14 +169,12 @@
 		methods: {
 			switchLang() {
 				if(this.$i18n.locale == "en") {
-					this.$store.state.slangChange = 'zh';
 					this.$i18n.locale = 'zh';
-					this.changeNamecom();
+					this.$store.commit('setLanguage', 'zh');
 					Cache.setLocal('bier_langChange', 'zh');
 				} else {
-					this.$store.state.slangChange = 'en'
 					this.$i18n.locale = 'en';
-					this.changeNamecom();
+					this.$store.commit('setLanguage', 'en');
 					Cache.setLocal('bier_langChange', 'en');
 				}
 			},

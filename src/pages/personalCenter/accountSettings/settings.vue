@@ -448,7 +448,7 @@
 					console.log(res);
 					if(res.success == 1) {
 						this.imgsrc = url;
-						this.$store.commit('heardUrl', url);
+						this.$store.commit('setHeardUrl', url);
 						Cache.setSession('bier_heardUrl', url);
 						this.$message('修改成功');
 					}
@@ -670,7 +670,7 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-					if(res.data.success) {
+					if(res.success) {
 						this.country = '';
 						this.idType = '';
 						this.idNum = '';

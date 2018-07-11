@@ -316,20 +316,16 @@
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
 				console.log(this.checkedData);
 				if(this.checkedData[0]){
-					console.log(this.checkedData[0].id)
-					var concept1Id = this.checkedData[0].id;
+					var concept1Id = this.checkedData[0].conceptId;
 				}
 				if(this.checkedData[1]){
-					console.log(this.checkedData[1].id)
-					var concept2Id = this.checkedData[1].id;
+					var concept2Id = this.checkedData[1].conceptId;
 				}
 				if(this.checkedData[2]){
-					console.log(this.checkedData[2].id)
-					var concept3Id = this.checkedData[2].id;
+					var concept3Id = this.checkedData[2].conceptId;
 				}
 				if(this.checkedData[3]){
-					console.log(this.checkedData[3].id)
-					var concept4Id = this.checkedData[3].id;
+					var concept4Id = this.checkedData[3].conceptId;
 				}
 				Request({
 					url: 'QueryNewCrowdfunding',
