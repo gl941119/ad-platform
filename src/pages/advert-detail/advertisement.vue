@@ -8,7 +8,7 @@
                 <div class="advertisement-container-title-label">项目</div>
             </div>
             <div class="advertisement-container-select">
-                <el-select size="mini" class="advertisement-container-select-left" v-model="value" placeholder="全部阶段">
+                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="value" placeholder="全部阶段">
                     <el-option v-for="item in conceptOptions" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
@@ -18,6 +18,13 @@
             <div class="advertisement-box-content">
                 <div class="advertisement-box-content-item">
                     <advert-item v-for="(advert, _i) in advertDatas" :key="_i" :advert-datas="advert" :system-tiem="sysTime" :is-white-back="true"></advert-item>
+                    <el-pagination class="ad-crowdsale-box-pagination"
+                        background
+                        layout="prev, pager, next"
+                        @current-change="queryCurrentPageList"
+                        :page-size="pageSize"
+                        :total="pageTotal">
+                    </el-pagination>
                 </div>
                 <div class="advertisement-box-content-imgs">
                     <img v-for="thumb in thumbImgs" :key="thumb" :src="thumb">
@@ -46,7 +53,9 @@ import Config from '../../utils/config.js';
                 value: '',
                 sysTime: undefined,
                 page: Config.pageStart,
-                pageSize: Config.pageSize,
+                pageSize: 30,
+                pageTotal: 0,
+                currpage: undefined,
             }
         },
         mounted() {
@@ -66,19 +75,20 @@ import Config from '../../utils/config.js';
                     })
                 });
             },
-            getAdvertInfo(page = this.page, pageSize = this.pageSize) {
+            getAdvertInfo(conceptId = 0, page = this.page, pageSize = this.pageSize) {
                 return new Promise((resolve, reject) => {
                     Request({
-                        url: 'QueryAdvertInfo',
+                        url: 'QueryAdvertInfoByCId',
                         data: {
                             page,
                             pageSize,
+                            conceptId,
                         },
                         type: 'get'
                     }).then(res => {
-                        console.log('QueryAdvertInfo_>', res);
+                        console.log('QueryAdvertInfoByCId_>', res);
                         this.advertDatas = res.data;
-                        this.totalAdvertItemDatas.push(...this.advertDatas);
+                        this.pageTotal = res.total;
                         resolve();
                     })
                 });
@@ -93,6 +103,12 @@ import Config from '../../utils/config.js';
                         resolve()
                     })
                 });
+            },
+            selectConcept(val){
+                console.log('select concept adverts manage_>', val);
+            },
+            queryCurrentPageList(page){
+                this.currpage = page;
             },
         }
     }

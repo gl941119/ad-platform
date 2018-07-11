@@ -26,11 +26,12 @@
                 <crowdsale-detial v-for="(detail, i) in crowdSaleDatas" :key="i" :detail-data="detail" :system-time="sysTime"></crowdsale-detial>
             </div>
             <el-pagination class="ad-crowdsale-box-pagination"
-            background
-            layout="prev, pager, next"
-            :page-size="pageSize"
-            :total="pageTotal">
-        </el-pagination>
+                background
+                layout="prev, pager, next"
+                @current-change="queryCurrentPageList"
+                :page-size="pageSize"
+                :total="pageTotal">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -118,11 +119,15 @@
             },
             selectStage(val){
                 console.log("select_stageValue_>", this.stageValue, val);
-                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
+                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
             },
             selectConcept(val){
                 console.log("select_conceptValue_>", this.conceptValue, val);
-                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, page = this.currpage);
+                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
+            },
+            queryCurrentPageList(page){
+                this.currpage = page;
+                this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
             },
         }
     }

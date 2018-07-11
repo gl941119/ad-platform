@@ -37,7 +37,6 @@
     import customCarouselCom from '@/components/custom-carousel';
     import crowdsaleItemCom from '@/components/index-com/crowdsale-item';
     import advertItemCom from '@/components/index-com/advert-item';
-    import learnMoreCom from '@/components/index-com/learn-more';
     import Request from '../../utils/require.js';
     import Config from '../../utils/config.js';
     import axios from 'axios';
@@ -79,7 +78,6 @@
             'custom-carousel': customCarouselCom,
             'crowdsale-item': crowdsaleItemCom,
             'advert-item': advertItemCom,
-            'learn-more': learnMoreCom,
         },
         methods: {
             getData() {
