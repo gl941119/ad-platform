@@ -1,11 +1,12 @@
 <template>
     <el-dialog title="分享" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
-            <p>点击即挖矿，流量即币值 ！上阿凡达不上当不受骗！</p>
-            <p>To gain Token by click, AFDChain No cheat No fraud.</p>
-            <a href="http://www.afdchain.com">http://www.afdchain.com</a>
+            <p class="show-share-title">点击即挖矿 流量即币值</p> 
+            <p class="show-share-title">上阿凡达不上当不受骗</p>
+            <p class="show-share-content first">To gain Token by click, AFDChain No cheat No fraud.</p>
+            <p class="show-share-content">http://www.afdchain.com</p>
         </div>
-        <el-button size="mini" @click="clickCopy">点我复制</el-button>
+        <el-button class="show-share-btn" size="mini" @click="clickCopy">点我复制</el-button>
     </el-dialog>
 </template>
 <script>
@@ -51,9 +52,38 @@
 </script>
 <style lang="scss" scoped>
     .show-share {
-        border: 1px solid #999;
-        border-radius: 8px;
-        padding: 12px;
-        margin-bottom: 16px;
+        margin-bottom: 36px;
+        &-title {
+            color: #FF9500;
+            font-size: 20px;
+            line-height: 28px;
+            text-align: center;
+        }
+        &-content {
+            font-size: 12px;
+            text-align: center;
+            line-height: 22px;
+            &.first {
+                margin-top: 24px;
+            }
+        }
+        &-btn {
+            display: block;
+            margin: 0 auto;
+            width: 116px;
+            background: #FF9500;
+			border: none;
+            color: #fff;
+            box-shadow:0px 2px 4px 0px #955700;
+			&:hover,
+			&:active,
+			&:focus {
+				background: #FF9500;
+				color: #fff;
+			}
+			&:active {
+				background: #FCA529;
+			}
+        }
     }
 </style>
