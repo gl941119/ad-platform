@@ -162,15 +162,12 @@
         computed: {
             userName: {
                 get(){
-                return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
+                    return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
                 },
                 set(){}
             }
         },
 		methods: {
-			...mapMutations({
-				changeNamecom: 'changeNamecom'
-			}),
 			switchLang() {
 				if(this.$i18n.locale == "en") {
 					this.$store.state.slangChange = 'zh';

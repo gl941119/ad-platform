@@ -2,6 +2,7 @@
     <div :class="{'white-back': isWhiteBack}" class="advert-item">
         <div class="advert-item-left">
             <div class="advert-item-left-logo">
+                <img :src="advertDatas.logo">
             </div>
             <div class="advert-item-left-text"><a :href="advertDatas.whitePaper" target="_blank">白皮书</a></div>
         </div>
@@ -21,14 +22,14 @@
         <div class="advert-item-right">
             <el-select class="advert-item-right-select" @change="handleAdvertFunc" v-model="advertValue" placeholder="去交易">
                 <el-option
-                    v-for="(item, index) in advertOptions"
+                    v-for="(item, index) in advertDatas.websiteResultList"
                     :key="index"
-                    :label="item.label"
-                    :value="item.value">
+                    :label="item&&item.websiteName"
+                    :value="item&&item.websiteAddress">
                 </el-option>
             </el-select>
             <div class="advert-item-right-icons">
-                <i class="custom-element-icon-fenxiang"></i>
+                <i @click="showShare" class="custom-element-icon-fenxiang"></i>
                 <i class="custom-element-icon-duihua"></i>
             </div>
         </div>
@@ -40,20 +41,27 @@ export default {
     data(){
         return {
             advertValue: '',
-            // advertOptions: [{label: 'huobi', value: 1}, {label: 'binance', value: 2}, {label: 'okex', value: 3}],
-        }
-    },
-    computed: {
-        advertOptions(){
-            console.log('this.advert_>', this.advertDatas);
-            let {websiteResultList} = this.advertDatas;
-            return websiteResultList;
         }
     },
     methods: {
-        handleAdvertFunc(val){
-            console.log('handleAdvertFunc_>', val)
+        showShare() {
+            this.$store.commit('setDialogVisible', true);
         },
+        handleAdvertFunc(val){
+            console.log('handleAdvertFunc_>', val, this.advertDatas);
+            // Request({
+            //     url: 'ClickAdvertToProfit',
+            //     data: {
+            //         advertId,
+            //         conceptId,
+            //         advertWebsiteId,
+            //     },
+            //     type: 'get'
+            // }).then(res => {
+            //     console.log('ClickAdvertToProfit_>', res);
+            // })
+        },
+        
     }
 }
 </script>
@@ -75,9 +83,12 @@ export default {
         &-logo {
             @include body-center(38px);
             height: 38px;
-            border-radius: 50%;
             margin-top: 10px;
-            background: #46638B;
+            &>img {
+                height: 100%;
+                width: 100%;
+                border-radius: 50%;
+            }
         }
         &-text {
             margin-top: 5px;
@@ -133,6 +144,9 @@ export default {
             @include content-flex(flex-end, flex-start);
             & i {
                 margin-left: 20px;
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }
