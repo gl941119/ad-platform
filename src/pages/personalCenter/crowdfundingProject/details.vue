@@ -594,7 +594,7 @@
 			listenCondept(checkedData) {
 				var newCheckedData = [];
 				checkedData.forEach(function(item, index) {
-					newCheckedData.push(item.value);
+					newCheckedData.push(item.name);
 				})
 				this.conceptDatas = newCheckedData.join('-');
 				this.checkeData = checkedData;

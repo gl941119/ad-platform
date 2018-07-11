@@ -6,7 +6,7 @@
 			<h5>团队</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>团队名称</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamName">
+				<el-input placeholder="请输入内容"  v-model="newCrowdfunding.teamName" >
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -198,7 +198,13 @@
 				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper">
 				</el-input>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
+				<label><el-input placeholder="自定义站点名" v-model="websites[index].websiteName" >
+				</el-input></label>
+				<el-input placeholder="自定义站点地址" v-model="websites[index].websiteAddress">
+				</el-input>
+			</li>
+			<!--<li class="newCrowdfunding_item_li">
 				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName1" >
 				</el-input></label>
 				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress1">
@@ -245,7 +251,7 @@
 				</el-input></label>
 				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress8">
 				</el-input>
-			</li>
+			</li>-->
 		</ul>
 		<button @click="submit">提交</button>
 	</div>
@@ -284,10 +290,6 @@
 					teamLocation: "", //团队所在地
 					proName: "", //项目名称
 					proDesc: "", //项目简介
-					concept1Id: '', //概念1 id
-					concept2Id: '', //概念2 id
-					concept3Id: '', //概念3 id
-					concept4Id: '', //概念4 id
 					technology1: "", //技术1
 					technology2: "", //技术2
 					website: "", //官网
@@ -295,23 +297,8 @@
 					shotEnName: "", //英文简写
 					shotCnName: "", //中文简写
 					fullEnName: "", //英文全名
-					siteName1: '', //自定义站点名
-					siteAddress1: '', //自定义站点地址
-					siteName2: '',
-					siteAddress2: '',
-					siteName3: '', //自定义站点名
-					siteAddress3: '',
-					siteName4: '', //自定义站点名
-					siteAddress4: '',
-					siteName5: '', //自定义站点名
-					siteAddress5: '',
-					siteName6: '', //自定义站点名
-					siteAddress6: '',
-					siteName7: '', //自定义站点名
-					siteAddress7: '',
-					siteName8: '', //自定义站点名
-					siteAddress8: '',
 				},
+				websites:[{},{},{},{},{},{},{},{}],
 				checkedData: [],
 				concept: false,
 				technology: false,
@@ -325,31 +312,17 @@
 		},
 		methods: {
 			submit() {
-				if(this.checkedData[0]){
-					var concept1Id = this.checkedData[0].id;
-				}
-				if(this.checkedData[1]){
-					var concept2Id = this.checkedData[1].id;
-				}
-				if(this.checkedData[2]){
-					var concept3Id = this.checkedData[2].id;
-				}
-				if(this.checkedData[3]){
-					var concept4Id = this.checkedData[3].id;
-				}
+				console.log(this.checkedData);
 				Request({
 					url: 'QueryNewProject',
 					data: {
-						accountId: this.accountId,
+						accountId: this.newCrowdfunding.accountId,
 						teamName: this.newCrowdfunding.teamName,
 						teamContact: this.newCrowdfunding.teamContact,
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						concept1Id: concept1Id,
-						concept2Id: concept2Id,
-						concept3Id: concept3Id,
-						concept4Id: concept4Id,
+						listConceptManage:this.checkedData,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -361,22 +334,7 @@
 						logo: this.imageUrl,
 						listMermber: this.coreTeam,
 						listConsultants: this.consultantTeam,
-						customAddress1: this.newCrowdfunding.siteName1,
-						customWebsite1: this.newCrowdfunding.siteAddress1,
-						customAddress2: this.newCrowdfunding.siteName2,
-						customWebsite2: this.newCrowdfunding.siteAddress2,
-						customAddress3: this.newCrowdfunding.siteName3,
-						customWebsite3: this.newCrowdfunding.siteAddress3,
-						customAddress4: this.newCrowdfunding.siteName4,
-						customWebsite4: this.newCrowdfunding.siteAddress4,
-						customAddress5: this.newCrowdfunding.siteName5,
-						customWebsite5: this.newCrowdfunding.siteAddress5,
-						customAddress6: this.newCrowdfunding.siteName6,
-						customWebsite6: this.newCrowdfunding.siteAddress6,
-						customAddress7: this.newCrowdfunding.siteName7,
-						customWebsite7: this.newCrowdfunding.siteAddress7,
-						customAddress8: this.newCrowdfunding.siteName8,
-						customWebsite8: this.newCrowdfunding.siteAddress8,
+						websites:this.websites,
 					},
 					type: 'post',
 					flag: true,
@@ -392,10 +350,11 @@
 			listenCondept(checkedData) {
 				var newCheckedData = [];
 				checkedData.forEach(function(item, index) {
-					newCheckedData.push(item.value);
+					newCheckedData.push(item.name);
 				})
 				this.conceptDatas = newCheckedData.join('-');
-				this.checkeData = checkedData;
+				this.checkedData = checkedData;
+				console.log(checkedData);
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
