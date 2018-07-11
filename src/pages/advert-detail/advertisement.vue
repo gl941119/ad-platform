@@ -9,7 +9,7 @@
             </div>
             <div class="advertisement-container-select">
                 <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="value" placeholder="全部阶段">
-                    <el-option v-for="item in conceptOptions" :key="item.value" :label="item.label" :value="item.value">
+                    <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
             </div>

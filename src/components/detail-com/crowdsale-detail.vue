@@ -76,7 +76,7 @@
                     <span>{{detailData.startTime | dateFormat('time')}}</span>
                 </div>
                 <div class="crowdsale-detail-specific-text">
-                    <span>抢购介绍时间：</span>
+                    <span>抢购结束时间：</span>
                     <span>{{detailData.endTime | dateFormat('time')}}</span>
                 </div>
             </div>

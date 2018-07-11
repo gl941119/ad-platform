@@ -8,7 +8,8 @@ export default new Vuex.Store({
 		id: undefined,
 		username: undefined,
 		usernickname: undefined,
-		token: undefined,
+        token: undefined,
+        dialogVisible: false,
 		slangChange: 'en',
 		heardUrl:'',
 	},
@@ -24,12 +25,15 @@ export default new Vuex.Store({
 		},
 		setToken(state, val) {
 			state.token = val;
-		},
+        },
+        setDialogVisible(state, val) {
+            state.dialogVisible = val;
+        },
 		setHeardUrl(state, val) {
 			state.heardUrl = val;
 		},
 		changeNamecom(state, val) {
 			console.log(state.slangChange)
-		}
+        },
 	},
 });

@@ -19,7 +19,6 @@ Vue.use(VeeValidate, Veeconfig);
 Vue.component('advert-item', advertItemCom); // 有多处用到，则注册全局组件
 Vue.component('learn-more', learnMoreCom); // 有多处用到，则注册全局组件
 Vue.component('telegram-login', telegramLoginCom);
-Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 })

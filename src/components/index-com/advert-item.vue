@@ -29,7 +29,7 @@
                 </el-option>
             </el-select>
             <div class="advert-item-right-icons">
-                <i class="custom-element-icon-fenxiang"></i>
+                <i @click="showShare" class="custom-element-icon-fenxiang"></i>
                 <i class="custom-element-icon-duihua"></i>
             </div>
         </div>
@@ -44,6 +44,9 @@ export default {
         }
     },
     methods: {
+        showShare() {
+            this.$store.commit('setDialogVisible', true);
+        },
         handleAdvertFunc(val){
             console.log('handleAdvertFunc_>', val, this.advertDatas);
             // Request({
@@ -58,6 +61,7 @@ export default {
             //     console.log('ClickAdvertToProfit_>', res);
             // })
         },
+        
     }
 }
 </script>
@@ -140,6 +144,9 @@ export default {
             @include content-flex(flex-end, flex-start);
             & i {
                 margin-left: 20px;
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }
