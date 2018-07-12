@@ -9,7 +9,8 @@ export default new Vuex.Store({
 		username: undefined,
 		usernickname: undefined,
         token: undefined,
-        dialogVisible: false,
+        dialogVisible: false, // share component visible
+        conceptId: 0, // advert concept id
 		slangChange: 'en',
 		heardUrl:'',
 	},
@@ -28,6 +29,9 @@ export default new Vuex.Store({
         },
         setDialogVisible(state, val) {
             state.dialogVisible = val;
+        },
+        setConceptId(state, val) {
+            state.conceptId = val;
         },
 		setHeardUrl(state, val) {
 			state.heardUrl = val;

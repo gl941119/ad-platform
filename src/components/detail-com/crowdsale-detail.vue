@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div v-if="status===2||status===3">
-                <el-progress type="circle" :width="62" color="#FF9500" :percentage="25"></el-progress>
+                <el-progress type="circle" :show-text="false" :width="62" color="#FF9500" :percentage="25"></el-progress>
             </div>
         </div>
     </div>

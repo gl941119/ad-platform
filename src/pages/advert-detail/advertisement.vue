@@ -8,7 +8,7 @@
                 <div class="advertisement-container-title-label">项目</div>
             </div>
             <div class="advertisement-container-select">
-                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="value" placeholder="全部阶段">
+                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="concepId" placeholder="全部概念">
                     <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
@@ -50,7 +50,7 @@ import Config from '../../utils/config.js';
                 conceptOptions: [],
                 advertDatas: [],
                 totalAdvertItemDatas: [],
-                value: '',
+                concepId: 0,
                 sysTime: undefined,
                 page: Config.pageStart,
                 pageSize: 30,
@@ -86,7 +86,7 @@ import Config from '../../utils/config.js';
                         },
                         type: 'get'
                     }).then(res => {
-                        console.log('QueryAdvertInfoByCId_>', res);
+                        // console.log('QueryAdvertInfoByCId_>', res);
                         this.advertDatas = res.data;
                         this.pageTotal = res.total;
                         resolve();
@@ -105,10 +105,13 @@ import Config from '../../utils/config.js';
                 });
             },
             selectConcept(val){
-                console.log('select concept adverts manage_>', val);
+                // console.log('select concept adverts manage_>', val);
+                this.$store.commit('setConceptId', val);
+                this.getAdvertInfo(val, this.currpage);
             },
             queryCurrentPageList(page){
                 this.currpage = page;
+                this.getAdvertInfo(this.concepId, page)
             },
         }
     }

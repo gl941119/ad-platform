@@ -118,11 +118,11 @@
                 });
             },
             selectStage(val){
-                console.log("select_stageValue_>", this.stageValue, val);
+                // console.log("select_stageValue_>", this.stageValue, val);
                 this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
             },
             selectConcept(val){
-                console.log("select_conceptValue_>", this.conceptValue, val);
+                // console.log("select_conceptValue_>", this.conceptValue, val);
                 this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
             },
             queryCurrentPageList(page){

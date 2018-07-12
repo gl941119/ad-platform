@@ -25,7 +25,7 @@
                     v-for="(item, index) in advertDatas.websiteResultList"
                     :key="index"
                     :label="item&&item.websiteName"
-                    :value="item&&item.websiteAddress">
+                    :value="item&&item.id">
                 </el-option>
             </el-select>
             <div class="advert-item-right-icons">
@@ -43,22 +43,34 @@ export default {
             advertValue: '',
         }
     },
+    computed: {
+        conceptId(){
+            return this.$store.state.conceptId;
+        }
+    },
     methods: {
         showShare() {
             this.$store.commit('setDialogVisible', true);
         },
         handleAdvertFunc(val){
-            console.log('handleAdvertFunc_>', val, this.advertDatas);
+            console.log('handleAdvertFunc_>', this.conceptId, val, this.advertDatas);
             // Request({
             //     url: 'ClickAdvertToProfit',
             //     data: {
-            //         advertId,
-            //         conceptId,
-            //         advertWebsiteId,
+            //         advertId: this.advertDatas.id,
+            //         conceptId: this.conceptId,
+            //         advertWebsiteId: val,
             //     },
             //     type: 'get'
             // }).then(res => {
             //     console.log('ClickAdvertToProfit_>', res);
+            //     // skip
+            //     this.advertDatas.websiteResultList.forEach(item => {
+            //         if(val === item.id){
+            //             let {websiteAddress} = item;
+            //             window.open(websiteAddress,'target');
+            //         }
+            //     });
             // })
         },
         

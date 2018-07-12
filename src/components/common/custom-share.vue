@@ -1,12 +1,12 @@
 <template>
     <el-dialog title="分享" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
-            <p class="show-share-title">点击即挖矿 流量即币值</p> 
-            <p class="show-share-title">上阿凡达不上当不受骗</p>
-            <p class="show-share-content first">To gain Token by click, AFDChain No cheat No fraud.</p>
-            <p class="show-share-content">http://www.afdchain.com</p>
+            <p class="show-share-title">点击即挖矿，流量即币值！上阿凡达不上当不受骗！</p>
+            <p class="show-share-title">http://www.afdchain.com</p>
+            <div class="show-share-btn">
+                <el-button class="show-share-btn-text" size="mini" @click="clickCopy">点我复制</el-button>
+            </div>
         </div>
-        <el-button class="show-share-btn" size="mini" @click="clickCopy">点我复制</el-button>
     </el-dialog>
 </template>
 <script>
@@ -52,38 +52,42 @@
 </script>
 <style lang="scss" scoped>
     .show-share {
-        margin-bottom: 36px;
+        width: 262px;
+        height: 160px;
+        border: 1px solid #979797;
+        margin: 0 auto 36px;
+        position: relative;
+        padding: 35px 10px;
         &-title {
             color: #FF9500;
             font-size: 20px;
-            line-height: 28px;
-            text-align: center;
-        }
-        &-content {
-            font-size: 12px;
-            text-align: center;
-            line-height: 22px;
-            &.first {
-                margin-top: 24px;
-            }
+            line-height: 30px;
         }
         &-btn {
-            display: block;
-            margin: 0 auto;
-            width: 116px;
-            background: #FF9500;
-			border: none;
-            color: #fff;
-            box-shadow:0px 2px 4px 0px #955700;
-			&:hover,
-			&:active,
-			&:focus {
-				background: #FF9500;
-				color: #fff;
-			}
-			&:active {
-				background: #FCA529;
-			}
+            position: absolute;
+            padding: 10px 20px;
+            background: #fff;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, -50%);
+            &-text {
+                display: block;
+                margin: 0 auto;
+                width: 116px;
+                background: #FF9500;
+                border: none;
+                color: #fff;
+                box-shadow:0px 2px 4px 0px #955700;
+                &:hover,
+                &:active,
+                &:focus {
+                    background: #FF9500;
+                    color: #fff;
+                }
+                &:active {
+                    background: #FCA529;
+                }
+            }
         }
     }
 </style>
