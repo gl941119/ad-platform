@@ -3,10 +3,10 @@
         <div class="crowdsale-item-title">
             <span>{{crowdsaleDatas.title}}</span>
             <span class="crowdsale-item-title-border"></span>
-            <span class="crowdsale-item-title-ad">广告</span>
+            <span class="crowdsale-item-title-ad">{{$t('home.advertising')}}</span>
         </div>
         <p class="crowdsale-item-sn">
-            <span>项目编号：</span>
+            <span>{{$t('home.projectNum')}}：</span>
             <span>{{crowdsaleDatas.proNum}}</span>
         </p>
         <p class="crowdsale-item-abstract">
@@ -27,7 +27,7 @@
                     <span>{{crowdsaleDatas.concept4Id}}</span>
                 </div>
                 <div class="crowdsale-item-list-left-label">
-                    <span>本轮发行：</span>
+                    <span>{{$t('home.thisIssuance')}}：</span>
                     <span>{{crowdsaleDatas.currCirculation}}</span>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <div>{{remainTime}}</div>
                 </div>
                 <div v-show="status===3" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
-                    已结束
+                    {{$t('home.over')}}
                 </div>
             </div>
         </div>
@@ -79,13 +79,13 @@
                 this.status = status;
                 switch (status) {
                     case 1:
-                        this.showText = '即将开始'
+                        this.showText = this.$t('home.begin')
                         break;
                     case 2:
-                        this.showText = '立即抢购'
+                        this.showText = this.$t('home.immediately')
                         break;
                     case 3:
-                        this.showText = '已经结束'
+                        this.showText = this.$t('home.over')
                         break;
                 }
                 this.remainTime = remainTime;

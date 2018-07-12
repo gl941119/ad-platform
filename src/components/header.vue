@@ -30,14 +30,14 @@
 		<el-dialog :title="title" :close-on-click-modal="false" :visible.sync="dialogModalVisible" width="360px">
 			<div v-show="!registerModel.registerVisible">
 				<el-form class="login-modal" :model="loginModal.form" ref="loginModalForm">
-					<el-form-item label="$t('login.account')" prop="email" :label-width="loginModal.formLabelWidth">
-						<el-input placeholder="$t('login.enterAccount')" auto-complete="off" v-model="loginModal.form.email"></el-input>
+					<el-form-item :label="$t('login.account')" prop="email" :label-width="loginModal.formLabelWidth">
+						<el-input :placeholder="$t('login.enterAccount')" auto-complete="off" v-model="loginModal.form.email"></el-input>
 					</el-form-item>
-					<el-form-item label="$t('login.password')" prop="passwordAgain" :label-width="loginModal.formLabelWidth">
-						<el-input placeholder="$t('login.enterPassword')" auto-complete="off" type="password" v-model="loginModal.form.password"></el-input>
+					<el-form-item :label="$t('login.password')" prop="passwordAgain" :label-width="loginModal.formLabelWidth">
+						<el-input :placeholder="$t('login.enterPassword')" auto-complete="off" type="password" v-model="loginModal.form.password"></el-input>
 					</el-form-item>
-					<el-form-item label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="loginModal.formLabelWidth">
-						<el-input placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
+					<el-form-item :label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="loginModal.formLabelWidth">
+						<el-input :placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
 						<div class="login-verify-btn" @click="changeCode">
 							<custom-identify :identify-code="code" :content-width="120" :font-size-min="20"></custom-identify>
 						</div>
@@ -54,33 +54,33 @@
 
 			<div v-show="registerModel.registerVisible">
 				<el-form class="register" :model="registerModel.form" ref="registerModelForm" :rules="registerModel.rule">
-					<el-form-item label="$t('register.registerEmail')" prop="email" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="$t('register.enterRegisterEmial')" auto-complete="off" v-model="registerModel.form.email"></el-input>
+					<el-form-item :label="$t('register.registerEmail')" prop="email" :label-width="registerModel.formLabelWidth">
+						<el-input :placeholder="$t('register.enterRegisterEmial')" auto-complete="off" v-model="registerModel.form.email"></el-input>
 					</el-form-item>
-					<el-form-item label="$t('register.registerCode')" prop="verifyCode" class="register-verify" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="$t('register.enterRegisterCode')" auto-complete="off" v-model="registerModel.form.verifyCode"></el-input>
+					<el-form-item :label="$t('register.registerCode')" prop="verifyCode" class="register-verify" :label-width="registerModel.formLabelWidth">
+						<el-input :placeholder="$t('register.enterRegisterCode')" auto-complete="off" v-model="registerModel.form.verifyCode"></el-input>
 						<div class="register-verify-btn">
 							<span style="color:#909399;">|</span>
 							<el-button @click="sendVerifyCode" v-if="disabled" type="text">{{$t('register.sendCode')}}</el-button>
 							<el-button v-else disabled type="text">(<span>{{num}}</span>s){{$t('register.again')}}</el-button>
 						</div>
 					</el-form-item>
-					<el-form-item label="$t('register.registerPassword')" prop="password" :label-width="registerModel.formLabelWidth">
+					<el-form-item :label="$t('register.registerPassword')" prop="password" :label-width="registerModel.formLabelWidth">
 						<el-popover ref="popover" placement="right" width="200" trigger="focus">
 							<div>
-								<p>1、密码长度必须介于8到16个字符之间。</p>
-								<p>2、密码只能包含英文字母（A-Z）、数字字符（0-9）以及标点符号。</p>
-								<p>3、密码至少包含1个英文字母和1个数字字符。</p>
-								<p>4、密码不能与账号相同。</p>
+								<p>{{$t('passwordNotic.one')}}</p>
+								<p>{{$t('passwordNotic.two')}}</p>
+								<p>{{$t('passwordNotic.three')}}</p>
+								<p>{{$t('passwordNotic.four')}}</p>
 							</div>
-							<el-input placeholder="$t('register.enterRegisterPassword')" auto-complete="off" slot="reference" type="password" v-model="registerModel.form.password"></el-input>
+							<el-input :placeholder="$t('register.enterRegisterPassword')" auto-complete="off" slot="reference" type="password" v-model="registerModel.form.password"></el-input>
 						</el-popover>
 					</el-form-item>
-					<el-form-item label="$t('register.registerOncePassword')" prop="passwordAgain" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="$t('register.enterOncePassword')" auto-complete="off" type="password" v-model="registerModel.form.passwordAgain"></el-input>
+					<el-form-item :label="$t('register.registerOncePassword')" prop="passwordAgain" :label-width="registerModel.formLabelWidth">
+						<el-input :placeholder="$t('register.enterOncePassword')" auto-complete="off" type="password" v-model="registerModel.form.passwordAgain"></el-input>
 					</el-form-item>
-					<el-form-item label="$t('register.registerVerifyCode')" :label-width="registerModel.formLabelWidth">
-						<el-input placeholder="$t('register.registerInviteCode')" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
+					<el-form-item :label="$t('register.registerVerifyCode')" :label-width="registerModel.formLabelWidth">
+						<el-input :placeholder="$t('register.registerInviteCode')" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
 					</el-form-item>
 					<div class="register-foot">
 						<el-button type="default" size="small" class="register-foot-btn" round @click="registerSubmit">{{$t('register.register')}}</el-button>
@@ -104,9 +104,9 @@
 				// return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.*?[~/`!@#$%^&*()_+|{}?;:><\-\]\\[\/].*$/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
 				return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
 			}
-			let emailValidate = validateFun.validateTest('邮箱不能为空', '邮箱格式不符', val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val));
-			let passwordValidate = validateFun.validateTest('密码不能为空', '密码格式不符', passTest.bind(this))
-			let passwordAgainValidate = validateFun.validateTest('确认密码不能为空', '确认密码不一致', val => val === this.registerModel.form.password)
+			let emailValidate = validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val));
+			let passwordValidate = validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this))
+			let passwordAgainValidate = validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password)
 			return {
 				utils: new Utils(),
 				code: '',
@@ -116,7 +116,7 @@
 				num: 60,
 				telegramBot: Config.TelegramBot,
 				dialogModalVisible: false,
-				title: '用户注册',
+				title: this.$t('register.userRegister'),
 				registerModel: {
 					registerVisible: false,
 					formLabelWidth: '6em',
@@ -127,7 +127,7 @@
 						}],
 						verifyCode: [{
 							required: true,
-							message: '验证码不能为空',
+							message: this.$t('messageNotice.codeEmpty'),
 							trigger: 'blur'
 						}],
 						password: [{
@@ -180,7 +180,7 @@
 			},
 			toLogin() {
 				this.dialogModalVisible = true;
-				this.title = '用户登录';
+				this.title = this.$t('login.userLogin');
 				this.registerModel.registerVisible = false;
 				this.createCode(this.source, this.codeLen);
 			},
@@ -256,7 +256,7 @@
 						});
 					} else {
 						this.$message({
-							message: '信息填写不符合规则',
+							message: this.$t('messageNotice.formatMatch'),
 							type: 'warning'
 						});
 					}
@@ -274,13 +274,13 @@
 					} else {
 						this.createCode(this.source, this.codeLen);
 						this.$message({
-							message: '验证码不正确',
+							message: this.$t('messageCode.verificationCode'),
 							type: 'warning'
 						});
 					}
 				} else {
 					this.$message({
-						message: '账号和密码不能为空',
+						message: this.$t('messageNotice.notEmpty'),
 						type: 'warning'
 					});
 				}
@@ -322,7 +322,7 @@
 				this.dialogModalVisible = false;
 			},
 			goToRegister() {
-				this.title = '用户注册';
+				this.title = this.$t('register.userRegister');
 				this.$refs.registerModelForm && this.$refs.registerModelForm.resetFields();
 				this.registerModel.registerVisible = true;
 			},

@@ -5,15 +5,15 @@
             <div class="crowdsale-detail-head-left">
                 {{detailData.title}}
                 <span>|</span>
-                <span>广告</span>
+                <span>{{$t('home.advertising')}}</span>
             </div>
             <div class="crowdsale-detail-head-right">
-                <el-select size="mini" class="crowdsale-detail-head-right-select" v-model="value" @change="crowdSaleSelect" placeholder="全部阶段">
+                <el-select size="mini" class="crowdsale-detail-head-right-select" v-model="value" @change="crowdSaleSelect" :placeholder="$t('crowdFunding.all')">
                     <el-option v-for="detail in options" :key="detail.value" :label="detail.label" :value="detail.value">
                     </el-option>
                 </el-select>
                 <div class="crowdsale-detail-head-right-sn">
-                    <span>项目编号:</span><span>{{detailData.proNum}}</span>
+                    <span>{{$t('home.projectNum')}}:</span><span>{{detailData.proNum}}</span>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
         </p>
         <div class="crowdsale-detail-label">
             <div class="crowdsale-detail-label-left">
-                <div class="crowdsale-detail-label-left-title">概念</div>
+                <div class="crowdsale-detail-label-left-title">{{$t('crowdFunding.concept')}}</div>
                 <div class="crowdsale-detail-label-left-list">
                     <div class="crowdsale-detail-label-left-list-tap">
                         <span>{{detailData.concept1Id}}</span>
@@ -39,18 +39,18 @@
                 </div>
             </div>
             <div class="crowdsale-detail-label-middle">
-                <div class="crowdsale-detail-label-middle-title">发行</div>
+                <div class="crowdsale-detail-label-middle-title">{{$t('crowdFunding.issuance')}}</div>
                 <div class="crowdsale-detail-label-middle-list">
                     <div class="crowdsale-detail-label-middle-list-tap">
-                        <span>总量{{detailData.circulation}}</span>
+                        <span>{{$t('crowdFunding.volume')}}{{detailData.circulation}}</span>
                     </div>
                     <div class="crowdsale-detail-label-middle-list-tap">
-                        <span>总价{{detailData.totalCrowdfund}}</span>
+                        <span>{{$t('crowdFunding.totalPrice')}}{{detailData.totalCrowdfund}}</span>
                     </div>
                 </div>
             </div>
             <div class="crowdsale-detail-label-middle">
-                <div class="crowdsale-detail-label-middle-title">技术</div>
+                <div class="crowdsale-detail-label-middle-title">{{$t('crowdFunding.technology')}}</div>
                 <div class="crowdsale-detail-label-middle-list">
                     <div class="crowdsale-detail-label-middle-list-tap">
                         <span>{{detailData.technology1}}</span>
@@ -64,19 +64,19 @@
         <div class="crowdsale-detail-specific">
             <div>
                 <div class="crowdsale-detail-specific-text">
-                    <span>本轮发行数量：</span>
+                    <span>{{$t('crowdFunding.issueNumber')}}：</span>
                     <span>{{detailData.currCirculation}} BRB</span>
                 </div>
                 <div class="crowdsale-detail-specific-text">
-                    <span>众筹价格：</span>
+                    <span>{{$t('crowdFunding.crowdPrice')}}：</span>
                     <span>{{detailData.price}} BRB</span>
                 </div>
                 <div class="crowdsale-detail-specific-text">
-                    <span>抢购开始时间：</span>
+                    <span>{{$t('crowdFunding.startTime')}}：</span>
                     <span>{{detailData.startTime | dateFormat('time')}}</span>
                 </div>
                 <div class="crowdsale-detail-specific-text">
-                    <span>抢购结束时间：</span>
+                    <span>{{$t('crowdFunding.endTime')}}：</span>
                     <span>{{detailData.endTime | dateFormat('time')}}</span>
                 </div>
             </div>
@@ -87,8 +87,8 @@
     </div>
     <div class="crowdsale-footer">
         <el-button v-if="status===1" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{remainTime}}{{showText}}</el-button>
-        <el-button v-if="status===2" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn go-to-buy"><span>剩余时间{{remainTime}}</span><span>{{showText}}</span></el-button>
-        <el-button v-if="status===3" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">已经结束</el-button>
+        <el-button v-if="status===2" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn go-to-buy"><span>{{$t('home.time')}}{{remainTime}}</span><span>{{showText}}</span></el-button>
+        <el-button v-if="status===3" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{$t('home.over')}}</el-button>
     </div>
 </div>
 </template>
@@ -117,11 +117,11 @@
                     whitePaper
                 } = this.detailData;
                 return [{
-                    label: '查看白皮书',
+                    label: this.$t('crowdFunding.readWhitePaper'),
                     value: 1,
                     site: whitePaper
                 }, {
-                    label: '访问官网',
+                    label: this.$t('crowdFunding.website'),
                     value: 2,
                     site: website,
                 }];
@@ -140,13 +140,13 @@
                 this.status = status;
                 switch (status) {
                     case 1:
-                        this.showText = '后即将开始'
+                        this.showText = this.$t('crowdFunding.laterStart')
                         break;
                     case 2:
-                        this.showText = '立即抢购'
+                        this.showText = this.$t('home.immediately')
                         break;
                     case 3:
-                        this.showText = '已经结束'
+                        this.showText = this.$t('home.over')
                         break;
                 }
                 this.remainTime = remainTime;

@@ -2,12 +2,12 @@
 <div class="platform-index">
     <custom-carousel></custom-carousel>
     <div class="platform-index-bull">
-        <div class="platform-index-bull-block">行情播报</div>
+        <div class="platform-index-bull-block">{{$t('home.broadcast')}}</div>
         <div class="platform-index-bull-content">
             <swiper :options="swiperOptions" class="platform-index-bull-content-swiper" ref="swiperBulls">
                 <swiper-slide v-for="(item, index) in bullsData" :key="index">
                     <div class="swiper-text">
-                        <span>{{item.symbol}}指数</span>
+                        <span>{{item.symbol}}{{$t('home.number')}}</span>
                         <span>${{item.price}} /</span>
                         <span :style="{color: item.percent_change_24h>=0?'#3da283':'#e50000'}">{{item.percent_change_24h}}%</span>
                     </div>
@@ -17,13 +17,13 @@
     </div>
     <div class="platform-index-item">
         <div class="platform-index-item-crowdsale">
-            <div class="platform-index-item-crowdsale-title">众筹</div>
+            <div class="platform-index-item-crowdsale-title">{{$t('crowdFunding.crowdfunding')}}</div>
             <crowdsale-item v-for="(crowdsale, i) in crowdsaleItemdata" :key="i" :crowdsale-datas="crowdsale" :system-time="sysTime">
             </crowdsale-item>
             <learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more>
         </div>
         <div class="platform-index-item-ad">
-            <div class="platform-index-item-ad-title">项目</div>
+            <div class="platform-index-item-ad-title">{{$t('header.project')}}</div>
             <advert-item v-for="(advert, _i) in totalAdvertItemDatas" :key="_i"
                 :advert-datas="advert" :system-tiem="sysTime">
             </advert-item>

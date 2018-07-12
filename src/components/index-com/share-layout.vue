@@ -2,7 +2,7 @@
     <div class="share-layout">
         <div class="share-layout-div" @click="showShare">
             <i class="custom-element-icon-fenxiang1"></i>
-            <span>分享</span>
+            <span>{{$t('share.shareTiltle')}}</span>
         </div>
     </div>
 </template>

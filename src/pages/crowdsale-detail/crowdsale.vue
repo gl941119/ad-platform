@@ -5,17 +5,17 @@
                 <img :src="headerImg">
             </div>
             <div class="ad-crowdsale-container-title">
-                <div class="ad-crowdsale-container-title-label">众筹</div>
+                <div class="ad-crowdsale-container-title-label">{{$t('crowdFunding.crowdfunding')}}</div>
                 <div class="ad-crowdsale-container-title-appx">
-                    风险警示：BierInc对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待
+                    {{$t('crowdFunding.warn')}}
                 </div>
             </div>
             <div class="ad-crowdsale-container-select">
-                <el-select size="mini" @change="selectStage" class="ad-crowdsale-container-select-left" v-model="stageValue" placeholder="全部阶段">
+                <el-select size="mini" @change="selectStage" class="ad-crowdsale-container-select-left" v-model="stageValue" :placeholder="$t('crowdFunding.all')">
                     <el-option v-for="item in stateOptions" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
-                <el-select size="mini" @change="selectConcept" class="ad-crowdsale-container-select-right" v-model="conceptValue" placeholder="全部概念">
+                <el-select size="mini" @change="selectConcept" class="ad-crowdsale-container-select-right" v-model="conceptValue" :placeholder="$t('crowdFunding.allConcept')">
                     <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
@@ -48,16 +48,16 @@
                 headerImg,
                 stateOptions: [{
                     value: 0,
-                    label: '全部阶段'
+                    label: this.$t('crowdFunding.all')
                 }, {
                     value: 1,
-                    label: '即将开始'
+                    label: this.$t('crowdFunding.start')
                 }, {
                     value: 2,
-                    label: '进行中'
+                    label: this.$t('crowdFunding.underway')
                 }, {
                     value: 3,
-                    label: '已经结束'
+                    label: this.$t('home.over')
                 }],
                 conceptOptions: [],
                 stageValue: 0,
@@ -100,7 +100,7 @@
                         url: 'QueryAllConcept',
                         type: 'get'
                     }).then(res => {
-                        res.data.unshift({id: 0, name: "全部概念"});
+                        res.data.unshift({id: 0, name: this.$t('crowdFunding.allConcept')});
                         this.conceptOptions = res.data;
                         resolve();
                     })
