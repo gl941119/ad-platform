@@ -29,6 +29,8 @@ const CrowdfundingDetail = () =>
 	import('@/pages/personalCenter/crowdfundingProject/details.vue');
 const Advertisers = () =>
 	import('@/pages/personalCenter/advertisers/advertisers');
+const Adserving = () =>
+	import('@/pages/personalCenter/advertisers/ad-serving');
 	
 Vue.use(VueRouter);
 
@@ -106,6 +108,11 @@ const router = new VueRouter({
 					path: 'crowdfundingDetail/:id/:value',//众筹详情
 					name: 'crowdfundingDetail',
 					component: CrowdfundingDetail,
+				},
+				{
+					path: 'adserving',//广告主-整体情况查询
+					name: 'adserving',
+					component: Adserving,
 				},
 				{
 					path: 'advertisers',//广告主-广告投放管理

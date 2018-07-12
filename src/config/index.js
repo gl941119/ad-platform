@@ -27,7 +27,7 @@ export default {
     ChangeCrowdfundingDetails: 'blockchainadvert/crowd-funding/put',//修改众筹申请
     /*广告方-添加新项目*/
     QueryNewProject: 'blockchainadvert/advertservice/advert',
-    QueryProject: 'blockchainadvert/advertservice/advert',//查詢詳情
+    QueryProject: 'blockchainadvert/advertservice/findAdvertProByAccountId',//查詢詳情
     /*邀请用户*/
     QueryInviteCode: 'blockchainadvert/account/getInviteCode',//获取验证码
     QueryInviteData: 'blockchainadvert/account/getInvitePerson',//获取邀请用户

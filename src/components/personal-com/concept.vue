@@ -37,7 +37,7 @@
 				if(item.isSelected) {
 					if(length < 4) {
 						var obj={};
-						obj.conceptId=item.id;
+						obj.conceptId = item.id;
 						obj.name = item.name;
 						this.checkedData.push(obj);
 						this.$emit('listenCondept',this.checkedData);

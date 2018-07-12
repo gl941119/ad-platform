@@ -86,34 +86,6 @@
 				</div>
 			</li>
 		</ul>
-		<!--<el-dialog :title="项目情况" :close-on-click-modal="false" :visible.sync="registerModel.registerVisible" width="360px">
-            <el-form class="register"  ref="registerModelForm" :rules="registerModel.rule">
-                <el-form-item label="项目名称"
-                              prop="email"
-                              :label-width="registerModel.formLabelWidth">
-                </el-form-item>
-                <el-form-item label="项目简介"
-                              prop="verifyCode"
-                              class="register-verify"
-                              :label-width="registerModel.formLabelWidth">
-                </el-form-item>
-                <el-form-item label="概念"
-                              prop="password"
-                              :label-width="registerModel.formLabelWidth">
-                </el-form-item>
-                <el-form-item label="技术"
-                              prop="passwordAgain"
-                              :label-width="registerModel.formLabelWidth">
-                </el-form-item>
-                <div class="register-foot">
-                    <el-button type="default"
-                            size="small"
-                            class="register-foot-btn"
-                            round
-                            @click="registerSubmit">注 册</el-button>
-                </div>
-            </el-form>
-        </el-dialog>-->
 		<ul class="newCrowdfunding_item">
 			<h5>项目情况</h5>
 			<li class="newCrowdfunding_item_li">
@@ -204,54 +176,6 @@
 				<el-input placeholder="自定义站点地址" v-model="websites[index].websiteAddress">
 				</el-input>
 			</li>
-			<!--<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName1" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress1">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName2" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress2">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName3" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress3">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName4" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress4">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName5" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress5">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName6" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress6">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName7" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress7">
-				</el-input>
-			</li>
-			<li class="newCrowdfunding_item_li">
-				<label><el-input placeholder="自定义站点名" v-model="newCrowdfunding.siteName8" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="newCrowdfunding.siteAddress8">
-				</el-input>
-			</li>-->
 		</ul>
 		<button @click="submit">提交</button>
 	</div>
@@ -310,9 +234,11 @@
 		components: {
 			conceptCom,
 		},
+		mounted(){
+			this.queryDetails();
+		},
 		methods: {
 			submit() {
-				console.log(this.checkedData);
 				Request({
 					url: 'QueryNewProject',
 					data: {
@@ -347,6 +273,18 @@
 					}
 				})
 			},
+			queryDetails(){
+				Request({
+					url: 'QueryProject',
+					data: {
+						accountId:this.newCrowdfunding.accountId,			
+					},
+					type: 'get',
+					flag: true,
+				}).then(res => {
+					console.log(res);
+				})
+			},
 			listenCondept(checkedData) {
 				var newCheckedData = [];
 				checkedData.forEach(function(item, index) {
@@ -363,7 +301,6 @@
 				this.coreTeam = tmpPersions;
 			},
 			deletedCore(value) { //核心团队
-				console.log(value)
 				var length = this.coreTeam.length;
 				if(length <= 1) {
 					this.$message("不要删了o，再删就没有了");
@@ -389,21 +326,6 @@
 			getImg(file) {
 				console.log(file)
 				this.imageUrl = file.url;
-			},
-			beforeAvatarUpload(file) { //头像文件限制
-				//console.log("beforeAvatarUpload file:",file)
-				const isJPG = file.type === 'image/jpeg';
-				const isLt2M = file.size / 1024 / 1024 < 2;
-				console.log("beforeAvatarUpload:", file, isJPG, isLt2M)
-				if(!isJPG) {
-					this.$message.error('上传头像图片只能是 JPG 格式!');
-					return false;
-				}
-				if(!isLt2M) {
-					this.$message.error('上传头像图片大小不能超过 2MB!');
-					return false;
-				}
-				return isJPG && isLt2M;
 			},
 			conceptFun() { //概念弹出窗
 				this.concept = !this.concept;
