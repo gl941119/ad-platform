@@ -256,7 +256,6 @@
 	import Cache from '../../../utils/cache';
 	import Request from '../../../utils/require';
 	import Utils from '../../../utils/util.js';
-	import Translate from '../../../utils/translate.js';
 	export default {
 		data() {
 			return {
