@@ -21,70 +21,80 @@
 			</li>
 			<li class="newCrowdfunding_item_li coreMembers">
 				<label>核心团队成员</label>
-				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
-						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
-							1
-						</el-aside>
-						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
-							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>全名</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].name">
-									</el-input>
-								</li>
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>头衔</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].title">
-									</el-input>
-								</li>
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>简介</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].desc">
-									</el-input>
-								</li>
-								<div style="display: flex;flex-direction: column;">
-									<button style="margin: 10px 0;border-radius: 5px;" @click="addCore">添加</button>
-									<button @click="deletedCore(index)">删除</button>
-								</div>
-							</ol>
-						</div>
-					</div>
-				</div>
+				<el-button type="text" @click="queryCore">点击打开核心团队成员</el-button>
 			</li>
+			<div>
+				<el-dialog title="核心团队成员" :visible.sync="centerDialogVisible" size="small">
+					<el-table :data="coreTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+						<el-table-column type="selection" width="55">
+						</el-table-column>
+						<el-table-column property="year" align="center" label="全名">
+							<template slot-scope="scope">
+								<el-input  v-model="scope.row.name"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="name" align="center" label="头衔" width="200">
+							<template slot-scope="scope">
+								<el-input  v-model="scope.row.title"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" label="简介">
+							<template slot-scope="scope">
+								<el-input  v-model="scope.row.desc"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" label="操作">
+							<template slot-scope="scope">
+								<el-button  @click="addCore">添加</el-button>
+								<el-button  @click="deletedCore(scope.$index)">删除</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div slot="footer" class="dialog-footer">
+						<el-button  @click="saveLink">保存</el-button>
+						<el-button  @click="addLink">添加</el-button>
+						<el-button  @click="deletedLink">删除</el-button>
+					</div>
+				</el-dialog>
+			</div>
 			<li class="newCrowdfunding_item_li">
 				<label>顾问团队</label>
-				<div class="newCrowdfunding_item_li_coreTeamMembers">
-					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
-						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
-							1
-						</el-aside>
-						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
-							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>全名</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].name">
-									</el-input>
-								</li>
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>头衔</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].title">
-									</el-input>
-								</li>
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>简介</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].desc">
-									</el-input>
-								</li>
-								<div style="display: flex;flex-direction: column;">
-									<button style="margin: 10px 0;" @click="addConsultant">添加</button>
-									<button @click="deletedConsultant(index)">删除</button>
-								</div>
-							</ol>
-						</div>
-					</div>
-				</div>
+				<el-button type="text" @click="queryConsultant">点击打开顾问团队成员</el-button>
 			</li>
+			<div>
+				<el-dialog title="顾问团队成员" :visible.sync="CrowdTeamDialogVisible" size="small">
+						<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+							<el-table-column type="selection" width="55">
+							</el-table-column>
+							<el-table-column property="year" align="center" label="全名">
+								<template slot-scope="scope">
+									<el-input  v-model="scope.row.name"></el-input>
+								</template>
+							</el-table-column>
+							<el-table-column property="name" align="center" label="头衔" width="200">
+								<template slot-scope="scope">
+									<el-input  v-model="scope.row.title"></el-input>
+								</template>
+							</el-table-column>
+							<el-table-column property="address" align="center" label="简介">
+								<template slot-scope="scope">
+									<el-input  v-model="scope.row.desc"></el-input>
+								</template>
+							</el-table-column>
+							<el-table-column property="address" align="center" label="操作">
+								<template slot-scope="scope">
+									<el-button  @click="addConsultant">添加</el-button>
+									<el-button  @click="deletedConsultant(scope.$index)">删除</el-button>
+								</template>
+							</el-table-column>
+						</el-table>
+						<div slot="footer" class="dialog-footer">
+							<el-button  @click="saveLinkConsultant">保存</el-button>
+							<el-button  @click="addLinkConsultant">添加</el-button>
+							<el-button  @click="deletedLinkConsultant">删除</el-button>
+						</div>
+					</el-dialog>
+			</div>
 		</ul>
 		<ul class="newCrowdfunding_item">
 			<h5>项目情况</h5>
@@ -176,8 +186,17 @@
 				<el-input placeholder="自定义站点地址" v-model="websites[index].websiteAddress">
 				</el-input>
 			</li>
+			<!--<li class="newCrowdfunding_item_li" v-for="(item, index) in websitesSubmit" :key="index">
+				<label class="project_review_details_item_li_label">
+					<el-input placeholder="自定义站点名" v-model="websitesSubmit[index].websiteName" >
+					</el-input>
+				</label>
+				<el-input placeholder="自定义站点地址" v-model="websitesSubmit[index].websiteAddress">
+				</el-input>
+			</li>-->
 		</ul>
 		<button @click="submit">提交</button>
+		<button @click="saveSubmit">保存修改</button>
 	</div>
 </template>
 
@@ -208,6 +227,7 @@
 				},
 				imageUrl: '',
 				newCrowdfunding: {
+					id:'',
 					accountId: this.$store.state.id || Cache.getSession('bier_userid'), //用户id
 					teamName: "", //团队名称
 					teamContact: "", //团队联系方式
@@ -229,6 +249,9 @@
 				imageUrl: '', //logo地址
 				conceptDatas: '',
 				technologyDatas: '',
+				centerDialogVisible: false,
+				CrowdTeamDialogVisible: false,
+				multipleSelection:[],
 			}
 		},
 		components: {
@@ -268,9 +291,41 @@
 					console.log(res);
 					if(res.success == 1) {
 						this.$message('添加成功');
-					} else if(res.data.success == 0) {
-						this.$message('您已经存在广告，无法再次申请');
-					}
+					} 
+				})
+			},
+			saveSubmit() {
+				Request({
+					url: 'ChangeProject',
+					data: {
+						accountId: this.newCrowdfunding.accountId,
+						id: this.newCrowdfunding.id,
+						teamName: this.newCrowdfunding.teamName,
+						teamContact: this.newCrowdfunding.teamContact,
+						teamLocation: this.newCrowdfunding.teamLocation,
+						proName: this.newCrowdfunding.proName,
+						proDesc: this.newCrowdfunding.proDesc,
+						listConceptManage:this.checkedData,
+						technology1: this.newCrowdfunding.technology1,
+						technology2: this.newCrowdfunding.technology2,
+						website: this.newCrowdfunding.website,
+						whitePaper: this.newCrowdfunding.whitePaper,
+						shotEnName: this.newCrowdfunding.shotEnName,
+						shotCnName: this.newCrowdfunding.shotCnName,
+						fullEnName: this.newCrowdfunding.fullEnName,
+						title: this.newCrowdfunding.title,
+						logo: this.imageUrl,
+						listMermber: this.coreTeam,
+						listConsultants: this.consultantTeam,
+						websites:this.websites,
+					},
+					type: 'post',
+					flag: true,
+				}).then(res => {
+					console.log(res);
+					if(res.success == 1) {
+						this.$message('添加成功');
+					} 
 				})
 			},
 			queryDetails(){
@@ -283,7 +338,175 @@
 					flag: true,
 				}).then(res => {
 					console.log(res);
+					this.newCrowdfunding = res.data;
+					var technologyArr = [];
+					if(res.data.technology1) {
+						technologyArr.push(res.data.technology1);
+					}
+					if(res.data.technology2) {
+						technologyArr.push(res.data.technology2);
+					}
+					var arr = [];
+					if(res.data.conceptResultList){
+						res.data.conceptResultList.forEach(function(item,index){
+							arr.push(item.name);
+						})
+					}
+					this.conceptDatas = arr.join('-')
+					this.technologyDatas = technologyArr.join('-');
+					if(res.data.websiteResultList){
+						var length = res.data.websiteResultList.length;
+						var obj = {};
+						this.websites = res.data.websiteResultList;
+						for(var i=0;i<8-length;i++){
+							this.websites.push(obj);
+						}
+					}
 				})
+			},
+			queryCore() {
+				Request({
+					url: 'QueryAdCoreMember',
+					data: {
+						advertId: this.newCrowdfunding.id
+					},
+					type: 'get',
+					flag:true,
+				}).then(res => {
+					this.coreTeam = res.data;
+					this.centerDialogVisible = true;
+				})
+			},
+			saveLink() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'ChangeAdCoreMember',
+					data: {
+						accountId: this.newCrowdfunding.accountId,
+						advertId: this.multipleSelection[0].advertId,
+						id: this.multipleSelection[0].id,
+						desc: this.multipleSelection[0].desc,
+						name: this.multipleSelection[0].name,
+						title: this.multipleSelection[0].title
+					},
+					type: 'put',
+					flag: true,
+				}).then(res => {
+					if(res.success){
+						this.centerDialogVisible = false;
+						this.$message('修改成功');
+					}
+				})
+			},
+			addLink() {
+				Request({
+					url: 'AddAdCoreMember',
+					data: {
+						accountId: this.newCrowdfunding.accountId,
+						advertId: this.newCrowdfunding.id,
+						desc: this.multipleSelection[0].desc,
+						name: this.multipleSelection[0].name,
+						title: this.multipleSelection[0].title
+					},
+					flag: true,
+				}).then(res => {
+					if(res.success == 1) {
+						this.centerDialogVisible = false;
+						this.$message('添加成功');
+					}
+				})
+			},
+			deletedLink() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'DeletedAdCoreMember',
+					data: {
+						advertId: this.multipleSelection[0].advertId,
+						id: this.multipleSelection[0].id
+					},
+					type: 'DELETE',
+					flag: true,
+				}).then(res => {
+					if(res.success == 1) {
+						this.$message('删除成功');
+						this.centerDialogVisible = false;
+						this.queryDetails();
+					}
+				})
+			},
+			queryConsultant() {
+				Request({
+					url: 'QueryAdConsultant',
+					data: {
+						advertId: this.newCrowdfunding.id,
+					},
+					type: 'get',
+					flag:true,
+				}).then(res => {
+					this.consultantTeam = res.data;
+					this.CrowdTeamDialogVisible = true;
+				})
+			},
+			addLinkConsultant() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'AddAdConsultant',
+					data: {
+						accountId: this.newCrowdfunding.accountId,
+						advertId: this.newCrowdfunding.id,
+						desc: this.multipleSelection[0].desc,
+						name: this.multipleSelection[0].name,
+						title: this.multipleSelection[0].title
+					},
+					flag: true,
+				}).then(res => {
+					if(res.success == 1) {
+						this.CrowdTeamDialogVisible = false;
+						this.$message('添加成功');
+					}
+				})
+			},
+			deletedLinkConsultant() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'DeletedAdConsultant',
+					data: {
+						advertId: this.multipleSelection[0].advertId,
+						id: this.multipleSelection[0].id,
+					},
+					type: 'DELETE',
+					flag: true,
+				}).then(res => {
+					if(res.success) {
+						this.CrowdTeamDialogVisible = false;
+						this.$message('删除成功');
+					}
+				})
+			},
+			saveLinkConsultant() {
+				var id = this.$route.params.id;
+				Request({
+					url: 'ChangeAdConsultant',
+					data: {
+						id: this.multipleSelection[0].id,
+						accountId: this.multipleSelection[0].accountId,
+						advertId: this.multipleSelection[0].advertId,
+						desc: this.multipleSelection[0].desc,
+						name: this.multipleSelection[0].name,
+						title: this.multipleSelection[0].title
+					},
+					type: 'put',
+					flag: true,
+				}).then(res => {
+					if(res.success) {
+						this.CrowdTeamDialogVisible = false;
+						this.$message('修改成功');
+					}
+				})
+			},
+			handleSelectionChange(val) {
+				this.multipleSelection = val;
+				console.log(val);
 			},
 			listenCondept(checkedData) {
 				var newCheckedData = [];

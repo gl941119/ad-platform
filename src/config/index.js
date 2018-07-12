@@ -24,10 +24,19 @@ export default {
     /*众筹项目方-申请新众筹*/
     QueryNewCrowdfunding: 'blockchainadvert/crowd-funding',
     QueryCrowdfundingDetails: 'blockchainadvert/crowd-funding/id',//众筹详情
-    ChangeCrowdfundingDetails: 'blockchainadvert/crowd-funding/put',//修改众筹申请
+    ChangeCrowdfundingDetails: 'blockchainadvert/advertservice/modifyAdvertProj',//修改众筹申请
     /*广告方-添加新项目*/
     QueryNewProject: 'blockchainadvert/advertservice/advert',
     QueryProject: 'blockchainadvert/advertservice/findAdvertProByAccountId',//查詢詳情
+    ChangeProject: 'blockchainadvert//advertservice/modifyAdvertProj',//修改
+    QueryAdCoreMember: 'blockchainadvert/advert-team-member/getAll/advert-id',//查询核心团队
+    AddAdCoreMember: 'blockchainadvert/advert-team-member/add',//添加核心团队
+    DeletedAdCoreMember: 'blockchainadvert/advert-team-member/delete/advert-id/id',//删除核心团队
+    ChangeAdCoreMember: 'blockchainadvert/advert-team-member/put',//修改核心团队
+    QueryAdConsultant: 'blockchainadvert/advert-team-consultants/getAll/advert-id',//查询顾问团队
+    AddAdConsultant: 'blockchainadvert/advert-team-consultants/add',//添加顾问团队
+    DeletedAdConsultant: 'blockchainadvert/advert-team-consultants/delete/advert-id/id',//删除顾问团队
+    ChangeAdConsultant: 'blockchainadvert/advert-team-consultants/put',//修改顾问团队
     /*邀请用户*/
     QueryInviteCode: 'blockchainadvert/account/getInviteCode',//获取验证码
     QueryInviteData: 'blockchainadvert/account/getInvitePerson',//获取邀请用户
