@@ -4,7 +4,7 @@
             <div class="advert-item-left-logo">
                 <img :src="advertDatas.logo">
             </div>
-            <div class="advert-item-left-text"><a :href="advertDatas.whitePaper" target="_blank">白皮书</a></div>
+            <div class="advert-item-left-text"><a :href="advertDatas.whitePaper" target="_blank">{{$t('home.whitePaper')}}</a></div>
         </div>
         <div class="advert-item-middle">
             <div class="advert-item-middle-title clearfix">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="advert-item-right">
-            <el-select class="advert-item-right-select" @change="handleAdvertFunc" v-model="advertValue" placeholder="去交易">
+            <el-select class="advert-item-right-select" @change="handleAdvertFunc" v-model="advertValue" :placeholder="$t('home.buy')">
                 <el-option
                     v-for="(item, index) in advertDatas.websiteResultList"
                     :key="index"

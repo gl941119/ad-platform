@@ -7,7 +7,7 @@ import advertItemCom from '@/components/index-com/advert-item';
 import learnMoreCom from '@/components/index-com/learn-more';
 import telegramLoginCom from '@/components/third-party/telegram-login';
 import filters from './filters';
-import i18n from './i18n/i18n'
+import i18n from './i18n/i18n';
 
 import './utils/element';
 import './assets/css/reset.css';

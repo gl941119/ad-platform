@@ -36,8 +36,9 @@ export default new Vuex.Store({
 		setHeardUrl(state, val) {
 			state.heardUrl = val;
 		},
-		changeNamecom(state, val) {
-			console.log(state.slangChange)
+		setLanguage(state, val) {
+			state.slangChange = val;
+			console.log(val)
         },
 	},
 });

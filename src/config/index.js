@@ -5,15 +5,12 @@ export default {
     QueryCrowdSaleDetailInfo: 'blockchainadvert/crowd-funding/secondary',
     QueryAllConcept: 'blockchainadvert/common/concept',
     QueryAdvertDetailInfo: 'blockchainadvert/advertservice/secondary',
-    QueryAdvertInfoByCId: 'blockchainadvert/advertservice/secondPage',
-    ClickAdvertToProfit: 'blockchainadvert/share/click-advert',
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',
     SendVerifyCode: 'blockchainadvert/account/sendRegistCode',
     TelegramAuthorizeCB: 'blockchainadvert/authorize/telegram',
     SignOut: 'blockchainadvert/account/signout',
-
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',//收益账户
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',//收益账户流水
     QueryMainBasicInformation: 'blockchainadvert/advert-main/account-id',//主账户
@@ -27,9 +24,19 @@ export default {
     /*众筹项目方-申请新众筹*/
     QueryNewCrowdfunding: 'blockchainadvert/crowd-funding',
     QueryCrowdfundingDetails: 'blockchainadvert/crowd-funding/id',//众筹详情
-    ChangeCrowdfundingDetails: 'blockchainadvert/crowd-funding/put',//修改众筹申请
+    ChangeCrowdfundingDetails: 'blockchainadvert/advertservice/modifyAdvertProj',//修改众筹申请
     /*广告方-添加新项目*/
     QueryNewProject: 'blockchainadvert/advertservice/advert',
+    QueryProject: 'blockchainadvert/advertservice/findAdvertProByAccountId',//查詢詳情
+    ChangeProject: 'blockchainadvert//advertservice/modifyAdvertProj',//修改
+    QueryAdCoreMember: 'blockchainadvert/advert-team-member/getAll/advert-id',//查询核心团队
+    AddAdCoreMember: 'blockchainadvert/advert-team-member/add',//添加核心团队
+    DeletedAdCoreMember: 'blockchainadvert/advert-team-member/delete/advert-id/id',//删除核心团队
+    ChangeAdCoreMember: 'blockchainadvert/advert-team-member/put',//修改核心团队
+    QueryAdConsultant: 'blockchainadvert/advert-team-consultants/getAll/advert-id',//查询顾问团队
+    AddAdConsultant: 'blockchainadvert/advert-team-consultants/add',//添加顾问团队
+    DeletedAdConsultant: 'blockchainadvert/advert-team-consultants/delete/advert-id/id',//删除顾问团队
+    ChangeAdConsultant: 'blockchainadvert/advert-team-consultants/put',//修改顾问团队
     /*邀请用户*/
     QueryInviteCode: 'blockchainadvert/account/getInviteCode',//获取验证码
     QueryInviteData: 'blockchainadvert/account/getInvitePerson',//获取邀请用户
@@ -38,7 +45,9 @@ export default {
     QueryCode: 'blockchainadvert/account/sendBindEmailCode',//获取验证码
     QueryPasswordCode: 'blockchainadvert/account/sendUpdateAccountCode',//获取验证码
     QueryAuthentication: 'blockchainadvert/account/idAuthentication',//身份验证
-    SetTradePassword: 'blockchainadvert/account/setTradePassword',//身份验证
+    SetPassword: 'blockchainadvert/account/setPassword',//设置密码
+    SetTradePassword: 'blockchainadvert/account/setTradePassword',//设置 交易密码
+    QuerySettings: 'blockchainadvert/account/getAccountStatus',//获取设置信息
     /*核心团队*/
     AddCoreMember: 'blockchainadvert/crowd-team-member',
     DeletedCoreMember: 'blockchainadvert/crowd-team-member/delete/crowd-id/id',

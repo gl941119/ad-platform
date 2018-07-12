@@ -18,11 +18,11 @@
                 let text;
                 switch (this.type) {
                     case 1:
-                        text = '了解更多';
+                        text = this.$t('home.learnMore');
                         break;
                 
                     default:
-                        text = '查看更多';
+                        text = this.$t('home.readMore');
                         break;
                 }
                 return text;

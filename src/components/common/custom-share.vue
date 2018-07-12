@@ -1,10 +1,10 @@
 <template>
-    <el-dialog title="分享" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
+    <el-dialog :title="$t('share.shareTiltle')" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
-            <p class="show-share-title">点击即挖矿，流量即币值！上阿凡达不上当不受骗！</p>
+            <p class="show-share-title">{{$t('share.shareOne')}}{{$t('share.shareTwo')}}</p>
             <p class="show-share-title">http://www.afdchain.com</p>
             <div class="show-share-btn">
-                <el-button class="show-share-btn-text" size="mini" @click="clickCopy">点我复制</el-button>
+                <el-button class="show-share-btn-text" size="mini" @click="clickCopy">{{$t('share.shareCopy')}}</el-button>
             </div>
         </div>
     </el-dialog>

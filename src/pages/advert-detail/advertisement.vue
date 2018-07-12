@@ -5,10 +5,10 @@
                 <img :src="headerImg">
             </div>
             <div class="advertisement-container-title">
-                <div class="advertisement-container-title-label">项目</div>
+                <div class="advertisement-container-title-label">{{$t('header.home')}}</div>
             </div>
             <div class="advertisement-container-select">
-                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="concepId" placeholder="全部概念">
+                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="concepId" :placeholder="$t('crowdFunding.all')">
                     <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
@@ -69,7 +69,7 @@ import Config from '../../utils/config.js';
                         url: 'QueryAllConcept',
                         type: 'get'
                     }).then(res => {
-                        res.data.unshift({id: 0, name: "全部概念"});
+                        res.data.unshift({id: 0, name: this.$t('crowdFunding.all')});
                         this.conceptOptions = res.data;
                         resolve();
                     })

@@ -61,14 +61,14 @@
 											<el-input placeholder="请输入你的邮箱" v-validate data-rules="required|email" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" v-model="bindEmail"></el-input>
 											<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 										</p>
-										<p style="position: relative;">
+										<div style="position: relative;">
 											<el-input placeholder="请输入你的验证码" v-model="code"></el-input>
-											<div class="el-button-getCode">
+											<div class="el-button-getCode password">
 												<span>|</span>
 												<el-button v-if="disabled" type="text" @click="getCode">获取邮箱验证码</el-button>
 												<el-button v-else disabled type="text">(<span>{{num}}</span>s)后重试</el-button>
 											</div>
-										</p>
+										</div>
 										<div class="el-collapse-item__content-box_buttonBox">
 											<button @click="toBindEmail">确定</button>
 										</div>
@@ -86,25 +86,27 @@
 							<div role="tabpanel" :class="{'button-selected': password}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
 								<div class="el-collapse-item__content">
 									<div class="el-collapse-item__content-box bindEmail">
-										<h3>修改密码</h3>
+										<h3 v-if="!existPassword">设置密码</h3>
+										<h3 v-if="existPassword">修改密码</h3>
 										<p>
-											<el-input placeholder="旧密码" v-model="oldPassword"></el-input>
+											<el-input v-if="!existPassword" placeholder="旧密码" v-model="oldPassword"></el-input>
 										</p>
 										<p>
-											<el-input placeholder="新密码" v-model="newPassword"></el-input>
+											<el-input type="password" placeholder="新密码" v-model="newPassword"></el-input>
 										</p>
 										<p>
-											<el-input placeholder="确认新密码" v-model="oncePassword"></el-input>
+											<el-input type="password" placeholder="确认新密码" v-model="oncePassword"></el-input>
 										</p>
-										<p>
+										<div style="position: relative;">
 											<el-input placeholder="请输入你的验证码" v-model="codePassword"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
 												<button class="el-button-getCode_button" @click="getPasswordCode()">获取邮箱验证码</button>
 											</div>
-										</p>
+										</div>
 										<div class="el-collapse-item__content-box_buttonBox">
-											<button @click="changePassword">确定</button>
+											<button v-if="!existPassword" @click="setPassword">确定</button>
+											<button v-if="existPassword" @click="changePassword">确定</button>
 										</div>
 									</div>
 								</div>
@@ -119,47 +121,47 @@
 							</div>
 							<div role="tabpanel" :class="{'button-selected': transactionPassword}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
 								<div class="el-collapse-item__content">
-									<div class="el-collapse-item__content-box bindEmail">
+									<div v-if="!existTradePassword" class="el-collapse-item__content-box bindEmail">
 										<h3>设置交易密码</h3>
 										<p>
-											<el-input placeholder="交易密码" v-model="tradePassword"></el-input>
+											<el-input type="password" placeholder="交易密码" v-model="tradePassword"></el-input>
 										</p>
 										<p>
-											<el-input placeholder="确认交易密码" v-model="onceSetTradePassword"></el-input>
+											<el-input type="password" placeholder="确认交易密码" v-model="onceSetTradePassword"></el-input>
 										</p>
-										<p>
-											<el-input placeholder="请输入你的验证码" v-model="codeTradePassword"></el-input>
-											<div class="el-button-getCode password" style="top: 167px;height: 37px;overflow: hidden;">
-												<span>|</span>
-												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">获取邮箱验证码</button>
-											</div>
-										</p>
-										<div class="el-collapse-item__content-box_buttonBox">
-											<button @click="setTradePassword">确定</button>
-										</div>
-									</div>
-									<!--<div class="el-collapse-item__content-box bindEmail">
-										<h3>更改交易密码</h3>
-										<p>
-											<el-input placeholder="旧交易密码" v-model="oldTradePassword"></el-input>
-										</p>
-										<p>
-											<el-input placeholder="新交易密码" v-model="newTradePassword"></el-input>
-										</p>
-										<p>
-											<el-input placeholder="确认新交易密码" v-model="onceTradePassword"></el-input>
-										</p>
-										<p>
+										<div style="position: relative;">
 											<el-input placeholder="请输入你的验证码" v-model="codeTradePassword"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
 												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">获取邮箱验证码</button>
 											</div>
+										</div>
+										<div class="el-collapse-item__content-box_buttonBox">
+											<button @click="setTradePassword">确定</button>
+										</div>
+									</div>
+									<div v-if="existTradePassword" class="el-collapse-item__content-box bindEmail">
+										<h3>更改交易密码</h3>
+										<p>
+											<el-input placeholder="旧交易密码" v-model="oldTradePassword"></el-input>
 										</p>
+										<p>
+											<el-input type="password" placeholder="新交易密码" v-model="newTradePassword"></el-input>
+										</p>
+										<p>
+											<el-input type="password" placeholder="确认新交易密码" v-model="onceTradePassword"></el-input>
+										</p>
+										<div style="position: relative;">
+											<el-input placeholder="请输入你的验证码" v-model="codeTradePassword"></el-input>
+											<div class="el-button-getCode password">
+												<span>|</span>
+												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">获取邮箱验证码</button>
+											</div>
+										</div>
 										<div class="el-collapse-item__content-box_buttonBox">
 											<button @click="changeTradePassword">确定</button>
 										</div>
-									</div>-->
+									</div>
 								</div>
 							</div>
 						</div>
@@ -353,28 +355,85 @@
 				numPassword:60,
 				numTradePassword:60,
 				imgData: Config.headPortrait,
-				imgsrc:Config.headPortrait[0]
+				imgsrc:Config.headPortrait[0],
+				existEmail:true,
+				existPassword:true,
+				existTradePassword:true,
+				isBindTelegram:true,
 			}
 		},
 		mounted() {
-			
+			Request({
+				url: 'QuerySettings',
+				type: 'get',
+			}).then(res => {
+				console.log(res);
+				this.existEmail = res.data.existEmail;
+				this.existPassword = res.data.existPassword;
+				this.existTradePassword = res.data.existTradePassword;
+				this.isBindTelegram = res.data.isBindTelegram;
+			})
 		},
 		methods: {
-			setTradePassword(){
-				Request({
-					url: 'SetTradePassword',
-					data: {
-						verificationCode: this.codeTradePassword,
-						password: this.tradePassword,
-					},
-					type: 'post',
-					flag: true
-				}).then(res => {
-					console.log(res);
-					if(res.success){
-						this.$message('设置交易密码成功');
+			setPassword(){//设置密码
+				var reg = new RegExp();
+				var str = this.newPassword;
+				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
+				console.log(1);
+				if(value){
+					if( this.newPassword === this.oncePassword){
+						Request({
+							url: 'SetPassword',
+							data: {
+								verificationCode: this.codePassword,
+								password: this.newPassword,
+							},
+							type: 'post',
+							flag: true
+						}).then(res => {
+							console.log(res);
+							if(res.success){
+								this.$message('设置交易密码成功');
+								this.oncePassword = '';
+								this.newPassword = '';
+								this.codePassword = '';
+							}
+						})
+					}else{
+						this.$message('交易密码要与确认密码保持一致');
 					}
-				})
+				}else{
+					this.dialogVisible = true;
+				}
+			},
+			setTradePassword(){//设置交易密码
+				var reg = new RegExp();
+				var str = this.tradePassword;
+				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
+				if(value){
+					if( this.tradePassword === this.onceSetTradePassword){
+						Request({
+							url: 'SetTradePassword',
+							data: {
+								verificationCode: this.codeTradePassword,
+								password: this.tradePassword,
+							},
+							type: 'post',
+							flag: true
+						}).then(res => {
+							console.log(res);
+							if(res.success){
+								this.$message('设置交易密码成功');
+								this.codeTradePassword = '';
+								this.tradePassword = '';
+							}
+						})
+					}else{
+						this.$message('交易密码要与确认密码保持一致');
+					}
+				}else{
+					this.dialogVisible = true;
+				}
 			},
 			selectImg(url) {
 				Request({
@@ -389,7 +448,7 @@
 					console.log(res);
 					if(res.success == 1) {
 						this.imgsrc = url;
-						this.$store.commit('heardUrl', url);
+						this.$store.commit('setHeardUrl', url);
 						Cache.setSession('bier_heardUrl', url);
 						this.$message('修改成功');
 					}
@@ -406,7 +465,6 @@
 							email: this.bindEmail,
 						},
 					}).then(res => {
-						console.log(res);
 						this.disabled = false;
 						let timer = setInterval(() => {
 							this.num--;
@@ -443,11 +501,11 @@
 								this.numPassword = 60;
 							}
 						}, 1000);
-						/*if(res.success == 1) {
+						if(res.success) {
 							this.$message('获取成功');
 						} else {
 							this.$message('获取失败');
-						}*/
+						}
 					})
 			},
 			getchangeTradePasswordCode() {
@@ -467,11 +525,11 @@
 								this.numTradePassword = 60;
 							}
 						}, 1000);
-						/*if(res.success == 1) {
+						if(res.success) {
 							this.$message('获取成功');
 						} else {
 							this.$message('获取失败');
-						}*/
+						}
 					})
 			},
 			changeTradePassword() {
@@ -491,9 +549,11 @@
 							type: 'post',
 							flag: true
 						}).then(res => {
-							console.log(res);
 							if(res.success == 1) {
 								this.$message('修改成功');
+								this.newTradePassword = '';
+								this.oldTradePassword = '';
+								this.codeTradePassword = '';
 							}
 						})
 					} else {
@@ -522,6 +582,10 @@
 						console.log(res);
 						if(res.success == 1) {
 							this.$message('修改成功');
+							 this.oldPassword = '';
+							this.newPassword = '';
+							this.codePassword = '';
+							this.this.oncePassword = '';
 							Request({
 								url: 'SignOut',
 								type: 'get',
@@ -530,6 +594,7 @@
 								}
 							}).then(res => {
 								if(res.success) {
+									this.handleSignOut();
 									this.$router.push({
 										name: 'index'
 									});
@@ -541,6 +606,16 @@
 					this.dialogVisible = true;
 				}
 			},
+			handleSignOut(){
+                this.$store.commit('setUserId', undefined);
+				this.$store.commit('setUserName', undefined);
+				this.$store.commit('setUserNickName', undefined);
+                this.$store.commit('setToken', undefined);
+                Cache.removeSession('bier_username');
+                Cache.removeSession('bier_token');
+                Cache.removeSession('bier_userid');
+				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
+           },
 			toBindEmail() { //绑定邮箱
 				if(this.bindEmail) {
 					Request({
@@ -553,6 +628,7 @@
 						flag: true
 					}).then(res => {
 						if(res.success == 1) {
+							this.bindEmail = '';
 							this.$message('认证成功');
 						}
 					})
@@ -571,7 +647,8 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						if(res.success == 1) {
+						if(res.success) {
+							this.nickName = '';
 							this.$message('认证成功');
 						}
 					})
@@ -593,8 +670,12 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-					console.log(res);
-					if(res.data.success == 1) {
+					if(res.success) {
+						this.country = '';
+						this.idType = '';
+						this.idNum = '';
+						this.realName = '';
+						this.imageUrl = '';
 						this.$message('认证成功');
 					} else {
 						this.$message('认证失败');
@@ -603,7 +684,6 @@
 			},
 			getImg(file) {
 				this.imageUrl = file.url;
-				console.log(file);
 			},
 			beforeAvatarUpload(file) {
 				const isJPG = file.type === 'image/jpeg';
@@ -910,19 +990,19 @@
 	
 	.el-button-getCode {
 		position: absolute;
-		top: 117px;
-		right: 45px;
+		top: 0;
+		height: 37px;
+		line-height: 37px;
+		right: 20px;
 		font-size: 14px;
 		color: rgba(255, 149, 0, 1);
 		button {
 			background: #ffffff;
 			font-size: 14px;
 			color: rgba(255, 149, 0, 1);
-			height: 38px;
+			height: 37px;
+			line-height: 37px;
 		}
 	}
 	
-	.password {
-		top: 223px;
-	}
 </style>

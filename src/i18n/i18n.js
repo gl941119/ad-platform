@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n'
 import messages from './langs'
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: localStorage.bier_langChange || 'en',
   messages,
 });
 locale.i18n((key, value) => i18n.t(key, value));//解决i18n与vue——i18n的兼容性
