@@ -27,6 +27,7 @@ export default {
     ChangeCrowdfundingDetails: 'blockchainadvert/advertservice/modifyAdvertProj',//修改众筹申请
     /*广告方-添加新项目*/
     QueryPrice: 'blockchainadvert/advertservice/findAdvertProPriceByAccountId',//查询价格信息
+    ChangePrice: 'blockchainadvert/advertservice/advert/modifyPrice',//修改概念价格
     QueryNewProject: 'blockchainadvert/advertservice/advert',
     QueryProject: 'blockchainadvert/advertservice/findAdvertProByAccountId',//查詢詳情
     ChangeProject: 'blockchainadvert//advertservice/modifyAdvertProj',//修改

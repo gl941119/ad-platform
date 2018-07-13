@@ -180,6 +180,12 @@
 				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper">
 				</el-input>
 			</li>
+			<!--<div  v-for="(item, index) in websites" :key="index">
+				<label><el-input placeholder="自定义站点名" v-model="websites[index].websiteName" >
+				</el-input></label>
+				<el-input placeholder="自定义站点地址" v-model="websites[index].websiteAddress">
+				</el-input>
+			</div>-->
 			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 				<label><el-input placeholder="自定义站点名" v-model="websites[index].websiteName" >
 				</el-input></label>
@@ -302,6 +308,12 @@
 				}else{
 					concept = this.conceptResultList;
 				}
+				var value = this.newCrowdfunding.id;
+				if(this.websites){
+					this.websites.forEach(function(item, index){
+						item.advertProjId = value;
+					})
+				}
 				Request({
 					url: 'ChangeProject',
 					data: {
@@ -312,7 +324,7 @@
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						listConceptManage:concept,
+						conceptManageList:concept,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -322,8 +334,6 @@
 						fullEnName: this.newCrowdfunding.fullEnName,
 						title: this.newCrowdfunding.title,
 						logo: this.imageUrl,
-						listMermber: this.coreTeam,
-						listConsultants: this.consultantTeam,
 						websites:this.websites,
 					},
 					type: 'post',

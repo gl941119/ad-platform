@@ -13,28 +13,21 @@
 					<el-dialog title="竞价策略" :visible.sync="dialogTableVisible">
 					  <el-form :model="form">
 					    <el-form-item label="首页（综合）" :label-width="formLabelWidth">
-					        <el-input-number v-model="form.num" controls-position="right" @change="handleChange">
+					        <el-input-number v-model="form.advertPrice" controls-position="right" @change="handleChange">
 					        </el-input-number>
 					    </el-form-item>
-					    <el-form-item label="相 关 概 念 1" :label-width="formLabelWidth">
-					      	<el-input-number v-model="form.num1" controls-position="right" @change="handleChange">
-					      	</el-input-number>
-					    </el-form-item>
-					     <el-form-item label="相 关 概 念 2" :label-width="formLabelWidth">
-					      	<el-input-number v-model="form.num2" controls-position="right" @change="handleChange">
-					      	</el-input-number>
-					    </el-form-item>
-					     <el-form-item label="相 关 概 念 3" :label-width="formLabelWidth">
-					      	<el-input-number v-model="form.num3" controls-position="right" @change="handleChange">
-					      	</el-input-number>
-					    </el-form-item>
-					    </el-form-item>
+					    <div v-for="(item, index) in form.conceptManageList" :key="index">
+					    	<el-form-item :label="item.name" :label-width="formLabelWidth">
+						      	<el-input-number v-model="item.conceptPrice" controls-position="right" @change="handleChange">
+						      	</el-input-number>
+						    </el-form-item>
+					    </div>
 					     <el-form-item :label-width="formLabelWidth">
 					      	<div>竞价策略调整将于新加坡时间次日00:00:00起生效，每天仅限调整一次</div>
 					    </el-form-item>
 					  	</el-form>
 						<div slot="footer" class="dialog-footer">
-						    <el-button type="primary" @click="dialogFormVisible = false">修 改</el-button>
+						    <el-button type="primary" @click="changePrice">修 改</el-button>
 						</div>
 					</el-dialog>
 				</div>
@@ -53,14 +46,13 @@
 				dialogTableVisible:false,
 				formLabelWidth: '120px',
 				form:{
-					num:'',
-					num1:'',
-					num2:'',
-					num3:'',
+					advertPrice:'',
+					conceptManageList:[],
 				},
 				accountId:this.$store.state.id || Cache.getSession('bier_userid'),
 				averagePrice:'',
 				isCheck:'',
+				advertId:'',
 			}
 		},
 		mounted(){
@@ -81,13 +73,32 @@
 					type: 'get',
 					flag: true,
 				}).then(res => {
-					console.log(res);
+					console.log(res)
+					this.form = res.data;
+					this.advertId = res.data.advertId;
 					this.averagePrice = res.data.averagePrice;
 					this.isCheck = res.data.isCheck;
 				})
 			},
 			changePrice(){
-				
+				var that = this;
+				Request({
+					url: 'ChangePrice',
+					data: {
+						accountId: this.accountId,
+						advertPrice:this.form.advertPrice,
+						advertId:this.advertId,
+						conceptManageList:this.form.conceptManageList,
+					},
+					type: 'post',
+					flag: true,
+				}).then(res => {
+					if(res.success){
+						that.dialogTableVisible = false;
+						this.$message('修改成功');
+						that.queryDetail();
+					}
+				})
 			},
 			handleChange(){
 				
