@@ -94,6 +94,7 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
+    import ContractInstance from '../../utils/contract.js'; 
     export default {
         props: ['detailData', 'systemTime'],
         data() {
@@ -130,7 +131,9 @@
         methods: {
             crowdSaleSelect(v) {
                 let sel = this.options.find(item => v === item.value);
-                console.log('options_>', v, sel);
+                if(sel){
+                    window.open(sel.site,'target');
+                }
             },
             handleTime(data, systemTime) {
                 let {
@@ -157,6 +160,11 @@
                     this.handleTime(data, sysTime);
                     sysTime += 1000;
                 }, 1000);
+            },
+            handleContract(){
+                let {contractAbi, contractId} = this.detailData;
+                let instance = new ContractInstance(contractAbi, contractId);
+                
             },
         },
         destroyed() {

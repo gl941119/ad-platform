@@ -27,7 +27,7 @@
             <advert-item v-for="(advert, _i) in totalAdvertItemDatas" :key="_i"
                 :advert-datas="advert" :system-tiem="sysTime">
             </advert-item>
-            <learn-more v-if="totalAdvertItemDatas.length<30" :type="2" @seemore="learnMoreItem"></learn-more>
+            <learn-more v-if="totalAdvertItemDatas.length<30&&advertItemDatas.length>0" :type="2" @seemore="learnMoreItem"></learn-more>
             <learn-more v-else :type="1" @seemore="toAdvertDetailPage"></learn-more>
         </div>
     </div>
@@ -102,10 +102,15 @@
                         },
                         type: 'get'
                     }).then(res => {
-                        console.log('QueryAdvertInfo_>', res);
+                        // console.log('QueryAdvertInfo_>', res);
                         this.advertItemDatas = res.data;
-                        this.totalAdvertItemDatas.push(...this.advertItemDatas);
-                        resolve();
+                        if(this.advertItemDatas && this.advertItemDatas.length===0){
+                            this.$message({message: '没有更多数据了', type:'warning'})
+                            resolve();
+                        }else{
+                            this.totalAdvertItemDatas.push(...this.advertItemDatas);
+                            resolve();
+                        }
                     })
                 });
             },

@@ -67,6 +67,7 @@
             }
         },
         mounted() {
+            console.log('crowdsaleDatas_>', this.crowdsaleDatas);
             this.handleTime(this.crowdsaleDatas, this.systemTime);
             this.countDown(this.crowdsaleDatas);
         },
