@@ -59,6 +59,7 @@ const en = {
 		getSuccess:'获取成功',
 		certificationSuccess:'认证成功',
 		nicknameEmpty:'昵称不能为空',
+		bindSuccess:'绑定成功',
 	},
 	home:{
 		broadcast:'行情播报',

@@ -190,15 +190,17 @@ const zh = {
 	},
 	purse:{
 		balance:'余额',
-		yue:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额',
-		yue:'这意味着：',
-		yue:'1、ETH钱包地址将可以用于接收基于ERC20协议的平台代币AFDT。',
-		yue:'2、如果您需要投放广告，则需要从本地址向平台充值以便核对',
+		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额',
+		main:'这意味着：',
+		one:'1、ETH钱包地址将可以用于接收基于ERC20协议的平台代币AFDT。',
+		two:'2、如果您需要投放广告，则需要从本地址向平台充值以便核对',
+		eth:'ETH钱包地址',
 	},
 	buttonAll:{
 		confirm:'确定',
 		cancle:'取消',
 		submitVerification:'提交验证',
+		bind:'绑定',
 	},
 	project:{
 		balance:'余额',
