@@ -4,51 +4,51 @@
 			<h3>BRB</h3>
 			<ul class="advertising_revenue_top_item">
 				<li class="advertising_revenue_top_item_li active">{{balance}} BRB</li>
-				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>冻结 1000.61254223 BRB</li>
+				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 BRB</li>
 			</ul>
-			<div class="advertising_revenue_top_money" @click="withdraw()">提现</div>
+			<div class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</div>
 		</div>
 		<!--提現-->
 		<div class="withdraw" v-if="withdrawView">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>可用金额</label><span>1111111111</span></li>
-					<li class="withdraw_item_li"><label>手续费</label><span>11111111</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>1111111111</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>11111111</span></li>
 					<li class="withdraw_item_li">
-						<span>广告收益账户</span><i class="custom-element-icon-zhuan-money">---</i><span>我的钱包</span>
+						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-zhuan-money">---</i><span>{{$t('project.myWallet')}}</span>
 					</li>
-					<li class="withdraw_item_li"><label>提现金额：</label>
-						<el-input placeholder="请输入内容" v-model="input" clearable>
+					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
+						<el-input :placeholder="$t('project.enterMoney')" v-model="input" clearable>
 						</el-input>
 					</li>
-					<li class="withdraw_item_li"><label>交易密码：</label>
-						<el-input placeholder="请输入内容" type="password" v-model="input1" clearable>
+					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
+						<el-input :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="input1" clearable>
 						</el-input>
 					</li>
-					<button class="right_now">提现</button>
+					<button class="right_now">{{$t('project.withdraw')}}</button>
 				</ul>
 			</div>
 		</div>
 		<div class="advertising_revenu_account_flow">
 			<div class="advertising_revenu_account_flow_time">
-				<div class="advertising_revenu_account_flow_title">账户流水</div>
+				<div class="advertising_revenu_account_flow_title">{{$t('accountFlow.accountStatement')}}</div>
 				<div class="advertising_revenu_account_flow_date">
-					<el-date-picker v-model="startTime" type="date" placeholder="开始日期">
+					<el-date-picker v-model="startTime" type="date" :placeholder="$t('accountFlow.startTime')">
 					</el-date-picker>
-					<el-date-picker v-model="endTime" type="date" placeholder="结束日期">
+					<el-date-picker v-model="endTime" type="date" :placeholder="$t('accountFlow.endTime')">
 					</el-date-picker>
-					<button @click="revenueData">sousuo</button>
+					<button @click="revenueData">{{$t('accountFlow.search')}}</button>
 				</div>
 			</div>
 			<el-table border :data="flowData" style="width: 100%">
-				<el-table-column prop="createTime" label="时间">
+				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
-				<el-table-column prop="desc" label="描述" width="300">
+				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
 				</el-table-column>
-				<el-table-column prop="flowType" label="流向">
+				<el-table-column prop="flowType" :label="$t('accountFlow.flowDirection')">
 				</el-table-column>
-				<el-table-column prop="money" label="金额（BRB）">
+				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
 				</el-table-column>
 			</el-table>
 			<div class="advertising_revenu_account_flow_data_pages">
