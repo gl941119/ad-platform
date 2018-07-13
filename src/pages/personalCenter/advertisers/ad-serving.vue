@@ -81,19 +81,23 @@
 				})
 			},
 			changePrice(){
+				var that = this;
 				Request({
 					url: 'ChangePrice',
 					data: {
 						accountId: this.accountId,
-						averagePrice:this.averagePrice,
+						advertPrice:this.form.advertPrice,
 						advertId:this.advertId,
-						conceptPrices:this.form.conceptManageList,
+						conceptManageList:this.form.conceptManageList,
 					},
 					type: 'post',
 					flag: true,
 				}).then(res => {
-					console.log(res);
-					this.dialogFormVisible = false;
+					if(res.success){
+						that.dialogTableVisible = false;
+						this.$message('修改成功');
+						that.queryDetail();
+					}
 				})
 			},
 			handleChange(){
