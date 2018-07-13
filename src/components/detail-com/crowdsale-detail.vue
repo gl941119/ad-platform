@@ -94,7 +94,8 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
-    import ContractInstance from '../../utils/contract.js'; 
+    import ContractInstance from '../../utils/contract.js';
+    import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
@@ -108,6 +109,9 @@
             }
         },
         mounted() {
+            // this.handleContract().then(res => {
+            //     console.log('res---->', res);
+            // })
             this.handleTime(this.detailData, this.systemTime);
             this.countDown(this.detailData);
         },
@@ -162,9 +166,43 @@
                 }, 1000);
             },
             handleContract(){
-                let {contractAbi, contractId} = this.detailData;
-                let instance = new ContractInstance(contractAbi, contractId);
-                
+                return new Promise((resolve, reject) => {
+                    let {contractAbi, contractId} = this.detailData;
+                    let address = '0x48cb60e734e67f0347f830e538916b2aa4f4209a'
+                    let instanceCls = new ContractInstance(ico_abi, address);
+                    let instance;
+                    instanceCls.init().then(res => {
+                        let result = {};
+                        instance = res;
+                        instance.START().then(res => {
+                            // startTime
+                            result.startTime = res;
+                            return instance.DAYS();
+                        }).then(res => {
+                            // sustain days
+                            result.sustainDay = res;
+                            // return instance.ENDTIME();
+                            return;
+                        }).then(res => {
+                            // end time
+                            result.endTime = res;
+                            return instance.raisedAmount();
+                        }).then(res => {
+                            // rasied amount
+                            result.raisedAmount = res;
+                            return instance.CAP();
+                        }).then(res => {
+                            // total
+                            result.total = res;
+                            return instance.RATE();
+                        }).then(res => {
+                            // rate
+                            result.rate = res;
+                            resolve(result);
+                        })
+                    })
+                    
+                });
             },
         },
         destroyed() {
