@@ -1,20 +1,20 @@
 <template>
 	<div class="invite">
 		<div class="invite_top">
-			<h3 class="invite_top_title">邀请用户</h3>
-			<p class="invite_top_code"><span>邀请码：</span>{{inviteCode}}</p>
-			<div class="invite_top_intro">受邀用户今后点击广告创造的价值将会以BRB的形式奖励给您</div>
+			<h3 class="invite_top_title">{{$t('invite.inviteUser')}}</h3>
+			<p class="invite_top_code"><span>{{$t('invite.code')}}：</span>{{inviteCode}}</p>
+			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<div class="invite_data">
-			<div class="invite_data_title">邀请用户</div>
+			<div class="invite_data_title">{{$t('invite.inviteUser')}}</div>
 			<el-table border :data="inviteData" style="width: 100%">
-				<el-table-column prop="createTime" label="邀请时间">
+				<el-table-column prop="createTime" :label="$t('invite.timer')">
 				</el-table-column>
-				<el-table-column prop="email" label="用户账号">
+				<el-table-column prop="email" :label="$t('invite.userAccout')">
 				</el-table-column>
-				<!--<el-table-column prop="province" label="最近登录">
+				<!--<el-table-column prop="province" :label="$t('invite.recently')">
 				</el-table-column>-->
-				<el-table-column prop="earnings" label="分润">
+				<el-table-column prop="earnings" :label="$t('invite.divided')">
 				</el-table-column>
 			</el-table>
 			<div class="invite_data_data_pages">
