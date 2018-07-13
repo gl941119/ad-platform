@@ -16,7 +16,7 @@
 					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>1111111111</span></li>
 					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>11111111</span></li>
 					<li class="withdraw_item_li">
-						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-zhuan-money">---</i><span>我的钱包</span>
+						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-zhuan-money">---</i><span>{{$t('project.myWallet')}}</span>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
 						<el-input :placeholder="$t('project.enterMoney')" v-model="input" clearable>

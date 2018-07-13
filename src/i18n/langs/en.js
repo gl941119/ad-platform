@@ -211,6 +211,7 @@ const en = {
 		withdraw:'提现',
 		recharge:'充值',
 		moneyAccount:'收款账户',
+		enterMoneyAccount:'请输入收款账户',
 		useBalance:'可用余额',
 		freeze:'冻结',
 		handlingFee:'手续费',
@@ -218,6 +219,7 @@ const en = {
 		myWallet:'我的钱包',
 		withdrawal:'提现金额',
 		enterMoney:'请输入金额',
+		notic:'充值金额到账后，相应金额会自动出现在广告主账户中',
 	},
 	accountFlow:{
 		accountStatement:'账户流水',
