@@ -98,7 +98,7 @@
 											<el-input type="password" placeholder="确认新密码" v-model="oncePassword"></el-input>
 										</p>
 										<div style="position: relative;">
-											<el-input placeholder="请输入你的验证码" v-model="codePassword"></el-input>
+											<el-input placeholder="请输入邮箱验证码" v-model="codePassword"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
 												<button class="el-button-getCode_button" @click="getPasswordCode()">获取邮箱验证码</button>
@@ -130,7 +130,7 @@
 											<el-input type="password" placeholder="确认交易密码" v-model="onceSetTradePassword"></el-input>
 										</p>
 										<div style="position: relative;">
-											<el-input placeholder="请输入你的验证码" v-model="codeTradePassword"></el-input>
+											<el-input placeholder="请输入邮箱验证码" v-model="codeTradePassword"></el-input>
 											<div class="el-button-getCode password">
 												<span>|</span>
 												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">获取邮箱验证码</button>
@@ -393,7 +393,7 @@
 						}).then(res => {
 							console.log(res);
 							if(res.success){
-								this.$message('设置交易密码成功');
+								this.$message('设置密码成功');
 								this.oncePassword = '';
 								this.newPassword = '';
 								this.codePassword = '';
@@ -503,8 +503,6 @@
 						}, 1000);
 						if(res.success) {
 							this.$message('获取成功');
-						} else {
-							this.$message('获取失败');
 						}
 					})
 			},
@@ -649,7 +647,7 @@
 					}).then(res => {
 						if(res.success) {
 							this.nickName = '';
-							this.$message('认证成功');
+							this.$message('修改成功');
 						}
 					})
 				} else {

@@ -5,11 +5,10 @@
 		<div class="ad-serving-info">
 			<div class="ad-serving-info-top">
 				<div class="ad-serving-info-top-price">
-					<h5>ppc</h5>
-					<div>当前均价</div>
+					<h5>当前均价</h5>
+					<div>{{averagePrice}}</div>
 					<div>
-						<span>number</span>
-						<el-button type="text" @click="dialogTableVisible = true">调整</el-button>
+						<el-button type="text" v-if="isCheck == 1" @click="dialogTableVisible = true">调整</el-button>
 					</div>
 					<el-dialog title="竞价策略" :visible.sync="dialogTableVisible">
 					  <el-form :model="form">
@@ -58,14 +57,37 @@
 					num1:'',
 					num2:'',
 					num3:'',
-				}
+				},
+				accountId:this.$store.state.id || Cache.getSession('bier_userid'),
+				averagePrice:'',
+				isCheck:'',
 			}
+		},
+		mounted(){
+			this.queryDetail();
 		},
 		methods: {
 			newProject(){
 				this.$router.push({
 					name:'advertisers',
 				})
+			},
+			queryDetail(){
+				Request({
+					url: 'QueryPrice',
+					data: {
+						accountId: this.accountId,
+					},
+					type: 'get',
+					flag: true,
+				}).then(res => {
+					console.log(res);
+					this.averagePrice = res.data.averagePrice;
+					this.isCheck = res.data.isCheck;
+				})
+			},
+			changePrice(){
+				
 			},
 			handleChange(){
 				
