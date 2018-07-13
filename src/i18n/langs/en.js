@@ -53,6 +53,12 @@ const en = {
 		codeEmpty:'验证码不能为空',
 		formatMatch:'信息填写不符合规则',
 		notEmpty:'账号和密码不能为空',
+		setSuccess:'设置密码成功',
+		setTradePassword:'设置交易密码成功',
+		changeSuccess:'修改成功',
+		getSuccess:'获取成功',
+		certificationSuccess:'认证成功',
+		nicknameEmpty:'昵称不能为空',
 	},
 	home:{
 		broadcast:'行情播报',
@@ -116,6 +122,7 @@ const en = {
 		desc:'描述',
 		flowDirection:'流向',
 		amountOfMoney:'金额',
+		freeze:'冻结',
 	},
 	messageCode:{
 		exceptions:'系统异常',

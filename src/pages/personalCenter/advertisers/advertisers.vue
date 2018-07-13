@@ -6,18 +6,18 @@
 			<h5>团队</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>团队名称</label>
-				<el-input placeholder="请输入内容"  v-model="newCrowdfunding.teamName" >
-				</el-input>
+				<input placeholder="请输入内容"  v-model="newCrowdfunding.teamName" >
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>团队联系方式</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamContact">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.teamContact">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>主要成员所在地</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li coreMembers">
 				<label>核心团队成员</label>
@@ -100,24 +100,24 @@
 			<h5>项目情况</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>项目名称</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.proName">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.proName">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>项目简介</label>
-				<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
-				</el-input>
+				<input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>概念</label>
-				<el-input v-model="conceptDatas" placeholder="请输入内容">
-				</el-input>
+				<input v-model="conceptDatas" placeholder="请输入内容">
+				</input>
 				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>技术</label>
-				<el-input v-model="technologyDatas" placeholder="请输入内容">
-				</el-input>
+				<input v-model="technologyDatas" placeholder="请输入内容">
+				</input>
 				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
 			</li>
 		</ul>
@@ -145,18 +145,18 @@
 			<h5>代币信息</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>英文简写</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>中文简写</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>英文全名</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
@@ -172,8 +172,8 @@
 			<h5>相关链接</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>官网</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.website">
-				</el-input>
+				<input placeholder="请输入内容" v-model="newCrowdfunding.website">
+				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>白皮书地址</label>
@@ -252,6 +252,7 @@
 				centerDialogVisible: false,
 				CrowdTeamDialogVisible: false,
 				multipleSelection:[],
+				conceptResultList:[],
 			}
 		},
 		components: {
@@ -271,7 +272,7 @@
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						listConceptManage:this.checkedData,
+						listConceptManage:this.checkedData || this.conceptResultList,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -295,17 +296,23 @@
 				})
 			},
 			saveSubmit() {
+				var concept = [];
+				if(this.checkedData){
+					concept = this.checkedData;
+				}else{
+					concept = this.conceptResultList;
+				}
 				Request({
 					url: 'ChangeProject',
 					data: {
-						accountId: this.newCrowdfunding.accountId,
 						id: this.newCrowdfunding.id,
+						accountId: this.newCrowdfunding.accountId,
 						teamName: this.newCrowdfunding.teamName,
 						teamContact: this.newCrowdfunding.teamContact,
 						teamLocation: this.newCrowdfunding.teamLocation,
 						proName: this.newCrowdfunding.proName,
 						proDesc: this.newCrowdfunding.proDesc,
-						listConceptManage:this.checkedData,
+						listConceptManage:concept,
 						technology1: this.newCrowdfunding.technology1,
 						technology2: this.newCrowdfunding.technology2,
 						website: this.newCrowdfunding.website,
@@ -322,9 +329,9 @@
 					type: 'post',
 					flag: true,
 				}).then(res => {
-					console.log(res);
-					if(res.success == 1) {
-						this.$message('添加成功');
+					if(res.success) {
+						this.queryDetails();
+						this.$message('修改成功');
 					} 
 				})
 			},
@@ -352,6 +359,7 @@
 							arr.push(item.name);
 						})
 					}
+					this.conceptResultList = res.data.conceptResultList;
 					this.conceptDatas = arr.join('-')
 					this.technologyDatas = technologyArr.join('-');
 					if(res.data.websiteResultList){
@@ -573,6 +581,18 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
+	.newCrowdfunding_item{
+		&_li{
+			color: #606266;
+			input{
+				width:368px;
+				height:40px;
+				border-radius:4px;
+				border:1px solid rgba(220,223,230,1);
+				padding: 0 5px;
+			}
+		}
+	}
 	.avatar-uploader .el-upload {
 		border: 1px dashed #d9d9d9;
 		border-radius: 6px;
