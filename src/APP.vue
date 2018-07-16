@@ -4,6 +4,7 @@
         <header-com></header-com>
         <router-view></router-view>
         <custom-share></custom-share>
+        <instant-buy></instant-buy>
     </div>
 </template>
 

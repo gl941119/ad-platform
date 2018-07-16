@@ -16,24 +16,78 @@
                 </div>
                 <div>
                     <span>本轮众筹剩余时间：</span>
-                    <span>{{immediateBuyDatas.remainTime}}</span>
+                    <span>{{remainTime}}</span>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>钱包地址：</span>
+                    <span>{{immediateBuyDatas.contractId}}</span>
+                </div>
+                <div>
+                    <span>二维码：</span>
+                    <span><img :src="'data:image/png;base64, ' + immediateBuyDatas.qrCode"></span>
                 </div>
             </div>
         </div>
     </el-dialog>
 </template>
 <script>
+import getDetail from '../../service/getData.js';
+import Utils from '../../utils/util.js';
 export default {
-    props:['immediateBuyDatas'],
     data(){
-        return {}
+        return {
+            immediateBuyDatas: {},
+            remainTime: undefined,
+            utils: new Utils(),
+            timer: null,
+        }
     },
     computed: {
         instantBuyVisible: {
-            get(){},
-            set(){}
+            get(){
+                return this.$store.state.instantBuyVisible;
+            },
+            set(){
+                this.$store.commit('setInstantBuyVisible', false);
+            }
+        },
+        id(){
+            return this.$store.state.instantBuyDataId;
+        },
+        change(){
+            return this.$store.state.change;
         }
     },
+    watch: {
+        change(newVal){
+            getDetail(this.id).then(res => {
+                console.log('get getDetail _>', res);
+                let {startTime, endTime, price, contractId, qrCode, systemTime} = res;
+                this.immediateBuyDatas = {startTime, endTime, price, contractId, qrCode};
+                console.log('get getDetail data_>', this.immediateBuyDatas);
+                this.handleTime(startTime, endTime, systemTime)
+                this.timer = setInterval(() => {
+                    systemTime += 1000;
+                    this.handleTime(startTime, endTime, systemTime);
+                }, 1000);
+            })
+        },
+        instantBuyVisible(val, old){
+            console.log(' newval_>', val, old);
+            if(false === val){
+                this.timer && clearInterval(this.timer);
+            }
+        }
+    },
+    methods: {
+        handleTime(startTime, endTime, systemTime){
+            let {status, dayArr} = this.utils.handleTime({startTime, endTime}, systemTime);
+            console.log('remain time_>', status, dayArr);
+            this.remainTime = `${dayArr[0]} 天 ${dayArr[1]} 时 ${dayArr[2]} 分 ${dayArr[3]} 秒`;
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

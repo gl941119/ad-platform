@@ -51,7 +51,7 @@
                     loop: true,
                     slidesPerView: 4,
                     loopedSlides: 10,
-                    simulateTouch: true,
+                    simulateTouch: false,
                     init: false,
                 },
                 bullsData: [],

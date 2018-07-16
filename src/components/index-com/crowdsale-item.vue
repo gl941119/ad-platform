@@ -37,7 +37,7 @@
                     <div class="crowdsale-item-list-right-content-divide"></div>
                     <div>{{remainTime}}</div>
                 </div>
-                <div v-show="status===2" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
+                <div @click="instantBuy" v-show="status===2" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
                     <div>{{showText}}</div>
                     <div class="crowdsale-item-list-right-content-divide"></div>
                     <div>{{remainTime}}</div>
@@ -94,9 +94,14 @@
             countDown(data) {
                 let sysTime = this.systemTime;
                 this.timer = setInterval(() => {
-                    this.handleTime(data, sysTime);
                     sysTime += 1000;
+                    this.handleTime(data, sysTime);
                 }, 1000);
+            },
+            instantBuy(){
+                this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
+                this.$store.commit('setInstantBuyVisible', true);
+                this.$store.commit('valueChange');
             },
         },
         destroyed() {
@@ -180,6 +185,10 @@
                     color: #fff;
                     border-radius: 5px;
                     font-size: 18px;
+                    cursor: pointer;
+                    &:last-child{
+                        cursor: auto;
+                    }
                     &-divide {
                         width: 63px;
                         height: 1px;

@@ -11,6 +11,9 @@ export default new Vuex.Store({
         token: undefined,
         dialogVisible: false, // share component visible
         conceptId: 0, // advert concept id
+        instantBuyVisible: false, // buy dialog visible
+        instantBuyDataId: undefined,
+        change: false,
 		slangChange: 'en',
 		heardUrl:'',
 	},
@@ -32,6 +35,15 @@ export default new Vuex.Store({
         },
         setConceptId(state, val) {
             state.conceptId = val;
+        },
+        setInstantBuyVisible(state, val) {
+            state.instantBuyVisible = val;
+        },
+        saveInstantBuyDataId(state, id) {
+            state.instantBuyDataId = id;
+        },
+        valueChange(state) {
+            state.change = !state.change;
         },
 		setHeardUrl(state, val) {
 			state.heardUrl = val;

@@ -136,7 +136,7 @@ export default class Util {
      * 剩余时间和状态
      * @param {Object} data {startTime: timestamp, endTime: timestamp}
      * @param {Date} systemTime timestamp
-     * @returns {Object} { status: 0default/1->未开始/2->正在开始/3->已结束, remainTime: String }
+     * @returns {Object} { status: 0default/1->未开始/2->正在开始/3->已结束, remainTime: String, dayArr: Array }
      */
     handleTime(data, systemTime) {
         let {
@@ -148,16 +148,17 @@ export default class Util {
         let status = endDiff < 0 ? 3 : 0;
         let remainTime = undefined;
         // console.log('diff___>', startDiff, endDiff, new Date(startTime), new Date(systemTime), new Date(endTime));
+        let dayArr = [];
         if (startDiff < 0) {
             status = 1;
-            let dayArr = this.formatDuring(-startDiff);
+            dayArr = this.formatDuring(-startDiff);
             remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
         } else if (startDiff > 0 && endDiff > 0) {
-            let dayArr = this.formatDuring(endDiff);
+            dayArr = this.formatDuring(endDiff);
             status = 2;
             remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
         }
-        return {status, remainTime}
+        return {status, remainTime, dayArr}
     }
 
     randomNum(min, max) {

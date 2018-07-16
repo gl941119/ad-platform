@@ -161,8 +161,8 @@
             countDown(data) {
                 let sysTime = this.systemTime;
                 this.timer = setInterval(() => {
-                    this.handleTime(data, sysTime);
                     sysTime += 1000;
+                    this.handleTime(data, sysTime);
                 }, 1000);
             },
             handleContract(){

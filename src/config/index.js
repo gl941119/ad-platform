@@ -7,6 +7,8 @@ export default {
     QueryAdvertDetailInfo: 'blockchainadvert/advertservice/secondary',
     QueryAdvertInfoByCId: 'blockchainadvert/advertservice/secondPage',
     ClickAdvertToProfit: 'blockchainadvert/share/click-advert',
+    QueryCrowdDataById: 'blockchainadvert/crowd-funding/id',
+    GetQrCode: 'blockchainadvert/common/createRrCode',
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',
