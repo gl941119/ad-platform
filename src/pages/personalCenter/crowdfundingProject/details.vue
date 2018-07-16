@@ -1,129 +1,121 @@
 <template>
 	<div class="project_review_details">
 		<div class="project_review_details_team">
-			<div class="project_review_details_title">团队</div>
+			<div class="project_review_details_title">{{$t('team.teamInfo')}}</div>
 			<ul class="project_review_details_team_item">
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">团队名称</label>
+					<label class="project_review_details_item_li_label">{{$t('team.teamName')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.teamName"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">团队联系方式</label>
+					<label class="project_review_details_item_li_label">{{$t('team.teamPhone')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.teamContact"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">主要成员所在地</label>
+					<label class="project_review_details_item_li_label">{{$t('team.teamAddress')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.teamLocation"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">核心团队成员</label>
-					<el-button type="text" @click="queryCore">点击打开核心团队成员</el-button>
+					<label class="project_review_details_item_li_label">{{$t('team.coreMember')}}</label>
+					<el-button type="text" @click="queryCore">{{$t('team.openCoreMember')}}</el-button>
 				</li>
 				<div class="project_review_details_item_li_info">
-					<el-dialog title="核心团队成员" :visible.sync="centerDialogVisible" size="small">
+					<el-dialog :title="$t('team.coreMember')" :visible.sync="centerDialogVisible" size="small">
 						<el-table :data="coreTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 							<el-table-column type="selection" width="55">
 							</el-table-column>
-							<el-table-column property="year" align="center" label="全名">
+							<el-table-column property="year" align="center" :label="$t('team.name')">
 								<template slot-scope="scope">
 									<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
 								</template>
 							</el-table-column>
-							<el-table-column property="name" align="center" label="头衔" width="200">
+							<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 								<template slot-scope="scope">
 									<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
 								</template>
 							</el-table-column>
-							<el-table-column property="address" align="center" label="简介">
+							<el-table-column property="address" align="center" :label="$t('team.desc')">
 								<template slot-scope="scope">
 									<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
 								</template>
 							</el-table-column>
-							<el-table-column property="address" align="center" label="操作">
+							<el-table-column property="address" align="center" :label="$t('team.operating')">
 								<template slot-scope="scope">
-									<el-button :disabled="disabled" @click="addCore">添加</el-button>
-									<el-button :disabled="disabled" @click="deletedCore(scope.$index)">删除</el-button>
+									<i @click="addCore" class="custom-element-icon-jia-copy"></i>
+									<i @click="deletedCore(scope.$index)" class="custom-element-icon-jian1"></i>
 								</template>
 							</el-table-column>
 						</el-table>
 						<div slot="footer" class="dialog-footer">
-							<el-button :disabled="disabled" @click="saveLink">保存</el-button>
-							<el-button :disabled="disabled" @click="addLink">添加</el-button>
-							<el-button :disabled="disabled" @click="deletedLink">删除</el-button>
+							<el-button :disabled="disabled" @click="saveLink">{{$t('buttonAll.save')}}</el-button>
+							<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
+							<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
 						</div>
 					</el-dialog>
 				</div>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">顾问团队</label>
-					<el-button type="text" @click="queryConsultant">点击打开顾问团队成员</el-button>
+					<label class="project_review_details_item_li_label">{{$t('team.consultant')}}</label>
+					<el-button type="text" @click="queryConsultant">{{$t('team.openConsultant')}}</el-button>
 				</li>
 				<div class="project_review_details_item_li_info">
-					<!--<el-table :show-header=false border :data="details.CrowdTeamConsultantsResult" style="width: 100%">
-						<el-table-column prop="name" label="日期" width="180">
-						</el-table-column>
-						<el-table-column prop="title" label="姓名" width="180">
-						</el-table-column>
-						<el-table-column prop="desc" label="地址">
-						</el-table-column>
-					</el-table>-->
-					<el-dialog title="顾问团队成员" :visible.sync="CrowdTeamDialogVisible" size="small">
+					<el-dialog :title="$t('team.consultant')" :visible.sync="CrowdTeamDialogVisible" size="small">
 						<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 							<el-table-column type="selection" width="55">
 							</el-table-column>
-							<el-table-column property="year" align="center" label="全名">
+							<el-table-column property="year" align="center" :label="$t('team.name')">
 								<template slot-scope="scope">
 									<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
 								</template>
 							</el-table-column>
-							<el-table-column property="name" align="center" label="头衔" width="200">
+							<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 								<template slot-scope="scope">
 									<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
 								</template>
 							</el-table-column>
-							<el-table-column property="address" align="center" label="简介">
+							<el-table-column property="address" align="center" :label="$t('team.desc')">
 								<template slot-scope="scope">
 									<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
 								</template>
 							</el-table-column>
-							<el-table-column property="address" align="center" label="操作">
+							<el-table-column property="address" align="center" :label="$t('team.operating')">
 								<template slot-scope="scope">
-									<el-button :disabled="disabled" @click="addConsultant">添加</el-button>
-									<el-button :disabled="disabled" @click="deletedConsultant(scope.$index)">删除</el-button>
+									<i @click="addConsultant" class="custom-element-icon-jia-copy"></i>
+									<i @click="deletedConsultant(scope.$index)" class="custom-element-icon-jian1"></i>
 								</template>
 							</el-table-column>
 						</el-table>
 						<div slot="footer" class="dialog-footer">
-							<el-button :disabled="disabled" @click="saveLinkConsultant">保存</el-button>
-							<el-button :disabled="disabled" @click="addLinkConsultant">添加</el-button>
-							<el-button :disabled="disabled" @click="deletedLinkConsultant">删除</el-button>
+							<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
+							<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
+							<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
 						</div>
 					</el-dialog>
 				</div>
 			</ul>
 		</div>
 		<div class="project_review_details_team">
-			<div class="project_review_details_title">项目情况</div>
+			<div class="project_review_details_title">{{$t('projectInfo.info')}}</div>
 			<ul class="project_review_details_item">
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">项目名称</label>
+					<label class="project_review_details_item_li_label">{{$t('projectInfo.projectName')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.proName"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">项目简介</label>
+					<label class="project_review_details_item_li_label">{{$t('projectInfo.projectDesc')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.proDesc"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">概念</label>
+					<label class="project_review_details_item_li_label">{{$t('projectInfo.concept')}}</label>
 					<div class="project_review_details_item_li_intro" style="position: relative;">
-						<el-input v-model="conceptDatas" :disabled="disabled" placeholder="请输入内容">
+						<el-input v-model="conceptDatas" :disabled="disabled">
 						</el-input>
 						<i class="el-icon-circle-plus" v-if="!disabled" style="position: absolute;top: 14px;right: 15px;" @click="conceptFun"></i>
 					</div>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">技术</label>
+					<label class="project_review_details_item_li_label">{{$t('projectInfo.technology')}}</label>
 					<div class="project_review_details_item_li_intro" style="position: relative;">
-						<el-input v-model="technologyDatas" :disabled="disabled" placeholder="请输入内容">
+						<el-input v-model="technologyDatas" :disabled="disabled">
 						</el-input>
 						<i class="el-icon-circle-plus" v-if="!disabled" style="position: absolute;top: 14px;right: 15px;" @click="technologyFun"></i>
 					</div>
@@ -151,31 +143,30 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input placeholder="请输入技术" v-model="details.technology1">
+				<el-input :placeholder="$t('projectInfo.enterTechnology1')" v-model="details.technology1">
 				</el-input>
-				<el-input placeholder="请输入技术" v-model="details.technology2">
+				<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="details.technology2">
 				</el-input>
-				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">好的</button>
+				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
 			</div>
 		</div>
 		<div class="project_review_details_team">
-			<div class="project_review_details_title">代币信息</div>
+			<div class="project_review_details_title">{{$t('tokenInfo.token')}}</div>
 			<ul class="project_review_details_item">
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">英文简写</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.english')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.shotEnName"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">英文全名</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.fullEnName"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">中文简写</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.chinese')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.shotCnName"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.englishName')}}</label>
+					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.fullEnName"></el-input>
+				</li>
+				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">logo</label>
-					<!--<span><img style="width: 50px;height: 50px;" :src="details.logo"/></span>-->
 					<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
 						<img v-if="details.logo" :src="details.logo" class="avatar">
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>

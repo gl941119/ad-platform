@@ -1,31 +1,31 @@
 <template>
 	<div class="my_crowdfunding">
 		<div class="advertising_revenu_account_flow">
-			<p class="my_crowdfunding_title">我发起的众筹</p>
-			<router-link tag="p" :to="{ name: 'newCrowdfunding'}" class="my_crowdfunding_title_intro">申请新的众筹</router-link>
+			<p class="my_crowdfunding_title">{{$t('initiated.iInitiated')}}</p>
+			<router-link tag="p" :to="{ name: 'newCrowdfunding'}" class="my_crowdfunding_title_intro">{{$t('initiated.newCrowd')}}</router-link>
 			<el-table border :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort="{prop: 'date', order: 'descending'}">
-				<el-table-column prop="shotEnName" label="Token名称">
+				<el-table-column prop="shotEnName" :label="$t('initiated.token')">
 				</el-table-column>
-				<el-table-column prop="proDesc" label="描述" width="300">
+				<el-table-column prop="proDesc" :label="$t('initiated.desc')" width="300">
 				</el-table-column>
-				<el-table-column label="硬顶/软顶">
+				<el-table-column :label="$t('initiated.lowTop')">
 					<template slot-scope="scope">
 						{{scope.row.lowLimit}}/{{scope.row.topLimit}}
 					</template>
 				</el-table-column>
-				<el-table-column label="完成度">
+				<el-table-column :label="$t('initiated.degree')">
 					<template slot-scope="scope">
 						{{scope.row.totalCrowdfund/scope.row.lowLimit | filter}}-{{scope.row.lowLimit}}
 					</template>
 				</el-table-column>
-				<el-table-column prop="city" label="状态">
+				<el-table-column prop="city" :label="$t('initiated.status')">
 					<template slot-scope="scope">
-						<div v-if="scope.row.isCheck==0">待审核</div>
-						<div v-if="scope.row.isCheck==1">已上架</div>
-						<div v-if="scope.row.isCheck==2">审核未通过-<span @click="openDetail(scope.row.id,1)">点击修改</span></div>
+						<div v-if="scope.row.isCheck==0">{{$t('initiated.review')}}</div>
+						<div v-if="scope.row.isCheck==1">{{$t('initiated.over')}}</div>
+						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}-<span @click="openDetail(scope.row.id,1)">{{$t('buttonAll.change')}}</span></div>
 					</template>
 				</el-table-column>
-				<el-table-column prop="updateTime" label="状态更新时间">
+				<el-table-column prop="updateTime" :label="$t('initiated.statusUpdate')">
 				</el-table-column>
 			</el-table>
 			<div class="my_crowdfunding_data_pages">

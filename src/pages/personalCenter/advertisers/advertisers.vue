@@ -1,122 +1,122 @@
 <template>
 	<div class="newCrowdfunding">
-		<h3>项目内容</h3>
-		<p>请尽可能详细得填写相关资料，以便投资委员会合理地评估贵项目（评估期间双方都应严格遵守保密义务）</p>
+		<h3>{{$t('projectNotic.title')}}</h3>
+		<p>{{$t('projectNotic.notic')}}</p>
 		<ul class="newCrowdfunding_item">
-			<h5>团队</h5>
+			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>团队名称</label>
-				<input placeholder="请输入内容"  v-model="newCrowdfunding.teamName" >
+				<label>{{$t('team.teamName')}}</label>
+				<input :placeholder="$t('team.enterTeamName')" :disabled="disabled"  v-model="newCrowdfunding.teamName" >
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>团队联系方式</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.teamContact">
+				<label>{{$t('team.teamPhone')}}</label>
+				<input :placeholder="$t('team.enterTeamPhone')" :disabled="disabled" v-model="newCrowdfunding.teamContact">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>主要成员所在地</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation">
+				<label>{{$t('team.teamAddress')}}</label>
+				<input :placeholder="$t('team.enterTeamAddress')" :disabled="disabled" v-model="newCrowdfunding.teamLocation">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li coreMembers">
-				<label>核心团队成员</label>
-				<el-button type="text" @click="queryCore">点击打开核心团队成员</el-button>
+				<label>{{$t('team.coreMember')}}</label>
+				<el-button type="text" @click="queryCore">{{$t('team.openCoreMember')}}</el-button>
 			</li>
 			<div>
-				<el-dialog title="核心团队成员" :visible.sync="centerDialogVisible" size="small">
+				<el-dialog :title="$t('team.coreMember')" :visible.sync="centerDialogVisible" size="small">
 					<el-table :data="coreTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 						<el-table-column type="selection" width="55">
 						</el-table-column>
-						<el-table-column property="year" align="center" label="全名">
+						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<el-input  v-model="scope.row.name"></el-input>
+								<el-input :placeholder="$t('team.enterName')" v-model="scope.row.name"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="name" align="center" label="头衔" width="200">
+						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<el-input  v-model="scope.row.title"></el-input>
+								<el-input :placeholder="$t('team.enterTitle')" v-model="scope.row.title"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" label="简介">
+						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<el-input  v-model="scope.row.desc"></el-input>
+								<el-input :placeholder="$t('team.enterDesc')" v-model="scope.row.desc"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" label="操作">
+						<el-table-column property="address" align="center" :label="$t('team.operating')">
 							<template slot-scope="scope">
-								<el-button  @click="addCore">添加</el-button>
-								<el-button  @click="deletedCore(scope.$index)">删除</el-button>
+								<i @click="addCore" class="custom-element-icon-jia-copy"></i>
+								<i @click="deletedCore(scope.$index)" class="custom-element-icon-jian1"></i>
 							</template>
 						</el-table-column>
 					</el-table>
 					<div slot="footer" class="dialog-footer">
-						<el-button  @click="saveLink">保存</el-button>
-						<el-button  @click="addLink">添加</el-button>
-						<el-button  @click="deletedLink">删除</el-button>
+						<el-button :disabled="disabled" @click="saveLink">{{$t('buttonAll.save')}}</el-button>
+						<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
+						<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
 					</div>
 				</el-dialog>
 			</div>
 			<li class="newCrowdfunding_item_li">
-				<label>顾问团队</label>
-				<el-button type="text" @click="queryConsultant">点击打开顾问团队成员</el-button>
+				<label>{{$t('team.consultant')}}</label>
+				<el-button type="text" @click="queryConsultant">{{$t('team.openConsultant')}}</el-button>
 			</li>
 			<div>
-				<el-dialog title="顾问团队成员" :visible.sync="CrowdTeamDialogVisible" size="small">
-						<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
-							<el-table-column type="selection" width="55">
-							</el-table-column>
-							<el-table-column property="year" align="center" label="全名">
-								<template slot-scope="scope">
-									<el-input  v-model="scope.row.name"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="name" align="center" label="头衔" width="200">
-								<template slot-scope="scope">
-									<el-input  v-model="scope.row.title"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="address" align="center" label="简介">
-								<template slot-scope="scope">
-									<el-input  v-model="scope.row.desc"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="address" align="center" label="操作">
-								<template slot-scope="scope">
-									<el-button  @click="addConsultant">添加</el-button>
-									<el-button  @click="deletedConsultant(scope.$index)">删除</el-button>
-								</template>
-							</el-table-column>
-						</el-table>
-						<div slot="footer" class="dialog-footer">
-							<el-button  @click="saveLinkConsultant">保存</el-button>
-							<el-button  @click="addLinkConsultant">添加</el-button>
-							<el-button  @click="deletedLinkConsultant">删除</el-button>
-						</div>
-					</el-dialog>
+				<el-dialog :title="$t('team.consultant')" :visible.sync="CrowdTeamDialogVisible" size="small">
+					<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+						<el-table-column type="selection" width="55">
+						</el-table-column>
+						<el-table-column property="year" align="center" :label="$t('team.name')">
+							<template slot-scope="scope">
+								<el-input :placeholder="$t('team.enterName')" v-model="scope.row.name"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+							<template slot-scope="scope">
+								<el-input :placeholder="$t('team.enterTitle')" v-model="scope.row.title"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" :label="$t('team.desc')">
+							<template slot-scope="scope">
+								<el-input :placeholder="$t('team.enterDesc')" v-model="scope.row.desc"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" :label="$t('team.operating')">
+							<template slot-scope="scope">
+								<i @click="addConsultant" class="custom-element-icon-jia-copy"></i>
+								<i @click="deletedConsultant(scope.$index)" class="custom-element-icon-jian1"></i>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div slot="footer" class="dialog-footer">
+						<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
+						<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
+						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
+					</div>
+				</el-dialog>
 			</div>
 		</ul>
 		<ul class="newCrowdfunding_item">
-			<h5>项目情况</h5>
+			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>项目名称</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.proName">
+				<label>{{$t('projectInfo.projectName')}}</label>
+				<input :placeholder="$t('projectInfo.enterProjectName')" :disabled="disabled" v-model="newCrowdfunding.proName">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>项目简介</label>
-				<input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
+				<label>{{$t('projectInfo.projectDesc')}}</label>
+				<input :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :disabled="disabled" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
-				<label>概念</label>
-				<input v-model="conceptDatas" placeholder="请输入内容">
+				<label>{{$t('projectInfo.concept')}}</label>
+				<input v-model="conceptDatas" :disabled="disabled">
 				</input>
 				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
-				<label>技术</label>
-				<input v-model="technologyDatas" placeholder="请输入内容">
+				<label>{{$t('projectInfo.technology')}}</label>
+				<input v-model="technologyDatas" :disabled="disabled">
 				</input>
 				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
 			</li>
@@ -134,28 +134,28 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology1">
+				<el-input :placeholder="$t('projectInfo.enterTechnology1')" :disabled="disabled" v-model="newCrowdfunding.technology1">
 				</el-input>
-				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology2">
+				<el-input :placeholder="$t('projectInfo.enterTechnology2')" :disabled="disabled" v-model="newCrowdfunding.technology2">
 				</el-input>
-				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">好的</button>
+				<el-button class="right_now" type="text" style=";position:absolute;top: 278px;" @click="technologyFun">{{$t('buttonAll.confirm')}}</el-button>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
-			<h5>代币信息</h5>
+			<h5>{{$t('tokenInfo.tokenIntro')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>英文简写</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName">
+				<label>{{$t('tokenInfo.english')}}</label>
+				<input :placeholder="$t('tokenInfo.enterEnglish')" :disabled="disabled" v-model="newCrowdfunding.shotEnName">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>中文简写</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName">
+				<label>{{$t('tokenInfo.chinese')}}</label>
+				<input :placeholder="$t('tokenInfo.enterChinese')" :disabled="disabled" v-model="newCrowdfunding.shotCnName">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>英文全名</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName">
+				<label>{{$t('tokenInfo.englishName')}}</label>
+				<input :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -169,40 +169,26 @@
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
-			<h5>相关链接</h5>
+			<h5>{{$t('aboutLink.linkInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>官网</label>
-				<input placeholder="请输入内容" v-model="newCrowdfunding.website">
+				<label>{{$t('aboutLink.website')}}</label>
+				<input :placeholder="$t('aboutLink.enterWebsite')" :disabled="disabled" v-model="newCrowdfunding.website">
 				</input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>白皮书地址</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper">
+				<label>{{$t('aboutLink.whitePaper')}}</label>
+				<el-input :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper">
 				</el-input>
 			</li>
-			<!--<div  v-for="(item, index) in websites" :key="index">
-				<label><el-input placeholder="自定义站点名" v-model="websites[index].websiteName" >
-				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="websites[index].websiteAddress">
-				</el-input>
-			</div>-->
 			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
-				<label><el-input placeholder="自定义站点名" v-model="websites[index].websiteName" >
+				<label><el-input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="websites[index].websiteName" >
 				</el-input></label>
-				<el-input placeholder="自定义站点地址" v-model="websites[index].websiteAddress">
+				<el-input :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress">
 				</el-input>
 			</li>
-			<!--<li class="newCrowdfunding_item_li" v-for="(item, index) in websitesSubmit" :key="index">
-				<label class="project_review_details_item_li_label">
-					<el-input placeholder="自定义站点名" v-model="websitesSubmit[index].websiteName" >
-					</el-input>
-				</label>
-				<el-input placeholder="自定义站点地址" v-model="websitesSubmit[index].websiteAddress">
-				</el-input>
-			</li>-->
 		</ul>
-		<button @click="submit">提交</button>
-		<button @click="saveSubmit">保存修改</button>
+		<button v-if="value == -1" @click="submit">{{$t('buttonAll.submits')}}</button>
+		<button v-if="value == 2" @click="saveSubmit">{{$t('buttonAll.saveChange')}}</button>
 	</div>
 </template>
 
@@ -259,13 +245,24 @@
 				CrowdTeamDialogVisible: false,
 				multipleSelection:[],
 				conceptResultList:[],
+				value:this.$route.params.value,
+				disabled:false,
 			}
 		},
 		components: {
 			conceptCom,
 		},
 		mounted(){
-			this.queryDetails();
+			var value = this.$route.params.value;
+			if(value == 1){
+				this.queryDetails();
+				this.disabled = false;
+			}else if(value == 2){
+				this.disabled = true;
+				this.queryDetails();
+			}else if(value == 0){
+				this.disabled = false;
+			}
 		},
 		methods: {
 			submit() {
@@ -383,17 +380,20 @@
 				})
 			},
 			queryCore() {
-				Request({
-					url: 'QueryAdCoreMember',
-					data: {
-						advertId: this.newCrowdfunding.id
-					},
-					type: 'get',
-					flag:true,
-				}).then(res => {
-					this.coreTeam = res.data;
-					this.centerDialogVisible = true;
-				})
+				var value = this.$route.params.value;
+				this.centerDialogVisible = true;
+				if(value == 1){
+					Request({
+						url: 'QueryAdCoreMember',
+						data: {
+							advertId: this.newCrowdfunding.id
+						},
+						type: 'get',
+						flag:true,
+					}).then(res => {
+						this.coreTeam = res.data;
+					})
+				}
 			},
 			saveLink() {
 				var id = this.$route.params.id;
@@ -453,17 +453,20 @@
 				})
 			},
 			queryConsultant() {
-				Request({
-					url: 'QueryAdConsultant',
-					data: {
-						advertId: this.newCrowdfunding.id,
-					},
-					type: 'get',
-					flag:true,
-				}).then(res => {
-					this.consultantTeam = res.data;
-					this.CrowdTeamDialogVisible = true;
-				})
+				var value = this.$route.params.value;
+				if(value == 1){
+					Request({
+						url: 'QueryAdConsultant',
+						data: {
+							advertId: this.newCrowdfunding.id,
+						},
+						type: 'get',
+						flag:true,
+					}).then(res => {
+						this.consultantTeam = res.data;
+					})
+				}
+				this.CrowdTeamDialogVisible = true;
 			},
 			addLinkConsultant() {
 				var id = this.$route.params.id;

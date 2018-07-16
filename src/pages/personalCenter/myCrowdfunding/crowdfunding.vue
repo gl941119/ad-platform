@@ -1,18 +1,18 @@
 <template>
 	<div class="my_crowdfunding">
 		<div class="advertising_revenu_account_flow">
-			<p class="my_crowdfunding_title">我参与的众筹</p>
-			<p class="my_crowdfunding_title_intro">所有众筹成功后相应的币会直接充值到您的BierWallet中，未成功的相关款项会原路返回</p>
+			<p class="my_crowdfunding_title">{{$t('personal.myCrowdfunding')}}</p>
+			<p class="my_crowdfunding_title_intro">{{$t('projectList.notic')}}</p>
 			<el-table border :data="crowdfundingData" style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
-				<el-table-column prop="shotEnName" label="Token名称">
+				<el-table-column prop="shotEnName" :label="$t('projectList.tokenName')">
 				</el-table-column>
-				<el-table-column prop="proDesc" label="描述" width="300">
+				<el-table-column prop="proDesc" :label="$t('projectList.desc')" width="300">
 				</el-table-column>
-				<el-table-column prop="price" sortable label="支付价格">
+				<el-table-column prop="price" sortable :label="$t('projectList.price')">
 				</el-table-column>
-				<el-table-column prop="status" label="状态">
+				<el-table-column prop="status" :label="$t('projectList.status')">
 				</el-table-column>
-				<el-table-column prop="updateTime" label="状态更新时间">
+				<el-table-column prop="updateTime" :label="$t('projectList.updateTime')">
 				</el-table-column>
 			</el-table>
 			<div class="my_crowdfunding_data_pages">
