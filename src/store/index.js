@@ -38,7 +38,6 @@ export default new Vuex.Store({
 		},
 		setLanguage(state, val) {
 			state.slangChange = val;
-			console.log(val)
         },
 	},
 });

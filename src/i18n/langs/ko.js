@@ -1,18 +1,18 @@
-﻿import enLocale from './enE'
-const en = {
+﻿import zhLocale from './zh-CN'
+const zh = {
 	header: {
-		home: 'Home',
+		home: '首页',
 		daico:'DAICO',
-		project: 'Project',
+		project: '项目',
 		medium:'媒体',
 		sunday:'周日狂欢夜',
 		bierTalk:'BierTalk',
-		login:'LogIn',
-		register:'Out',
+		login:'登 录',
+		register:'注 册',
 		help:'帮助',
 	},
 	login:{
-		login:'登录',
+		login:'登 录',
 		userLogin:'用户登录',
 		account:'账号',
 		password:'密码',
@@ -70,10 +70,10 @@ const en = {
 		begin:'即将开始',
 		time:'剩余时间',
 		number:'指数',
-		immediately:'Buy Now!',
+		immediately:'立即抢购',
 		over:'已结束',
-		buy:'Buy It',
-		whitePaper:'WhitePaper',
+		buy:'去交易',
+		whitePaper:'白皮书',
 		chName:'中文名',
 		readMore:'查看更多',
 		learnMore:'了解更多',
@@ -101,7 +101,7 @@ const en = {
 		concept:'概念',
 		technology:'技术',
 		issuance:'发行',
-		issueNumber:'本次发行数量',
+		issueNumber:'本轮发行数量',
 		crowdPrice:'众筹价格',
 		startTime:'抢购开始时间',
 		endTime:'抢购结束时间',
@@ -183,7 +183,7 @@ const en = {
 		changeTradePassword:'更改交易密码',
 		enterTradePassword:'请输入交易密码',
 	},
-	personal:{
+	personal:{//个人中心
 		purse:'钱包',
 		revenue:'广告收益账户',
 		main:'广告主账户',
@@ -200,7 +200,7 @@ const en = {
 		medium:'媒体',
 		loginOut:'退出登录',
 	},
-	purse:{
+	purse:{//钱包
 		balance:'余额',
 		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额',
 		main:'这意味着：',
@@ -221,7 +221,7 @@ const en = {
 		submits:'提交',
 		saveChange:'保存修改',
 	},
-	initiated:{
+	initiated:{//我发起的众筹
 		iInitiated:'我发起的众筹',
 		token:'Token名称',
 		desc:'描述',
@@ -403,6 +403,6 @@ const en = {
 		notApplyAgain:'您已经存在广告，无法再次申请',
 		loginInvalid:'登录失效，请重新登录',
 	},
-	...enLocale
+	...zhLocale
 };
-export default en
+export default zh
