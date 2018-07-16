@@ -26,9 +26,9 @@
 						<a href="javascript:;" @click="switchLang()" v-if="'en' == $i18n.locale">EN</a>
 						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>-->
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;">{{$t('header.bierTalk')}}</a><span>|</span></div>
+						<a href="javascript:;"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;">{{$t('header.help')}}</a><span>|</span></div>
+						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
 						<a v-if="!userName" @click="toLogin" href="javascript:;">{{$t('header.login')}}</a>
 						<a v-if="userName" @click="toPersonCenter" href="javascript:;">{{userName}}</a>
