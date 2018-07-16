@@ -79,6 +79,7 @@ Vue.use(Aside);
 Vue.use(Main);
 Vue.use(Footer);
 Vue.use(Collapse);
+Vue.use(Loading.directive);
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$confirm = MessageBox.confirm;

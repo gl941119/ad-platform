@@ -164,13 +164,13 @@ contract LavevelICO is Ownable {
   }
   
   modifier defeated() { 
-      if (now >= START.add(DAYS * 1 minutes) && raisedAmount <= softtop * 1 ether)
+      if (now >= START.add(DAYS * 1 days) && raisedAmount <= softtop * 1 ether)
       _; 
       
   }
   
   modifier succeed() { 
-   if (now >= START.add(DAYS * 1 minutes) && raisedAmount >= softtop * 1 ether )
+   if (now >= START.add(DAYS * 1 days) && raisedAmount >= softtop * 1 ether )
    _; 
   
   }
@@ -200,7 +200,7 @@ contract LavevelICO is Ownable {
     return (
         initialized == true &&
         now >= START && // Must be after the START date
-        now <= START.add(DAYS * 1 minutes) && // Must be before the end date
+        now <= START.add(DAYS * 1 days) && // Must be before the end date
         goalReached() == false // Goal must not already be reached
     );
   }

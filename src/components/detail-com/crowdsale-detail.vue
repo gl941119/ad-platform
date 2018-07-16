@@ -65,11 +65,11 @@
             <div>
                 <div class="crowdsale-detail-specific-text">
                     <span>{{$t('crowdFunding.issueNumber')}}：</span>
-                    <span>{{detailData.currCirculation}} BRB</span>
+                    <span>{{detailData.currCirculation}} AFDT</span>
                 </div>
                 <div class="crowdsale-detail-specific-text">
                     <span>{{$t('crowdFunding.crowdPrice')}}：</span>
-                    <span>{{detailData.price}} BRB</span>
+                    <span>{{detailData.price}} AFDT</span>
                 </div>
                 <div class="crowdsale-detail-specific-text">
                     <span>{{$t('crowdFunding.startTime')}}：</span>
@@ -81,21 +81,21 @@
                 </div>
             </div>
             <div v-if="status===2||status===3">
-                <el-progress type="circle" :show-text="false" :width="62" color="#FF9500" :percentage="25"></el-progress>
+                <el-progress type="circle" :show-text="false" :width="62" color="#FF9500" :percentage="contractData.progress"></el-progress>
             </div>
         </div>
     </div>
     <div class="crowdsale-footer">
         <el-button v-if="status===1" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{remainTime}}{{showText}}</el-button>
-        <el-button v-if="status===2" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn go-to-buy"><span>{{$t('home.time')}}{{remainTime}}</span><span>{{showText}}</span></el-button>
+        <el-button @click="instantBuy" v-if="status===2" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn go-to-buy"><span>{{$t('home.time')}}{{remainTime}}</span><span>{{showText}}</span></el-button>
         <el-button v-if="status===3" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{$t('home.over')}}</el-button>
     </div>
 </div>
 </template>
 <script>
     import Utils from '../../utils/util.js';
-//  import ContractInstance from '../../utils/contract.js';
-    // import ico_abi from '../../../build/contracts/LavevelICO.json';
+    import {handleContract} from '../../utils/contract.js';
+    import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
@@ -106,14 +106,21 @@
                 status: 0,
                 utils: new Utils(),
                 timer: undefined,
+                contractData: {},
             }
         },
         mounted() {
-            // this.handleContract().then(res => {
-            //     console.log('res---->', res);
-            // })
             this.handleTime(this.detailData, this.systemTime);
             this.countDown(this.detailData);
+            /* handleContract(ico_abi).then(res => {
+                let {startTime, endTime, raisedAmount, total} = res;
+                this.contractData = Object.assign({}, res, {
+                    startTime: startTime*1000,
+                    progress: Math.round((raisedAmount / total)*100),
+                })
+                console.log('handleContract contractData res---->', this.contractData);
+                
+            }) */
         },
         computed: {
             options() {
@@ -165,44 +172,11 @@
                     this.handleTime(data, sysTime);
                 }, 1000);
             },
-            handleContract(){
-                return new Promise((resolve, reject) => {
-                    let {contractAbi, contractId} = this.detailData;
-                    let address = '0x48cb60e734e67f0347f830e538916b2aa4f4209a'
-                    let instanceCls = new ContractInstance(ico_abi, address);
-                    let instance;
-                    instanceCls.init().then(res => {
-                        let result = {};
-                        instance = res;
-                        instance.START().then(res => {
-                            // startTime
-                            result.startTime = res;
-                            return instance.DAYS();
-                        }).then(res => {
-                            // sustain days
-                            result.sustainDay = res;
-                            // return instance.ENDTIME();
-                            return;
-                        }).then(res => {
-                            // end time
-                            result.endTime = res;
-                            return instance.raisedAmount();
-                        }).then(res => {
-                            // rasied amount
-                            result.raisedAmount = res;
-                            return instance.CAP();
-                        }).then(res => {
-                            // total
-                            result.total = res;
-                            return instance.RATE();
-                        }).then(res => {
-                            // rate
-                            result.rate = res;
-                            resolve(result);
-                        })
-                    })
-                    
-                });
+            instantBuy(){
+                this.$store.commit('saveInstantBuyDataId', this.detailData.id);
+                // this.$store.commit('setInstantBuyData', this.contractData);
+                this.$store.commit('setInstantBuyVisible', true);
+                this.$store.commit('valueChange');
             },
         },
         destroyed() {

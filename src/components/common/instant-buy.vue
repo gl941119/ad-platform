@@ -4,15 +4,15 @@
             <div class="instant-buy-box">
                 <div>
                     <span>本轮发行剩余：</span>
-                    <span>{{immediateBuyDatas.remain}}BRB</span>
+                    <span>{{instantBuyData.remain}} ETH</span>
                 </div>
                 <div>
                     <span>众筹价格：</span>
-                    <span>1 EHT={{immediateBuyDatas.price}} BRB</span>
+                    <span>1 EHT={{instantBuyData.rate}} AFDT</span>
                 </div>
                 <div>
                     <span>单账户兑换限制：</span>
-                    <span>1-{{immediateBuyDatas.mostNumber}}</span>
+                    <span>{{instantBuyData.minContribution}}-{{instantBuyData.maxContribution}} ETH</span>
                 </div>
                 <div>
                     <span>本轮众筹剩余时间：</span>
@@ -26,8 +26,11 @@
                 </div>
                 <div>
                     <span>二维码：</span>
-                    <span><img :src="'data:image/png;base64, ' + immediateBuyDatas.qrCode"></span>
+                    <span v-if="immediateBuyDatas.qrCode"><img :src="'data:image/png;base64, ' + immediateBuyDatas.qrCode"></span>
                 </div>
+            </div>
+            <div>
+                <el-button @click="finish">完成</el-button>
             </div>
         </div>
     </el-dialog>
@@ -53,12 +56,18 @@ export default {
                 this.$store.commit('setInstantBuyVisible', false);
             }
         },
+        instantBuyData(){
+            let {raisedAmount, total} = this.$store.state.instantBuyData;
+            return Object.assign({}, this.$store.state.instantBuyData, {
+                remain: total - raisedAmount,
+            });
+        },
         id(){
             return this.$store.state.instantBuyDataId;
         },
         change(){
             return this.$store.state.change;
-        }
+        },
     },
     watch: {
         change(newVal){
@@ -75,7 +84,7 @@ export default {
             })
         },
         instantBuyVisible(val, old){
-            console.log(' newval_>', val, old);
+            // console.log(' newval_>', val, old);
             if(false === val){
                 this.timer && clearInterval(this.timer);
             }
@@ -84,9 +93,11 @@ export default {
     methods: {
         handleTime(startTime, endTime, systemTime){
             let {status, dayArr} = this.utils.handleTime({startTime, endTime}, systemTime);
-            console.log('remain time_>', status, dayArr);
             this.remainTime = `${dayArr[0]} 天 ${dayArr[1]} 时 ${dayArr[2]} 分 ${dayArr[3]} 秒`;
-        }
+        },
+        finish(){
+            this.instantBuyVisible = false;
+        },
     }
 }
 </script>

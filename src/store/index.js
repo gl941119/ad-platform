@@ -13,6 +13,7 @@ export default new Vuex.Store({
         conceptId: 0, // advert concept id
         instantBuyVisible: false, // buy dialog visible
         instantBuyDataId: undefined,
+        instantBuyData: {},
         change: false,
 		slangChange: 'en',
 		heardUrl:'',
@@ -41,6 +42,9 @@ export default new Vuex.Store({
         },
         saveInstantBuyDataId(state, id) {
             state.instantBuyDataId = id;
+        },
+        setInstantBuyData(state, data) {
+            state.instantBuyData = Object.assign({}, data);
         },
         valueChange(state) {
             state.change = !state.change;
