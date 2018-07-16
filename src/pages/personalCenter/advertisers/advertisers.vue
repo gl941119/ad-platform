@@ -292,7 +292,6 @@
 					type: 'post',
 					flag: true,
 				}).then(res => {
-					console.log(res);
 					if(res.success == 1) {
 						this.$message(this.$t('messageNotice.addSuccess'));
 					} 
@@ -527,7 +526,6 @@
 			},
 			handleSelectionChange(val) {
 				this.multipleSelection = val;
-				console.log(val);
 			},
 			listenCondept(checkedData) {
 				var newCheckedData = [];
@@ -536,7 +534,6 @@
 				})
 				this.conceptDatas = newCheckedData.join('-');
 				this.checkedData = checkedData;
-				console.log(checkedData);
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
@@ -559,7 +556,6 @@
 				this.consultantTeam = tmpPersions;
 			},
 			deletedConsultant(value) { //顾问团队
-				console.log(value)
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
 					this.$message(this.$t('messageNotice.noDelete'));
@@ -568,7 +564,6 @@
 				}
 			},
 			getImg(file) {
-				console.log(file)
 				this.imageUrl = file.url;
 			},
 			conceptFun() { //概念弹出窗

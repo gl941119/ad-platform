@@ -3,16 +3,20 @@
 		<div class="user-management-list-title">
 			<h3>{{$t('purse.balance')}}0AFDT</h3>
 			<div class="balance">
-				<p>{{$t('purse.bindWalletAddress')}}</p>
-				<p>{{$t('purse.main')}}{{$t('purse.one')}}{{$t('purse.two')}}</p>
+				<p>{{$t('purse.bindWalletAddress')}}{{$t('purse.main')}}</p>
+				<p>{{$t('purse.one')}}</p>
+				<p>{{$t('purse.two')}}</p>
 				<div class="purse_address">
-					<label style="width: 160px;">{{$t('purse.eth')}}</label>
+					<label>{{$t('purse.eth')}}</label>
 					<el-input v-model="purseAddress"></el-input>
 					<button class="purse_address_bind" @click="bind">{{$t('buttonAll.bind')}}</button>
 				</div>
 			</div>
 			<div class="balance">
 				≈ <span>2.61254212</span> BTC ≈ <span>19.36115238</span> ETH ≈ <span>19361.15</span> USD
+			</div>
+			<div class="img_box">
+				<img src="../../../assets/imgs/img/正在接入中.png" />
 			</div>
 		</div>
 	</div>
@@ -24,6 +28,7 @@
 		data() {
 			return {
 				purseAddress:'',
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		computed: {
@@ -36,15 +41,15 @@
 				Request({
 					url: 'QueryBindWalletAddress',
 					data: {
-						id: 5,
+						id: this.accountId,
 						walletAddress:this.purseAddress
 					},
 					type: 'post',
 					flag:true,
 				}).then(res => {
-					console.log(res);
 					if(res.success == 1){
 						this.$message(this.$t('messageNotice.bindSuccess'));
+						this.purseAddress = '';
 					}
 				})
 			}
@@ -54,19 +59,39 @@
 <style lang="scss" scoped>
 	.balance {
 		margin-top: 20px;
+		p{
+			font-size: 14px;
+			margin: 5px 0;
+		}
 	}
 	
 	.purse_address {
 		display: flex;
 		justify-content: space-between;
+		margin-top: 20px;
+		label{
+			width: 160px;
+			font-size: 14px;
+			line-height: 32px;
+		}
 	}
 	
 	.purse_address_bind {
 		margin-left: 20px;
 		width: 100px;
 		border-radius: 5px;
-		background: #FFFFFF;
-		color: #000000;
-		border: 1px solid #333333;
+		background:rgba(255,149,0,1);
+		border-radius:4px;
+		color: #FFFFFF;
+	}
+	.img_box{
+		width:402px;
+		height:715px;
+		overflow: hidden;
+		margin: 0 auto;
+		img{
+			width:402px;
+			height:715px;
+		}
 	}
 </style>

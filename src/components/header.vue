@@ -14,12 +14,21 @@
 				</div>
 				<div class="header-content-tab-right">
 					<div class="header-content-tab-right-item">
+						<el-select v-model="select" slot="prepend" @change="change(select)">
+							<el-option label="英文" value="en"></el-option>
+							<el-option label="中文" value="zh"></el-option>
+							<!--<el-option label="zh-cn" value="简体中文"></el-option>-->
+							<el-option label="韩文" value="ko"></el-option>
+							<el-option label="日文" value="ja"></el-option>
+						</el-select>
+					</div>
+					<!--<div class="header-content-tab-right-item">
 						<a href="javascript:;" @click="switchLang()" v-if="'en' == $i18n.locale">EN</a>
-						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>
+						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>-->
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;">{{$t('header.bierTalk')}}</a><span>|</span></div>
+						<a href="javascript:;"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;">{{$t('header.help')}}</a><span>|</span></div>
+						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
 						<a v-if="!userName" @click="toLogin" href="javascript:;">{{$t('header.login')}}</a>
 						<a v-if="userName" @click="toPersonCenter" href="javascript:;">{{userName}}</a>
@@ -156,6 +165,7 @@
 						verifyCode: '',
 					}
 				},
+				select:'en',
 			}
         },
         computed: {
@@ -167,6 +177,11 @@
             }
         },
 		methods: {
+			change(value){
+				this.$i18n.locale = value;
+				this.$store.commit('setLanguage', value);
+				Cache.setLocal('bier_langChange', value);
+			},
 			switchLang() {
 				if(this.$i18n.locale == "en") {
 					this.$i18n.locale = 'zh';

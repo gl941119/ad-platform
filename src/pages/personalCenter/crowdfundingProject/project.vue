@@ -77,7 +77,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.crowdfundingData = res.data;
 					this.total = res.total;
 				})

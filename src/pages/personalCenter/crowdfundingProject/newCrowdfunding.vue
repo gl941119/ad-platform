@@ -166,70 +166,70 @@
 				</el-upload>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>本轮众筹标题</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.title">
+				<label>{{$t('tokenInfo.title')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterTitle')" v-model="newCrowdfunding.title">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>发行总量</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.circulation">
+				<label>{{$t('tokenInfo.issueTotal')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterIssueTotal')" v-model="newCrowdfunding.circulation">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>众筹总量</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.totalCrowdfund">
+				<label>{{$t('tokenInfo.total')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterTotal')" v-model="newCrowdfunding.totalCrowdfund">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>本轮次发行量</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.currCirculation">
+				<label>{{$t('tokenInfo.thisIssue')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterThisIssue')" v-model="newCrowdfunding.currCirculation">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>众筹价格</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.price">
+				<label>{{$t('tokenInfo.price')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterPrice')" v-model="newCrowdfunding.price">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>单账号兑换限制</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.mostNumber">
+				<label>{{$t('tokenInfo.limit')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterLimit')" v-model="newCrowdfunding.mostNumber">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>目标货币</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.targetCurrency">
+				<label>{{$t('tokenInfo.money')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterMoney')" v-model="newCrowdfunding.targetCurrency">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>发行硬顶</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.topLimit">
+				<label>{{$t('tokenInfo.topLimit')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterTopLimit')" v-model="newCrowdfunding.topLimit">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>发行软顶</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.lowLimit">
+				<label>{{$t('tokenInfo.lowLimit')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterLowLimit')" v-model="newCrowdfunding.lowLimit">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>本轮众筹时间</label>
+				<label>{{$t('tokenInfo.dataTime')}}</label>
 				<div>
-					<el-date-picker v-model="timeInterval" type="datetimerange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+					<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
 					</el-date-picker>
 				</div>
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
-			<h5>合规性文件</h5>
+			<h5>{{$t('tokenInfo.files')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>相关牌照</label>
+				<label>{{$t('tokenInfo.about')}}</label>
 				<div>
 					<el-upload class="upload-demo" action="" :on-change="getFile" :auto-upload="false" :on-remove="handleRemove" multiple>
-						<el-button size="small" type="primary">上传</el-button>
+						<el-button size="small" type="primary">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
 				</div>
 			</li>
 		</ul>
-		<button @click="submit">提交</button>
+		<button @click="submit">{{$t('buttonAll.submits')}}</button>
 	</div>
 </template>
 
@@ -313,7 +313,6 @@
 			submit() {
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
-				console.log(this.checkedData);
 				if(this.checkedData[0]){
 					var concept1Id = this.checkedData[0].conceptId;
 				}
@@ -366,9 +365,8 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-					console.log(res);
 					if(res.success == 1) {
-						this.$message('添加成功');
+						this.$message(this.$t('messageNotice.addSuccess'));
 					}
 				})
 			},
@@ -387,10 +385,9 @@
 				this.coreTeam = tmpPersions;
 			},
 			deletedCore(value) { //核心团队
-				console.log(value)
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					alert("不要删了o，再删就没有了")
+					this.$message(this.$t('messageNotice.noDelete'));
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -402,10 +399,9 @@
 				this.consultantTeam = tmpPersions;
 			},
 			deletedConsultant(value) { //顾问团队
-				console.log(value)
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					alert("不要删了o，再删就没有了")
+					this.$message(this.$t('messageNotice.noDelete'));
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}
@@ -425,28 +421,12 @@
 				this.technologyDatas = technologyArr.join('-');
 			},
 			getImg(file) {
-				console.log(file)
 				this.imageUrl = file.url;
-			},
-			beforeAvatarUpload(file) { //头像文件限制
-				const isJPG = file.type === 'image/jpeg';
-				const isLt2M = file.size / 1024 / 1024 < 2;
-				console.log("beforeAvatarUpload:", file, isJPG, isLt2M)
-				if(!isJPG) {
-					this.$message.error('上传头像图片只能是 JPG 格式!');
-					return false;
-				}
-				if(!isLt2M) {
-					this.$message.error('上传头像图片大小不能超过 2MB!');
-					return false;
-				}
-				return isJPG && isLt2M;
 			},
 			handleRemove(file, fileList) {
 				console.log(file, fileList);
 			},
 			getFile(file) {
-				console.log(file);
 				this.fileUrl = file.url;
 			}
 		}
