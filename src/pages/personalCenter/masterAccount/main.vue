@@ -37,10 +37,10 @@
 					</el-date-picker>
 					<el-date-picker v-model="endTime" type="date" :placeholder="$t('accountFlow.endTime')">
 					</el-date-picker>
-					<button @click="mainData">{{$t('accountFlow.search')}}</button>
+					<button @click="mainData" class="search">{{$t('accountFlow.search')}}</button>
 				</div>
 			</div>
-			<el-table border :data="flowData" style="width: 100%">
+			<el-table :data="flowData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">

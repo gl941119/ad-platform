@@ -125,4 +125,8 @@
 		line-height: 65px;
 		color: #cccccc;
 	}
+	.bierinc-main-container-view{
+		margin: 20px;
+		background: #FFFFFF;
+	}
 </style>
