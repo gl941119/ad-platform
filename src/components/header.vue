@@ -13,6 +13,14 @@
                                     :to="{ name: 'home' }">{{$t('header.sunday')}}</router-link> -->
 				</div>
 				<div class="header-content-tab-right">
+					<el-select v-model="language" placeholder="请选择">
+				    <el-option
+				      v-for="item in languages"
+				      :key="item.value"
+				      :label="item.label"
+				      :value="item.value">
+				    </el-option>
+				  </el-select>
 					<div class="header-content-tab-right-item">
 						<a href="javascript:;" @click="switchLang()" v-if="'en' == $i18n.locale">EN</a>
 						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>
@@ -156,6 +164,11 @@
 						verifyCode: '',
 					}
 				},
+				languages:[{
+					value:'1',
+					label:'1',
+				}],
+				language:'',
 			}
         },
         computed: {

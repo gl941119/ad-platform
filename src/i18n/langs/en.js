@@ -96,7 +96,7 @@ const en = {
 		website:'访问官网',
 		volume:'总量',
 		totalPrice:'总价',
-		crowdfunding:'众筹',
+		crowdfunding:'DAICO',
 		calculate:'亿',
 		concept:'概念',
 		technology:'技术',

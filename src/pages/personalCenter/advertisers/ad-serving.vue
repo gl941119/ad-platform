@@ -6,7 +6,7 @@
 			<div class="ad-serving-info-top">
 				<div class="ad-serving-info-top-price">
 					<h5>{{$t('adServing.averagePrice')}}</h5>
-					<div>{{averagePrice}}</div>
+					<div v-if="isCheck == 1">{{averagePrice}}</div>
 					<div>
 						<el-button type="text" v-if="isCheck == 1" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
 					</div>
@@ -76,7 +76,6 @@
 					type: 'get',
 					flag: true,
 				}).then(res => {
-					console.log(res);
 					this.form = res.data;
 					this.advertId = res.data.advertId;
 					this.averagePrice = res.data.averagePrice;

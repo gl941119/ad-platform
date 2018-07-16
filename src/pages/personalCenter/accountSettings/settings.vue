@@ -143,13 +143,13 @@
 									<div v-if="existTradePassword" class="el-collapse-item__content-box bindEmail">
 										<h3>{{$t('passwordInfo.changeTradePassword')}}</h3>
 										<p>
-											<el-input :placeholder="$t('setting.oldTradePassword')" v-model="oldTradePassword"></el-input>
+											<el-input :placeholder="$t('passwordInfo.oldTradePassword')" v-model="oldTradePassword"></el-input>
 										</p>
 										<p>
-											<el-input type="password" :placeholder="$t('setting.newTradePassword')" v-model="newTradePassword"></el-input>
+											<el-input type="password" :placeholder="$t('passwordInfo.newTradePassword')" v-model="newTradePassword"></el-input>
 										</p>
 										<p>
-											<el-input type="password" :placeholder="$t('setting.onceTradePassword')" v-model="onceTradePassword"></el-input>
+											<el-input type="password" :placeholder="$t('passwordInfo.onceTradePassword')" v-model="onceTradePassword"></el-input>
 										</p>
 										<div style="position: relative;">
 											<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
