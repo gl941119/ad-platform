@@ -175,68 +175,68 @@
 			</ul>
 		</div>
 		<div class="project_review_details_team">
-			<div class="project_review_details_title">本轮众筹标题</div>
+			<div class="project_review_details_title">{{$t('tokenInfo.title')}}</div>
 			<ul class="project_review_details_item">
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">发行总量</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.issueTotal')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.circulation"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">众筹总量</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.total')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.totalCrowdfund"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">本轮次发行量</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.thisIssue')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.currCirculation"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">众筹价格</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.price')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.price"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">单账号兑换限制</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.limit')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.mostNumber"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">目标货币</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.money')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.targetCurrency"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">发行硬顶</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.topLimit')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.topLimit"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">发行软顶</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.lowLimit')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.lowLimit"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">本轮众筹时间</label>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.dataTime')}}</label>
 					<div v-if="disabled" class="project_review_details_item_li_intro">
 						<span>{{details.startTime}}</span> ~ <span>{{details.endTime}}</span>
 					</div>
 					<div v-if="!disabled" class="project_review_details_item_li_intro">
-						<el-date-picker v-model="timeInterval" type="datetimerange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+						<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
 						</el-date-picker>
 					</div>
 				</li>
 			</ul>
 		</div>
 		<div class="project_review_details_team">
-			<div class="project_review_details_title">合规性文件</div>
+			<div class="project_review_details_title">{{$t('tokenInfo.files')}}</div>
 			<ul class="project_review_details_item">
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">相关牌照</label>
-					<a v-if="disabled && details.license" :href="details.license" download>下载</a>
+					<label class="project_review_details_item_li_label">{{$t('tokenInfo.about')}}</label>
+					<a v-if="disabled && details.license" :href="details.license" download>{{$t('tokenInfo.download')}}</a>
 					<div v-if="!disabled">
 						<el-upload class="upload-demo" action="" :auto-upload="false" :on-change="getFile" :multiple="false">
-							<el-button size="small">上传</el-button>
+							<el-button size="small">{{$t('tokenInfo.upload')}}</el-button>
 						</el-upload>
 					</div>
 				</li>
 			</ul>
 		</div>
 		<div v-if="!disabled">
-			<button class="check" @click="changeDetails">保存修改</button>
+			<button class="check" @click="changeDetails">{{$t('buttonAll.saveChange')}}</button>
 		</div>
 	</div>
 </template>
@@ -313,7 +313,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.details = res.data;
 					let {
 						concept1Id,
@@ -355,7 +354,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.consultantTeam = res.data;
 					this.CrowdTeamDialogVisible = true;
 				})
@@ -403,7 +401,7 @@
 				}).then(res => {
 					if(res.success) {
 						this.queryDetails();
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 					}
 				})
 			},
@@ -414,10 +412,9 @@
 				this.coreTeam = tmpPersions;
 			},
 			deletedCore(value) { //核心团队
-				console.log(value)
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					alert("不要删了o，再删就没有了")
+					this.$message(this.$t('messageNotice.noDelete'));
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -438,7 +435,7 @@
 					flag: true,
 				}).then(res => {
 					if(res.success) {
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 						this.queryDetails();
 					}
 				})
@@ -457,7 +454,7 @@
 					flag: true,
 				}).then(res => {
 					if(res.success == 1) {
-						this.$message('添加成功');
+						this.$message(this.$t('messageNotice.addSuccess'));
 						this.queryDetails();
 					}
 				})
@@ -474,7 +471,7 @@
 					flag: true,
 				}).then(res => {
 					if(res.success == 1) {
-						this.$message('删除成功');
+						this.$message(this.$t('messageNotice.deleteSuccess'));
 						this.queryDetails();
 					}
 				})
@@ -486,10 +483,9 @@
 				this.consultantTeam = tmpPersions;
 			},
 			deletedConsultant(value) { //顾问团队
-				console.log(value)
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					alert("不要删了o，再删就没有了")
+					this.$message(this.$t('messageNotice.noDelete'));
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}
@@ -509,7 +505,7 @@
 				}).then(res => {
 					if(res.success == 1) {
 						this.queryDetails();
-						this.$message('添加成功');
+						this.$message(this.$t('messageNotice.addSuccess'));
 					}
 				})
 			},
@@ -529,7 +525,7 @@
 				}).then(res => {
 					if(res.success) {
 						this.queryDetails();
-						this.$message('删除成功');
+						this.$message(this.$t('messageNotice.deleteSuccess'));
 					}
 				})
 			},
@@ -550,13 +546,12 @@
 				}).then(res => {
 					if(res.success) {
 						this.queryDetails();
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 					}
 				})
 			},
 			handleSelectionChange(val) {
 				this.multipleSelection = val;
-				console.log(val)
 			},
 			handleAvatarSuccess(res, file) {
 //				this.details.logo = file.url;
