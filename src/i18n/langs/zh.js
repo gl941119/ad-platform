@@ -60,6 +60,9 @@ const zh = {
 		certificationSuccess:'认证成功',
 		nicknameEmpty:'昵称不能为空',
 		bindSuccess:'绑定成功',
+		addSuccess:'添加成功',
+		deleteSuccess:'删除成功',
+		noDelete:'不能再删了，再删就没有了',
 	},
 	home:{
 		broadcast:'行情播报',
@@ -211,6 +214,8 @@ const zh = {
 		save:'保存',
 		add:'添加',
 		delete:'删除',
+		submits:'提交',
+		saveChange:'保存修改',
 	},
 	initiated:{//我发起的众筹
 		iInitiated:'我发起的众筹',

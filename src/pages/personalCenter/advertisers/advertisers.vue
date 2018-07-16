@@ -294,7 +294,7 @@
 				}).then(res => {
 					console.log(res);
 					if(res.success == 1) {
-						this.$message('添加成功');
+						this.$message(this.$t('messageNotice.addSuccess'));
 					} 
 				})
 			},
@@ -338,7 +338,7 @@
 				}).then(res => {
 					if(res.success) {
 						this.queryDetails();
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 					} 
 				})
 			},
@@ -412,7 +412,7 @@
 				}).then(res => {
 					if(res.success){
 						this.centerDialogVisible = false;
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 					}
 				})
 			},
@@ -430,7 +430,7 @@
 				}).then(res => {
 					if(res.success == 1) {
 						this.centerDialogVisible = false;
-						this.$message('添加成功');
+						this.$message(this.$t('messageNotice.addSuccess'));
 					}
 				})
 			},
@@ -446,7 +446,7 @@
 					flag: true,
 				}).then(res => {
 					if(res.success == 1) {
-						this.$message('删除成功');
+						this.$message(this.$t('messageNotice.deleteSuccess'));
 						this.centerDialogVisible = false;
 						this.queryDetails();
 					}
@@ -483,7 +483,7 @@
 				}).then(res => {
 					if(res.success == 1) {
 						this.CrowdTeamDialogVisible = false;
-						this.$message('添加成功');
+						this.$message(this.$t('messageNotice.addSuccess'));
 					}
 				})
 			},
@@ -500,7 +500,7 @@
 				}).then(res => {
 					if(res.success) {
 						this.CrowdTeamDialogVisible = false;
-						this.$message('删除成功');
+						this.$message(this.$t('messageNotice.deleteSuccess'));
 					}
 				})
 			},
@@ -521,7 +521,7 @@
 				}).then(res => {
 					if(res.success) {
 						this.CrowdTeamDialogVisible = false;
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 					}
 				})
 			},
@@ -547,7 +547,7 @@
 			deletedCore(value) { //核心团队
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					this.$message("不要删了o，再删就没有了");
+					this.$message(this.$t('messageNotice.noDelete'));
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -562,7 +562,7 @@
 				console.log(value)
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					this.$message("不要删了o，再删就没有了");
+					this.$message(this.$t('messageNotice.noDelete'));
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}

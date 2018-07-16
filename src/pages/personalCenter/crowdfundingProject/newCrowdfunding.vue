@@ -44,7 +44,7 @@
 									</el-input>
 								</li>
 								<div style="display: flex;flex-direction: column;">
-									<i @click="addCore" class="custom-element-icon-jia-copy"></i>
+									<i @click="addCore" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
 									<i @click="deletedCore(index)" class="custom-element-icon-jian1"></i>
 								</div>
 							</ol>

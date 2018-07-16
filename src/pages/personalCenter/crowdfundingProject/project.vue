@@ -15,7 +15,7 @@
 				</el-table-column>
 				<el-table-column :label="$t('initiated.degree')">
 					<template slot-scope="scope">
-						{{scope.row.totalCrowdfund/scope.row.lowLimit | filter}}-{{scope.row.lowLimit}}
+						{{scope.row.croAchieve/scope.row.topLimit | filter}}-{{scope.row.lowLimit}}
 					</template>
 				</el-table-column>
 				<el-table-column prop="city" :label="$t('initiated.status')">

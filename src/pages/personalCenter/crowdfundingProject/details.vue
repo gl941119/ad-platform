@@ -121,11 +121,11 @@
 					</div>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">官网</label>
+					<label class="project_review_details_item_li_label">{{$t('aboutLink.website')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.website"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">白皮书地址</label>
+					<label class="project_review_details_item_li_label">{{$t('aboutLink.whitePaper')}}</label>
 					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.whitePaper"></el-input>
 				</li>
 			</ul>
@@ -203,11 +203,11 @@
 				</li>
 				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">发行硬顶</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.lowLimit"></el-input>
+					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.topLimit"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">发行软顶</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.topLimit"></el-input>
+					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.lowLimit"></el-input>
 				</li>
 				<li class="project_review_details_item_li">
 					<label class="project_review_details_item_li_label">本轮众筹时间</label>

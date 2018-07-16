@@ -60,6 +60,9 @@ const en = {
 		certificationSuccess:'认证成功',
 		nicknameEmpty:'昵称不能为空',
 		bindSuccess:'绑定成功',
+		addSuccess:'添加成功',
+		deleteSuccess:'删除成功',
+		noDelete:'不能再删了，再删就没有了',
 	},
 	home:{
 		broadcast:'行情播报',
