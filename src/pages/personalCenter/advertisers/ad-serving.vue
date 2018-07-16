@@ -1,18 +1,18 @@
 <template>
 	<div class="ad-serving">
-		<h3>广告投放</h3>
-		<p><el-button @click="newProject" type="text">投放内容管理</el-button></p>
+		<h3>{{$t('adServing.adSer')}}</h3>
+		<p><el-button @click="newProject(isCheck)" type="text">{{$t('adServing.trafficking')}}</el-button></p>
 		<div class="ad-serving-info">
 			<div class="ad-serving-info-top">
 				<div class="ad-serving-info-top-price">
-					<h5>当前均价</h5>
+					<h5>{{$t('adServing.averagePrice')}}</h5>
 					<div>{{averagePrice}}</div>
 					<div>
-						<el-button type="text" v-if="isCheck == 1" @click="dialogTableVisible = true">调整</el-button>
+						<el-button type="text" v-if="isCheck == 1" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
 					</div>
-					<el-dialog title="竞价策略" :visible.sync="dialogTableVisible">
+					<el-dialog :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
 					  <el-form :model="form">
-					    <el-form-item label="首页（综合）" :label-width="formLabelWidth">
+					    <el-form-item :label="$t('adServing.all')" :label-width="formLabelWidth">
 					        <el-input-number v-model="form.advertPrice" controls-position="right" @change="handleChange">
 					        </el-input-number>
 					    </el-form-item>
@@ -23,11 +23,11 @@
 						    </el-form-item>
 					    </div>
 					     <el-form-item :label-width="formLabelWidth">
-					      	<div>竞价策略调整将于新加坡时间次日00:00:00起生效，每天仅限调整一次</div>
+					      	<div>{{$t('adServing.prompt')}}</div>
 					    </el-form-item>
 					  	</el-form>
 						<div slot="footer" class="dialog-footer">
-						    <el-button type="primary" @click="changePrice">修 改</el-button>
+						    <el-button type="primary" @click="changePrice">{{$t('buttonAll.revise')}}</el-button>
 						</div>
 					</el-dialog>
 				</div>
@@ -59,10 +59,13 @@
 			this.queryDetail();
 		},
 		methods: {
-			newProject(){
+			newProject(value){
 				this.$router.push({
-					name:'advertisers',
-				})
+					path: 'advertisers/'+ value,
+					params: {
+						value: value,
+					}
+				});
 			},
 			queryDetail(){
 				Request({
@@ -95,7 +98,7 @@
 				}).then(res => {
 					if(res.success){
 						that.dialogTableVisible = false;
-						this.$message('修改成功');
+						this.$message(this.$t('messageNotice.changeSuccess'));
 						that.queryDetail();
 					}
 				})

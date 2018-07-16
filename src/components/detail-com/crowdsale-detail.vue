@@ -94,7 +94,7 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
-    import ContractInstance from '../../utils/contract.js';
+//  import ContractInstance from '../../utils/contract.js';
     // import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         props: ['detailData', 'systemTime'],

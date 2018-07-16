@@ -115,7 +115,7 @@ const router = new VueRouter({
 					component: Adserving,
 				},
 				{
-					path: 'advertisers',//广告主-广告投放管理
+					path: 'advertisers/:value',//广告主-广告投放管理
 					name: 'advertisers',
 					component: Advertisers,
 				},

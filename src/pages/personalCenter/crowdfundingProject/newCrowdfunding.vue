@@ -1,26 +1,26 @@
 <template>
 	<div class="newCrowdfunding">
-		<h3>众筹申请</h3>
-		<p>请尽可能详细得填写相关资料，以便投资委员会合理地评估贵项目（评估期间双方都应严格遵守保密义务）</p>
+		<h3>{{$t('projectNotic.newApplication')}}</h3>
+		<p>{{$t('projectNotic.notic')}}</p>
 		<ul class="newCrowdfunding_item">
-			<h5>团队</h5>
+			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>团队名称</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamName">
+				<label>{{$t('team.teamName')}}</label>
+				<el-input :placeholder="$t('team.enterTeamName')" v-model="newCrowdfunding.teamName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>团队联系方式</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamContact">
+				<label>{{$t('team.teamPhone')}}</label>
+				<el-input :placeholder="$t('team.enterTeamPhone')" v-model="newCrowdfunding.teamContact">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>主要成员所在地</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.teamLocation">
+				<label>{{$t('team.teamAddress')}}</label>
+				<el-input :placeholder="$t('team.enterTeamAddress')" v-model="newCrowdfunding.teamLocation">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>核心团队成员</label>
+				<label>{{$t('team.coreMember')}}</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
@@ -29,23 +29,23 @@
 						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>全名</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].name">
+									<label>{{$t('team.name')}}</label>
+									<el-input :placeholder="$t('team.enterName')" v-model="coreTeam[index].name">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>头衔</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].title">
+									<label>{{$t('team.title')}}</label>
+									<el-input :placeholder="$t('team.enterTitle')" v-model="coreTeam[index].title">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>简介</label>
-									<el-input placeholder="请输入内容" v-model="coreTeam[index].desc">
+									<label>{{$t('team.desc')}}</label>
+									<el-input :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc">
 									</el-input>
 								</li>
 								<div style="display: flex;flex-direction: column;">
-									<button style="margin: 10px 0;" @click="addCore">添加</button>
-									<button @click="deletedCore(index)">删除</button>
+									<i @click="addCore" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
+									<i @click="deletedCore(index)" class="custom-element-icon-jian1"></i>
 								</div>
 							</ol>
 						</div>
@@ -53,7 +53,7 @@
 				</div>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>顾问团队</label>
+				<label>{{$t('team.coreMember')}}</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
@@ -62,23 +62,23 @@
 						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>全名</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].name">
+									<label>{{$t('team.name')}}</label>
+									<el-input :placeholder="$t('team.enterName')" v-model="consultantTeam[index].name">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>头衔</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].title">
+									<label>{{$t('team.title')}}</label>
+									<el-input :placeholder="$t('team.enterTitle')" v-model="consultantTeam[index].title">
 									</el-input>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
-									<label>简介</label>
-									<el-input placeholder="请输入内容" v-model="consultantTeam[index].desc">
+									<label>{{$t('team.desc')}}</label>
+									<el-input :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc">
 									</el-input>
 								</li>
 								<div style="display: flex;flex-direction: column;">
-									<button style="margin: 10px 0;" @click="addConsultant">添加</button>
-									<button @click="deletedConsultant(index)">删除</button>
+									<i @click="addConsultant" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
+									<i @click="deletedConsultant(index)" class="custom-element-icon-jian1"></i>
 								</div>
 							</ol>
 						</div>
@@ -87,38 +87,37 @@
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
-			<h5>项目情况</h5>
+			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>项目名称</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.proName">
+				<label>{{$t('projectInfo.projectName')}}</label>
+				<el-input :placeholder="$t('projectInfo.enterProjectName')" v-model="newCrowdfunding.proName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>项目简介</label>
-				<el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="newCrowdfunding.proDesc">
+				<label>{{$t('projectInfo.projectDesc')}}</label>
+				<el-input :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
-				<label>概念</label>
-				<el-input v-model="conceptDatas" placeholder="请输入内容">
+				<label>{{$t('projectInfo.concept')}}</label>
+				<el-input v-model="conceptDatas">
 				</el-input>
-				<!--<span v-for="(item, index) in checkedData" :key="index">{{item.value}}</span>-->
 				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec" >
-				<label>技术</label>
-				<el-input v-model="technologyDatas" placeholder="请输入内容">
+				<label>{{$t('projectInfo.technology')}}</label>
+				<el-input v-model="technologyDatas">
 				</el-input>
 				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>官网</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.website">
+				<label>{{$t('aboutLink.website')}}</label>
+				<el-input :placeholder="$t('aboutLink.enterWebsite')" v-model="newCrowdfunding.website">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>白皮书地址</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.whitePaper">
+				<label>{{$t('aboutLink.whitePaper')}}</label>
+				<el-input :placeholder="$t('aboutLink.enterWhitePaper')" v-model="newCrowdfunding.whitePaper">
 				</el-input>
 			</li>
 		</ul>
@@ -135,28 +134,28 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology1">
+				<el-input :placeholder="$t('projectInfo.enterTechnology1')" v-model="newCrowdfunding.technology1">
 				</el-input>
-				<el-input placeholder="请输入技术" v-model="newCrowdfunding.technology2">
+				<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="newCrowdfunding.technology2">
 				</el-input>
-				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">好的</button>
+				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
-			<h5>代币发行</h5>
+			<h5>{{$t('tokenInfo.token')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>英文简写</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotEnName">
+				<label>{{$t('tokenInfo.english')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterEnglish')" v-model="newCrowdfunding.shotEnName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>中文简写</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.shotCnName">
+				<label>{{$t('tokenInfo.chinese')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterChinese')" v-model="newCrowdfunding.shotCnName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>英文全名</label>
-				<el-input placeholder="请输入内容" v-model="newCrowdfunding.fullEnName">
+				<label>{{$t('tokenInfo.englishName')}}</label>
+				<el-input :placeholder="$t('tokenInfo.enterFullEnglish')" v-model="newCrowdfunding.fullEnName">
 				</el-input>
 			</li>
 			<li class="newCrowdfunding_item_li">
