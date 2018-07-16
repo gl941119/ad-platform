@@ -350,6 +350,7 @@
 					type: 'get',
 					flag: true,
 				}).then(res => {
+					console.log(res);
 					this.newCrowdfunding = res.data;
 					var technologyArr = [];
 					if(res.data.technology1) {

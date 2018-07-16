@@ -19,6 +19,8 @@ export default {
     QueryMainAccountFlow: 'blockchainadvert/main-flow/main-id',//账户流水
     /*我发起的众筹*/
     QueryMyNewCrowdfunding: 'blockchainadvert/crowd-funding/initiate',
+    /*钱包地址的绑定*/
+    QueryBindWalletAddress:'blockchainadvert/account/bindWalletAddress',
     /*我参与的众筹*/
     QueryMyCrowdfunding: 'blockchainadvert/join-crowd-funding/account-id',
     /*获取所有概念*/

@@ -24,6 +24,7 @@
 		data() {
 			return {
 				purseAddress:'',
+				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
 		computed: {
@@ -36,15 +37,15 @@
 				Request({
 					url: 'QueryBindWalletAddress',
 					data: {
-						id: 5,
+						id: this.accountId,
 						walletAddress:this.purseAddress
 					},
 					type: 'post',
 					flag:true,
 				}).then(res => {
-					console.log(res);
 					if(res.success == 1){
 						this.$message(this.$t('messageNotice.bindSuccess'));
+						this.purseAddress = '';
 					}
 				})
 			}

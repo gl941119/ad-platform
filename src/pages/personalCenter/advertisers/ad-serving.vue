@@ -76,7 +76,7 @@
 					type: 'get',
 					flag: true,
 				}).then(res => {
-					console.log(res)
+					console.log(res);
 					this.form = res.data;
 					this.advertId = res.data.advertId;
 					this.averagePrice = res.data.averagePrice;
