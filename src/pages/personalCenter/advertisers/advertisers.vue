@@ -1,23 +1,20 @@
 <template>
 	<div class="newCrowdfunding">
-		<h3>{{$t('projectNotic.title')}}</h3>
-		<p>{{$t('projectNotic.notic')}}</p>
+		<span class="title">{{$t('projectNotic.title')}}</span>
+		<span class="title_info">{{$t('projectNotic.notic')}}</span>
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamName')}}</label>
-				<input :placeholder="$t('team.enterTeamName')" :disabled="disabled"  v-model="newCrowdfunding.teamName" >
-				</input>
+				<input :placeholder="$t('team.enterTeamName')" :disabled="disabled"  v-model="newCrowdfunding.teamName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamPhone')}}</label>
-				<input :placeholder="$t('team.enterTeamPhone')" :disabled="disabled" v-model="newCrowdfunding.teamContact">
-				</input>
+				<input :placeholder="$t('team.enterTeamPhone')" :disabled="disabled" v-model="newCrowdfunding.teamContact" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamAddress')}}</label>
-				<input :placeholder="$t('team.enterTeamAddress')" :disabled="disabled" v-model="newCrowdfunding.teamLocation">
-				</input>
+				<input :placeholder="$t('team.enterTeamAddress')" :disabled="disabled" v-model="newCrowdfunding.teamLocation" />
 			</li>
 			<li class="newCrowdfunding_item_li coreMembers">
 				<label>{{$t('team.coreMember')}}</label>
@@ -100,25 +97,21 @@
 			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectName')}}</label>
-				<input :placeholder="$t('projectInfo.enterProjectName')" :disabled="disabled" v-model="newCrowdfunding.proName">
-				</input>
+				<input class="langer" :placeholder="$t('projectInfo.enterProjectName')" :disabled="disabled" v-model="newCrowdfunding.proName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectDesc')}}</label>
-				<input :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :disabled="disabled" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
-				</input>
+				<input class="langer" :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :disabled="disabled" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc" />
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.concept')}}</label>
-				<input v-model="conceptDatas" :disabled="disabled">
-				</input>
-				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
+				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
+				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.technology')}}</label>
-				<input v-model="technologyDatas" :disabled="disabled">
-				</input>
-				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
+				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
+				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
 			</li>
 		</ul>
 		<!--概念-->
@@ -134,29 +127,30 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input :placeholder="$t('projectInfo.enterTechnology1')" :disabled="disabled" v-model="newCrowdfunding.technology1">
-				</el-input>
-				<el-input :placeholder="$t('projectInfo.enterTechnology2')" :disabled="disabled" v-model="newCrowdfunding.technology2">
-				</el-input>
-				<el-button class="right_now" type="text" style=";position:absolute;top: 278px;" @click="technologyFun">{{$t('buttonAll.confirm')}}</el-button>
+				<div class="technology">
+					<el-input :placeholder="$t('projectInfo.enterTechnology1')" :disabled="disabled" v-model="newCrowdfunding.technology1">
+					</el-input>
+				</div>
+				<div class="technology">
+					<el-input :placeholder="$t('projectInfo.enterTechnology2')" :disabled="disabled" v-model="newCrowdfunding.technology2">
+					</el-input>
+				</div>
+				<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('tokenInfo.tokenIntro')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.english')}}</label>
-				<input :placeholder="$t('tokenInfo.enterEnglish')" :disabled="disabled" v-model="newCrowdfunding.shotEnName">
-				</input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterEnglish')" :disabled="disabled" v-model="newCrowdfunding.shotEnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.chinese')}}</label>
-				<input :placeholder="$t('tokenInfo.enterChinese')" :disabled="disabled" v-model="newCrowdfunding.shotCnName">
-				</input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterChinese')" :disabled="disabled" v-model="newCrowdfunding.shotCnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.englishName')}}</label>
-				<input :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName">
-				</input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
@@ -172,19 +166,17 @@
 			<h5>{{$t('aboutLink.linkInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.website')}}</label>
-				<input :placeholder="$t('aboutLink.enterWebsite')" :disabled="disabled" v-model="newCrowdfunding.website">
-				</input>
+				<input class="langer" :placeholder="$t('aboutLink.enterWebsite')" :disabled="disabled" v-model="newCrowdfunding.website" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.whitePaper')}}</label>
-				<el-input :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper">
-				</el-input>
+				<input class="langer" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
 			</li>
 			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
-				<label><el-input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="websites[index].websiteName" >
-				</el-input></label>
-				<el-input :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress">
-				</el-input>
+				<label class="label">
+					<input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="websites[index].websiteName" >
+				</label>
+				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress" />
 			</li>
 		</ul>
 		<button v-if="value == -1" @click="submit">{{$t('buttonAll.submits')}}</button>
@@ -590,24 +582,4 @@
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
 	@import '../../../assets/css/upload.css';
-	.newCrowdfunding_item{
-		&_li{
-			color: #606266;
-			input{
-				width:368px;
-				height:40px;
-				border-radius:4px;
-				border:1px solid rgba(220,223,230,1);
-				padding: 0 5px;
-			}
-		}
-	}
-	.exec {
-		position: relative;
-	}
-	.example {
-		position: absolute;
-		top: 14px;
-		right: 15px;
-	}
 </style>

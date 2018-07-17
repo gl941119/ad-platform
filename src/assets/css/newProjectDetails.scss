@@ -30,6 +30,14 @@
                 label {
                     width: 120px;
                 }
+                .label{
+                    width: 105px;
+                    overflow: hidden;
+                    margin-right: 15px;
+                    input{
+                        width: 105px;
+                    }
+                }
                 input{
                     width:240px;
                     height:40px;
@@ -74,6 +82,15 @@
                 }
             }
         }
+        .submit_box{
+            text-align: center;
+            .submit{
+                background: #ff9500;
+                border-radius: 4px;
+                padding: 10px 20px;
+                color: #FFFFFF;
+            }
+        }
     }
     .exec {
         position: relative;
@@ -88,8 +105,16 @@
         border: 1px solid #dcdfe6;
         border-radius: 20px;
     }
-    .right_now{
-        background: #DF5000;
+    .technology{
+        margin: 10px 0 20px 0;
+    }
+    .confirm{
+        background: #ff9500;
+        border-radius: 4px;
         padding: 5px 20px;
-        margin-bottom: 20px;
+        color: #FFFFFF;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        margin-left: -36px;
     }

@@ -56,15 +56,16 @@
                 }
             }
             .right_now {
-                background: #DF5000;
-                padding: 5px 20px;
-                color: #ffffff;
-                text-align: center;
-                margin: 0 auto;
+                background:rgba(255,149,0,1);
+                height: 30px;
+                line-height: 30px;
+                border-radius: 16px;
+                color: #FFFFFF;
+                width: 100px;
                 position: absolute;
-                bottom: 20px;
                 left: 50%;
-                margin-left: -35px;
+                margin: 10px 0 10px -50px;
+                border: 0;
             }
         }
     }
