@@ -216,6 +216,7 @@
         &-item {
             @include body-center();
             @include content-flex(flex-start, flex-start);
+            padding-bottom: 50px;
             &-crowdsale {
                 width: $crowdsaleWidth;
                 &-title {

@@ -12,7 +12,7 @@ export default function getWeb3() {
             results = {
                 web3: web3
             }
-            // console.log('Injected web3 detected.');
+            console.log('Injected web3 detected.');
             resolve(results)
         } else {
             // Fallback to localhost if no web3 injection.

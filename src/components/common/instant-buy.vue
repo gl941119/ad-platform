@@ -96,17 +96,23 @@
                         systemTime += 1000;
                         this.handleTime(startTime, endTime, systemTime);
                     }, 1000);
-                    return handleContract(ico_abi, '0x06a1280e1eb6ac56565f9cc7b32329f883e48081');
+                    return handleContract(this.instantBuyData);
+                    // return handleContract({ico_abi, ico_address: '0x06a1280e1eb6ac56565f9cc7b32329f883e48081'});
                 }).then(res => {
                     let {
                         raisedAmount,
                         total,
                     } = res;
+                    // console.log('handleContract------>', this.immediateBuyDatas);
                     this.immediateBuyDatas = Object.assign(this.immediateBuyDatas, res, {
                         remain: total - raisedAmount,
                     });
                     this.loadingData = false;
                     // console.log('get getDetail data contractData------>', this.immediateBuyDatas);
+                }).catch(e => {
+                    console.error('handleContract error_>', e);
+                    this.$message.error({message: 'contract function invoke fail'});
+                    this.finish();
                 })
             },
             instantBuyVisible(val, old) {
