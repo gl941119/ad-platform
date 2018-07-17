@@ -589,6 +589,7 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
+	@import '../../../assets/css/upload.css';
 	.newCrowdfunding_item{
 		&_li{
 			color: #606266;
@@ -601,38 +602,9 @@
 			}
 		}
 	}
-	.avatar-uploader .el-upload {
-		border: 1px dashed #d9d9d9;
-		border-radius: 6px;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.avatar-uploader .el-upload:hover {
-		border-color: #409EFF;
-	}
-	
-	.avatar-uploader-icon {
-		font-size: 28px;
-		color: #8c939d;
-		width: 178px;
-		height: 178px;
-		line-height: 178px;
-		text-align: center;
-		border: 1px solid #eeeeee;
-	}
-	
-	.avatar {
-		width: 178px;
-		height: 178px;
-		display: block;
-	}
-	
 	.exec {
 		position: relative;
 	}
-	
 	.example {
 		position: absolute;
 		top: 14px;

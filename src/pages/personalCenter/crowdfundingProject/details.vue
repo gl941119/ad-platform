@@ -594,6 +594,7 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
 	@import '../../../assets/css/withdraw.scss';
+	@import '../../../assets/css/upload.css';
 	.project_review_details_team {
 		padding: 20px;
 		margin-bottom: 10px;
@@ -601,7 +602,6 @@
 		box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.06);
 		border: 1px solid rgba(228, 231, 237, 1);
 	}
-	
 	.project_review_details_item_li {
 		display: flex;
 		font-size: 14px;
@@ -619,7 +619,6 @@
 			margin: 10px 0;
 		}
 	}
-	
 	.check {
 		border-radius: 4px;
 		color: rgba(16, 16, 16, 1);
@@ -628,32 +627,5 @@
 		border: 1px solid rgba(187, 187, 187, 1);
 		padding: 5px 10px;
 		background: #ffffff;
-	}
-	
-	.avatar-uploader .el-upload {
-		border: 1px dashed #d9d9d9;
-		border-radius: 6px;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.avatar-uploader .el-upload:hover {
-		border-color: #409EFF;
-	}
-	
-	.avatar-uploader-icon {
-		font-size: 28px;
-		color: #8c939d;
-		width: 178px;
-		height: 178px;
-		line-height: 178px;
-		text-align: center;
-	}
-	
-	.avatar {
-		width: 178px;
-		height: 178px;
-		display: block;
 	}
 </style>

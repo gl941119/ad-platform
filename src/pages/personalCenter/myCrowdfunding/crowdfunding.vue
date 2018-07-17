@@ -76,6 +76,7 @@
 <style lang="scss" scoped>
 	.my_crowdfunding_data_pages {
 		margin-top: 30px;
+		text-align: center;
 	}
 	.my_crowdfunding_title{
 		font-size:24px;
@@ -83,7 +84,8 @@
 		line-height:33px;
 		&_intro {
 			margin: 26px 0;
-			font-size:20px;
+			font-size:16px;
+			color: #333333;
 			color:rgba(51,51,51,1);
 			line-height:28px;
 		}

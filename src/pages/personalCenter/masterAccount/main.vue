@@ -6,7 +6,7 @@
 				<li class="advertising_revenue_top_item_li active">{{balance}} AFD</li>
 				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFD</li>
 			</ul>
-			<div class="advertising_revenue_top_money" @click="recharge()">{{$t('project.recharge')}}</div>
+			<button class="advertising_revenue_top_money" @click="recharge()">{{$t('project.recharge')}}</button>
 		</div>
 		<div class="withdraw" v-if="rechargeView">
 			<div class="withdraw_box">

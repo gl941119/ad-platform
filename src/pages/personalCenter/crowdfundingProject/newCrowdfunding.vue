@@ -6,18 +6,15 @@
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamName')}}</label>
-				<el-input :placeholder="$t('team.enterTeamName')" v-model="newCrowdfunding.teamName">
-				</el-input>
+				<input :placeholder="$t('team.enterTeamName')" v-model="newCrowdfunding.teamName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamPhone')}}</label>
-				<el-input :placeholder="$t('team.enterTeamPhone')" v-model="newCrowdfunding.teamContact">
-				</el-input>
+				<input :placeholder="$t('team.enterTeamPhone')" v-model="newCrowdfunding.teamContact" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamAddress')}}</label>
-				<el-input :placeholder="$t('team.enterTeamAddress')" v-model="newCrowdfunding.teamLocation">
-				</el-input>
+				<input :placeholder="$t('team.enterTeamAddress')" v-model="newCrowdfunding.teamLocation" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.coreMember')}}</label>
@@ -90,35 +87,32 @@
 			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectName')}}</label>
-				<el-input :placeholder="$t('projectInfo.enterProjectName')" v-model="newCrowdfunding.proName">
-				</el-input>
+				<input class="langer" :placeholder="$t('projectInfo.enterProjectName')" v-model="newCrowdfunding.proName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectDesc')}}</label>
-				<el-input :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
-				</el-input>
+				<div class="textarea">
+					<el-input :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
+					</el-input>
+				</div>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.concept')}}</label>
-				<el-input v-model="conceptDatas">
-				</el-input>
+				<input class="langer" v-model="conceptDatas" />
 				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec" >
 				<label>{{$t('projectInfo.technology')}}</label>
-				<el-input v-model="technologyDatas">
-				</el-input>
+				<input class="langer" v-model="technologyDatas" />
 				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.website')}}</label>
-				<el-input :placeholder="$t('aboutLink.enterWebsite')" v-model="newCrowdfunding.website">
-				</el-input>
+				<input class="langer" :placeholder="$t('aboutLink.enterWebsite')" v-model="newCrowdfunding.website" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.whitePaper')}}</label>
-				<el-input :placeholder="$t('aboutLink.enterWhitePaper')" v-model="newCrowdfunding.whitePaper">
-				</el-input>
+				<input class="langer" :placeholder="$t('aboutLink.enterWhitePaper')" v-model="newCrowdfunding.whitePaper" />
 			</li>
 		</ul>
 		<!--概念-->
@@ -145,18 +139,15 @@
 			<h5>{{$t('tokenInfo.token')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.english')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterEnglish')" v-model="newCrowdfunding.shotEnName">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterEnglish')" v-model="newCrowdfunding.shotEnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.chinese')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterChinese')" v-model="newCrowdfunding.shotCnName">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterChinese')" v-model="newCrowdfunding.shotCnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.englishName')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterFullEnglish')" v-model="newCrowdfunding.fullEnName">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterFullEnglish')" v-model="newCrowdfunding.fullEnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
@@ -167,48 +158,39 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.title')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterTitle')" v-model="newCrowdfunding.title">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterTitle')" v-model="newCrowdfunding.title" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.issueTotal')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterIssueTotal')" v-model="newCrowdfunding.circulation">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterIssueTotal')" v-model="newCrowdfunding.circulation" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.total')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterTotal')" v-model="newCrowdfunding.totalCrowdfund">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterTotal')" v-model="newCrowdfunding.totalCrowdfund" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.thisIssue')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterThisIssue')" v-model="newCrowdfunding.currCirculation">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterThisIssue')" v-model="newCrowdfunding.currCirculation" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.price')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterPrice')" v-model="newCrowdfunding.price">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterPrice')" v-model="newCrowdfunding.price" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.limit')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterLimit')" v-model="newCrowdfunding.mostNumber">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterLimit')" v-model="newCrowdfunding.mostNumber" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.money')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterMoney')" v-model="newCrowdfunding.targetCurrency">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterMoney')" v-model="newCrowdfunding.targetCurrency" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.topLimit')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterTopLimit')" v-model="newCrowdfunding.topLimit">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterTopLimit')" v-model="newCrowdfunding.topLimit" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.lowLimit')}}</label>
-				<el-input :placeholder="$t('tokenInfo.enterLowLimit')" v-model="newCrowdfunding.lowLimit">
-				</el-input>
+				<input class="langer" :placeholder="$t('tokenInfo.enterLowLimit')" v-model="newCrowdfunding.lowLimit" />
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.dataTime')}}</label>
@@ -438,38 +420,10 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
-	.avatar-uploader .el-upload {
-		border: 1px dashed #d9d9d9;
-		border-radius: 6px;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.avatar-uploader .el-upload:hover {
-		border-color: #409EFF;
-	}
-	
-	.avatar-uploader-icon {
-		font-size: 28px;
-		color: #8c939d;
-		width: 178px;
-		height: 178px;
-		line-height: 178px;
-		text-align: center;
-		border: 1px solid #eeeeee;
-	}
-	
-	.avatar {
-		width: 178px;
-		height: 178px;
-		display: block;
-	}
-	
+	@import '../../../assets/css/upload.css';
 	.exec {
 		position: relative;
 	}
-	
 	.example {
 		position: absolute;
 		top: 14px;

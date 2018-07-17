@@ -8,7 +8,9 @@
 				<p>{{$t('purse.two')}}</p>
 				<div class="purse_address">
 					<label>{{$t('purse.eth')}}</label>
-					<el-input v-model="purseAddress"></el-input>
+					<div class="input">
+						<el-input v-model="purseAddress"></el-input>
+					</div>
 					<button class="purse_address_bind" @click="bind">{{$t('buttonAll.bind')}}</button>
 				</div>
 			</div>
@@ -57,33 +59,48 @@
 	};
 </script>
 <style lang="scss" scoped>
+.user-management-list-title{
+	h3{
+		font-size: 24px;
+	}
 	.balance {
 		margin-top: 20px;
+		font-size: 16px;
+		color: #333333;
 		p{
-			font-size: 14px;
+			font-size: 16px;
 			margin: 5px 0;
+			color: #333333;
 		}
 	}
+}
 	
 	.purse_address {
 		display: flex;
-		justify-content: space-between;
+		justify-content:flex-start;
 		margin-top: 20px;
 		label{
-			width: 160px;
-			font-size: 14px;
+			width: 120px;
+			font-size: 16px;
 			line-height: 32px;
+		}
+		.input{
+			width: 500px;
+			overflow: hidden;
+		}
+		.purse_address_bind {
+			margin-left: 20px;
+			width: 100px;
+			border-radius: 5px;
+			background:rgba(255,149,0,1);
+			border-radius:4px;
+			color: #FFFFFF;
+			:hover{
+				cursor: pointer;
+			}
 		}
 	}
 	
-	.purse_address_bind {
-		margin-left: 20px;
-		width: 100px;
-		border-radius: 5px;
-		background:rgba(255,149,0,1);
-		border-radius:4px;
-		color: #FFFFFF;
-	}
 	.img_box{
 		width:402px;
 		height:715px;

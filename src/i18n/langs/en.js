@@ -183,17 +183,17 @@ const en = {
 		changeTradePassword:'更改交易密码',
 		enterTradePassword:'请输入交易密码',
 	},
-	personal:{
+	personal:{//个人中心
 		purse:'钱包',
 		revenue:'广告收益账户',
 		main:'广告主账户',
-		crowdfunding:'我的众筹',
+		crowdfunding:'我的DAICO',
 		myCrowdfunding:'我参与的众筹',
 		vote:'我的投票',
 		invite:'邀请用户',
 		settings:'账号设置',
 		adserving:'广告方',
-		project:'众筹项目方',
+		project:'DAICO项目方',
 		Investors:'投资人',
 		partner:'合伙人',
 		exchange:'交易所',
@@ -202,7 +202,7 @@ const en = {
 	},
 	purse:{
 		balance:'余额',
-		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额',
+		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额。',
 		main:'这意味着：',
 		one:'1、ETH钱包地址将可以用于接收基于ERC20协议的平台代币AFDT。',
 		two:'2、如果您需要投放广告，则需要从本地址向平台充值以便核对',
@@ -272,7 +272,7 @@ const en = {
 	projectNotic:{
 		title:'项目内容',
 		notic:'请尽可能详细得填写相关资料，以便投资委员会合理地评估贵项目（评估期间双方都应严格遵守保密义务）',
-		newApplication:'众筹申请',
+		newApplication:'DAICO申请',
 	},
 	team:{
 		teamInfo:'团队',

@@ -6,7 +6,7 @@
 				<li class="advertising_revenue_top_item_li active">{{balance}} BRB</li>
 				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 BRB</li>
 			</ul>
-			<div class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</div>
+			<button class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</button>
 		</div>
 		<!--提現-->
 		<div class="withdraw" v-if="withdrawView">
