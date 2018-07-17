@@ -10,19 +10,19 @@
 						</div>
 					</div>
 					<ul class="bierinc-main-container-aside-menu">
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'purse'}">钱包</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'revenue'}">广告收益账户</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">广告主账户</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'purse'}">{{$t('personal.purse')}}</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'revenue'}">{{$t('personal.revenue')}}</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">{{$t('personal.main')}}</router-link>
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'crowdfunding'}">我的众筹</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'crowdfunding'}">{{$t('personal.crowdfunding')}}</router-link>
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">我的投票</router-link>-->
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'invite'}">邀请用户</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'settings'}">账号设置</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'invite'}">{{$t('personal.invite')}}</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'settings'}">{{$t('personal.settings')}}</router-link>
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'adserving'}">广告方</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'project'}">众筹项目方</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'adserving'}">{{$t('personal.adserving')}}</router-link>
+						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'project'}">{{$t('personal.project')}}</router-link>
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">投资人</router-link>-->
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">合伙人</router-link>-->
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>-->

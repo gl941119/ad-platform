@@ -1,7 +1,7 @@
 <template>
 	<div class="user-management-list">
 		<div class="user-management-list-title">
-			<h3>{{$t('purse.balance')}}0AFDT</h3>
+			<h3>{{$t('purse.wallet')}}</h3>
 			<div class="balance">
 				<p>{{$t('purse.bindWalletAddress')}}{{$t('purse.main')}}</p>
 				<p>{{$t('purse.one')}}</p>
@@ -12,6 +12,12 @@
 						<el-input v-model="purseAddress"></el-input>
 					</div>
 					<button class="purse_address_bind" @click="bind">{{$t('buttonAll.bind')}}</button>
+				</div>
+				<div class="purse_address">
+					<label>{{$t('purse.balance')}}</label>
+					<div class="input">
+						<el-input></el-input>
+					</div>
 				</div>
 			</div>
 			<div class="balance">

@@ -201,6 +201,7 @@ const zh = {
 		loginOut:'退出登录',
 	},
 	purse:{//钱包
+		wallet:'钱包',
 		balance:'余额',
 		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额。',
 		main:'这意味着：',

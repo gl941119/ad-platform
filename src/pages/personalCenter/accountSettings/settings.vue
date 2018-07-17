@@ -1,289 +1,222 @@
 <template>
-	<div class="accountSettings">
-		<div class="accountSettings_content">
-			<h3 id="shou-feng-qin-xiao-guo">{{$t('setting.setInfo')}}</h3>
-			<div class="demo-block demo-box demo-zh-CN demo-collapse">
-				<div class="source">
-					<div role="tablist" aria-multiselectable="true" class="el-collapse">
-						<div class="el-collapse-item">
-							<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
-								<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
-									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(1)"></i> {{$t('setting.headUrl')}}
-									<span class="el-collapse-item__header_span" @click="checked(1)">更改</span>
+	<div>
+		<div>
+			<div class="title">设置信息</div>
+			<div class="settings_box">
+				<el-collapse v-model="activeName" accordion>
+					<el-collapse-item title="头像" name="1">
+						<div>
+							<div class="el-collapse-item__content">
+								<div class="el-collapse-item__content_img">
+									<img :src="imgsrc" />
 								</div>
-							</div>
-							<div role="tabpanel" :class="{'button-selected': headPortrait}" aria-labelledby="el-collapse-head-8983" id="el-collapse-content-8983" class="el-collapse-item__wrap" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-								<div class="el-collapse-item__content">
-									<div class="el-collapse-item__content_img">
-										<img :src="imgsrc" />
-									</div>
-									<div class="el-collapse-item__content_imgs">
-										<div class="el-collapse-item__content_imgs_box" v-for="(item, index) in imgData" :key="index">
-											<img @click="selectImg(item)" :src="item" />
-										</div>
+								<div class="el-collapse-item__content_imgs">
+									<div class="el-collapse-item__content_imgs_box" v-for="(item, index) in imgData" :key="index">
+										<img @click="selectImg(item)" :src="item" />
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="el-collapse-item">
-							<div role="tab" aria-controls="el-collapse-content-1977" aria-describedby="el-collapse-content-1977">
-								<div role="button" id="el-collapse-head-1977" tabindex="0" class="el-collapse-item__header">
-									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(2)"></i> {{$t('setting.nickname')}}
-									<span class="el-collapse-item__header_span" @click="checked(2)">修改</span>
-								</div>
-							</div>
-							<div role="tabpanel" :class="{'button-selected': nickname}" aria-hidden="true" aria-labelledby="el-collapse-head-1977" id="el-collapse-content-1977" class="el-collapse-item__wrap">
-								<div class="el-collapse-item__content">
-									<div class="el-collapse-item__content-box">
-										<h3>{{$t('setting.changeNickname')}}</h3>
-										<el-input :placeholder="$t('setting.enterNickname')" v-model="nickName"></el-input>
-										<span v-show="errors.has('nickName')" class="help is-danger">{{ errors.first('nickName') }}</span>
-										<div class="el-collapse-item__content-box_buttonBox">
-											<button @click="changeNickName">{{$t('buttonAll.confirm')}}</button>
-											<button @click="cancel">{{$t('buttonAll.cancle')}}</button>
-										</div>
-									</div>
+					</el-collapse-item>
+					<el-collapse-item title="昵称" name="2">
+						<div class="el-collapse-item__content">
+							<div class="el-collapse-item__content-box">
+								<h3>{{$t('setting.changeNickname')}}</h3>
+								<el-input :placeholder="$t('setting.enterNickname')" v-model="nickName"></el-input>
+								<span v-show="errors.has('nickName')" class="help is-danger">{{ errors.first('nickName') }}</span>
+								<div class="el-collapse-item__content-box_buttonBox">
+									<button @click="changeNickName">{{$t('buttonAll.confirm')}}</button>
+									<button @click="cancel">{{$t('buttonAll.cancle')}}</button>
 								</div>
 							</div>
 						</div>
-						<div class="el-collapse-item">
-							<div role="tab" aria-controls="el-collapse-content-5256" aria-describedby="el-collapse-content-5256">
-								<div role="button" id="el-collapse-head-5256" tabindex="0" class="el-collapse-item__header">
-									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(3)"></i> {{$t('setting.email')}}
-									<span class="el-collapse-item__header_span" @click="checked(3)">绑定</span>
-								</div>
-							</div>
-							<div role="tabpanel" :class="{'button-selected': email}" aria-hidden="true" aria-labelledby="el-collapse-head-5256" id="el-collapse-content-5256" class="el-collapse-item__wrap">
-								<div class="el-collapse-item__content">
-									<div class="el-collapse-item__content-box max">
-										<h3>{{$t('setting.bindEmail')}}</h3>
-										<p>
-											<el-input :placeholder="$t('setting.enterBindEmail')" v-validate data-rules="required|email" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" v-model="bindEmail"></el-input>
-											<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-										</p>
-										<div style="position: relative;">
-											<el-input :placeholder="$t('setting.enterEmailCode')" v-model="code"></el-input>
-											<div class="el-button-getCode password">
-												<span>|</span>
-												<el-button v-if="disabled" type="text" @click="getCode">{{$t('setting.getEmailCode')}}</el-button>
-												<el-button v-else disabled type="text">(<span>{{num}}</span>s){{$t('setting.once')}}</el-button>
-											</div>
-										</div>
-										<div class="el-collapse-item__content-box_buttonBox">
-											<button @click="toBindEmail">{{$t('buttonAll.confirm')}}</button>
-										</div>
+					</el-collapse-item>
+					<el-collapse-item title="邮箱" name="3">
+						<div class="el-collapse-item__content">
+							<div class="el-collapse-item__content-box max">
+								<h3>{{$t('setting.bindEmail')}}</h3>
+								<p>
+									<el-input :placeholder="$t('setting.enterBindEmail')" v-validate data-rules="required|email" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" v-model="bindEmail"></el-input>
+									<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+								</p>
+								<div style="position: relative;">
+									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="code"></el-input>
+									<div class="el-button-getCode password">
+										<span>|</span>
+										<el-button v-if="disable" type="text" @click="getCode">{{$t('setting.getEmailCode')}}</el-button>
+										<el-button v-if="!disable" disabled type="text">(<span>{{num}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
+								</div>
+								<div class="el-collapse-item__content-box_buttonBox">
+									<button @click="toBindEmail">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
 						</div>
-						<div class="el-collapse-item">
-							<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
-								<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(4)"></i> {{$t('passwordInfo.passwords')}}
-									<span class="el-collapse-item__header_span" @click="checked(4)">更改</span>
-								</div>
-							</div>
-							<div role="tabpanel" :class="{'button-selected': password}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
-								<div class="el-collapse-item__content">
-									<div class="el-collapse-item__content-box bindEmail">
-										<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
-										<h3 v-if="existPassword">{{$t('passwordInfo.changePassword')}}</h3>
-										<p>
-											<el-input v-if="!existPassword" :placeholder="$t('passwordInfo.oldPassword')" v-model="oldPassword"></el-input>
-										</p>
-										<p>
-											<el-input type="password" :placeholder="$t('passwordInfo.newPassword')" v-model="newPassword"></el-input>
-										</p>
-										<p>
-											<el-input type="password" :placeholder="$t('passwordInfo.oncePassword')" v-model="oncePassword"></el-input>
-										</p>
-										<div style="position: relative;">
-											<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codePassword"></el-input>
-											<div class="el-button-getCode password">
-												<span>|</span>
-												<button class="el-button-getCode_button" @click="getPasswordCode()">{{$t('setting.getEmailCode')}}</button>
-											</div>
-										</div>
-										<div class="el-collapse-item__content-box_buttonBox">
-											<button v-if="!existPassword" @click="setPassword">{{$t('buttonAll.confirm')}}</button>
-											<button v-if="existPassword" @click="changePassword">{{$t('buttonAll.confirm')}}</button>
-										</div>
+					</el-collapse-item>
+					<el-collapse-item title="密码" name="4">
+						<div class="el-collapse-item__content">
+							<div class="el-collapse-item__content-box bindEmail">
+								<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
+								<h3 v-if="existPassword">{{$t('passwordInfo.changePassword')}}</h3>
+								<p>
+									<el-input v-if="!existPassword" :placeholder="$t('passwordInfo.oldPassword')" v-model="oldPassword"></el-input>
+								</p>
+								<p>
+									<el-input type="password" :placeholder="$t('passwordInfo.newPassword')" v-model="newPassword"></el-input>
+								</p>
+								<p>
+									<el-input type="password" :placeholder="$t('passwordInfo.oncePassword')" v-model="oncePassword"></el-input>
+								</p>
+								<div style="position: relative;">
+									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codePassword"></el-input>
+									<div class="el-button-getCode password">
+										<span>|</span>
+										<button class="el-button-getCode_button" @click="getPasswordCode()">{{$t('setting.getEmailCode')}}</button>
 									</div>
+								</div>
+								<div class="el-collapse-item__content-box_buttonBox">
+									<button v-if="!existPassword" @click="setPassword">{{$t('buttonAll.confirm')}}</button>
+									<button v-if="existPassword" @click="changePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
 						</div>
-						<div class="el-collapse-item">
-							<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
-								<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(5)"></i> {{$t('passwordInfo.tradePassword')}}
-									<span class="el-collapse-item__header_span" @click="checked(5)">更改</span>
+					</el-collapse-item>
+					<el-collapse-item title="交易密码" name="5">
+						<div class="el-collapse-item__content">
+							<div v-if="!existTradePassword" class="el-collapse-item__content-box bindEmail">
+								<h3>{{$t('passwordInfo.setTradePassword')}}</h3>
+								<p>
+									<el-input type="password" :placeholder="$t('passwordInfo.tradePassword')" v-model="tradePassword"></el-input>
+								</p>
+								<p>
+									<el-input type="password" :placeholder="$t('passwordInfo.onceTradePassword')" v-model="onceSetTradePassword"></el-input>
+								</p>
+								<div style="position: relative;">
+									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
+									<div class="el-button-getCode password">
+										<span>|</span>
+										<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+									</div>
+								</div>
+								<div class="el-collapse-item__content-box_buttonBox">
+									<button @click="setTradePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
-							<div role="tabpanel" :class="{'button-selected': transactionPassword}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
-								<div class="el-collapse-item__content">
-									<div v-if="!existTradePassword" class="el-collapse-item__content-box bindEmail">
-										<h3>{{$t('passwordInfo.setTradePassword')}}</h3>
-										<p>
-											<el-input type="password" :placeholder="$t('passwordInfo.tradePassword')" v-model="tradePassword"></el-input>
-										</p>
-										<p>
-											<el-input type="password" :placeholder="$t('passwordInfo.onceTradePassword')" v-model="onceSetTradePassword"></el-input>
-										</p>
-										<div style="position: relative;">
-											<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
-											<div class="el-button-getCode password">
-												<span>|</span>
-												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
-											</div>
-										</div>
-										<div class="el-collapse-item__content-box_buttonBox">
-											<button @click="setTradePassword">{{$t('buttonAll.confirm')}}</button>
-										</div>
+							<div v-if="existTradePassword" class="el-collapse-item__content-box bindEmail">
+								<h3>{{$t('passwordInfo.changeTradePassword')}}</h3>
+								<p>
+									<el-input :placeholder="$t('passwordInfo.oldTradePassword')" v-model="oldTradePassword"></el-input>
+								</p>
+								<p>
+									<el-input type="password" :placeholder="$t('passwordInfo.newTradePassword')" v-model="newTradePassword"></el-input>
+								</p>
+								<p>
+									<el-input type="password" :placeholder="$t('passwordInfo.onceTradePassword')" v-model="onceTradePassword"></el-input>
+								</p>
+								<div style="position: relative;">
+									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
+									<div class="el-button-getCode password">
+										<span>|</span>
+										<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
 									</div>
-									<div v-if="existTradePassword" class="el-collapse-item__content-box bindEmail">
-										<h3>{{$t('passwordInfo.changeTradePassword')}}</h3>
-										<p>
-											<el-input :placeholder="$t('passwordInfo.oldTradePassword')" v-model="oldTradePassword"></el-input>
-										</p>
-										<p>
-											<el-input type="password" :placeholder="$t('passwordInfo.newTradePassword')" v-model="newTradePassword"></el-input>
-										</p>
-										<p>
-											<el-input type="password" :placeholder="$t('passwordInfo.onceTradePassword')" v-model="onceTradePassword"></el-input>
-										</p>
-										<div style="position: relative;">
-											<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
-											<div class="el-button-getCode password">
-												<span>|</span>
-												<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
-											</div>
-										</div>
-										<div class="el-collapse-item__content-box_buttonBox">
-											<button @click="changeTradePassword">{{$t('buttonAll.confirm')}}</button>
-										</div>
-									</div>
+								</div>
+								<div class="el-collapse-item__content-box_buttonBox">
+									<button @click="changeTradePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
 						</div>
-						<div class="el-collapse-item">
-							<div role="tab" aria-controls="el-collapse-content-8128" aria-describedby="el-collapse-content-8128">
-								<div role="button" id="el-collapse-head-8128" tabindex="0" class="el-collapse-item__header">
-									<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(6)"></i> {{$t('setting.telegram')}}
-									<span class="el-collapse-item__header_span" @click="checked(6)">绑定</span>
-								</div>
-							</div>
-							<div role="tabpanel" :class="{'button-selected': telegram}" aria-hidden="true" aria-labelledby="el-collapse-head-8128" id="el-collapse-content-8128" class="el-collapse-item__wrap">
-								<div class="el-collapse-item__content">
-									<ul class="el-collapse-item__content_item">
-										<li class="el-collapse-item__content_item_li">新浪微博
-											<a>去绑定</a>
-										</li>
-										<li class="el-collapse-item__content_item_li">腾讯qq
-											<a>去绑定</a>
-										</li>
-										<li class="el-collapse-item__content_item_li">飞机
-											<a>去绑定</a>
-										</li>
-										<li class="el-collapse-item__content_item_li">微信
-											<a>去绑定</a>
-										</li>
-										<li class="el-collapse-item__content_item_li">小鸟
-											<a>去绑定</a>
-										</li>
-										<li class="el-collapse-item__content_item_li">f
-											<a>去绑定</a>
-										</li>
-									</ul>
-								</div>
-							</div>
+					</el-collapse-item>
+					<el-collapse-item title="Telegram" name="6">
+						<div class="el-collapse-item__content">
+							<ul class="el-collapse-item__content_item">
+								<li class="el-collapse-item__content_item_li">新浪微博
+									<a>去绑定</a>
+								</li>
+								<li class="el-collapse-item__content_item_li">腾讯qq
+									<a>去绑定</a>
+								</li>
+								<li class="el-collapse-item__content_item_li">飞机
+									<a>去绑定</a>
+								</li>
+								<li class="el-collapse-item__content_item_li">微信
+									<a>去绑定</a>
+								</li>
+								<li class="el-collapse-item__content_item_li">小鸟
+									<a>去绑定</a>
+								</li>
+								<li class="el-collapse-item__content_item_li">f
+									<a>去绑定</a>
+								</li>
+							</ul>
 						</div>
-					</div>
-				</div>
+					</el-collapse-item>
+				</el-collapse>
 			</div>
-			<h3 id="shou-feng-qin-xiao-guo">{{$t('setting.authentication')}}</h3>
-			<el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
-				<span>提示</span>
-				<div>
-					<p>1、密码长度必须介于8到16个字符之间。</p>
-					<p>2、密码只能包含英文字母（A-Z）、数字字符（0-9）以及标点符号。</p>
-					<p>3、密码至少包含1个英文字母和1个数字字符。</p>
-					<p>4、密码不能与账号相同。</p>
-				</div>
-				<span slot="footer" class="dialog-footer">
+		</div>
+		<div class="title">{{$t('setting.authentication')}}</div>
+		<el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
+			<span>提示</span>
+			<div>
+				<p>1、密码长度必须介于8到16个字符之间。</p>
+				<p>2、密码只能包含英文字母（A-Z）、数字字符（0-9）以及标点符号。</p>
+				<p>3、密码至少包含1个英文字母和1个数字字符。</p>
+				<p>4、密码不能与账号相同。</p>
+			</div>
+			<span slot="footer" class="dialog-footer">
 				    <el-button @click="dialogVisible = false">取 消</el-button>
 				</span>
-			</el-dialog>
-
-			<div class="demo-block demo-box demo-zh-CN demo-collapse">
-				<div class="el-collapse-item">
-					<div role="tab" aria-controls="el-collapse-content-8983" aria-describedby="el-collapse-content-8983" aria-expanded="true">
-						<div role="button" id="el-collapse-head-8983" tabindex="0" class="el-collapse-item__header focusing">
-							<i class="el-collapse-item__arrow el-icon-arrow-down" @click="checked(7)"></i>{{$t('setting.fillInformation')}}
-						</div>
-					</div>
-					<ul class="el-collapse-item__content_authentication" :class="{'button-selected': certificationInformation}">
-						<li class="el-collapse-item__content_authentication_li">
-							<div class="el-collapse-item__content_authentication_li_box">
-								<div class="el-collapse-item__content_authentication_li_box_one">
-									<p class="el-collapse-item__content_authentication_li_box_one_title">{{$t('setting.country')}}</p>
-									<el-select v-model="country" clearable :placeholder="$t('setting.pleaseSelect')">
-										<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
-										</el-option>
-									</el-select>
+		</el-dialog>
+		<div class="settings_box">
+			<el-collapse v-model="active" accordion>
+				<el-collapse-item title="填写认证信息" name="1">
+						<ul class="el-collapse-item__content_authentication">
+							<li class="el-collapse-item__content_authentication_li">
+								<label>{{$t('setting.name')}}</label>
+								<input class="el-collapse-item__content_authentication_li_info" v-model="realName" />
+							</li>
+							<li class="el-collapse-item__content_authentication_li">
+								<label>{{$t('setting.identityFileType')}}</label>
+								<el-select v-model="idType" clearable :placeholder="$t('setting.pleaseSelect')">
+									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
+									</el-option>
+								</el-select>
+							</li>
+							<li class="el-collapse-item__content_authentication_li">
+								<label>{{$t('setting.identityFileNumber')}}</label>
+								<input class="el-collapse-item__content_authentication_li_info" v-model="idNum" />
+							</li>
+							<li class="el-collapse-item__content_authentication_li">
+								<label>{{$t('setting.country')}}</label>
+								<el-select v-model="country" clearable :placeholder="$t('setting.pleaseSelect')">
+									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
+									</el-option>
+								</el-select>
+							</li>
+							<li class="el-collapse-item__content_authentication_li last">
+								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
+								<div>
+									<el-upload class="avatar-uploader" action="" :show-file-list="false" :on-change="getImg">
+										<img v-if="imageUrl" :src="imageUrl" class="avatar">
+										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+									</el-upload>
 								</div>
-							</div>
-						</li>
-						<li class="el-collapse-item__content_authentication_li">
-							<div class="el-collapse-item__content_authentication_li_box">
-								<div class="el-collapse-item__content_authentication_li_box_one exec">
-									<p class="el-collapse-item__content_authentication_li_box_one_title">{{$t('setting.identityFileType')}}</p>
-									<el-select v-model="idType" clearable :placeholder="$t('setting.pleaseSelect')">
-										<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
-										</el-option>
-									</el-select>
+								<div class="el-collapse-item__content_authentication_li_precautions">
+									<p class="el-collapse-item__content_authentication_li_precautions_title">{{$t('setting.notic')}}</p>
+									<ol class="el-collapse-item__content_authentication_li_precautions_item">
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticOne')}}</li>
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticTwo')}}</li>
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticThree')}}</li>
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticFour')}}</li>
+									</ol>
 								</div>
-								<div class="el-collapse-item__content_authentication_li_box_one exec">
-									<p class="el-collapse-item__content_authentication_li_box_one_title">{{$t('setting.identityFileNumber')}}</p>
-									<el-input v-model="idNum"></el-input>
-								</div>
-							</div>
-						</li>
-						<li class="el-collapse-item__content_authentication_li">
-							<div class="el-collapse-item__content_authentication_li_box">
-								<div class="el-collapse-item__content_authentication_li_box_one">
-									<p class="el-collapse-item__content_authentication_li_box_one_title">{{$t('setting.name')}}</p>
-									<div class="el-collapse-item__content_authentication_li_box_one_name">
-										<el-input v-model="realName"></el-input>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="el-collapse-item__content_authentication_li last">
-							<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
-							<div>
-								<el-upload class="avatar-uploader" action="" :show-file-list="false" :on-change="getImg" >
-									<img v-if="imageUrl" :src="imageUrl" class="avatar">
-									<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-								</el-upload>
-							</div>
-							<div class="el-collapse-item__content_authentication_li_precautions">
-								<p class="el-collapse-item__content_authentication_li_precautions_title">{{$t('setting.notic')}}</p>
-								<ol class="el-collapse-item__content_authentication_li_precautions_item">
-									<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticOne')}}</li>
-									<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticTwo')}}</li>
-									<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticThree')}}</li>
-									<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticFour')}}</li>
-								</ol>
-							</div>
-						</li>
-					</ul>
-					<button :class="{'button-selected': certificationInformation}" class="commit" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
-				</div>
-			</div>
+							</li>
+						</ul>
+						<button class="commit" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
+				</el-collapse-item>
+			</el-collapse>
 		</div>
 	</div>
 </template>
-
 <script>
 	import Config from '../../../utils/config.js';
 	import Request from '../../../utils/require.js';
@@ -291,16 +224,11 @@
 	export default {
 		data() {
 			return {
+				activeName: '',
+				active: '',
 				fileList: [],
 				value4: '',
 				options: [],
-				headPortrait: false,
-				nickname: false,
-				email: false,
-				password: false,
-				transactionPassword: false,
-				telegram: false,
-				certificationInformation: false,
 				bindEmail: "",
 				headUrl: "",
 				id: 0,
@@ -308,14 +236,14 @@
 				oldPassword: "",
 				newPassword: "",
 				oncePassword: "",
-				tradePassword:'',
-				onceSetTradePassword:'',
+				tradePassword: '',
+				onceSetTradePassword: '',
 				oldTradePassword: "",
 				newTradePassword: "",
 				onceTradePassword: "",
 				code: "",
-				codePassword:'',
-				codeTradePassword:'',
+				codePassword: '',
+				codeTradePassword: '',
 				/*身份验证*/
 				country: "",
 				countryData: [{
@@ -348,18 +276,18 @@
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				dialogVisible: false,
-				disabled: true,
+				disable: true,
 				disabledTradePassword: true,
 				disabledPassword: true,
 				num: 60,
-				numPassword:60,
-				numTradePassword:60,
+				numPassword: 60,
+				numTradePassword: 60,
 				imgData: Config.headPortrait,
-				imgsrc:Config.headPortrait[0],
-				existEmail:true,
-				existPassword:true,
-				existTradePassword:true,
-				isBindTelegram:true,
+				imgsrc: Config.headPortrait[0],
+				existEmail: true,
+				existPassword: true,
+				existTradePassword: true,
+				isBindTelegram: true,
 			}
 		},
 		mounted() {
@@ -375,13 +303,13 @@
 			})
 		},
 		methods: {
-			setPassword(){//设置密码
+			setPassword() { //设置密码
 				var reg = new RegExp();
 				var str = this.newPassword;
 				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
 				console.log(1);
-				if(value){
-					if( this.newPassword === this.oncePassword){
+				if(value) {
+					if(this.newPassword === this.oncePassword) {
 						Request({
 							url: 'SetPassword',
 							data: {
@@ -392,26 +320,26 @@
 							flag: true
 						}).then(res => {
 							console.log(res);
-							if(res.success){
+							if(res.success) {
 								this.$message(this.$t('messageNotice.setSuccess'));
 								this.oncePassword = '';
 								this.newPassword = '';
 								this.codePassword = '';
 							}
 						})
-					}else{
+					} else {
 						this.$message(this.$t('messageNotice.oncePasswordEqual'));
 					}
-				}else{
+				} else {
 					this.dialogVisible = true;
 				}
 			},
-			setTradePassword(){//设置交易密码
+			setTradePassword() { //设置交易密码
 				var reg = new RegExp();
 				var str = this.tradePassword;
 				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
-				if(value){
-					if( this.tradePassword === this.onceSetTradePassword){
+				if(value) {
+					if(this.tradePassword === this.onceSetTradePassword) {
 						Request({
 							url: 'SetTradePassword',
 							data: {
@@ -422,16 +350,16 @@
 							flag: true
 						}).then(res => {
 							console.log(res);
-							if(res.success){
+							if(res.success) {
 								this.$message(this.$t('messageNotice.setTradePassword'));
 								this.codeTradePassword = '';
 								this.tradePassword = '';
 							}
 						})
-					}else{
+					} else {
 						this.$message(this.$t('messageNotice.oncePasswordEqual'));
 					}
-				}else{
+				} else {
 					this.dialogVisible = true;
 				}
 			},
@@ -465,55 +393,54 @@
 							email: this.bindEmail,
 						},
 					}).then(res => {
-						this.disabled = false;
-						let timer = setInterval(() => {
-							this.num--;
-							if(this.num < 1) {
-								clearInterval(timer);
-								this.disabled = true;
-								this.num = 60;
-							}
-						}, 1000);
-						/*if(res.success == 1) {
+						if(res.success) {
+							this.disable = false;
+							let timerEmail = setInterval(() => {
+								this.num--;
+								if(this.num < 1) {
+									clearInterval(timerEmail);
+									this.disable = true;
+									this.num = 60;
+								}
+							}, 1000);
 							this.$message('获取成功');
-						} else {
-							this.$message('获取失败');
-						}*/
+						} 
 					})
 				} else {
 					this.$message(this.$t('messageNotice.emailEmpty'));
 				}
 			},
 			getPasswordCode() {
-					Request({
-						url: 'QueryPasswordCode',
-						data: {
-							codeType: 3,
-						},
-					}).then(res => {
-						console.log(res);
-						this.disabledPassword = false;
-						let timer = setInterval(() => {
-							this.numPassword--;
-							if(this.numPassword < 1) {
-								clearInterval(timer);
-								this.disabledPassword = true;
-								this.numPassword = 60;
-							}
-						}, 1000);
-						if(res.success) {
-							this.$message(this.$t('messageNotice.getSuccess'));
+				Request({
+					url: 'QueryPasswordCode',
+					data: {
+						codeType: 3,
+					},
+				}).then(res => {
+					console.log(res);
+					this.disabledPassword = false;
+					let timer = setInterval(() => {
+						this.numPassword--;
+						if(this.numPassword < 1) {
+							clearInterval(timer);
+							this.disabledPassword = true;
+							this.numPassword = 60;
 						}
-					})
+					}, 1000);
+					if(res.success) {
+						this.$message(this.$t('messageNotice.getSuccess'));
+					}
+				})
 			},
 			getchangeTradePasswordCode() {
-					Request({
-						url: 'QueryPasswordCode',
-						data: {
-							codeType: 4,
-						},
-					}).then(res => {
-						console.log(res);
+				Request({
+					url: 'QueryPasswordCode',
+					data: {
+						codeType: 4,
+					},
+				}).then(res => {
+					if(res.success) {
+						this.$message(this.$t('messageNotice.getSuccess'));
 						this.disabledTradePassword = false;
 						let timer = setInterval(() => {
 							this.TradePassword--;
@@ -523,24 +450,22 @@
 								this.numTradePassword = 60;
 							}
 						}, 1000);
-						if(res.success) {
-							this.$message(this.$t('messageNotice.getSuccess'));
-						}
-					})
+					}
+				})
 			},
 			changeTradePassword() {
 				var reg = new RegExp();
 				var str = this.newTradePassword;
 				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
 				if(value) {
-					if( this.newTradePassword === this.onceTradePassword){
+					if(this.newTradePassword === this.onceTradePassword) {
 						Request({
 							url: 'QueryAccountSettings',
 							data: {
 								id: this.accountId,
 								tradePassword: this.newTradePassword,
 								oldTradePassword: this.oldTradePassword,
-								verificationCode:this.codeTradePassword,
+								verificationCode: this.codeTradePassword,
 							},
 							type: 'post',
 							flag: true
@@ -552,7 +477,7 @@
 								this.codeTradePassword = '';
 							}
 						})
-					}else{
+					} else {
 						this.$message(this.$t('messageNotice.oncePasswordEqual'));
 					}
 				} else {
@@ -570,7 +495,7 @@
 							id: this.accountId,
 							oldPassword: this.oldPassword,
 							password: this.newPassword,
-							verificationCode:this.codePassword,
+							verificationCode: this.codePassword,
 						},
 						type: 'post',
 						flag: true
@@ -602,16 +527,16 @@
 					this.dialogVisible = true;
 				}
 			},
-			handleSignOut(){
-                this.$store.commit('setUserId', undefined);
+			handleSignOut() {
+				this.$store.commit('setUserId', undefined);
 				this.$store.commit('setUserName', undefined);
 				this.$store.commit('setUserNickName', undefined);
-                this.$store.commit('setToken', undefined);
-                Cache.removeSession('bier_username');
-                Cache.removeSession('bier_token');
-                Cache.removeSession('bier_userid');
+				this.$store.commit('setToken', undefined);
+				Cache.removeSession('bier_username');
+				Cache.removeSession('bier_token');
+				Cache.removeSession('bier_userid');
 				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
-           },
+			},
 			toBindEmail() { //绑定邮箱
 				if(this.bindEmail) {
 					Request({
@@ -679,33 +604,6 @@
 			getImg(file) {
 				this.imageUrl = file.url;
 			},
-			checked(value) {
-				switch(value) {
-					case 1:
-						this.headPortrait = !this.headPortrait;
-						break;
-					case 2:
-						this.nickname = !this.nickname;
-						break;
-					case 3:
-						this.email = !this.email;
-						break;
-					case 4:
-						this.password = !this.password;
-						break;
-					case 5:
-						this.transactionPassword = !this.transactionPassword;
-						break;
-					case 6:
-						this.telegram = !this.telegram;
-						break;
-					case 7:
-						this.certificationInformation = !this.certificationInformation;
-						break;
-					default:
-						break;
-				}
-			},
 		}
 	}
 </script>
@@ -719,67 +617,6 @@
 			}
 		}
 	}
-	
-	.page-component .content>h3 {
-		margin: 55px 0 20px;
-	}
-	
-	.page-container h2,
-	.page-container h3,
-	.page-container h4,
-	.page-container h5 {
-		font-weight: 400;
-		color: #1f2f3d;
-	}
-	
-	.el-collapse-item__header.is-active {
-		border-bottom-color: transparent;
-	}
-	
-	.el-collapse-item__header {
-		height: 48px;
-		line-height: 48px;
-		background-color: #fff;
-		cursor: pointer;
-		border-bottom: 1px solid #ebeef5;
-		font-size: 13px;
-		font-weight: 500;
-		font-size: 18px;
-		color: rgba(96, 98, 102, 1);
-		transition: border-bottom-color .3s;
-		outline: none;
-		position: relative;
-		&_span {
-			position: absolute;
-			top: 0px;
-			right: 45px;
-			font-size: 18px;
-			color: rgba(96, 98, 102, 1);
-		}
-	}
-	
-	.el-collapse-item__wrap {
-		will-change: height;
-		background-color: #fff;
-		overflow: hidden;
-		box-sizing: border-box;
-		border-bottom: 1px solid #ebeef5;
-		display: none;
-	}
-	
-	.el-collapse-item__arrow.is-active {
-		transform: rotate(180deg);
-	}
-	
-	.el-collapse-item__arrow {
-		font-size: 26px;
-		margin-right: 8px;
-		transition: transform .3s;
-		float: right;
-		line-height: 48px;
-		font-weight: 300;
-	}
-	
 	.el-collapse-item__content {
 		height: 376px;
 		background: rgba(245, 245, 245, 1);
@@ -788,7 +625,7 @@
 		&_img {
 			float: left;
 			margin: 115px 80px 0 80px;
-			img{
+			img {
 				border-radius: 50%;
 			}
 		}
@@ -811,20 +648,29 @@
 			}
 		}
 		&_authentication {
-			border: 1px solid rgba(228, 231, 237, 1);
-			display: none;
-			border-top: 0;
 			&_li {
-				display: block;
-				height: 144px;
-				border-bottom: 1px solid rgba(228, 231, 237, 1);
-				position: relative;
+				height: 70px;
+				label{
+					vertical-align: middle;
+					display:inline-block; 
+					width:200px; 
+					text-align:right;
+					margin-right: 20px;
+				}
+				&_info{
+					width: 222px;
+					height: 40px;
+					padding: 10px;
+					border-radius:4px;
+					border:1px solid rgba(216,220,230,1);
+					vertical-align: middle;
+				}
 				&_precautions {
-					position: absolute;
-					top: 0;
-					right: 100px;
 					font-size: 12px;
 					color: rgba(153, 153, 153, 1);
+					position: absolute;
+					top: 0;
+    				right: 180px;
 					&_title {
 						font-size: 14px;
 						color: rgba(96, 98, 102, 1);
@@ -898,7 +744,6 @@
 			}
 		}
 	}
-	
 	.max {
 		height: 250px;
 	}
@@ -916,6 +761,7 @@
 		height: 300px;
 		border: 0;
 		padding-left: 144px;
+		position: relative;
 	}
 	
 	.el-upload__text {
@@ -935,11 +781,6 @@
 		font-size: 14px;
 		color: rgba(255, 255, 255, 1);
 		margin: 26px 0 0 144px;
-		display: none;
-	}
-	
-	.button-selected {
-		display: block;
 	}
 	
 	.avatar-uploader .el-upload {
@@ -979,12 +820,19 @@
 		font-size: 14px;
 		color: rgba(255, 149, 0, 1);
 		button {
-			background: #ffffff;
 			font-size: 14px;
 			color: rgba(255, 149, 0, 1);
-			height: 37px;
-			line-height: 37px;
+			height: 38px;
+			background: transparent;
 		}
 	}
-	
+	.title {
+		font-size: 24px;
+		color: rgba(51, 51, 51, 1);
+		margin: 10px 0 30px 20px;
+	}
+	.settings_box {
+		padding: 20px;
+		background: #FFFFFF;
+	}
 </style>

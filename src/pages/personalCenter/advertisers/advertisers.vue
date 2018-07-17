@@ -179,8 +179,10 @@
 				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress" />
 			</li>
 		</ul>
-		<button v-if="value == -1" @click="submit">{{$t('buttonAll.submits')}}</button>
-		<button v-if="value == 2" @click="saveSubmit">{{$t('buttonAll.saveChange')}}</button>
+		<div class="submit_box">
+			<button v-if="value == -1" @click="submit" class="submit">{{$t('buttonAll.submits')}}</button>
+			<button v-if="value == 2" @click="saveSubmit" class="submit">{{$t('buttonAll.saveChange')}}</button>
+		</div>
 	</div>
 </template>
 
@@ -248,9 +250,9 @@
 			var value = this.$route.params.value;
 			if(value == 1){
 				this.queryDetails();
-				this.disabled = false;
-			}else if(value == 2){
 				this.disabled = true;
+			}else if(value == 2){
+				this.disabled = false;
 				this.queryDetails();
 			}else if(value == 0){
 				this.disabled = false;
@@ -373,7 +375,7 @@
 			queryCore() {
 				var value = this.$route.params.value;
 				this.centerDialogVisible = true;
-				if(value == 1){
+				if(value == 1 || value == 2){
 					Request({
 						url: 'QueryAdCoreMember',
 						data: {
@@ -382,6 +384,7 @@
 						type: 'get',
 						flag:true,
 					}).then(res => {
+						console.log(res);
 						this.coreTeam = res.data;
 					})
 				}
@@ -445,7 +448,7 @@
 			},
 			queryConsultant() {
 				var value = this.$route.params.value;
-				if(value == 1){
+				if(value == 1 || value == 2){
 					Request({
 						url: 'QueryAdConsultant',
 						data: {
