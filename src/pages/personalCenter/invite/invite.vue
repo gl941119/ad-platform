@@ -5,16 +5,16 @@
 			<p class="invite_top_code"><span>{{$t('invite.code')}}：</span>{{inviteCode}}</p>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
-		<div class="invite_data">
+		<!--<div class="invite_data">
 			<div class="invite_data_title">{{$t('invite.inviteUser')}}</div>
 			<el-table :data="inviteData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('invite.timer')">
 				</el-table-column>
 				<el-table-column prop="email" :label="$t('invite.userAccout')">
-				</el-table-column>
+				</el-table-column>-->
 				<!--<el-table-column prop="province" :label="$t('invite.recently')">
 				</el-table-column>-->
-				<el-table-column prop="earnings" :label="$t('invite.divided')">
+				<!--<el-table-column prop="earnings" :label="$t('invite.divided')">
 				</el-table-column>
 			</el-table>
 			<div class="invite_data_data_pages">
@@ -28,7 +28,7 @@
       :total="total">
     </el-pagination>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </template>
 <script>
@@ -47,7 +47,7 @@
 			}
 		},
 		mounted() {
-			this.queryCode();
+//			this.queryCode();
 		},
 		methods: {
 			queryCode() {
