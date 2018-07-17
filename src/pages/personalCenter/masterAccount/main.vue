@@ -136,4 +136,8 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProject.scss';
+	.master_account{
+		background: #FFFFFF;
+		padding: 20px;
+	}
 </style>

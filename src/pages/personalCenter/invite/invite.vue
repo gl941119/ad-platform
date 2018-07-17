@@ -88,7 +88,10 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.invite_top {
+.invite{
+	background: #FFFFFF;
+	padding: 20px;
+	&_top {
 		margin: 30px 0;
 		&_code {
 			margin: 10px 0;
@@ -101,6 +104,7 @@
 			font-size: 24px;
 		}
 	}
+}
 	
 	.invite_data_title {
 		margin: 10px 0 20px 0;

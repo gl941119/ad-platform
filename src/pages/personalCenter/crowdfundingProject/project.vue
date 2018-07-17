@@ -105,19 +105,23 @@
 	}
 </script>
 <style lang="scss" scoped>
-.my_crowdfunding_title{
-	font-size: 24px;
-	&_intro {
-		margin-bottom: 30px;
-		float: right;
-		font-size:18px;
-		color:rgba(153,153,153,1);
-		line-height:25px;
+.my_crowdfunding{
+	background: #FFFFFF;
+	padding: 20px;
+	&_title{
+		font-size: 24px;
+		&_intro {
+			margin-bottom: 30px;
+			float: right;
+			font-size:18px;
+			color:rgba(153,153,153,1);
+			line-height:25px;
+		}
 	}
-}
 	
 	.my_crowdfunding_data_pages {
 		margin-top: 30px;
 		text-align: center;
 	}
+}
 </style>
