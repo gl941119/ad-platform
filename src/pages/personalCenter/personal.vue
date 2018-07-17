@@ -16,17 +16,17 @@
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'crowdfunding'}">我的众筹</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">我的投票</router-link>
+						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">我的投票</router-link>-->
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'invite'}">邀请用户</router-link>
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'settings'}">账号设置</router-link>
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'adserving'}">广告方</router-link>
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'project'}">众筹项目方</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">投资人</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">合伙人</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>
+						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">投资人</router-link>-->
+						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">合伙人</router-link>-->
+						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>-->
+						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>-->
 					</ul>
 					<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
 				</el-aside>

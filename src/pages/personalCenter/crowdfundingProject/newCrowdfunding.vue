@@ -128,11 +128,15 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input :placeholder="$t('projectInfo.enterTechnology1')" v-model="newCrowdfunding.technology1">
-				</el-input>
-				<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="newCrowdfunding.technology2">
-				</el-input>
-				<button class="right_now" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				<div class="technology">
+					<el-input :placeholder="$t('projectInfo.enterTechnology1')" v-model="newCrowdfunding.technology1">
+					</el-input>
+				</div>
+				<div class="technology">
+					<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="newCrowdfunding.technology2">
+					</el-input>
+				</div>
+				<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
@@ -211,7 +215,9 @@
 				</div>
 			</li>
 		</ul>
-		<button @click="submit">{{$t('buttonAll.submits')}}</button>
+		<div class="submit_box">
+			<button class="submit" @click="submit">{{$t('buttonAll.submits')}}</button>
+		</div>
 	</div>
 </template>
 

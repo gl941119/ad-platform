@@ -101,16 +101,11 @@
                         raisedAmount,
                         total,
                     } = res;
-                    // console.log('handleContract------>', this.immediateBuyDatas);
                     this.immediateBuyDatas = Object.assign(this.immediateBuyDatas, res, {
                         remain: total - raisedAmount,
                     });
                     this.loadingData = false;
                     // console.log('get getDetail data contractData------>', this.immediateBuyDatas);
-                }).catch(e => {
-                    console.error('handleContract error_>', e);
-                    this.$message.error({message: 'contract function invoke fail'});
-                    this.finish();
                 })
             },
             instantBuyVisible(val, old) {

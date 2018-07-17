@@ -1,135 +1,125 @@
 <template>
-	<div class="project_review_details">
-		<div class="project_review_details_team">
-			<div class="project_review_details_title">{{$t('team.teamInfo')}}</div>
-			<ul class="project_review_details_team_item">
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('team.teamName')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.teamName"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('team.teamPhone')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.teamContact"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('team.teamAddress')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.teamLocation"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('team.coreMember')}}</label>
-					<el-button type="text" @click="queryCore">{{$t('team.openCoreMember')}}</el-button>
-				</li>
-				<div class="project_review_details_item_li_info">
-					<el-dialog :title="$t('team.coreMember')" :visible.sync="centerDialogVisible" size="small">
-						<el-table :data="coreTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
-							<el-table-column type="selection" width="55">
-							</el-table-column>
-							<el-table-column property="year" align="center" :label="$t('team.name')">
-								<template slot-scope="scope">
-									<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
-								<template slot-scope="scope">
-									<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="address" align="center" :label="$t('team.desc')">
-								<template slot-scope="scope">
-									<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="address" align="center" :label="$t('team.operating')">
-								<template slot-scope="scope">
-									<i @click="addCore" class="custom-element-icon-jia-copy"></i>
-									<i @click="deletedCore(scope.$index)" class="custom-element-icon-jian1"></i>
-								</template>
-							</el-table-column>
-						</el-table>
-						<div slot="footer" class="dialog-footer">
-							<el-button :disabled="disabled" @click="saveLink">{{$t('buttonAll.save')}}</el-button>
-							<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
-							<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
-						</div>
-					</el-dialog>
-				</div>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('team.consultant')}}</label>
-					<el-button type="text" @click="queryConsultant">{{$t('team.openConsultant')}}</el-button>
-				</li>
-				<div class="project_review_details_item_li_info">
-					<el-dialog :title="$t('team.consultant')" :visible.sync="CrowdTeamDialogVisible" size="small">
-						<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
-							<el-table-column type="selection" width="55">
-							</el-table-column>
-							<el-table-column property="year" align="center" :label="$t('team.name')">
-								<template slot-scope="scope">
-									<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
-								<template slot-scope="scope">
-									<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="address" align="center" :label="$t('team.desc')">
-								<template slot-scope="scope">
-									<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
-								</template>
-							</el-table-column>
-							<el-table-column property="address" align="center" :label="$t('team.operating')">
-								<template slot-scope="scope">
-									<i @click="addConsultant" class="custom-element-icon-jia-copy"></i>
-									<i @click="deletedConsultant(scope.$index)" class="custom-element-icon-jian1"></i>
-								</template>
-							</el-table-column>
-						</el-table>
-						<div slot="footer" class="dialog-footer">
-							<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
-							<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
-							<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
-						</div>
-					</el-dialog>
-				</div>
-			</ul>
-		</div>
-		<div class="project_review_details_team">
-			<div class="project_review_details_title">{{$t('projectInfo.info')}}</div>
-			<ul class="project_review_details_item">
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('projectInfo.projectName')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.proName"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('projectInfo.projectDesc')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.proDesc"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('projectInfo.concept')}}</label>
-					<div class="project_review_details_item_li_intro" style="position: relative;">
-						<el-input v-model="conceptDatas" :disabled="disabled">
-						</el-input>
-						<i class="el-icon-circle-plus" v-if="!disabled" style="position: absolute;top: 14px;right: 15px;" @click="conceptFun"></i>
+	<div class="newCrowdfunding">
+		<ul class="newCrowdfunding_item">
+			<h5>{{$t('team.teamInfo')}}</h5>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('team.teamName')}}</label>
+				<input :disabled="disabled" v-model="details.teamName" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('team.teamPhone')}}</label>
+				<input :disabled="disabled" v-model="details.teamContact" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('team.teamAddress')}}</label>
+				<input :disabled="disabled" v-model="details.teamLocation" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('team.coreMember')}}</label>
+				<el-button type="text" @click="queryCore">{{$t('team.openCoreMember')}}</el-button>
+			</li>
+			<div class="project_review_details_item_li_info">
+				<el-dialog :title="$t('team.coreMember')" :visible.sync="centerDialogVisible" size="small">
+					<el-table :data="coreTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+						<el-table-column type="selection" width="55">
+						</el-table-column>
+						<el-table-column property="year" align="center" :label="$t('team.name')">
+							<template slot-scope="scope">
+								<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+							<template slot-scope="scope">
+								<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" :label="$t('team.desc')">
+							<template slot-scope="scope">
+								<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" :label="$t('team.operating')">
+							<template slot-scope="scope">
+								<i @click="addCore" class="custom-element-icon-jia-copy"></i>
+								<i @click="deletedCore(scope.$index)" class="custom-element-icon-jian1"></i>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div slot="footer" class="dialog-footer">
+						<el-button :disabled="disabled" @click="saveLink">{{$t('buttonAll.save')}}</el-button>
+						<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
+						<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
 					</div>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('projectInfo.technology')}}</label>
-					<div class="project_review_details_item_li_intro" style="position: relative;">
-						<el-input v-model="technologyDatas" :disabled="disabled">
-						</el-input>
-						<i class="el-icon-circle-plus" v-if="!disabled" style="position: absolute;top: 14px;right: 15px;" @click="technologyFun"></i>
+				</el-dialog>
+			</div>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('team.consultant')}}</label>
+				<el-button type="text" @click="queryConsultant">{{$t('team.openConsultant')}}</el-button>
+			</li>
+			<div class="project_review_details_item_li_info">
+				<el-dialog :title="$t('team.consultant')" :visible.sync="CrowdTeamDialogVisible" size="small">
+					<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+						<el-table-column type="selection" width="55">
+						</el-table-column>
+						<el-table-column property="year" align="center" :label="$t('team.name')">
+							<template slot-scope="scope">
+								<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+							<template slot-scope="scope">
+								<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" :label="$t('team.desc')">
+							<template slot-scope="scope">
+								<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
+							</template>
+						</el-table-column>
+						<el-table-column property="address" align="center" :label="$t('team.operating')">
+							<template slot-scope="scope">
+								<i @click="addConsultant" class="custom-element-icon-jia-copy"></i>
+								<i @click="deletedConsultant(scope.$index)" class="custom-element-icon-jian1"></i>
+							</template>
+						</el-table-column>
+					</el-table>
+					<div slot="footer" class="dialog-footer">
+						<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
+						<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
+						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
 					</div>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('aboutLink.website')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.website"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('aboutLink.whitePaper')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.whitePaper"></el-input>
-				</li>
-			</ul>
-		</div>
+				</el-dialog>
+			</div>
+		</ul>
+		<ul class="newCrowdfunding_item">
+			<h5 >{{$t('projectInfo.info')}}</h5>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('projectInfo.projectName')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.proName" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('projectInfo.projectDesc')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.proDesc" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label >{{$t('projectInfo.concept')}}</label>
+				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
+				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label >{{$t('projectInfo.technology')}}</label>
+				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
+				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label >{{$t('aboutLink.website')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.website" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label >{{$t('aboutLink.whitePaper')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.whitePaper" />
+			</li>
+		</ul>
 		<!--概念-->
 		<div v-if="concept" class="withdraw">
 			<div class="withdraw_box">
@@ -143,100 +133,98 @@
 		<div v-if="technology" class="withdraw">
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="technologyFun"><i class="el-icon-close"></i></span>
-				<el-input :placeholder="$t('projectInfo.enterTechnology1')" v-model="details.technology1">
-				</el-input>
-				<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="details.technology2">
-				</el-input>
-				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				<div class="technology">
+					<el-input :placeholder="$t('projectInfo.enterTechnology1')" v-model="details.technology1">
+					</el-input>
+				</div>
+				<div class="technology">
+					<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="details.technology2">
+					</el-input>
+				</div>
+				<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
 			</div>
 		</div>
-		<div class="project_review_details_team">
-			<div class="project_review_details_title">{{$t('tokenInfo.token')}}</div>
-			<ul class="project_review_details_item">
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.english')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.shotEnName"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.chinese')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.shotCnName"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.englishName')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.fullEnName"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">logo</label>
-					<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
-						<img v-if="details.logo" :src="details.logo" class="avatar">
-						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+		<ul class="newCrowdfunding_item">
+			<h5 >{{$t('tokenInfo.token')}}</h5>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.english')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.shotEnName" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.chinese')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.shotCnName" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.englishName')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.fullEnName" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>logo</label>
+				<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
+					<img v-if="details.logo" :src="details.logo" class="avatar">
+					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+				</el-upload>
+			</li>
+		</ul>
+		<ul class="newCrowdfunding_item">
+			<h5>{{$t('tokenInfo.title')}}</h5>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.issueTotal')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.circulation" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.total')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.totalCrowdfund" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label >{{$t('tokenInfo.thisIssue')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.currCirculation" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.price')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.price" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.limit')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.mostNumber" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.money')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.targetCurrency" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.topLimit')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.topLimit" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.lowLimit')}}</label>
+				<input class="langer" :disabled="disabled" v-model="details.lowLimit" />
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.dataTime')}}</label>
+				<div v-if="disabled">
+					<span>{{details.startTime}}</span> ~ <span>{{details.endTime}}</span>
+				</div>
+				<div v-if="!disabled" >
+					<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
+					</el-date-picker>
+				</div>
+			</li>
+		</ul>
+		<ul class="newCrowdfunding_item">
+			<h5>{{$t('tokenInfo.files')}}</h5>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.about')}}</label>
+				<a v-if="disabled && details.license" :href="details.license" download>{{$t('tokenInfo.download')}}</a>
+				<div v-if="!disabled">
+					<el-upload class="upload-demo" action="" :auto-upload="false" :on-change="getFile" :multiple="false">
+						<el-button size="small">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
-				</li>
-			</ul>
-		</div>
-		<div class="project_review_details_team">
-			<div class="project_review_details_title">{{$t('tokenInfo.title')}}</div>
-			<ul class="project_review_details_item">
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.issueTotal')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.circulation"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.total')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.totalCrowdfund"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.thisIssue')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.currCirculation"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.price')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.price"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.limit')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.mostNumber"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.money')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.targetCurrency"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.topLimit')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.topLimit"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.lowLimit')}}</label>
-					<el-input class="project_review_details_item_li_intro" :disabled="disabled" v-model="details.lowLimit"></el-input>
-				</li>
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.dataTime')}}</label>
-					<div v-if="disabled" class="project_review_details_item_li_intro">
-						<span>{{details.startTime}}</span> ~ <span>{{details.endTime}}</span>
-					</div>
-					<div v-if="!disabled" class="project_review_details_item_li_intro">
-						<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
-						</el-date-picker>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div class="project_review_details_team">
-			<div class="project_review_details_title">{{$t('tokenInfo.files')}}</div>
-			<ul class="project_review_details_item">
-				<li class="project_review_details_item_li">
-					<label class="project_review_details_item_li_label">{{$t('tokenInfo.about')}}</label>
-					<a v-if="disabled && details.license" :href="details.license" download>{{$t('tokenInfo.download')}}</a>
-					<div v-if="!disabled">
-						<el-upload class="upload-demo" action="" :auto-upload="false" :on-change="getFile" :multiple="false">
-							<el-button size="small">{{$t('tokenInfo.upload')}}</el-button>
-						</el-upload>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div v-if="!disabled">
-			<button class="check" @click="changeDetails">{{$t('buttonAll.saveChange')}}</button>
+				</div>
+			</li>
+		</ul>
+		<div class="submit_box" v-if="!disabled">
+			<button class="submit" @click="changeDetails">{{$t('buttonAll.saveChange')}}</button>
 		</div>
 	</div>
 </template>
@@ -595,37 +583,4 @@
 	@import '../../../assets/css/newProjectDetails.scss';
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/upload.css';
-	.project_review_details_team {
-		padding: 20px;
-		margin-bottom: 10px;
-		background: rgba(255, 255, 255, 1);
-		box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.06);
-		border: 1px solid rgba(228, 231, 237, 1);
-	}
-	.project_review_details_item_li {
-		display: flex;
-		font-size: 14px;
-		color: rgba(16, 16, 16, 1);
-		min-height: 20px;
-		line-height: 20px;
-		margin: 10px 0;
-		&_label {
-			width: 150px;
-		}
-		&_intro {
-			flex: 1;
-		}
-		&_info {
-			margin: 10px 0;
-		}
-	}
-	.check {
-		border-radius: 4px;
-		color: rgba(16, 16, 16, 1);
-		font-size: 14px;
-		text-align: center;
-		border: 1px solid rgba(187, 187, 187, 1);
-		padding: 5px 10px;
-		background: #ffffff;
-	}
 </style>

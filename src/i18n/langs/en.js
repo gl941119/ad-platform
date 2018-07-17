@@ -374,7 +374,7 @@ const en = {
 		websiteAddress:'自定义站点地址',
 		enterWebsite:'请输入官网',
 		enterWhitePaper:'请输入白皮书地址',
-		enterWebsiteName:'请输入自定义站点名',
+		enterWebsiteName:'自定义站点名',
 		enterWebsiteAddress:'请输入自定义站点地址',
 		emptyWebsite:'官网不能为空（符合网站地址）',
 		emptyWhitePaper:'白皮书地址不能为空（符合网站地址）',
