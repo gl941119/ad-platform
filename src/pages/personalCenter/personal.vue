@@ -94,6 +94,9 @@
 		display: flex;
 		.logo_box {
 			margin: auto;
+			:hover{
+				cursor: pointer;
+			}
 			.logo_img {
 				width: 88px;
 				height: 88px;
@@ -108,7 +111,6 @@
 			}
 		}
 	}
-	
 	.el-container {
 		width: 1200px;
 		margin: 0 auto;
@@ -116,13 +118,27 @@
 	
 	.bierinc-main-container-aside-menu {
 		margin-bottom: 20px;
+		background: #FFFFFF;
+		:hover{
+			cursor: pointer;
+		}
+		&-li {
+			background: #FFFFFF;
+			text-align: center;
+			height: 65px;
+			line-height: 65px;
+			color: #cccccc;
+			:hover{
+				cursor: pointer;
+			}
+			&.router-link-active {
+		        color: rgba(255,149,0,1);
+		    }
+		}
 	}
 	
-	.bierinc-main-container-aside-menu-li {
-		background: #000000;
-		text-align: center;
-		height: 65px;
-		line-height: 65px;
-		color: #cccccc;
+	.bierinc-main-container-view{
+		margin: 20px;
+		background: #FFFFFF;
 	}
 </style>

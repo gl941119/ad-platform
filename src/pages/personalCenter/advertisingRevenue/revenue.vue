@@ -6,7 +6,7 @@
 				<li class="advertising_revenue_top_item_li active">{{balance}} BRB</li>
 				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 BRB</li>
 			</ul>
-			<div class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</div>
+			<button class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</button>
 		</div>
 		<!--提現-->
 		<div class="withdraw" v-if="withdrawView">
@@ -38,10 +38,10 @@
 					</el-date-picker>
 					<el-date-picker v-model="endTime" type="date" :placeholder="$t('accountFlow.endTime')">
 					</el-date-picker>
-					<button @click="revenueData">{{$t('accountFlow.search')}}</button>
+					<button class="search" @click="revenueData">{{$t('accountFlow.search')}}</button>
 				</div>
 			</div>
-			<el-table border :data="flowData" style="width: 100%">
+			<el-table :data="flowData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">

@@ -7,7 +7,7 @@
 		</div>
 		<div class="invite_data">
 			<div class="invite_data_title">{{$t('invite.inviteUser')}}</div>
-			<el-table border :data="inviteData" style="width: 100%">
+			<el-table :data="inviteData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('invite.timer')">
 				</el-table-column>
 				<el-table-column prop="email" :label="$t('invite.userAccout')">
@@ -90,8 +90,15 @@
 <style lang="scss" scoped>
 	.invite_top {
 		margin: 30px 0;
-		.invite_top_code {
+		&_code {
 			margin: 10px 0;
+			color: #333333;
+		}
+		&_intro{
+			color: #999999;
+		}
+		&_title{
+			font-size: 24px;
 		}
 	}
 	
@@ -100,6 +107,8 @@
 	}
 	
 	.invite_data_data_pages {
+		font-size: 20px;
+		text-align: center;
 		margin-top: 30px;
 	}
 </style>

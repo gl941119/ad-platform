@@ -24,15 +24,21 @@
             margin: 0 10px;
             height: 30px;
             line-height: 30px;
-            border: 1px solid #333333;
-            border-radius: 5px;
+            background:rgba(255,149,0,1);
+            border-radius:4px;
+            color: #FFFFFF;
         }
     }
     
     .active {
         color: #000000;
     }
-    
+    .search{
+        background:rgba(255,149,0,1);
+        border-radius:4px;
+        color: #FFFFFF;
+        padding: 10px 20px;
+    }
     .advertising_revenu_account_flow {
         overflow: hidden;
         clear: both;
@@ -45,5 +51,11 @@
         }
         .advertising_revenu_account_flow_data_pages {
             margin-top: 30px;
+            text-align: center;
+        }
+    }
+    button{
+        :hover{
+            cursor: pointer;
         }
     }

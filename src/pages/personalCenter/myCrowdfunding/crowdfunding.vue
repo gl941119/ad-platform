@@ -3,7 +3,7 @@
 		<div class="advertising_revenu_account_flow">
 			<p class="my_crowdfunding_title">{{$t('personal.myCrowdfunding')}}</p>
 			<p class="my_crowdfunding_title_intro">{{$t('projectList.notic')}}</p>
-			<el-table border :data="crowdfundingData" style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
+			<el-table :data="crowdfundingData" style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
 				<el-table-column prop="shotEnName" :label="$t('projectList.tokenName')">
 				</el-table-column>
 				<el-table-column prop="proDesc" :label="$t('projectList.desc')" width="300">
@@ -74,10 +74,20 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.my_crowdfunding_title_intro {
-		margin: 30px 0;
-	}
 	.my_crowdfunding_data_pages {
 		margin-top: 30px;
+		text-align: center;
+	}
+	.my_crowdfunding_title{
+		font-size:24px;
+		color:rgba(51,51,51,1);
+		line-height:33px;
+		&_intro {
+			margin: 26px 0;
+			font-size:16px;
+			color: #333333;
+			color:rgba(51,51,51,1);
+			line-height:28px;
+		}
 	}
 </style>
