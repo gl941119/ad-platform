@@ -18,7 +18,7 @@
 				≈ <span>2.61254212</span> BTC ≈ <span>19.36115238</span> ETH ≈ <span>19361.15</span> USD
 			</div>
 			<div class="img_box">
-				<img src="../../../assets/imgs/img/正在接入中.png" />
+				<img src="../../../assets/imgs/img/connect.png" />
 			</div>
 		</div>
 	</div>

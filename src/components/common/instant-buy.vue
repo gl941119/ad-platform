@@ -38,10 +38,10 @@
 <script>
     import getDetail from '../../service/getData.js';
     import Utils from '../../utils/util.js';
-    import {
+    /*import {
         handleContract
     } from '../../utils/contract.js';
-    import ico_abi from '../../../build/contracts/LavevelICO.json';
+    import ico_abi from '../../../build/contracts/LavevelICO.json';*/
     export default {
         data() {
             return {

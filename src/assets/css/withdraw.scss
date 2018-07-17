@@ -56,16 +56,15 @@
                 }
             }
             .right_now {
-                background: orangered;
-                height: 30px;
-                line-height: 30px;
-                border-radius: 16px;
-                color: #FFFFFF;
-                width: 100px;
+                background: #DF5000;
+                padding: 5px 20px;
+                color: #ffffff;
+                text-align: center;
+                margin: 0 auto;
                 position: absolute;
+                bottom: 20px;
                 left: 50%;
-                margin: 10px 0 10px -50px;
-                border: 0;
+                margin-left: -35px;
             }
         }
     }

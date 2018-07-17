@@ -1,7 +1,7 @@
 <template>
 	<div class="newCrowdfunding">
-		<h3>{{$t('projectNotic.newApplication')}}</h3>
-		<p>{{$t('projectNotic.notic')}}</p>
+		<span class="title">{{$t('projectNotic.newApplication')}}</span>
+		<span class="title_info">{{$t('projectNotic.notic')}}</span>
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
@@ -99,12 +99,12 @@
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.concept')}}</label>
 				<input class="langer" v-model="conceptDatas" />
-				<i class="el-icon-circle-plus example" @click="conceptFun"></i>
+				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec" >
 				<label>{{$t('projectInfo.technology')}}</label>
 				<input class="langer" v-model="technologyDatas" />
-				<i class="el-icon-circle-plus example" @click="technologyFun"></i>
+				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.website')}}</label>
@@ -132,7 +132,7 @@
 				</el-input>
 				<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="newCrowdfunding.technology2">
 				</el-input>
-				<button class="right_now" style=";position:absolute;top: 278px;" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				<button class="right_now" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
@@ -421,12 +421,4 @@
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
 	@import '../../../assets/css/upload.css';
-	.exec {
-		position: relative;
-	}
-	.example {
-		position: absolute;
-		top: 14px;
-		right: 15px;
-	}
 </style>

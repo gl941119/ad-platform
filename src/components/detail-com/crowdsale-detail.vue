@@ -94,8 +94,8 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
-    // import {handleContract} from '../../utils/contract.js';
-    // import ico_abi from '../../../build/contracts/LavevelICO.json';
+//     import {handleContract} from '../../utils/contract.js';
+//     import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
