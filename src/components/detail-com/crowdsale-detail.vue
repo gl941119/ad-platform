@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div v-if="status===2||status===3">
-                <el-progress type="circle" :show-text="false" :width="62" color="#FF9500" :percentage="contractData.progress"></el-progress>
+                <el-progress type="circle" :show-text="false" :width="62" color="#FF9500" :percentage="progress"></el-progress>
             </div>
         </div>
     </div>
@@ -94,8 +94,8 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
-    import {handleContract} from '../../utils/contract.js';
-    import ico_abi from '../../../build/contracts/LavevelICO.json';
+    // import {handleContract} from '../../utils/contract.js';
+    // import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
@@ -106,12 +106,14 @@
                 status: 0,
                 utils: new Utils(),
                 timer: undefined,
-                contractData: {},
+                progress: 0,
             }
         },
         mounted() {
             this.handleTime(this.detailData, this.systemTime);
             this.countDown(this.detailData);
+            let {croAchieve, currCirculation} = this.detailData;
+            this.progress = (croAchieve / currCirculation) * 100;
             /* handleContract(ico_abi).then(res => {
                 let {startTime, endTime, raisedAmount, total} = res;
                 this.contractData = Object.assign({}, res, {
@@ -174,7 +176,7 @@
             },
             instantBuy(){
                 this.$store.commit('saveInstantBuyDataId', this.detailData.id);
-                // this.$store.commit('setInstantBuyData', this.contractData);
+                this.$store.commit('setInstantBuyData', {ico_abi:this.detailData.contractAbi, ico_address:this.detailData.contractId});
                 this.$store.commit('setInstantBuyVisible', true);
                 this.$store.commit('valueChange');
             },

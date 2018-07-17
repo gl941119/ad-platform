@@ -69,6 +69,8 @@
         mounted() {
             this.handleTime(this.crowdsaleDatas, this.systemTime);
             this.countDown(this.crowdsaleDatas);
+            let {croAchieve, currCirculation} = this.crowdsaleDatas;
+            this.progress = (croAchieve / currCirculation) * 100;
         },
         methods: {
             handleTime(data, systemTime) {

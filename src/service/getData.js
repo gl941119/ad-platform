@@ -10,8 +10,8 @@ async function getCrowdDetailData(id) {
             url: 'GetQrCode',
             data: {
                 contents: detailData.data.contractId,
-                width: 130,
-                height: 130,
+                width: 120,
+                height: 120,
             },
             type: 'get',
         });
