@@ -19,15 +19,15 @@ export class ContractCls {
             return initContract.at(this.address);
         } catch (error) {
             console.error('init web3 error_>', error);
-            return null;
+            return new Error('init web3 error');
         }
     }
 }
 
-export function handleContract(ico_abi, address, detailData) {
+export function handleContract(detailData) {
     return new Promise((resolve, reject) => {
-        // let {contractAbi: ico_abi, contractId: address} = detailData;
-        let instanceCls = new ContractCls(ico_abi, address);
+        let {ico_abi, ico_address} = detailData;
+        let instanceCls = new ContractCls(ico_abi, ico_address);
         let instance;
         instanceCls.init().then(res => {
             instance = res;
@@ -46,6 +46,9 @@ export function handleContract(ico_abi, address, detailData) {
                 console.error('handleContract_>', e);
                 reject(e);
             })
+        }).catch(e => {
+            console.error('instance contract error', e);
+            reject(e);
         })
     });
 }
