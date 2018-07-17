@@ -1,3 +1,6 @@
+import feedbackZh from '../i18n/feedback/feedback-zh.js';
+import feedbackEn from '../i18n/feedback/feedback-en.js';
+
 export default class Util {
 	/**
 	 * date format
@@ -189,6 +192,18 @@ export default class Util {
 		} catch(error) {
 			console.error('formatDuring error_>', error);
 			return [];
+		}
+	}
+	
+	// 读取反馈代码
+	judgeLanuage(lang, key){
+		switch(lang){
+			case 'zh': 
+				return feedbackZh[key];
+				break;
+			default:
+				return feedbackEn[key];
+				break;
 		}
 	}
 

@@ -71,7 +71,8 @@
 									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codePassword"></el-input>
 									<div class="el-button-getCode password">
 										<span>|</span>
-										<button class="el-button-getCode_button" @click="getPasswordCode()">{{$t('setting.getEmailCode')}}</button>
+										<button class="el-button-getCode_button" v-if="disabledPassword" @click="getPasswordCode()">{{$t('setting.getEmailCode')}}</button>
+										<el-button v-if="!disabledPassword" disabled type="text">(<span>{{numPassword}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
@@ -95,7 +96,8 @@
 									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
 									<div class="el-button-getCode password">
 										<span>|</span>
-										<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<button class="el-button-getCode_button" v-if="disabledTradePassword" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<el-button v-if="!disabledTradePassword" disabled type="text">(<span>{{numTradePassword}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
@@ -117,7 +119,8 @@
 									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
 									<div class="el-button-getCode password">
 										<span>|</span>
-										<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<button class="el-button-getCode_button" v-if="disabledTradePassword" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<el-button v-if="!disabledTradePassword" disabled type="text">(<span>{{numTradePassword}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
@@ -221,9 +224,11 @@
 	import Config from '../../../utils/config.js';
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
+	import Utils from '../../../utils/util';
 	export default {
 		data() {
 			return {
+				utils: new Utils(),
 				activeName: '',
 				active: '',
 				fileList: [],
@@ -319,7 +324,6 @@
 							type: 'post',
 							flag: true
 						}).then(res => {
-							console.log(res);
 							if(res.success) {
 								this.$message(this.$t('messageNotice.setSuccess'));
 								this.oncePassword = '';
@@ -419,10 +423,10 @@
 				}).then(res => {
 					console.log(res);
 					this.disabledPassword = false;
-					let timer = setInterval(() => {
+					let timerPassword = setInterval(() => {
 						this.numPassword--;
 						if(this.numPassword < 1) {
-							clearInterval(timer);
+							clearInterval(timerPassword);
 							this.disabledPassword = true;
 							this.numPassword = 60;
 						}
@@ -442,10 +446,10 @@
 					if(res.success) {
 						this.$message(this.$t('messageNotice.getSuccess'));
 						this.disabledTradePassword = false;
-						let timer = setInterval(() => {
+						let timerTradePassword = setInterval(() => {
 							this.TradePassword--;
 							if(this.numTradePassword < 1) {
-								clearInterval(timer);
+								clearInterval(timerTradePassword);
 								this.disabledTradePassword = true;
 								this.numTradePassword = 60;
 							}
@@ -568,10 +572,8 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						if(res.success) {
 							this.nickName = '';
-							this.$message(this.$t('messageNotice.changeSuccess'));
-						}
+							this.$message({message: this.utils.judgeLanuage(this.$store.state.slangChange, res.message), type: 'success'});
 					})
 				} else {
 					this.$message(this.$t('messageNotice.nicknameEmpty'));

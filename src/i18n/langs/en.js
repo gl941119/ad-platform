@@ -403,6 +403,16 @@ const en = {
 		underReview:'众筹信息审核中，无法修改',
 		notApplyAgain:'您已经存在广告，无法再次申请',
 		loginInvalid:'登录失效，请重新登录',
+		noBindEmail:'该账户未绑定邮箱',
+		illegal:'广告非法',
+		remove:'广告已下架',
+		invalid:'点击挖矿无效',
+		exist:'众筹不存在',
+		existed:'交易密码已经存在',
+		passwordExisted:'密码已经存在',
+		unableBind:'钱包地址已经被使用，无法继续绑定',
+		itemNoExist:'广告项目不存在',
+		noSetConcept:'广告项目还未设置概念',
 	},
 	...enLocale
 };
