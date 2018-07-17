@@ -144,4 +144,8 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProject.scss';
+	.advertising_revenue{
+		background: #FFFFFF;
+		padding: 20px;
+	}
 </style>

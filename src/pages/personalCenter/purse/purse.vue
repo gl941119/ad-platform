@@ -60,6 +60,8 @@
 </script>
 <style lang="scss" scoped>
 .user-management-list-title{
+	background: #FFFFFF;
+	padding: 20px;
 	h3{
 		font-size: 24px;
 	}
