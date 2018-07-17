@@ -94,8 +94,6 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
-//     import {handleContract} from '../../utils/contract.js';
-//     import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
@@ -114,15 +112,6 @@
             this.countDown(this.detailData);
             let {croAchieve, currCirculation} = this.detailData;
             this.progress = (croAchieve / currCirculation) * 100;
-            /* handleContract(ico_abi).then(res => {
-                let {startTime, endTime, raisedAmount, total} = res;
-                this.contractData = Object.assign({}, res, {
-                    startTime: startTime*1000,
-                    progress: Math.round((raisedAmount / total)*100),
-                })
-                console.log('handleContract contractData res---->', this.contractData);
-                
-            }) */
         },
         computed: {
             options() {
