@@ -1,5 +1,5 @@
 <template>
-  <div ref="telegram"></div>
+  <div class="telegram-login" :class="{'telegram-login-loading':loginLoading}" ref="telegram"></div>
 </template>
 
 <script>
@@ -33,7 +33,7 @@
             },
             size: {
                 type: String,
-                default: 'large',
+                default: 'small',
                 validator(value) {
                     return ['small', 'medium', 'large'].includes(value)
                 }
@@ -44,6 +44,11 @@
             },
             radius: {
                 type: String
+            }
+        },
+        data() {
+            return {
+                loginLoading: true,
             }
         },
         methods: {
@@ -69,7 +74,41 @@
             } else {
                 script.setAttribute('data-auth-url', this.redirectUrl)
             }
-            this.$refs.telegram.appendChild(script)
-        }
+            this.$refs.telegram.appendChild(script);
+            script.onload = () => {
+                this.loginLoading = false;
+            }
+            script.onerror = () => {
+                this.loginLoading = false;
+            }
+        },
     }
 </script>
+<style>
+@keyframes rolling {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+.telegram-login {
+    margin-top: 20px;
+}
+.telegram-login-loading:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #FF9500;
+    border-bottom-color: transparent;
+    -webkit-animation: rolling .8s infinite linear;
+    animation: rolling .8s infinite linear;
+    z-index: 1;
+}
+</style>
