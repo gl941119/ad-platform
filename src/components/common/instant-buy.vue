@@ -22,7 +22,7 @@
             <div class="instant-buy-content">
                 <div>
                     <span>钱包地址：</span>
-                    <span>{{immediateBuyDatas.contractId}}</span>
+                    <span class="instant-buy-content-address">{{immediateBuyDatas.contractId}}</span>
                 </div>
                 <div>
                     <span>二维码：</span>
@@ -41,7 +41,7 @@
     import {
         handleContract
     } from '../../utils/contract.js';
-    // import ico_abi from '../../../build/contracts/LavevelICO.json';
+    import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         data() {
             return {
@@ -61,9 +61,6 @@
                     this.$store.commit('setInstantBuyVisible', false);
                 }
             },
-            instantBuyData() {
-                return this.$store.state.instantBuyData;
-            },
             id() {
                 return this.$store.state.instantBuyDataId;
             },
@@ -80,6 +77,7 @@
                         endTime,
                         price,
                         contractId,
+                        contractAbi,
                         qrCode,
                         systemTime
                     } = res;
@@ -90,14 +88,14 @@
                         contractId,
                         qrCode
                     };
-                    // console.log('get getDetail data_>', this.immediateBuyDatas);
+                    console.log('get getDetail data_>', res);
                     this.handleTime(startTime, endTime, systemTime)
                     this.timer = setInterval(() => {
                         systemTime += 1000;
                         this.handleTime(startTime, endTime, systemTime);
                     }, 1000);
-                    return handleContract(this.instantBuyData);
-                    // return handleContract({ico_abi, ico_address: '0x06a1280e1eb6ac56565f9cc7b32329f883e48081'});
+                    // return handleContract({ico_abi: contractAbi, ico_address: contractId});
+                    return handleContract({ico_abi, ico_address: '0x06a1280e1eb6ac56565f9cc7b32329f883e48081'});
                 }).then(res => {
                     let {
                         raisedAmount,
@@ -161,8 +159,12 @@
                 &>span:first-child {
                     display: inline-block;
                     font-size: 14px;
-                    width: 6em;
+                    width: 5em;
                 }
+            }
+            &-address {
+                word-break: break-word;
+                text-overflow: ellipsis;  
             }
         }
         &-foot {

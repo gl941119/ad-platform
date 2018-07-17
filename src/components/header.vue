@@ -55,7 +55,7 @@
 						<el-button type="default" size="small" class="register-foot-btn" round @click="loginSubmit">{{$t('login.login')}}</el-button>
 						<el-button type="default" size="small" class="register-foot-btn" round @click="goToRegister">{{$t('register.register')}}</el-button>
 					</div>
-					<div class="register-foot">
+					<div class="register-other">
 						<telegram-login mode="callback" :telegram-login="telegramBot" @callback="callbackFunction"></telegram-login>
 					</div>
 				</el-form>
@@ -440,7 +440,12 @@
 				background: #FCA529;
 			}
 		}
-	}
+    }
+    
+    .register-other {
+        min-height: 30px;
+        position: relative;
+    }
 	
 	.login-modal .register-foot {
 		@include content-flex(space-around);

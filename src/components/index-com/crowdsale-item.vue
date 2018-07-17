@@ -101,7 +101,6 @@
             },
             instantBuy(){
                 this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
-                this.$store.commit('setInstantBuyData', {ico_abi:this.crowdsaleDatas.contractAbi, ico_address:this.crowdsaleDatas.contractId});
                 this.$store.commit('setInstantBuyVisible', true);
                 this.$store.commit('valueChange');
             },
