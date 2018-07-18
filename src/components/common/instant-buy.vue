@@ -82,7 +82,7 @@
                         qrCode,
                         systemTime
                     } = res;
-                    this.immediateBuyDatas = {
+                    let immediateBuyDatas = {
                         startTime,
                         endTime,
                         price,
@@ -97,15 +97,15 @@
                     }, 1000);
                     // return handleContract({ico_abi: JSON.parse(contractAbi), ico_address: contractId});
                     // return handleContract({ico_abi, ico_address: '0x06a1280e1eb6ac56565f9cc7b32329f883e48081'});
-                    let result = mainNetContract(contractAbi, contractId);
-                    console.log('res--->', result);
+                    let result = mainNetContract(JSON.parse(contractAbi), contractId);
                         let {
-                        raisedAmount,
+                            raisedAmount,
                         total,
                     } = result;
-                    this.immediateBuyDatas = Object.assign(this.immediateBuyDatas, res, {
+                    this.immediateBuyDatas = Object.assign(immediateBuyDatas, result, {
                         remain: total - raisedAmount,
                     });
+                    console.log('res--->', this.immediateBuyDatas);
                     this.loadingData = false;
                 })
                 // .then(res => {
