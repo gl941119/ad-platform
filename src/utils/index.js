@@ -1,7 +1,7 @@
 /*import Web3 from 'web3';
 
 export function mainNetContract(abi, address) {
-console.log('window.web3->', window.web3);
+    // console.log('window.web3->', window.web3);
     // let web3;
     if (typeof web3 !== 'undefined') {
         console.log('test');
