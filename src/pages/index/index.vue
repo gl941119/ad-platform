@@ -113,7 +113,7 @@
                         // console.log('QueryAdvertInfo_>', res);
                         this.advertItemDatas = res.data;
                         if(this.advertItemDatas && this.advertItemDatas.length===0){
-                            this.$message({message: '没有更多数据了', type:'warning'})
+                            this.$message({message: this.$t('home.noData'), type:'warning'})
                             resolve();
                         }else{
                             this.totalAdvertItemDatas.push(...this.advertItemDatas);

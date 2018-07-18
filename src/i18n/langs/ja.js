@@ -1,18 +1,18 @@
-﻿import zhLocale from './zh-CN'
-const zh = {
+﻿import enLocale from './enE'
+const en = {
 	header: {
-		home: '首页',
+		home: 'Home',
 		daico:'DAICO',
-		project: '项目',
+		project: 'Project',
 		medium:'媒体',
 		sunday:'周日狂欢夜',
 		bierTalk:'BierTalk',
-		login:'登 录',
-		register:'注 册',
+		login:'LogIn',
+		register:'Out',
 		help:'帮助',
 	},
 	login:{
-		login:'登 录',
+		login:'登录',
 		userLogin:'用户登录',
 		account:'账号',
 		password:'密码',
@@ -70,10 +70,10 @@ const zh = {
 		begin:'即将开始',
 		time:'剩余时间',
 		number:'指数',
-		immediately:'立即抢购',
+		immediately:'Buy Now!',
 		over:'已结束',
-		buy:'去交易',
-		whitePaper:'白皮书',
+		buy:'Buy It',
+		whitePaper:'WhitePaper',
 		chName:'中文名',
 		readMore:'查看更多',
 		learnMore:'了解更多',
@@ -101,7 +101,7 @@ const zh = {
 		concept:'概念',
 		technology:'技术',
 		issuance:'发行',
-		issueNumber:'本轮发行数量',
+		issueNumber:'本次发行数量',
 		crowdPrice:'众筹价格',
 		startTime:'抢购开始时间',
 		endTime:'抢购结束时间',
@@ -112,6 +112,7 @@ const zh = {
 		walletAddress:'钱包地址',
 		qrCode:'二维码',
 		buySuccess:'抢购成功',
+		timeLeft:'本轮众筹剩余时间',
 		warn:'风险警示：BierInc对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
 	},
 	projectList:{
@@ -187,22 +188,23 @@ const zh = {
 		purse:'钱包',
 		revenue:'广告收益账户',
 		main:'广告主账户',
-		crowdfunding:'我的众筹',
+		crowdfunding:'我的DAICO',
 		myCrowdfunding:'我参与的众筹',
 		vote:'我的投票',
 		invite:'邀请用户',
 		settings:'账号设置',
 		adserving:'广告方',
-		project:'众筹项目方',
+		project:'DAICO项目方',
 		Investors:'投资人',
 		partner:'合伙人',
 		exchange:'交易所',
 		medium:'媒体',
 		loginOut:'退出登录',
 	},
-	purse:{//钱包
+	purse:{
+		wallet:'钱包',
 		balance:'余额',
-		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额',
+		bindWalletAddress:'绑定您的钱包地址，用于提现在平台获得的广告收益、核对作为广告主的充值记录、检查您的账户余额。',
 		main:'这意味着：',
 		one:'1、ETH钱包地址将可以用于接收基于ERC20协议的平台代币AFDT。',
 		two:'2、如果您需要投放广告，则需要从本地址向平台充值以便核对',
@@ -220,8 +222,9 @@ const zh = {
 		delete:'删除',
 		submits:'提交',
 		saveChange:'保存修改',
+		finish:'完成',
 	},
-	initiated:{//我发起的众筹
+	initiated:{
 		iInitiated:'我发起的众筹',
 		token:'Token名称',
 		desc:'描述',
@@ -272,7 +275,7 @@ const zh = {
 	projectNotic:{
 		title:'项目内容',
 		notic:'请尽可能详细得填写相关资料，以便投资委员会合理地评估贵项目（评估期间双方都应严格遵守保密义务）',
-		newApplication:'众筹申请',
+		newApplication:'DAICO申请',
 	},
 	team:{
 		teamInfo:'团队',
@@ -374,7 +377,7 @@ const zh = {
 		websiteAddress:'自定义站点地址',
 		enterWebsite:'请输入官网',
 		enterWhitePaper:'请输入白皮书地址',
-		enterWebsiteName:'请输入自定义站点名',
+		enterWebsiteName:'自定义站点名',
 		enterWebsiteAddress:'请输入自定义站点地址',
 		emptyWebsite:'官网不能为空（符合网站地址）',
 		emptyWhitePaper:'白皮书地址不能为空（符合网站地址）',
@@ -402,7 +405,17 @@ const zh = {
 		underReview:'众筹信息审核中，无法修改',
 		notApplyAgain:'您已经存在广告，无法再次申请',
 		loginInvalid:'登录失效，请重新登录',
+		noBindEmail:'该账户未绑定邮箱',
+		illegal:'广告非法',
+		remove:'广告已下架',
+		invalid:'点击挖矿无效',
+		exist:'众筹不存在',
+		existed:'交易密码已经存在',
+		passwordExisted:'密码已经存在',
+		unableBind:'钱包地址已经被使用，无法继续绑定',
+		itemNoExist:'广告项目不存在',
+		noSetConcept:'广告项目还未设置概念',
 	},
-	...zhLocale
+	...enLocale
 };
-export default zh
+export default en

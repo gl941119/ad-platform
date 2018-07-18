@@ -3,34 +3,34 @@
         <div class="instant-buy" v-loading="loadingData">
             <div class="instant-buy-box">
                 <div>
-                    <span>本轮发行剩余：</span>
+                    <span>{{$t('crowdFunding.residue')}}：</span>
                     <span>{{immediateBuyDatas.remain}} ETH</span>
                 </div>
                 <div>
-                    <span>众筹价格：</span>
+                    <span>{{$t('crowdFunding.crowdPrice')}}：</span>
                     <span>1 EHT={{immediateBuyDatas.rate}} AFDT</span>
                 </div>
                 <div>
-                    <span>单账户兑换限制：</span>
+                    <span>{{$t('crowdFunding.limit')}}：</span>
                     <span>{{immediateBuyDatas.minContribution}}-{{immediateBuyDatas.maxContribution}} ETH</span>
                 </div>
                 <div>
-                    <span>本轮众筹剩余时间：</span>
+                    <span>{{$t('crowdFunding.timeLeft')}}：</span>
                     <span>{{remainTime}}</span>
                 </div>
             </div>
             <div class="instant-buy-content">
                 <div>
-                    <span>钱包地址：</span>
+                    <span>{{$t('crowdFunding.walletAddress')}}：</span>
                     <span class="instant-buy-content-address">{{immediateBuyDatas.contractId}}</span>
                 </div>
                 <div>
-                    <span>二维码：</span>
+                    <span>{{$t('crowdFunding.qrCode')}}：</span>
                     <span v-if="immediateBuyDatas.qrCode"><img width="90" :src="'data:image/png;base64, ' + immediateBuyDatas.qrCode"></span>
                 </div>
             </div>
             <div class="instant-buy-foot">
-                <el-button class="instant-buy-foot-btn" type="default" size="small" round @click="finish">完成</el-button>
+                <el-button class="instant-buy-foot-btn" type="default" size="small" round @click="finish">{{$t('buttonAll.finish')}}</el-button>
             </div>
         </div>
     </el-dialog>
@@ -38,9 +38,9 @@
 <script>
     import getDetail from '../../service/getData.js';
     import Utils from '../../utils/util.js';
-   import {
+   /*import {
         handleContract
-    } from '../../utils/contract.js';
+    } from '../../utils/contract.js';*/
     // import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         data() {
