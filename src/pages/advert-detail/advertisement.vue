@@ -8,7 +8,7 @@
                 <div class="advertisement-container-title-label">{{$t('header.home')}}</div>
             </div>
             <div class="advertisement-container-select">
-                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="concepId" :placeholder="$t('crowdFunding.all')">
+                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="concepId" :placeholder="$t('crowdFunding.allConcept')">
                     <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
@@ -69,7 +69,7 @@ import Config from '../../utils/config.js';
                         url: 'QueryAllConcept',
                         type: 'get'
                     }).then(res => {
-                        res.data.unshift({id: 0, name: this.$t('crowdFunding.all')});
+                        res.data.unshift({id: 0, name: this.$t('crowdFunding.allConcept')});
                         this.conceptOptions = res.data;
                         resolve();
                     })

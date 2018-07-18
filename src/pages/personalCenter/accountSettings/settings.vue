@@ -130,7 +130,7 @@
 						</div>
 					</el-collapse-item>
 					<el-collapse-item title="Telegram" name="6">
-						<div class="el-collapse-item__content">
+						<!--<div class="el-collapse-item__content">
 							<ul class="el-collapse-item__content_item">
 								<li class="el-collapse-item__content_item_li">新浪微博
 									<a>去绑定</a>
@@ -151,7 +151,7 @@
 									<a>去绑定</a>
 								</li>
 							</ul>
-						</div>
+						</div>-->
 					</el-collapse-item>
 				</el-collapse>
 			</div>
@@ -687,7 +687,7 @@
 					margin-right: 20px;
 				}
 				&_info{
-					width: 203px;
+					width: 222px;
 					height: 40px;
 					padding: 10px;
 					border-radius:4px;

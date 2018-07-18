@@ -13,7 +13,7 @@
                                     :to="{ name: 'home' }">{{$t('header.sunday')}}</router-link> -->
 				</div>
 				<div class="header-content-tab-right">
-					<div class="header-content-tab-right-item">
+					<div class="header-content-tab-right-item languae">
 						<el-select size="mini" class="language_height" v-model="select" slot="prepend" @change="change(select)">
 							<el-option label="英文" value="en"></el-option>
 							<el-option label="中文" value="zh"></el-option>
@@ -396,6 +396,10 @@
 				}
 			}
 		}
+	}
+	.languae{
+		width: 100px;
+		margin-right: 20px;
 	}
 	.login-verify {
 		position: relative;
