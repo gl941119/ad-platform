@@ -294,7 +294,30 @@
 						message:this.$t('messageNotice.addSuccess'),
 						type:'success'
 					});
+					this.clear();
 				})
+			},
+			clear(){
+				this.newCrowdfunding.accountId = '';
+				this.newCrowdfunding.teamName = '';
+				this.newCrowdfunding.teamContact = '';
+				this.newCrowdfunding.teamLocation = '';
+				this.newCrowdfunding.proName = '';
+				this.newCrowdfunding.proDesc = '';
+				this.checkedData  = '';
+				this.conceptResultList = '';
+				this.newCrowdfunding.technology1 = '';
+				this.newCrowdfunding.technology2 = '';
+				this.newCrowdfunding.website = '';
+				this.newCrowdfunding.whitePaper = '';
+				this.newCrowdfunding.shotEnName = '';
+				this.newCrowdfunding.shotCnName = '';
+				this.newCrowdfunding.fullEnName = '';
+				this.newCrowdfunding.title = '';
+				this.imageUrl = '';
+				this.coreTeam = '';
+				this.consultantTeam = '';
+				this.websites = '';
 			},
 			saveSubmit() {
 				var concept = [];

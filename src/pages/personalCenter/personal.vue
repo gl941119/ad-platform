@@ -28,11 +28,12 @@
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>-->
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>-->
 					</ul>
-					<div class="bierinc-main-contain
-						er-aside-menu-li" @click="out">退出登录</div>
+					<div class="bierinc-main-container-aside-menu">
+						<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
+					</div>
 				</el-aside>
 				<el-main class="bierinc-main-container-view">
-					<router-view v-if="isRouterAlive" :key="$route.name"></router-view>
+					<router-view :key="$route.name"></router-view>
 				</el-main>
 			</el-container>
 		</div>

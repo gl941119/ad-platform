@@ -20,7 +20,7 @@
 				<label>{{$t('team.coreMember')}}</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
-						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
+						<el-aside style="width:35px;height:150px;line-height:150px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							{{index+1}}
 						</el-aside>
 						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
@@ -35,7 +35,7 @@
 									<el-input :placeholder="$t('team.enterTitle')" v-model="coreTeam[index].title">
 									</el-input>
 								</li>
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
 									<el-input :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc">
 									</el-input>
@@ -53,7 +53,7 @@
 				<label>{{$t('team.coreMember')}}</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
-						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
+						<el-aside style="width:35px;height:150px;line-height:150px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
 							{{index+1}}
 						</el-aside>
 						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
@@ -68,7 +68,7 @@
 									<el-input :placeholder="$t('team.enterTitle')" v-model="consultantTeam[index].title">
 									</el-input>
 								</li>
-								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
+								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
 									<el-input :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc">
 									</el-input>
@@ -357,6 +357,7 @@
 						message:this.$t('messageNotice.addSuccess'),
 						type:'success'
 					});
+					this.$router.push({ name: 'project'});
 				})
 			},
 			listenCondept(checkedData) {
@@ -434,4 +435,7 @@
 	@import '../../../assets/css/withdraw.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
 	@import '../../../assets/css/upload.css';
+	.last{
+		width: 350px;
+	}
 </style>
