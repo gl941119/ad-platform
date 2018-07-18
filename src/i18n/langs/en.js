@@ -224,6 +224,7 @@ const en = {
 		submits:'提交',
 		saveChange:'保存修改',
 		finish:'完成',
+		ok:'好的',
 	},
 	initiated:{
 		iInitiated:'我发起的众筹',

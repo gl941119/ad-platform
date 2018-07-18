@@ -16,7 +16,7 @@
 						<el-input :placeholder="$t('project.enterMoneyAccount')" v-model="input" clearable>
 						</el-input>
 					</li>
-					<li class="withdraw_item_li" style="height: 126px;"><label style="width: 100px;">{{$t('project.useBalance')}}：</label>
+					<li class="withdraw_item_li" style="height: 126px;"><label style="width: 100px;">{{$t('crowdFunding.qrCode')}}：</label>
 						<div class="img">
 							<img src="../../../assets/imgs/swiper-img/swiper2.jpg" />
 						</div>
@@ -25,7 +25,7 @@
 						<span>111111111111111111111</span>
 					</li>
 					<p>{{$t('project.notic')}}</p>
-					<button class="right_now" style=";position:absolute;top: 278px;">好的</button>
+					<button class="right_now" style=";position:absolute;top: 278px;">{{$t('buttonAll.ok')}}</button>
 				</ul>
 			</div>
 		</div>

@@ -224,6 +224,7 @@ const zh = {
 		submits:'提交',
 		saveChange:'保存修改',
 		finish:'完成',
+		ok:'好的',
 	},
 	initiated:{//我发起的众筹
 		iInitiated:'我发起的众筹',

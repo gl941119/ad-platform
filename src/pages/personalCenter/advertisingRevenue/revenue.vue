@@ -16,7 +16,7 @@
 					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>1111111111</span></li>
 					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>11111111</span></li>
 					<li class="withdraw_item_li">
-						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-zhuan-money">---</i><span>{{$t('project.myWallet')}}</span>
+						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
 						<el-input :placeholder="$t('project.enterMoney')" v-model="input" clearable>
@@ -28,6 +28,15 @@
 					</li>
 					<button class="right_now">{{$t('project.withdraw')}}</button>
 				</ul>
+			</div>
+		</div>
+		<div class="withdraw" v-if="withdrawed">
+			<div class="withdraw_box">
+				<div class="center">
+					<i class="custom-element-icon-duihao"></i>
+				</div>
+				<p  class="center">已提交体现申请</p>
+				<button class="allright">{{$t('buttonAll.ok')}}</button>
 			</div>
 		</div>
 		<div class="advertising_revenu_account_flow">
@@ -79,6 +88,7 @@
 				size: 5,
 				total:0,
 				withdrawView: false,
+				withdrawed:false,
 				startTime: '',
 				endTime: '',
 				util: new Utils(),
@@ -147,5 +157,31 @@
 	.advertising_revenue{
 		background: #FFFFFF;
 		padding: 20px;
+	}
+	.custom-element-icon-jiantou1-copy{
+		margin: 0 10px;
+	}
+	.center{
+		text-align: center;
+		margin: 10px 0;
+		font-size:24px;
+		color:rgba(96,98,102,1);
+		.custom-element-icon-duihao{
+			color: #44DB01;
+		    margin-top: 35px;
+		    font-size: 54px;
+		    display: inline-block;
+		}
+	}
+	.allright{
+		width:116px;
+		height:28px;
+		background:rgba(245,247,250,1);
+		border-radius:100px;
+		border:1px solid rgba(220,223,230,1);
+		margin-top: 66px;
+		position: absolute;
+	    right: 50%;
+	    margin-right: -58px;
 	}
 </style>

@@ -36,12 +36,15 @@
             }
         }
         .withdraw_item {
+            color: #909399;
             .withdraw_item_li {
                 height: 50px;
                 line-height: 50px;
                 @include content-flex;
+                color: #909399;
                 label {
                     width: 125px;
+                    color: #909399;
                 }
                 .img {
                     width: 100px;

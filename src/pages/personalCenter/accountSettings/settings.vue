@@ -273,8 +273,8 @@
 					value: '身份证',
 					label: '身份证'
 				}, {
-					value: '脸',
-					label: '脸'
+					value: '护照',
+					label: '护照'
 				}],
 				realName: "",
 				imageUrl: '',
