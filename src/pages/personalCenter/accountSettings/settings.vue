@@ -587,7 +587,7 @@
 						url: 'QueryAccountSettings',
 						data: {
 							id: this.accountId,
-							nickName: this.nickName,
+							nickname: this.nickName,
 						},
 						type: 'post',
 						flag: true
