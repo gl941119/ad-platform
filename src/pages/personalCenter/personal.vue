@@ -133,7 +133,7 @@
 			text-align: center;
 			height: 65px;
 			line-height: 65px;
-			color: #cccccc;
+			color: #666666;
 			:hover{
 				cursor: pointer;
 			}

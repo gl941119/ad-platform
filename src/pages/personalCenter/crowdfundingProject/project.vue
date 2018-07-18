@@ -22,7 +22,7 @@
 					<template slot-scope="scope">
 						<div v-if="scope.row.isCheck==0">{{$t('initiated.review')}}</div>
 						<div v-if="scope.row.isCheck==1">{{$t('initiated.over')}}</div>
-						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}-<span @click="openDetail(scope.row.id,1)">{{$t('buttonAll.change')}}</span></div>
+						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}-<a class="change" @click="openDetail(scope.row.id,1)">{{$t('buttonAll.change')}}</a></div>
 					</template>
 				</el-table-column>
 				<el-table-column prop="updateTime" :label="$t('initiated.statusUpdate')">
@@ -122,6 +122,12 @@
 	.my_crowdfunding_data_pages {
 		margin-top: 30px;
 		text-align: center;
+	}
+	.change{
+		color: dodgerblue;
+	}
+	.change:hover{
+		cursor: pointer;
 	}
 }
 </style>

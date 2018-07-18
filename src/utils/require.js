@@ -6,10 +6,12 @@ import Cache from './cache';
 import { Message, Loading } from 'element-ui';
 import ajaxURL from '../config';
 import config from './config';
+import Utils from './util.js';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.url.localTestUrl : config.url.productUrl;
 
 let loadingInstance;
+let utils = new Utils();
 
 axios.interceptors.request.use(config => {
     loadingInstance = Loading.service({
@@ -97,7 +99,7 @@ function requestHandle(params) {
                     resolve(res.data);
                 } else {
                     Message.error({
-                        message,
+                        message: utils.judgeLanuage(store.state.slangChange, message),
                     });
                 }
             },
@@ -108,5 +110,6 @@ function requestHandle(params) {
         );
     })
 }
+
 
 export default requestHandle;

@@ -71,7 +71,8 @@
 									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codePassword"></el-input>
 									<div class="el-button-getCode password">
 										<span>|</span>
-										<button class="el-button-getCode_button" @click="getPasswordCode()">{{$t('setting.getEmailCode')}}</button>
+										<button class="el-button-getCode_button" v-if="disabledPassword" @click="getPasswordCode()">{{$t('setting.getEmailCode')}}</button>
+										<el-button v-if="!disabledPassword" disabled type="text">(<span>{{numPassword}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
@@ -95,7 +96,8 @@
 									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
 									<div class="el-button-getCode password">
 										<span>|</span>
-										<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<button class="el-button-getCode_button" v-if="disabledTradePassword" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<el-button v-if="!disabledTradePassword" disabled type="text">(<span>{{numTradePassword}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
@@ -117,7 +119,8 @@
 									<el-input :placeholder="$t('setting.enterEmailCode')" v-model="codeTradePassword"></el-input>
 									<div class="el-button-getCode password">
 										<span>|</span>
-										<button class="el-button-getCode_button" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<button class="el-button-getCode_button" v-if="disabledTradePassword" @click="getchangeTradePasswordCode">{{$t('setting.getEmailCode')}}</button>
+										<el-button v-if="!disabledTradePassword" disabled type="text">(<span>{{numTradePassword}}</span>s){{$t('setting.once')}}</el-button>
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
@@ -221,9 +224,11 @@
 	import Config from '../../../utils/config.js';
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
+	import Utils from '../../../utils/util';
 	export default {
 		data() {
 			return {
+				utils: new Utils(),
 				activeName: '',
 				active: '',
 				fileList: [],
@@ -319,16 +324,19 @@
 							type: 'post',
 							flag: true
 						}).then(res => {
-							console.log(res);
-							if(res.success) {
-								this.$message(this.$t('messageNotice.setSuccess'));
+							this.$message({
+								message:this.$t('messageNotice.setSuccess'),
+								type:'success'
+							});
 								this.oncePassword = '';
 								this.newPassword = '';
 								this.codePassword = '';
-							}
 						})
 					} else {
-						this.$message(this.$t('messageNotice.oncePasswordEqual'));
+						this.$message({
+							message:this.$t('messageNotice.oncePasswordEqual'),
+							type:'warning'
+						});
 					}
 				} else {
 					this.dialogVisible = true;
@@ -349,15 +357,18 @@
 							type: 'post',
 							flag: true
 						}).then(res => {
-							console.log(res);
-							if(res.success) {
-								this.$message(this.$t('messageNotice.setTradePassword'));
-								this.codeTradePassword = '';
-								this.tradePassword = '';
-							}
+							this.$message({
+								message:this.$t('messageNotice.setTradePassword'),
+								type:'success'
+							});
+							this.codeTradePassword = '';
+							this.tradePassword = '';
 						})
 					} else {
-						this.$message(this.$t('messageNotice.oncePasswordEqual'));
+						this.$message({
+							message:this.$t('messageNotice.oncePasswordEqual'),
+							type:'warning'
+						});
 					}
 				} else {
 					this.dialogVisible = true;
@@ -374,12 +385,13 @@
 					flag: true
 				}).then(res => {
 					console.log(res);
-					if(res.success == 1) {
 						this.imgsrc = url;
 						this.$store.commit('setHeardUrl', url);
 						Cache.setSession('bier_heardUrl', url);
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					}
+						this.$message({
+							message:this.$t('messageNotice.changeSuccess'),
+							type:'success'
+						});
 				})
 			},
 			cancel() { //取消修改昵称
@@ -393,21 +405,25 @@
 							email: this.bindEmail,
 						},
 					}).then(res => {
-						if(res.success) {
-							this.disable = false;
-							let timerEmail = setInterval(() => {
-								this.num--;
-								if(this.num < 1) {
-									clearInterval(timerEmail);
-									this.disable = true;
-									this.num = 60;
-								}
-							}, 1000);
-							this.$message('获取成功');
-						} 
+						this.disable = false;
+						let timerEmail = setInterval(() => {
+							this.num--;
+							if(this.num < 1) {
+								clearInterval(timerEmail);
+								this.disable = true;
+								this.num = 60;
+							}
+						}, 1000);
+						this.$message({
+							message:this.$t('messageNotice.getSuccess'),
+							type:'success'
+						});
 					})
 				} else {
-					this.$message(this.$t('messageNotice.emailEmpty'));
+					this.$message({
+						message:this.$t('messageNotice.emailEmpty'),
+						type:'warning'
+					});
 				}
 			},
 			getPasswordCode() {
@@ -419,17 +435,18 @@
 				}).then(res => {
 					console.log(res);
 					this.disabledPassword = false;
-					let timer = setInterval(() => {
+					let timerPassword = setInterval(() => {
 						this.numPassword--;
 						if(this.numPassword < 1) {
-							clearInterval(timer);
+							clearInterval(timerPassword);
 							this.disabledPassword = true;
 							this.numPassword = 60;
 						}
 					}, 1000);
-					if(res.success) {
-						this.$message(this.$t('messageNotice.getSuccess'));
-					}
+					this.$message({
+						message:this.$t('messageNotice.getSuccess'),
+						type:'success'
+					});
 				})
 			},
 			getchangeTradePasswordCode() {
@@ -439,18 +456,19 @@
 						codeType: 4,
 					},
 				}).then(res => {
-					if(res.success) {
-						this.$message(this.$t('messageNotice.getSuccess'));
-						this.disabledTradePassword = false;
-						let timer = setInterval(() => {
-							this.TradePassword--;
-							if(this.numTradePassword < 1) {
-								clearInterval(timer);
-								this.disabledTradePassword = true;
-								this.numTradePassword = 60;
-							}
-						}, 1000);
-					}
+					this.$message({
+						message:this.$t('messageNotice.getSuccess'),
+						type:'success'
+					});
+					this.disabledTradePassword = false;
+					let timerTradePassword = setInterval(() => {
+						this.TradePassword--;
+						if(this.numTradePassword < 1) {
+							clearInterval(timerTradePassword);
+							this.disabledTradePassword = true;
+							this.numTradePassword = 60;
+						}
+					}, 1000);
 				})
 			},
 			changeTradePassword() {
@@ -470,15 +488,19 @@
 							type: 'post',
 							flag: true
 						}).then(res => {
-							if(res.success == 1) {
-								this.$message(this.$t('messageNotice.changeSuccess'));
-								this.newTradePassword = '';
-								this.oldTradePassword = '';
-								this.codeTradePassword = '';
-							}
+							this.$message({
+								message:this.$t('messageNotice.changeSuccess'),
+								type:'success'
+							});
+							this.newTradePassword = '';
+							this.oldTradePassword = '';
+							this.codeTradePassword = '';
 						})
 					} else {
-						this.$message(this.$t('messageNotice.oncePasswordEqual'));
+						this.$message({
+							message:this.$t('messageNotice.oncePasswordEqual'),
+							type:'warning'
+						});
 					}
 				} else {
 					this.dialogVisible = true;
@@ -500,28 +522,26 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						console.log(res);
-						if(res.success == 1) {
-							this.$message(this.$t('messageNotice.changeSuccess'));
-							this.oldPassword = '';
-							this.newPassword = '';
-							this.codePassword = '';
-							this.this.oncePassword = '';
-							Request({
-								url: 'SignOut',
-								type: 'get',
-								data: {
-									token: this.token
-								}
-							}).then(res => {
-								if(res.success) {
-									this.handleSignOut();
-									this.$router.push({
-										name: 'index'
-									});
-								}
-							})
-						}
+						this.$message({
+							message:this.$t('messageNotice.changeSuccess'),
+							type:'success'
+						});
+						this.oldPassword = '';
+						this.newPassword = '';
+						this.codePassword = '';
+						this.this.oncePassword = '';
+						Request({
+							url: 'SignOut',
+							type: 'get',
+							data: {
+								token: this.token
+							}
+						}).then(res => {
+							this.handleSignOut();
+							this.$router.push({
+								name: 'index'
+							});
+						})
 					})
 				} else {
 					this.dialogVisible = true;
@@ -548,13 +568,17 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						if(res.success == 1) {
-							this.bindEmail = '';
-							this.$message(this.$t('messageNotice.bindSuccess'));
-						}
+						this.bindEmail = '';
+						this.$message({
+							message:this.$t('messageNotice.bindSuccess'),
+							type:'success'
+						});
 					})
 				} else {
-					this.$message(this.$t('messageNotice.emailEmpty'));
+					this.$message({
+						message:this.$t('messageNotice.emailEmpty'),
+						type:'warning'
+					});
 				}
 			},
 			changeNickName() { //改昵称
@@ -568,13 +592,17 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						if(res.success) {
 							this.nickName = '';
-							this.$message(this.$t('messageNotice.changeSuccess'));
-						}
+							this.$message({
+								message: this.$t('messageNotice.changeSuccess'), 
+								type: 'success'
+							});
 					})
 				} else {
-					this.$message(this.$t('messageNotice.nicknameEmpty'));
+					this.$message({
+						message:this.$t('messageNotice.nicknameEmpty'),
+						type:'warning'
+					});
 				}
 			},
 			authentication() {
@@ -591,14 +619,15 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-					if(res.success) {
 						this.country = '';
 						this.idType = '';
 						this.idNum = '';
 						this.realName = '';
 						this.imageUrl = '';
-						this.$message(this.$t('messageNotice.certificationSuccess'));
-					}
+						this.$message({
+							message:this.$t('messageNotice.certificationSuccess'),
+							type:'success'
+						});
 				})
 			},
 			getImg(file) {

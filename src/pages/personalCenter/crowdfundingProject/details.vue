@@ -101,12 +101,12 @@
 				<label>{{$t('projectInfo.projectDesc')}}</label>
 				<input class="langer" :disabled="disabled" v-model="details.proDesc" />
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.concept')}}</label>
 				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
 				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.technology')}}</label>
 				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
 				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
@@ -160,7 +160,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
-				<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
+				<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" @on-change = "change" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
 					<img v-if="details.logo" :src="details.logo" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 				</el-upload>
@@ -277,6 +277,7 @@
 				technologyDatas: '',
 				checkeData: [],
 				util: new Utils(),
+				isCheck:'',
 			};
 		},
 		components: {
@@ -301,7 +302,9 @@
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res);
 					this.details = res.data;
+					this.isCheck = res.data.isCheck;
 					let {
 						concept1Id,
 						concept2Id,
@@ -387,10 +390,11 @@
 					type: 'put',
 					flag:true,
 				}).then(res => {
-					if(res.success) {
-						this.queryDetails();
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					}
+					this.queryDetails();
+					this.$message({
+						message:this.$t('messageNotice.changeSuccess'),
+						type:'success'
+					});
 				})
 			},
 			addCore() { //核心团队
@@ -402,7 +406,10 @@
 			deletedCore(value) { //核心团队
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					this.$message(this.$t('messageNotice.noDelete'));
+					this.$message({
+						message:this.$t('messageNotice.noDelete'),
+						type:'warning'
+					});
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -422,10 +429,11 @@
 					type: 'put',
 					flag: true,
 				}).then(res => {
-					if(res.success) {
-						this.$message(this.$t('messageNotice.changeSuccess'));
-						this.queryDetails();
-					}
+					this.$message({
+						message:this.$t('messageNotice.changeSuccess'),
+						type:'warning'
+					});
+					this.queryDetails();
 				})
 			},
 			addLink() {
@@ -441,10 +449,11 @@
 					},
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
-						this.$message(this.$t('messageNotice.addSuccess'));
-						this.queryDetails();
-					}
+					this.$message({
+						message:this.$t('messageNotice.addSuccess'),
+						type:'success'
+					});
+					this.queryDetails();
 				})
 			},
 			deletedLink() {
@@ -458,10 +467,11 @@
 					type: 'DELETE',
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
-						this.$message(this.$t('messageNotice.deleteSuccess'));
-						this.queryDetails();
-					}
+					this.$message({
+						message:this.$t('messageNotice.deleteSuccess'),
+						type:'success'
+					});
+					this.queryDetails();
 				})
 			},
 			addConsultant() { //顾问团队
@@ -473,7 +483,10 @@
 			deletedConsultant(value) { //顾问团队
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					this.$message(this.$t('messageNotice.noDelete'));
+					this.$message({
+						message:this.$t('messageNotice.noDelete'),
+						type:'warning'
+					});
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}
@@ -491,10 +504,11 @@
 					},
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
 						this.queryDetails();
-						this.$message(this.$t('messageNotice.addSuccess'));
-					}
+						this.$message({
+							message:this.$t('messageNotice.addSuccess'),
+							type:'success'
+						});
 				})
 			},
 			deletedLinkConsultant() {
@@ -511,10 +525,11 @@
 					type: 'DELETE',
 					flag: true,
 				}).then(res => {
-					if(res.success) {
 						this.queryDetails();
-						this.$message(this.$t('messageNotice.deleteSuccess'));
-					}
+						this.$message({
+							message:this.$t('messageNotice.deleteSuccess'),
+							type:'success'
+						});
 				})
 			},
 			saveLinkConsultant() {
@@ -532,17 +547,22 @@
 					type: 'put',
 					flag: true,
 				}).then(res => {
-					if(res.success) {
-						this.queryDetails();
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					}
+					this.queryDetails();
+					this.$message({
+						message:this.$t('messageNotice.changeSuccess'),
+						type:'success'
+					});
 				})
 			},
 			handleSelectionChange(val) {
 				this.multipleSelection = val;
 			},
 			handleAvatarSuccess(res, file) {
-//				this.details.logo = file.url;
+				this.details.logo = file.url;
+				console.log(file);
+			},
+			change(res, file) {
+				this.details.logo = file.url;
 				console.log(file);
 			},
 			beforeAvatarUpload(file){
