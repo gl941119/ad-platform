@@ -42,13 +42,7 @@
 	export default {
 		data() {
 			return {
-				crowdfundingData: [{
-					totalCrowdfund: '3333',
-					lowLimit: '4345',
-				}, {
-					totalCrowdfund: '3333',
-					lowLimit: '1',
-				}],
+				crowdfundingData: [],
 				currentPage: 1,
 				size: 5,
 				total: 0,

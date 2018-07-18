@@ -12,9 +12,8 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="recharge"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>{{$t('project.moneyAccount')}}：</label>
-						<el-input :placeholder="$t('project.enterMoneyAccount')" v-model="input" clearable>
-						</el-input>
+					<li class="withdraw_item_li"><label style="width: 100px;">{{$t('project.moneyAccount')}}：</label>
+						<span>111111111111111</span>
 					</li>
 					<li class="withdraw_item_li" style="height: 126px;"><label style="width: 100px;">{{$t('crowdFunding.qrCode')}}：</label>
 						<div class="img">
@@ -25,7 +24,7 @@
 						<span>111111111111111111111</span>
 					</li>
 					<p>{{$t('project.notic')}}</p>
-					<button class="right_now" style=";position:absolute;top: 278px;">{{$t('buttonAll.ok')}}</button>
+					<button class="right_now" @click="close" style=";position:absolute;top: 278px;">{{$t('buttonAll.ok')}}</button>
 				</ul>
 			</div>
 		</div>
@@ -81,6 +80,9 @@
 			this.mainData();
 		},
 		methods: {
+			close(){
+				this.rechargeView = false
+			},
 			BasicInformation() {
 				Request({
 					url: 'QueryMainBasicInformation',

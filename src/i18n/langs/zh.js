@@ -111,7 +111,7 @@ const zh = {
 		residue:'本轮发行剩余',
 		limit:'单账号兑换限制',
 		walletAddress:'钱包地址',
-		qrCode:'二维码',
+		qrCode:'二 维 码',
 		buySuccess:'抢购成功',
 		timeLeft:'本轮众筹剩余时间',
 		warn:'风险警示：BierInc对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
