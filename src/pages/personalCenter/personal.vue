@@ -42,21 +42,24 @@
 
 <script>
 	import Cache from '../../utils/cache';
-	import Request from '../../utils/require';
+    import Request from '../../utils/require';
+    import Config from '../../utils/config.js';
 	export default {
 		data() {
 			return {
 				uid: this.$store.state.id || Cache.getSession('bier_userid'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
-				heardUrl:this.$store.state.heardUrl || Cache.getSession('bier_heardUrl'),
-				isRouterAlive:true,
+                isRouterAlive:true,
 			};
 		},
 		computed: {
 			activeIndex() {
 				return this.$route.name;
-			},
+            },
+            heardUrl() {
+                return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
+            }
 		},
 		methods: {
 			out() {

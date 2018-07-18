@@ -11,6 +11,7 @@ import filters from './filters';
 import i18n from './i18n/i18n';
 
 import './utils/element';
+import Cache from './utils/cache';
 import './assets/css/reset.css';
 import 'swiper/dist/css/swiper.css';
 import { VeeValidate, Veeconfig } from './utils/validation';
@@ -24,6 +25,21 @@ Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 })
+
+router.beforeEach((to, from, next) => {
+    let token = store.state.token || Cache.getSession('bier_token');
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!token) {
+            next({name: 'index'});
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({

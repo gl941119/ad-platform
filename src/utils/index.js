@@ -3,14 +3,14 @@ import Web3 from 'web3';
 export function mainNetContract(abi, address) {
     // console.log('window.web3->', window.web3);
     // let web3;
-    if (typeof web3 !== 'undefined') {
-        console.log('test');
-        web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
-    } else {
-        // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-        console.log('net-->');
-        web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
-    }
+    var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
+    // if (typeof web3 !== 'undefined') {
+    //     console.log('test');
+    // } else {
+    //     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+    //     console.log('net-->');
+    //     web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
+    // }
 
     let customContract = web3.eth.contract(abi).at(address);
     // console.log('custom instance ->',customContract);

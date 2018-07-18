@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import axios from 'axios';
 import qs from 'qs';
 import store from '../store';
@@ -98,6 +97,7 @@ function requestHandle(params) {
                 if (success === 1) {
                     resolve(res.data);
                 } else {
+                    reject(data)
                     Message.error({
                         message: utils.judgeLanuage(store.state.slangChange, message),
                     });

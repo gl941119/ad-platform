@@ -58,7 +58,8 @@ const router = new VueRouter({
 		},
 		{
 			path: '/personalCenter',//个人中心
-			name: 'personalCenter',
+            name: 'personalCenter',
+            meta: {requiresAuth: true},
 			component: PersonalCenter,
 			redirect: {
 				name: 'purse'
