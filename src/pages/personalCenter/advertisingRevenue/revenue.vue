@@ -4,7 +4,7 @@
 			<h3>AFTD</h3>
 			<ul class="advertising_revenue_top_item">
 				<li class="advertising_revenue_top_item_li active">{{balance}} AFTD</li>
-				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>
+				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>-->
 			</ul>
 			<button class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</button>
 		</div>

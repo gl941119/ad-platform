@@ -4,7 +4,7 @@
 			<h3>AFTD</h3>
 			<ul class="advertising_revenue_top_item">
 				<li class="advertising_revenue_top_item_li active">{{balance}} AFTD</li>
-				<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>
+				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>-->
 			</ul>
 			<button class="advertising_revenue_top_money" @click="recharge()">{{$t('project.recharge')}}</button>
 		</div>
@@ -96,9 +96,7 @@
 					},
 					type: 'get'
 				}).then(res => {
-					if(res.data){
-						this.balance = res.data.balance;
-					}
+					this.balance = res.data.balance;
 				})
 			},
 			mainData() {

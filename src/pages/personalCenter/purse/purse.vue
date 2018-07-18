@@ -20,9 +20,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="balance">
+			<!--<div class="balance">
 				≈ <span>2.61254212</span> BTC ≈ <span>19.36115238</span> ETH ≈ <span>19361.15</span> USD
-			</div>
+			</div>-->
 			<div class="img_box">
 				<img src="../../../assets/imgs/img/connect.png" />
 			</div>

@@ -174,9 +174,9 @@
 			</li>
 			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 				<label class="label">
-					<input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="websites[index].websiteName" >
+					<input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="item.websiteName" >
 				</label>
-				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress" />
+				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="item.websiteAddress" />
 			</li>
 		</ul>
 		<div class="submit_box">
@@ -228,7 +228,7 @@
 					shotCnName: "", //中文简写
 					fullEnName: "", //英文全名
 				},
-				websites:[{},{},{},{},{},{},{},{}],
+				websites:[],
 				checkedData: [],
 				concept: false,
 				technology: false,
@@ -327,11 +327,16 @@
 					concept = this.conceptResultList;
 				}
 				var value = this.newCrowdfunding.id;
+				var arr = [];
 				if(this.websites){
 					this.websites.forEach(function(item, index){
 						item.advertProjId = value;
+						if(item.websiteName){
+							arr.push(item);
+						}
 					})
 				}
+				console.log(arr);
 				Request({
 					url: 'ChangeProject',
 					data: {
@@ -352,7 +357,7 @@
 						fullEnName: this.newCrowdfunding.fullEnName,
 						title: this.newCrowdfunding.title,
 						logo: this.imageUrl,
-						websites:this.websites,
+						websites:arr,
 					},
 					type: 'post',
 					flag: true,
@@ -393,7 +398,7 @@
 					this.technologyDatas = technologyArr.join('-');
 					if(res.data.websiteResultList){
 						var length = res.data.websiteResultList.length;
-						var obj = {};
+						var obj = {websiteName: '', websiteAddress: ''};
 						this.websites = res.data.websiteResultList;
 						for(var i=0;i<8-length;i++){
 							this.websites.push(obj);
