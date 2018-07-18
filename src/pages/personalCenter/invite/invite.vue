@@ -5,7 +5,8 @@
 			<p class="invite_top_code">
 				<span>{{$t('invite.code')}}：</span>
 				<span id="inviteCode">{{inviteCode}}</span>
-			</p><el-button @click="inviteCodeCopy('inviteCode')">点击复制</el-button>
+			</p>
+			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">点击复制</el-button>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<!--<div class="invite_data">
@@ -27,7 +28,7 @@
       :current-page="currentPage"
       :page-sizes="[10, 20, 30, 40, 50]"
       :page-size="size"
-      layout="sizes, prev, pager, next, jumper"
+      layout="sizes, prev, pager, next, jumper" v
       :total="total">
     </el-pagination>
 			</div>
@@ -52,7 +53,7 @@
 			}
 		},
 		mounted() {
-//			this.queryCode();
+			this.queryCode();
 		},
 		methods: {
 			inviteCodeCopy(value){
@@ -68,7 +69,7 @@
 					type: 'get'
 				}).then(res => {
 					this.inviteCode = res.data.inviteCode;
-					this.queryInviteData();
+//					this.queryInviteData();
 				})
 			},
 			queryInviteData() {
@@ -103,11 +104,15 @@
 	&_top {
 		margin: 30px 0;
 		&_code {
+			display: inline-block;
+			height: 40px;
+			line-height: 40px;
 			margin: 10px 0;
 			color: #333333;
 		}
 		&_intro{
 			color: #999999;
+			margin-top: 10px;
 		}
 		&_title{
 			font-size: 24px;
@@ -123,5 +128,14 @@
 		font-size: 20px;
 		text-align: center;
 		margin-top: 30px;
+	}
+	.purse_address_bind {
+		display: inline-block;
+		margin-left: 20px;
+		width: 100px;
+		border-radius: 5px;
+		background:rgba(255,149,0,1);
+		border-radius:4px;
+		color: #FFFFFF;
 	}
 </style>
