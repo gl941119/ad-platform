@@ -16,7 +16,7 @@
 				<div class="purse_address">
 					<label>{{$t('purse.balance')}}</label>
 					<div class="input">
-						<el-input></el-input>
+						<el-input v-model="balance"></el-input>
 					</div>
 				</div>
 			</div>
@@ -37,6 +37,7 @@
 			return {
 				purseAddress:'',
 				disabled:false,
+				balance:'',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
@@ -88,7 +89,21 @@
 					this.purseAddress = res.data.walletAddress;
 					if(res.data.walletAddress){
 						this.disabled = true;
+						this.QueryBalance();
 					}
+				})
+			},
+			QueryBalance(){
+				Request({
+					url: 'QueryBalance',
+					data: {
+						address: this.purseAddress,
+					},
+					type: 'get',
+					flag:true,
+				}).then(res => {
+					console.log(res);
+					this.balance = res.data.balance;
 				})
 			}
 		}
