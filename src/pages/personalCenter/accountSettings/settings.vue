@@ -59,7 +59,7 @@
 								<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
 								<h3 v-if="existPassword">{{$t('passwordInfo.changePassword')}}</h3>
 								<p>
-									<el-input v-if="!existPassword" :placeholder="$t('passwordInfo.oldPassword')" v-model="oldPassword"></el-input>
+									<el-input v-if="existPassword" :placeholder="$t('passwordInfo.oldPassword')" v-model="oldPassword"></el-input>
 								</p>
 								<p>
 									<el-input type="password" :placeholder="$t('passwordInfo.newPassword')" v-model="newPassword"></el-input>
@@ -280,6 +280,7 @@
 				imageUrl: '',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
+				token: this.$store.state.token || Cache.getSession('bier_token'),
 				dialogVisible: false,
 				disable: true,
 				disabledTradePassword: true,
@@ -288,7 +289,7 @@
 				numPassword: 60,
 				numTradePassword: 60,
 				imgData: Config.headPortrait,
-				imgsrc: Config.headPortrait[0],
+				imgsrc: this.$store.state.heardUrl || Cache.getSession('bier_heardUrl'),
 				existEmail: true,
 				existPassword: true,
 				existTradePassword: true,
@@ -312,7 +313,6 @@
 				var reg = new RegExp();
 				var str = this.newPassword;
 				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
-				console.log(1);
 				if(value) {
 					if(this.newPassword === this.oncePassword) {
 						Request({
@@ -328,9 +328,9 @@
 								message:this.$t('messageNotice.setSuccess'),
 								type:'success'
 							});
-								this.oncePassword = '';
-								this.newPassword = '';
-								this.codePassword = '';
+							this.oncePassword = '';
+							this.newPassword = '';
+							this.codePassword = '';
 						})
 					} else {
 						this.$message({
@@ -362,6 +362,7 @@
 								type:'success'
 							});
 							this.codeTradePassword = '';
+							this.onceSetTradePassword = '';
 							this.tradePassword = '';
 						})
 					} else {
@@ -384,7 +385,6 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-					console.log(res);
 						this.imgsrc = url;
 						this.$store.commit('setHeardUrl', url);
 						Cache.setSession('bier_heardUrl', url);
@@ -494,6 +494,7 @@
 							});
 							this.newTradePassword = '';
 							this.oldTradePassword = '';
+							this.onceTradePassword = '';
 							this.codeTradePassword = '';
 						})
 					} else {
@@ -522,39 +523,38 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						this.$message({
-							message:this.$t('messageNotice.changeSuccess'),
-							type:'success'
-						});
 						this.oldPassword = '';
 						this.newPassword = '';
 						this.codePassword = '';
-						this.this.oncePassword = '';
-						Request({
-							url: 'SignOut',
-							type: 'get',
-							data: {
-								token: this.token
-							}
-						}).then(res => {
-							this.handleSignOut();
-							this.$router.push({
-								name: 'index'
-							});
-						})
+						this.oncePassword = '';
+						this.out();
 					})
 				} else {
 					this.dialogVisible = true;
 				}
 			},
+			out(){
+				Request({
+					url: 'SignOut',
+					type: 'get',
+					data: {
+						token: this.token
+					}
+				}).then(res => {
+					this.handleSignOut();
+					this.$router.push({
+						name: 'index'
+					});
+				})
+			},
 			handleSignOut() {
 				this.$store.commit('setUserId', undefined);
 				this.$store.commit('setUserName', undefined);
 				this.$store.commit('setUserNickName', undefined);
-				this.$store.commit('setToken', undefined);
-				Cache.removeSession('bier_username');
-				Cache.removeSession('bier_token');
-				Cache.removeSession('bier_userid');
+                this.$store.commit('setToken', undefined);
+                Cache.removeSession('bier_username');
+                Cache.removeSession('bier_token');
+                Cache.removeSession('bier_userid');
 				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
 			},
 			toBindEmail() { //绑定邮箱
@@ -687,7 +687,7 @@
 					margin-right: 20px;
 				}
 				&_info{
-					width: 222px;
+					width: 203px;
 					height: 40px;
 					padding: 10px;
 					border-radius:4px;

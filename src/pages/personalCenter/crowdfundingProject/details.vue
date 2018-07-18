@@ -390,7 +390,7 @@
 					type: 'put',
 					flag:true,
 				}).then(res => {
-					this.queryDetails();
+					this.$router.push({ name: 'project'});
 					this.$message({
 						message:this.$t('messageNotice.changeSuccess'),
 						type:'success'
@@ -433,7 +433,7 @@
 						message:this.$t('messageNotice.changeSuccess'),
 						type:'warning'
 					});
-					this.queryDetails();
+					this.centerDialogVisible = false;
 				})
 			},
 			addLink() {
@@ -453,7 +453,7 @@
 						message:this.$t('messageNotice.addSuccess'),
 						type:'success'
 					});
-					this.queryDetails();
+					this.centerDialogVisible = false;
 				})
 			},
 			deletedLink() {
@@ -471,7 +471,7 @@
 						message:this.$t('messageNotice.deleteSuccess'),
 						type:'success'
 					});
-					this.queryDetails();
+					this.centerDialogVisible = false;
 				})
 			},
 			addConsultant() { //顾问团队
@@ -504,7 +504,7 @@
 					},
 					flag: true,
 				}).then(res => {
-						this.queryDetails();
+						this.CrowdTeamDialogVisible = false;
 						this.$message({
 							message:this.$t('messageNotice.addSuccess'),
 							type:'success'
@@ -525,7 +525,7 @@
 					type: 'DELETE',
 					flag: true,
 				}).then(res => {
-						this.queryDetails();
+						this.CrowdTeamDialogVisible = false;
 						this.$message({
 							message:this.$t('messageNotice.deleteSuccess'),
 							type:'success'
@@ -547,7 +547,7 @@
 					type: 'put',
 					flag: true,
 				}).then(res => {
-					this.queryDetails();
+					this.CrowdTeamDialogVisible = false;
 					this.$message({
 						message:this.$t('messageNotice.changeSuccess'),
 						type:'success'

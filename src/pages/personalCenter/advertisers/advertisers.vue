@@ -47,7 +47,7 @@
 							</template>
 						</el-table-column>
 					</el-table>
-					<div slot="footer" class="dialog-footer">
+					<div slot="footer" v-if="isCheck!=-1" class="dialog-footer">
 						<el-button :disabled="disabled" @click="saveLink">{{$t('buttonAll.save')}}</el-button>
 						<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
 						<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
@@ -85,7 +85,7 @@
 							</template>
 						</el-table-column>
 					</el-table>
-					<div slot="footer" class="dialog-footer">
+					<div slot="footer" v-if="isCheck!=-1" class="dialog-footer">
 						<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
 						<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
 						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
@@ -241,6 +241,7 @@
 				conceptResultList:[],
 				value:this.$route.params.value,
 				disabled:false,
+				isCheck:'',
 			}
 		},
 		components: {
@@ -248,6 +249,7 @@
 		},
 		mounted(){
 			var value = this.$route.params.value;
+			this.isCheck = value;
 			if(value == 1){
 				this.queryDetails();
 				this.disabled = true;
@@ -255,6 +257,8 @@
 				this.disabled = false;
 				this.queryDetails();
 			}else if(value == 0){
+				this.disabled = false;
+			}else if(value == -1){
 				this.disabled = false;
 			}
 		},
@@ -290,7 +294,30 @@
 						message:this.$t('messageNotice.addSuccess'),
 						type:'success'
 					});
+					this.clear();
 				})
+			},
+			clear(){
+				this.newCrowdfunding.accountId = '';
+				this.newCrowdfunding.teamName = '';
+				this.newCrowdfunding.teamContact = '';
+				this.newCrowdfunding.teamLocation = '';
+				this.newCrowdfunding.proName = '';
+				this.newCrowdfunding.proDesc = '';
+				this.checkedData  = '';
+				this.conceptResultList = '';
+				this.newCrowdfunding.technology1 = '';
+				this.newCrowdfunding.technology2 = '';
+				this.newCrowdfunding.website = '';
+				this.newCrowdfunding.whitePaper = '';
+				this.newCrowdfunding.shotEnName = '';
+				this.newCrowdfunding.shotCnName = '';
+				this.newCrowdfunding.fullEnName = '';
+				this.newCrowdfunding.title = '';
+				this.imageUrl = '';
+				this.coreTeam = '';
+				this.consultantTeam = '';
+				this.websites = '';
 			},
 			saveSubmit() {
 				var concept = [];

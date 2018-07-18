@@ -28,7 +28,9 @@
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">交易所</router-link>-->
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>-->
 					</ul>
-					<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
+					<div class="bierinc-main-container-aside-menu">
+						<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
+					</div>
 				</el-aside>
 				<el-main class="bierinc-main-container-view">
 					<router-view :key="$route.name"></router-view>
@@ -48,6 +50,7 @@
 				token: this.$store.state.token || Cache.getSession('bier_token'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				heardUrl:this.$store.state.heardUrl || Cache.getSession('bier_heardUrl'),
+				isRouterAlive:true,
 			};
 		},
 		computed: {
@@ -57,7 +60,6 @@
 		},
 		methods: {
 			out() {
-				console.log(this.token)
 				Request({
 					url: 'SignOut',
 					type: 'get',
@@ -65,13 +67,10 @@
 						token: this.token
 					}
 				}).then(res => {
-					console.log(res);
-					if(res.success) {
-                        this.handleSignOut();
-						this.$router.push({
-							name: 'index'
-						});
-					}
+                    this.handleSignOut();
+					this.$router.push({
+						name: 'index'
+					});
 				})
             },
             handleSignOut(){
@@ -83,7 +82,7 @@
                 Cache.removeSession('bier_token');
                 Cache.removeSession('bier_userid');
 				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
-            }
+            },
 		}
 	};
 </script>

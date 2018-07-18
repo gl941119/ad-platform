@@ -24,6 +24,7 @@ export default {
     /*钱包地址的绑定*/
     QueryBindWalletAddress:'blockchainadvert/account/bindWalletAddress',
     QueryWalletAddress:'blockchainadvert/account/findWalletAddress',
+    QueryBalance:'blockchainadvert/account/getWalletBalance',
     /*我参与的众筹*/
     QueryMyCrowdfunding: 'blockchainadvert/join-crowd-funding/account-id',
     /*获取所有概念*/

@@ -55,7 +55,12 @@
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
 				</el-table-column>
-				<el-table-column prop="flowType" :label="$t('accountFlow.flowDirection')">
+				<el-table-column :label="$t('accountFlow.flowDirection')">
+					<template slot-scope="scope">
+						<div v-if="scope.row.flowType == 1">
+							充值
+						</div>
+					</template>
 				</el-table-column>
 				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
 				</el-table-column>

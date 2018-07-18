@@ -16,7 +16,7 @@
 				<div class="purse_address">
 					<label>{{$t('purse.balance')}}</label>
 					<div class="input">
-						<el-input></el-input>
+						<el-input v-model="balance"></el-input>
 					</div>
 				</div>
 			</div>
@@ -37,6 +37,7 @@
 			return {
 				purseAddress:'',
 				disabled:false,
+				balance:'',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
@@ -50,21 +51,31 @@
 		},
 		methods: {
 			bind(){
-				Request({
-					url: 'QueryBindWalletAddress',
-					data: {
-						id: this.accountId,
-						walletAddress:this.purseAddress
-					},
-					type: 'post',
-					flag:true,
-				}).then(res => {
-						this.$message({
-							message:this.$t('messageNotice.bindSuccess'),
-							type:'success'
-						});
-						this.queryWallet();
-				})
+				var reg = new RegExp();
+				var str = this.purseAddress;
+				var value = /^0x.{40}$/.test(str);
+				if(value){
+					Request({
+						url: 'QueryBindWalletAddress',
+						data: {
+							id: this.accountId,
+							walletAddress:this.purseAddress
+						},
+						type: 'post',
+						flag:true,
+					}).then(res => {
+							this.$message({
+								message:this.$t('messageNotice.bindSuccess'),
+								type:'success'
+							});
+							this.queryWallet();
+					})
+				}else{
+					this.$message({
+						message:this.$t('messageNotice.walltLimit'),
+						type:'warning'
+					});
+				}
 			},
 			queryWallet(){
 				Request({
@@ -78,7 +89,21 @@
 					this.purseAddress = res.data.walletAddress;
 					if(res.data.walletAddress){
 						this.disabled = true;
+						this.QueryBalance();
 					}
+				})
+			},
+			QueryBalance(){
+				Request({
+					url: 'QueryBalance',
+					data: {
+						address: this.purseAddress,
+					},
+					type: 'get',
+					flag:true,
+				}).then(res => {
+					console.log(res);
+					this.balance = res.data.balance;
 				})
 			}
 		}
