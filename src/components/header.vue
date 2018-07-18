@@ -263,7 +263,7 @@
 							this.dialogModalVisible = false;
 							this.handleLoginFunc(email, password);
 							this.$message({
-								message: res.message,
+								message: this.utils.judgeLanguage(store.state.slangChange, res.message),
 								type: 'success'
 							});
 						});

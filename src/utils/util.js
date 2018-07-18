@@ -196,7 +196,7 @@ export default class Util {
 	}
 	
 	// 读取反馈代码
-	judgeLanuage(lang, key){
+	judgeLanguage(lang, key){
 		switch(lang){
 			case 'zh': 
 				return feedbackZh[key];

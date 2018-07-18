@@ -99,7 +99,7 @@ function requestHandle(params) {
                 } else {
                     reject(data)
                     Message.error({
-                        message: utils.judgeLanuage(store.state.slangChange, message),
+                        message: utils.judgeLanguage(store.state.slangChange, message),
                     });
                 }
             },
