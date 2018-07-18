@@ -16,7 +16,7 @@ export default function getWeb3() {
             resolve(results)
         } else {
             // Fallback to localhost if no web3 injection.
-            var provider = new Web3.providers.HttpProvider('http://localhost:8545')
+            var provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7')
             web3 = new Web3(provider)
             results = {
                 web3: web3
