@@ -38,10 +38,10 @@
 <script>
     import getDetail from '../../service/getData.js';
     import Utils from '../../utils/util.js';
-   /* import {
+   import {
         handleContract
     } from '../../utils/contract.js';
-    import ico_abi from '../../../build/contracts/LavevelICO.json';*/
+    // import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         data() {
             return {
@@ -88,14 +88,14 @@
                         contractId,
                         qrCode
                     };
-                    console.log('get getDetail data_>', res);
+                    // console.log('get getDetail data_>', res);
                     this.handleTime(startTime, endTime, systemTime)
                     this.timer = setInterval(() => {
                         systemTime += 1000;
                         this.handleTime(startTime, endTime, systemTime);
                     }, 1000);
-                    // return handleContract({ico_abi: contractAbi, ico_address: contractId});
-                    return handleContract({ico_abi, ico_address: '0x06a1280e1eb6ac56565f9cc7b32329f883e48081'});
+                    return handleContract({ico_abi: JSON.parse(contractAbi), ico_address: contractId});
+                    // return handleContract({ico_abi, ico_address: '0x06a1280e1eb6ac56565f9cc7b32329f883e48081'});
                 }).then(res => {
                     let {
                         raisedAmount,
@@ -106,6 +106,10 @@
                     });
                     this.loadingData = false;
                     // console.log('get getDetail data contractData------>', this.immediateBuyDatas);
+                }).catch(e => {
+                    console.error('contract_abi_and_address error_>', e);
+                    this.$message.error({message: 'contract function invoke fail'});
+                    this.finish();
                 })
             },
             instantBuyVisible(val, old) {

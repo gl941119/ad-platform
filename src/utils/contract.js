@@ -26,7 +26,8 @@ export class ContractCls {
 
 export function handleContract(detailData) {
     return new Promise((resolve, reject) => {
-        let {ico_abi, ico_address} = detailData;
+        let { ico_abi, ico_address } = detailData;
+        // console.log('ico-contract-abi->', detailData);
         let instanceCls = new ContractCls(ico_abi, ico_address);
         let instance;
         instanceCls.init().then(res => {
@@ -42,9 +43,6 @@ export function handleContract(detailData) {
                     minContribution: instanceCls.web3.fromWei(minContribution, 'ether').toNumber(),
                     maxContribution: instanceCls.web3.fromWei(maxContribution, 'ether').toNumber(),
                 });
-            }).catch(e => {
-                console.error('handleContract_>', e);
-                reject(e);
             })
         }).catch(e => {
             console.error('instance contract error', e);

@@ -239,7 +239,6 @@
 					data: user,
 					flag: true,
 				}).then(res => {
-					console.log('TelegramAuthorize_>', res.data);
 					this.handleLoginSucc(res.data);
 				})
 			},
@@ -310,7 +309,6 @@
 					type: 'get'
 				}).then(res => {
 					this.handleLoginSucc(res.data);
-					console.log('res--------',res);
 				})
 			},
 			handleLoginSucc(data) {
@@ -326,7 +324,7 @@
 				this.$store.commit('setUserName', email);
 				this.$store.commit('setUserNickName', nickname);
 				this.$store.commit('setToken', token);
-				this.$store.commit('heardUrl', heardUrl);
+				this.$store.commit('setHeardUrl', heardUrl);
 				
 				Cache.setSession('bier_userid', id);
 				Cache.setSession('bier_username', email);
