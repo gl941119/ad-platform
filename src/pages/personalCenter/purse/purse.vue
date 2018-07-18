@@ -44,6 +44,9 @@
 				return this.$store.state.slangChange || Cache.getLocal('bier_langChange');
 			}
 		},
+		mounted(){
+			this.queryWallet();
+		},
 		methods: {
 			bind(){
 				Request({
@@ -55,10 +58,25 @@
 					type: 'post',
 					flag:true,
 				}).then(res => {
-					if(res.success == 1){
-						this.$message(this.$t('messageNotice.bindSuccess'));
+						this.$message({
+							message:this.$t('messageNotice.bindSuccess'),
+							type:'success'
+						});
 						this.purseAddress = '';
-					}
+				})
+			},
+			queryWallet(){
+				Request({
+					url: 'QueryWalletAddress',
+					data: {
+						accountId: this.accountId,
+					},
+					type: 'post',
+					flag:true,
+				}).then(res => {
+					console.log(res)
+//					this.$message(this.$t('messageNotice.bindSuccess'));
+//					this.purseAddress = '';
 				})
 			}
 		}

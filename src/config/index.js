@@ -23,6 +23,7 @@ export default {
     QueryMyNewCrowdfunding: 'blockchainadvert/crowd-funding/initiate',
     /*钱包地址的绑定*/
     QueryBindWalletAddress:'blockchainadvert/account/bindWalletAddress',
+    QueryWalletAddress:'blockchainadvert/account/findWalletAddress',
     /*我参与的众筹*/
     QueryMyCrowdfunding: 'blockchainadvert/join-crowd-funding/account-id',
     /*获取所有概念*/
@@ -64,6 +65,6 @@ export default {
     /*顾问团队团队*/
     addConsultant: 'blockchainadvert/crowd-team-consultants',
     deletedConsultant: 'blockchainadvert/crowd-team-consultants/delete/crowd-id/id',
-    ChangeConsultant: 'blockchainadvert/crowd-team-member/put',
+    ChangeConsultant: 'blockchainadvert/crowd-team-consultants/put',
     QueryConsultant: 'blockchainadvert/crowd-team-consultants/getAll/crowd-id/',
 }

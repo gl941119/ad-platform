@@ -286,9 +286,10 @@
 					type: 'post',
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
-						this.$message(this.$t('messageNotice.addSuccess'));
-					} 
+					this.$message({
+						message:this.$t('messageNotice.addSuccess'),
+						type:'success'
+					});
 				})
 			},
 			saveSubmit() {
@@ -329,10 +330,11 @@
 					type: 'post',
 					flag: true,
 				}).then(res => {
-					if(res.success) {
-						this.queryDetails();
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					} 
+					this.queryDetails();
+					this.$message({
+						message:this.$t('messageNotice.changeSuccess'),
+						type:'success'
+					});
 				})
 			},
 			queryDetails(){
@@ -404,10 +406,11 @@
 					type: 'put',
 					flag: true,
 				}).then(res => {
-					if(res.success){
-						this.centerDialogVisible = false;
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					}
+					this.centerDialogVisible = false;
+					this.$message({
+						message:this.$t('messageNotice.changeSuccess'),
+						type:'success'
+					});
 				})
 			},
 			addLink() {
@@ -422,10 +425,11 @@
 					},
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
-						this.centerDialogVisible = false;
-						this.$message(this.$t('messageNotice.addSuccess'));
-					}
+					this.centerDialogVisible = false;
+					this.$message({
+						message:this.$t('messageNotice.addSuccess'),
+						type:'success'
+					});
 				})
 			},
 			deletedLink() {
@@ -439,11 +443,12 @@
 					type: 'DELETE',
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
-						this.$message(this.$t('messageNotice.deleteSuccess'));
+					this.$message({
+						message:this.$t('messageNotice.deleteSuccess'),
+						type:'success'
+					});
 						this.centerDialogVisible = false;
 						this.queryDetails();
-					}
 				})
 			},
 			queryConsultant() {
@@ -475,10 +480,11 @@
 					},
 					flag: true,
 				}).then(res => {
-					if(res.success == 1) {
-						this.CrowdTeamDialogVisible = false;
-						this.$message(this.$t('messageNotice.addSuccess'));
-					}
+					this.CrowdTeamDialogVisible = false;
+					this.$message({
+						message:this.$t('messageNotice.addSuccess'),
+						type:'success'
+					});
 				})
 			},
 			deletedLinkConsultant() {
@@ -492,10 +498,11 @@
 					type: 'DELETE',
 					flag: true,
 				}).then(res => {
-					if(res.success) {
-						this.CrowdTeamDialogVisible = false;
-						this.$message(this.$t('messageNotice.deleteSuccess'));
-					}
+					this.CrowdTeamDialogVisible = false;
+					this.$message({
+						message:this.$t('messageNotice.deleteSuccess'),
+						type:'success'
+					});
 				})
 			},
 			saveLinkConsultant() {
@@ -513,10 +520,11 @@
 					type: 'put',
 					flag: true,
 				}).then(res => {
-					if(res.success) {
-						this.CrowdTeamDialogVisible = false;
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					}
+					this.CrowdTeamDialogVisible = false;
+					this.$message({
+						message:this.$t('messageNotice.changeSuccess'),
+						type:'success'
+					});
 				})
 			},
 			handleSelectionChange(val) {
@@ -539,7 +547,10 @@
 			deletedCore(value) { //核心团队
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					this.$message(this.$t('messageNotice.noDelete'));
+					this.$message({
+						message:this.$t('messageNotice.noDelete'),
+						type:'warning'
+					});
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -553,7 +564,10 @@
 			deletedConsultant(value) { //顾问团队
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					this.$message(this.$t('messageNotice.noDelete'));
+					this.$message({
+						message:this.$t('messageNotice.noDelete'),
+						type:'warning'
+					});;
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}

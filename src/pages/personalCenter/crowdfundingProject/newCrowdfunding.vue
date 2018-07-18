@@ -353,9 +353,10 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-					if(res.success == 1) {
-						this.$message(this.$t('messageNotice.addSuccess'));
-					}
+					this.$message({
+						message:this.$t('messageNotice.addSuccess'),
+						type:'success'
+					});
 				})
 			},
 			listenCondept(checkedData) {
@@ -375,7 +376,10 @@
 			deletedCore(value) { //核心团队
 				var length = this.coreTeam.length;
 				if(length <= 1) {
-					this.$message(this.$t('messageNotice.noDelete'));
+					this.$message({
+						message:this.$t('messageNotice.noDelete'),
+						type:'warning'
+					});
 				} else {
 					this.coreTeam.splice(value, 1);
 				}
@@ -389,7 +393,10 @@
 			deletedConsultant(value) { //顾问团队
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
-					this.$message(this.$t('messageNotice.noDelete'));
+					this.$message({
+						message:this.$t('messageNotice.noDelete'),
+						type:'warning'
+					});
 				} else {
 					this.consultantTeam.splice(value, 1);
 				}
