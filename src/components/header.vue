@@ -14,7 +14,7 @@
 				</div>
 				<div class="header-content-tab-right">
 					<div class="header-content-tab-right-item">
-						<el-select v-model="select" slot="prepend" @change="change(select)">
+						<el-select size="mini" class="language_height" v-model="select" slot="prepend" @change="change(select)">
 							<el-option label="英文" value="en"></el-option>
 							<el-option label="中文" value="zh"></el-option>
 							<!--<el-option label="zh-cn" value="简体中文"></el-option>-->
@@ -26,7 +26,7 @@
 						<a href="javascript:;" @click="switchLang()" v-if="'en' == $i18n.locale">EN</a>
 						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>-->
 					<div class="header-content-tab-right-item">
-						<a href="javascript:;"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
+						<span>|</span><a href="javascript:;"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
 						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
@@ -397,7 +397,6 @@
 			}
 		}
 	}
-	
 	.login-verify {
 		position: relative;
 		&-input {
