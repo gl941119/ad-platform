@@ -2,7 +2,10 @@
 	<div class="invite">
 		<div class="invite_top">
 			<h3 class="invite_top_title">{{$t('invite.inviteUser')}}</h3>
-			<p class="invite_top_code"><span>{{$t('invite.code')}}：</span>{{inviteCode}}</p>
+			<p class="invite_top_code">
+				<span>{{$t('invite.code')}}：</span>
+				<span id="inviteCode">{{inviteCode}}</span>
+			</p><el-button @click="inviteCodeCopy('inviteCode')">点击复制</el-button>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<!--<div class="invite_data">
@@ -35,6 +38,7 @@
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	import Config from '../../../utils/config.js';
+	import Utils from '../../../utils/util.js';
 	export default {
 		data() {
 			return {
@@ -44,12 +48,17 @@
 				size: 5,
 				total:0,
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
+				utils: new Utils(),
 			}
 		},
 		mounted() {
 //			this.queryCode();
 		},
 		methods: {
+			inviteCodeCopy(value){
+				var message = this.utils.copy(value);
+        		this.$message(message)
+			},
 			queryCode() {
 				Request({
 					url: 'QueryInviteCode',

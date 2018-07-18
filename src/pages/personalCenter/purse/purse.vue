@@ -11,7 +11,7 @@
 					<div class="input">
 						<el-input v-model="purseAddress"></el-input>
 					</div>
-					<button class="purse_address_bind" @click="bind">{{$t('buttonAll.bind')}}</button>
+					<el-button class="purse_address_bind" :disabled="disabled" @click="bind">{{$t('buttonAll.bind')}}</el-button>
 				</div>
 				<div class="purse_address">
 					<label>{{$t('purse.balance')}}</label>
@@ -36,6 +36,7 @@
 		data() {
 			return {
 				purseAddress:'',
+				disabled:false,
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 			}
 		},
@@ -71,12 +72,13 @@
 					data: {
 						accountId: this.accountId,
 					},
-					type: 'post',
+					type: 'get',
 					flag:true,
 				}).then(res => {
-					console.log(res)
-//					this.$message(this.$t('messageNotice.bindSuccess'));
-//					this.purseAddress = '';
+					this.purseAddress = res.data.walletAddress;
+					if(res.data.walletAddress){
+						this.disabled = true;
+					}
 				})
 			}
 		}
@@ -121,9 +123,6 @@
 			background:rgba(255,149,0,1);
 			border-radius:4px;
 			color: #FFFFFF;
-			:hover{
-				cursor: pointer;
-			}
 		}
 	}
 	

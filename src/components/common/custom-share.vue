@@ -4,15 +4,18 @@
             <p class="show-share-title">{{$t('share.shareOne')}}{{$t('share.shareTwo')}}</p>
             <p class="show-share-title">http://www.afdchain.com</p>
             <div class="show-share-btn">
-                <el-button class="show-share-btn-text" size="mini" @click="clickCopy">{{$t('share.shareCopy')}}</el-button>
+                <el-button class="show-share-btn-text" size="mini" @click="clickCopy('thisDiv')">{{$t('share.shareCopy')}}</el-button>
             </div>
         </div>
     </el-dialog>
 </template>
 <script>
+	import Utils from '../../utils/util.js';
     export default {
         data() {
-            return {}
+            return {
+            	utils: new Utils(),
+            }
         },
         computed: {
             dialogVisible: {
@@ -25,28 +28,10 @@
             }
         },
         methods: {
-            clickCopy() {
-                var text = document.getElementById('thisDiv');
-                if (document.body.createTextRange) {
-                    var range = document.body.createTextRange();
-                    range.moveToElementText(text);
-                    range.select();
-                } else if (window.getSelection) {
-                    var selection = window.getSelection();
-                    var range = document.createRange();
-                    range.selectNodeContents(text);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                } else {
-                    console.log('please press Ctrl/Cmd+C to copy');
-                }
-                document.execCommand('Copy', 'false', null);
-                this.slct();
-                this.$message({message:'copy success', type: 'success'})             
-            },
-            slct() {
-                window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
-            }
+        	clickCopy(value){
+        		var message = this.utils.copy(value);
+        		this.$message(message);
+        	}
         }
     }
 </script>
