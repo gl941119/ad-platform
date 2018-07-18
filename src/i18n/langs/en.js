@@ -156,7 +156,7 @@ const en = {
 		identityFileType:'身份文件类型',
 		identityFileNumber:'身份文件号码',
 		name:'姓名',
-		identityFile:'身份文件人像页',
+		identityFile:'手持身份文件人像页',
 		notic:'注意事项',
 		noticOne:'1.请确保你使用的证件真实可信',
 		noticTwo:'2.你要手持身份证，距离面部7公分',
