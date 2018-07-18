@@ -64,13 +64,21 @@
             }
         },
         mounted() {
+            let loading = this.$loading({
+                lock: true,
+                text: 'Loading...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                fullscreen: true,
+            });
             Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo()])
                 .then(() => {
-                    this.swiper.init();
+                    this.swiperInstance.init();
+                    loading.close();
                 })
         },
         computed: {
-            swiper() {
+            swiperInstance() {
                 return this.$refs.swiperBulls.swiper;
             }
         },
@@ -126,13 +134,20 @@
             },
             getBulls() {
                 return new Promise((resolve, reject) => {
-                    axios.get('https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=id&structure=array').then(res => {
-                        this.bullsData = this.handleBullsData(res.data.data);
-                        resolve()
-                    }).catch(e => {
-                        console.error('bulls_>', e);
-                        reject(e)
-                    })
+                    let bull = this.$store.state.bullsData;
+                    if(bull) {
+                        this.bullsData = bull;
+                        resolve();
+                    } else {
+                        axios.get('https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=id&structure=array').then(res => {
+                            this.bullsData = this.handleBullsData(res.data.data);
+                            this.$store.commit('setBullsData', this.bullsData);
+                            resolve()
+                        }).catch(e => {
+                            console.error('bulls_>', e);
+                            reject(e)
+                        })
+                    }
                 });
             },
             getSystemTime() {

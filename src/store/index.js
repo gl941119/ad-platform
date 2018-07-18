@@ -14,6 +14,7 @@ export default new Vuex.Store({
         instantBuyVisible: false, // buy dialog visible
         instantBuyDataId: undefined,
         change: false,
+        bullsData: undefined,
 		slangChange: 'en',
 		heardUrl:'',
 	},
@@ -44,6 +45,9 @@ export default new Vuex.Store({
         },
         valueChange(state) {
             state.change = !state.change;
+        },
+        setBullsData(state, val) {
+            state.bullsData = val;
         },
 		setHeardUrl(state, val) {
 			state.heardUrl = val;
