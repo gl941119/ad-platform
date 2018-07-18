@@ -64,6 +64,7 @@ const en = {
 		addSuccess:'添加成功',
 		deleteSuccess:'删除成功',
 		noDelete:'不能再删了，再删就没有了',
+		walltLimit:'请输入以0x开头的42位字符串',
 	},
 	home:{
 		broadcast:'行情播报',

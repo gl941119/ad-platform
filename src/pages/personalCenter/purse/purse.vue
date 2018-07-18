@@ -50,21 +50,31 @@
 		},
 		methods: {
 			bind(){
-				Request({
-					url: 'QueryBindWalletAddress',
-					data: {
-						id: this.accountId,
-						walletAddress:this.purseAddress
-					},
-					type: 'post',
-					flag:true,
-				}).then(res => {
-						this.$message({
-							message:this.$t('messageNotice.bindSuccess'),
-							type:'success'
-						});
-						this.queryWallet();
-				})
+				var reg = new RegExp();
+				var str = this.purseAddress;
+				var value = /^0x.{40}$/.test(str);
+				if(value){
+					Request({
+						url: 'QueryBindWalletAddress',
+						data: {
+							id: this.accountId,
+							walletAddress:this.purseAddress
+						},
+						type: 'post',
+						flag:true,
+					}).then(res => {
+							this.$message({
+								message:this.$t('messageNotice.bindSuccess'),
+								type:'success'
+							});
+							this.queryWallet();
+					})
+				}else{
+					this.$message({
+						message:this.$t('messageNotice.walltLimit'),
+						type:'warning'
+					});
+				}
 			},
 			queryWallet(){
 				Request({

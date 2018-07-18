@@ -313,7 +313,6 @@
 				var reg = new RegExp();
 				var str = this.newPassword;
 				var value = /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.username;
-				console.log(1);
 				if(value) {
 					if(this.newPassword === this.oncePassword) {
 						Request({
