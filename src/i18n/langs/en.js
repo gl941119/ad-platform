@@ -80,6 +80,7 @@ const en = {
 		projectNum:'项目编号',
 		advertising:'广告',
 		thisIssuance:'本轮发行',
+		noData:'没有更多数据了',
 	},
 	share:{
 		shareTiltle:'分享',
