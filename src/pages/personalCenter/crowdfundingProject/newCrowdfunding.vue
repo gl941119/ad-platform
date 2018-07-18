@@ -21,7 +21,7 @@
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in coreTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
-							1
+							{{index+1}}
 						</el-aside>
 						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
@@ -54,7 +54,7 @@
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:138px;line-height:138px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">
-							1
+							{{index+1}}
 						</el-aside>
 						<div class="newCrowdfunding_item_li_coreTeamMembers_member_info">
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
@@ -287,7 +287,7 @@
 				technology: false,
 				fileUrl: '', //相关牌照地址
 				imageUrl: '', //logo地址
-				timeInterval: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+				timeInterval: [],
 				fileList: [],
 				util: new Utils(),
 				conceptDatas: '',
