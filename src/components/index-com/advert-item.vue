@@ -53,25 +53,25 @@ export default {
             this.$store.commit('setDialogVisible', true);
         },
         handleAdvertFunc(val){
-            console.log('handleAdvertFunc_>', this.conceptId, val, this.advertDatas);
-            // Request({
-            //     url: 'ClickAdvertToProfit',
-            //     data: {
-            //         advertId: this.advertDatas.id,
-            //         conceptId: this.conceptId,
-            //         advertWebsiteId: val,
-            //     },
-            //     type: 'get'
-            // }).then(res => {
-            //     console.log('ClickAdvertToProfit_>', res);
-            //     // skip
-            //     this.advertDatas.websiteResultList.forEach(item => {
-            //         if(val === item.id){
-            //             let {websiteAddress} = item;
-            //             window.open(websiteAddress,'target');
-            //         }
-            //     });
-            // })
+            // console.log('handleAdvertFunc_>', this.conceptId, val, this.advertDatas);
+            Request({
+                url: 'ClickAdvertToProfit',
+                data: {
+                    advertId: this.advertDatas.id,
+                    conceptId: this.conceptId,
+                    advertWebsiteId: val,
+                },
+                type: 'get'
+            }).then(res => {
+                // console.log('ClickAdvertToProfit_>', res);
+                // skip
+                this.advertDatas.websiteResultList.forEach(item => {
+                    if(val === item.id){
+                        let {websiteAddress} = item;
+                        window.open(websiteAddress,'target');
+                    }
+                });
+            })
         },
         
     }
