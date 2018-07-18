@@ -101,12 +101,12 @@
 				<label>{{$t('projectInfo.projectDesc')}}</label>
 				<input class="langer" :disabled="disabled" v-model="details.proDesc" />
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.concept')}}</label>
 				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
 				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.technology')}}</label>
 				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
 				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
@@ -160,7 +160,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
-				<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
+				<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" @on-change = "change" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
 					<img v-if="details.logo" :src="details.logo" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 				</el-upload>
@@ -277,6 +277,7 @@
 				technologyDatas: '',
 				checkeData: [],
 				util: new Utils(),
+				isCheck:'',
 			};
 		},
 		components: {
@@ -301,7 +302,9 @@
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res);
 					this.details = res.data;
+					this.isCheck = res.data.isCheck;
 					let {
 						concept1Id,
 						concept2Id,
@@ -542,7 +545,11 @@
 				this.multipleSelection = val;
 			},
 			handleAvatarSuccess(res, file) {
-//				this.details.logo = file.url;
+				this.details.logo = file.url;
+				console.log(file);
+			},
+			change(res, file) {
+				this.details.logo = file.url;
 				console.log(file);
 			},
 			beforeAvatarUpload(file){

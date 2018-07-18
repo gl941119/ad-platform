@@ -30,13 +30,13 @@ export default {
     /*众筹项目方-申请新众筹*/
     QueryNewCrowdfunding: 'blockchainadvert/crowd-funding',
     QueryCrowdfundingDetails: 'blockchainadvert/crowd-funding/id',//众筹详情
-    ChangeCrowdfundingDetails: 'blockchainadvert/advertservice/modifyAdvertProj',//修改众筹申请
+    ChangeCrowdfundingDetails: 'blockchainadvert/crowd-funding/put',//修改众筹申请
     /*广告方-添加新项目*/
     QueryPrice: 'blockchainadvert/advertservice/findAdvertProPriceByAccountId',//查询价格信息
     ChangePrice: 'blockchainadvert/advertservice/advert/modifyPrice',//修改概念价格
     QueryNewProject: 'blockchainadvert/advertservice/advert',
     QueryProject: 'blockchainadvert/advertservice/findAdvertProByAccountId',//查詢詳情
-    ChangeProject: 'blockchainadvert//advertservice/modifyAdvertProj',//修改
+    ChangeProject: 'blockchainadvert/advertservice/modifyAdvertProj',//修改
     QueryAdCoreMember: 'blockchainadvert/advert-team-member/getAll/advert-id',//查询核心团队
     AddAdCoreMember: 'blockchainadvert/advert-team-member/add',//添加核心团队
     DeletedAdCoreMember: 'blockchainadvert/advert-team-member/delete/advert-id/id',//删除核心团队
