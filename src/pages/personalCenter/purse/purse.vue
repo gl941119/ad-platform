@@ -63,7 +63,7 @@
 							message:this.$t('messageNotice.bindSuccess'),
 							type:'success'
 						});
-						this.purseAddress = '';
+						this.queryWallet();
 				})
 			},
 			queryWallet(){
