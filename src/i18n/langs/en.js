@@ -112,6 +112,7 @@ const en = {
 		walletAddress:'钱包地址',
 		qrCode:'二维码',
 		buySuccess:'抢购成功',
+		timeLeft:'本轮众筹剩余时间',
 		warn:'风险警示：BierInc对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
 	},
 	projectList:{
@@ -221,6 +222,7 @@ const en = {
 		delete:'删除',
 		submits:'提交',
 		saveChange:'保存修改',
+		finish:'完成',
 	},
 	initiated:{
 		iInitiated:'我发起的众筹',
