@@ -21,9 +21,6 @@
 							<!--<el-option label="日本語" value="ja"></el-option>-->
 						</el-select>
 					</div>
-					<!--<div class="header-content-tab-right-item">
-						<a href="javascript:;" @click="switchLang()" v-if="'en' == $i18n.locale">EN</a>
-						<a href="javascript:;" @click="switchLang()" v-if="'zh' == $i18n.locale">ZN</a><span>|</span></div>-->
 					<div class="header-content-tab-right-item">
 						<span>|</span><a href="javascript:;"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<div class="header-content-tab-right-item">
@@ -180,17 +177,6 @@
 				this.$i18n.locale = value;
 				this.$store.commit('setLanguage', value);
 				Cache.setLocal('bier_langChange', value);
-			},
-			switchLang() {
-				if(this.$i18n.locale == "en") {
-					this.$i18n.locale = 'zh';
-					this.$store.commit('setLanguage', 'zh');
-					Cache.setLocal('bier_langChange', 'zh');
-				} else {
-					this.$i18n.locale = 'en';
-					this.$store.commit('setLanguage', 'en');
-					Cache.setLocal('bier_langChange', 'en');
-				}
 			},
 			toLogin() {
 				this.dialogModalVisible = true;
