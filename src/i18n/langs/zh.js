@@ -67,6 +67,7 @@ const zh = {
 		walltLimit:'请输入以0x开头的42位字符串',
 		giveyou:'提示',
 		nomore:'最多选择四个',
+		copy:'复制成功',
 	},
 	home:{
 		broadcast:'行情播报',
@@ -119,6 +120,7 @@ const zh = {
 		buySuccess:'抢购成功',
 		timeLeft:'本轮众筹剩余时间',
 		warn:'风险警示：BierInc对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
+		sorry:'抱歉，该分类暂无，试试搜索其他内容',
 	},
 	projectList:{
 		tokenName:'Token名称',

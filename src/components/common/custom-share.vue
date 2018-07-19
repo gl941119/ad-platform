@@ -29,8 +29,8 @@
         },
         methods: {
         	clickCopy(value){
-        		var message = this.utils.copy(value);
-        		this.$message(message);
+        		this.utils.copy(value);
+        		this.$message({message: $t('messageNotice.copy'),type:'success'});
         	}
         }
     }

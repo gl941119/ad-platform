@@ -21,7 +21,7 @@
                 </el-select>
             </div>
         </div>
-        <div class="ad-crowdsale-box">
+        <div class="ad-crowdsale-box" v-if="crowdSaleDatas.length>0">
             <div class="ad-crowdsale-box-content">
                 <crowdsale-detial v-for="(detail, i) in crowdSaleDatas" :key="i" :detail-data="detail" :system-time="sysTime"></crowdsale-detial>
             </div>
@@ -32,6 +32,11 @@
                 :page-size="pageSize"
                 :total="pageTotal">
             </el-pagination>
+        </div>
+        <div v-else class="ad-crowdsale-exec">
+        	<div class="ad-crowdsale-exec-text">
+        		{{$t('crowdFunding.sorry')}}
+        	</div>
         </div>
     </div>
 </template>
@@ -176,6 +181,21 @@
             &-pagination {
                 text-align: center;
             }
+        }
+        &-exec{
+        	background: #F5F5F5;
+        	padding-top: 10px;
+        	padding-bottom: 100px;
+		    &-text{
+			    padding-top: 100px;
+			    font-size: 18px;
+			    color: #606266;
+			    text-align: center;
+			    background: white;
+			    width: 1200px;
+			    margin: 0 auto;
+			    height: 500px;
+		    }
         }
     }
 </style>

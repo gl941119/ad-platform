@@ -223,7 +223,6 @@ export default class Util {
         }
         document.execCommand('Copy', 'false', null);
         this.slct();
-        return {message:'copy success', type: 'success'}
     }
     slct() {
         window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();

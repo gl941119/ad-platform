@@ -1,7 +1,10 @@
 <template>
 	<div class="ad-serving">
-		<h3>{{$t('adServing.adSer')}}</h3>
-		<p><el-button @click="newProject(isCheck)" type="text">{{$t('adServing.trafficking')}}</el-button></p>
+		<div class="ad-serving_title">
+			<div class="ad-serving_title_info">{{$t('adServing.adSer')}}</div>
+			<el-button class="ad-serving_title_button" @click="newProject(isCheck)" type="text">{{$t('adServing.trafficking')}}
+			</el-button>
+		</div>
 		<div class="ad-serving-info">
 			<div class="ad-serving-info-top">
 				<div class="ad-serving-info-top-price">
@@ -107,5 +110,32 @@
 </script>
 
 <style lang="scss" scoped>
-	
+.ad-serving{
+	&_title{
+		margin-bottom: 30px;
+		&_info{
+			margin-left: 36px;
+			margin-right: 40px;
+			font-size:24px;
+			color:rgba(51,51,51,1);
+			display: inline-block;
+		}
+		&_button{
+			display: inline-block;
+			font-size:18px;
+			color:rgba(255,255,255,1);
+			line-height:25px;
+			background:rgba(255,149,0,1);
+			border-radius:4px;
+			padding: 5px 20px;
+
+		}
+	}
+}
+	.ad-serving-info{
+		padding: 20px 36px;
+		background:rgba(255,255,255,1);
+		box-shadow:0px 2px 12px 0px rgba(0,0,0,0.06);
+		border:1px solid rgba(228,231,237,1);
+	}
 </style>
