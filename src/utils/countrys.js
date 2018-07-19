@@ -474,9 +474,6 @@ export default {
 		value:'斯里兰卡',
 		label:'斯里兰卡'
 	},{
-		value:'圣卢西亚',
-		label:'圣卢西亚'
-	},{
 		value:'圣文森特',
 		label:'圣文森特'
 	},{

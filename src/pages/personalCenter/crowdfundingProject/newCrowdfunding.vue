@@ -155,7 +155,14 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
-				<el-upload class="avatar-uploader" :show-file-list="false" action="" :on-change="getImg"  :auto-upload="false">
+				<el-upload class="avatar-uploader"
+					 :show-file-list="false" 
+					 :action="uploadImg"
+					 :headers="requestToken"
+					 :on-error="imgError"
+					 accept=".jpg,.png"
+					 :limit="1"
+					 :on-success="getImg">
 					<img v-if="imageUrl" :src="imageUrl" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 				</el-upload>
@@ -209,7 +216,15 @@
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.about')}}</label>
 				<div>
-					<el-upload class="upload-demo" action="" :on-change="getFile" :auto-upload="false" :on-remove="handleRemove" multiple>
+					<el-upload class="upload-demo" 
+						:action="uploadImg" 
+						:on-success="getFile" 
+						:on-error="imgError"
+						:data="params"
+						:headers="requestToken"
+						:limit="1"
+						accept=".jpg,.jpeg,.png,,.pdf"
+						:on-remove="handleRemove" multiple>
 						<el-button size="small" type="primary">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
 				</div>
@@ -226,6 +241,7 @@
 	import Request from '../../../utils/require.js';
 	import Utils from '../../../utils/util.js';
 	import Cache from '../../../utils/cache';
+	import Config from '../../../utils/config';
 	export default {
 		data() {
 			return {
@@ -292,6 +308,15 @@
 				util: new Utils(),
 				conceptDatas: '',
 				technologyDatas: '',
+				uploadImg: Config.UploadImg,
+				requestToken: {
+					token:
+                        this.$store.state.token ||
+                        Cache.getSession('bier_token')
+				},
+				params:{
+					fileType:'2'
+				}
 			}
 		},
 		components: {
@@ -416,14 +441,17 @@
 				}
 				this.technologyDatas = technologyArr.join('-');
 			},
-			getImg(file) {
-				this.imageUrl = file.url;
+			getImg(res, file) {
+				this.imageUrl = res.data;
+			},
+			imgError(){
+				this.$message('上传失败');
 			},
 			handleRemove(file, fileList) {
 				console.log(file, fileList);
 			},
-			getFile(file) {
-				this.fileUrl = file.url;
+			getFile(res) {
+				this.fileUrl = res.data;
 			}
 		}
 	}

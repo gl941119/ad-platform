@@ -155,7 +155,14 @@
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
 				<div>
-					<el-upload class="avatar-uploader" :show-file-list="false" action="" :on-change="getImg" :auto-upload="false">
+					<el-upload class="avatar-uploader" 
+						:show-file-list="false" 
+						 :action="uploadImg"
+						 :headers="requestToken"
+						 :on-error="imgError"
+						 accept=".jpg,.png"
+						 :limit="1"
+						 :on-success="getImg">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 					</el-upload>
@@ -243,6 +250,12 @@
 				value:this.$route.params.value,
 				disabled:false,
 				isCheck:'',
+				uploadImg: Config.UploadImg,
+				requestToken: {
+					token:
+                        this.$store.state.token ||
+                        Cache.getSession('bier_token')
+				},
 			}
 		},
 		components: {
@@ -605,8 +618,11 @@
 					this.consultantTeam.splice(value, 1);
 				}
 			},
-			getImg(file) {
-				this.imageUrl = file.url;
+			getImg(res) {
+				this.imageUrl = res.data;
+			},
+			imgError(){
+				this.$message('上传错误')
 			},
 			conceptFun() { //概念弹出窗
 				this.concept = !this.concept;

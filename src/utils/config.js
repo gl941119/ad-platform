@@ -26,5 +26,5 @@ export default {
         'http://pic.bierinc.com/chainadvert/1@1530951208942.svg?x-bier.oss-process=image/resize,m_fixed,w_250',
         'http://pic.bierinc.com/chainadvert/1@1530951208936.svg?x-bier.oss-process=image/resize,m_fixed,w_250',
     ],
-    UploadImg: process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl + 'blockchainadvert/common/uploadimage',
+    UploadImg: (process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl) + 'blockchainadvert/common/upload-file',
 };
