@@ -97,7 +97,18 @@ function requestHandle(params) {
                 if (success === 1) {
                     resolve(res.data);
                 } else {
-                    reject(data)
+                    if (data && data.islogin) {
+                        store.commit('setUserId', undefined);
+                        store.commit('setUserName', undefined);
+                        store.commit('setUserNickName', undefined);
+                        store.commit('setToken', undefined);
+                        Cache.removeSession('bier_username');
+                        Cache.removeSession('bier_token');
+                        Cache.removeSession('bier_userid');
+                        Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
+                        // location.href = "/index";
+                    }
+                    reject(data);
                     Message.error({
                         message: utils.judgeLanguage(store.state.slangChange, message),
                     });
