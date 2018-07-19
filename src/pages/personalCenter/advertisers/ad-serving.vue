@@ -22,9 +22,6 @@
 						      	</el-input-number>
 						    </el-form-item>
 					    </div>
-					     <el-form-item :label-width="formLabelWidth">
-					      	<div>{{$t('adServing.prompt')}}</div>
-					    </el-form-item>
 					  	</el-form>
 						<div slot="footer" class="dialog-footer">
 						    <el-button type="primary" @click="changePrice">{{$t('buttonAll.revise')}}</el-button>

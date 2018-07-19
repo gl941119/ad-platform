@@ -209,6 +209,10 @@
 								this.num = 60;
 							}
 						}, 1000);
+						this.$message({
+							message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+							type: 'success'
+						});
 					})
 				} else {
 					this.$message({

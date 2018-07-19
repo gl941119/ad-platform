@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<div>
-			<div class="title">设置信息</div>
+			<div class="title">{{$t('setting.setInfo')}}</div>
 			<div class="settings_box">
 				<el-collapse v-model="activeName" accordion>
-					<el-collapse-item title="头像" name="1">
+					<el-collapse-item :title="$t('setting.headUrl')" name="1">
 						<div>
 							<div class="el-collapse-item__content">
 								<div class="el-collapse-item__content_img">
@@ -18,7 +18,7 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="昵称" name="2">
+					<el-collapse-item :title="$t('setting.nickname')" name="2">
 						<div class="el-collapse-item__content">
 							<div class="el-collapse-item__content-box">
 								<h3>{{$t('setting.changeNickname')}}</h3>
@@ -31,7 +31,7 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="邮箱" name="3">
+					<el-collapse-item :title="$t('setting.email')" name="3">
 						<div class="el-collapse-item__content">
 							<div class="el-collapse-item__content-box max">
 								<h3>{{$t('setting.bindEmail')}}</h3>
@@ -53,7 +53,7 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="密码" name="4">
+					<el-collapse-item :title="$t('passwordInfo.passwords')" name="4">
 						<div class="el-collapse-item__content">
 							<div class="el-collapse-item__content-box bindEmail">
 								<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
@@ -82,7 +82,7 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="交易密码" name="5">
+					<el-collapse-item :title="$t('passwordInfo.tradePassword')" name="5">
 						<div class="el-collapse-item__content">
 							<div v-if="!existTradePassword" class="el-collapse-item__content-box bindEmail">
 								<h3>{{$t('passwordInfo.setTradePassword')}}</h3>
@@ -157,25 +157,25 @@
 			</div>
 		</div>
 		<div class="title">{{$t('setting.authentication')}}</div>
-		<el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
-			<span>提示</span>
+		<el-dialog :title="$t('messageNotice.giveyou')" :visible.sync="dialogVisible" width="30%">
+			<span>{{$t('messageNotice.giveyou')}}</span>
 			<div>
-				<p>1、密码长度必须介于8到16个字符之间。</p>
-				<p>2、密码只能包含英文字母（A-Z）、数字字符（0-9）以及标点符号。</p>
-				<p>3、密码至少包含1个英文字母和1个数字字符。</p>
-				<p>4、密码不能与账号相同。</p>
+				<p>{{$t('passwordNotic.one')}}</p>
+				<p>{{$t('passwordNotic.two')}}</p>
+				<p>{{$t('passwordNotic.three')}}</p>
+				<p>{{$t('passwordNotic.four')}}</p>
 			</div>
 			<span slot="footer" class="dialog-footer">
-				    <el-button @click="dialogVisible = false">取 消</el-button>
+				    <el-button @click="dialogVisible = false">{{$t('buttonAll.cancle')}}</el-button>
 				</span>
 		</el-dialog>
 		<div class="settings_box">
 			<el-collapse v-model="active" accordion>
-				<el-collapse-item title="填写认证信息" name="1">
+				<el-collapse-item :title="$t('setting.fillInformation')" name="1">
 						<ul class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
-								<input class="el-collapse-item__content_authentication_li_info" v-model="realName" />
+								<input class="el-collapse-item__content_authentication_li_info" @blur="name" v-model="realName" />
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileType')}}</label>
@@ -186,7 +186,7 @@
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileNumber')}}</label>
-								<input class="el-collapse-item__content_authentication_li_info" v-model="idNum" />
+								<input class="el-collapse-item__content_authentication_li_info" @blur="text" v-model="idNum" />
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.country')}}</label>
@@ -225,6 +225,7 @@
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	import Utils from '../../../utils/util';
+	import Country from '../../../utils/countrys';
 	export default {
 		data() {
 			return {
@@ -237,7 +238,6 @@
 				bindEmail: "",
 				headUrl: "",
 				id: 0,
-				nickName: "",
 				oldPassword: "",
 				newPassword: "",
 				oncePassword: "",
@@ -251,22 +251,7 @@
 				codeTradePassword: '',
 				/*身份验证*/
 				country: "",
-				countryData: [{
-					value: '中国',
-					label: '中国'
-				}, {
-					value: '大中国',
-					label: '大中国'
-				}, {
-					value: '大中华',
-					label: '大中华'
-				}, {
-					value: '俄罗斯',
-					label: '俄罗斯'
-				}, {
-					value: '巴基斯坦',
-					label: '巴基斯坦'
-				}],
+				countryData: Country.country,
 				idNum: "",
 				idType: "",
 				idTypeData: [{
@@ -296,6 +281,11 @@
 				isBindTelegram: true,
 			}
 		},
+		computed:{
+			nickName(){
+				return this.$store.state.usernickname || Cache.getSession('bier_usernickname');
+			}
+		},
 		mounted() {
 			Request({
 				url: 'QuerySettings',
@@ -307,6 +297,7 @@
 				this.existTradePassword = res.data.existTradePassword;
 				this.isBindTelegram = res.data.isBindTelegram;
 			})
+			console.log(Country)
 		},
 		methods: {
 			setPassword() { //设置密码
@@ -415,8 +406,8 @@
 							}
 						}, 1000);
 						this.$message({
-							message:this.$t('messageNotice.getSuccess'),
-							type:'success'
+							message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+							type: 'success'
 						});
 					})
 				} else {
@@ -444,8 +435,8 @@
 						}
 					}, 1000);
 					this.$message({
-						message:this.$t('messageNotice.getSuccess'),
-						type:'success'
+						message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+						type: 'success'
 					});
 				})
 			},
@@ -469,6 +460,10 @@
 							this.numTradePassword = 60;
 						}
 					}, 1000);
+					this.$message({
+						message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+						type: 'success'
+					});
 				})
 			},
 			changeTradePassword() {
@@ -592,11 +587,13 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-							this.nickName = '';
+							this.$store.commit('setUserNickName', this.nickName);
+							Cache.setSession('bier_usernickname', this.nickName);
 							this.$message({
 								message: this.$t('messageNotice.changeSuccess'), 
 								type: 'success'
 							});
+							this.nickName = '';
 					})
 				} else {
 					this.$message({
@@ -629,6 +626,16 @@
 							type:'success'
 						});
 				})
+			},
+			name(){
+				if(!this.realName || this.realName.length>64){
+					this.$message(this.$t('setting.limitName'));
+				}
+			},
+			text(){
+				if(this.idNum.length>32){
+					this.$message(this.$t('setting.limit'));
+				}
 			},
 			getImg(file) {
 				this.imageUrl = file.url;

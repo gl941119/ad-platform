@@ -29,7 +29,7 @@
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>-->
 					</ul>
 					<div class="bierinc-main-container-aside-menu">
-						<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
+						<div class="bierinc-main-container-aside-menu-li" @click="out">{{$t('personal.loginOut')}}</div>
 					</div>
 				</el-aside>
 				<el-main class="bierinc-main-container-view">
@@ -49,7 +49,6 @@
 			return {
 				uid: this.$store.state.id || Cache.getSession('bier_userid'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
-				username: this.$store.state.username || Cache.getSession('bier_username'),
                 isRouterAlive:true,
 			};
 		},
@@ -59,6 +58,9 @@
             },
             heardUrl() {
                 return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
+            },
+            username(){
+            	return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
             }
 		},
 		methods: {

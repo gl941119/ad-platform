@@ -42,7 +42,7 @@
    /*import {
         handleContract
     } from '../../utils/contract.js';*/
-    // import ico_abi from '../../../build/contracts/LavevelICO.json';
+//     import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         data() {
             return {
@@ -121,7 +121,7 @@
                 // })
                 .catch(e => {
                     console.error('contract_abi_and_address error_>', e);
-                    this.$message.error({message: 'contract function invoke fail'});
+                    this.$message.error({message: this.$t('home.instant')});
                     this.finish();
                 })
             },

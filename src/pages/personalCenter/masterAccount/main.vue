@@ -21,7 +21,7 @@
 						</div>
 					</li>
 					<li class="withdraw_item_li"><label style="width: 100px;">{{$t('project.useBalance')}}：</label>
-						<span>111111111111111111111</span>
+						<span>{{walltsBalance}}</span>
 					</li>
 					<p>{{$t('project.notic')}}</p>
 					<button class="right_now" @click="close" style=";position:absolute;top: 278px;">{{$t('buttonAll.ok')}}</button>
@@ -78,6 +78,7 @@
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
+				walltsBalance: this.$store.state.balance || Cache.getSession('setBalance'),
 			}
 		},
 		mounted() {

@@ -17,6 +17,7 @@ export default new Vuex.Store({
         bullsData: undefined,
 		slangChange: 'en',
 		heardUrl:'',
+		balance:'',
 	},
 	mutations: {
 		setUserId(state, val) {
@@ -54,6 +55,9 @@ export default new Vuex.Store({
 		},
 		setLanguage(state, val) {
 			state.slangChange = val;
+        },
+        setBalance(state, val) {
+			state.balance = val;
         },
 	},
 });

@@ -65,6 +65,7 @@ const zh = {
 		deleteSuccess:'删除成功',
 		noDelete:'不能再删了，再删就没有了',
 		walltLimit:'请输入以0x开头的42位字符串',
+		giveyou:'提示',
 	},
 	home:{
 		broadcast:'行情播报',
@@ -82,6 +83,7 @@ const zh = {
 		advertising:'广告',
 		thisIssuance:'本轮发行',
 		noData:'没有更多数据了',
+		instant:'智能合约未能及时响应，请稍后再试...'
 	},
 	share:{
 		shareTiltle:'分享',
@@ -157,6 +159,8 @@ const zh = {
 		identityFileType:'身份文件类型',
 		identityFileNumber:'身份文件号码',
 		name:'姓名',
+		limit:'身份文件号码限制在32位以内',
+		limitName:'请输入64位以内的姓名',
 		identityFile:'手持身份文件人像页',
 		notic:'注意事项',
 		noticOne:'1.请确保你使用的证件真实可信',
@@ -244,6 +248,7 @@ const zh = {
 		balance:'余额',
 		ethWalletAddress:'ETH钱包地址',
 		withdraw:'提现',
+		requireWithdraw:'已提交提现申请',
 		recharge:'充值',
 		moneyAccount:'收款账户',
 		enterMoneyAccount:'请输入收款账户',
@@ -386,7 +391,7 @@ const zh = {
 		emptyWhitePaper:'白皮书地址不能为空（符合网站地址）',
 	},
 	messageCode:{
-		'exceptions':'系统异常',
+		exceptions:'系统异常',
 		success:'操作成功',
 		failure:'操作失败',
 		registered:'注册成功',
