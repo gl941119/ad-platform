@@ -25,9 +25,9 @@
 						<span>|</span><a href="https://t.me/AFDchain99" target="_blank"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<!-- <div class="header-content-tab-right-item">
 						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div> -->
-					<div class="header-content-tab-right-item">
-						<a v-if="!userName" @click="toLogin" href="javascript:;">{{$t('header.login')}}</a>
-						<a v-if="userName" @click="toPersonCenter" href="javascript:;">{{userName}}</a>
+					<div class="header-content-tab-right-item head-img">
+						<a v-show="!userName" @click="toLogin" href="javascript:;"><i class="custom-element-icon-touxiang" style="margin-right:8px;"></i><span class="header-content-tab-right-item-username">{{$t('header.login')}}</span></a>
+						<a v-show="userName" @click="toPersonCenter" href="javascript:;"><img class="header-content-tab-right-item-img" :src="heardUrl"><span class="header-content-tab-right-item-username">{{userName}}</span></a>
 					</div>
 				</div>
 			</div>
@@ -170,7 +170,10 @@
                     return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
                 },
                 set(){}
-            }
+            },
+            heardUrl() {
+                return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
+            },
         },
 		methods: {
 			change(value){
@@ -376,11 +379,27 @@
 							color: #fff;
 							height: 100%;
 							display: inline-block;
-							padding: 0 25px;
-						}
+                            padding: 0 25px;
+                        }
+                        &.head-img a{
+                            @include content-flex();
+                        }
 						&:last-child a {
 							padding-right: 0;
-						}
+                        }
+                        &-img {
+                            width: 30px;
+                            height: 30px;
+                            margin-right: 8px;
+                            border-radius: 50%;
+                        }
+                        &-username {
+                            width: 4em;
+                            overflow: hidden;
+                            word-break: break-all;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
 					}
 				}
 			}

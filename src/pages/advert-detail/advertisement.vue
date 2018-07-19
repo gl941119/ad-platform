@@ -5,7 +5,7 @@
                 <img :src="headerImg">
             </div>
             <div class="advertisement-container-title">
-                <div class="advertisement-container-title-label">{{$t('header.home')}}</div>
+                <div class="advertisement-container-title-label">{{$t('header.project')}}</div>
             </div>
             <div class="advertisement-container-select">
                 <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="conceptId" :placeholder="$t('crowdFunding.allConcept')">

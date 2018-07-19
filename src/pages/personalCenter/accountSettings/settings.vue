@@ -274,7 +274,7 @@
 				numPassword: 60,
 				numTradePassword: 60,
 				imgData: Config.headPortrait,
-				imgsrc: this.$store.state.heardUrl || Cache.getSession('bier_heardUrl'),
+				imgsrc: this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5],
 				existEmail: true,
 				existPassword: true,
 				existTradePassword: true,
