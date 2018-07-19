@@ -8,9 +8,9 @@
         </div>
         <div class="advert-item-middle">
             <div class="advert-item-middle-title clearfix">
-                <div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}/{{advertDatas.shotCnName}}</div>
+                <div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}<span v-show="language==='zh'&&advertDatas.shotCnName">/{{advertDatas.shotCnName}}</span></div>
                 <div class="advert-item-middle-title-symbol">{{advertDatas.fullEnName}}</div>
-                <div class="advert-item-middle-title-icon">
+                <div class="advert-item-middle-title-icon" v-show="itemIndex < 30">
                     <i class="custom-element-icon-hot"></i>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 </template>
 <script>
 export default {
-    props: ['advertDatas', 'systemTime', 'isWhiteBack'],
+    props: ['advertDatas', 'systemTime', 'isWhiteBack', 'itemIndex'],
     data(){
         return {
             advertValue: '',
@@ -46,6 +46,9 @@ export default {
     computed: {
         conceptId(){
             return this.$store.state.conceptId;
+        },
+        language(){
+            return this.$store.state.slangChange;
         }
     },
     methods: {
