@@ -231,6 +231,7 @@
 			return {
                 utils: new Utils(),
                 telegramBot: Config.TelegramBot,
+                nickName: this.$store.state.usernickname || Cache.getSession('bier_usernickname'),
 				activeName: '',
 				active: '',
 				fileList: [],
@@ -279,14 +280,14 @@
 				existEmail: true,
 				existPassword: true,
 				existTradePassword: true,
-				isBindTelegram: true,
+                isBindTelegram: true,
 			}
 		},
-		computed:{
-			nickName(){
-				return this.$store.state.usernickname || Cache.getSession('bier_usernickname');
-			}
-		},
+		// computed:{
+		// 	nickName(){
+		// 		return this.$store.state.usernickname || Cache.getSession('bier_usernickname');
+		// 	}
+		// },
 		mounted() {
 			this.info();
 		},
@@ -592,8 +593,7 @@
 			},
 			changeNickName() { //改昵称
 				if(this.nickName) {
-					console.log(this.nickName)
-					/*Request({
+					Request({
 						url: 'QueryAccountSettings',
 						data: {
 							id: this.accountId,
@@ -602,14 +602,15 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-							this.$store.commit('setUserNickName', this.nickName);
-							Cache.setSession('bier_usernickname', this.nickName);
-							this.$message({
-								message: this.$t('messageNotice.changeSuccess'), 
-								type: 'success'
-							});
-							this.nickName = '';
-					})*/
+                        this.$store.commit('setUserNickName', this.nickName);
+                        Cache.setSession('bier_usernickname', this.nickName);
+                        this.$message({
+                            message: this.$t('messageNotice.changeSuccess'), 
+                            type: 'success'
+                        });
+					}).catch(e => {
+                        console.error('change nickname error_>', e);
+                    })
 				} else {
 					this.$message({
 						message:this.$t('messageNotice.nicknameEmpty'),
