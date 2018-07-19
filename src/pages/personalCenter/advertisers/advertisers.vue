@@ -174,9 +174,9 @@
 			</li>
 			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 				<label class="label">
-					<input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="item.websiteName" >
+					<input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="websites[index].websiteName" >
 				</label>
-				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="item.websiteAddress" />
+				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress" />
 			</li>
 		</ul>
 		<div class="submit_box">
@@ -228,7 +228,8 @@
 					shotCnName: "", //中文简写
 					fullEnName: "", //英文全名
 				},
-				websites:[],
+				websites:[{},{},{},{},{},{},{},{}],
+				website:[{},{},{},{},{},{},{},{}],
 				checkedData: [],
 				concept: false,
 				technology: false,
@@ -328,7 +329,7 @@
 				}
 				var value = this.newCrowdfunding.id;
 				var arr = [];
-				if(this.websites){
+				if(this.websites.length>0){
 					this.websites.forEach(function(item, index){
 						item.advertProjId = value;
 						if(item.websiteName){
@@ -336,7 +337,6 @@
 						}
 					})
 				}
-				console.log(arr);
 				Request({
 					url: 'ChangeProject',
 					data: {
@@ -396,13 +396,14 @@
 					this.conceptResultList = res.data.conceptResultList;
 					this.conceptDatas = arr.join('-')
 					this.technologyDatas = technologyArr.join('-');
-					if(res.data.websiteResultList){
-						var length = res.data.websiteResultList.length;
-						var obj = {websiteName: '', websiteAddress: ''};
-						this.websites = res.data.websiteResultList;
-						for(var i=0;i<8-length;i++){
-							this.websites.push(obj);
-						}
+					var that = this;
+					if(res.data.websiteResultList.length>0){
+						let number = -1;
+						res.data.websiteResultList.forEach(function(item, index){
+							console.log(item);
+							number++;
+							that.websites.splice(number,1,item);
+						})
 					}
 				})
 			},

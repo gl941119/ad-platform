@@ -17,8 +17,8 @@
 						<el-select size="mini" class="language_height" v-model="select" slot="prepend" @change="change(select)">
 							<el-option label="English" value="en"></el-option>
 							<el-option label="简体中文" value="zh"></el-option>
-							<el-option label="한국어" value="ko"></el-option>
-							<el-option label="日本語" value="ja"></el-option>
+							<!--<el-option label="한국어" value="ko"></el-option>-->
+							<!--<el-option label="日本語" value="ja"></el-option>-->
 						</el-select>
 					</div>
 					<!--<div class="header-content-tab-right-item">
