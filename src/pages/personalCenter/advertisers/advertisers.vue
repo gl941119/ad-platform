@@ -52,6 +52,9 @@
 						<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
 						<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
 					</div>
+					<div slot="footer" v-if="isCheck == '-1'" class="dialog-footer">
+						<el-button @click="centerDialogVisible = false">{{$t('buttonAll.confirm')}}</el-button>
+					</div>
 				</el-dialog>
 			</div>
 			<li class="newCrowdfunding_item_li">
@@ -91,7 +94,7 @@
 						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
 					</div>
 					<div slot="footer" v-if="isCheck == '-1'" class="dialog-footer">
-						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.confirm')}}</el-button>
+						<el-button @click="CrowdTeamDialogVisible = false">{{$t('buttonAll.confirm')}}</el-button>
 					</div>
 				</el-dialog>
 			</div>
