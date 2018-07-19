@@ -60,6 +60,7 @@ export default {
     SetPassword: 'blockchainadvert/account/setPassword',//设置密码
     SetTradePassword: 'blockchainadvert/account/setTradePassword',//设置 交易密码
     QuerySettings: 'blockchainadvert/account/getAccountStatus',//获取设置信息
+    BindTelegram: 'blockchainadvert/account/bindTelegram', // 绑定telegram
     /*核心团队*/
     AddCoreMember: 'blockchainadvert/crowd-team-member',
     DeletedCoreMember: 'blockchainadvert/crowd-team-member/delete/crowd-id/id',
