@@ -85,10 +85,13 @@
 							</template>
 						</el-table-column>
 					</el-table>
-					<div slot="footer" v-if="isCheck!=-1" class="dialog-footer">
+					<div slot="footer" v-if="isCheck != '-1'" class="dialog-footer">
 						<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
 						<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
 						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
+					</div>
+					<div slot="footer" v-if="isCheck == '-1'" class="dialog-footer">
+						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.confirm')}}</el-button>
 					</div>
 				</el-dialog>
 			</div>
