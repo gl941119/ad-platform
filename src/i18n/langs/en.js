@@ -73,7 +73,7 @@ const en = {
 		broadcast:'Market',
 		begin:'Coming',
 		time:'Remaining',
-		number:'指数 ',
+		number:' ',
 		immediately:'Buy now!',
 		over:'End',
 		buy:'Trade',

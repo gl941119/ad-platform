@@ -57,7 +57,7 @@ const zh = {
 		setTradePassword:'设置交易密码成功',
 		emptyTradePassword:'交易密码不能为空',
 		changeSuccess:'修改成功',
-		getSuccess:'获取成功',
+		getSuccess:'验证码已发送',
 		certificationSuccess:'认证成功',
 		nicknameEmpty:'昵称不能为空',
 		bindSuccess:'绑定成功',

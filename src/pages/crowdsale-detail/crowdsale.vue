@@ -51,7 +51,20 @@
                 pageSize: Config.pageSize,
                 pageTotal: 0,
                 headerImg,
-                stateOptions: [{
+                conceptOptions: [],
+                stageValue: 0,
+                conceptValue: 0,
+                currpage: undefined,
+                crowdSaleDatas: [],
+                sysTime: undefined,
+            }
+        },
+        components: {
+            'crowdsale-detial': crowdsaleDetialCom,
+        },
+        computed: {
+        	stateOptions(){
+        		return [{
                     value: 0,
                     label: this.$t('crowdFunding.all')
                 }, {
@@ -63,17 +76,8 @@
                 }, {
                     value: 3,
                     label: this.$t('home.over')
-                }],
-                conceptOptions: [],
-                stageValue: 0,
-                conceptValue: 0,
-                currpage: undefined,
-                crowdSaleDatas: [],
-                sysTime: undefined,
-            }
-        },
-        components: {
-            'crowdsale-detial': crowdsaleDetialCom,
+                }]
+        	}
         },
         mounted() {
             Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime()]).then(() => {
