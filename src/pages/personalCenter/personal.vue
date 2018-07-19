@@ -29,7 +29,7 @@
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">媒体</router-link>-->
 					</ul>
 					<div class="bierinc-main-container-aside-menu">
-						<div class="bierinc-main-container-aside-menu-li" @click="out">退出登录</div>
+						<div class="bierinc-main-container-aside-menu-li" @click="out">{{$t('personal.loginOut')}}</div>
 					</div>
 				</el-aside>
 				<el-main class="bierinc-main-container-view">

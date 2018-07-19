@@ -35,7 +35,7 @@
 				<div class="center">
 					<i class="custom-element-icon-duihao"></i>
 				</div>
-				<p  class="center">已提交体现申请</p>
+				<p  class="center">{{$t('project.requireWithdraw')}}</p>
 				<button class="allright">{{$t('buttonAll.ok')}}</button>
 			</div>
 		</div>
