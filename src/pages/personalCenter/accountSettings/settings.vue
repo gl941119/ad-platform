@@ -175,7 +175,7 @@
 						<ul class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
-								<input class="el-collapse-item__content_authentication_li_info" v-model="realName" />
+								<input class="el-collapse-item__content_authentication_li_info" @blur="name" v-model="realName" />
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileType')}}</label>
@@ -186,7 +186,7 @@
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileNumber')}}</label>
-								<input class="el-collapse-item__content_authentication_li_info" v-model="idNum" />
+								<input class="el-collapse-item__content_authentication_li_info" @blur="text" v-model="idNum" />
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.country')}}</label>
@@ -225,6 +225,7 @@
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	import Utils from '../../../utils/util';
+	import Country from '../../../utils/countrys';
 	export default {
 		data() {
 			return {
@@ -250,22 +251,7 @@
 				codeTradePassword: '',
 				/*身份验证*/
 				country: "",
-				countryData: [{
-					value: '中国',
-					label: '中国'
-				}, {
-					value: '大中国',
-					label: '大中国'
-				}, {
-					value: '大中华',
-					label: '大中华'
-				}, {
-					value: '俄罗斯',
-					label: '俄罗斯'
-				}, {
-					value: '巴基斯坦',
-					label: '巴基斯坦'
-				}],
+				countryData: Country.country,
 				idNum: "",
 				idType: "",
 				idTypeData: [{
@@ -311,6 +297,7 @@
 				this.existTradePassword = res.data.existTradePassword;
 				this.isBindTelegram = res.data.isBindTelegram;
 			})
+			console.log(Country)
 		},
 		methods: {
 			setPassword() { //设置密码
@@ -639,6 +626,16 @@
 							type:'success'
 						});
 				})
+			},
+			name(){
+				if(!this.realName || this.realName.length>64){
+					this.$message(this.$t('setting.limitName'));
+				}
+			},
+			text(){
+				if(this.idNum.length>32){
+					this.$message(this.$t('setting.limit'));
+				}
 			},
 			getImg(file) {
 				this.imageUrl = file.url;

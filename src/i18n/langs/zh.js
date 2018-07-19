@@ -159,6 +159,8 @@ const zh = {
 		identityFileType:'身份文件类型',
 		identityFileNumber:'身份文件号码',
 		name:'姓名',
+		limit:'身份文件号码限制在32位以内',
+		limitName:'请输入64位以内的姓名',
 		identityFile:'手持身份文件人像页',
 		notic:'注意事项',
 		noticOne:'1.请确保你使用的证件真实可信',
