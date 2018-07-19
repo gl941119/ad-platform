@@ -1,15 +1,15 @@
 const url = {
     // localTestUrl: 'http://192.168.1.15:8091/',
     localTestUrl: 'http://192.168.1.254:8091/',
-    // productUrl: 'http://192.168.1.254:8091/',
-    productUrl: 'http://api.afdchain.com/',
+    productUrl: 'http://192.168.1.254:8091/',
+    // productUrl: 'http://api.afdchain.com/',
 };
 
 export default {
     url,
     pageSize: 10, // 一页的数量
     pageStart: 1,
-    TelegramBot: 'hanguishuai_bot',
+    TelegramBot: 'AFDchain_bot',
     headPortrait: [
         "https://s3-us-west-2.amazonaws.com/static-afd/upload-folder/picture/8b8b249f7cd14a219b046e04d95f9949.png",
         "https://s3-us-west-2.amazonaws.com/static-afd/upload-folder/picture/5429df2d58ff41de90cf53c5cfaec9e8.png",

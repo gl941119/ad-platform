@@ -130,18 +130,18 @@
 						</div>
 					</el-collapse-item>
 					<el-collapse-item title="Telegram" name="6">
-						<!--<div class="el-collapse-item__content">
+						<div class="el-collapse-item__content">
 							<ul class="el-collapse-item__content_item">
-								<li class="el-collapse-item__content_item_li">新浪微博
+								<!-- <li class="el-collapse-item__content_item_li">新浪微博
 									<a>去绑定</a>
 								</li>
 								<li class="el-collapse-item__content_item_li">腾讯qq
 									<a>去绑定</a>
+								</li> -->
+								<li class="el-collapse-item__content_item_li">
+                                    <telegram-login mode="callback" :telegram-login="telegramBot" @callback="callbackFunction"></telegram-login>
 								</li>
-								<li class="el-collapse-item__content_item_li">飞机
-									<a>去绑定</a>
-								</li>
-								<li class="el-collapse-item__content_item_li">微信
+								<!-- <li class="el-collapse-item__content_item_li">微信
 									<a>去绑定</a>
 								</li>
 								<li class="el-collapse-item__content_item_li">小鸟
@@ -149,9 +149,9 @@
 								</li>
 								<li class="el-collapse-item__content_item_li">f
 									<a>去绑定</a>
-								</li>
+								</li> -->
 							</ul>
-						</div>-->
+						</div>
 					</el-collapse-item>
 				</el-collapse>
 			</div>
@@ -229,7 +229,8 @@
 	export default {
 		data() {
 			return {
-				utils: new Utils(),
+                utils: new Utils(),
+                telegramBot: Config.TelegramBot,
 				activeName: '',
 				active: '',
 				fileList: [],
@@ -300,6 +301,17 @@
 					this.existPassword = res.data.existPassword;
 					this.existTradePassword = res.data.existTradePassword;
 					this.isBindTelegram = res.data.isBindTelegram;
+				})
+            },
+            // telegram 绑定回调
+            callbackFunction(user) {
+				// console.log('hanguishuai_bot_>', user);
+				Request({
+					url: 'BindTelegram',
+					data: user,
+					flag: true,
+				}).then(res => {
+					console.log('bind success->', res);
 				})
 			},
 			setPassword() { //设置密码
