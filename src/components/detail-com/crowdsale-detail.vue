@@ -4,11 +4,11 @@
         <div class="crowdsale-detail-head">
             <div class="crowdsale-detail-head-left">
                 {{detailData.title}}
-                <span>|</span>
-                <span>{{$t('home.advertising')}}</span>
+                <!-- <span>|</span>
+                <span>{{$t('home.advertising')}}</span> -->
             </div>
             <div class="crowdsale-detail-head-right">
-                <el-select size="mini" class="crowdsale-detail-head-right-select" v-model="value" @change="crowdSaleSelect" :placeholder="$t('crowdFunding.all')">
+                <el-select ref="crowdSaleSelectCom" @focus="crowdsaleFocus" size="mini" class="crowdsale-detail-head-right-select" v-model="value" @change="crowdSaleSelect" :placeholder="$t('crowdFunding.readWhitePaper')">
                     <el-option v-for="detail in options" :key="detail.value" :label="detail.label" :value="detail.value">
                     </el-option>
                 </el-select>
@@ -98,7 +98,7 @@
         props: ['detailData', 'systemTime'],
         data() {
             return {
-                value: 1,
+                value: '',
                 showText: '',
                 remainTime: '',
                 status: 0,
@@ -136,6 +136,10 @@
                 if(sel){
                     window.open(sel.site,'target');
                 }
+                this.$refs.crowdSaleSelectCom.blur();
+            },
+            crowdsaleFocus(){
+                this.value = '';
             },
             handleTime(data, systemTime) {
                 let {

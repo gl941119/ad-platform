@@ -22,7 +22,7 @@
 						</el-select>
 					</div>
 					<div class="header-content-tab-right-item">
-						<span>|</span><a href="javascript:;"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
+						<span>|</span><a href="https://t.me/AFDchain99" target="_blank"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<!-- <div class="header-content-tab-right-item">
 						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div> -->
 					<div class="header-content-tab-right-item">
@@ -218,7 +218,7 @@
 				}
 			},
 			callbackFunction(user) {
-				console.log('hanguishuai_bot_>', user);
+				// console.log('hanguishuai_bot_>', user);
 				Request({
 					url: 'TelegramAuthorizeCB',
 					data: user,

@@ -5,7 +5,7 @@ export default {
     QueryCrowdSaleDetailInfo: 'blockchainadvert/crowd-funding/secondary',
     QueryAllConcept: 'blockchainadvert/common/concept',
     QueryAdvertDetailInfo: 'blockchainadvert/advertservice/secondary',
-    QueryAdvertInfoByCId: 'blockchainadvert/advertservice/secondPage',
+    QueryAdvertInfoForPage: 'blockchainadvert/advertservice/secondPage',
     ClickAdvertToProfit: 'blockchainadvert/share/click-advert',
     QueryCrowdDataById: 'blockchainadvert/crowd-funding/id',
     GetQrCode: 'blockchainadvert/common/createRrCode',
