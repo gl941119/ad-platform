@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="advert-item-right">
-            <el-select class="advert-item-right-select" @change="handleAdvertFunc" v-model="advertValue" :placeholder="$t('home.buy')">
+            <el-select ref="advertSelect" class="advert-item-right-select" @focus="focusAdvert" @change="handleAdvertFunc" v-model="advertValue" :placeholder="$t('home.buy')">
                 <el-option
                     v-for="(item, index) in advertDatas.websiteResultList"
                     :key="index"
@@ -29,13 +29,14 @@
                 </el-option>
             </el-select>
             <div class="advert-item-right-icons">
-                <i @click="showShare" class="custom-element-icon-fenxiang"></i>
-                <i class="custom-element-icon-duihua"></i>
+                <a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
+                <a href="https://t.me/AFDchain99" target="_blank"><i class="custom-element-icon-duihua"></i></a>
             </div>
         </div>
     </div>
 </template>
 <script>
+import Request from '../../utils/require.js';
 export default {
     props: ['advertDatas', 'systemTime', 'isWhiteBack', 'itemIndex'],
     data(){
@@ -54,6 +55,9 @@ export default {
     methods: {
         showShare() {
             this.$store.commit('setDialogVisible', true);
+        },
+        focusAdvert(){
+            this.advertValue = '';
         },
         handleAdvertFunc(val){
             // console.log('handleAdvertFunc_>', this.conceptId, val, this.advertDatas);
@@ -74,6 +78,13 @@ export default {
                         window.open(websiteAddress,'target');
                     }
                 });
+                this.$refs.advertSelect.blur();
+            }).catch(e => {
+                // console.log('e-->', e);
+                this.$emit('update-data');
+                this.$refs.advertSelect.blur();
+
+                // this.$router.push({name: 'index'})
             })
         },
         
@@ -154,14 +165,11 @@ export default {
             }
         }
         &-icons {
-            color: #aaa;
             margin-top: 29px;
             @include content-flex(flex-end, flex-start);
-            & i {
+            & a {
+                color: #aaa;
                 margin-left: 20px;
-                &:hover {
-                    cursor: pointer;
-                }
             }
         }
     }

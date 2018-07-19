@@ -8,7 +8,7 @@
                 <div class="advertisement-container-title-label">{{$t('header.home')}}</div>
             </div>
             <div class="advertisement-container-select">
-                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="concepId" :placeholder="$t('crowdFunding.allConcept')">
+                <el-select size="mini" @change="selectConcept" class="advertisement-container-select-left" v-model="conceptId" :placeholder="$t('crowdFunding.allConcept')">
                     <el-option v-for="item in conceptOptions" :key="item.id" :label="item.name" :value="item.id">
                     </el-option>
                 </el-select>
@@ -17,7 +17,7 @@
         <div class="advertisement-box">
             <div class="advertisement-box-content">
                 <div class="advertisement-box-content-item">
-                    <advert-item v-for="(advert, _i) in advertDatas" :key="_i" :advert-datas="advert"  :item-index="(currpage?currpage:1)*29" :system-time="sysTime" :is-white-back="true"></advert-item>
+                    <advert-item v-for="(advert, _i) in advertDatas" :key="_i" :advert-datas="advert"  :item-index="(currpage?currpage:1)*29" :system-time="sysTime" :is-white-back="true" @update-data="updateAdvertData"></advert-item>
                     <el-pagination class="ad-crowdsale-box-pagination"
                         background
                         layout="prev, pager, next"
@@ -50,7 +50,7 @@ import Config from '../../utils/config.js';
                 conceptOptions: [],
                 advertDatas: [],
                 totalAdvertItemDatas: [],
-                concepId: 0,
+                conceptId: 0,
                 sysTime: undefined,
                 page: Config.pageStart,
                 pageSize: 30,
@@ -78,7 +78,7 @@ import Config from '../../utils/config.js';
             getAdvertInfo(conceptId = 0, page = this.page, pageSize = this.pageSize) {
                 return new Promise((resolve, reject) => {
                     Request({
-                        url: 'QueryAdvertInfoByCId',
+                        url: 'QueryAdvertInfoForPage',
                         data: {
                             page,
                             pageSize,
@@ -86,7 +86,7 @@ import Config from '../../utils/config.js';
                         },
                         type: 'get'
                     }).then(res => {
-                        // console.log('QueryAdvertInfoByCId_>', res);
+                        // console.log('QueryAdvertInfoForPage>', res);
                         this.advertDatas = res.data;
                         this.pageTotal = res.total;
                         resolve();
@@ -111,7 +111,10 @@ import Config from '../../utils/config.js';
             },
             queryCurrentPageList(page){
                 this.currpage = page;
-                this.getAdvertInfo(this.concepId, page)
+                this.getAdvertInfo(this.conceptId, page)
+            },
+            updateAdvertData(){
+                this.getAdvertInfo(this.conceptId, this.currpage);
             },
         }
     }
