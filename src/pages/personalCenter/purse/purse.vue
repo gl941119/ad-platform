@@ -86,6 +86,7 @@
 					type: 'get',
 					flag:true,
 				}).then(res => {
+					console.log(res);
 					this.purseAddress = res.data.walletAddress;
 					if(res.data.walletAddress){
 						this.disabled = true;

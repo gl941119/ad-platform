@@ -66,6 +66,7 @@ const zh = {
 		noDelete:'不能再删了，再删就没有了',
 		walltLimit:'请输入以0x开头的42位字符串',
 		giveyou:'提示',
+		nomore:'最多选择四个',
 	},
 	home:{
 		broadcast:'行情播报',

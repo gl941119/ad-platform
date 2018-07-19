@@ -36,7 +36,7 @@
 							<div class="el-collapse-item__content-box max">
 								<h3>{{$t('setting.bindEmail')}}</h3>
 								<p>
-									<el-input :placeholder="$t('setting.enterBindEmail')" v-validate data-rules="required|email" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" v-model="bindEmail"></el-input>
+									<el-input :placeholder="$t('setting.enterBindEmail')" v-model="bindEmail"></el-input>
 									<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 								</p>
 								<div style="position: relative;">
@@ -287,19 +287,21 @@
 			}
 		},
 		mounted() {
-			Request({
-				url: 'QuerySettings',
-				type: 'get',
-			}).then(res => {
-				console.log(res);
-				this.existEmail = res.data.existEmail;
-				this.existPassword = res.data.existPassword;
-				this.existTradePassword = res.data.existTradePassword;
-				this.isBindTelegram = res.data.isBindTelegram;
-			})
-			console.log(Country)
+			this.info();
 		},
 		methods: {
+			info(){
+				Request({
+					url: 'QuerySettings',
+					type: 'get',
+				}).then(res => {
+					this.bindEmail = res.data.Email;
+					this.existEmail = res.data.existEmail;
+					this.existPassword = res.data.existPassword;
+					this.existTradePassword = res.data.existTradePassword;
+					this.isBindTelegram = res.data.isBindTelegram;
+				})
+			},
 			setPassword() { //设置密码
 				var reg = new RegExp();
 				var str = this.newPassword;
@@ -563,11 +565,11 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						this.bindEmail = '';
 						this.$message({
 							message:this.$t('messageNotice.bindSuccess'),
 							type:'success'
 						});
+						this.info();
 					})
 				} else {
 					this.$message({

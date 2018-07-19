@@ -41,10 +41,12 @@
 						obj.name = item.name;
 						this.checkedData.push(obj);
 						this.$emit('listenCondept',this.checkedData);
-						console.log(this.checkedData);
 					} else {
 						item.isSelected = false;
-						this.$message('最多四个哦，不能再多了');
+						this.$message({
+							message:this.$t('messageNotice.nomore'),
+							type:'warning'
+						});
 					}
 				} else {
 					let _index = this.checkedData.findIndex(v => item.name === v.name);

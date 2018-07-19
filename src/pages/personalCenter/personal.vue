@@ -12,7 +12,7 @@
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'purse'}">{{$t('personal.purse')}}</router-link>
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'revenue'}">{{$t('personal.revenue')}}</router-link>
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">{{$t('personal.main')}}</router-link>
+						<router-link tag="li" v-if="isCheck == '1'" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">{{$t('personal.main')}}</router-link>
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'crowdfunding'}">{{$t('personal.crowdfunding')}}</router-link>
@@ -50,6 +50,7 @@
 				uid: this.$store.state.id || Cache.getSession('bier_userid'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
                 isRouterAlive:true,
+                isCheck:'',
 			};
 		},
 		computed: {
@@ -64,6 +65,18 @@
             }
 		},
 		methods: {
+			query(){//查询广告状态
+				Request({
+					url: 'QueryWalletAddress',
+					data: {
+						accountId: this.uid,
+					},
+					type: 'get',
+					flag:true,
+				}).then(res => {
+					this.isCheck = res.data.isCheck;
+				})
+			},
 			out() {
 				Request({
 					url: 'SignOut',
