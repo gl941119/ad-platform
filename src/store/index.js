@@ -12,6 +12,7 @@ export default new Vuex.Store({
         dialogVisible: false, // share component visible
         conceptId: 0, // advert concept id
         instantBuyVisible: false, // buy dialog visible
+        dialogModalVisible: false, // login dialog
         instantBuyDataId: undefined,
         change: false,
         bullsData: undefined,
@@ -40,6 +41,9 @@ export default new Vuex.Store({
         },
         setInstantBuyVisible(state, val) {
             state.instantBuyVisible = val;
+        },
+        setDialogModalVisible(state, val) {
+            state.dialogModalVisible = val;
         },
         saveInstantBuyDataId(state, id) {
             state.instantBuyDataId = id;

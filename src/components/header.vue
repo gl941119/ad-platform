@@ -120,7 +120,6 @@
 				disabled: true,
 				num: 60,
 				telegramBot: Config.TelegramBot,
-				dialogModalVisible: false,
 				title: this.$t('register.userRegister'),
 				registerModel: {
 					registerVisible: false,
@@ -174,6 +173,14 @@
             heardUrl() {
                 return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
             },
+            dialogModalVisible: {
+                get(){
+                    return this.$store.state.dialogModalVisible;
+                },
+                set(val){
+                    this.$store.commit('setDialogModalVisible', val)
+                }
+            }
         },
 		methods: {
 			change(value){

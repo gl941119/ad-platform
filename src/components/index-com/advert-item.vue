@@ -83,7 +83,7 @@ export default {
                 // console.log('e-->', e);
                 this.$emit('update-data');
                 this.$refs.advertSelect.blur();
-
+                this.$store.commit('setDialogModalVisible', true)
                 // this.$router.push({name: 'index'})
             })
         },
