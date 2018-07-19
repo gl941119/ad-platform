@@ -17,7 +17,7 @@
         <div class="advertisement-box">
             <div class="advertisement-box-content">
                 <div class="advertisement-box-content-item">
-                    <advert-item v-for="(advert, _i) in advertDatas" :key="_i" :advert-datas="advert" :system-tiem="sysTime" :is-white-back="true"></advert-item>
+                    <advert-item v-for="(advert, _i) in advertDatas" :key="_i" :advert-datas="advert"  :item-index="(currpage?currpage:1)*29" :system-time="sysTime" :is-white-back="true"></advert-item>
                     <el-pagination class="ad-crowdsale-box-pagination"
                         background
                         layout="prev, pager, next"

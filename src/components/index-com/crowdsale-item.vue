@@ -2,8 +2,8 @@
     <div class="crowdsale-item">
         <div class="crowdsale-item-title">
             <span>{{crowdsaleDatas.title}}</span>
-            <span class="crowdsale-item-title-border"></span>
-            <span class="crowdsale-item-title-ad">{{$t('home.advertising')}}</span>
+            <!-- <span class="crowdsale-item-title-border"></span>
+            <span class="crowdsale-item-title-ad">{{$t('home.advertising')}}</span> -->
         </div>
         <p class="crowdsale-item-sn">
             <span>{{$t('home.projectNum')}}：</span>
