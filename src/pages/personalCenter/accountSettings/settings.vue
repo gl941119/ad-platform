@@ -237,7 +237,6 @@
 				bindEmail: "",
 				headUrl: "",
 				id: 0,
-				nickName: "",
 				oldPassword: "",
 				newPassword: "",
 				oncePassword: "",
@@ -294,6 +293,11 @@
 				existPassword: true,
 				existTradePassword: true,
 				isBindTelegram: true,
+			}
+		},
+		computed:{
+			nickName(){
+				return this.$store.state.usernickname || Cache.getSession('bier_usernickname');
 			}
 		},
 		mounted() {
@@ -592,11 +596,13 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-							this.nickName = '';
+							this.$store.commit('setUserNickName', this.nickName);
+							Cache.setSession('bier_usernickname', this.nickName);
 							this.$message({
 								message: this.$t('messageNotice.changeSuccess'), 
 								type: 'success'
 							});
+							this.nickName = '';
 					})
 				} else {
 					this.$message({

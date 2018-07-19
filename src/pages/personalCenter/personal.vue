@@ -49,7 +49,6 @@
 			return {
 				uid: this.$store.state.id || Cache.getSession('bier_userid'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
-				username: this.$store.state.username || Cache.getSession('bier_username'),
                 isRouterAlive:true,
 			};
 		},
@@ -59,6 +58,9 @@
             },
             heardUrl() {
                 return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
+            },
+            username(){
+            	return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
             }
 		},
 		methods: {

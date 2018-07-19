@@ -13,13 +13,13 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>1111111111</span></li>
-					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>11111111</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>{{walltsBalance}}</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>{{handlingFee}} AFTD</span></li>
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
-						<el-input :placeholder="$t('project.enterMoney')" v-model="input" clearable>
+						<el-input :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" clearable>
 						</el-input>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
@@ -88,7 +88,8 @@
 			return {
 				flowData: [],
 				balance: '',
-				value1: '',
+				money: '',
+				input1:'',
 				currentPage: 1,
 				size: 5,
 				total:0,
@@ -98,13 +99,24 @@
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
+				walltsBalance: this.$store.state.balance || Cache.getSession('setBalance'),
 			}
 		},
+		computed: {
+            handlingFee: {
+                get(){
+                    return this.money*1/1000;
+                },
+            }
+        },
 		mounted() {
 			this.BasicInformation();
 			this.revenueData();
 		},
 		methods: {
+			getHandlingFee() {
+				return  this.money*1/1000;
+			},
 			BasicInformation() {
 				Request({
 					url: 'QueryRevenueBasicInformation',
@@ -150,6 +162,7 @@
 			},
 			withdraw() {
 				this.withdrawView = !this.withdrawView;
+				this.money = '';
 			},
 		}
 	}
