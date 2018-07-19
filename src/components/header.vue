@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="header-content">
-			<div class="header-content-logo"><img height="54" src="../assets/imgs/img/logo.png"></div>
+			<div class="header-content-logo" style="margin-left: 65px;"><img height="30" src="../assets/imgs/img/logo.png"></div>
 			<div class="header-content-tab clearfix">
 				<div class="header-content-tab-left">
 					<router-link class="header-content-tab-left-menu" :to="{ name: 'index' }">{{$t('header.home')}}</router-link>
@@ -329,7 +329,7 @@
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);
 				Cache.setSession('bier_token', token);
-				Cache.setSession('bier_heardUrl', heardUrl);
+				heardUrl && Cache.setSession('bier_heardUrl', heardUrl);
 				this.userName = this.getUserName();
 				this.dialogModalVisible = false;
 			},

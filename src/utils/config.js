@@ -1,8 +1,8 @@
 const url = {
     localTestUrl: 'http://192.168.1.15:8091/',
     // localTestUrl: 'http://192.168.1.129:8091/',
-    productUrl: 'http://192.168.1.254:8091/',
-    // productUrl: 'http://api.afdchain.com/',
+    // productUrl: 'http://192.168.1.254:8091/',
+    productUrl: 'http://api.afdchain.com/',
 };
 
 export default {
@@ -27,4 +27,5 @@ export default {
         'http://pic.bierinc.com/chainadvert/1@1530951208942.svg?x-bier.oss-process=image/resize,m_fixed,w_250',
         'http://pic.bierinc.com/chainadvert/1@1530951208936.svg?x-bier.oss-process=image/resize,m_fixed,w_250',
     ],
+    UploadImg: process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl + 'blockchainadvert/common/uploadimage',
 };
