@@ -592,7 +592,8 @@
 			},
 			changeNickName() { //改昵称
 				if(this.nickName) {
-					Request({
+					console.log(this.nickName)
+					/*Request({
 						url: 'QueryAccountSettings',
 						data: {
 							id: this.accountId,
@@ -608,7 +609,7 @@
 								type: 'success'
 							});
 							this.nickName = '';
-					})
+					})*/
 				} else {
 					this.$message({
 						message:this.$t('messageNotice.nicknameEmpty'),

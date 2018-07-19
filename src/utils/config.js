@@ -27,5 +27,5 @@ export default {
         "https://s3-us-west-2.amazonaws.com/static-afd/upload-folder/picture/d58c936b9e3c4291bc13c452021ec17b.png",
         "https://s3-us-west-2.amazonaws.com/static-afd/upload-folder/picture/57dc9b4a9a974552957f2ac654f011f8.png"
     ],
-    UploadImg: process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl + 'blockchainadvert/common/uploadimage',
+    UploadImg: (process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl) + 'blockchainadvert/common/upload-file',
 };

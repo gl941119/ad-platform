@@ -160,7 +160,14 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>logo</label>
-				<el-upload class="avatar-uploader" action="" :multiple="false" :show-file-list="false" @on-change = "change" :auto-upload="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
+				<el-upload class="avatar-uploader" 
+					:show-file-list="false" 
+					 :action="uploadImg"
+					 :headers="requestToken"
+					 :on-error="imgError"
+					 accept=".jpg,.png"
+					 :limit="1"
+					:on-success="handleAvatarSuccess">
 					<img v-if="details.logo" :src="details.logo" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 				</el-upload>
@@ -217,7 +224,15 @@
 				<label>{{$t('tokenInfo.about')}}</label>
 				<a v-if="disabled && details.license" :href="details.license" download>{{$t('tokenInfo.download')}}</a>
 				<div v-if="!disabled">
-					<el-upload class="upload-demo" action="" :auto-upload="false" :on-change="getFile" :multiple="false">
+					<el-upload class="upload-demo" 
+						:action="uploadImg" 
+						:on-success="getFile" 
+						:on-error="imgError"
+						:data="params"
+						:headers="requestToken"
+						:limit="1"
+						accept=".jpg,.jpeg,.png,,.pdf"
+						:on-remove="handleRemove" multiple>
 						<el-button size="small">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
 				</div>
@@ -278,6 +293,15 @@
 				checkeData: [],
 				util: new Utils(),
 				isCheck:'',
+				uploadImg: Config.UploadImg,
+				requestToken: {
+					token:
+                        this.$store.state.token ||
+                        Cache.getSession('bier_token')
+				},
+				params:{
+					fileType:'2'
+				}
 			};
 		},
 		components: {
@@ -557,19 +581,14 @@
 			handleSelectionChange(val) {
 				this.multipleSelection = val;
 			},
-			handleAvatarSuccess(res, file) {
-				this.details.logo = file.url;
-				console.log(file);
+			handleAvatarSuccess(res) {
+				this.details.logo = res.data;
 			},
-			change(res, file) {
-				this.details.logo = file.url;
-				console.log(file);
+			imgError(){
+				this.$message('上传失败');
 			},
-			beforeAvatarUpload(file){
-				console.log(file);
-			},
-			getFile(file) {
-				this.details.license = file.url;
+			getFile(res) {
+				this.details.license = res.data;
 			},
 			conceptFun() { //概念弹出窗
 				this.concept = !this.concept;
