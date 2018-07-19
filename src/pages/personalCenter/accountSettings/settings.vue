@@ -26,7 +26,6 @@
 								<span v-show="errors.has('nickName')" class="help is-danger">{{ errors.first('nickName') }}</span>
 								<div class="el-collapse-item__content-box_buttonBox">
 									<button @click="changeNickName">{{$t('buttonAll.confirm')}}</button>
-									<button @click="cancel">{{$t('buttonAll.cancle')}}</button>
 								</div>
 							</div>
 						</div>
@@ -399,9 +398,6 @@
 							type:'success'
 						});
 				})
-			},
-			cancel() { //取消修改昵称
-				this.nickName = '';
 			},
 			getCode() {
 				if(this.bindEmail) {
