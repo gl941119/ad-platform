@@ -44,13 +44,13 @@
     import crowdsaleDetialCom from '@/components/detail-com/crowdsale-detail';
     import Request from '../../utils/require.js';
     import Config from '../../utils/config.js';
-    const headerImg = require('../../assets/imgs/detail-img/crowdsale.png');
+    // const headerImg = require('../../assets/imgs/detail-img/crowdsale.png');
     export default {
         data() {
             return {
                 pageSize: Config.pageSize,
                 pageTotal: 0,
-                headerImg,
+                headerImg: '',
                 conceptOptions: [],
                 stageValue: 0,
                 conceptValue: 0,
@@ -126,6 +126,18 @@
                     })
                 });
             },
+            findAdvertisement(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'FindAdvertisement',
+                        type: 'get',
+                    }).then(res => {
+                        console.log('FindAdvertisement->', res);
+                        this.headerImg = this.handleCarouselData(res.data).banner;
+                        resolve();
+                    })
+                })
+            },
             selectStage(val){
                 // console.log("select_stageValue_>", this.stageValue, val);
                 this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
@@ -137,6 +149,9 @@
             queryCurrentPageList(page){
                 this.currpage = page;
                 this.getCrowdSaleInfo(this.stageValue, this.conceptValue, this.currpage);
+            },
+            handleCarouselData(data){
+                return data.find(item => item.advertPosition === 2)
             },
         }
     }

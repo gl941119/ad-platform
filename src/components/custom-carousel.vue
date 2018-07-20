@@ -1,7 +1,7 @@
 <template>
   <div class="custom-carousel">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide v-for="img in swiperImg" :key="img"><img :src="img"></swiper-slide>
+        <swiper-slide v-for="img in swiperImgs" :key="img.id"><a :href="img.advertUrl" target="_blank"><img :src="img.banner"></a></swiper-slide>
       </swiper>
     <div class="swiper-pagination"></div>
   </div>
@@ -9,13 +9,14 @@
 
 <script>
     import {swiper,swiperSlide} from 'vue-awesome-swiper';
-    const swiperImg1 = require('../assets/imgs/swiper-img/swiper1.jpg');
-    const swiperImg2 = require('../assets/imgs/swiper-img/swiper2.jpg');
-    const swiperImg3 = require('../assets/imgs/swiper-img/swiper3.jpg');
-    const swiperImg4 = require('../assets/imgs/swiper-img/swiper4.jpg');
-    const swiperImg5 = require('../assets/imgs/swiper-img/swiper5.jpg');
-    let swiperImg = [swiperImg1, swiperImg2, swiperImg3, swiperImg4, swiperImg5];
+    // const swiperImg1 = require('../assets/imgs/swiper-img/swiper1.jpg');
+    // const swiperImg2 = require('../assets/imgs/swiper-img/swiper2.jpg');
+    // const swiperImg3 = require('../assets/imgs/swiper-img/swiper3.jpg');
+    // const swiperImg4 = require('../assets/imgs/swiper-img/swiper4.jpg');
+    // const swiperImg5 = require('../assets/imgs/swiper-img/swiper5.jpg');
+    // let swiperImg = [{banner:swiperImg1}, {banner:swiperImg2}, {banner:swiperImg3}, {banner:swiperImg4}, {banner:swiperImg5}];
     export default {
+        props: ['swiperImgs'],
         data() {
             return {
                 swiperImg,
@@ -29,7 +30,7 @@
                         el: '.swiper-pagination',
                         clickable: true,
                         renderBullet: function (index, className) {
-                            return '<span class="' + className + '"><image width="208" src="' + swiperImg[index] + '"></span>';
+                            return '<span class="' + className + '"><image width="208" height="61" src="' + swiperImg[index].banner + '"></span>';
                         },
                     },
                 }
@@ -50,8 +51,9 @@
         position: relative;
     }
     .gallery-top {
-        height: 100%;
+        height: 354px;
         width: $contentWidth;
+        overflow: hidden;
         margin: 0 auto;
     }
     .swiper-pagination{

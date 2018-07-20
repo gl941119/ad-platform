@@ -9,6 +9,7 @@ export default {
     ClickAdvertToProfit: 'blockchainadvert/share/click-advert',
     QueryCrowdDataById: 'blockchainadvert/crowd-funding/id',
     GetQrCode: 'blockchainadvert/common/createRrCode',
+    FindAdvertisement: 'blockchainadvert/advertservice/findAdvertisement',
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',

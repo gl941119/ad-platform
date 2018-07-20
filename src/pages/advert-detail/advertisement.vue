@@ -27,7 +27,7 @@
                     </el-pagination>
                 </div>
                 <div class="advertisement-box-content-imgs">
-                    <img v-for="thumb in thumbImgs" :key="thumb" :src="thumb">
+                    <img v-for="thumb in thumbImgs" :key="thumb.id" :src="thumb.banner">
                 </div>
             </div>
         </div>
@@ -36,17 +36,18 @@
 <script>
 import Request from '../../utils/require.js';
 import Config from '../../utils/config.js';
-    const headerImg = require('../../assets/imgs/detail-img/advertisement.jpg');
-    const thumb1 = require('../../assets/imgs/detail-img/dis-thumb1.jpg');
-    const thumb2 = require('../../assets/imgs/detail-img/dis-thumb2.jpg');
-    const thumb3 = require('../../assets/imgs/detail-img/dis-thumb3.jpg');
-    const thumb4 = require('../../assets/imgs/detail-img/dis-thumb4.jpg');
-    const thumb5 = require('../../assets/imgs/detail-img/dis-thumb5.jpg');
+    // const headerImg = require('../../assets/imgs/detail-img/advertisement.jpg');
+    // const thumb1 = require('../../assets/imgs/detail-img/dis-thumb1.jpg');
+    // const thumb2 = require('../../assets/imgs/detail-img/dis-thumb2.jpg');
+    // const thumb3 = require('../../assets/imgs/detail-img/dis-thumb3.jpg');
+    // const thumb4 = require('../../assets/imgs/detail-img/dis-thumb4.jpg');
+    // const thumb5 = require('../../assets/imgs/detail-img/dis-thumb5.jpg');
     export default {
         data() {
             return {
-                headerImg,
-                thumbImgs: [thumb1, thumb2, thumb3, thumb4, thumb5],
+                headerImg: '',
+                // thumbImgs: [thumb1, thumb2, thumb3, thumb4, thumb5],
+                thumbImgs: [],
                 conceptOptions: [],
                 advertDatas: [],
                 totalAdvertItemDatas: [],
@@ -110,6 +111,19 @@ import Config from '../../utils/config.js';
                     })
                 });
             },
+            findAdvertisement(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'FindAdvertisement',
+                        type: 'get',
+                    }).then(res => {
+                        console.log('FindAdvertisement->', res);
+                        this.headerImg = this.handleCarouselData(res.data).banner;
+                        this.thumbImgs = this.handlePicList(res.data);
+                        resolve();
+                    })
+                })
+            },
             getSystemTime() {
                 return new Promise((resolve, reject) => {
                     Request({
@@ -133,6 +147,12 @@ import Config from '../../utils/config.js';
             updateAdvertData(){
                 this.getAdvertInfo(this.conceptId, this.currpage);
             },
+            handleCarouselData(data){
+                return data.find(item => item.advertPosition === 2)
+            },
+            handlePicList(data){
+                return data.filter(item => item.advertPosition === 1).sort((a, b) => a.sort - b.sort)
+            }
         }
     }
 </script>
@@ -167,6 +187,9 @@ import Config from '../../utils/config.js';
                 @include body-center();
                 @include content-flex(space-between, flex-start);
                 &-imgs {
+                    width: 416px;
+                    height: 162px;
+                    overflow: hidden;
                     margin-top: 12px;
                     @include content-flex(flex-start, flex-start);
                     flex-direction: column;
