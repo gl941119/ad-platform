@@ -30,8 +30,8 @@
                         el: '.swiper-pagination',
                         clickable: true,
                         renderBullet: function (index, className) {
-                            return '<span class="' + className + '"><image width="208" height="61" src="' + swiperImg[index].banner + '"></span>';
-                        },
+                            return '<span class="' + className + '"><image width="208" height="61" src="' + this.swiperImgs[index].banner + '"></span>';
+                        }.bind(this),
                     },
                 }
             }

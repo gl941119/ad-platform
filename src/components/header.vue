@@ -310,7 +310,8 @@
 						email,
 						password
 					},
-					type: 'get'
+                    type: 'post',
+                    flag: true,
 				}).then(res => {
 					this.handleLoginSucc(res.data);
 				})
