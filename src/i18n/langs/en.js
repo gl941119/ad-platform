@@ -19,7 +19,8 @@ const en = {
 		verifyCode:'SecurityCode',
 		enterAccount:'account',
 		enterPassword:'password',
-		enterCode:'securitycode',
+        enterCode:'securitycode',
+        modelWidth: '410px',
 	},
 	register:{
 		register:'Register',

@@ -110,7 +110,7 @@
                         },
                         type: 'get'
                     }).then(res => {
-                        // console.log('QueryAdvertInfo_>', res);
+                        console.log('QueryAdvertInfo_>', res);
                         this.advertItemDatas = res.data;
                         if(this.advertItemDatas && this.advertItemDatas.length===0){
                             this.$message({message: this.$t('home.noData'), type:'warning'})

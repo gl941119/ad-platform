@@ -19,7 +19,8 @@ const zh = {
 		verifyCode:'验证码',
 		enterAccount:'请输入账号',
 		enterPassword:'请输入密码',
-		enterCode:'请输入验证码',
+        enterCode:'请输入验证码',
+        modelWidth: '365px',
 	},
 	register:{
 		register:'注 册',

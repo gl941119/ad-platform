@@ -193,7 +193,11 @@ export default class Util {
 			console.error('formatDuring error_>', error);
 			return [];
 		}
-	}
+    }
+    
+    getCurrLanguage(store, local){
+        return store.state.slangChange || local.getLocal('bier_langChange') || 'en';
+    }
 	
 	// 读取反馈代码
 	judgeLanguage(lang, key){

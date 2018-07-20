@@ -32,17 +32,17 @@
 				</div>
 			</div>
 		</div>
-		<el-dialog :title="title" :close-on-click-modal="false" :visible.sync="dialogModalVisible" width="360px">
+		<el-dialog :title="title" :close-on-click-modal="false" :visible.sync="dialogModalVisible" :width="$t('login.modelWidth')">
 			<div v-show="!registerModel.registerVisible">
 				<el-form class="login-modal" :model="loginModal.form" ref="loginModalForm">
-					<el-form-item :label="$t('login.account')" prop="email" :label-width="loginModal.formLabelWidth">
+					<el-form-item :label="$t('login.account')" prop="email" :label-width="getLabelWidth(language, 'login')">
 						<el-input :placeholder="$t('login.enterAccount')" auto-complete="off" v-model="loginModal.form.email"></el-input>
 					</el-form-item>
-					<el-form-item :label="$t('login.password')" prop="passwordAgain" :label-width="loginModal.formLabelWidth">
+					<el-form-item :label="$t('login.password')" prop="passwordAgain" :label-width="getLabelWidth(language, 'login')">
 						<el-input :placeholder="$t('login.enterPassword')" auto-complete="off" type="password" v-model="loginModal.form.password"></el-input>
 					</el-form-item>
-					<el-form-item :label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="loginModal.formLabelWidth">
-						<el-input :placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
+					<el-form-item :label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="getLabelWidth(language, 'login')">
+						<el-input :placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" :class="{'english-lang': language==='en'}" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
 						<div class="login-verify-btn" @click="changeCode">
 							<custom-identify :identify-code="code" :content-width="120" :font-size-min="20"></custom-identify>
 						</div>
@@ -59,10 +59,10 @@
 
 			<div v-show="registerModel.registerVisible">
 				<el-form class="register" :model="registerModel.form" ref="registerModelForm" :rules="registerModel.rule">
-					<el-form-item :label="$t('register.registerEmail')" prop="email" :label-width="registerModel.formLabelWidth">
+					<el-form-item :label="$t('register.registerEmail')" prop="email" :label-width="getLabelWidth(language, 'register')">
 						<el-input :placeholder="$t('register.enterRegisterEmial')" auto-complete="off" v-model="registerModel.form.email"></el-input>
 					</el-form-item>
-					<el-form-item :label="$t('register.registerCode')" prop="verifyCode" class="register-verify" :label-width="registerModel.formLabelWidth">
+					<el-form-item :label="$t('register.registerCode')" prop="verifyCode" class="register-verify" :label-width="getLabelWidth(language, 'register')">
 						<el-input :placeholder="$t('register.enterRegisterCode')" auto-complete="off" v-model="registerModel.form.verifyCode"></el-input>
 						<div class="register-verify-btn">
 							<span style="color:#909399;">|</span>
@@ -70,7 +70,7 @@
 							<el-button v-else disabled type="text">(<span>{{num}}</span>s){{$t('register.again')}}</el-button>
 						</div>
 					</el-form-item>
-					<el-form-item :label="$t('register.registerPassword')" prop="password" :label-width="registerModel.formLabelWidth">
+					<el-form-item :label="$t('register.registerPassword')" prop="password" :label-width="getLabelWidth(language, 'register')">
 						<el-popover ref="popover" placement="right" width="200" trigger="focus">
 							<div>
 								<p>{{$t('passwordNotic.one')}}</p>
@@ -81,10 +81,10 @@
 							<el-input :placeholder="$t('register.enterRegisterPassword')" auto-complete="off" slot="reference" type="password" v-model="registerModel.form.password"></el-input>
 						</el-popover>
 					</el-form-item>
-					<el-form-item :label="$t('register.registerOncePassword')" prop="passwordAgain" :label-width="registerModel.formLabelWidth">
+					<el-form-item :label="$t('register.registerOncePassword')" prop="passwordAgain" :label-width="getLabelWidth(language, 'register')">
 						<el-input :placeholder="$t('register.enterOncePassword')" auto-complete="off" type="password" v-model="registerModel.form.passwordAgain"></el-input>
 					</el-form-item>
-					<el-form-item :label="$t('register.registerVerifyCode')" :label-width="registerModel.formLabelWidth">
+					<el-form-item :label="$t('register.registerVerifyCode')" :label-width="getLabelWidth(language, 'register')">
 						<el-input :placeholder="$t('register.registerInviteCode')" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
 					</el-form-item>
 					<div class="register-foot">
@@ -102,7 +102,6 @@
 	import Request from '../utils/require.js';
 	import Config from '../utils/config.js';
 	import validateFun from '../utils/validate.js';
-	import { mapState, mapMutations } from 'vuex'
 	export default {
 		data() {
 			function passTest(str) {
@@ -123,7 +122,6 @@
 				title: this.$t('register.userRegister'),
 				registerModel: {
 					registerVisible: false,
-					formLabelWidth: '6em',
 					rule: {
 						email: [{
 							validator: emailValidate,
@@ -153,14 +151,13 @@
 				},
 				loginModal: {
 					loginVisible: false,
-					formLabelWidth: '6em',
 					form: {
 						email: '',
 						password: '',
 						verifyCode: '',
 					}
 				},
-				select:'en',
+				select: 'en',
 			}
         },
         computed: {
@@ -180,9 +177,17 @@
                 set(val){
                     this.$store.commit('setDialogModalVisible', val)
                 }
+            },
+            language(){
+                return this.utils.getCurrLanguage(this.$store, Cache);
             }
         },
 		methods: {
+            getLabelWidth(lang, type){
+                return type === 'login' ?
+                (lang === 'en' ? '8em' : '6em') :
+                (lang === 'en' ? '10em' : '6em')
+            },
 			change(value){
 				this.$i18n.locale = value;
 				this.$store.commit('setLanguage', value);
@@ -419,8 +424,11 @@
 	.login-verify {
 		position: relative;
 		&-input {
-			width: 108px;
+			width: 115px;
 		}
+        &-input.english-lang {
+            width: 130px;
+        }
 		&-btn {
 			position: absolute;
 			top: 0;
