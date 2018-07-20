@@ -225,7 +225,7 @@
 							}
 						}, 1000);
 						this.$message({
-							message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+							message: this.utils.judgeLanguage(this.language, res.message),
 							type: 'success'
 						});
 					})
@@ -268,7 +268,7 @@
 							this.dialogModalVisible = false;
 							this.handleLoginFunc(email, password);
 							this.$message({
-								message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+								message: this.utils.judgeLanguage(this.language, res.message),
 								type: 'success'
 							});
 						});
