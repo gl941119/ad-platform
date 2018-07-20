@@ -19,6 +19,7 @@ export default new Vuex.Store({
 		slangChange: 'en',
 		heardUrl:'',
 		balance:'',
+		authStatus:'',
 	},
 	mutations: {
 		setUserId(state, val) {
@@ -62,6 +63,9 @@ export default new Vuex.Store({
         },
         setBalance(state, val) {
 			state.balance = val;
+        },
+        setAuth(state, val) {
+			state.authStatus = val;
         },
 	},
 });

@@ -100,6 +100,7 @@
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				walltsBalance: this.$store.state.balance || Cache.getSession('setBalance'),
+				authStatus:this.$store.state.authStatus || Cache.getSession('bier_auth'),
 			}
 		},
 		computed: {
@@ -160,8 +161,21 @@
 				this.revenueData();
 			},
 			withdraw() {
-				this.withdrawView = !this.withdrawView;
-				this.money = '';
+				switch(this.authStatus){
+					case '0':
+						this.$message(this.$t('messageNotice.noAuth'))
+						break;
+					case '1':
+						this.withdrawView = !this.withdrawView;
+						this.money = '';
+						break;
+					case '2':
+						this.$message(this.$t('messageNotice.onAuth'))
+						break;
+					case '3':
+						this.$message(this.$t('messageNotice.refuseAuth'))
+						break;
+				}
 			},
 		}
 	}

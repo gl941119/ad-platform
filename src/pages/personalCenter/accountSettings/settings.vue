@@ -417,7 +417,7 @@
 							}
 						}, 1000);
 						this.$message({
-							message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+							message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
 							type: 'success'
 						});
 					})
