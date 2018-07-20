@@ -197,7 +197,13 @@
 							<li class="el-collapse-item__content_authentication_li last">
 								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
 								<div>
-									<el-upload class="avatar-uploader" action="" :show-file-list="false" :on-change="getImg">
+									<el-upload class="avatar-uploader" 
+										:show-file-list="false" 
+										:action="uploadImg"
+										:headers="requestToken"
+										:limit="1"
+										accept=".jpg,.png"
+										:on-success="getImg">
 										<img v-if="imageUrl" :src="imageUrl" class="avatar">
 										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 									</el-upload>
@@ -280,6 +286,12 @@
 				existPassword: true,
 				existTradePassword: true,
                 isBindTelegram: true,
+                uploadImg: Config.UploadImg,
+                requestToken: {
+					token:
+                        this.$store.state.token ||
+                        Cache.getSession('bier_token')
+				},
 			}
 		},
 		// computed:{
@@ -655,8 +667,8 @@
 					this.$message(this.$t('setting.limit'));
 				}
 			},
-			getImg(file) {
-				this.imageUrl = file.url;
+			getImg(res) {
+				this.imageUrl = res.data;
 			},
 		}
 	}
