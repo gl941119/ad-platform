@@ -13,13 +13,13 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>{{walltsBalance}}</span></li>
-					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>{{handlingFee}} AFDT</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span class="span">{{walltsBalance}}</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span class="span">{{handlingFee}} AFDT</span></li>
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
-						<el-input :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" clearable>
+						<el-input style="text-align: right;" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" clearable>
 						</el-input>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
@@ -161,19 +161,19 @@
 				this.revenueData();
 			},
 			withdraw() {
-				console.log(typeof(this.authStatus));
-				switch(this.authStatus){
-					case 0:
+				var value = this.authStatus;
+				switch(value){
+					case '0':
 						this.$message(this.$t('messageNotice.noAuth'))
 						break;
-					case 1:
+					case '1':
 						this.withdrawView = !this.withdrawView;
 						this.money = '';
 						break;
-					case 2:
+					case '2':
 						this.$message(this.$t('messageNotice.onAuth'))
 						break;
-					case 3:
+					case '3':
 						this.$message(this.$t('messageNotice.refuseAuth'))
 						break;
 				}

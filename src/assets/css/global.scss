@@ -62,3 +62,7 @@
 .settings_box .border-none .el-collapse-item__header{
     border: 0;
 }
+//withdraw money tradePassword right
+.withdraw_item_li .el-input--suffix .el-input__inner{
+    text-align: right;
+}
