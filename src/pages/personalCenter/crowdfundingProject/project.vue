@@ -15,7 +15,8 @@
 				</el-table-column>
 				<el-table-column :label="$t('initiated.degree')">
 					<template slot-scope="scope">
-						{{scope.row.croAchieve/scope.row.topLimit | filter}}-{{scope.row.croAchieve}}
+						<div v-if="scope.row.croAchieve != 0">{{scope.row.croAchieve/scope.row.topLimit | filter}}-{{scope.row.croAchieve}}</div>
+						<div v-else>0%-{{scope.row.croAchieve}}</div>
 					</template>
 				</el-table-column>
 				<el-table-column prop="city" :label="$t('initiated.status')">

@@ -6,7 +6,7 @@
 				<span>{{$t('invite.code')}}：</span>
 				<span id="inviteCode">{{inviteCode}}</span>
 			</p>
-			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">点击复制</el-button>
+			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">{{$t('share.shareCopy')}}</el-button>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<!--<div class="invite_data">
@@ -58,7 +58,7 @@
 		methods: {
 			inviteCodeCopy(value){
 				this.utils.copy(value);
-        		this.$message({message: $t('messageNotice.copy'),type:'success'});
+        		this.$message({message: this.$t('messageNotice.copy'),type:'success'});
 			},
 			queryCode() {
 				Request({
@@ -137,5 +137,6 @@
 		background:rgba(255,149,0,1);
 		border-radius:4px;
 		color: #FFFFFF;
+		border: 0;
 	}
 </style>

@@ -30,7 +30,10 @@
         methods: {
         	clickCopy(value){
         		this.utils.copy(value);
-        		this.$message({message: $t('messageNotice.copy'),type:'success'});
+        		this.$message({
+        			message: this.$t('messageNotice.copy'),
+        			type:'success'
+        		});
         	}
         }
     }
