@@ -60,7 +60,7 @@ import Config from '../../utils/config.js';
             }
         },
         mounted() {
-            Promise.all([this.getAdvertInfoInit(), this.getAllConcept(), this.getSystemTime()]).then(() => {
+            Promise.all([this.getAdvertInfoInit(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
             })
         },
         methods: {
@@ -120,6 +120,7 @@ import Config from '../../utils/config.js';
                         console.log('FindAdvertisement->', res);
                         this.headerImg = this.handleCarouselData(res.data).banner;
                         this.thumbImgs = this.handlePicList(res.data);
+                        console.log('FindAdvertisement->', this.thumbImgs);
                         resolve();
                     })
                 })
@@ -148,10 +149,10 @@ import Config from '../../utils/config.js';
                 this.getAdvertInfo(this.conceptId, this.currpage);
             },
             handleCarouselData(data){
-                return data.find(item => item.advertPosition === 2)
+                return data.find(item => item.advertPosition === 3)
             },
             handlePicList(data){
-                return data.filter(item => item.advertPosition === 1).sort((a, b) => a.sort - b.sort)
+                return data.filter(item => item.advertPosition === 1).sort((a, b) => a.advertSort - b.advertSort)
             }
         }
     }

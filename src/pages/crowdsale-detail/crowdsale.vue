@@ -80,7 +80,7 @@
         	}
         },
         mounted() {
-            Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime()]).then(() => {
+            Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
             })
         },
         methods: {
