@@ -341,7 +341,7 @@
 			},
 			saveSubmit() {
 				var concept = [];
-				if(this.checkedData){
+				if(this.checkedData.length>0){
 					concept = this.checkedData;
 				}else{
 					concept = this.conceptResultList;
