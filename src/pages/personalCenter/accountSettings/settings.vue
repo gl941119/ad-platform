@@ -435,7 +435,6 @@
 						codeType: 3,
 					},
 				}).then(res => {
-					console.log(res);
 					this.disabledPassword = false;
 					let timerPassword = setInterval(() => {
 						this.numPassword--;

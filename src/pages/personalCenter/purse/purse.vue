@@ -86,7 +86,6 @@
 					type: 'get',
 					flag:true,
 				}).then(res => {
-					console.log(res);
 					this.purseAddress = res.data.walletAddress;
 					if(res.data.walletAddress){
 						this.disabled = true;
@@ -103,7 +102,6 @@
 					type: 'get',
 					flag:true,
 				}).then(res => {
-					console.log(res);
 					this.balance = res.data.balance;
 					this.$store.commit('setBalance', res.data.balance);
 					Cache.setSession('setBalance', res.data.balance);

@@ -326,7 +326,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.details = res.data;
 					this.isCheck = res.data.isCheck;
 					let {

@@ -397,7 +397,6 @@
 					type: 'get',
 					flag: true,
 				}).then(res => {
-					console.log(res);
 					this.newCrowdfunding = res.data;
 					var technologyArr = [];
 					if(res.data.technology1) {
@@ -419,7 +418,6 @@
 					if(res.data.websiteResultList.length>0){
 						let number = -1;
 						res.data.websiteResultList.forEach(function(item, index){
-							console.log(item);
 							number++;
 							that.websites.splice(number,1,item);
 						})
@@ -438,7 +436,6 @@
 						type: 'get',
 						flag:true,
 					}).then(res => {
-						console.log(res);
 						this.coreTeam = res.data;
 					})
 				}
