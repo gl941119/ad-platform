@@ -224,7 +224,6 @@
 					title: '',
 					desc: '',
 				},
-				imageUrl: '',
 				newCrowdfunding: {
 					id:'',
 					accountId: this.$store.state.id || Cache.getSession('bier_userid'), //用户id
@@ -398,6 +397,7 @@
 					flag: true,
 				}).then(res => {
 					this.newCrowdfunding = res.data;
+					this.imageUrl = res.data.logo;
 					var technologyArr = [];
 					if(res.data.technology1) {
 						technologyArr.push(res.data.technology1);

@@ -1,8 +1,11 @@
 <template>
 	<div class="my_crowdfunding">
 		<div class="advertising_revenu_account_flow">
-			<p class="my_crowdfunding_title">{{$t('initiated.iInitiated')}}</p>
-			<router-link tag="p" :to="{ name: 'newCrowdfunding'}" class="my_crowdfunding_title_intro">{{$t('initiated.newCrowd')}}</router-link>
+			<div class="my_crowdfunding_title">
+				<p class="my_crowdfunding_title_info">{{$t('initiated.iInitiated')}}</p>
+				<el-button class="my_crowdfunding_title_button" @click="newProject()" type="text">{{$t('initiated.newCrowd')}}
+				</el-button>
+			</div>
 			<el-table :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort="{prop: 'date', order: 'descending'}">
 				<el-table-column prop="shotEnName" :label="$t('initiated.token')">
 				</el-table-column>
@@ -15,7 +18,8 @@
 				</el-table-column>
 				<el-table-column :label="$t('initiated.degree')">
 					<template slot-scope="scope">
-						{{scope.row.croAchieve/scope.row.topLimit | filter}}-{{scope.row.croAchieve}}
+						<div v-if="scope.row.croAchieve != 0">{{scope.row.croAchieve/scope.row.topLimit | filter}}-{{scope.row.croAchieve}}</div>
+						<div v-else>0%-{{scope.row.croAchieve}}</div>
 					</template>
 				</el-table-column>
 				<el-table-column prop="city" :label="$t('initiated.status')">
@@ -44,7 +48,7 @@
 			return {
 				crowdfundingData: [],
 				currentPage: 1,
-				size: 5,
+				size: 30,
 				total: 0,
 				mathData: [],
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
@@ -61,6 +65,11 @@
 			}
 		},
 		methods: {
+			newProject(){
+				this.$router.push({
+					name: 'newCrowdfunding',
+				});
+			},
 			crowdfunding() {
 				Request({
 					url: 'QueryMyNewCrowdfunding',
@@ -103,16 +112,28 @@
 	background: #FFFFFF;
 	padding: 20px;
 	&_title{
-		font-size: 24px;
-		&_intro {
+		&_info{
+			font-size: 24px;
+		}
+		&_button {
 			margin-bottom: 30px;
 			float: right;
 			font-size:18px;
-			color:rgba(153,153,153,1);
+			color:rgba(255,255,255,1);
 			line-height:25px;
+			background:rgba(255,149,0,1);
+			border-radius:4px;
+			padding: 5px 20px;
 		}
 	}
-	
+	.ad-serving_title_button{
+			font-size:18px;
+			color:rgba(255,255,255,1);
+			line-height:25px;
+			background:rgba(255,149,0,1);
+			border-radius:4px;
+			padding: 5px 20px;
+	}
 	.my_crowdfunding_data_pages {
 		margin-top: 30px;
 		text-align: center;

@@ -6,11 +6,13 @@
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamName')}}</label>
-				<input :placeholder="$t('team.enterTeamName')" v-model="newCrowdfunding.teamName" />
+				<input :placeholder="$t('team.enterTeamName')" :class="[errors.has('contactsName')?'llo':'']" :data-vv-as="$t('team.enterTeamName')" v-validate data-vv-rules="required" name="teamName" v-model="newCrowdfunding.teamName" />
+				<span class="is-danger" v-show="errors.has('teamName')">{{ errors.first('teamName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamPhone')}}</label>
-				<input :placeholder="$t('team.enterTeamPhone')" v-model="newCrowdfunding.teamContact" />
+				<input :placeholder="$t('team.enterTeamPhone')" :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.enterTeamPhone')" v-validate data-vv-rules="required" name="teamContact" v-model="newCrowdfunding.teamContact" />
+				<span class="is-danger" v-show="errors.has('teamContact')">{{ errors.first('teamContact') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamAddress')}}</label>
@@ -465,5 +467,8 @@
 	@import '../../../assets/css/upload.css';
 	.last{
 		width: 350px;
+	}
+	.is-danger{
+		color: red;
 	}
 </style>

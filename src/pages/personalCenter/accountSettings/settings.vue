@@ -879,7 +879,7 @@
 		margin: 10px 0 30px 20px;
 	}
 	.settings_box {
-		padding: 20px;
+		padding: 0 20px;
 		background: #FFFFFF;
 	}
 </style>
