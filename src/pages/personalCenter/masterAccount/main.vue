@@ -1,10 +1,10 @@
 <template>
 	<div class="master_account">
 		<div class="advertising_revenue_top">
-			<h3>AFTD</h3>
+			<h3>AFDT</h3>
 			<ul class="advertising_revenue_top_item">
-				<li class="advertising_revenue_top_item_li active">{{balance}} AFTD</li>
-				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>-->
+				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
+				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
 			<button class="advertising_revenue_top_money" @click="recharge()">{{$t('project.recharge')}}</button>
 		</div>
@@ -12,16 +12,16 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="recharge"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label style="width: 100px;">{{$t('project.moneyAccount')}}：</label>
-						<span>111111111111111</span>
+					<li class="withdraw_item_li"><label>{{$t('project.moneyAccount')}}：</label>
+						<span>111111111111111 AFDT</span>
 					</li>
-					<li class="withdraw_item_li" style="height: 126px;"><label style="width: 100px;">{{$t('crowdFunding.qrCode')}}：</label>
+					<li class="withdraw_item_li" style="height: 126px;"><label>{{$t('crowdFunding.qrCode')}}：</label>
 						<div class="img">
 							<img src="../../../assets/imgs/swiper-img/swiper2.jpg" />
 						</div>
 					</li>
-					<li class="withdraw_item_li"><label style="width: 100px;">{{$t('project.useBalance')}}：</label>
-						<span>{{walltsBalance}}</span>
+					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}：</label>
+						<span>{{balance}} AFDT</span>
 					</li>
 					<p>{{$t('project.notic')}}</p>
 					<button class="right_now" @click="close" style=";position:absolute;top: 278px;">{{$t('buttonAll.ok')}}</button>
@@ -78,7 +78,6 @@
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
-				walltsBalance: this.$store.state.balance || Cache.getSession('setBalance'),
 			}
 		},
 		mounted() {

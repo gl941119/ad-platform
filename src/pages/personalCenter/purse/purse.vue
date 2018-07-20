@@ -51,7 +51,6 @@
 		},
 		methods: {
 			bind(){
-				var reg = new RegExp();
 				var str = this.purseAddress;
 				var value = /^0x.{40}$/.test(str);
 				if(value){
@@ -103,8 +102,6 @@
 					flag:true,
 				}).then(res => {
 					this.balance = res.data.balance;
-					this.$store.commit('setBalance', res.data.balance);
-					Cache.setSession('setBalance', res.data.balance);
 				})
 			}
 		}

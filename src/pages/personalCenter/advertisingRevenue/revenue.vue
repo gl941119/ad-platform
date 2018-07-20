@@ -1,10 +1,10 @@
 <template>
 	<div class="advertising_revenue">
 		<div class="advertising_revenue_top">
-			<h3>AFTD</h3>
+			<h3>AFDT</h3>
 			<ul class="advertising_revenue_top_item">
-				<li class="advertising_revenue_top_item_li active">{{balance}} AFTD</li>
-				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>-->
+				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
+				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
 			<button class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</button>
 		</div>
@@ -13,13 +13,13 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>{{walltsBalance}}</span></li>
-					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>{{handlingFee}} AFTD</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span class="span">{{balance}}</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span class="span">{{handlingFee}} AFDT</span></li>
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
-						<el-input :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" clearable>
+						<el-input style="text-align: right;" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" clearable>
 						</el-input>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
@@ -99,7 +99,7 @@
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
-				walltsBalance: this.$store.state.balance || Cache.getSession('setBalance'),
+				authStatus:this.$store.state.authStatus || Cache.getSession('bier_auth'),
 			}
 		},
 		computed: {
@@ -160,8 +160,22 @@
 				this.revenueData();
 			},
 			withdraw() {
-				this.withdrawView = !this.withdrawView;
-				this.money = '';
+				var value = this.authStatus;
+				switch(value){
+					case '0':
+						this.$message(this.$t('messageNotice.noAuth'))
+						break;
+					case '1':
+						this.withdrawView = !this.withdrawView;
+						this.money = '';
+						break;
+					case '2':
+						this.$message(this.$t('messageNotice.onAuth'))
+						break;
+					case '3':
+						this.$message(this.$t('messageNotice.refuseAuth'))
+						break;
+				}
 			},
 		}
 	}

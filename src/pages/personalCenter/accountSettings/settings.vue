@@ -3,7 +3,7 @@
 		<div>
 			<div class="title">{{$t('setting.setInfo')}}</div>
 			<div class="settings_box">
-				<el-collapse v-model="activeName" accordion>
+				<el-collapse class="top" v-model="activeName" accordion>
 					<el-collapse-item :title="$t('setting.headUrl')" name="1">
 						<div>
 							<div class="el-collapse-item__content">
@@ -128,7 +128,7 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="Telegram" name="6">
+					<el-collapse-item title="Telegram" class="border-none" name="6">
 						<div class="el-collapse-item__content">
 							<ul class="el-collapse-item__content_item">
 								<!-- <li class="el-collapse-item__content_item_li">新浪微博
@@ -169,8 +169,8 @@
 				</span>
 		</el-dialog>
 		<div class="settings_box">
-			<el-collapse v-model="active" accordion>
-				<el-collapse-item :title="$t('setting.fillInformation')" name="1">
+			<el-collapse class="top" v-model="active" accordion>
+				<el-collapse-item class="border-none" :title="$t('setting.fillInformation')" name="1">
 						<ul class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
@@ -197,7 +197,13 @@
 							<li class="el-collapse-item__content_authentication_li last">
 								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
 								<div>
-									<el-upload class="avatar-uploader" action="" :show-file-list="false" :on-change="getImg">
+									<el-upload class="avatar-uploader" 
+										:show-file-list="false" 
+										:action="uploadImg"
+										:headers="requestToken"
+										:limit="1"
+										accept=".jpg,.png"
+										:on-success="getImg">
 										<img v-if="imageUrl" :src="imageUrl" class="avatar">
 										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 									</el-upload>
@@ -280,6 +286,12 @@
 				existPassword: true,
 				existTradePassword: true,
                 isBindTelegram: true,
+                uploadImg: Config.UploadImg,
+                requestToken: {
+					token:
+                        this.$store.state.token ||
+                        Cache.getSession('bier_token')
+				},
 			}
 		},
 		// computed:{
@@ -417,7 +429,7 @@
 							}
 						}, 1000);
 						this.$message({
-							message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+							message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
 							type: 'success'
 						});
 					})
@@ -588,24 +600,31 @@
 			},
 			changeNickName() { //改昵称
 				if(this.nickName) {
-					Request({
-						url: 'QueryAccountSettings',
-						data: {
-							id: this.accountId,
-							nickname: this.nickName,
-						},
-						type: 'post',
-						flag: true
-					}).then(res => {
-                        this.$store.commit('setUserNickName', this.nickName);
-                        Cache.setSession('bier_usernickname', this.nickName);
-                        this.$message({
-                            message: this.$t('messageNotice.changeSuccess'), 
-                            type: 'success'
-                        });
-					}).catch(e => {
-                        console.error('change nickname error_>', e);
-                    })
+					if(this.nickName.length<=8){
+						Request({
+							url: 'QueryAccountSettings',
+							data: {
+								id: this.accountId,
+								nickname: this.nickName,
+							},
+							type: 'post',
+							flag: true
+						}).then(res => {
+	                        this.$store.commit('setUserNickName', this.nickName);
+	                        Cache.setSession('bier_usernickname', this.nickName);
+	                        this.$message({
+	                            message: this.$t('messageNotice.changeSuccess'), 
+	                            type: 'success'
+	                        });
+						}).catch(e => {
+	                        console.error('change nickname error_>', e);
+	                    })
+					}else{
+						this.$message({
+							message:this.$t('messageNotice.nicknameLength'),
+							type:'warning'
+						});
+					}
 				} else {
 					this.$message({
 						message:this.$t('messageNotice.nicknameEmpty'),
@@ -648,8 +667,8 @@
 					this.$message(this.$t('setting.limit'));
 				}
 			},
-			getImg(file) {
-				this.imageUrl = file.url;
+			getImg(res) {
+				this.imageUrl = res.data;
 			},
 		}
 	}
@@ -881,5 +900,8 @@
 	.settings_box {
 		padding: 0 20px;
 		background: #FFFFFF;
+	}
+	.top{
+		border: 0;
 	}
 </style>

@@ -322,14 +322,17 @@
 					nickname,
 					token,
 					phone,
-					heardUrl
+					heardUrl,
+					authStatus
 				} = data;
 				this.$store.commit('setUserId', id);
 				this.$store.commit('setUserName', email);
 				this.$store.commit('setUserNickName', nickname);
 				this.$store.commit('setToken', token);
 				this.$store.commit('setHeardUrl', heardUrl);
+				this.$store.commit('setAuth', authStatus);
 				
+				Cache.setSession('bier_auth', authStatus);
 				Cache.setSession('bier_userid', id);
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);
