@@ -30,7 +30,7 @@
             </el-select>
             <div class="advert-item-right-icons">
                 <a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
-                <a href="https://t.me/AFDchain99" target="_blank"><i class="custom-element-icon-duihua"></i></a>
+                <a :href="advertDatas.telegrameUrl" target="_blank"><i class="custom-element-icon-duihua"></i></a>
             </div>
         </div>
     </div>

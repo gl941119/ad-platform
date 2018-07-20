@@ -1,6 +1,6 @@
 <template>
 <div class="platform-index">
-    <custom-carousel></custom-carousel>
+    <custom-carousel :swiper-imgs="swiperImgs"></custom-carousel>
     <div class="platform-index-bull">
         <div class="platform-index-bull-block">{{$t('home.broadcast')}}</div>
         <div class="platform-index-bull-content">
@@ -55,6 +55,7 @@
                     init: false,
                 },
                 bullsData: [],
+                swiperImgs: [],
                 crowdsaleItemdata: [],
                 sysTime: undefined,
                 advertItemDatas: [],
@@ -71,7 +72,7 @@
                 background: 'rgba(0, 0, 0, 0.5)',
                 fullscreen: true,
             });
-            Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo()])
+            Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo(), this.findAdvertisement()])
                 .then(() => {
                     this.swiperInstance.init();
                     loading.close();
@@ -110,7 +111,7 @@
                         },
                         type: 'get'
                     }).then(res => {
-                        console.log('QueryAdvertInfo_>', res);
+                        // console.log('QueryAdvertInfo_>', res);
                         this.advertItemDatas = res.data;
                         if(this.advertItemDatas && this.advertItemDatas.length===0){
                             this.$message({message: this.$t('home.noData'), type:'warning'})
@@ -150,6 +151,19 @@
                     }
                 });
             },
+            findAdvertisement(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'FindAdvertisement',
+                        type: 'get',
+                    }).then(res => {
+                        console.log('FindAdvertisement->', res);
+                        this.swiperImgs = this.handleCarouselData(res.data);
+                        console.log('this.swiperImgs->', this.swiperImgs);
+                        resolve();
+                    })
+                })
+            },
             getSystemTime() {
                 return new Promise((resolve, reject) => {
                     Request({
@@ -186,6 +200,9 @@
             updateAdvertData(){
                 this.getAdvertInfo(this.page);
             },
+            handleCarouselData(data){
+                return data.filter(item => item.advertPosition === 1).sort((a, b) => a.sort - b.sort)
+            }
         }
     }
 </script>
