@@ -118,7 +118,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.website')}}</label>
-				<input class="langer" :class="[errors.has('website')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWebsite')" v-validate v-validate data-vv-rules="required" name="website" :placeholder="$t('aboutLink.enterWebsite')" v-model="newCrowdfunding.website" />
+				<input class="langer" :class="[errors.has('website')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWebsite')" v-validate data-vv-rules="required" name="website" :placeholder="$t('aboutLink.enterWebsite')" v-model="newCrowdfunding.website" />
 				<span class="is-danger" v-show="errors.has('website')">{{ errors.first('website') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
