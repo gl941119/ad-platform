@@ -19,7 +19,7 @@
         props: ['swiperImgs'],
         data() {
             return {
-                swiperImg,
+                // swiperImg,
                 swiperOptionTop: {
                     autoplay: {
                         disableOnInteraction: false,
