@@ -161,18 +161,19 @@
 				this.revenueData();
 			},
 			withdraw() {
+				console.log(typeof(this.authStatus));
 				switch(this.authStatus){
-					case '0':
+					case 0:
 						this.$message(this.$t('messageNotice.noAuth'))
 						break;
-					case '1':
+					case 1:
 						this.withdrawView = !this.withdrawView;
 						this.money = '';
 						break;
-					case '2':
+					case 2:
 						this.$message(this.$t('messageNotice.onAuth'))
 						break;
-					case '3':
+					case 3:
 						this.$message(this.$t('messageNotice.refuseAuth'))
 						break;
 				}
