@@ -59,7 +59,6 @@
 				}).then(res => {
 					this.crowdfundingData = res.data;
 					this.total = res.total;
-					console.log('QueryMyCrowdfunding res_>', res);
 				})
 			},
 			handleCurrentChange(page){

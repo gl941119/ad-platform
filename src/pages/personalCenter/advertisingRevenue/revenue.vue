@@ -147,7 +147,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res)
 					this.flowData = res.data;
 					this.total = res.total;
 				})
