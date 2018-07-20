@@ -201,7 +201,7 @@
                 this.getAdvertInfo(this.page);
             },
             handleCarouselData(data){
-                return data.filter(item => item.advertPosition === 1).sort((a, b) => a.sort - b.sort)
+                return data.filter(item => item.advertPosition === 1).sort((a, b) => a.advertSort - b.advertSort)
             }
         }
     }
