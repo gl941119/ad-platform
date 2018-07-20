@@ -59,7 +59,7 @@ import Config from '../../utils/config.js';
             }
         },
         mounted() {
-            Promise.all([this.getAdvertInfo(), this.getAllConcept(), this.getSystemTime()]).then(() => {
+            Promise.all([this.getAdvertInfoInit(), this.getAllConcept(), this.getSystemTime()]).then(() => {
             })
         },
         methods: {
@@ -87,6 +87,23 @@ import Config from '../../utils/config.js';
                         type: 'get'
                     }).then(res => {
                         // console.log('QueryAdvertInfoForPage>', res);
+                        this.advertDatas = res.data;
+                        this.pageTotal = res.total;
+                        resolve();
+                    })
+                });
+            },
+            getAdvertInfoInit(page = this.page, pageSize = this.pageSize) {
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'QueryAdvertInfo',
+                        data: {
+                            page,
+                            pageSize,
+                        },
+                        type: 'get'
+                    }).then(res => {
+                        // console.log('QueryAdvertInfo_>', res);
                         this.advertDatas = res.data;
                         this.pageTotal = res.total;
                         resolve();

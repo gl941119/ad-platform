@@ -4,7 +4,7 @@
             <div class="advert-item-left-logo">
                 <img :src="advertDatas.logo">
             </div>
-            <div class="advert-item-left-text"><a :href="advertDatas.whitePaper" target="_blank">{{$t('home.whitePaper')}}</a></div>
+            <div class="advert-item-left-text" :class="{'english-lang': language==='en'}"><a :href="advertDatas.whitePaper" target="_blank">{{$t('home.whitePaper')}}</a></div>
         </div>
         <div class="advert-item-middle">
             <div class="advert-item-middle-title clearfix">
@@ -37,11 +37,14 @@
 </template>
 <script>
 import Request from '../../utils/require.js';
+import Utils from '../../utils/util.js';
+import Cache from '../../utils/cache.js';
 export default {
     props: ['advertDatas', 'systemTime', 'isWhiteBack', 'itemIndex'],
     data(){
         return {
             advertValue: '',
+            utils: new Utils(),
         }
     },
     computed: {
@@ -49,7 +52,7 @@ export default {
             return this.$store.state.conceptId;
         },
         language(){
-            return this.$store.state.slangChange;
+            return this.utils.getCurrLanguage(this.$store, Cache);
         }
     },
     methods: {
@@ -122,6 +125,9 @@ export default {
             font-size: $headerFontSize;
             & a {
                 color: #47c3d3;
+            }
+            &.english-lang {
+                font-size: 13px;
             }
         }
     }

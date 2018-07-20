@@ -3,7 +3,7 @@
  * bier_userid    ->     user id
  * bier_username  ->     account
  * bier_usernickname    ->      nickname
- * bier_langChange    ->      langChange
+ * bier_langChange    ->      langChange localStorage
  * bier_heardUrl    ->      heardUrl
  * setBalance    ->      balance
  */

@@ -110,7 +110,7 @@ function requestHandle(params) {
                     }
                     reject(data);
                     Message.error({
-                        message: utils.judgeLanguage(store.state.slangChange, message),
+                        message: utils.judgeLanguage(utils.getCurrLanguage(store, Cache), message),
                     });
                 }
             },
