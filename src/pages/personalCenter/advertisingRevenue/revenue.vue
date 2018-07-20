@@ -13,7 +13,7 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
-					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span class="span">{{walltsBalance}}</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span class="span">{{balance}}</span></li>
 					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span class="span">{{handlingFee}} AFDT</span></li>
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
@@ -99,7 +99,6 @@
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
-				walltsBalance: this.$store.state.balance || Cache.getSession('setBalance'),
 				authStatus:this.$store.state.authStatus || Cache.getSession('bier_auth'),
 			}
 		},
