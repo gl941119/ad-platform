@@ -45,7 +45,7 @@
 			return {
 				crowdfundingData: [],
 				currentPage: 1,
-				size: 5,
+				size: 30,
 				total: 0,
 				mathData: [],
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),

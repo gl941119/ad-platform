@@ -71,7 +71,7 @@
 				flowData: [],
 				balance: '',
 				currentPage: 1,
-				size: 5,
+				size: 30,
 				total: 0,
 				rechargeView: false,
 				startTime: '',

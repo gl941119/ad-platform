@@ -147,8 +147,8 @@
 			width: 100px;
 			border-radius: 5px;
 			background:rgba(255,149,0,1);
-			border-radius:4px;
 			color: #FFFFFF;
+			border: 0;
 		}
 	}
 	

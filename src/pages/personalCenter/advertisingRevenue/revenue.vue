@@ -91,7 +91,7 @@
 				money: '',
 				input1:'',
 				currentPage: 1,
-				size: 5,
+				size: 30,
 				total:0,
 				withdrawView: false,
 				withdrawed:false,
