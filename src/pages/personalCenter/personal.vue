@@ -64,6 +64,9 @@
             	return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
             }
 		},
+		mounted(){
+			this.query();
+		},
 		methods: {
 			query(){//查询广告状态
 				Request({
