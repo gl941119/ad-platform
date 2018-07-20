@@ -51,7 +51,6 @@
 		},
 		methods: {
 			bind(){
-				var reg = new RegExp();
 				var str = this.purseAddress;
 				var value = /^0x.{40}$/.test(str);
 				if(value){

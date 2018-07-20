@@ -58,3 +58,7 @@
     width: 100%;
     @include content-flex(space-between);
 }
+//settings el-collapse last style
+.settings_box .border-none .el-collapse-item__header{
+    border: 0;
+}

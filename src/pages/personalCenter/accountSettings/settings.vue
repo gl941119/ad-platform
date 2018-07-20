@@ -3,7 +3,7 @@
 		<div>
 			<div class="title">{{$t('setting.setInfo')}}</div>
 			<div class="settings_box">
-				<el-collapse v-model="activeName" accordion>
+				<el-collapse class="top" v-model="activeName" accordion>
 					<el-collapse-item :title="$t('setting.headUrl')" name="1">
 						<div>
 							<div class="el-collapse-item__content">
@@ -128,7 +128,7 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="Telegram" name="6">
+					<el-collapse-item title="Telegram" class="border-none" name="6">
 						<div class="el-collapse-item__content">
 							<ul class="el-collapse-item__content_item">
 								<!-- <li class="el-collapse-item__content_item_li">新浪微博
@@ -169,8 +169,8 @@
 				</span>
 		</el-dialog>
 		<div class="settings_box">
-			<el-collapse v-model="active" accordion>
-				<el-collapse-item :title="$t('setting.fillInformation')" name="1">
+			<el-collapse class="top" v-model="active" accordion>
+				<el-collapse-item class="border-none" :title="$t('setting.fillInformation')" name="1">
 						<ul class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
@@ -881,5 +881,8 @@
 	.settings_box {
 		padding: 0 20px;
 		background: #FFFFFF;
+	}
+	.top{
+		border: 0;
 	}
 </style>

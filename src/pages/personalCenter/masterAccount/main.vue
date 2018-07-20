@@ -1,10 +1,10 @@
 <template>
 	<div class="master_account">
 		<div class="advertising_revenue_top">
-			<h3>AFTD</h3>
+			<h3>AFDT</h3>
 			<ul class="advertising_revenue_top_item">
-				<li class="advertising_revenue_top_item_li active">{{balance}} AFTD</li>
-				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>-->
+				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
+				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
 			<button class="advertising_revenue_top_money" @click="recharge()">{{$t('project.recharge')}}</button>
 		</div>

@@ -1,10 +1,10 @@
 <template>
 	<div class="advertising_revenue">
 		<div class="advertising_revenue_top">
-			<h3>AFTD</h3>
+			<h3>AFDT</h3>
 			<ul class="advertising_revenue_top_item">
-				<li class="advertising_revenue_top_item_li active">{{balance}} AFTD</li>
-				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFTD</li>-->
+				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
+				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
 			<button class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</button>
 		</div>
@@ -14,7 +14,7 @@
 				<span class="withdraw_box_back" @click="withdraw"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
 					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span>{{walltsBalance}}</span></li>
-					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>{{handlingFee}} AFTD</span></li>
+					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span>{{handlingFee}} AFDT</span></li>
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>

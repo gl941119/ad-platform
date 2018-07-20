@@ -90,7 +90,7 @@ const zh = {
 	share:{
 		shareTiltle:'分享',
 		shareOne:'点击即挖矿  流量即币值',
-		shareTwo:'上阿凡达不上当不受不受骗',
+		shareTwo:'上阿凡达不上当不受骗',
 		shareCopy:'点我复制',
 	},
 	crowdFunding:{
@@ -119,7 +119,7 @@ const zh = {
 		qrCode:'二 维 码',
 		buySuccess:'抢购成功',
 		timeLeft:'本轮众筹剩余时间',
-		warn:'风险警示：BierInc对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
+		warn:'风险警示：AFD对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
 		sorry:'抱歉，该分类暂无，试试搜索其他内容',
 	},
 	projectList:{
@@ -128,11 +128,11 @@ const zh = {
 		price:'支付价格',
 		status:'状态',
 		updateTime:'状态更新时间',
-		notic:'所有众筹成功后此昂硬的币会直接充值到您的BierWallet中，未成功的相关款项会原路返回',
+		notic:'所有众筹成功后此昂硬的币会直接充值到您的钱包中，未成功的相关款项会原路返回',
 	},
 	invite:{
 		inviteUser:'邀请用户',
-		info:'受邀用户今后点击广告创造的价值将会以AFTD的形式奖励给您',
+		info:'受邀用户今后点击广告创造的价值将会以AFDT的形式奖励给您',
 		code:'邀请码',
 		copy:'复制',
 		timer:'邀请时间',
@@ -272,7 +272,7 @@ const zh = {
 		dataTime:'时间',
 		desc:'描述',
 		flowDirection:'流向',
-		amountOfMoney:'金额（AFTD）',
+		amountOfMoney:'金额（AFDT）',
 	},
 	adServing:{
 		adSer:'广告投放',
