@@ -61,6 +61,7 @@ const zh = {
 		getSuccess:'验证码已发送',
 		certificationSuccess:'认证成功',
 		nicknameEmpty:'昵称不能为空',
+		nicknameLength:'昵称不能多于8个字符',
 		bindSuccess:'绑定成功',
 		addSuccess:'添加成功',
 		deleteSuccess:'删除成功',

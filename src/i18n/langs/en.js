@@ -61,6 +61,7 @@ const en = {
 		getSuccess:'SecurityCode has been sent' ,
 		certificationSuccess:' SecurityCode has beenconfirm',
 		nicknameEmpty:'Nickname cannot be empty',
+		nicknameLength:'昵称不能多于8个字符',
 		bindSuccess:'Success！',
 		addSuccess:'Success！',
 		deleteSuccess:'Success！',

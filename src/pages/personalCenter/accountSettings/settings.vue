@@ -588,24 +588,31 @@
 			},
 			changeNickName() { //改昵称
 				if(this.nickName) {
-					Request({
-						url: 'QueryAccountSettings',
-						data: {
-							id: this.accountId,
-							nickname: this.nickName,
-						},
-						type: 'post',
-						flag: true
-					}).then(res => {
-                        this.$store.commit('setUserNickName', this.nickName);
-                        Cache.setSession('bier_usernickname', this.nickName);
-                        this.$message({
-                            message: this.$t('messageNotice.changeSuccess'), 
-                            type: 'success'
-                        });
-					}).catch(e => {
-                        console.error('change nickname error_>', e);
-                    })
+					if(this.nickName.length<=8){
+						Request({
+							url: 'QueryAccountSettings',
+							data: {
+								id: this.accountId,
+								nickname: this.nickName,
+							},
+							type: 'post',
+							flag: true
+						}).then(res => {
+	                        this.$store.commit('setUserNickName', this.nickName);
+	                        Cache.setSession('bier_usernickname', this.nickName);
+	                        this.$message({
+	                            message: this.$t('messageNotice.changeSuccess'), 
+	                            type: 'success'
+	                        });
+						}).catch(e => {
+	                        console.error('change nickname error_>', e);
+	                    })
+					}else{
+						this.$message({
+							message:this.$t('messageNotice.nicknameLength'),
+							type:'warning'
+						});
+					}
 				} else {
 					this.$message({
 						message:this.$t('messageNotice.nicknameEmpty'),
