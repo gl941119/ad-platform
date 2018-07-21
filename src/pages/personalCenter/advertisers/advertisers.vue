@@ -269,17 +269,22 @@
 		mounted(){
 			var value = this.$route.params.value;
 			this.isCheck = value;
-			if(value == 1){
-				this.queryDetails();
-				this.disabled = true;
-			}else if(value == 2){
-				this.disabled = false;
-				this.queryDetails();
-			}else if(value == 0){
-				this.queryDetails();
-				this.disabled = false;
-			}else if(value == -1){
-				this.disabled = false;
+			switch(value){
+				case -1:
+					this.disabled = false;
+					break;
+				case 0:
+					this.queryDetails();
+					this.disabled = false;
+					break;
+				case 1:
+					this.queryDetails();
+					this.disabled = true;
+					break;
+				case 2:
+					this.disabled = false;
+					this.queryDetails();
+					break;
 			}
 		},
 		methods: {
