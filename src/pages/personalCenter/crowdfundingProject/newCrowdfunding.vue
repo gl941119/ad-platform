@@ -169,7 +169,7 @@
 				<span class="is-danger" v-show="errors.has('fullEnName')">{{ errors.first('fullEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>logo</label>
+				<label>{{$t('tokenInfo.logo')}}</label>
 				<el-upload class="avatar-uploader"
 					 :show-file-list="false" 
 					 :action="uploadImg"
