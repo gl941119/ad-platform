@@ -1,36 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-const IndexCom = () =>
-	import('@/pages/index/index');
-const CrowdSaleCom = () =>
-	import('@/pages/crowdsale-detail/crowdsale');
-const AdvertisementCom = () =>
-	import('@/pages/advert-detail/advertisement');
-const PersonalCenter = () =>
-	import('@/pages/personalCenter/personal');
-const Purse = () =>
-	import('@/pages/personalCenter/purse/purse');
-const Revenue = () =>
-	import('@/pages/personalCenter/advertisingRevenue/revenue');
-const Main = () =>
-	import('@/pages/personalCenter/masterAccount/main');
-const Crowdfunding = () =>
-	import('@/pages/personalCenter/myCrowdfunding/crowdfunding');
-const Invite = () =>
-	import('@/pages/personalCenter/invite/invite');
-const Settings = () =>
-	import('@/pages/personalCenter/accountSettings/settings.vue');
-const Project = () =>
-	import('@/pages/personalCenter/crowdfundingProject/project.vue');
-const NewProject = () =>
-	import('@/pages/personalCenter/crowdfundingProject/newCrowdfunding.vue');
-const CrowdfundingDetail = () =>
-	import('@/pages/personalCenter/crowdfundingProject/details.vue');
-const Advertisers = () =>
-	import('@/pages/personalCenter/advertisers/advertisers');
-const Adserving = () =>
-	import('@/pages/personalCenter/advertisers/ad-serving');
+const IndexCom = () => import('@/pages/index/index');
+const CrowdSaleCom = () => import('@/pages/crowdsale-detail/crowdsale');
+const AdvertisementCom = () => import('@/pages/advert-detail/advertisement');
+const PersonalCenter = () => import('@/pages/personalCenter/personal');
+const Purse = () => import('@/pages/personalCenter/purse/purse');
+const Revenue = () => import('@/pages/personalCenter/advertisingRevenue/revenue');
+const Main = () => import('@/pages/personalCenter/masterAccount/main');
+const Crowdfunding = () => import('@/pages/personalCenter/myCrowdfunding/crowdfunding');
+const Invite = () => import('@/pages/personalCenter/invite/invite');
+const Settings = () => import('@/pages/personalCenter/accountSettings/settings.vue');
+const Project = () => import('@/pages/personalCenter/crowdfundingProject/project.vue');
+const NewProject = () => import('@/pages/personalCenter/crowdfundingProject/newCrowdfunding.vue');
+const CrowdfundingDetail = () => import('@/pages/personalCenter/crowdfundingProject/details.vue');
+const Advertisers = () => import('@/pages/personalCenter/advertisers/advertisers');
+const Adserving = () => import('@/pages/personalCenter/advertisers/ad-serving');
 	
 Vue.use(VueRouter);
 
@@ -121,7 +106,8 @@ const router = new VueRouter({
 					component: Advertisers,
 				},
 			],
-		}
+        },
+        {path: '*', redirect: '/'}
 	]
 })
 

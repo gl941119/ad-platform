@@ -55,6 +55,7 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
+    import Cache from '../../utils/cache.js';
     export default {
         props: ['crowdsaleDatas', 'systemTime'],
         data() {
@@ -71,6 +72,11 @@
             this.countDown(this.crowdsaleDatas);
             let {croAchieve, currCirculation} = this.crowdsaleDatas;
             this.progress = (croAchieve / currCirculation) * 100;
+        },
+        computed: {
+            token(){
+                return this.$store.state.token || Cache.getSession('bier_token')
+            }
         },
         methods: {
             handleTime(data, systemTime) {
@@ -100,9 +106,18 @@
                 }, 1000);
             },
             instantBuy(){
-                this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
-                this.$store.commit('setInstantBuyVisible', true);
-                this.$store.commit('valueChange');
+                if(this.token){
+                    this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
+                    this.$store.commit('setInstantBuyVisible', true);
+                    this.$store.commit('valueChange');
+                }else {
+                    this.$alert('请先登录', {
+                        confirmButtonText: '确定',
+                        callback: () => {
+                            this.$store.commit('setDialogModalVisible', true)
+                        }
+                    });
+                }
             },
         },
         destroyed() {

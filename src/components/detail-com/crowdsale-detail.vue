@@ -129,6 +129,9 @@
                     site: website,
                 }];
             },
+            token(){
+                return this.$store.state.token || Cache.getSession('bier_token')
+            }
         },
         methods: {
             crowdSaleSelect(v) {
@@ -168,9 +171,18 @@
                 }, 1000);
             },
             instantBuy(){
-                this.$store.commit('saveInstantBuyDataId', this.detailData.id);
-                this.$store.commit('setInstantBuyVisible', true);
-                this.$store.commit('valueChange');
+                if(this.token){
+                    this.$store.commit('saveInstantBuyDataId', this.detailData.id);
+                    this.$store.commit('setInstantBuyVisible', true);
+                    this.$store.commit('valueChange');
+                }else {
+                    this.$alert('请先登录', {
+                        confirmButtonText: '确定',
+                        callback: () => {
+                            this.$store.commit('setDialogModalVisible', true)
+                        }
+                    });
+                }
             },
         },
         destroyed() {
