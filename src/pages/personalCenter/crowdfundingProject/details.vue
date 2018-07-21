@@ -159,7 +159,7 @@
 				<input class="langer" :disabled="disabled" v-model="details.fullEnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>logo</label>
+				<label>{{$t('tokenInfo.logo')}}</label>
 				<el-upload class="avatar-uploader" 
 					:show-file-list="false" 
 					 :action="uploadImg"
