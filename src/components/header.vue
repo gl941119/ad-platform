@@ -157,7 +157,7 @@
 						verifyCode: '',
 					}
 				},
-				select: 'en',
+				select: this.$i18n.locale,
 			}
         },
         computed: {
