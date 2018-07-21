@@ -254,7 +254,7 @@
 						:data="params"
 						:headers="requestToken"
 						:limit="1"
-						accept=".jpg,.jpeg,.png,,.pdf"
+						accept=".jpg,.jpeg,.png,.pdf"
 						:on-remove="handleRemove" multiple>
 						<el-button size="small" type="primary">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
@@ -328,7 +328,6 @@
 					targetCurrency: "", //目标货币
 					topLimit: '', //发行上限
 					lowLimit: '', //发行下限
-					license: "", //相关牌照
 				},
 				checkedData: [],
 				concept: false,
@@ -394,7 +393,7 @@
 					if(!this.imageUrl){
 						this.img = true;
 					}
-					if(!this.newCrowdfunding.license){
+					if(!this.fileUrl){
 						this.fileEmpty = true;
 					}
 					if(result){
