@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-carousel">
+  <div class="custom-carousel" v-if="swiperImgs.length>0">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
         <swiper-slide v-for="img in swiperImgs" :key="img.id"><a :href="img.advertUrl" target="_blank"><img :src="img.banner"></a></swiper-slide>
       </swiper>
@@ -18,7 +18,6 @@
     export default {
         props: ['swiperImgs'],
         data() {
-            console.log('swiperImgs->', this.swiperImgs);
             return {
                 // swiperImg,
                 swiperOptionTop: {

@@ -3,7 +3,7 @@
     <custom-carousel :swiper-imgs="swiperImgs"></custom-carousel>
     <div class="platform-index-bull">
         <div class="platform-index-bull-block">{{$t('home.broadcast')}}</div>
-        <div class="platform-index-bull-content">
+        <div class="platform-index-bull-content" v-if="bullsData.length>0">
             <swiper :options="swiperOptions" class="platform-index-bull-content-swiper" ref="swiperBulls">
                 <swiper-slide v-for="(item, index) in bullsData" :key="index">
                     <div class="swiper-text">
@@ -80,7 +80,7 @@
         },
         computed: {
             swiperInstance() {
-                return this.$refs.swiperBulls.swiper;
+                return this.$refs.swiperBulls&&this.$refs.swiperBulls.swiper;
             }
         },
         components: {
@@ -157,9 +157,9 @@
                         url: 'FindAdvertisement',
                         type: 'get',
                     }).then(res => {
-                        console.log('FindAdvertisement->', res);
+                        // console.log('FindAdvertisement->', res);
                         this.swiperImgs = this.handleCarouselData(res.data);
-                        console.log('this.swiperImgs->', this.swiperImgs);
+                        // console.log('this.swiperImgs->', this.swiperImgs);
                         resolve();
                     })
                 })
