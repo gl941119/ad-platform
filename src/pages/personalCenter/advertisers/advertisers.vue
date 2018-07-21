@@ -107,7 +107,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectDesc')}}</label>
-				<input class="langer" :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :disabled="disabled" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc" />
+				<input class="langer" :placeholder="$t('projectInfo.enterProjectDesc')" :disabled="disabled" v-model="newCrowdfunding.proDesc" />
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.concept')}}</label>
@@ -187,9 +187,9 @@
 			</li>
 			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 				<label class="label">
-					<input :placeholder="$t('aboutLink.enterWebsiteName')" v-model="websites[index].websiteName" >
+					<input :placeholder="$t('aboutLink.enterWebsiteName')" :disabled="disabled" v-model="websites[index].websiteName" >
 				</label>
-				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" v-model="websites[index].websiteAddress" />
+				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 			</li>
 		</ul>
 		<div class="submit_box">
@@ -270,18 +270,18 @@
 			var value = this.$route.params.value;
 			this.isCheck = value;
 			switch(value){
-				case -1:
+				case '-1':
 					this.disabled = false;
 					break;
-				case 0:
+				case '0':
 					this.queryDetails();
 					this.disabled = false;
 					break;
-				case 1:
+				case '1':
 					this.queryDetails();
 					this.disabled = true;
 					break;
-				case 2:
+				case '2':
 					this.disabled = false;
 					this.queryDetails();
 					break;

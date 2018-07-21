@@ -100,11 +100,12 @@
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectDesc')}}</label>
 				<div class="textarea">
-					<el-input :placeholder="$t('projectInfo.enterProjectDesc')" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
+					<el-input :placeholder="$t('projectInfo.enterProjectDesc')" @blur="proDesc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="newCrowdfunding.proDesc">
 					</el-input>
 					<!--<textarea :placeholder="$t('projectInfo.enterProjectDesc')" rows="2" cols="50" type="textarea" v-model="newCrowdfunding.proDesc">
 					</textarea>-->
 				</div>
+				<span class="is-danger" v-if="proDescr">{{$t('projectInfo.emptyProjectDesc')}}</span>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.concept')}}</label>
@@ -180,6 +181,7 @@
 					<img v-if="imageUrl" :src="imageUrl" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 				</el-upload>
+				<span class="is-danger" v-if="img">{{$t('tokenInfo.emptyLogo')}}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.title')}}</label>
@@ -229,9 +231,15 @@
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.dataTime')}}</label>
 				<div>
-					<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
+					<el-date-picker v-model="timeInterval" 
+						type="datetimerange" 
+						@blur="data"
+						:range-separator="$t('tokenInfo.to')" 
+						:start-placeholder="$t('tokenInfo.startTime')" 
+						:end-placeholder="$t('tokenInfo.endTime')">
 					</el-date-picker>
 				</div>
+				<span class="is-danger" v-if="isData">{{$t('tokenInfo.emptyDadataTime')}}</span>
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
@@ -251,6 +259,7 @@
 						<el-button size="small" type="primary">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
 				</div>
+				<span class="is-danger" v-if="fileEmpty">{{$t('tokenInfo.emptyAbout')}}</span>
 			</li>
 		</ul>
 		<div class="submit_box">
@@ -339,13 +348,31 @@
 				},
 				params:{
 					fileType:'2'
-				}
+				},
+				proDescr:false,//项目简介提示
+				img:false,//logo提示
+				isData:false,//众筹时间提示
+				fileEmpty:false,//相关牌照提示
 			}
 		},
 		components: {
 			conceptCom,
 		},
 		methods: {
+			data(){//时间
+				if(this.timeInterval.length<=0){
+					this.isData = true;
+				}else{
+					this.isData = false;
+				}
+			},
+			proDesc(){//项目简介
+				if(!this.newCrowdfunding.proDesc){
+					this.proDescr = true;
+				}else{
+					this.proDescr = false;
+				}
+			},
 			submit() {
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
@@ -361,52 +388,64 @@
 				if(this.checkedData[3]){
 					var concept4Id = this.checkedData[3].conceptId;
 				}
-				Request({
-					url: 'QueryNewCrowdfunding',
-					data: {
-						accountId: this.newCrowdfunding.accountId,
-						teamName: this.newCrowdfunding.teamName,
-						teamContact: this.newCrowdfunding.teamContact,
-						teamLocation: this.newCrowdfunding.teamLocation,
-						proName: this.newCrowdfunding.proName,
-						proDesc: this.newCrowdfunding.proDesc,
-						concept1Id: concept1Id,
-						concept2Id: concept2Id,
-						concept3Id: concept3Id,
-						concept4Id: concept4Id,
-						technology1: this.newCrowdfunding.technology1,
-						technology2: this.newCrowdfunding.technology2,
-						website: this.newCrowdfunding.website,
-						whitePaper: this.newCrowdfunding.whitePaper,
-						shotEnName: this.newCrowdfunding.shotEnName,
-						shotCnName: this.newCrowdfunding.shotCnName,
-						fullEnName: this.newCrowdfunding.fullEnName,
-						title: this.newCrowdfunding.title,
-						logo: this.imageUrl,
-						circulation: this.newCrowdfunding.circulation,
-						totalCrowdfund: this.newCrowdfunding.totalCrowdfund,
-						currCirculation: this.newCrowdfunding.currCirculation,
-						mostNumber: this.newCrowdfunding.mostNumber,
-						price: this.newCrowdfunding.price,
-						mostNumber: this.newCrowdfunding.mostNumber,
-						targetCurrency: this.newCrowdfunding.targetCurrency,
-						topLimit: this.newCrowdfunding.topLimit,
-						lowLimit: this.newCrowdfunding.lowLimit,
-						startTime: startTime,
-						endTime: endTime,
-						license: this.fileUrl,
-						crowdTeamMembers: this.coreTeam,
-						crowdTeamConsultants: this.consultantTeam
-					},
-					type: 'post',
-					flag: true
-				}).then(res => {
-					this.$message({
-						message:this.$t('messageNotice.addSuccess'),
-						type:'success'
-					});
-					this.$router.push({ name: 'project'});
-				})
+				this.$validator.validateAll().then((result) => {
+					this.data();
+					this.proDesc();
+					if(!this.imageUrl){
+						this.img = true;
+					}
+					if(!this.newCrowdfunding.license){
+						this.fileEmpty = true;
+					}
+					if(result){
+							Request({
+								url: 'QueryNewCrowdfunding',
+								data: {
+									accountId: this.newCrowdfunding.accountId,
+									teamName: this.newCrowdfunding.teamName,
+									teamContact: this.newCrowdfunding.teamContact,
+									teamLocation: this.newCrowdfunding.teamLocation,
+									proName: this.newCrowdfunding.proName,
+									proDesc: this.newCrowdfunding.proDesc,
+									concept1Id: concept1Id,
+									concept2Id: concept2Id,
+									concept3Id: concept3Id,
+									concept4Id: concept4Id,
+									technology1: this.newCrowdfunding.technology1,
+									technology2: this.newCrowdfunding.technology2,
+									website: this.newCrowdfunding.website,
+									whitePaper: this.newCrowdfunding.whitePaper,
+									shotEnName: this.newCrowdfunding.shotEnName,
+									shotCnName: this.newCrowdfunding.shotCnName,
+									fullEnName: this.newCrowdfunding.fullEnName,
+									title: this.newCrowdfunding.title,
+									logo: this.imageUrl,
+									circulation: this.newCrowdfunding.circulation,
+									totalCrowdfund: this.newCrowdfunding.totalCrowdfund,
+									currCirculation: this.newCrowdfunding.currCirculation,
+									mostNumber: this.newCrowdfunding.mostNumber,
+									price: this.newCrowdfunding.price,
+									mostNumber: this.newCrowdfunding.mostNumber,
+									targetCurrency: this.newCrowdfunding.targetCurrency,
+									topLimit: this.newCrowdfunding.topLimit,
+									lowLimit: this.newCrowdfunding.lowLimit,
+									startTime: startTime,
+									endTime: endTime,
+									license: this.fileUrl,
+									crowdTeamMembers: this.coreTeam,
+									crowdTeamConsultants: this.consultantTeam
+								},
+								type: 'post',
+								flag: true
+							}).then(res => {
+								this.$message({
+									message:this.$t('messageNotice.addSuccess'),
+									type:'success'
+								});
+								this.$router.push({ name: 'project'});
+							})
+					}
+				});
 			},
 			listenCondept(checkedData) {
 				var newCheckedData = [];
@@ -466,6 +505,7 @@
 			},
 			getImg(res, file) {
 				this.imageUrl = res.data;
+				this.img = false;
 			},
 			imgError(){
 				this.$message('上传失败');
@@ -475,6 +515,7 @@
 			},
 			getFile(res) {
 				this.fileUrl = res.data;
+				this.fileEmpty = false;
 			}
 		}
 	}
