@@ -18,6 +18,7 @@
     export default {
         props: ['swiperImgs'],
         data() {
+            console.log('swiperImgs->', this.swiperImgs);
             return {
                 // swiperImg,
                 swiperOptionTop: {

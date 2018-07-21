@@ -2,7 +2,9 @@
     <div class="ad-crowdsale">
         <div class="ad-crowdsale-container">
             <div class="ad-crowdsale-container-header">
-                <img :src="headerImg">
+                <a :href="headerImg.advertUrl" target="_blank">
+                    <img :src="headerImg.banner">
+                </a>
             </div>
             <div class="ad-crowdsale-container-title">
                 <div class="ad-crowdsale-container-title-label">{{$t('crowdFunding.crowdfunding')}}</div>
@@ -50,7 +52,7 @@
             return {
                 pageSize: Config.pageSize,
                 pageTotal: 0,
-                headerImg: '',
+                headerImg: {},
                 conceptOptions: [],
                 stageValue: 0,
                 conceptValue: 0,
@@ -132,8 +134,7 @@
                         url: 'FindAdvertisement',
                         type: 'get',
                     }).then(res => {
-                        console.log('FindAdvertisement->', res);
-                        this.headerImg = this.handleCarouselData(res.data).banner;
+                        this.headerImg = this.handleCarouselData(res.data);
                         resolve();
                     })
                 })
@@ -164,6 +165,10 @@
         width: 100%;
         &-container {
             @include body-center();
+            &-header {
+                height: 366px;
+                overflow: hidden;
+            }
             &-title {
                 @include content-flex(flex-start, flex-end);
                 height: 48px;

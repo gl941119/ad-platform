@@ -307,8 +307,8 @@
 				Request({
 					url: 'Login',
 					data: {
-						email,
-						password
+						email: validateFun.encrypt(email),
+						password: validateFun.encrypt(password),
 					},
                     type: 'post',
                     flag: true,

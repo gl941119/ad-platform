@@ -2,7 +2,9 @@
     <div class="advertisement">
         <div class="advertisement-container">
             <div class="advertisement-container-header">
-                <img :src="headerImg">
+                <a :href="headerImg.advertUrl" target="_blank">
+                    <img :src="headerImg.banner">
+                </a>
             </div>
             <div class="advertisement-container-title">
                 <div class="advertisement-container-title-label">{{$t('header.project')}}</div>
@@ -27,7 +29,9 @@
                     </el-pagination>
                 </div>
                 <div class="advertisement-box-content-imgs">
-                    <img v-for="thumb in thumbImgs" :key="thumb.id" :src="thumb.banner">
+                    <a :href="thumb.advertUrl" v-for="thumb in thumbImgs" :key="thumb.id" target="_blank">
+                        <img :src="thumb.banner">
+                    </a>
                 </div>
             </div>
         </div>
@@ -36,17 +40,10 @@
 <script>
 import Request from '../../utils/require.js';
 import Config from '../../utils/config.js';
-    // const headerImg = require('../../assets/imgs/detail-img/advertisement.jpg');
-    // const thumb1 = require('../../assets/imgs/detail-img/dis-thumb1.jpg');
-    // const thumb2 = require('../../assets/imgs/detail-img/dis-thumb2.jpg');
-    // const thumb3 = require('../../assets/imgs/detail-img/dis-thumb3.jpg');
-    // const thumb4 = require('../../assets/imgs/detail-img/dis-thumb4.jpg');
-    // const thumb5 = require('../../assets/imgs/detail-img/dis-thumb5.jpg');
     export default {
         data() {
             return {
-                headerImg: '',
-                // thumbImgs: [thumb1, thumb2, thumb3, thumb4, thumb5],
+                headerImg: {},
                 thumbImgs: [],
                 conceptOptions: [],
                 advertDatas: [],
@@ -117,10 +114,9 @@ import Config from '../../utils/config.js';
                         url: 'FindAdvertisement',
                         type: 'get',
                     }).then(res => {
-                        console.log('FindAdvertisement->', res);
-                        this.headerImg = this.handleCarouselData(res.data).banner;
+                        this.headerImg = this.handleCarouselData(res.data);
                         this.thumbImgs = this.handlePicList(res.data);
-                        console.log('FindAdvertisement->', this.thumbImgs);
+                        // console.log('FindAdvertisement->', this.thumbImgs);
                         resolve();
                     })
                 })
@@ -165,6 +161,10 @@ import Config from '../../utils/config.js';
         width: 100%;
         &-container {
             @include body-center();
+            &-header {
+                height: 366px;
+                overflow: hidden;
+            }
             &-title {
                 @include content-flex(flex-start, flex-end);
                 height: 48px;
@@ -188,14 +188,17 @@ import Config from '../../utils/config.js';
                 @include body-center();
                 @include content-flex(space-between, flex-start);
                 &-imgs {
-                    width: 416px;
-                    height: 162px;
+                    
                     overflow: hidden;
                     margin-top: 12px;
                     @include content-flex(flex-start, flex-start);
                     flex-direction: column;
-                    & img {
+                    & a {
                         margin-bottom: 24px;
+                        & img {
+                            height: 162px;
+                            width: 416px;
+                        }
                     }
                 }
             }

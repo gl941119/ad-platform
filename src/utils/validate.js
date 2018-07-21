@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 export default {
     /**
      * 验证模式方法
@@ -15,5 +16,12 @@ export default {
                 callback();
             }
         }
+    },
+
+    encrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("bier2018key12345");
+        var src = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(src, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return encrypted.toString();
     }
 }
