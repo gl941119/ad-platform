@@ -102,15 +102,17 @@
 	import Request from '../utils/require.js';
 	import Config from '../utils/config.js';
 	import validateFun from '../utils/validate.js';
+	function passTest(str) {
+		// return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.*?[~/`!@#$%^&*()_+|{}?;:><\-\]\\[\/].*$/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
+		return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
+	}
+	
 	export default {
 		data() {
-			function passTest(str) {
-				// return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.*?[~/`!@#$%^&*()_+|{}?;:><\-\]\\[\/].*$/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
-				return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
-			}
 			let emailValidate = validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val));
 			let passwordValidate = validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this))
 			let passwordAgainValidate = validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password)
+
 			return {
 				utils: new Utils(),
 				code: '',
@@ -159,6 +161,29 @@
 				},
 				select: this.$i18n.locale,
 			}
+        },
+        watch: {
+        	language(val, old){
+        		this.registerModel.rule = {
+						email: [{
+							validator: validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val)),
+							trigger: 'blur'
+						}],
+						verifyCode: [{
+							required: true,
+							message: this.$t('messageNotice.codeEmpty'),
+							trigger: 'blur'
+						}],
+						password: [{
+							validator: validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this)),
+							trigger: 'blur'
+						}],
+						passwordAgain: [{
+							validator: validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password),
+							trigger: 'blur'
+						}],
+					}
+        	}
         },
         computed: {
             userName: {
