@@ -194,7 +194,7 @@
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.country')}}</label>
-								<el-select v-model="country" clearable :placeholder="$t('setting.pleaseSelect')">
+								<el-select v-model="country" filterable clearable :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>

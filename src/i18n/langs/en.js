@@ -381,7 +381,7 @@ const en = {
 		emptyMoney:'请输入目标货币（限制）',
 		emptyTopLimit:'请输入发行硬顶（数字）',
 		emptyLowLimit:'请输入发行软顶（数字）',
-		emptyDadataTime:'请输入本轮众筹时间',
+		emptyDadataTime:'请选择本轮众筹时间',
 		emptyFiles:'合规性文件不能为空',
 		emptyAbout:'相关牌照不能为空',
 	},

@@ -13,7 +13,7 @@
 				</el-table-column>
 				<el-table-column :label="$t('initiated.lowTop')">
 					<template slot-scope="scope">
-						{{scope.row.lowLimit}}/{{scope.row.topLimit}}
+						{{scope.row.topLimit}}/{{scope.row.lowLimit}}
 					</template>
 				</el-table-column>
 				<el-table-column :label="$t('initiated.degree')">
