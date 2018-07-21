@@ -25,6 +25,7 @@
 								<el-input :placeholder="$t('setting.enterNickname')" v-model="nickName"></el-input>
 								<span v-show="errors.has('nickName')" class="help is-danger">{{ errors.first('nickName') }}</span>
 								<div class="el-collapse-item__content-box_buttonBox">
+									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="changeNickName">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
@@ -32,7 +33,7 @@
 					</el-collapse-item>
 					<el-collapse-item :title="$t('setting.email')" name="3">
 						<div class="el-collapse-item__content">
-							<div class="el-collapse-item__content-box max">
+							<div class="el-collapse-item__content-box">
 								<h3>{{$t('setting.bindEmail')}}</h3>
 								<p>
 									<el-input :placeholder="$t('setting.enterBindEmail')" v-model="bindEmail"></el-input>
@@ -47,6 +48,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
+									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="toBindEmail">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
@@ -54,7 +56,7 @@
 					</el-collapse-item>
 					<el-collapse-item :title="$t('passwordInfo.passwords')" name="4">
 						<div class="el-collapse-item__content">
-							<div class="el-collapse-item__content-box bindEmail">
+							<div class="el-collapse-item__content-box">
 								<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
 								<h3 v-if="existPassword">{{$t('passwordInfo.changePassword')}}</h3>
 								<p>
@@ -75,6 +77,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
+									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
 									<button v-if="!existPassword" @click="setPassword">{{$t('buttonAll.confirm')}}</button>
 									<button v-if="existPassword" @click="changePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
@@ -83,7 +86,7 @@
 					</el-collapse-item>
 					<el-collapse-item :title="$t('passwordInfo.tradePassword')" name="5">
 						<div class="el-collapse-item__content">
-							<div v-if="!existTradePassword" class="el-collapse-item__content-box bindEmail">
+							<div v-if="!existTradePassword" class="el-collapse-item__content-box">
 								<h3>{{$t('passwordInfo.setTradePassword')}}</h3>
 								<p>
 									<el-input type="password" :placeholder="$t('passwordInfo.tradePassword')" v-model="tradePassword"></el-input>
@@ -100,10 +103,11 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
+									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="setTradePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
-							<div v-if="existTradePassword" class="el-collapse-item__content-box bindEmail">
+							<div v-if="existTradePassword" class="el-collapse-item__content-box">
 								<h3>{{$t('passwordInfo.changeTradePassword')}}</h3>
 								<p>
 									<el-input :placeholder="$t('passwordInfo.oldTradePassword')" v-model="oldTradePassword"></el-input>
@@ -123,6 +127,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
+									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="changeTradePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
@@ -239,12 +244,7 @@
                 nickName: this.$store.state.usernickname || Cache.getSession('bier_usernickname'),
 				activeName: '',
 				active: '',
-				fileList: [],
-				value4: '',
-				options: [],
 				bindEmail: "",
-				headUrl: "",
-				id: 0,
 				oldPassword: "",
 				newPassword: "",
 				oncePassword: "",
@@ -303,6 +303,20 @@
 			this.info();
 		},
 		methods: {
+			cnacle(){
+				this.activeName = '';
+				this.oldPassword = '';
+				this.newPassword = '';
+				this.oncePassword = '';
+				this.tradePassword = '';
+				this.onceSetTradePassword = '';
+				this.oldTradePassword = '';
+				this.newTradePassword = '';
+				this.onceTradePassword = '';
+				this.code = '';
+				this.codePassword = '';
+				this.codeTradePassword = '';
+			},
 			info(){
 				Request({
 					url: 'QuerySettings',
@@ -767,6 +781,12 @@
 					}
 				}
 			}
+			.last {
+				height: 300px;
+				border: 0;
+				padding-left: 144px;
+				position: relative;
+			}
 		}
 		&_item {
 			height: 376px;
@@ -783,53 +803,39 @@
 		}
 		&-box {
 			width: 395px;
-			height: 192px;
 			background: rgba(255, 255, 255, 1);
 			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
 			margin: 0 auto;
-			padding: 30px;
+			padding: 16px 30px 26px;
 			position: relative;
 			h3 {
-				text-align: center;
 				margin-bottom: 10px;
+			    font-size: 24px;
+			    color: #333333;
 			}
 			p {
 				margin-bottom: 10px;
 			}
 			&_buttonBox {
 				display: flex;
-				justify-content: space-between;
+				justify-content: flex-end;
 				margin-top: 12px;
 				button {
-					padding: 12px 24px;
+					margin-left: 10px;
+					padding: 8px 24px;
 					border-radius: 5px;
 					font-size: 14px;
 					color: rgba(255, 255, 255, 1);
 					background: #FF9500;
 				}
+				.cancle{
+				    color: rgba(94,97,102,1);
+				    background: #ffffff;
+				    border: 1px solid rgba(220,223,230,1);
+				}
 			}
 		}
 	}
-	.max {
-		height: 250px;
-	}
-	
-	.bindEmail {
-		height: 330px;
-	}
-	
-	.exec {
-		float: left;
-		margin-right: 60px;
-	}
-	
-	.last {
-		height: 300px;
-		border: 0;
-		padding-left: 144px;
-		position: relative;
-	}
-	
 	.el-upload__text {
 		padding: 10px 30px;
 		background: #ff9500;
@@ -839,7 +845,6 @@
 		left: 50%;
 		margin-left: -44px;
 	}
-	
 	.commit {
 		padding: 10px 17px;
 		background: rgba(255, 149, 0, 1);
@@ -848,7 +853,6 @@
 		color: rgba(255, 255, 255, 1);
 		margin: 26px 0 0 144px;
 	}
-	
 	.avatar-uploader .el-upload {
 		border: 1px dashed #d9d9d9;
 		border-radius: 6px;
@@ -856,11 +860,9 @@
 		position: relative;
 		overflow: hidden;
 	}
-	
 	.avatar-uploader .el-upload:hover {
 		border-color: #409EFF;
 	}
-	
 	.avatar-uploader-icon {
 		font-size: 28px;
 		color: #8c939d;
@@ -870,13 +872,11 @@
 		text-align: center;
 		border: 1px solid #EEEEEE;
 	}
-	
 	.avatar {
 		width: 300px;
 		height: 200px;
 		display: block;
 	}
-	
 	.el-button-getCode {
 		position: absolute;
 		top: 0;
