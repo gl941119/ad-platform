@@ -159,7 +159,7 @@
 				<input class="langer" :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>logo</label>
+				<label>{{$t('tokenInfo.logo')}}</label>
 				<div>
 					<el-upload class="avatar-uploader" 
 						:show-file-list="false" 
