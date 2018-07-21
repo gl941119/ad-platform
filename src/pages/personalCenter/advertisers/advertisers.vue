@@ -276,6 +276,7 @@
 				this.disabled = false;
 				this.queryDetails();
 			}else if(value == 0){
+				this.queryDetails();
 				this.disabled = false;
 			}else if(value == -1){
 				this.disabled = false;
