@@ -83,7 +83,7 @@ export default {
                 });
                 this.$refs.advertSelect.blur();
             }).catch(e => {
-                console.log('e-->', e);
+                // console.log('e-->', e);
                 this.$emit('update-data');
                 this.$refs.advertSelect.blur();
                 if(e&& e.islogin){

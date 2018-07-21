@@ -197,6 +197,10 @@
             },
             dialogModalVisible: {
                 get(){
+                    if(this.$store.state.dialogModalVisible) {
+                        this.title = this.$t('login.userLogin');
+                        this.registerModel.registerVisible = false;
+                    }
                     return this.$store.state.dialogModalVisible;
                 },
                 set(val){
