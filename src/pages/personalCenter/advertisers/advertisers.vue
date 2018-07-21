@@ -270,18 +270,18 @@
 			var value = this.$route.params.value;
 			this.isCheck = value;
 			switch(value){
-				case -1:
+				case '-1':
 					this.disabled = false;
 					break;
-				case 0:
+				case '0':
 					this.queryDetails();
 					this.disabled = false;
 					break;
-				case 1:
+				case '1':
 					this.queryDetails();
 					this.disabled = true;
 					break;
-				case 2:
+				case '2':
 					this.disabled = false;
 					this.queryDetails();
 					break;
