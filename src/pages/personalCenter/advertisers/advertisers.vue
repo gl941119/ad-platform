@@ -210,14 +210,21 @@
 				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="whitePaper" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
 				<span class="is-danger" v-show="errors.has('whitePaper')">{{ errors.first('whitePaper') }}</span>
 			</li>
-			<li>
+			<li style="position: relative;">
 				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 					<label class="label">
 						<input :placeholder="$t('aboutLink.enterWebsiteName')" :disabled="disabled" v-model="websites[index].websiteName" >
 					</label>
-					<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
+					<input class="langer" @blur="address(websites[index].websiteAddress, index)" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
-				<!--<span class="is-danger">网址验证</span>-->
+				<span style="position: absolute;right: 306px;top: 0;" class="is-danger" v-if="websites[0].websiteAddress && !isAddress">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 50px;" class="is-danger" v-if="websites[1].websiteAddress && !isAddressOne">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 100px;" class="is-danger" v-if="websites[2].websiteAddress && !isAddressTwo">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 150px;" class="is-danger" v-if="websites[3].websiteAddress && !isAddressThree">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 200px;" class="is-danger" v-if="websites[4].websiteAddress && !isAddressFour">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 250px;" class="is-danger" v-if="websites[5].websiteAddress && !isAddressFive">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 300px;" class="is-danger" v-if="websites[6].websiteAddress && !isAddressSix">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 306px;top: 350px;" class="is-danger" v-if="websites[7].websiteAddress && !isAddressSeven">{{$t('aboutLink.emptyAddress')}}</span>
 			</li>
 			</li>
 		</ul>
@@ -294,6 +301,14 @@
 				img:false,//logo提示
 				coreTeams:false,//核心团队是否为空
 				consultantTeams:false,//顾问团队是否为空
+				isAddress:false,
+				isAddressOne:false,
+				isAddressTwo:false,
+				isAddressThree:false,
+				isAddressFour:false,
+				isAddressFive:false,
+				isAddressSix:false,
+				isAddressSeven:false,
 			}
 		},
 		components: {
@@ -320,6 +335,35 @@
 			}
 		},
 		methods: {
+			address(value, index){
+				var str = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+				switch (index){
+					case 0:
+						this.isAddress = str.test(value);
+						break;
+					case 1:
+						this.isAddressOne = str.test(value);
+						break;
+					case 2:
+						this.isAddressTwo = str.test(value);
+						break;
+					case 3:
+						this.isAddressThree = str.test(value);
+						break;
+					case 4:
+						this.isAddressFour = str.test(value);
+						break;
+					case 5:
+						this.isAddressFive = str.test(value);
+						break;
+					case 6:
+						this.isAddressSix = str.test(value);
+						break;
+					case 7:
+						this.isAddressSeven = str.test(value);
+						break;
+				}
+			},
 			desc(){//项目简介
 				if(!this.newCrowdfunding.proDesc){
 					this.proDescr = true;

@@ -399,6 +399,7 @@ const zh = {
 		enterWebsiteAddress:'请输入自定义站点地址',
 		emptyWebsite:'官网不能为空（符合网站地址）',
 		emptyWhitePaper:'白皮书地址不能为空（符合网站地址）',
+		emptyAddress:'自定义站点地址需符合网站地址',
 	},
 	messageCode:{
 		exceptions:'系统异常',
