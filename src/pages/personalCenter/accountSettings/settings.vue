@@ -654,7 +654,7 @@
 						country: this.country,
 						idType: this.idType,
 						idNum: this.idNum,
-						realName: this.realName,
+						realname: this.realName,
 						idImg: this.imageUrl
 					},
 					type: 'post',
