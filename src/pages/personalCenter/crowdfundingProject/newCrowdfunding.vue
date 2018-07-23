@@ -6,7 +6,7 @@
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamName')}}</label>
-				<input :placeholder="$t('team.enterTeamName')" :class="[errors.has('contactsName')?'llo':'']" :data-vv-as="$t('team.emptyTeamName')" v-validate data-vv-rules="required" name="teamName" v-model="newCrowdfunding.teamName" />
+				<input :placeholder="$t('team.enterTeamName')" :class="[errors.has('teamName')?'llo':'']" :data-vv-as="$t('team.emptyTeamName')" v-validate data-vv-rules="required" name="teamName" v-model="newCrowdfunding.teamName" />
 				<span class="is-danger" v-show="errors.has('teamName')">{{ errors.first('teamName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -30,15 +30,15 @@
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.name')}}</label>
-									<input class="mini" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="coreName" :placeholder="$t('team.enterName')" v-model="coreTeam[index].name"/>
+									<input class="mini" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required" name="coreName" :placeholder="$t('team.enterName')" v-model="coreTeam[index].name"/>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.title')}}</label>
-									<input class="mini" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="coreTeam[index].title" />
+									<input class="mini" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="coreTeam[index].title" />
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
+									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addCore" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -65,15 +65,15 @@
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.name')}}</label>
-									<input class="mini" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="consultantName" :placeholder="$t('team.enterName')" v-model="consultantTeam[index].name" />
+									<input class="mini" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required" name="consultantName" :placeholder="$t('team.enterName')" v-model="consultantTeam[index].name" />
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.title')}}</label>
-									<input class="mini" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="consultantTeam[index].title" />
+									<input class="mini" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="consultantTeam[index].title" />
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
+									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addConsultant" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -528,12 +528,5 @@
 	@import '../../../assets/css/upload.css';
 	.last{
 		width: 350px;
-	}
-	.is-danger{
-		font-size:14px;
-		color:rgba(250,85,85,1);
-    	line-height: 40px;
-    	padding-left: 12px;
-    	display: block;
 	}
 </style>

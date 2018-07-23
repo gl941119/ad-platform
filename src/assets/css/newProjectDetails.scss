@@ -29,6 +29,8 @@
                 line-height: 20px;
                 label {
                     width: 120px;
+                    height: 40px;
+                    line-height: 40px;
                 }
                 .label{
                     width: 105px;
@@ -44,6 +46,9 @@
                     border-radius:4px;
                     padding: 10px;
                     border:1px solid rgba(220,223,230,1);
+                }
+                .team{
+                    width: 100%;
                 }
                 .mini{
                     width: 160px;
@@ -100,6 +105,16 @@
                 color: #FFFFFF;
             }
         }
+    }
+    .is-danger{
+        font-size:14px;
+        color:rgba(250,85,85,1);
+        line-height: 40px;
+        padding-left: 12px;
+        display: block;
+    }
+    .teamDanger{
+        line-height: 32px;
     }
     .exec {
         position: relative;

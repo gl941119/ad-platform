@@ -318,6 +318,8 @@ const zh = {
 		emptyName:'全名不能为空',
 		emptyTitle:'头衔不能为空',
 		emptyDesc:'简介不能为空',
+		emptyCore:'核心团队成员不能为空',
+		emptyConsultant:'顾问团队成员不能为空',
 	},
 	projectInfo:{
 		info:'项目情况',

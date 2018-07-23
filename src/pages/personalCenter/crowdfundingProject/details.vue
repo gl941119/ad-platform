@@ -4,38 +4,41 @@
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamName')}}</label>
-				<input :disabled="disabled" v-model="details.teamName" />
+				<input :disabled="disabled" :class="[errors.has('contactsName')?'llo':'']" :data-vv-as="$t('team.emptyTeamName')" v-validate data-vv-rules="required" name="teamName" v-model="details.teamName" />
+				<span class="is-danger" v-show="errors.has('teamName')">{{ errors.first('teamName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamPhone')}}</label>
-				<input :disabled="disabled" v-model="details.teamContact" />
+				<input :disabled="disabled" :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required" name="teamContact" v-model="details.teamContact" />
+				<span class="is-danger" v-show="errors.has('teamContact')">{{ errors.first('teamContact') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.teamAddress')}}</label>
-				<input :disabled="disabled" v-model="details.teamLocation" />
+				<input :disabled="disabled" :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required" name="teamLocation" v-model="details.teamLocation" />
+				<span class="is-danger" v-show="errors.has('teamLocation')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('team.coreMember')}}</label>
 				<el-button type="text" @click="queryCore">{{$t('team.openCoreMember')}}</el-button>
 			</li>
-			<div class="project_review_details_item_li_info">
+			<div class="newCrowdfunding_item_li">
 				<el-dialog :title="$t('team.coreMember')" :visible.sync="centerDialogVisible" size="small">
 					<el-table :data="coreTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 						<el-table-column type="selection" width="55">
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
+								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required" name="coreName" v-model="scope.row.name">
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
+								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required" name="coreTitle" v-model="scope.row.title">
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
+								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required" name="coreDesc" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -45,6 +48,11 @@
 							</template>
 						</el-table-column>
 					</el-table>
+					<div style="display: inline-block;float: left;">
+						<span class="is-danger teamDanger" v-show="errors.has('coreName')">{{ errors.first('coreName') }}</span>
+						<span class="is-danger teamDanger" v-show="errors.has('coreTitle')">{{ errors.first('coreTitle') }}</span>
+						<span class="is-danger teamDanger" v-show="errors.has('coreDesc')">{{ errors.first('coreDesc') }}</span>
+					</div>
 					<div slot="footer" v-if="!disabled" class="dialog-footer">
 						<el-button @click="saveLink">{{$t('buttonAll.save')}}</el-button>
 						<el-button @click="addLink">{{$t('buttonAll.add')}}</el-button>
@@ -59,24 +67,24 @@
 				<label>{{$t('team.consultant')}}</label>
 				<el-button type="text" @click="queryConsultant">{{$t('team.openConsultant')}}</el-button>
 			</li>
-			<div class="project_review_details_item_li_info">
+			<div class="newCrowdfunding_item_li">
 				<el-dialog :title="$t('team.consultant')" :visible.sync="CrowdTeamDialogVisible" size="small">
 					<el-table :data="consultantTeam" border class="tForm" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 						<el-table-column type="selection" width="55">
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<el-input :disabled="disabled" v-model="scope.row.name"></el-input>
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required" name="consultantName" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<el-input :disabled="disabled" v-model="scope.row.title"></el-input>
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required" name="consultantTitle" v-model="scope.row.title">
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required" name="consultantDesc" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -86,6 +94,11 @@
 							</template>
 						</el-table-column>
 					</el-table>
+					<div style="display: inline-block;float: left;">
+						<span class="is-danger teamDanger" v-show="errors.has('consultantName')">{{ errors.first('consultantName') }}</span>
+						<span class="is-danger teamDanger" v-show="errors.has('consultantTitle')">{{ errors.first('consultantTitle') }}</span>
+						<span class="is-danger teamDanger" v-show="errors.has('consultantDesc')">{{ errors.first('consultantDesc') }}</span>
+					</div>
 					<div slot="footer" v-if="!disabled" class="dialog-footer">
 						<el-button @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
 						<el-button @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
@@ -101,11 +114,16 @@
 			<h5 >{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectName')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.proName" />
+				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required" name="proName" :disabled="disabled" v-model="details.proName" />
+				<span class="is-danger" v-show="errors.has('proName')">{{ errors.first('proName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectDesc')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.proDesc" />
+				<div class="textarea">
+					<el-input @blur="desc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" :disabled="disabled" v-model="details.proDesc" >
+					</el-input>
+				</div>
+				<span class="is-danger" v-if="proDescr">{{$t('projectInfo.emptyProjectDesc')}}</span>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.concept')}}</label>
@@ -119,11 +137,13 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label >{{$t('aboutLink.website')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.website" />
+				<input class="langer" :class="[errors.has('website')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWebsite')" v-validate data-vv-rules="required" name="website" :disabled="disabled" v-model="details.website" />
+				<span class="is-danger" v-show="errors.has('website')">{{ errors.first('website') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label >{{$t('aboutLink.whitePaper')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.whitePaper" />
+				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate data-vv-rules="required" name="whitePaper" :disabled="disabled" v-model="details.whitePaper" />
+				<span class="is-danger" v-show="errors.has('whitePaper')">{{ errors.first('whitePaper') }}</span>
 			</li>
 		</ul>
 		<!--概念-->
@@ -154,7 +174,8 @@
 			<h5 >{{$t('tokenInfo.token')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.english')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.shotEnName" />
+				<input class="langer" :class="[errors.has('shotEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyEnglish')" v-validate data-vv-rules="required" name="shotEnName" :disabled="disabled" v-model="details.shotEnName" />
+				<span class="is-danger" v-show="errors.has('shotEnName')">{{ errors.first('shotEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.chinese')}}</label>
@@ -162,7 +183,8 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.englishName')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.fullEnName" />
+				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required" name="fullEnName" :disabled="disabled" v-model="details.fullEnName" />
+				<span class="is-danger" v-show="errors.has('fullEnName')">{{ errors.first('fullEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.logo')}}</label>
@@ -182,36 +204,48 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('tokenInfo.title')}}</h5>
 			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.title')}}</label>
+				<input class="langer" :class="[errors.has('title')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyTitle')" v-validate data-vv-rules="required" name="title" :disabled="disabled" v-model="details.title" />
+				<span class="is-danger" v-show="errors.has('title')">{{ errors.first('title') }}</span>
+			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.issueTotal')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.circulation" />
+				<input class="langer" :class="[errors.has('circulation')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyIssueTotal')" v-validate data-vv-rules="required|numeric" name="circulation" :disabled="disabled" v-model="details.circulation" />
+				<span class="is-danger" v-show="errors.has('circulation')">{{ errors.first('circulation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.total')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.totalCrowdfund" />
+				<input class="langer" :class="[errors.has('totalCrowdfund')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyTotal')" v-validate data-vv-rules="required|numeric" name="totalCrowdfund" :disabled="disabled" v-model="details.totalCrowdfund" />
+				<span class="is-danger" v-show="errors.has('totalCrowdfund')">{{ errors.first('totalCrowdfund') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label >{{$t('tokenInfo.thisIssue')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.currCirculation" />
+				<input class="langer" :class="[errors.has('currCirculation')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyThisIssue')" v-validate data-vv-rules="required|numeric" name="currCirculation" :disabled="disabled" v-model="details.currCirculation" />
+				<span class="is-danger" v-show="errors.has('currCirculation')">{{ errors.first('currCirculation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.price')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.price" />
+				<input class="langer" :class="[errors.has('price')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyPrice')" v-validate data-vv-rules="required|numeric" name="price" :disabled="disabled" v-model="details.price" />
+				<span class="is-danger" v-show="errors.has('price')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.limit')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.mostNumber" />
+				<input class="langer" :class="[errors.has('mostNumber')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyLimit')" v-validate data-vv-rules="required|numeric" name="mostNumber" :disabled="disabled" v-model="details.mostNumber" />
+				<span class="is-danger" v-show="errors.has('mostNumber')">{{ errors.first('mostNumber') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.money')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.targetCurrency" />
+				<input class="langer" :class="[errors.has('targetCurrency')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyMoney')" v-validate data-vv-rules="required" name="targetCurrency" :disabled="disabled" v-model="details.targetCurrency" />
+				<span class="is-danger" v-show="errors.has('targetCurrency')">{{ errors.first('targetCurrency') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.topLimit')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.topLimit" />
+				<input class="langer" :class="[errors.has('topLimit')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyTopLimit')" v-validate data-vv-rules="required|numeric" name="topLimit" :disabled="disabled" v-model="details.topLimit" />
+				<span class="is-danger" v-show="errors.has('topLimit')">{{ errors.first('topLimit') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.lowLimit')}}</label>
-				<input class="langer" :disabled="disabled" v-model="details.lowLimit" />
+				<input class="langer" :class="[errors.has('lowLimit')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyLowLimit')" v-validate data-vv-rules="required|numeric" name="lowLimit" :disabled="disabled" v-model="details.lowLimit" />
+				<span class="is-danger" v-show="errors.has('lowLimit')">{{ errors.first('lowLimit') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.dataTime')}}</label>
@@ -219,7 +253,11 @@
 					<span>{{details.startTime | cal}}</span> ~ <span>{{details.endTime |cal }}</span>
 				</div>
 				<div v-if="!disabled" >
-					<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
+					<el-date-picker v-model="timeInterval" 
+						type="datetimerange" 
+						:range-separator="$t('tokenInfo.to')" 
+						:start-placeholder="$t('tokenInfo.startTime')" 
+						:end-placeholder="$t('tokenInfo.endTime')">
 					</el-date-picker>
 				</div>
 			</li>
@@ -307,7 +345,8 @@
 				},
 				params:{
 					fileType:'2'
-				}
+				},
+				proDescr:false,//项目简介提示
 			};
 		},
 		components: {
@@ -384,53 +423,65 @@
 					this.CrowdTeamDialogVisible = true;
 				})
 			},
+			desc(){//项目简介
+				if(!this.details.proDesc){
+					this.proDescr = true;
+				}else{
+					this.proDescr = false;
+				}
+			},
 			changeDetails() {
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
-				Request({
-					url: 'ChangeCrowdfundingDetails',
-					data: {
-						accountId: this.details.accountId,
-						circulation: this.details.circulation,
-						concept1Id: this.details.concept1Id,
-						concept2Id: this.details.concept2Id,
-						concept3Id: this.details.concept3Id,
-						concept4Id: this.details.concept4Id,
-						currCirculation: this.details.currCirculation,
-						endTime: endTime,
-						fullEnName: this.details.fullEnName,
-						id: this.details.id,
-						license: this.details.license,
-						logo: this.details.logo,
-						lowLimit: this.details.lowLimit,
-						mostNumber: this.details.mostNumber,
-						price: this.details.price,
-						proDesc: this.details.proDesc,
-						proName: this.details.proName,
-						shotCnName: this.details.shotCnName,
-						shotEnName: this.details.shotEnName,
-						startTime: startTime,
-						targetCurrency: this.details.targetCurrency,
-						teamContact: this.details.teamContact,
-						teamLocation: this.details.teamLocation,
-						teamName: this.details.teamName,
-						technology1: this.details.technology1,
-						technology2: this.details.technology2,
-						title: this.details.title,
-						topLimit: this.details.topLimit,
-						totalCrowdfund: this.details.totalCrowdfund,
-						website: this.details.website,
-						whitePaper: this.details.whitePaper
-					},
-					type: 'put',
-					flag:true,
-				}).then(res => {
-					this.$router.push({ name: 'project'});
-					this.$message({
-						message:this.$t('messageNotice.changeSuccess'),
-						type:'success'
-					});
-				})
+				this.$validator.validateAll().then((result) => {
+					if(result){
+						this.proDesc();
+						Request({
+							url: 'ChangeCrowdfundingDetails',
+							data: {
+								accountId: this.details.accountId,
+								circulation: this.details.circulation,
+								concept1Id: this.details.concept1Id,
+								concept2Id: this.details.concept2Id,
+								concept3Id: this.details.concept3Id,
+								concept4Id: this.details.concept4Id,
+								currCirculation: this.details.currCirculation,
+								endTime: endTime,
+								fullEnName: this.details.fullEnName,
+								id: this.details.id,
+								license: this.details.license,
+								logo: this.details.logo,
+								lowLimit: this.details.lowLimit,
+								mostNumber: this.details.mostNumber,
+								price: this.details.price,
+								proDesc: this.details.proDesc,
+								proName: this.details.proName,
+								shotCnName: this.details.shotCnName,
+								shotEnName: this.details.shotEnName,
+								startTime: startTime,
+								targetCurrency: this.details.targetCurrency,
+								teamContact: this.details.teamContact,
+								teamLocation: this.details.teamLocation,
+								teamName: this.details.teamName,
+								technology1: this.details.technology1,
+								technology2: this.details.technology2,
+								title: this.details.title,
+								topLimit: this.details.topLimit,
+								totalCrowdfund: this.details.totalCrowdfund,
+								website: this.details.website,
+								whitePaper: this.details.whitePaper
+							},
+							type: 'put',
+							flag:true,
+						}).then(res => {
+							this.$router.push({ name: 'project'});
+							this.$message({
+								message:this.$t('messageNotice.changeSuccess'),
+								type:'success'
+							});
+						})
+					}
+				});
 			},
 			addCore() { //核心团队
 				var tmpPersions = this.coreTeam;
@@ -451,45 +502,53 @@
 			},
 			saveLink() {
 				var id = this.$route.params.id;
-				Request({
-					url: 'ChangeCoreMember',
-					data: {
-						id: this.multipleSelection[0].id,
-						accountId: this.accountId,
-						crowdId: this.multipleSelection[0].crowdId,
-						desc: this.multipleSelection[0].desc,
-						name: this.multipleSelection[0].name,
-						title: this.multipleSelection[0].title
-					},
-					type: 'put',
-					flag: true,
-				}).then(res => {
-					this.$message({
-						message:this.$t('messageNotice.changeSuccess'),
-						type:'warning'
-					});
-					this.centerDialogVisible = false;
-				})
+				this.$validator.validateAll().then((result) => {
+					if(result){
+						Request({
+							url: 'ChangeCoreMember',
+							data: {
+								id: this.multipleSelection[0].id,
+								accountId: this.accountId,
+								crowdId: this.multipleSelection[0].crowdId,
+								desc: this.multipleSelection[0].desc,
+								name: this.multipleSelection[0].name,
+								title: this.multipleSelection[0].title
+							},
+							type: 'put',
+							flag: true,
+						}).then(res => {
+							this.$message({
+								message:this.$t('messageNotice.changeSuccess'),
+								type:'warning'
+							});
+							this.centerDialogVisible = false;
+						})
+					}
+				});
 			},
 			addLink() {
 				var id = this.$route.params.id;
-				Request({
-					url: 'AddCoreMember',
-					data: {
-						accountId: this.accountId,
-						crowdId: this.details.id,
-						desc: this.multipleSelection[0].desc,
-						name: this.multipleSelection[0].name,
-						title: this.multipleSelection[0].title
-					},
-					flag: true,
-				}).then(res => {
-					this.$message({
-						message:this.$t('messageNotice.addSuccess'),
-						type:'success'
-					});
-					this.centerDialogVisible = false;
-				})
+				this.$validator.validateAll().then((result) => {
+					if(result){
+						Request({
+							url: 'AddCoreMember',
+							data: {
+								accountId: this.accountId,
+								crowdId: this.details.id,
+								desc: this.multipleSelection[0].desc,
+								name: this.multipleSelection[0].name,
+								title: this.multipleSelection[0].title
+							},
+							flag: true,
+						}).then(res => {
+							this.$message({
+								message:this.$t('messageNotice.addSuccess'),
+								type:'success'
+							});
+							this.centerDialogVisible = false;
+						})
+					}
+				});
 			},
 			deletedLink() {
 				var id = this.$route.params.id;
@@ -507,7 +566,7 @@
 						type:'success'
 					});
 					this.centerDialogVisible = false;
-				})
+				}) 
 			},
 			addConsultant() { //顾问团队
 				var tmpPersions = this.consultantTeam;
@@ -528,23 +587,27 @@
 			},
 			addLinkConsultant() {
 				var id = this.$route.params.id;
-				Request({
-					url: 'addConsultant',
-					data: {
-						accountId: this.accountId,
-						crowdId: this.details.id,
-						desc: this.multipleSelection[0].desc,
-						name: this.multipleSelection[0].name,
-						title: this.multipleSelection[0].title
-					},
-					flag: true,
-				}).then(res => {
-						this.CrowdTeamDialogVisible = false;
-						this.$message({
-							message:this.$t('messageNotice.addSuccess'),
-							type:'success'
-						});
-				})
+				this.$validator.validateAll().then((result) => {
+					if(result){
+						Request({
+							url: 'addConsultant',
+							data: {
+								accountId: this.accountId,
+								crowdId: this.details.id,
+								desc: this.multipleSelection[0].desc,
+								name: this.multipleSelection[0].name,
+								title: this.multipleSelection[0].title
+							},
+							flag: true,
+						}).then(res => {
+								this.CrowdTeamDialogVisible = false;
+								this.$message({
+									message:this.$t('messageNotice.addSuccess'),
+									type:'success'
+								});
+						})
+					}
+				});
 			},
 			deletedLinkConsultant() {
 				var id = this.$route.params.id;
@@ -569,25 +632,29 @@
 			},
 			saveLinkConsultant() {
 				var id = this.$route.params.id;
-				Request({
-					url: 'ChangeConsultant',
-					data: {
-						id: this.multipleSelection[0].id,
-						accountId: this.accountId,
-						crowdId: this.multipleSelection[0].crowdId,
-						desc: this.multipleSelection[0].desc,
-						name: this.multipleSelection[0].name,
-						title: this.multipleSelection[0].title
-					},
-					type: 'put',
-					flag: true,
-				}).then(res => {
-					this.CrowdTeamDialogVisible = false;
-					this.$message({
-						message:this.$t('messageNotice.changeSuccess'),
-						type:'success'
-					});
-				})
+				this.$validator.validateAll().then((result) => {
+					if(result){
+						Request({
+							url: 'ChangeConsultant',
+							data: {
+								id: this.multipleSelection[0].id,
+								accountId: this.accountId,
+								crowdId: this.multipleSelection[0].crowdId,
+								desc: this.multipleSelection[0].desc,
+								name: this.multipleSelection[0].name,
+								title: this.multipleSelection[0].title
+							},
+							type: 'put',
+							flag: true,
+						}).then(res => {
+							this.CrowdTeamDialogVisible = false;
+							this.$message({
+								message:this.$t('messageNotice.changeSuccess'),
+								type:'success'
+							});
+						})
+					}
+				});
 			},
 			handleSelectionChange(val) {
 				this.multipleSelection = val;
