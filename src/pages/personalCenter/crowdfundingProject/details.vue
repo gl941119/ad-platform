@@ -38,7 +38,7 @@
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required" name="coreDesc" v-model="scope.row.desc">
+								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="coreDesc" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -84,7 +84,7 @@
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required" name="consultantDesc" v-model="scope.row.desc">
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -174,7 +174,7 @@
 			<h5 >{{$t('tokenInfo.token')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.english')}}</label>
-				<input class="langer" :class="[errors.has('shotEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyEnglish')" v-validate data-vv-rules="required" name="shotEnName" :disabled="disabled" v-model="details.shotEnName" />
+				<input class="langer" :class="[errors.has('shotEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyEnglish')" v-validate data-vv-rules="required|max:5" name="shotEnName" :disabled="disabled" v-model="details.shotEnName" />
 				<span class="is-danger" v-show="errors.has('shotEnName')">{{ errors.first('shotEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -424,7 +424,7 @@
 				})
 			},
 			desc(){//项目简介
-				if(!this.details.proDesc){
+				if(!this.details.proDesc || this.details.proDesc.length>100){
 					this.proDescr = true;
 				}else{
 					this.proDescr = false;

@@ -38,7 +38,7 @@
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
+									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:100" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addCore" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -73,7 +73,7 @@
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
+									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addConsultant" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -156,7 +156,7 @@
 			<h5>{{$t('tokenInfo.token')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.english')}}</label>
-				<input class="langer" :class="[errors.has('shotEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyEnglish')" v-validate data-vv-rules="required" name="shotEnName" :placeholder="$t('tokenInfo.enterEnglish')" v-model="newCrowdfunding.shotEnName" />
+				<input class="langer" :class="[errors.has('shotEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyEnglish')" v-validate data-vv-rules="required|max:5" name="shotEnName" :placeholder="$t('tokenInfo.enterEnglish')" v-model="newCrowdfunding.shotEnName" />
 				<span class="is-danger" v-show="errors.has('shotEnName')">{{ errors.first('shotEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -205,7 +205,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.price')}}</label>
-				<input class="langer" :class="[errors.has('price')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyPrice')" v-validate data-vv-rules="required|numeric" name="price" :placeholder="$t('tokenInfo.enterPrice')" v-model="newCrowdfunding.price" />
+				<input class="langer" :class="[errors.has('price')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyPrice')" v-validate data-vv-rules="required|numeric:{0}" name="price" :placeholder="$t('tokenInfo.enterPrice')" v-model="newCrowdfunding.price" />
 				<span class="is-danger" v-show="errors.has('price')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -366,7 +366,7 @@
 				}
 			},
 			proDesc(){//项目简介
-				if(!this.newCrowdfunding.proDesc){
+				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length>100){
 					this.proDescr = true;
 				}else{
 					this.proDescr = false;

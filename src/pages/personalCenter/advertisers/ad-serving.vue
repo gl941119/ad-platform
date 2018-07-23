@@ -16,12 +16,12 @@
 					<el-dialog :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
 					  <el-form :model="form">
 					    <el-form-item :label="$t('adServing.all')" :label-width="formLabelWidth">
-					        <el-input-number v-model="form.advertPrice" controls-position="right" @change="handleChange">
+					        <el-input-number v-model="form.advertPrice" :min="0.1" controls-position="right" @change="handleChange">
 					        </el-input-number>
 					    </el-form-item>
 					    <div v-for="(item, index) in form.conceptManageList" :key="index">
 					    	<el-form-item :label="item.name" :label-width="formLabelWidth">
-						      	<el-input-number v-model="item.conceptPrice" controls-position="right" @change="handleChange">
+						      	<el-input-number v-model="item.conceptPrice" :min="0.1" controls-position="right" @change="handleChange">
 						      	</el-input-number>
 						    </el-form-item>
 					    </div>
@@ -46,7 +46,7 @@
 				dialogTableVisible:false,
 				formLabelWidth: '120px',
 				form:{
-					advertPrice:'',
+					advertPrice:'0.1',
 					conceptManageList:[],
 				},
 				accountId:this.$store.state.id || Cache.getSession('bier_userid'),

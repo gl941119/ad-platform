@@ -286,6 +286,7 @@
 				existPassword: true,
 				existTradePassword: true,
                 isBindTelegram: true,
+                authStatus:'',
                 uploadImg: Config.UploadImg,
                 requestToken: {
 					token:
@@ -322,6 +323,7 @@
 					url: 'QuerySettings',
 					type: 'get',
 				}).then(res => {
+					this.authStatus = res.data.authStatus;
 					this.bindEmail = res.data.Email;
 					this.existEmail = res.data.existEmail;
 					this.existPassword = res.data.existPassword;
