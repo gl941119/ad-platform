@@ -217,14 +217,14 @@
 					</label>
 					<input class="langer" @blur="address(websites[index].websiteAddress, index)" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
-				<span style="position: absolute;right: 306px;top: 0;" class="is-danger" v-if="websites[0].websiteAddress && !isAddress">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 50px;" class="is-danger" v-if="websites[1].websiteAddress && !isAddressOne">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 100px;" class="is-danger" v-if="websites[2].websiteAddress && !isAddressTwo">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 150px;" class="is-danger" v-if="websites[3].websiteAddress && !isAddressThree">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 200px;" class="is-danger" v-if="websites[4].websiteAddress && !isAddressFour">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 250px;" class="is-danger" v-if="websites[5].websiteAddress && !isAddressFive">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 300px;" class="is-danger" v-if="websites[6].websiteAddress && !isAddressSix">{{$t('aboutLink.emptyAddress')}}</span>
-				<span style="position: absolute;right: 306px;top: 350px;" class="is-danger" v-if="websites[7].websiteAddress && !isAddressSeven">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 0;" class="is-danger" v-if="websites[0].websiteAddress && !isAddress">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 50px;" class="is-danger" v-if="websites[1].websiteAddress && !isAddressOne">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 100px;" class="is-danger" v-if="websites[2].websiteAddress && !isAddressTwo">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 150px;" class="is-danger" v-if="websites[3].websiteAddress && !isAddressThree">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 200px;" class="is-danger" v-if="websites[4].websiteAddress && !isAddressFour">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 250px;" class="is-danger" v-if="websites[5].websiteAddress && !isAddressFive">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 300px;" class="is-danger" v-if="websites[6].websiteAddress && !isAddressSix">{{$t('aboutLink.emptyAddress')}}</span>
+				<span style="position: absolute;right: 166px;top: 350px;" class="is-danger" v-if="websites[7].websiteAddress && !isAddressSeven">{{$t('aboutLink.emptyAddress')}}</span>
 			</li>
 			</li>
 		</ul>
