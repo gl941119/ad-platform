@@ -27,7 +27,7 @@
                 font-family: PingFangSC-Regular;
                 color: rgba(96, 98, 102, 1);
                 line-height: 20px;
-                label {
+                >label{
                     width: 120px;
                     height: 40px;
                     line-height: 40px;
@@ -38,6 +38,7 @@
                     margin-right: 15px;
                     input{
                         width: 105px;
+                        height: 38px;
                     }
                 }
                 input{

@@ -202,19 +202,23 @@
 			<h5>{{$t('aboutLink.linkInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.website')}}</label>
-				<input class="langer" :class="[errors.has('website')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWebsite')" v-validate data-vv-rules="required" name="website" :placeholder="$t('aboutLink.enterWebsite')" :disabled="disabled" v-model="newCrowdfunding.website" />
+				<input class="langer" :class="[errors.has('website')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWebsite')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="website" :placeholder="$t('aboutLink.enterWebsite')" :disabled="disabled" v-model="newCrowdfunding.website" />
 				<span class="is-danger" v-show="errors.has('website')">{{ errors.first('website') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('aboutLink.whitePaper')}}</label>
-				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate data-vv-rules="required" name="whitePaper" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
+				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="whitePaper" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
 				<span class="is-danger" v-show="errors.has('whitePaper')">{{ errors.first('whitePaper') }}</span>
 			</li>
-			<li class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
-				<label class="label">
-					<input :placeholder="$t('aboutLink.enterWebsiteName')" :disabled="disabled" v-model="websites[index].websiteName" >
-				</label>
-				<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
+			<li>
+				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
+					<label class="label">
+						<input :placeholder="$t('aboutLink.enterWebsiteName')" :disabled="disabled" v-model="websites[index].websiteName" >
+					</label>
+					<input class="langer" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
+				</div>
+				<!--<span class="is-danger">网址验证</span>-->
+			</li>
 			</li>
 		</ul>
 		<div class="submit_box">

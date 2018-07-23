@@ -99,7 +99,7 @@
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
-				authStatus:this.$store.state.authStatus || Cache.getSession('bier_auth'),
+				authStatus:'',
 			}
 		},
 		computed: {
@@ -125,7 +125,9 @@
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res);
 					this.balance = res.data.balance;
+					this.authStatus = res.data.authStatus;
 				})
 			},
 			revenueData() {
@@ -162,17 +164,17 @@
 			withdraw() {
 				var value = this.authStatus;
 				switch(value){
-					case '0':
+					case 0:
 						this.$message(this.$t('messageNotice.noAuth'))
 						break;
-					case '1':
+					case 1:
 						this.withdrawView = !this.withdrawView;
 						this.money = '';
 						break;
-					case '2':
+					case 2:
 						this.$message(this.$t('messageNotice.onAuth'))
 						break;
-					case '3':
+					case 3:
 						this.$message(this.$t('messageNotice.refuseAuth'))
 						break;
 				}
