@@ -24,16 +24,16 @@
             <div class="crowdsale-detail-label-left">
                 <div class="crowdsale-detail-label-left-title">{{$t('crowdFunding.concept')}}</div>
                 <div class="crowdsale-detail-label-left-list">
-                    <div class="crowdsale-detail-label-left-list-tap">
+                    <div v-if="detailData.concept1Id" class="crowdsale-detail-label-left-list-tap">
                         <span>{{detailData.concept1Id}}</span>
                     </div>
-                    <div class="crowdsale-detail-label-left-list-tap">
+                    <div v-if="detailData.concept2Id" class="crowdsale-detail-label-left-list-tap">
                         <span>{{detailData.concept2Id}}</span>
                     </div>
-                    <div class="crowdsale-detail-label-left-list-tap">
+                    <div v-if="detailData.concept3Id" class="crowdsale-detail-label-left-list-tap">
                         <span>{{detailData.concept3Id}}</span>
                     </div>
-                    <div class="crowdsale-detail-label-left-list-tap">
+                    <div v-if="detailData.concept4Id" class="crowdsale-detail-label-left-list-tap">
                         <span>{{detailData.concept4Id}}</span>
                     </div>
                 </div>
@@ -52,10 +52,10 @@
             <div class="crowdsale-detail-label-middle">
                 <div class="crowdsale-detail-label-middle-title">{{$t('crowdFunding.technology')}}</div>
                 <div class="crowdsale-detail-label-middle-list">
-                    <div class="crowdsale-detail-label-middle-list-tap">
+                    <div v-if="detailData.technology1" class="crowdsale-detail-label-middle-list-tap">
                         <span>{{detailData.technology1}}</span>
                     </div>
-                    <div class="crowdsale-detail-label-middle-list-tap">
+                    <div v-if="detailData.technology2" class="crowdsale-detail-label-middle-list-tap">
                         <span>{{detailData.technology2}}</span>
                     </div>
                 </div>

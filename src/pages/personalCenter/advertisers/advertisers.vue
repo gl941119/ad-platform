@@ -477,7 +477,9 @@
 							type: 'post',
 							flag: true,
 						}).then(res => {
-							this.queryDetails();
+							this.$router.push({
+								name: 'adserving',
+							});
 							this.$message({
 								message:this.$t('messageNotice.changeSuccess'),
 								type:'success'
