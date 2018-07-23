@@ -24,9 +24,9 @@
 				</el-table-column>
 				<el-table-column prop="city" :label="$t('initiated.status')">
 					<template slot-scope="scope">
-						<div v-if="scope.row.isCheck==0">{{$t('initiated.review')}}</div>
-						<div v-if="scope.row.isCheck==1">{{$t('initiated.over')}}</div>
-						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}-<a class="change" @click="openDetail(scope.row.id,1)">{{$t('buttonAll.change')}}</a></div>
+						<div v-if="scope.row.isCheck==0" @click="openDetail(scope.row.id,0)">{{$t('initiated.review')}}</div>
+						<div v-if="scope.row.isCheck==1" @click="openDetail(scope.row.id,1)">{{$t('initiated.over')}}</div>
+						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}-<a class="change" @click="openDetail(scope.row.id,2)">{{$t('buttonAll.change')}}</a></div>
 					</template>
 				</el-table-column>
 				<el-table-column prop="updateTime" :label="$t('initiated.statusUpdate')">

@@ -38,17 +38,20 @@
 								<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.operating')">
+						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
 							<template slot-scope="scope">
 								<i @click="addCore" class="custom-element-icon-jia-copy"></i>
 								<i @click="deletedCore(scope.$index)" class="custom-element-icon-jian1"></i>
 							</template>
 						</el-table-column>
 					</el-table>
-					<div slot="footer" class="dialog-footer">
-						<el-button :disabled="disabled" @click="saveLink">{{$t('buttonAll.save')}}</el-button>
-						<el-button :disabled="disabled" @click="addLink">{{$t('buttonAll.add')}}</el-button>
-						<el-button :disabled="disabled" @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
+					<div slot="footer" v-if="!disabled" class="dialog-footer">
+						<el-button @click="saveLink">{{$t('buttonAll.save')}}</el-button>
+						<el-button @click="addLink">{{$t('buttonAll.add')}}</el-button>
+						<el-button @click="deletedLink">{{$t('buttonAll.delete')}}</el-button>
+					</div>
+					<div slot="footer" v-if="disabled" class="dialog-footer">
+						<el-button @click="centerDialogVisible = false">{{$t('buttonAll.confirm')}}</el-button>
 					</div>
 				</el-dialog>
 			</div>
@@ -76,17 +79,20 @@
 								<el-input :disabled="disabled" v-model="scope.row.desc"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.operating')">
+						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
 							<template slot-scope="scope">
 								<i @click="addConsultant" class="custom-element-icon-jia-copy"></i>
 								<i @click="deletedConsultant(scope.$index)" class="custom-element-icon-jian1"></i>
 							</template>
 						</el-table-column>
 					</el-table>
-					<div slot="footer" class="dialog-footer">
-						<el-button :disabled="disabled" @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
-						<el-button :disabled="disabled" @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
-						<el-button :disabled="disabled" @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
+					<div slot="footer" v-if="!disabled" class="dialog-footer">
+						<el-button @click="saveLinkConsultant">{{$t('buttonAll.save')}}</el-button>
+						<el-button @click="addLinkConsultant">{{$t('buttonAll.add')}}</el-button>
+						<el-button @click="deletedLinkConsultant">{{$t('buttonAll.delete')}}</el-button>
+					</div>
+					<div slot="footer" v-if="disabled" class="dialog-footer">
+						<el-button @click="CrowdTeamDialogVisible = false">{{$t('buttonAll.confirm')}}</el-button>
 					</div>
 				</el-dialog>
 			</div>
@@ -104,12 +110,12 @@
 			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.concept')}}</label>
 				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
-				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
+				<i v-if="!disabled" class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label >{{$t('projectInfo.technology')}}</label>
 				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
-				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
+				<i v-if="!disabled" class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label >{{$t('aboutLink.website')}}</label>
@@ -210,7 +216,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.dataTime')}}</label>
 				<div v-if="disabled">
-					<span>{{details.startTime}}</span> ~ <span>{{details.endTime}}</span>
+					<span>{{details.startTime | cal}}</span> ~ <span>{{details.endTime |cal }}</span>
 				</div>
 				<div v-if="!disabled" >
 					<el-date-picker v-model="timeInterval" type="datetimerange" :range-separator="$t('tokenInfo.to')" :start-placeholder="$t('tokenInfo.startTime')" :end-placeholder="$t('tokenInfo.endTime')">
@@ -232,7 +238,7 @@
 						:headers="requestToken"
 						:limit="1"
 						accept=".jpg,.jpeg,.png,,.pdf"
-						:on-remove="handleRemove" multiple>
+						 multiple>
 						<el-button size="small">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>
 				</div>
@@ -314,10 +320,17 @@
 			queryDetails() {
 				var id = this.$route.params.id;
 				var value = this.$route.params.value;
-				if(value == 1) {
-					this.disabled = false;
-				} else {
-					this.disabled = true;
+				this.isCheck = value;
+				switch(value){
+					case '0':
+						this.disabled = true;//不允许修改
+						break;
+					case '1':
+						this.disabled = true;
+						break;
+					case '2':
+						this.disabled = false;
+						break;
 				}
 				Request({
 					url: 'QueryCrowdfundingDetails',
@@ -327,7 +340,6 @@
 					type: 'get'
 				}).then(res => {
 					this.details = res.data;
-					this.isCheck = res.data.isCheck;
 					let {
 						concept1Id,
 						concept2Id,

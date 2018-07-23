@@ -40,7 +40,7 @@
 								<el-input :placeholder="$t('team.enterDesc')" v-model="scope.row.desc"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.operating')">
+						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
 							<template slot-scope="scope">
 								<i @click="addCore" class="custom-element-icon-jia-copy"></i>
 								<i @click="deletedCore(scope.$index)" class="custom-element-icon-jian1"></i>
@@ -81,7 +81,7 @@
 								<el-input :placeholder="$t('team.enterDesc')" v-model="scope.row.desc"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.operating')">
+						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
 							<template slot-scope="scope">
 								<i @click="addConsultant" class="custom-element-icon-jia-copy"></i>
 								<i @click="deletedConsultant(scope.$index)" class="custom-element-icon-jian1"></i>
@@ -112,12 +112,12 @@
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.concept')}}</label>
 				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
-				<i class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
+				<i v-if="isCheck != 1 && isCheck != 3" class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<label>{{$t('projectInfo.technology')}}</label>
 				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
-				<i class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
+				<i v-if="isCheck != 1 && isCheck != 3" class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
 			</li>
 		</ul>
 		<!--概念-->
@@ -270,20 +270,19 @@
 			var value = this.$route.params.value;
 			this.isCheck = value;
 			switch(value){
-				case '-1':
-					this.disabled = false;
-					break;
 				case '0':
 					this.queryDetails();
-					this.disabled = false;
 					break;
 				case '1':
 					this.queryDetails();
-					this.disabled = true;
+					this.disabled = true;//不允许修改
 					break;
 				case '2':
-					this.disabled = false;
 					this.queryDetails();
+					break;
+				case '3':
+					this.queryDetails();
+					this.disabled = true;//不允许修改
 					break;
 			}
 		},

@@ -25,7 +25,23 @@ Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 })
+//时间转换
+Vue.filter('cal', function(input) {
+  if(input==""){
 
+    return "";
+  }else{
+    var d = new Date(input);
+    var year = d.getFullYear();
+    var monthT = d.getMonth() + 1;
+    var month = monthT < 10 ? '0' + monthT : '' + monthT;
+    var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
+    /*  var hour = d.getHours();
+        var minutes = d.getMinutes();
+        var seconds = d.getSeconds();*/
+    return year + '-' + month + '-' + day;
+  }
+});
 router.beforeEach((to, from, next) => {
     let token = store.state.token || Cache.getSession('bier_token');
 
