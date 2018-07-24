@@ -66,3 +66,14 @@
 .withdraw_item_li .el-input--suffix .el-input__inner{
     text-align: right;
 }
+//icon position
+.settings_box .el-collapse-item__header{
+    position: relative;
+    font-size: 16px;
+    color: #606266;
+}
+//icon size open
+.settings_box .el-collapse-item__header .el-collapse-item__arrow {
+    font-size: 22px; 
+    color: #999999;  
+}

@@ -4,7 +4,12 @@
 			<div class="title">{{$t('setting.setInfo')}}</div>
 			<div class="settings_box">
 				<el-collapse class="top" v-model="activeName" accordion>
-					<el-collapse-item :title="$t('setting.headUrl')" name="1">
+					<el-collapse-item  name="1">
+						<template slot="title">
+						      {{$t('setting.headUrl')}}
+						      <i class="custom-element-icon-duihao1 icons"></i>
+						      <i v-if="existImg" class="custom-element-icon-duihao1 icons green"></i>
+						</template>
 						<div>
 							<div class="el-collapse-item__content">
 								<div class="el-collapse-item__content_img">
@@ -18,7 +23,12 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item :title="$t('setting.nickname')" name="2">
+					<el-collapse-item name="2">
+						<template slot="title">
+						      {{$t('setting.nickname')}}
+						      <i class="custom-element-icon-duihao1 icons"></i>
+						      <i v-if="existNickname" class="custom-element-icon-duihao1 icons green"></i>
+						</template>
 						<div class="el-collapse-item__content">
 							<div class="el-collapse-item__content-box">
 								<h3>{{$t('setting.changeNickname')}}</h3>
@@ -31,7 +41,12 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item :title="$t('setting.email')" name="3">
+					<el-collapse-item name="3">
+						<template slot="title">
+						      {{$t('setting.email')}}
+						      <i class="custom-element-icon-duihao1 icons"></i>
+						      <i v-if="existEmail" class="custom-element-icon-duihao1 icons green"></i>
+						</template>
 						<div class="el-collapse-item__content">
 							<div class="el-collapse-item__content-box">
 								<h3>{{$t('setting.bindEmail')}}</h3>
@@ -54,7 +69,12 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item :title="$t('passwordInfo.passwords')" name="4">
+					<el-collapse-item name="4">
+						<template slot="title">
+						      {{$t('passwordInfo.passwords')}}
+						      <i class="custom-element-icon-duihao1 icons"></i>
+						      <i v-if="existPassword" class="custom-element-icon-duihao1 icons green"></i>
+						</template>
 						<div class="el-collapse-item__content">
 							<div class="el-collapse-item__content-box">
 								<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
@@ -84,7 +104,12 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item :title="$t('passwordInfo.tradePassword')" name="5">
+					<el-collapse-item name="5">
+						<template slot="title">
+						      {{$t('passwordInfo.tradePassword')}}
+						      <i class="custom-element-icon-duihao1 icons"></i>
+						      <i v-if="existTradePassword" class="custom-element-icon-duihao1 icons green"></i>
+						</template>
 						<div class="el-collapse-item__content">
 							<div v-if="!existTradePassword" class="el-collapse-item__content-box">
 								<h3>{{$t('passwordInfo.setTradePassword')}}</h3>
@@ -133,7 +158,12 @@
 							</div>
 						</div>
 					</el-collapse-item>
-					<el-collapse-item title="Telegram" class="border-none" name="6">
+					<el-collapse-item class="border-none" name="6">
+						<template slot="title">
+						    {{$t('setting.telegram')}}
+						    <i class="custom-element-icon-duihao1 icons"></i>
+						    <i v-if="isBindTelegram" class="custom-element-icon-duihao1 icons green"></i>
+						</template>
 						<div class="el-collapse-item__content">
 							<ul class="el-collapse-item__content_item">
 								<!-- <li class="el-collapse-item__content_item_li">新浪微博
@@ -175,7 +205,12 @@
 		</el-dialog>
 		<div class="settings_box">
 			<el-collapse class="top" v-model="active" accordion>
-				<el-collapse-item class="border-none" :title="$t('setting.fillInformation')" name="1">
+				<el-collapse-item class="border-none" name="1">
+					<template slot="title">
+					    {{$t('setting.fillInformation')}}
+					    <i class="custom-element-icon-duihao1 icons"></i>
+						<i v-if="authStatus == 1" class="custom-element-icon-duihao1 icons green"></i>
+					</template>
 						<ul class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
@@ -224,7 +259,15 @@
 								</div>
 							</li>
 						</ul>
-						<button class="commit" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
+						<div class="withdraw" v-if="authStatus != 0">
+							<div class="withdraw_box" style="text-align: center;width: 400px;height: 200px;">
+								<p class="notic"><i class="custom-element-icon-questionsign"></i><span>提示</span></p>
+								<p class="notic" v-if="authStatus == 2">身份认证已提交申请，正在审核</p>
+								<p class="notic" v-if="authStatus == 3">身份认证未通过审核，请知悉</p>
+								<button class="commit" style="margin: 0;" @click="close">确认</button>
+							</div>
+						</div>
+						<button class="commit" v-if="authStatus != 1" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
 				</el-collapse-item>
 			</el-collapse>
 		</div>
@@ -282,10 +325,12 @@
 				numTradePassword: 60,
 				imgData: Config.headPortrait,
 				imgsrc: this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5],
-				existEmail: true,
-				existPassword: true,
-				existTradePassword: true,
-                isBindTelegram: true,
+				existEmail: false,
+				existPassword: false,
+				existTradePassword: false,
+                isBindTelegram: false,
+                existImg:'',
+                existNickname:'',
                 authStatus:'',
                 uploadImg: Config.UploadImg,
                 requestToken: {
@@ -304,6 +349,9 @@
 			this.info();
 		},
 		methods: {
+			close(){
+				this.active = '';
+			},
 			cnacle(){
 				this.activeName = '';
 				this.oldPassword = '';
@@ -323,12 +371,15 @@
 					url: 'QuerySettings',
 					type: 'get',
 				}).then(res => {
+					console.log(res);
 					this.authStatus = res.data.authStatus;
 					this.bindEmail = res.data.Email;
 					this.existEmail = res.data.existEmail;
 					this.existPassword = res.data.existPassword;
 					this.existTradePassword = res.data.existTradePassword;
 					this.isBindTelegram = res.data.isBindTelegram;
+					this.existImg = res.data.nickname;
+					this.existNickname = res.data.heardUrl;
 				})
             },
             // telegram 绑定回调
@@ -361,9 +412,10 @@
 								message:this.$t('messageNotice.setSuccess'),
 								type:'success'
 							});
-							this.oncePassword = '';
+							this.info();
+							/*this.oncePassword = '';
 							this.newPassword = '';
-							this.codePassword = '';
+							this.codePassword = '';*/
 						})
 					} else {
 						this.$message({
@@ -394,9 +446,10 @@
 								message:this.$t('messageNotice.setTradePassword'),
 								type:'success'
 							});
-							this.codeTradePassword = '';
+							this.info();
+							/*this.codeTradePassword = '';
 							this.onceSetTradePassword = '';
-							this.tradePassword = '';
+							this.tradePassword = '';*/
 						})
 					} else {
 						this.$message({
@@ -425,6 +478,7 @@
 							message:this.$t('messageNotice.changeSuccess'),
 							type:'success'
 						});
+						this.info();
 				})
 			},
 			getCode() {
@@ -525,10 +579,11 @@
 								message:this.$t('messageNotice.changeSuccess'),
 								type:'success'
 							});
-							this.newTradePassword = '';
+							this.info();
+							/*this.newTradePassword = '';
 							this.oldTradePassword = '';
 							this.onceTradePassword = '';
-							this.codeTradePassword = '';
+							this.codeTradePassword = '';*/
 						})
 					} else {
 						this.$message({
@@ -556,10 +611,11 @@
 						type: 'post',
 						flag: true
 					}).then(res => {
-						this.oldPassword = '';
+						this.info();
+						/*this.oldPassword = '';
 						this.newPassword = '';
 						this.codePassword = '';
-						this.oncePassword = '';
+						this.oncePassword = '';*/
 						this.out();
 					})
 				} else {
@@ -632,6 +688,7 @@
 	                            message: this.$t('messageNotice.changeSuccess'), 
 	                            type: 'success'
 	                        });
+	                        this.info();
 						}).catch(e => {
 	                        console.error('change nickname error_>', e);
 	                    })
@@ -662,15 +719,16 @@
 					type: 'post',
 					flag: true
 				}).then(res => {
-						this.country = '';
+						/*this.country = '';
 						this.idType = '';
 						this.idNum = '';
 						this.realName = '';
-						this.imageUrl = '';
+						this.imageUrl = '';*/
 						this.$message({
 							message:this.$t('messageNotice.certificationSuccess'),
 							type:'success'
 						});
+						this.info();
 				})
 			},
 			name(){
@@ -691,6 +749,9 @@
 </script>
 
 <style lang="scss" scoped>
+	@import '../../../assets/css/global.scss';
+	@import '../../../assets/css/variable.scss';
+	@import '../../../assets/css/withdraw.scss';
 	.accountSettings {
 		padding: 0 28px;
 		&_content {
@@ -905,5 +966,25 @@
 	}
 	.top{
 		border: 0;
+	}
+	.notic{
+		text-align: center;
+		font-size: 18px;
+		color:rgba(102,102,102,1);
+		margin: 10px 0 20px;
+	}
+	.notic:first-child{
+		font-size: 24px;
+		color:rgba(51,51,51,1);
+		margin: 0;
+	}
+	.icons{
+		position: absolute;
+	    right: 35px;
+	    font-size: 18px;
+		color: #999999;
+	}
+	.green{
+		color: #2a9c2b;
 	}
 </style>

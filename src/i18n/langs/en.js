@@ -157,7 +157,7 @@ const en = {
 		getEmailCode:'获取邮箱验证码',
 		once:'后重试',
 		enterEmailCode:'请输入邮箱验证码',
-		telegram:'Telegram',
+		telegram:'绑定Telegram',
 		binded:'已绑定',
 		goBind:'去绑定',
 		authentication:'身份验证',
