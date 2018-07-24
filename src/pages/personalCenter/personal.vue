@@ -99,8 +99,12 @@
 				this.$store.commit('setUserName', undefined);
 				this.$store.commit('setUserNickName', undefined);
                 this.$store.commit('setToken', undefined);
+                this.$store.commit('setHeardUrl', undefined);
+                this.$store.commit('setAuth', undefined);
                 Cache.removeSession('bier_username');
                 Cache.removeSession('bier_token');
+                Cache.removeSession('bier_auth');
+                Cache.removeSession('bier_heardUrl');
                 Cache.removeSession('bier_userid');
 				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
             },

@@ -211,7 +211,7 @@
 					    <i class="custom-element-icon-duihao1 icons"></i>
 						<i v-if="authStatus == 1" class="custom-element-icon-duihao1 icons green"></i>
 					</template>
-						<ul class="el-collapse-item__content_authentication">
+						<ul v-if="authStatus!=1" class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
 								<input class="el-collapse-item__content_authentication_li_info" @blur="name" v-model="realName" />
@@ -259,15 +259,19 @@
 								</div>
 							</li>
 						</ul>
-						<div class="withdraw" v-if="authStatus != 0">
+						<div class="withdraw" v-if="authStatus == 2 && authStatus == 3">
 							<div class="withdraw_box" style="text-align: center;width: 400px;height: 200px;">
-								<p class="notic"><i class="custom-element-icon-questionsign"></i><span>提示</span></p>
+								<p class="notic"><i class="custom-element-icon-weibiaoti1psd"></i><span class="noticText">提示</span></p>
 								<p class="notic" v-if="authStatus == 2">身份认证已提交申请，正在审核</p>
 								<p class="notic" v-if="authStatus == 3">身份认证未通过审核，请知悉</p>
 								<button class="commit" style="margin: 0;" @click="close">确认</button>
 							</div>
 						</div>
 						<button class="commit" v-if="authStatus != 1" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
+					<div v-if="authStatus == 1">
+						<p class="notic"><i class="custom-element-icon-shenfenrenzheng auth"></i><span class="noticText">提示</span></p>
+						<p class="notic">身份认证提交资料已成功通过审核</p>
+					</div>
 				</el-collapse-item>
 			</el-collapse>
 		</div>
@@ -371,7 +375,6 @@
 					url: 'QuerySettings',
 					type: 'get',
 				}).then(res => {
-					console.log(res);
 					this.authStatus = res.data.authStatus;
 					this.bindEmail = res.data.Email;
 					this.existEmail = res.data.existEmail;
@@ -724,10 +727,10 @@
 						this.idNum = '';
 						this.realName = '';
 						this.imageUrl = '';*/
-						this.$message({
+						/*this.$message({
 							message:this.$t('messageNotice.certificationSuccess'),
 							type:'success'
-						});
+						});*/
 						this.info();
 				})
 			},
@@ -969,20 +972,29 @@
 	}
 	.notic{
 		text-align: center;
-		font-size: 18px;
+		font-size: 16px;
 		color:rgba(102,102,102,1);
 		margin: 10px 0 20px;
 	}
 	.notic:first-child{
-		font-size: 24px;
+		font-size: 21px;
 		color:rgba(51,51,51,1);
 		margin: 0;
+	}
+	.noticText{
+		display: inline-block;
+		margin-left: 5px;
+		font-size: 20px;
 	}
 	.icons{
 		position: absolute;
 	    right: 35px;
 	    font-size: 18px;
 		color: #999999;
+	}
+	.auth{
+		font-size: 24px;
+		color: #FF9500;
 	}
 	.green{
 		color: #2a9c2b;
