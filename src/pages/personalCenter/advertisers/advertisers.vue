@@ -145,7 +145,7 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
 				<div>
-					<conceptCom @listenCondept="listenCondept"></conceptCom>
+					<conceptCom :id = "conceptId" @listenCondept="listenCondept"></conceptCom>
 				</div>
 			</div>
 		</div>
@@ -273,6 +273,7 @@
 				website:[{},{},{},{},{},{},{},{}],
 				checkedData: [],
 				concept: false,
+				conceptId:[],
 				technology: false,
 				imageUrl: '', //logo地址
 				conceptDatas: '',
@@ -471,13 +472,16 @@
 						technologyArr.push(res.data.technology2);
 					}
 					var arr = [];
+					var concept = [];
 					if(res.data.conceptResultList){
 						res.data.conceptResultList.forEach(function(item,index){
 							arr.push(item.name);
+							concept.push(item.id);
 						})
 					}
 					this.conceptResultList = res.data.conceptResultList;
-					this.conceptDatas = arr.join('-')
+					this.conceptDatas = arr.join('-');
+					this.conceptId = concept;
 					this.technologyDatas = technologyArr.join('-');
 					var that = this;
 					if(res.data.websiteResultList.length>0){

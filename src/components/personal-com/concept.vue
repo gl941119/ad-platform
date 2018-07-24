@@ -9,14 +9,14 @@
 <script>
 	import Request from '../../utils/require.js';
 	export default {
-		props:["listenCondept"],
+		props:["listenCondept",'id'],
 		data() {
 			return {
 				concept: [],
 				checkedData: [],
 			}
 		},
-		mounted() {
+		created(){
 			this.conceptData();
 		},
 		methods: {
@@ -25,11 +25,19 @@
 					url: 'QueryConcept',
 					type: 'get'
 				}).then(res => {
-					res.data.forEach(item => {
-						item.isSelected = false;
-					})
+					this.lightConcept(res.data);
 					this.concept = res.data;
 				})
+			},
+			lightConcept(data){
+				data.forEach((item, index) => {
+					item.isSelected = false;
+					let flag = this.id.find(id => item.id == id);
+					if(flag){
+						item.isSelected = true;
+						this.checkedData.push(item);
+					}
+				});
 			},
 			checked(item, index) {
 				var length = this.checkedData.length;

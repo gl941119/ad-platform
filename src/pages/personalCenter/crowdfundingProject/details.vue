@@ -151,7 +151,7 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
 				<div>
-					<conceptCom @listenCondept="listenCondept"></conceptCom>
+					<conceptCom :id="conceptId" @listenCondept="listenCondept"></conceptCom>
 				</div>
 			</div>
 		</div>
@@ -331,8 +331,10 @@
 				multipleSelection: [],
 				timeInterval: [],
 				concept: false,
+				conceptData:[],
 				technology: false,
 				conceptDatas: '',
+				conceptId:[],
 				technologyDatas: '',
 				checkeData: [],
 				util: new Utils(),
@@ -356,6 +358,26 @@
 			this.queryDetails();
 		},
 		methods: {
+			concepts() {
+				Request({
+					url: 'QueryConcept',
+					type: 'get'
+				}).then(res => {
+					this.lightConcept(res.data);
+				})
+			},
+			lightConcept(data){
+				var concept = [];
+				data.forEach((item, index) => {
+					item.isSelected = false;
+					let flag = this.conceptId.find(id => item.id == id);
+					if(flag){
+						concept.push(item.name);
+					}
+				});
+				this.conceptDatas = concept.join('-');
+				console.log(this.conceptDatas)
+			},
 			queryDetails() {
 				var id = this.$route.params.id;
 				var value = this.$route.params.value;
@@ -392,7 +414,8 @@
 					if(res.data.concept4Id){
 						concept.push(res.data.concept4Id);
 					}
-					this.conceptDatas = concept.join('-');
+					this.conceptId = concept;
+					this.concepts();
 					var technologyArr = [];
 					if(res.data.technology1) {
 						technologyArr.push(res.data.technology1);
