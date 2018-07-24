@@ -379,13 +379,20 @@
 					type: 'get'
 				}).then(res => {
 					this.details = res.data;
-					let {
-						concept1Id,
-						concept2Id,
-						concept3Id,
-						concept4Id,
-					} = res.data;
-					this.conceptDatas = [concept1Id, concept2Id, concept3Id, concept4Id].join('-');
+					var concept = [];
+					if(res.data.concept1Id){
+						concept.push(res.data.concept1Id);
+					}
+					if(res.data.concept2Id){
+						concept.push(res.data.concept2Id);
+					}
+					if(res.data.concept3Id){
+						concept.push(res.data.concept3Id);
+					}
+					if(res.data.concept4Id){
+						concept.push(res.data.concept4Id);
+					}
+					this.conceptDatas = concept.join('-');
 					var technologyArr = [];
 					if(res.data.technology1) {
 						technologyArr.push(res.data.technology1);
