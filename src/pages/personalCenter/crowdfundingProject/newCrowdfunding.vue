@@ -503,12 +503,10 @@
 				this.technologyDatas = technologyArr.join('-');
 			},
 			getImg(res, file) {
-				console.log(res)
 				this.imageUrl = res.data;
 				this.img = false;
 			},
 			imgError(){
-				console.log(1);
 				this.$message('上传失败');
 			},
 			handleRemove(file, fileList) {
