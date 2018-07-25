@@ -1,22 +1,32 @@
 <template>
     <el-dialog :title="$t('share.shareTiltle')" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
-            <p class="show-share-title">{{$t('share.shareOne')}}{{$t('share.shareTwo')}}</p>
-            <p class="show-share-title">http://www.afdchain.com</p>
+            <p class="show-share-title"><!-- {{$t('share.shareOne')}}{{$t('share.shareTwo')}} -->
+                点击挖矿，分享成为矿场主！
+            </p>
+            <p class="show-share-title" id="show-share-title" style="opacity: 0;">http://www.afdchain.com/?inviteCode={{inviteCode}}</p>
             <div class="show-share-btn">
-                <el-button class="show-share-btn-text" size="mini" @click="clickCopy('thisDiv')">{{$t('share.shareCopy')}}</el-button>
+                <el-button class="show-share-btn-text" size="mini" @click="clickCopy('show-share-title')">{{$t('share.shareCopy')}}</el-button>
             </div>
         </div>
     </el-dialog>
 </template>
 <script>
+    import Request from '../../utils/require.js';
+    import Cache from '../../utils/cache';
+    import Config from '../../utils/config.js';
 	import Utils from '../../utils/util.js';
+    
+
     export default {
         data() {
             return {
             	utils: new Utils(),
+                accountId:this.$store.state.id || Cache.getSession('bier_userid'),
+                inviteCode:''
             }
         },
+
         computed: {
             dialogVisible: {
                 get(){
@@ -27,14 +37,30 @@
                 }
             }
         },
+        mounted(){
+            this.queryCode()
+        },
         methods: {
         	clickCopy(value){
+                console.log(this.inviteCode)
         		this.utils.copy(value);
         		this.$message({
         			message: this.$t('messageNotice.copy'),
         			type:'success'
         		});
-        	}
+        	},
+            queryCode() {//请求邀请码
+                console.log('123')  
+                Request({
+                    url: 'QueryInviteCode',
+                    data: {
+                        accountId: this.accountId,
+                    },
+                    type: 'get'
+                }).then(res => {
+                    this.inviteCode = res.data.inviteCode;
+                })
+            }
         }
     }
 </script>
