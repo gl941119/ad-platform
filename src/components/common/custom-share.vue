@@ -1,8 +1,8 @@
 <template>
     <el-dialog :title="$t('share.shareTiltle')" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
-            <p class="show-share-title"><!-- {{$t('share.shareOne')}}{{$t('share.shareTwo')}} -->
-                点击挖矿，分享成为矿场主！
+            <p class="show-share-title"> 
+            	{{$t('share.shareOne')}}
             </p>
             <p class="show-share-title" id="show-share-title" style="opacity: 0;">http://www.afdchain.com/?inviteCode={{inviteCode}}</p>
             <div class="show-share-btn">

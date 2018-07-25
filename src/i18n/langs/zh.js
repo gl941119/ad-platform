@@ -94,8 +94,7 @@ const zh = {
 	},
 	share:{
 		shareTiltle:'分享',
-		shareOne:'点击即挖矿  流量即币值',
-		shareTwo:'上阿凡达不上当不受骗',
+		shareOne:'点击挖矿，分享成为矿场主！',
 		shareCopy:'点我复制',
 	},
 	crowdFunding:{
@@ -175,6 +174,10 @@ const zh = {
 		noticTwo:'2.你要手持身份证，距离面部7公分',
 		noticThree:'3.进行肩部以上的手持证件照拍摄',
 		noticFour:'4.你现在使用的证件在有效期内',
+		tips:'提示',
+		review:'身份认证已提交申请，正在审核',
+		nopass:'身份认证未通过审核，请知悉',
+		pass:'身份认证提交资料已成功通过审核',
 	},
 	passwordInfo:{//更改密码、交易密码
 		passwords:'密码',
@@ -226,6 +229,7 @@ const zh = {
 	},
 	buttonAll:{
 		confirm:'确定',
+		affirm:'确认',
 		cancle:'取消',
 		submitVerification:'提交验证',
 		bind:'绑定',
@@ -266,7 +270,8 @@ const zh = {
 		revenue :'广告收益账户',
 		myWallet:'我的钱包',
 		withdrawal:'提现金额',
-		enterMoney:'请输入金额',
+		enterMoney:'请输入提现金额',
+		emptyMoney:'提现金额至少为100，且必须是100的倍数',
 		notic:'充值金额到账后，相应金额会自动出现在广告主账户中',
 	},
 	accountFlow:{
@@ -287,6 +292,12 @@ const zh = {
 		strategy:'竞价策略',
 		all:'首页（综合）',
 		prompt:'竞价策略调整将于新加坡时间次日00:00:00起生效，每天仅限调整一次',
+		currentPosition:'当前位置（位）',
+		banner:'上传banner',
+		totalnumber:'累计点击（次）',
+		stop:'数据截止到',
+		yestoday:'昨日点击（次）',
+		accountMoney:'广告账户余额',
 	},
 	projectNotic:{
 		title:'项目内容',

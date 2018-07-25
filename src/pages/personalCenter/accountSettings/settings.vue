@@ -261,16 +261,16 @@
 						</ul>
 						<div class="withdraw" v-if="authStatus == 2 && authStatus == 3">
 							<div class="withdraw_box" style="text-align: center;width: 400px;height: 200px;">
-								<p class="notic"><i class="custom-element-icon-weibiaoti1psd"></i><span class="noticText">提示</span></p>
-								<p class="notic" v-if="authStatus == 2">身份认证已提交申请，正在审核</p>
-								<p class="notic" v-if="authStatus == 3">身份认证未通过审核，请知悉</p>
-								<button class="commit" style="margin: 0;" @click="close">确认</button>
+								<p class="notic"><i class="custom-element-icon-weibiaoti1psd"></i><span class="noticText">{{$t('setting.tips')}}</span></p>
+								<p class="notic" v-if="authStatus == 2">{{$t('setting.review')}}</p>
+								<p class="notic" v-if="authStatus == 3">{{$t('setting.nopass')}}</p>
+								<button class="commit" style="margin: 0;" @click="close">{{$t('buttonAll.affirm')}}</button>
 							</div>
 						</div>
 						<button class="commit" v-if="authStatus != 1" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
 					<div v-if="authStatus == 1">
-						<p class="notic"><i class="custom-element-icon-shenfenrenzheng auth"></i><span class="noticText">提示</span></p>
-						<p class="notic">身份认证提交资料已成功通过审核</p>
+						<p class="notic"><i class="custom-element-icon-shenfenrenzheng auth"></i><span class="noticText">{{$t('setting.tips')}}</span></p>
+						<p class="notic">{{$t('setting.pass')}}</p>
 					</div>
 				</el-collapse-item>
 			</el-collapse>

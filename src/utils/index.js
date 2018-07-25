@@ -1,37 +1,37 @@
-// import Web3 from 'web3';
+  /* import Web3 from 'web3';
 
-// export function mainNetContract(abi, address) {
-// console.log('window.web3->', window.web3);
-//     // let web3;
-//     var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
-//      // if (typeof web3 !== 'undefined') {
-//      //     console.log('test');
-//      // } else {
-//      //     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-//      //     console.log('net-->');
-//      //     web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
-//      // }
+   export function mainNetContract(abi, address) {
+   console.log('window.web3->', window.web3);
+       // let web3;
+       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
+        // if (typeof web3 !== 'undefined') {
+        //     console.log('test');
+        // } else {
+        //     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+        //     console.log('net-->');
+        //     web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
+           }
 
-//     let customContract = web3.eth.contract(abi).at(address);
-//     // console.log('custom instance ->',customContract);
-//     let start = customContract.START();
-//     let days = customContract.DAYS();
-//     let raisedAmount = customContract.raisedAmount();
-//     let cap = customContract.CAP();
-//     let rate = customContract.RATE();
-//     let minContribution = customContract.minContribution();
-//     let maxContribution = customContract.maxContribution();
-//     return {
-//         startTime: start.toNumber(),
-//         sustainDay: days.toNumber(),
-//         raisedAmount: web3.fromWei(raisedAmount, 'ether').toNumber(),
-//         total: cap.toNumber(),
-//         rate: rate.toNumber(),
-//         minContribution: web3.fromWei(minContribution, 'ether').toNumber(),
-//         maxContribution: web3.fromWei(maxContribution, 'ether').toNumber(),
-//     }
-// }
-
+       let customContract = web3.eth.contract(abi).at(address);
+       // console.log('custom instance ->',customContract);
+       let start = customContract.START();
+       let days = customContract.DAYS();
+       let raisedAmount = customContract.raisedAmount();
+       let cap = customContract.CAP();
+       let rate = customContract.RATE();
+       let minContribution = customContract.minContribution();
+       let maxContribution = customContract.maxContribution();
+       return {
+           startTime: start.toNumber(),
+           sustainDay: days.toNumber(),
+           raisedAmount: web3.fromWei(raisedAmount, 'ether').toNumber(),
+           total: cap.toNumber(),
+           rate: rate.toNumber(),
+           minContribution: web3.fromWei(minContribution, 'ether').toNumber(),
+           maxContribution: web3.fromWei(maxContribution, 'ether').toNumber(),
+       }
+   }
+*/
 
 
 

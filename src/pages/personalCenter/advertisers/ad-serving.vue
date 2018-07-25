@@ -34,34 +34,34 @@
 						</el-dialog>
 					</li>
 					<li class="ad-serving-info-top-item-li">
-						<h5>当前位置（位）</h5>
+						<h5>{{$t('adServing.currentPosition')}}</h5>
 						<div class="ad-serving-info-top-item-li-data">32</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button type="text" @click="dialogTableVisible = true">上传banner</el-button>
+							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.banner')}}</el-button>
 						</div>
 					</li>
 					<li class="ad-serving-info-top-item-li">
-						<h5>雷杰点击（次）</h5>
+						<h5>{{$t('adServing.totalnumber')}}</h5>
 						<div class="ad-serving-info-top-item-li-data">32,234,889</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button type="text" @click="dialogTableVisible = true">数据截止到20180519</el-button>
+							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.stop')}}20180519</el-button>
 						</div>
 					</li>
 					<li class="ad-serving-info-top-item-li">
-						<h5>昨日点击（次）</h5>
+						<h5>{{$t('adServing.yestoday')}}</h5>
 						<div class="ad-serving-info-top-item-li-data">5799</div> 
 						<!--<div> 
 							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
 						</div>-->
 					</li>
 					<li class="ad-serving-info-top-item-li">
-						<h5>广告账户余额（AFDT）</h5>
+						<h5>{{$t('adServing.yestoday')}}(AFDT)</h5>
 						<div class="ad-serving-info-top-item-li-data last">
 							<p class="balance">189.99AFDT</p>
 							<p class="balance">1000 point</p>
 						</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button class="button" type="primary" size="small" @click="dialogTableVisible = true">充值</el-button>
+							<el-button class="button" type="primary" size="small" @click="dialogTableVisible = true">{{$t('project.recharge')}}</el-button>
 						</div>
 					</li>
 				</ul>

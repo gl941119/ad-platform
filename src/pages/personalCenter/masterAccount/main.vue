@@ -39,7 +39,10 @@
 					<button @click="mainData" class="search">{{$t('accountFlow.search')}}</button>
 				</div>
 			</div>
-			<el-table :data="flowData" style="width: 100%">
+			<el-tabs type="border-card">
+			  <el-tab-pane value='1'>
+			    <span slot="label">充值记录</span>
+			    <el-table :data="flowData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
@@ -55,9 +58,44 @@
 				</el-table-column>
 			</el-table>
 			<div class="advertising_revenu_account_flow_data_pages">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40, 50]" :page-size="size" layout="sizes, prev, pager, next, jumper" :total="total">
+				<el-pagination 
+					background
+					@current-change="handleCurrent" 
+					:current-page="current" 
+					:page-size="size" 
+					layout="prev, pager, next" 
+					:total="total">
 				</el-pagination>
 			</div>
+			  </el-tab-pane>
+			  <el-tab-pane value='2' label="消费记录">
+			  	<el-table :data="flowDatas" style="width: 100%">
+				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+				</el-table-column>
+				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
+				</el-table-column>
+				<el-table-column :label="$t('accountFlow.flowDirection')">
+					<template slot-scope="scope">
+						<div v-if="scope.row.flowType == 1">
+							提现
+						</div>
+					</template>
+				</el-table-column>
+				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+				</el-table-column>
+			</el-table>
+			<div class="advertising_revenu_account_flow_data_pages">
+				<el-pagination 
+					background
+					@current-change="handleCurrentChange" 
+					:current-page="currentPage" 
+					:page-size="size" 
+					layout="prev, pager, next" 
+					:total="totals">
+				</el-pagination>
+			</div>
+			  </el-tab-pane>
+			</el-tabs>
 		</div>
 	</div>
 </template>
@@ -69,20 +107,23 @@
 		data() {
 			return {
 				flowData: [],
+				flowDatas: [],
 				balance: '',
 				currentPage: 1,
-				size: 30,
+				current: 1,
+				size: 5,
 				total: 0,
+				totals: 0,
 				rechargeView: false,
 				startTime: '',
 				endTime: '',
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
+				id:'',
 			}
 		},
 		mounted() {
 			this.BasicInformation();
-			this.mainData();
 		},
 		methods: {
 			close(){
@@ -97,6 +138,9 @@
 					type: 'get'
 				}).then(res => {
 					this.balance = res.data.balance;
+					this.id = res.data.id;
+					this.mainData();
+					this.mainDatas();
 				})
 			},
 			mainData() {
@@ -109,8 +153,8 @@
 				Request({
 					url: 'QueryMainAccountFlow',
 					data: {
-						mainId: this.accountId,
-						page: this.currentPage,
+						mainId: this.id,
+						page: this.current,
 						pageSize: this.size,
 						flowType: 1,
 						startTime: startTime,
@@ -122,13 +166,37 @@
 					this.total = res.total;
 				})
 			},
-			handleCurrentChange(page) {
-				this.currentPage = page;
+			mainDatas() {
+				if(this.startTime){
+					var startTime = this.util.format(this.startTime, 'yyyy-MM-dd HH:mm:ss');
+				}
+				if(this.endTime){
+					var endTime = this.util.format(this.endTime, 'yyyy-MM-dd HH:mm:ss');
+				}
+				Request({
+					url: 'QueryMainAccountFlow',
+					data: {
+						mainId: this.id,
+						page: this.currentPage,
+						pageSize: this.size,
+						flowType: 2,
+						startTime: startTime,
+						endTime: endTime
+					},
+					type: 'get'
+				}).then(res => {
+					console.log(res);
+					this.flowDatas = res.data;
+					this.totals = res.total;
+				})
+			},
+			handleCurrent(page) {
+				this.current = page;
 				this.mainData();
 			},
-			handleSizeChange(page) {
-				this.size = page;
-				this.mainData();
+			handleCurrentChange(page) {
+				this.currentPage = page;
+				this.mainDatas();
 			},
 			recharge() {
 				this.rechargeView = !this.rechargeView;

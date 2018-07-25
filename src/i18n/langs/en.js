@@ -94,8 +94,7 @@ const en = {
 	},
 	share:{
 		shareTiltle:'Share',
-		shareOne:' To gain Token by click ',
-		shareTwo:' AFDchain no cheat no fraud ',
+		shareOne:'点击挖矿，分享成为矿场主！',
 		shareCopy:'copy',
 	},
 	crowdFunding:{
@@ -175,7 +174,10 @@ const en = {
 		noticTwo:'2.You should hold your id card 7 centimeters from your face ',
 		noticThree:'3.Take photos of your hand held identification above your shoulders ',
 		noticFour:'4.The document you are using is within the validity period ',
-
+		tips:'提示',
+		review:'身份认证已提交申请，正在审核',
+		nopass:'身份认证未通过审核，请知悉',
+		pass:'身份认证提交资料已成功通过审核',
 	},
 	passwordInfo:{//更改密码、交易密码
 		passwords:'password',
@@ -227,6 +229,7 @@ const en = {
 	},
 	buttonAll:{
 		confirm:'Confirm',
+		affirm:'确认',
 		cancle:'Cancel',
 		submitVerification:'Submit verification ',
 		bind:'Bind',
@@ -266,7 +269,8 @@ const en = {
 		revenue :' Advertising revenue account ',
 		myWallet:' My wallet',
 		withdrawal:'Withdrawal',
-		enterMoney:'Please enter the amount',
+		enterMoney:'请输入提现金额',
+		emptyMoney:'提现金额至少为100，且必须是100的倍数',
 		notic:'After the recharge amount is received, the corresponding amount will automatically appear in the advertiser\'s account. ',
 		requireWithdraw:'已提交提现申请',
 	},
@@ -289,6 +293,12 @@ const en = {
 		strategy:'Bidding strategy ',
 		all:'Home',
 		prompt:'The bidding strategy adjustment will take effect from 00:00:00 the next day in Singapore time, only once a day. ',
+		currentPosition:'当前位置（位）',
+		banner:'上传banner',
+		totalnumber:'累计点击（次）',
+		stop:'数据截止到',
+		yestoday:'昨日点击（次）',
+		accountMoney:'广告账户余额',
 	},
 	projectNotic:{
 		title:'Project Description ',
