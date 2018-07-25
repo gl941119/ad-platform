@@ -4,7 +4,7 @@
 			<h3 class="invite_top_title">{{$t('invite.inviteUser')}}</h3>
 			<p class="invite_top_code">
 				<span>{{$t('invite.code')}}：</span>
-				<span id="inviteCode">{{inviteCode}}</span>
+				<span id="inviteCode"><span style="position: absolute;z-index: -1">http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
 			</p>
 			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">{{$t('share.shareCopy')}}</el-button>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
