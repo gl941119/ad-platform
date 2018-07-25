@@ -1,7 +1,7 @@
 <template>
 	<div class="concept">
 		<div class="concept-personal">
-			<el-button :class="{'button-selected': item.isSelected}" class="concept-personal-button" @click="checked(item,index)" v-for="(item, index) in concept" :key="index" size="small" round>{{item.name}}</el-button>
+			<el-button :class="{'button-selected': item.isSelected}" class="concept-personal-button" @click="checked(item,index)" v-for="(item, index) in concept" :key="index" size="small" round>{{item.name|lang}}</el-button>
 		</div>
 	</div>
 </template>
@@ -25,17 +25,19 @@
 					url: 'QueryConcept',
 					type: 'get'
 				}).then(res => {
-					this.lightConcept(res.data);
 					this.concept = res.data;
+					this.lightConcept(res.data);
 				})
 			},
 			lightConcept(data){
 				data.forEach((item, index) => {
 					item.isSelected = false;
-					let flag = this.id.find(id => item.id == id);
-					if(flag){
-						item.isSelected = true;
-						this.checkedData.push(item);
+					if(this.id != undefined){
+						let flag = this.id.find(id => item.id == id);
+						if(flag){
+							item.isSelected = true;
+							this.checkedData.push(item);
+						}
 					}
 				});
 			},

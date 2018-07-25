@@ -28,17 +28,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required" name="coreName" v-model="scope.row.name">
+								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required" name="coreName" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required" name="coreTitle" v-model="scope.row.title">
+								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required" name="coreTitle" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="coreDesc" v-model="scope.row.desc">
+								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="coreDesc" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -79,12 +79,12 @@
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required" name="consultantTitle" v-model="scope.row.title">
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required" name="consultantTitle" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" v-model="scope.row.desc">
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -357,6 +357,16 @@
 		mounted() {
 			this.queryDetails();
 		},
+		computed: {
+			slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.queryDetails();
+			}
+		},
 		methods: {
 			concepts() {
 				Request({
@@ -376,7 +386,6 @@
 					}
 				});
 				this.conceptDatas = concept.join('-');
-				console.log(this.conceptDatas)
 			},
 			queryDetails() {
 				var id = this.$route.params.id;
@@ -398,7 +407,7 @@
 					data: {
 						id: id
 					},
-					type: 'get'
+					type: 'get',
 				}).then(res => {
 					this.details = res.data;
 					var concept = [];
@@ -436,6 +445,7 @@
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res);
 					this.coreTeam = res.data;
 					this.centerDialogVisible = true;
 				})

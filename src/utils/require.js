@@ -38,11 +38,15 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     type = type.toUpperCase();
     url = ajaxURL[url];
     let token = store.state.token || Cache.getSession('bier_token');
+    let lang = store.state.slangChange || Cache.getLocal('bier_langChange');
 
     if (type === 'GET') {
         return token?axios.get(url, {
             params: data,
-            headers: {token},
+            headers: {
+            	token,
+            	lang,
+            },
         }):
         axios.get(url, {params: data});
     } else if (type === 'POST') {
@@ -51,11 +55,13 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
                     headers: {
                         'Content-Type': 'application/json',
                         token,
+                        lang
                     },
                 }) :
                 axios.post(url, data, {
                     headers: {
                         'Content-Type': 'application/json',
+                        lang
                     },
                 });
         }
