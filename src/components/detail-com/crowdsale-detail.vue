@@ -94,6 +94,7 @@
 </template>
 <script>
     import Utils from '../../utils/util.js';
+    import Cache from '../../utils/cache.js';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
