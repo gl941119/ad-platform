@@ -23,6 +23,7 @@
             return {
             	utils: new Utils(),
                 accountId:this.$store.state.id || Cache.getSession('bier_userid'),
+                token:this.$store.state.token|| Cache.getSession("bier_token"),
                 inviteCode:''
             }
         },
@@ -38,19 +39,18 @@
             }
         },
         mounted(){
-            this.queryCode()
+            
         },
         methods: {
         	clickCopy(value){
-                console.log(this.inviteCode)
-        		this.utils.copy(value);
-        		this.$message({
-        			message: this.$t('messageNotice.copy'),
-        			type:'success'
-        		});
+                if(this.token){
+                    this.queryCode(value)
+                }else{
+                    this.utils.copy(value);
+                }
+        		
         	},
-            queryCode() {//请求邀请码
-                console.log('123')  
+            queryCode(value) {
                 Request({
                     url: 'QueryInviteCode',
                     data: {
@@ -59,8 +59,15 @@
                     type: 'get'
                 }).then(res => {
                     this.inviteCode = res.data.inviteCode;
+                    this.utils.copy(value);
+                    this.$message({
+                     message: this.$t('messageNotice.copy'),
+                     type:'success'
+                    });
+
                 })
             }
+            
         }
     }
 </script>
