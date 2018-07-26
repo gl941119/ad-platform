@@ -471,20 +471,32 @@
 				}
 			},
 			changeDetails() {
+				if(this.checkeData[0].conceptId){
+					var concept1Id = this.checkeData[0].conceptId;
+				}
+				if(this.checkeData[1].conceptId){
+					var concept2Id = this.checkeData[1].conceptId;
+				}
+				if(this.checkeData[2].conceptId){
+					var concept3Id = this.checkeData[2].conceptId;
+				}
+				if(this.checkeData[3].conceptId){
+					var concept4Id = this.checkeData[3].conceptId;
+				}
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
 				this.$validator.validateAll().then((result) => {
 					if(result){
-						this.proDesc();
+						this.desc();
 						Request({
 							url: 'ChangeCrowdfundingDetails',
 							data: {
 								accountId: this.details.accountId,
 								circulation: this.details.circulation,
-								concept1Id: this.details.concept1Id,
-								concept2Id: this.details.concept2Id,
-								concept3Id: this.details.concept3Id,
-								concept4Id: this.details.concept4Id,
+								concept1Id: concept1Id,
+								concept2Id: concept2Id,
+								concept3Id: concept3Id,
+								concept4Id: concept4Id,
 								currCirculation: this.details.currCirculation,
 								endTime: endTime,
 								fullEnName: this.details.fullEnName,

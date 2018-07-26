@@ -66,14 +66,14 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
                 });
         }
         return token ? axios.post(url, qs.stringify(data), {
-            headers: {token},
+            headers: {token,lang},
         }) : axios.post(url, qs.stringify(data));
     }else if (type === 'PUT') {
         return token?axios.put(url, data, {
-            headers: { token},
+            headers: { token,lang},
         }):
         axios.put(url, data, {
-            headers: {token},
+            headers: {token,lang},
         });
     } else if (type === 'DELETE') {
         return token?axios.delete(url, {

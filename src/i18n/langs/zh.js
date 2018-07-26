@@ -90,7 +90,7 @@ const zh = {
 		advertising:'广告',
 		thisIssuance:'本轮发行',
 		noData:'没有更多数据了',
-		instant:'智能合约未能及时响应，请稍后再试...'
+		instant:'智能合约未能及时响应，请稍后再试...',
 	},
 	share:{
 		shareTiltle:'分享',
