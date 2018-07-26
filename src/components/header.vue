@@ -222,6 +222,9 @@
                 (lang === 'EN' ? '10em' : '6em')
             },
 			change(value){
+				if(value=='en'){
+					value = value.toUpperCase();
+				}
 				this.$i18n.locale = value;
 				this.$store.commit('setLanguage', value);
 				Cache.setLocal('bier_langChange', value);

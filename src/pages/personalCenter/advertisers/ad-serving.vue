@@ -37,14 +37,14 @@
 						<h5>{{$t('adServing.currentPosition')}}</h5>
 						<div class="ad-serving-info-top-item-li-data">32</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.banner')}}</el-button>
+							<el-button type="text">{{$t('adServing.banner')}}</el-button>
 						</div>
 					</li>
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.totalnumber')}}</h5>
 						<div class="ad-serving-info-top-item-li-data">32,234,889</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.stop')}}20180519</el-button>
+							<el-button type="text">{{$t('adServing.stop')}}20180519</el-button>
 						</div>
 					</li>
 					<li class="ad-serving-info-top-item-li">
@@ -61,7 +61,7 @@
 							<p class="balance">1000 point</p>
 						</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button class="button" type="primary" size="small" @click="dialogTableVisible = true">{{$t('project.recharge')}}</el-button>
+							<el-button class="button" type="primary" size="small">{{$t('project.recharge')}}</el-button>
 						</div>
 					</li>
 				</ul>
