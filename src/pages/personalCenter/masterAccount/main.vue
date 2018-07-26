@@ -43,7 +43,7 @@
 			</div>
 			<el-tabs type="border-card">
 			  <el-tab-pane value='1'>
-			    <span slot="label">充值记录</span>
+			    <span slot="label">{{$t('accountFlow.rechargeRecord')}}</span>
 			    <el-table :data="flowData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
@@ -52,7 +52,7 @@
 				<el-table-column :label="$t('accountFlow.flowDirection')">
 					<template slot-scope="scope">
 						<div v-if="scope.row.flowType == 1">
-							提现
+							{{$t('accountFlow.transfer')}}
 						</div>
 					</template>
 				</el-table-column>
@@ -70,7 +70,7 @@
 				</el-pagination>
 			</div>
 			  </el-tab-pane>
-			  <el-tab-pane value='2' label="消费记录">
+			  <el-tab-pane value='2' :label="$t('accountFlow.expenses')">
 			  	<el-table :data="flowDatas" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
@@ -79,7 +79,7 @@
 				<el-table-column :label="$t('accountFlow.flowDirection')">
 					<template slot-scope="scope">
 						<div v-if="scope.row.flowType == 1">
-							提现
+							{{$t('accountFlow.deduction')}}
 						</div>
 					</template>
 				</el-table-column>

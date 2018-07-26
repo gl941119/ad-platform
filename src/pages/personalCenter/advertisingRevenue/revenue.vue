@@ -23,7 +23,7 @@
 						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{ required: true, regex: /^(?:[1-9]\d0|[1-9]\d{2,}00)$/}" name="money" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" />
 					</li>
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
-					<span class="is-danger" v-if="insufficient" >余额不足</span>
+					<span class="is-danger" v-if="insufficient" >{{$t('accountFlow.insufficient')}}</span>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
 						<input class="tixian" :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="input1" />
 					</li>
@@ -55,7 +55,7 @@
 			</div>
 			<el-tabs type="border-card">
 				<el-tab-pane value="1">
-				    <span slot="label">提现记录</span>
+				    <span slot="label">{{$t('accountFlow.withdrawals')}}</span>
 				    <el-table :data="flowData" style="width: 100%">
 						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
@@ -64,7 +64,7 @@
 						<el-table-column :label="$t('accountFlow.flowDirection')">
 							<template slot-scope="scope">
 								<div v-if="scope.row.flowType == 1">
-									充值
+									{{$t('accountFlow.transfer')}}
 								</div>
 							</template>
 						</el-table-column>
@@ -83,7 +83,7 @@
 					</div>
 				</el-tab-pane>
 				<el-tab-pane>
-				    <span slot="label" value="2">收益记录</span>
+				    <span slot="label" value="2">{{$t('accountFlow.income')}}</span>
 				    <el-table :data="flowDatas" style="width: 100%">
 						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
@@ -92,7 +92,7 @@
 						<el-table-column :label="$t('accountFlow.flowDirection')">
 							<template slot-scope="scope">
 								<div v-if="scope.row.flowType == 1">
-									充值
+									{{$t('accountFlow.revenue')}}
 								</div>
 							</template>
 						</el-table-column>

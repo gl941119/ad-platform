@@ -2,7 +2,7 @@
 	<div class="ad-serving">
 		<div class="ad-serving_title">
 			<div class="ad-serving_title_info">{{$t('adServing.adSer')}}</div>
-			<el-button class="ad-serving_title_button" @click="newProject(isCheck)" type="text">{{$t('adServing.trafficking')}}
+			<el-button class="ad-serving_title_button" :title="title" @click="newProject(isCheck)" type="text">{{$t('adServing.trafficking')}}
 			</el-button>
 		</div>
 		<div class="ad-serving-info">
@@ -55,10 +55,9 @@
 						</div>-->
 					</li>
 					<li class="ad-serving-info-top-item-li">
-						<h5>{{$t('adServing.yestoday')}}(AFDT)</h5>
-						<div class="ad-serving-info-top-item-li-data last">
-							<p class="balance">189.99AFDT</p>
-							<p class="balance">1000 point</p>
+						<h5>{{$t('adServing.accountMoney')}}(AFDT)</h5>
+						<div class="ad-serving-info-top-item-li-data">
+							189.99AFDT
 						</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
 							<el-button class="button" type="primary" size="small">{{$t('project.recharge')}}</el-button>
@@ -87,6 +86,7 @@
 				averagePrice:'',
 				isCheck:'',
 				advertId:'',
+				title:'',//拒绝原因
 			}
 		},
 		computed: {
@@ -104,7 +104,6 @@
 			}
 		},
 		mounted(){
-			
 			this.queryDetail();
 		},
 		methods: {
@@ -129,6 +128,9 @@
 					this.advertId = res.data.advertId;
 					this.averagePrice = res.data.averagePrice;
 					this.isCheck = res.data.isCheck;
+					if(this.isCheck == 2){
+						this.title = '拒绝你';
+					}
 				})
 			},
 			changePrice(){
@@ -211,11 +213,6 @@
 					&-data{
 						color:rgba(102,102,102,1);
 						margin: 20px 0;
-						.balance{
-							height: 25px;
-	    					line-height: 25px;
-							color:rgba(102,102,102,1);
-						}
 					}
 					&-button{
 						button{
@@ -226,9 +223,6 @@
 							color: #FFFFFF;
     						border: 0;
 						}
-					}
-					.last{
-						margin: 10px 0;
 					}
 				}
 				&-li:last-child{

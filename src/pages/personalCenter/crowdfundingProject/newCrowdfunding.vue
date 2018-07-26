@@ -247,6 +247,16 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('tokenInfo.files')}}</h5>
 			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.companyName')}}</label>
+				<input class="langer" :class="[errors.has('companyName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanyName')" v-validate data-vv-rules="required" name="companyName" :placeholder="$t('tokenInfo.enterCompanyName')" v-model="newCrowdfunding.companyName" />
+				<span class="is-danger" v-show="errors.has('companyName')">{{ errors.first('companyName') }}</span>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.companycode')}}</label>
+				<input class="langer" :class="[errors.has('companyCode')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanycode')" v-validate data-vv-rules="required" name="companyCode" :placeholder="$t('tokenInfo.enterCompanycode')" v-model="newCrowdfunding.companycode" />
+				<span class="is-danger" v-show="errors.has('companyCode')">{{ errors.first('companyCode') }}</span>
+			</li>
+			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.about')}}</label>
 				<div>
 					<el-upload class="upload-demo" 
@@ -264,6 +274,8 @@
 				<span class="is-danger" v-if="fileEmpty">{{$t('tokenInfo.emptyAbout')}}</span>
 			</li>
 		</ul>
+		<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement">免责声明</span>
+		<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
 		<div class="submit_box">
 			<button class="submit" @click="submit">{{$t('buttonAll.submits')}}</button>
 		</div>
@@ -330,6 +342,8 @@
 					targetCurrency: "", //目标货币
 					topLimit: '', //发行上限
 					lowLimit: '', //发行下限
+					companyName:'',
+					companyCode:'',
 				},
 				checkedData: [],
 				concept: false,
@@ -398,6 +412,9 @@
 					if(!this.fileUrl){
 						this.fileEmpty = true;
 					}
+					if(!this.checked){
+						this.$message('请先选择免责声明');
+					}
 					if(result){
 							Request({
 								url: 'QueryNewCrowdfunding',
@@ -434,7 +451,9 @@
 									endTime: endTime,
 									license: this.fileUrl,
 									crowdTeamMembers: this.coreTeam,
-									crowdTeamConsultants: this.consultantTeam
+									crowdTeamConsultants: this.consultantTeam,
+									companyName: this.newCrowdfunding.companyName,
+									companyCode: this.newCrowdfunding.companyCode,
 								},
 								type: 'post',
 								flag: true
@@ -530,5 +549,16 @@
 	@import '../../../assets/css/upload.css';
 	.last{
 		width: 350px;
+	}
+	.checkbox{
+		width:24px;
+		height:24px;
+		background:rgba(102,102,102,1);
+	}
+	.statement{
+		font-size:18px;
+		color:rgba(102,102,102,1);
+		margin-left: 5px;
+		vertical-align: middle;
 	}
 </style>

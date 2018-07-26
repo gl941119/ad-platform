@@ -267,6 +267,16 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('tokenInfo.files')}}</h5>
 			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.companyName')}}</label>
+				<input class="langer" :disabled="disabled" :class="[errors.has('companyName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanyName')" v-validate data-vv-rules="required" name="companyName" :placeholder="$t('tokenInfo.enterCompanyName')" v-model="details.companyName" />
+				<span class="is-danger" v-show="errors.has('companyName')">{{ errors.first('companyName') }}</span>
+			</li>
+			<li class="newCrowdfunding_item_li">
+				<label>{{$t('tokenInfo.companycode')}}</label>
+				<input class="langer" :disabled="disabled" :class="[errors.has('companyCode')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanycode')" v-validate data-vv-rules="required" name="companyCode" :placeholder="$t('tokenInfo.enterCompanycode')" v-model="details.companycode" />
+				<span class="is-danger" v-show="errors.has('companyCode')">{{ errors.first('companyCode') }}</span>
+			</li>
+			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.about')}}</label>
 				<a v-if="disabled && details.license" :href="details.license" download>{{$t('tokenInfo.download')}}</a>
 				<div v-if="!disabled">
@@ -527,7 +537,9 @@
 								topLimit: this.details.topLimit,
 								totalCrowdfund: this.details.totalCrowdfund,
 								website: this.details.website,
-								whitePaper: this.details.whitePaper
+								whitePaper: this.details.whitePaper,
+								companycode:this.details.companycode,
+								companyName:this.details.companyName,
 							},
 							type: 'put',
 							flag:true,
