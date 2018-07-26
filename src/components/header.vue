@@ -42,7 +42,7 @@
 						<el-input :placeholder="$t('login.enterPassword')" auto-complete="off" type="password" v-model="loginModal.form.password"></el-input>
 					</el-form-item>
 					<el-form-item :label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="getLabelWidth(language, 'login')">
-						<el-input :placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" :class="{'english-lang': language==='en'}" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
+						<el-input :placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" :class="{'english-lang': language==='EN'}" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
 						<div class="login-verify-btn" @click="changeCode">
 							<custom-identify :identify-code="code" :content-width="120" :font-size-min="20"></custom-identify>
 						</div>
