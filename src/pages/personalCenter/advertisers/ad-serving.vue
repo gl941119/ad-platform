@@ -89,7 +89,18 @@
 				advertId:'',
 			}
 		},
+		computed: {
+			slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.queryDetail();
+			}
+		},
 		mounted(){
+			
 			this.queryDetail();
 		},
 		methods: {

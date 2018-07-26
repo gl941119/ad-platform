@@ -17,12 +17,10 @@
 			</el-table>
 			<div class="my_crowdfunding_data_pages">
 				<el-pagination
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage"
-      :page-sizes="[10, 20, 30, 40, 50]"
       :page-size="size"
-      layout="sizes, prev, pager, next, jumper"
+      layout="prev, pager, next"
       :total="total">
     </el-pagination>
 			</div>
@@ -46,6 +44,16 @@
 		mounted() {
 			this.crowdfunding();
 		},
+		computed: {
+			slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.crowdfunding();
+			}
+		},
 		methods:{
 			crowdfunding(){
 				Request({
@@ -65,10 +73,6 @@
 				this.currentPage = page;
 				this.crowdfunding();
 			},
-			handleSizeChange(page){
-				this.size = page;
-				this.crowdfunding();
-			}
 		}
 	}
 </script>

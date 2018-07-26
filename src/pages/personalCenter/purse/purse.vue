@@ -16,7 +16,7 @@
 				<div class="purse_address">
 					<label>{{$t('purse.balance')}}</label>
 					<div class="input">
-						<el-input v-model="balance"></el-input>
+						<el-input disabled v-model="balance"></el-input>
 					</div>
 				</div>
 			</div>

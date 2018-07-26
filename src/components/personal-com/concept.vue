@@ -26,6 +26,7 @@
 					type: 'get'
 				}).then(res => {
 					this.concept = res.data;
+					console.log(res.data);
 					this.lightConcept(res.data);
 				})
 			},
@@ -44,6 +45,7 @@
 			checked(item, index) {
 				var length = this.checkedData.length;
 				item.isSelected = !item.isSelected;
+				console.log(item)
 				if(item.isSelected) {
 					if(length < 4) {
 						var obj={};
@@ -51,6 +53,7 @@
 						obj.name = item.name;
 						this.checkedData.push(obj);
 						this.$emit('listenCondept',this.checkedData);
+						console.log(this.checkedData)
 					} else {
 						item.isSelected = false;
 						this.$message({
