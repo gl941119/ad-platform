@@ -4,7 +4,7 @@
             <div class="advert-item-left-logo">
                 <img :src="advertDatas.logo">
             </div>
-            <div class="advert-item-left-text" :class="{'english-lang': language==='en'}"><a :href="advertDatas.whitePaper" target="_self">{{$t('home.whitePaper')}}</a></div>
+            <div class="advert-item-left-text" :class="{'english-lang': language!=='zh'}"><a :href="advertDatas.whitePaper" target="_self">{{$t('home.whitePaper')}}</a></div>
         </div>
         <div class="advert-item-middle">
             <div class="advert-item-middle-title clearfix">
