@@ -352,7 +352,6 @@ const en = {
 		chinese:'Chinese shorthand',
 		englishName:'* Full name in English',
 		logo:'* logo',
-		upload:'Upload',
 		enterEnglish:'Please enter English shorthand ',
 		enterChinese:'Please enter Chinese shorthand ',
 		enterFullEnglish:'Please enter your full English name',
