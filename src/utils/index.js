@@ -1,4 +1,4 @@
-/*import Web3 from 'web3';
+import Web3 from 'web3';
 
 export function mainNetContract(abi, address) {
 console.log('window.web3->', window.web3);
@@ -30,7 +30,7 @@ console.log('window.web3->', window.web3);
         minContribution: web3.fromWei(minContribution, 'ether').toNumber(),
         maxContribution: web3.fromWei(maxContribution, 'ether').toNumber(),
     }
-}*/
+}
 
 
 
