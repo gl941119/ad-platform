@@ -19,13 +19,26 @@
 		created(){
 			this.conceptData();
 		},
+		computed: {
+			slangChange() {
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.conceptData();
+			}
+		},
 		methods: {
 			conceptData() {
 				Request({
 					url: 'QueryConcept',
 					type: 'get'
 				}).then(res => {
-					this.concept = res.data;
 					this.lightConcept(res.data);
 				})
 			},
@@ -40,6 +53,7 @@
 						}
 					}
 				});
+				this.concept = data;
 			},
 			checked(item, index) {
 				var length = this.checkedData.length;

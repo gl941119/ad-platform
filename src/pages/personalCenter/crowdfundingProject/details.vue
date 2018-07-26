@@ -167,7 +167,9 @@
 					<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="details.technology2">
 					</el-input>
 				</div>
-				<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				<div class="button-box">
+					<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				</div>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
@@ -359,7 +361,11 @@
 		},
 		computed: {
 			slangChange() {
-				return this.$store.state.slangChange || this.$i18n.locale;
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
 			}
 		},
 		watch: {

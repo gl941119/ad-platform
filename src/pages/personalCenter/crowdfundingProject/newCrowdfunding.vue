@@ -149,7 +149,9 @@
 					<el-input :placeholder="$t('projectInfo.enterTechnology2')" v-model="newCrowdfunding.technology2">
 					</el-input>
 				</div>
-				<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				<div class="button-box">
+					<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				</div>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">

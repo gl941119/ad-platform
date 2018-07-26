@@ -24,7 +24,9 @@
 						<span>{{balance}} AFDT</span>
 					</li>
 					<p>{{$t('project.notic')}}</p>
-					<button class="right_now" @click="close" style=";position:absolute;top: 278px;">{{$t('buttonAll.ok')}}</button>
+					<div style="text-align: center;">
+						<button class="right_now" @click="close">{{$t('buttonAll.ok')}}</button>
+					</div>
 				</ul>
 			</div>
 		</div>

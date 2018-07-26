@@ -39,7 +39,9 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     url = ajaxURL[url];
     let token = store.state.token || Cache.getSession('bier_token');
     let lang = store.state.slangChange || Cache.getLocal('bier_langChange');
-
+	if(lang == 'en'){
+		lang = lang.toUpperCase()
+	}
     if (type === 'GET') {
         return token?axios.get(url, {
             params: data,

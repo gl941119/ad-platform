@@ -16,7 +16,7 @@ export default new Vuex.Store({
         instantBuyDataId: undefined,
         change: false,
         bullsData: undefined,
-		slangChange: 'EN',
+		slangChange: '',
 		heardUrl:'',
 	},
 	mutations: {

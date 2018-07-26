@@ -46,7 +46,11 @@
 		},
 		computed: {
 			slangChange() {
-				return this.$store.state.slangChange || this.$i18n.locale;
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
 			}
 		},
 		watch: {

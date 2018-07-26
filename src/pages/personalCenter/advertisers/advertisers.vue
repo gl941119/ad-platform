@@ -161,7 +161,9 @@
 					<el-input :placeholder="$t('projectInfo.enterTechnology2')" :disabled="disabled" v-model="newCrowdfunding.technology2">
 					</el-input>
 				</div>
-				<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				<div class="button-box">
+					<button class="confirm" @click="technologyFun">{{$t('buttonAll.confirm')}}</button>
+				</div>
 			</div>
 		</div>
 		<ul class="newCrowdfunding_item">
@@ -313,7 +315,11 @@
 		},
 		computed: {
 			slangChange() {
-				return this.$store.state.slangChange || this.$i18n.locale;
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
 			}
 		},
 		watch: {
@@ -489,7 +495,7 @@
 					if(res.data.conceptResultList){
 						res.data.conceptResultList.forEach(function(item,index){
 							arr.push(item.name);
-							concept.push(item.id);
+							concept.push(item.conceptId);
 						})
 					}
 					this.conceptResultList = res.data.conceptResultList;

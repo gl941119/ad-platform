@@ -133,13 +133,12 @@
     .technology{
         margin: 10px 0 20px 0;
     }
-    .confirm{
-        background: #ff9500;
-        border-radius: 4px;
-        padding: 5px 20px;
-        color: #FFFFFF;
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        margin-left: -36px;
+    .button-box{
+        text-align: center;
+        .confirm{
+            background: #ff9500;
+            border-radius: 4px;
+            padding: 5px 20px;
+            color: #FFFFFF;
+        }
     }
