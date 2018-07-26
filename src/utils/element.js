@@ -40,7 +40,9 @@ import {
     MessageBox,
     Message,
     Collapse,
-    CollapseItem
+    CollapseItem,
+    Tabs,
+    TabPane
 } from 'element-ui';
 
 Vue.use(Pagination);
@@ -81,6 +83,8 @@ Vue.use(Main);
 Vue.use(Footer);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
+Vue.use(Tabs);
+Vue.use(TabPane);
 Vue.use(Loading.directive);
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;

@@ -79,12 +79,21 @@
                     value: 3,
                     label: this.$t('home.over')
                 }]
-        	}
+        	},
+        	slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
         },
         mounted() {
             Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
             })
         },
+		watch: {
+			slangChange(val, oldval) {
+				Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
+            	})
+			}
+		},
         methods: {
             getCrowdSaleInfo(state = 0, concept = 0, page = Config.pageStart) {
                 return new Promise((resolve, reject) => {

@@ -78,10 +78,29 @@
                     loading.close();
                 })
         },
+		watch: {
+			slangChange(val, oldval) {
+				let loading = this.$loading({
+                lock: true,
+                text: 'Loading...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                fullscreen: true,
+		        });
+		        Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo(), this.findAdvertisement()])
+                .then(() => {
+                    this.swiperInstance.init();
+                    loading.close();
+                })
+			}
+		},
         computed: {
             swiperInstance() {
                 return this.$refs.swiperBulls&&this.$refs.swiperBulls.swiper;
-            }
+            },
+            slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
         },
         components: {
             'custom-carousel': customCarouselCom,

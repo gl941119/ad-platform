@@ -7,30 +7,64 @@
 		</div>
 		<div class="ad-serving-info">
 			<div class="ad-serving-info-top">
-				<div class="ad-serving-info-top-price">
-					<h5>{{$t('adServing.averagePrice')}}</h5>
-					<div v-if="isCheck == 1">{{averagePrice}}</div>
-					<div>
-						<el-button type="text" v-if="isCheck == 1" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
-					</div>
-					<el-dialog :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
-					  <el-form :model="form">
-					    <el-form-item :label="$t('adServing.all')" :label-width="formLabelWidth">
-					        <el-input-number v-model="form.advertPrice" :step="0.05" :min="0.1" controls-position="right" @change="handleChange">
-					        </el-input-number>
-					    </el-form-item>
-					    <div v-for="(item, index) in form.conceptManageList" :key="index">
-					    	<el-form-item :label="item.name" :label-width="formLabelWidth">
-						      	<el-input-number v-model="item.conceptPrice" :step="0.05" :min="0.1" controls-position="right" @change="handleChange">
-						      	</el-input-number>
-						    </el-form-item>
-					    </div>
-					  	</el-form>
-						<div slot="footer" class="dialog-footer">
-						    <el-button type="primary" @click="changePrice">{{$t('buttonAll.revise')}}</el-button>
+				<div class="ad-serving-info-top-title">PPC</div>
+				<ul class="ad-serving-info-top-item">
+					<li class="ad-serving-info-top-item-li">
+						<h5>{{$t('adServing.averagePrice')}} (AFDT)</h5>
+						<div class="ad-serving-info-top-item-li-data" v-if="isCheck == 1">{{averagePrice}}</div> 
+						<div> 
+							<el-button v-if="isCheck == 1" type="text" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
 						</div>
-					</el-dialog>
-				</div>
+						<el-dialog :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
+						  <el-form :model="form">
+						    <el-form-item :label="$t('adServing.all')" :label-width="formLabelWidth">
+						        <el-input-number v-model="form.advertPrice" :step="0.05" :min="0.1" controls-position="right" @change="handleChange">
+						        </el-input-number>
+						    </el-form-item>
+						    <div v-for="(item, index) in form.conceptManageList" :key="index">
+						    	<el-form-item :label="item.name" :label-width="formLabelWidth">
+							      	<el-input-number v-model="item.conceptPrice" :step="0.05" :min="0.1" controls-position="right" @change="handleChange">
+							      	</el-input-number>
+							    </el-form-item>
+						    </div>
+						  	</el-form>
+							<div slot="footer" class="dialog-footer">
+							    <el-button type="primary" @click="changePrice">{{$t('buttonAll.revise')}}</el-button>
+							</div>
+						</el-dialog>
+					</li>
+					<li class="ad-serving-info-top-item-li">
+						<h5>{{$t('adServing.currentPosition')}}</h5>
+						<div class="ad-serving-info-top-item-li-data">32</div> 
+						<div class="ad-serving-info-top-item-li-button"> 
+							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.banner')}}</el-button>
+						</div>
+					</li>
+					<li class="ad-serving-info-top-item-li">
+						<h5>{{$t('adServing.totalnumber')}}</h5>
+						<div class="ad-serving-info-top-item-li-data">32,234,889</div> 
+						<div class="ad-serving-info-top-item-li-button"> 
+							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.stop')}}20180519</el-button>
+						</div>
+					</li>
+					<li class="ad-serving-info-top-item-li">
+						<h5>{{$t('adServing.yestoday')}}</h5>
+						<div class="ad-serving-info-top-item-li-data">5799</div> 
+						<!--<div> 
+							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
+						</div>-->
+					</li>
+					<li class="ad-serving-info-top-item-li">
+						<h5>{{$t('adServing.yestoday')}}(AFDT)</h5>
+						<div class="ad-serving-info-top-item-li-data last">
+							<p class="balance">189.99AFDT</p>
+							<p class="balance">1000 point</p>
+						</div> 
+						<div class="ad-serving-info-top-item-li-button"> 
+							<el-button class="button" type="primary" size="small" @click="dialogTableVisible = true">{{$t('project.recharge')}}</el-button>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -55,7 +89,18 @@
 				advertId:'',
 			}
 		},
+		computed: {
+			slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.queryDetail();
+			}
+		},
 		mounted(){
+			
 			this.queryDetail();
 		},
 		methods: {
@@ -137,5 +182,55 @@
 		background:rgba(255,255,255,1);
 		box-shadow:0px 2px 12px 0px rgba(0,0,0,0.06);
 		border:1px solid rgba(228,231,237,1);
+		&-top{
+			&-title{
+				margin: 15px 0;
+				font-size:18px;
+				color:rgba(96,98,102,1);
+			}
+			&-item{
+				width: 100%;
+				height:170px;
+				border:1px solid rgba(229,229,229,1);
+				&-li{
+					width: 20%;
+					height: 120px;
+					border-right: 1px solid #EEEEEE;
+					box-sizing: border-box;
+					float: left;
+					text-align: center;
+					margin: 25px 0;
+					font-size:16px;
+					h5{
+						color:rgba(96,98,102,1);
+					}
+					&-data{
+						color:rgba(102,102,102,1);
+						margin: 20px 0;
+						.balance{
+							height: 25px;
+	    					line-height: 25px;
+							color:rgba(102,102,102,1);
+						}
+					}
+					&-button{
+						button{
+							color: #009EC2;
+						}
+						.button{
+							background: #009EC2;
+							color: #FFFFFF;
+    						border: 0;
+						}
+					}
+					.last{
+						margin: 10px 0;
+					}
+				}
+				&-li:last-child{
+					border: 0;
+				}
+			}
+		}
 	}
 </style>

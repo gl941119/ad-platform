@@ -18,15 +18,18 @@
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>
-					<li class="withdraw_item_li"><label>{{$t('project.withdrawal')}}：</label>
-						<el-input style="text-align: right;" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" clearable>
-						</el-input>
+					<li class="withdraw_item_li">
+						<label>{{$t('project.withdrawal')}}：</label>
+						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{ required: true, regex: /^(?:[1-9]\d0|[1-9]\d{2,}00)$/}" name="money" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" />
 					</li>
+					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
+					<span class="is-danger" v-if="insufficient" >余额不足</span>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
-						<el-input :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="input1" clearable>
-						</el-input>
+						<input class="tixian" :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="input1" />
 					</li>
-					<button class="right_now">{{$t('project.withdraw')}}</button>
+					<div style="text-align: center;">
+						<button class="right_now">{{$t('project.withdraw')}}</button>
+					</div>
 				</ul>
 			</div>
 		</div>
@@ -50,32 +53,64 @@
 					<button class="search" @click="revenueData">{{$t('accountFlow.search')}}</button>
 				</div>
 			</div>
-			<el-table :data="flowData" style="width: 100%">
-				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
-				</el-table-column>
-				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
-				</el-table-column>
-				<el-table-column :label="$t('accountFlow.flowDirection')">
-					<template slot-scope="scope">
-						<div v-if="scope.row.flowType == 1">
-							充值
-						</div>
-					</template>
-				</el-table-column>
-				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
-				</el-table-column>
-			</el-table>
-			<div class="advertising_revenu_account_flow_data_pages">
-				 <el-pagination
-			      @size-change="handleSizeChange"
-			      @current-change="handleCurrentChange"
-			      :current-page="currentPage"
-			      :page-sizes="[10, 20, 30, 40, 50]"
-			      :page-size="size"
-			      layout="sizes, prev, pager, next, jumper"
-			      :total="total">
-			    </el-pagination>
-			</div>
+			<el-tabs type="border-card">
+				<el-tab-pane value="1">
+				    <span slot="label">提现记录</span>
+				    <el-table :data="flowData" style="width: 100%">
+						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+						</el-table-column>
+						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
+						</el-table-column>
+						<el-table-column :label="$t('accountFlow.flowDirection')">
+							<template slot-scope="scope">
+								<div v-if="scope.row.flowType == 1">
+									充值
+								</div>
+							</template>
+						</el-table-column>
+						<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+						</el-table-column>
+					</el-table>
+					<div class="advertising_revenu_account_flow_data_pages">
+						<el-pagination
+							background
+							@current-change="handleCurrent"
+					      :current-page="current"
+					      :page-size="size"
+					      layout="prev, pager, next"
+					      :total="total">
+					    </el-pagination>
+					</div>
+				</el-tab-pane>
+				<el-tab-pane>
+				    <span slot="label" value="2">收益记录</span>
+				    <el-table :data="flowDatas" style="width: 100%">
+						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+						</el-table-column>
+						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
+						</el-table-column>
+						<el-table-column :label="$t('accountFlow.flowDirection')">
+							<template slot-scope="scope">
+								<div v-if="scope.row.flowType == 1">
+									充值
+								</div>
+							</template>
+						</el-table-column>
+						<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+						</el-table-column>
+					</el-table>
+					<div class="advertising_revenu_account_flow_data_pages">
+						<el-pagination
+							background
+							@current-change="handleCurrentChange"
+					      :current-page="currentPage"
+					      :page-size="size"
+					      layout=" prev, pager, next"
+					      :total="totals">
+					    </el-pagination>
+					</div>
+				</el-tab-pane>
+			</el-tabs>
 		</div>
 	</div>
 </template>
@@ -87,12 +122,15 @@
 		data() {
 			return {
 				flowData: [],
+				flowDatas:[],
 				balance: '',
 				money: '',
 				input1:'',
 				currentPage: 1,
+				current: 1,
 				size: 30,
 				total:0,
+				totals:0,
 				withdrawView: false,
 				withdrawed:false,
 				startTime: '',
@@ -100,6 +138,8 @@
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				authStatus:'',
+				id:'',
+				insufficient:false,//余额不足
 			}
 		},
 		computed: {
@@ -107,11 +147,19 @@
                 get(){
                     return this.money*1/1000;
                 },
-            }
+            },
         },
 		mounted() {
 			this.BasicInformation();
-			this.revenueData();
+		},
+		watch:{
+			money(){
+				if(this.money>this.balance){
+					this.insufficient = !this.insufficient;
+				}else{
+					this.insufficient = false;
+				}
+			}
 		},
 		methods: {
 			getHandlingFee() {
@@ -125,9 +173,11 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.balance = res.data.balance;
 					this.authStatus = res.data.authStatus;
+					this.id = res.data.id;
+					this.revenueData();
+					this.revenueDatas();
 				})
 			},
 			revenueData() {
@@ -140,25 +190,49 @@
 				Request({
 					url: 'QueryRevenueAccountFlow',
 					data: {
-						incomeId: this.accountId,
-						page: this.currentPage,
-						pageSize: this.pageSizes,
+						incomeId: this.id,
+						page: this.current,
+						pageSize: this.size,
 						flowType: 1,
 						startTime: startTime,
 						endTime: endTime
 					},
 					type: 'get'
 				}).then(res => {
+					console.log(res);
 					this.flowData = res.data;
 					this.total = res.total;
 				})
 			},
-			handleCurrentChange(page) {
-				this.currentPage = page;
-				this.revenueData();
+			revenueDatas() {
+				if(this.startTime){
+					var startTime = this.util.format(this.startTime, 'yyyy-MM-dd HH:mm:ss');
+				}
+				if(this.endTime){
+					var endTime = this.util.format(this.endTime, 'yyyy-MM-dd HH:mm:ss');
+				}
+				Request({
+					url: 'QueryRevenueAccountFlow',
+					data: {
+						incomeId: this.id,
+						page: this.currentPage,
+						pageSize: this.size,
+						flowType: 2,
+						startTime: startTime,
+						endTime: endTime
+					},
+					type: 'get'
+				}).then(res => {
+					this.flowDatas = res.data;
+					this.totals = res.total;
+				})
 			},
-			handleSizeChange(page) {
-				this.size = page;
+			handleCurrentChange(page){
+				this.currentPage = page;
+				this.revenueDatas();
+			},
+			handleCurrent(page){
+				this.current = page;
 				this.revenueData();
 			},
 			withdraw() {
@@ -205,6 +279,13 @@
 		    font-size: 54px;
 		    display: inline-block;
 		}
+	}
+	.is-danger{
+		display: block;
+		display: block;
+	    padding-left: 100px;
+	    color:rgba(250,85,85,1);
+	    margin: 5px 0;
 	}
 	.allright{
 		width:116px;

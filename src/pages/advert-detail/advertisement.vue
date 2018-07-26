@@ -60,6 +60,17 @@ import Config from '../../utils/config.js';
             Promise.all([this.getAdvertInfoInit(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
             })
         },
+        computed: {
+			slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				Promise.all([this.getAdvertInfoInit(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
+            	})
+			}
+		},
         methods: {
             getAllConcept(){
                 return new Promise((resolve, reject) => {

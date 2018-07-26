@@ -15,7 +15,7 @@
 				<div class="header-content-tab-right">
 					<div class="header-content-tab-right-item languae">
 						<el-select size="mini" class="language_height" v-model="select" slot="prepend" @change="change(select)">
-							<el-option label="English" value="en"></el-option>
+							<el-option label="English" value="EN"></el-option>
 							<el-option label="简体中文" value="zh"></el-option>
 							<!--<el-option label="한국어" value="ko"></el-option>-->
 							<!--<el-option label="日本語" value="ja"></el-option>-->
@@ -211,11 +211,15 @@
                 return this.utils.getCurrLanguage(this.$store, Cache);
             }
         },
+        mounted(){
+        	var arr = window.location.search;
+        	this.registerModel.form.inviteCode = arr.split('=')[1];
+        },
 		methods: {
             getLabelWidth(lang, type){
                 return type === 'login' ?
-                (lang === 'en' ? '8em' : '6em') :
-                (lang === 'en' ? '10em' : '6em')
+                (lang === 'EN' ? '8em' : '6em') :
+                (lang === 'EN' ? '10em' : '6em')
             },
 			change(value){
 				this.$i18n.locale = value;
@@ -353,16 +357,13 @@
 					token,
 					phone,
 					heardUrl,
-					authStatus
 				} = data;
 				this.$store.commit('setUserId', id);
 				this.$store.commit('setUserName', email);
 				this.$store.commit('setUserNickName', nickname);
 				this.$store.commit('setToken', token);
 				this.$store.commit('setHeardUrl', heardUrl);
-				this.$store.commit('setAuth', authStatus);
 				
-				Cache.setSession('bier_auth', authStatus);
 				Cache.setSession('bier_userid', id);
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);

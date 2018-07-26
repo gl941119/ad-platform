@@ -309,26 +309,39 @@
 			conceptCom,
 		},
 		mounted(){
-			var value = this.$route.params.value;
-			this.isCheck = value;
-			switch(value){
-				case '0':
-					this.queryDetails();
-					break;
-				case '1':
-					this.queryDetails();
-					this.disabled = true;//不允许修改
-					break;
-				case '2':
-					this.queryDetails();
-					break;
-				case '3':
-					this.queryDetails();
-					this.disabled = true;//不允许修改
-					break;
+			this.isDetails();
+		},
+		computed: {
+			slangChange() {
+				return this.$store.state.slangChange || this.$i18n.locale;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.isDetails();
 			}
 		},
 		methods: {
+			isDetails(){
+				var value = this.$route.params.value;
+				this.isCheck = value;
+				switch(value){
+					case '0':
+						this.queryDetails();
+						break;
+					case '1':
+						this.queryDetails();
+						this.disabled = true;//不允许修改
+						break;
+					case '2':
+						this.queryDetails();
+						break;
+					case '3':
+						this.queryDetails();
+						this.disabled = true;//不允许修改
+						break;
+				}
+			},
 			desc(){//项目简介
 				if(!this.newCrowdfunding.proDesc){
 					this.proDescr = true;

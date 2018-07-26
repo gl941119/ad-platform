@@ -55,7 +55,7 @@
 				</div>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('team.coreMember')}}</label>
+				<label>{{$t('team.consultant')}}</label>
 				<div class="newCrowdfunding_item_li_coreTeamMembers">
 					<div v-for="(person,index) in consultantTeam" :key="index" class="newCrowdfunding_item_li_coreTeamMembers_member">
 						<el-aside style="width:35px;height:150px;line-height:150px;text-align:center;background:rgba(245,245,245,1);border-radius:4px 0px 0px 4px;">

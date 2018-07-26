@@ -16,9 +16,8 @@ export default new Vuex.Store({
         instantBuyDataId: undefined,
         change: false,
         bullsData: undefined,
-		slangChange: 'en',
+		slangChange: 'EN',
 		heardUrl:'',
-		authStatus:'',
 	},
 	mutations: {
 		setUserId(state, val) {
@@ -59,9 +58,6 @@ export default new Vuex.Store({
 		},
 		setLanguage(state, val) {
 			state.slangChange = val;
-        },
-        setAuth(state, val) {
-			state.authStatus = val;
         },
 	},
 });
