@@ -273,7 +273,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.companycode')}}</label>
-				<input class="langer" :disabled="disabled" :class="[errors.has('companyCode')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanycode')" v-validate data-vv-rules="required" name="companyCode" :placeholder="$t('tokenInfo.enterCompanycode')" v-model="details.companycode" />
+				<input class="langer" :disabled="disabled" :class="[errors.has('companyCode')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanycode')" v-validate data-vv-rules="required" name="companyCode" :placeholder="$t('tokenInfo.enterCompanycode')" v-model="details.companyCode" />
 				<span class="is-danger" v-show="errors.has('companyCode')">{{ errors.first('companyCode') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -487,17 +487,24 @@
 				}
 			},
 			changeDetails() {
-				if(this.checkeData[0].conceptId){
-					var concept1Id = this.checkeData[0].conceptId;
-				}
-				if(this.checkeData[1].conceptId){
-					var concept2Id = this.checkeData[1].conceptId;
-				}
-				if(this.checkeData[2].conceptId){
-					var concept3Id = this.checkeData[2].conceptId;
-				}
-				if(this.checkeData[3].conceptId){
-					var concept4Id = this.checkeData[3].conceptId;
+				if(this.checkeData.length>0){
+					if(this.checkeData[0]){
+						var concept1Id = this.checkeData[0].conceptId;
+					}
+					if(this.checkeData[1]){
+						var concept2Id = this.checkeData[1].conceptId;
+					}
+					if(this.checkeData[2]){
+						var concept3Id = this.checkeData[2].conceptId;
+					}
+					if(this.checkeData[3]){
+						var concept4Id = this.checkeData[3].conceptId;
+					}
+				}else{
+					var concept1Id = this.conceptId[0];
+					var concept2Id = this.conceptId[1];
+					var concept3Id = this.conceptId[2];
+					var concept4Id = this.conceptId[3];
 				}
 				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
 				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
@@ -538,7 +545,7 @@
 								totalCrowdfund: this.details.totalCrowdfund,
 								website: this.details.website,
 								whitePaper: this.details.whitePaper,
-								companycode:this.details.companycode,
+								companyCode:this.details.companyCode,
 								companyName:this.details.companyName,
 							},
 							type: 'put',

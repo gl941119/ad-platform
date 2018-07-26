@@ -21,6 +21,7 @@ const zh = {
 		enterPassword:'请输入密码',
         enterCode:'请输入验证码',
         modelWidth: '365px',
+        pleaseLogin: '请先登录',
 	},
 	register:{
 		register:'注 册',

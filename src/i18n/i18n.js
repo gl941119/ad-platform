@@ -5,7 +5,7 @@ import messages from './langs'
 import Cache from '../utils/cache.js';
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-  locale: Cache.getLocal('bier_langChange').toUpperCase() || 'EN',
+  locale: Cache.getLocal('bier_langChange') || 'EN',
   messages,
 });
 locale.i18n((key, value) => i18n.t(key, value));//解决i18n与vue——i18n的兼容性

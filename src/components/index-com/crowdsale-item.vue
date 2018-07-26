@@ -111,8 +111,8 @@
                     this.$store.commit('setInstantBuyVisible', true);
                     this.$store.commit('valueChange');
                 }else {
-                    this.$alert('请先登录', {
-                        confirmButtonText: '确定',
+                    this.$alert(this.$t('login.pleaseLogin'), {
+                        confirmButtonText: this.$t('buttonAll.confirm'),
                         callback: () => {
                             this.$store.commit('setDialogModalVisible', true)
                         }

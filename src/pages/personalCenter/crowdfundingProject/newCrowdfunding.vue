@@ -253,7 +253,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('tokenInfo.companycode')}}</label>
-				<input class="langer" :class="[errors.has('companyCode')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanycode')" v-validate data-vv-rules="required" name="companyCode" :placeholder="$t('tokenInfo.enterCompanycode')" v-model="newCrowdfunding.companycode" />
+				<input class="langer" :class="[errors.has('companyCode')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanycode')" v-validate data-vv-rules="required" name="companyCode" :placeholder="$t('tokenInfo.enterCompanycode')" v-model="newCrowdfunding.companyCode" />
 				<span class="is-danger" v-show="errors.has('companyCode')">{{ errors.first('companyCode') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -411,9 +411,6 @@
 					}
 					if(!this.fileUrl){
 						this.fileEmpty = true;
-					}
-					if(!this.checked){
-						this.$message('请先选择免责声明');
 					}
 					if(result){
 							Request({

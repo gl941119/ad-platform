@@ -21,6 +21,7 @@ const en = {
 		enterPassword:'password',
         enterCode:'securitycode',
         modelWidth: '410px',
+        pleaseLogin: '请先登录',
 	},
 	register:{
 		register:'Register',

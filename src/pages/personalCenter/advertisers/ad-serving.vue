@@ -129,7 +129,7 @@
 					this.averagePrice = res.data.averagePrice;
 					this.isCheck = res.data.isCheck;
 					if(this.isCheck == 2){
-						this.title = '拒绝你';
+						this.title = res.data.noPassReason;
 					}
 				})
 			},

@@ -26,7 +26,7 @@
 					<template slot-scope="scope">
 						<div v-if="scope.row.isCheck==0" @click="openDetail(scope.row.id,0)">{{$t('initiated.review')}}</div>
 						<div v-if="scope.row.isCheck==1" @click="openDetail(scope.row.id,1)">{{$t('initiated.over')}}</div>
-						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}<button class="change" @click="openDetail(scope.row.id,2)">{{$t('buttonAll.change')}}</button></div>
+						<div v-if="scope.row.isCheck==2">{{$t('initiated.refuse')}}<button class="change" :title="scope.row.description" @click="openDetail(scope.row.id,2)">{{$t('buttonAll.change')}}</button></div>
 					</template>
 				</el-table-column>
 				<el-table-column prop="updateTime" :label="$t('initiated.statusUpdate')">
