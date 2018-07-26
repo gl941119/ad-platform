@@ -4,7 +4,7 @@
             <div class="advert-item-left-logo">
                 <img :src="advertDatas.logo">
             </div>
-            <div class="advert-item-left-text" :class="{'english-lang': language==='en'}"><a :href="advertDatas.whitePaper" target="_blank">{{$t('home.whitePaper')}}</a></div>
+            <div class="advert-item-left-text" :class="{'english-lang': language==='en'}"><a :href="advertDatas.whitePaper" target="_self">{{$t('home.whitePaper')}}</a></div>
         </div>
         <div class="advert-item-middle">
             <div class="advert-item-middle-title clearfix">
@@ -30,7 +30,7 @@
             </el-select>
             <div class="advert-item-right-icons">
                 <a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
-                <a :href="advertDatas.telegrameUrl" target="_blank"><i class="custom-element-icon-duihua"></i></a>
+                <a :href="advertDatas.telegrameUrl" target="_self"><i class="custom-element-icon-duihua"></i></a>
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@
 						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{ required: true, regex: /^(?:[1-9]\d0|[1-9]\d{2,}00)$/}" name="money" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" />
 					</li>
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
+					<span class="is-danger" v-if="insufficient" >余额不足</span>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
 						<input class="tixian" :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="input1" />
 					</li>
@@ -138,6 +139,7 @@
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				authStatus:'',
 				id:'',
+				insufficient:false,//余额不足
 			}
 		},
 		computed: {
@@ -145,10 +147,19 @@
                 get(){
                     return this.money*1/1000;
                 },
-            }
+            },
         },
 		mounted() {
 			this.BasicInformation();
+		},
+		watch:{
+			money(){
+				if(this.money>this.balance){
+					this.insufficient = !this.insufficient;
+				}else{
+					this.insufficient = false;
+				}
+			}
 		},
 		methods: {
 			getHandlingFee() {
