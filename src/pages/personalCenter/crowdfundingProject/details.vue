@@ -257,6 +257,7 @@
 				<div v-if="!disabled" >
 					<el-date-picker v-model="timeInterval" 
 						type="datetimerange" 
+						:picker-options="pickerTime"
 						:range-separator="$t('tokenInfo.to')" 
 						:start-placeholder="$t('tokenInfo.startTime')" 
 						:end-placeholder="$t('tokenInfo.endTime')">
@@ -351,6 +352,11 @@
 				checkeData: [],
 				util: new Utils(),
 				isCheck:'',
+				pickerTime: {
+					disabledDate(time) {
+						return time.getTime() < Date.now() - 8.64e7;
+					}
+				},
 				uploadImg: Config.UploadImg,
 				requestToken: {
 					token:

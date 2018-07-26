@@ -236,6 +236,7 @@
 					<el-date-picker v-model="timeInterval" 
 						type="datetimerange" 
 						@blur="data"
+						:picker-options="pickerTime"
 						:range-separator="$t('tokenInfo.to')" 
 						:start-placeholder="$t('tokenInfo.startTime')" 
 						:end-placeholder="$t('tokenInfo.endTime')">
@@ -356,6 +357,11 @@
 				conceptDatas: '',
 				technologyDatas: '',
 				uploadImg: Config.UploadImg,
+				pickerTime: {
+					disabledDate(time) {
+						return time.getTime() < Date.now() - 8.64e7;
+					}
+				},
 				requestToken: {
 					token:
                         this.$store.state.token ||
