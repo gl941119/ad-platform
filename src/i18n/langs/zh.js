@@ -352,6 +352,7 @@ const zh = {
 		chinese:'中文简写',
 		englishName:'*英文全名',
 		logo:'*logo',
+		upload:'Upload',
 		enterEnglish:'请输入英文简写',
 		enterChinese:'请输入中文简写',
 		enterFullEnglish:'请输入英文全名',

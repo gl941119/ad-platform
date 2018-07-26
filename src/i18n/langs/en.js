@@ -90,7 +90,7 @@ const en = {
 		advertising:'AD',
 		thisIssuance:'This round',
 		noData:'没有更多数据了',
-		instant:'The smart contract failed to respond in time, please try again later...'
+		instant:'The smart contract failed to respond in time, please try again later...',
 	},
 	share:{
 		shareTiltle:'Share',
@@ -283,7 +283,6 @@ const en = {
 		desc:'Description ',
 		flowDirection:'Flow direction ',
 		amountOfMoney:'Amount(AFDT)',
-
 	},
 	adServing:{
 		adSer:'Ad serving',
@@ -332,7 +331,6 @@ const en = {
 		emptyName:'Full name cannot be empty ',
 		emptyTitle:'Title cannot be empty ',
 		emptyDesc:'Introduction cannot be empty ',
-
 	},
 	projectInfo:{
 		info:'Project Status ',
