@@ -395,8 +395,8 @@
 				}
 			},
 			submit() {
-				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
-				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
+				var startTime = this.util.dateFormat(this.timeInterval[0], "time");
+				var endTime = this.util.dateFormat(this.timeInterval[1], 'time');
 				if(this.checkedData[0]){
 					var concept1Id = this.checkedData[0].conceptId;
 				}

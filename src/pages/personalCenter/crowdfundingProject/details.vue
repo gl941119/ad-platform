@@ -467,7 +467,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.coreTeam = res.data;
 					this.centerDialogVisible = true;
 				})
@@ -512,8 +511,8 @@
 					var concept3Id = this.conceptId[2];
 					var concept4Id = this.conceptId[3];
 				}
-				var startTime = this.util.format(this.timeInterval[0], 'yyyy-MM-dd HH:mm:ss');
-				var endTime = this.util.format(this.timeInterval[1], 'yyyy-MM-dd HH:mm:ss');
+				var startTime = this.util.dateFormat(this.timeInterval[0], 'time');
+				var endTime = this.util.dateFormat(this.timeInterval[1], 'time');
 				this.$validator.validateAll().then((result) => {
 					if(result){
 						this.desc();
