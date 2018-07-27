@@ -100,7 +100,6 @@
 				this.$store.commit('setUserNickName', undefined);
                 this.$store.commit('setToken', undefined);
                 this.$store.commit('setHeardUrl', undefined);
-                this.$store.commit('setAuth', undefined);
                 Cache.removeSession('bier_username');
                 Cache.removeSession('bier_token');
                 Cache.removeSession('bier_auth');

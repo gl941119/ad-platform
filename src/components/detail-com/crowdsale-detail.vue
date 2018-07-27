@@ -95,6 +95,7 @@
 <script>
     import Utils from '../../utils/util.js';
     import Cache from '../../utils/cache.js';
+    import Request from '../../utils/require.js';
     export default {
         props: ['detailData', 'systemTime'],
         data() {
@@ -112,7 +113,7 @@
             this.handleTime(this.detailData, this.systemTime);
             this.countDown(this.detailData);
             let {croAchieve, currCirculation} = this.detailData;
-            console.log('detail corwdsale_>', this.detailData);
+            // console.log('detail corwdsale_>', this.detailData);
             // 进度的判断
             if(currCirculation <= 0){
                 this.progress = 0;
