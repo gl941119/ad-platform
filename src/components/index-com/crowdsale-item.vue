@@ -14,16 +14,16 @@
         </p>
         <div class="crowdsale-item-list">
             <div class="crowdsale-item-list-left">
-                <div class="crowdsale-item-list-left-label">
+                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept1Id">
                     <span>{{crowdsaleDatas.concept1Id}}</span>
                 </div>
-                <div class="crowdsale-item-list-left-label">
+                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept2Id">
                     <span>{{crowdsaleDatas.concept2Id}}</span>
                 </div>
-                <div class="crowdsale-item-list-left-label">
+                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept3Id">
                     <span>{{crowdsaleDatas.concept3Id}}</span>
                 </div>
-                <div class="crowdsale-item-list-left-label">
+                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept4Id">
                     <span>{{crowdsaleDatas.concept4Id}}</span>
                 </div>
                 <div class="crowdsale-item-list-left-label">
@@ -32,17 +32,17 @@
                 </div>
             </div>
             <div class="crowdsale-item-list-right">
-                <div v-show="status===1" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
+                <div v-show="status===1&&progress<100" :class="{'event-over': status===3||progress===100}" class="crowdsale-item-list-right-content">
                     <div>{{showText}}</div>
                     <div class="crowdsale-item-list-right-content-divide"></div>
                     <div>{{remainTime}}</div>
                 </div>
-                <div @click="instantBuy" v-show="status===2" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
+                <div @click="instantBuy" v-show="status===2&&progress<100" :class="{'event-over': status===3||progress===100}" class="crowdsale-item-list-right-content">
                     <div>{{showText}}</div>
                     <div class="crowdsale-item-list-right-content-divide"></div>
                     <div>{{remainTime}}</div>
                 </div>
-                <div v-show="status===3" :class="{'event-over': status===3}" class="crowdsale-item-list-right-content">
+                <div v-show="status===3||progress===100" :class="{'event-over': status===3||progress===100}" class="crowdsale-item-list-right-content">
                     {{$t('home.over')}}
                 </div>
             </div>
@@ -56,8 +56,9 @@
 <script>
     import Utils from '../../utils/util.js';
     import Cache from '../../utils/cache.js';
+    import Request from '../../utils/require.js';
     export default {
-        props: ['crowdsaleDatas', 'systemTime'],
+        props: ['crowdsaleDatas', 'systemTime'], // croAchieve-> 众筹量 currCirculation-> 总量 mostNumber-> 单笔最大
         data() {
             return {
                 status: 0,
@@ -70,12 +71,20 @@
         mounted() {
             this.handleTime(this.crowdsaleDatas, this.systemTime);
             this.countDown(this.crowdsaleDatas);
+            // console.log('crowdsaleDatas_>', this.crowdsaleDatas);
             let {croAchieve, currCirculation} = this.crowdsaleDatas;
-            this.progress = (croAchieve / currCirculation) * 100;
+            // 进度的判断
+            if(currCirculation <= 0){
+                this.progress = 0;
+            }else{
+                let progress = Math.round(croAchieve / currCirculation)
+                progress = progress > 1 ? 1 : progress;
+                this.progress = progress * 100;
+            }
         },
         computed: {
-            token(){
-                return this.$store.state.token || Cache.getSession('bier_token')
+            accountId(){
+                return this.$store.state.id || Cache.getSession('bier_userid');
             }
         },
         methods: {
@@ -106,10 +115,25 @@
                 }, 1000);
             },
             instantBuy(){
-                if(this.token){
-                    this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
-                    this.$store.commit('setInstantBuyVisible', true);
-                    this.$store.commit('valueChange');
+                if(this.accountId){
+                    this.judgeAuthStatus().then(res => {
+                        switch(res.authStatus){
+                            case 0:
+                                this.$message({message: this.$t('messageNotice.noAuth'), type: 'warning'})
+                                break;
+                            case 1:
+                                this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
+                                this.$store.commit('setInstantBuyVisible', true);
+                                this.$store.commit('valueChange');
+                                break;
+                            case 2:
+                                this.$message({message: this.$t('messageNotice.onAuth'), type: 'warning'})
+                                break;
+                            case 3:
+                                this.$message({message: this.$t('messageNotice.refuseAuth'), type: 'warining'})
+                                break;
+                        }
+                    })
                 }else {
                     this.$alert(this.$t('login.pleaseLogin'), {
                         confirmButtonText: this.$t('buttonAll.confirm'),
@@ -118,6 +142,21 @@
                         }
                     });
                 }
+            },
+            // 是否实名认证
+            judgeAuthStatus(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'QueryRevenueBasicInformation',
+                        data: {
+                            accountId: this.accountId
+                        },
+                        type: 'get'
+                    }).then(res => {
+                        console.log('authStatus_>', res.data);
+                        resolve(res.data);
+                    })
+                });
             },
         },
         destroyed() {
@@ -159,6 +198,7 @@
             @extend %text-abstract;
             height: 56px;
             line-height: 19px;
+            @include multi-line-hide();
         }
         &-list {
             @include content-flex();
@@ -175,6 +215,7 @@
                     border-radius: 3px;
                     text-align: center;
                     margin-bottom: 4px;
+                    @include text-ellipsis();
                     & span {
                         font-size: 12px;
                         display: inline-block;

@@ -50,7 +50,7 @@
     export default {
         data() {
             return {
-                pageSize: Config.pageSize,
+                pageSize: 9,
                 pageTotal: 0,
                 headerImg: {},
                 conceptOptions: [],
@@ -200,7 +200,7 @@
                 @include content-flex;
                 &-left,
                 &-right {
-                    width: 112px;
+                    width: 115px;
                 }
                 &-right {
                     margin-left: 32px;

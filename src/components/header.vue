@@ -444,10 +444,7 @@
                         }
                         &-username {
                             width: 4em;
-                            overflow: hidden;
-                            word-break: break-all;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
+                            @include text-ellipsis();
                         }
 					}
 				}

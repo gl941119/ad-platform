@@ -47,6 +47,22 @@
     }
 }
 
+// sigle line hide
+@mixin text-ellipsis {
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// multiple line hide
+@mixin multi-line-hide($line: 3) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    overflow: hidden;
+}
+
 // modify crowdsale-detail select style
 .crowdsale-detail-head-right-select input.el-input__inner {
     padding: 0 30px 0 10px;
