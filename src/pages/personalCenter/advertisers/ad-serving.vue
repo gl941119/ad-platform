@@ -57,7 +57,7 @@
 							{{accountAmount}} AFDT
 						</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button class="button" type="primary" size="small">{{$t('project.recharge')}}</el-button>
+							<el-button class="button" type="primary" size="small" @click="recharge">{{$t('project.recharge')}}</el-button>
 						</div>
 					</li>
 				</ul>
@@ -109,6 +109,11 @@
 			this.queryDetail();
 		},
 		methods: {
+			recharge(){
+				this.$router.push({
+					name:'main'
+				})
+			},
 			newProject(value){
 				this.$router.push({
 					path: 'advertisers/'+ value,

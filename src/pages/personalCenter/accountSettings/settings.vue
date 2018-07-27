@@ -727,10 +727,10 @@
 						this.idNum = '';
 						this.realName = '';
 						this.imageUrl = '';*/
-						/*this.$message({
+						this.$message({
 							message:this.$t('messageNotice.certificationSuccess'),
 							type:'success'
-						});*/
+						});
 						this.info();
 				})
 			},

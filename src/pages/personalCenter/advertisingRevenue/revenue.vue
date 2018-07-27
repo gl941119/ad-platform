@@ -20,7 +20,7 @@
 					</li>
 					<li class="withdraw_item_li">
 						<label>{{$t('project.withdrawal')}}：</label>
-						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{ required: true, min_value:100}" name="money" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" />
+						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{required:true,regex:/^\d{3,}/}" name="money" v-on:change="getHandlingFee" :placeholder="$t('project.enterMoney')" v-model="money" />
 					</li>
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
 					<span class="is-danger" v-if="insufficient" >{{$t('accountFlow.insufficient')}}</span>
@@ -141,7 +141,7 @@
 		watch:{
 			money(){
 				if(this.money>this.balance){
-					this.insufficient = !this.insufficient;
+					this.insufficient = true;
 				}else{
 					this.insufficient = false;
 				}

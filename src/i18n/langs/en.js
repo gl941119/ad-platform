@@ -277,7 +277,7 @@ const en = {
 		myWallet:' My wallet',
 		withdrawal:'Withdrawal',
 		enterMoney:'请输入提现金额',
-		emptyMoney:'提现金额至少为100，且必须是100的倍数',
+		emptyMoney:'提现金额至少为100',
 		notic:'After the recharge amount is received, the corresponding amount will automatically appear in the advertiser\'s account. ',
 		requireWithdraw:'已提交提现申请',
 	},

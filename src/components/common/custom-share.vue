@@ -39,16 +39,17 @@
             }
         },
         mounted(){
-            
+            if(this.token){
+	            this.queryCode();
+	        }
         },
         methods: {
         	clickCopy(value){
-                if(this.token){
-                    this.queryCode(value)
-                }else{
-                    this.utils.copy(value);
-                }
-        		
+                this.utils.copy(value);
+                this.$message({
+                     message: this.$t('messageNotice.copy'),
+                     type:'success'
+                });
         	},
             queryCode(value) {
                 Request({
@@ -59,12 +60,6 @@
                     type: 'get'
                 }).then(res => {
                     this.inviteCode = res.data.inviteCode;
-                    this.utils.copy(value);
-                    this.$message({
-                     message: this.$t('messageNotice.copy'),
-                     type:'success'
-                    });
-
                 })
             }
             
