@@ -10,7 +10,15 @@
 				</el-table-column>
 				<el-table-column prop="price" sortable :label="$t('projectList.price')">
 				</el-table-column>
-				<el-table-column prop="status" :label="$t('projectList.status')">
+				<el-table-column :label="$t('projectList.status')">
+					<template slot-scope="scope">
+						<div v-if="scope.row.status==1">{{$t('projectList.currency')}}</div>
+						<div v-if="scope.row.status==2">{{$t('projectList.coin')}}</div>
+						<div v-if="scope.row.status==3">{{$t('projectList.currencyIn')}}</div>
+						<div v-if="scope.row.status==4">{{$t('projectList.coinIn')}}</div>
+						<div v-if="scope.row.status==5">{{$t('projectList.currencyFailed')}}</div>
+						<div v-if="scope.row.status==6">{{$t('projectList.coinFailed')}}</div>
+					</template>
 				</el-table-column>
 				<el-table-column prop="updateTime" :label="$t('projectList.updateTime')">
 				</el-table-column>
