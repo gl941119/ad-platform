@@ -86,7 +86,8 @@
                 spinner: 'el-icon-loading',
                 background: 'rgba(0, 0, 0, 0.5)',
                 fullscreen: true,
-		        });
+                });
+                this.totalAdvertItemDatas = [];
 		        Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo(), this.findAdvertisement()])
                 .then(() => {
                     this.swiperInstance.init();

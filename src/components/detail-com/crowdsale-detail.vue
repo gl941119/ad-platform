@@ -274,6 +274,7 @@
                 &-left {
                     width: 232px;
                     @extend %crowdsale-detail-title;
+                    @include multi-line-hide(2);
                 }
                 &-right {
                     width: 126px;
@@ -336,6 +337,7 @@
                         &-tap {
                             @extend %crowdsale-detail-label;
                             margin-bottom: 9px;
+                            @include text-ellipsis();
                         }
                     }
                 }
