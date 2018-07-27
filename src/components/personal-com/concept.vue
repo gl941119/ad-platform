@@ -57,7 +57,7 @@
 			},
 			checked(item, index) {
 				var length = this.checkedData.length;
-				item.isSelected = true;
+				item.isSelected = !item.isSelected;
 				if(item.isSelected) {
 					if(length < 4) {
 						var obj={};
