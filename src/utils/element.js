@@ -42,7 +42,8 @@ import {
     Collapse,
     CollapseItem,
     Tabs,
-    TabPane
+    TabPane,
+    Tooltip
 } from 'element-ui';
 
 Vue.use(Pagination);
@@ -85,6 +86,7 @@ Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Tabs);
 Vue.use(TabPane);
+Vue.use(Tooltip);
 Vue.use(Loading.directive);
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
