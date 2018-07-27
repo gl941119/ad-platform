@@ -65,9 +65,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         sourceMap: false,
         cache: true
       }),
-      /* new OptimizeCSSAssetsPlugin({
+      new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: { safe: true, map: config.build.productionSourceMap }
-      }) */
+      })
     ]
   },
   plugins: [
