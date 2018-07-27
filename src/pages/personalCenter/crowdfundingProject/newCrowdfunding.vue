@@ -267,7 +267,7 @@
 						:data="params"
 						:headers="requestToken"
 						:limit="1"
-						accept=".jpg,.jpeg,.png,.pdf"
+						accept=".jpg,.png,.pdf"
 						:on-remove="handleRemove" multiple>
 						<el-button size="small" type="primary">{{$t('tokenInfo.upload')}}</el-button>
 					</el-upload>

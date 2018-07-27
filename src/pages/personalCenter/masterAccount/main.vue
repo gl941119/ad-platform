@@ -49,13 +49,6 @@
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
 				</el-table-column>
-				<el-table-column :label="$t('accountFlow.flowDirection')">
-					<template slot-scope="scope">
-						<div v-if="scope.row.flowType == 1">
-							{{$t('accountFlow.transfer')}}
-						</div>
-					</template>
-				</el-table-column>
 				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
 				</el-table-column>
 			</el-table>
@@ -75,13 +68,6 @@
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
-				</el-table-column>
-				<el-table-column :label="$t('accountFlow.flowDirection')">
-					<template slot-scope="scope">
-						<div v-if="scope.row.flowType == 1">
-							{{$t('accountFlow.deduction')}}
-						</div>
-					</template>
 				</el-table-column>
 				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
 				</el-table-column>

@@ -20,7 +20,7 @@
 					</li>
 					<li class="withdraw_item_li">
 						<label>{{$t('project.withdrawal')}}：</label>
-						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{ required: true, regex: /^(?:[1-9]\d0|[1-9]\d{2,}00)$/}" name="money" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" />
+						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{ required: true, min_value:100}" name="money" :placeholder="$t('project.enterMoney')" v-on:change="getHandlingFee" v-model="money" />
 					</li>
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
 					<span class="is-danger" v-if="insufficient" >{{$t('accountFlow.insufficient')}}</span>
@@ -61,13 +61,6 @@
 						</el-table-column>
 						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
 						</el-table-column>
-						<el-table-column :label="$t('accountFlow.flowDirection')">
-							<template slot-scope="scope">
-								<div v-if="scope.row.flowType == 1">
-									{{$t('accountFlow.transfer')}}
-								</div>
-							</template>
-						</el-table-column>
 						<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
 						</el-table-column>
 					</el-table>
@@ -88,13 +81,6 @@
 						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
 						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
-						</el-table-column>
-						<el-table-column :label="$t('accountFlow.flowDirection')">
-							<template slot-scope="scope">
-								<div v-if="scope.row.flowType == 1">
-									{{$t('accountFlow.revenue')}}
-								</div>
-							</template>
 						</el-table-column>
 						<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
 						</el-table-column>
