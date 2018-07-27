@@ -2,8 +2,11 @@
 	<div class="ad-serving">
 		<div class="ad-serving_title">
 			<div class="ad-serving_title_info">{{$t('adServing.adSer')}}</div>
-			<el-button class="ad-serving_title_button" :title="title" @click="newProject(isCheck)" type="text">{{$t('adServing.trafficking')}}
-			</el-button>
+			<el-tooltip :content="title" :disabled="titleShow" placement="top" effect="light">
+				<el-button class="ad-serving_title_button" :title="title" @click="newProject(isCheck)" type="text">
+					{{$t('adServing.trafficking')}}
+				</el-button>
+			</el-tooltip>
 		</div>
 		<div class="ad-serving-info">
 			<div class="ad-serving-info-top">
@@ -84,6 +87,7 @@
 				isCheck:'',
 				advertId:'',
 				title:'',//拒绝原因
+				titleShow:true,
 				accountAmount:'',
 				currentPosition:'',
 				deadline:'',
@@ -148,6 +152,7 @@
 					this.isCheck = isCheck;
 					if(this.isCheck == 2){
 						this.title = noPassReason;
+						this.titleShow = !this.titleShow;
 					}
 					this.accountAmount = accountAmount;//账户余额
 					this.currentPosition = currentPosition;//当前位置
