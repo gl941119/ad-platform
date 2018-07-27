@@ -134,6 +134,12 @@ const en = {
 		status:'Condition',
 		updateTime:'turnover time',
 		notic :' After successful crowdfunding, the corresponding Token will be directly recharged into your wallet, and the relevant unsuccessful funds will be returned the same way ',
+		currency:'打币成功1',
+		coin:'退币成功1',
+		currencyIn:'打币中1',
+		coinIn:'退币中1',
+		currencyFailed:'打币失败1',
+		coinFailed:'退币失败1',
 	},
 	invite:{
 		inviteUser:'Invite',

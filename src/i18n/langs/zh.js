@@ -134,6 +134,12 @@ const zh = {
 		status:'状态',
 		updateTime:'状态更新时间',
 		notic:'所有众筹成功后相应的币会直接充值到您的钱包中，未成功的相关款项会原路返回',
+		currency:'打币成功',
+		coin:'退币成功',
+		currencyIn:'打币中',
+		coinIn:'退币中',
+		currencyFailed:'打币失败',
+		coinFailed:'退币失败',
 	},
 	invite:{
 		inviteUser:'邀请用户',
