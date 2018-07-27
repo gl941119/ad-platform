@@ -39,7 +39,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     type = type.toUpperCase();
     url = ajaxURL[url];
     let token = store.state.token || Cache.getSession('bier_token');
-    let lang = store.state.slangChange || Cache.getLocal('bier_langChange') || i18n.locale;
+    let lang = store.state.slangChange || i18n.locale;
 	if(lang == 'en'){
 		lang = lang.toUpperCase();
 	}
