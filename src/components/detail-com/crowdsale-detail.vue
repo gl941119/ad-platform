@@ -86,9 +86,9 @@
         </div>
     </div>
     <div class="crowdsale-footer">
-        <el-button v-if="status===1" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{remainTime}}{{showText}}</el-button>
-        <el-button @click="instantBuy" v-if="status===2" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn go-to-buy"><span>{{$t('home.time')}}{{remainTime}}</span><span>{{showText}}</span></el-button>
-        <el-button v-if="status===3" :class="{'reserve-btn':status===3}" class="crowdsale-footer-btn">{{$t('home.over')}}</el-button>
+        <el-button v-show="status===1&&progress<100" :class="{'reserve-btn':status===3||progress===100}" class="crowdsale-footer-btn">{{remainTime}}{{showText}}</el-button>
+        <el-button @click="instantBuy" v-show="status===2&&progress<100" :class="{'reserve-btn':status===3||progress===100}" class="crowdsale-footer-btn go-to-buy"><span>{{$t('home.time')}}{{remainTime}}</span><span>{{showText}}</span></el-button>
+        <el-button v-show="status===3||progress===100" :class="{'reserve-btn':status===3||progress===100}" class="crowdsale-footer-btn">{{$t('home.over')}}</el-button>
     </div>
 </div>
 </template>
@@ -112,7 +112,15 @@
             this.handleTime(this.detailData, this.systemTime);
             this.countDown(this.detailData);
             let {croAchieve, currCirculation} = this.detailData;
-            this.progress = (croAchieve / currCirculation) * 100;
+            console.log('detail corwdsale_>', this.detailData);
+            // 进度的判断
+            if(currCirculation <= 0){
+                this.progress = 0;
+            }else{
+                let progress = Math.round(croAchieve / currCirculation)
+                progress = progress > 1 ? 1 : progress;
+                this.progress = progress * 100;
+            }
         },
         computed: {
             options() {
@@ -130,15 +138,16 @@
                     site: website,
                 }];
             },
-            token(){
-                return this.$store.state.token || Cache.getSession('bier_token')
+            accountId(){
+                return this.$store.state.id || Cache.getSession('bier_userid');
             }
         },
         methods: {
             crowdSaleSelect(v) {
                 let sel = this.options.find(item => v === item.value);
                 if(sel){
-                    window.open(sel.site,'target');
+                    // window.open(sel.site,'target'); // 会被拦截
+                    window.location.href = sel.site;
                 }
                 this.$refs.crowdSaleSelectCom.blur();
             },
@@ -172,10 +181,25 @@
                 }, 1000);
             },
             instantBuy(){
-                if(this.token){
-                    this.$store.commit('saveInstantBuyDataId', this.detailData.id);
-                    this.$store.commit('setInstantBuyVisible', true);
-                    this.$store.commit('valueChange');
+                if(this.accountId){
+                    this.judgeAuthStatus().then(res => {
+                        switch(res.authStatus){
+                            case 0:
+                                this.$message({message: this.$t('messageNotice.noAuth'), type: 'warning'})
+                                break;
+                            case 1:
+                                this.$store.commit('saveInstantBuyDataId', this.detailData.id);
+                                this.$store.commit('setInstantBuyVisible', true);
+                                this.$store.commit('valueChange');
+                                break;
+                            case 2:
+                                this.$message({message: this.$t('messageNotice.onAuth'), type: 'warning'})
+                                break;
+                            case 3:
+                                this.$message({message: this.$t('messageNotice.refuseAuth'), type: 'warining'})
+                                break;
+                        }
+                    })
                 }else {
                     this.$alert(this.$t('login.pleaseLogin'), {
                         confirmButtonText: this.$t('buttonAll.confirm'),
@@ -184,6 +208,21 @@
                         }
                     });
                 }
+            },
+            // 是否实名认证
+            judgeAuthStatus(){
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'QueryRevenueBasicInformation',
+                        data: {
+                            accountId: this.accountId
+                        },
+                        type: 'get'
+                    }).then(res => {
+                        console.log('authStatus_>', res.data);
+                        resolve(res.data);
+                    })
+                });
             },
         },
         destroyed() {
@@ -276,6 +315,7 @@
                         &-tap {
                             width: 67px;
                             @extend %crowdsale-detail-label;
+                            @include text-ellipsis();
                             &:nth-child(2n) {
                                 margin-left: 9px;
                             }

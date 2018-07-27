@@ -78,7 +78,8 @@ export default {
                 this.advertDatas.websiteResultList.forEach(item => {
                     if(val === item.id){
                         let {websiteAddress} = item;
-                        window.open(websiteAddress,'target');
+                        // window.open(websiteAddress,'target');
+                        window.location.href = websiteAddress;
                     }
                 });
                 this.$refs.advertSelect.blur();
@@ -161,6 +162,7 @@ export default {
             width: 493px;
             @extend %text-abstract;
             height: 60px;
+            @include multi-line-hide();
         }
     }
     &-right {

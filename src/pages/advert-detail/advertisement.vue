@@ -192,7 +192,7 @@ import Config from '../../utils/config.js';
                 height: 65px;
                 @include content-flex;
                 &-left {
-                    width: 112px;
+                    width: 115px;
                 }
             }
         }
