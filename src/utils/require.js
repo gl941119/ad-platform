@@ -6,6 +6,7 @@ import { Message, Loading } from 'element-ui';
 import ajaxURL from '../config';
 import config from './config';
 import Utils from './util.js';
+import i18n from '../i18n/i18n.js';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.url.localTestUrl : config.url.productUrl;
 
@@ -38,7 +39,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     type = type.toUpperCase();
     url = ajaxURL[url];
     let token = store.state.token || Cache.getSession('bier_token');
-    let lang = store.state.slangChange || Cache.getLocal('bier_langChange');
+    let lang = store.state.slangChange || i18n.locale;
 	if(lang == 'en'){
 		lang = lang.toUpperCase();
 	}
@@ -50,7 +51,12 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
             	lang,
             },
         }):
-        axios.get(url, {params: data});
+        axios.get(url, {params: data,
+        	headers: {
+            	token,
+            	lang,
+            },
+        });
     } else if (type === 'POST') {
         if (isJson) {
             return token ? axios.post(url, data, {
@@ -69,7 +75,9 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
         }
         return token ? axios.post(url, qs.stringify(data), {
             headers: {token,lang},
-        }) : axios.post(url, qs.stringify(data));
+        }) : axios.post(url, qs.stringify(data),{
+        	headers: {lang},
+        });
     }else if (type === 'PUT') {
         return token?axios.put(url, data, {
             headers: { token,lang},

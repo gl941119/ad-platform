@@ -245,7 +245,7 @@
 										accept=".jpg,.png"
 										:on-success="getImg">
 										<img v-if="imageUrl" :src="imageUrl" class="avatar">
-										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+										<i v-else class="el-icon-plus custom-element-icon-shangchuanzhaopian avatar-uploader-icon"></i>
 									</el-upload>
 								</div>
 								<div class="el-collapse-item__content_authentication_li_precautions">
@@ -755,6 +755,7 @@
 	@import '../../../assets/css/global.scss';
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
+	@import '../../../assets/css/upload.css';
 	.accountSettings {
 		padding: 0 28px;
 		&_content {
@@ -815,8 +816,8 @@
 					font-size: 12px;
 					color: rgba(153, 153, 153, 1);
 					position: absolute;
-					top: 0;
-    				right: 180px;
+					top: 6px;
+    				left: 570px; 
 					&_title {
 						font-size: 14px;
 						color: rgba(96, 98, 102, 1);
@@ -848,7 +849,7 @@
 				}
 			}
 			.last {
-				height: 300px;
+				height: auto;
 				border: 0;
 				padding-left: 144px;
 				position: relative;
@@ -868,7 +869,8 @@
 			}
 		}
 		&-box {
-			width: 395px;
+			min-width: 395px;
+    		max-width: 555px;
 			background: rgba(255, 255, 255, 1);
 			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
 			margin: 0 auto;
@@ -919,28 +921,18 @@
 		color: rgba(255, 255, 255, 1);
 		margin: 26px 0 0 144px;
 	}
-	.avatar-uploader .el-upload {
-		border: 1px dashed #d9d9d9;
-		border-radius: 6px;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-	}
-	.avatar-uploader .el-upload:hover {
-		border-color: #409EFF;
-	}
 	.avatar-uploader-icon {
-		font-size: 28px;
+		font-size: 130px;
 		color: #8c939d;
-		width: 300px;
-		height: 200px;
-		line-height: 178px;
+		width: 400px;
+		height: 300px;
+		line-height: 300px;
 		text-align: center;
 		border: 1px solid #EEEEEE;
 	}
 	.avatar {
-		width: 300px;
-		height: 200px;
+		width: 400px;
+		height: 300px;
 		display: block;
 	}
 	.el-button-getCode {

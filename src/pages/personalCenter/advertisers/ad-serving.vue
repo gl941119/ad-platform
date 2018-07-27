@@ -12,18 +12,18 @@
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.averagePrice')}} (AFDT)</h5>
 						<div class="ad-serving-info-top-item-li-data" v-if="isCheck == 1">{{averagePrice}}</div> 
-						<div> 
+						<div class="ad-serving-info-top-item-li-button"> 
 							<el-button v-if="isCheck == 1" type="text" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
 						</div>
-						<el-dialog :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
+						<el-dialog width="20%" :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
 						  <el-form :model="form">
 						    <el-form-item :label="$t('adServing.all')" :label-width="formLabelWidth">
-						        <el-input-number v-model="form.advertPrice" :step="0.05" :min="0.1" controls-position="right" @change="handleChange">
+						        <el-input-number v-model="form.advertPrice" :step="0.05" :min="0.1" controls-position="right">
 						        </el-input-number>
 						    </el-form-item>
 						    <div v-for="(item, index) in form.conceptManageList" :key="index">
 						    	<el-form-item :label="item.name" :label-width="formLabelWidth">
-							      	<el-input-number v-model="item.conceptPrice" :step="0.05" :min="0.1" controls-position="right" @change="handleChange">
+							      	<el-input-number v-model="item.conceptPrice" :step="0.05" :min="0.1" controls-position="right">
 							      	</el-input-number>
 							    </el-form-item>
 						    </div>
@@ -35,29 +35,26 @@
 					</li>
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.currentPosition')}}</h5>
-						<div class="ad-serving-info-top-item-li-data">32</div> 
-						<div class="ad-serving-info-top-item-li-button"> 
+						<div class="ad-serving-info-top-item-li-data">{{currentPosition}}</div> 
+						<!--<div class="ad-serving-info-top-item-li-button"> 
 							<el-button type="text">{{$t('adServing.banner')}}</el-button>
-						</div>
+						</div>-->
 					</li>
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.totalnumber')}}</h5>
-						<div class="ad-serving-info-top-item-li-data">32,234,889</div> 
+						<div class="ad-serving-info-top-item-li-data">{{totalClicks}}</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
-							<el-button type="text">{{$t('adServing.stop')}}20180519</el-button>
+							<el-button type="text">{{$t('adServing.stop')}}{{deadline}}</el-button>
 						</div>
 					</li>
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.yestoday')}}</h5>
-						<div class="ad-serving-info-top-item-li-data">5799</div> 
-						<!--<div> 
-							<el-button type="text" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
-						</div>-->
+						<div class="ad-serving-info-top-item-li-data">{{yesterdayClicks}}</div> 
 					</li>
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.accountMoney')}}(AFDT)</h5>
 						<div class="ad-serving-info-top-item-li-data">
-							189.99AFDT
+							{{accountAmount}} AFDT
 						</div> 
 						<div class="ad-serving-info-top-item-li-button"> 
 							<el-button class="button" type="primary" size="small">{{$t('project.recharge')}}</el-button>
@@ -87,6 +84,11 @@
 				isCheck:'',
 				advertId:'',
 				title:'',//拒绝原因
+				accountAmount:'',
+				currentPosition:'',
+				deadline:'',
+				totalClicks:'',
+				yesterdayClicks:'',
 			}
 		},
 		computed: {
@@ -124,13 +126,29 @@
 					type: 'get',
 					flag: true,
 				}).then(res => {
+					let {
+						advertId,
+						averagePrice,
+						isCheck,
+						noPassReason,
+						accountAmount,
+						currentPosition,
+						deadline,
+						totalClicks,
+						yesterdayClicks,
+					} = res.data;
 					this.form = res.data;
-					this.advertId = res.data.advertId;
-					this.averagePrice = res.data.averagePrice;
-					this.isCheck = res.data.isCheck;
+					this.advertId = advertId;
+					this.averagePrice = averagePrice;
+					this.isCheck = isCheck;
 					if(this.isCheck == 2){
-						this.title = res.data.noPassReason;
+						this.title = noPassReason;
 					}
+					this.accountAmount = accountAmount;//账户余额
+					this.currentPosition = currentPosition;//当前位置
+					this.deadline = deadline;//截止日期
+					this.totalClicks = totalClicks;//累计点击
+					this.yesterdayClicks = yesterdayClicks;//昨日点击
 				})
 			},
 			changePrice(){
@@ -152,9 +170,6 @@
 						that.queryDetail();
 					}
 				})
-			},
-			handleChange(){
-				
 			},
 		}
 	}

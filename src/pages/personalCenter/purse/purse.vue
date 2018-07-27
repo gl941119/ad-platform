@@ -132,12 +132,13 @@
 	
 	.purse_address {
 		display: flex;
-		justify-content:flex-start;
 		margin-top: 20px;
 		label{
 			width: 120px;
-			font-size: 16px;
-			line-height: 32px;
+		    font-size: 16px;
+		    max-height: 40px;
+		    display: flex;
+		    align-items: center;
 		}
 		.input{
 			width: 500px;
