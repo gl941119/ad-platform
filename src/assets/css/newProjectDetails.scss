@@ -28,9 +28,10 @@
                 color: rgba(96, 98, 102, 1);
                 line-height: 20px;
                 >label{
-                    width: 120px;
+                    width: 130px;
                     height: 40px;
-                    line-height: 40px;
+                    display: flex;
+                    align-items: center;
                 }
                 .label{
                     width: 105px;
