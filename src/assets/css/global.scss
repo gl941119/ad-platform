@@ -58,9 +58,9 @@
 // multiple line hide
 @mixin multi-line-hide($line: 3) {
     display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: $line;
     overflow: hidden;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
 }
 
 // modify crowdsale-detail select style
