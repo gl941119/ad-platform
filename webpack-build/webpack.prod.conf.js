@@ -36,7 +36,8 @@ const webpackConfig = merge(baseWebpackConfig, {
           {
             loader: 'css-loader',
             options: { 
-              sourceMap: false
+                sourceMap: false,
+                minimize:true
             }
           },
           {
