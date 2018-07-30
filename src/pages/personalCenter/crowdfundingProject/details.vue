@@ -492,18 +492,19 @@
 				}
 			},
 			changeDetails() {
+				console.log(this.checkeData)
 				if(this.checkeData.length>0){
 					if(this.checkeData[0]){
-						var concept1Id = this.checkeData[0].conceptId;
+						var concept1Id = this.checkeData[0].conceptId || this.checkeData[0].id;
 					}
 					if(this.checkeData[1]){
-						var concept2Id = this.checkeData[1].conceptId;
+						var concept2Id = this.checkeData[1].conceptId || this.checkeData[1].id;
 					}
 					if(this.checkeData[2]){
-						var concept3Id = this.checkeData[2].conceptId;
+						var concept3Id = this.checkeData[2].conceptId || this.checkeData[2].id;
 					}
 					if(this.checkeData[3]){
-						var concept4Id = this.checkeData[3].conceptId;
+						var concept4Id = this.checkeData[3].conceptId || this.checkeData[3].id;
 					}
 				}else{
 					var concept1Id = this.conceptId[0];

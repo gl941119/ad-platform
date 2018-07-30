@@ -125,6 +125,7 @@ const en = {
 		warn:' Risk warning: AFD  has fulfilled its obligation to review compliance with crowdfunding projects. Investors are expected to be aware of and be cautious about the risk nature of their investments ',
 		timeLeft:'the rest time of this crowdfunding',
 		sorry:'Sorry，nothing with this category，Try other content',
+		day:'Day',
 	},
 	projectList:{
 		tokenName:'Token Name',
@@ -297,6 +298,11 @@ const en = {
 		transfer:'transfer to wallet',
 		deduction:'deduction of advertisement',
 		insufficient:'not sufficient balance',
+		withdraw:'申请已提交',
+		successTransfer:'转账成功',
+		passReview:'待转账（审核通过）',
+		onReview:'待审核',
+		refuseReview:'审核不通过',
 	},
 	adServing:{
 		adSer:'Ad serving',

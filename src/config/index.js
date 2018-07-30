@@ -21,6 +21,7 @@ export default {
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',//收益账户流水
     QueryMainBasicInformation: 'blockchainadvert/advert-main/account-id',//主账户
     QueryMainAccountFlow: 'blockchainadvert/main-flow/main-id',//账户流水
+    PostWithdraw: 'blockchainadvert/account/withdraw',//提现
     /*图片上传*/
     Upload:'blockchainadvert/common/upload-file',
     /*我发起的众筹*/

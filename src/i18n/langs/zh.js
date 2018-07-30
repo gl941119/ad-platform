@@ -125,6 +125,7 @@ const zh = {
 		timeLeft:'本轮众筹剩余时间',
 		warn:'风险警示：AFD对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
 		sorry:'抱歉，该分类暂无，试试搜索其他内容',
+		day:'天',
 	},
 	projectList:{
 		tokenName:'Token名称',
@@ -287,6 +288,7 @@ const zh = {
 		search:'搜索',
 		dataTime:'时间',
 		desc:'描述',
+		status:'状态',
 		flowDirection:'流向',
 		amountOfMoney:'金额（AFDT）',
 		withdrawals:'提现记录',
@@ -297,6 +299,11 @@ const zh = {
 		transfer:'划转至钱包',
 		deduction:'广告扣费',
 		insufficient:'余额不足',
+		withdraw:'申请已提交',
+		successTransfer:'转账成功',
+		passReview:'待转账（审核通过）',
+		onReview:'待审核',
+		refuseReview:'审核不通过',
 	},
 	adServing:{
 		adSer:'广告投放',

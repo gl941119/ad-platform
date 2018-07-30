@@ -25,10 +25,11 @@
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
 					<span class="is-danger" v-if="insufficient" >{{$t('accountFlow.insufficient')}}</span>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
-						<input class="tixian" :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="input1" />
+						<input class="tixian" :class="[errors.has('password')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="password" :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="password" />
 					</li>
+					<span class="is-danger" v-show="errors.has('password')">{{ errors.first('password') }}</span>
 					<div style="text-align: center;">
-						<button class="right_now">{{$t('project.withdraw')}}</button>
+						<button class="right_now" @click="withdrawls">{{$t('project.withdraw')}}</button>
 					</div>
 				</ul>
 			</div>
@@ -57,11 +58,19 @@
 				<el-tab-pane value="1">
 				    <span slot="label">{{$t('accountFlow.withdrawals')}}</span>
 				    <el-table :data="flowData" style="width: 100%">
-						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+						<el-table-column prop="createTime" width="150" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
-						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
+						<el-table-column prop="desc" :label="$t('accountFlow.desc')" >
 						</el-table-column>
-						<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+						<el-table-column :label="$t('accountFlow.status')" >
+							<template slot-scope="scope">
+								<div v-if="scope.row.status==1">{{$t('accountFlow.successTransfer')}}</div>
+								<div v-if="scope.row.status==2">{{$t('accountFlow.passReview')}}</div>
+								<div v-if="scope.row.status==3">{{$t('accountFlow.onReview')}}</div>
+								<div v-if="scope.row.status==4">{{$t('accountFlow.refuseReview')}}</div>
+							</template>
+						</el-table-column>
+						<el-table-column prop="money" width="200" :label="$t('accountFlow.amountOfMoney')">
 						</el-table-column>
 					</el-table>
 					<div class="advertising_revenu_account_flow_data_pages">
@@ -78,11 +87,11 @@
 				<el-tab-pane>
 				    <span slot="label" value="2">{{$t('accountFlow.income')}}</span>
 				    <el-table :data="flowDatas" style="width: 100%">
-						<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+						<el-table-column prop="createTime" width="150" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
 						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
 						</el-table-column>
-						<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+						<el-table-column prop="money" width="200" :label="$t('accountFlow.amountOfMoney')">
 						</el-table-column>
 					</el-table>
 					<div class="advertising_revenu_account_flow_data_pages">
@@ -104,6 +113,7 @@
 	import Request from '../../../utils/require.js';
 	import Utils from '../../../utils/util.js';
 	import Cache from '../../../utils/cache';
+	import validateFun from '../../../utils/validate.js';
 	export default {
 		data() {
 			return {
@@ -111,7 +121,7 @@
 				flowDatas:[],
 				balance: '',
 				money: '',
-				input1:'',
+				password:'',
 				currentPage: 1,
 				current: 1,
 				size: 30,
@@ -148,6 +158,32 @@
 			}
 		},
 		methods: {
+			withdrawls(){
+				this.$validator.validateAll().then((result) => {
+					console.log(!this.insufficient);
+					if(!this.insufficient){
+						if(result){
+							Request({
+								url: 'PostWithdraw',
+								data: {
+									accountId: this.accountId,
+									amount: this.money,
+									cost: this.handlingFee,
+									password: validateFun.encrypt(this.password)
+								},
+								flag:true,
+							}).then(res => {
+								this.money = '',
+								this.password = '',
+								this.$message({
+									message:this.$t('accountFlow.withdraw'),
+									type:'success'
+								});
+							})
+						}
+					}
+				});
+			},
 			getHandlingFee() {
 				return  this.money*1/1000;
 			},
@@ -185,7 +221,6 @@
 					},
 					type: 'get'
 				}).then(res => {
-					console.log(res);
 					this.flowData = res.data;
 					this.total = res.total;
 				})

@@ -1,7 +1,7 @@
 <template>
 	<div class="statement">
 		<div class="statement_info">
-			<h3>《广告发布协议》</h3>
+			<h3>《众筹发布协议》</h3>
 			<div class="statement_info_title">火币与用户共同确认：</div>
 			<ul class="statement_info_item">
 				<li>关高噶U哥那里看电视了可没逗死非常的舒服次哦的身份的就是快乐大发牢骚看到了伐看得见司法解释受打击了客服尽快适当放宽都市风流健康减肥技术的开发建设</li>
@@ -34,6 +34,11 @@
 
 <script>
 	export default{
+		data(){
+			return {
+				
+			}
+		},
 		methods:{
 			back(){
 				this.$router.go(-1);
