@@ -13,7 +13,8 @@ export default {
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',
-    SendVerifyCode: 'blockchainadvert/account/sendRegistCode',
+    GetVerifyFromSer: 'blockchainadvert/account/getValidateCode', // get verify from service
+    SendVerifyCode: 'blockchainadvert/account/sendRegistCode', // email verify
     TelegramAuthorizeCB: 'blockchainadvert/authorize/telegram',
     SignOut: 'blockchainadvert/account/signout',
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',//收益账户
