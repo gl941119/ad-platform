@@ -283,6 +283,7 @@
 	import Cache from '../../../utils/cache';
 	import Utils from '../../../utils/util';
 	import Country from '../../../utils/countrys';
+	import validateFun from '../../../utils/validate.js';
 	export default {
 		data() {
 			return {
@@ -406,7 +407,7 @@
 							url: 'SetPassword',
 							data: {
 								verificationCode: this.codePassword,
-								password: this.newPassword,
+								password: validateFun.encrypt(this.newPassword),
 							},
 							type: 'post',
 							flag: true
@@ -440,7 +441,7 @@
 							url: 'SetTradePassword',
 							data: {
 								verificationCode: this.codeTradePassword,
-								password: this.tradePassword,
+								password: validateFun.encrypt(this.tradePassword),
 							},
 							type: 'post',
 							flag: true
@@ -571,8 +572,8 @@
 							url: 'QueryAccountSettings',
 							data: {
 								id: this.accountId,
-								tradePassword: this.newTradePassword,
-								oldTradePassword: this.oldTradePassword,
+								tradePassword: validateFun.encrypt(this.newTradePassword),
+								oldTradePassword: validateFun.encrypt(this.oldTradePassword),
 								verificationCode: this.codeTradePassword,
 							},
 							type: 'post',
@@ -607,8 +608,8 @@
 						url: 'QueryAccountSettings',
 						data: {
 							id: this.accountId,
-							oldPassword: this.oldPassword,
-							password: this.newPassword,
+							oldPassword: validateFun.encrypt(this.oldPassword),
+							password: validateFun.encrypt(this.newPassword),
 							verificationCode: this.codePassword,
 						},
 						type: 'post',
