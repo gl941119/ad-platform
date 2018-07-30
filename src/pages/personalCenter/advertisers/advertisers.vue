@@ -124,7 +124,7 @@
 			<li class="newCrowdfunding_item_li">
 				<label>{{$t('projectInfo.projectDesc')}}</label>
 				<div class="textarea">
-					<el-input @blur="desc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" :placeholder="$t('projectInfo.enterProjectDesc')" :disabled="disabled" v-model="newCrowdfunding.proDesc" />
+					<el-input @blur="desc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" :placeholder="$t('projectInfo.enterProjectDesc')" :disabled="disabled" v-model="newCrowdfunding.proDesc" >
 					</el-input>
 				</div>
 				<span class="is-danger" v-if="proDescr">{{$t('projectInfo.emptyProjectDesc')}}</span>
@@ -220,7 +220,6 @@
 					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress"  :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
 				<span class="is-danger" v-show="errors.has('websiteAddress')">{{ errors.first('websiteAddress') }}</span>
-			</li>
 			</li>
 		</ul>
 		<div class="submit_box">
