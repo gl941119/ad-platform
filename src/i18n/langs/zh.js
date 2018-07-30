@@ -310,7 +310,7 @@ const zh = {
 		currentPosition:'当前位置（位）',
 		banner:'上传banner',
 		totalnumber:'累计点击（次）',
-		stop:'数据截止到',
+		stop:'数据截止到 ',
 		yestoday:'昨日点击（次）',
 		accountMoney:'广告账户余额',
 	},
