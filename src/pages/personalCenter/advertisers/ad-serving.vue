@@ -9,8 +9,8 @@
 			</el-tooltip>
 		</div>
 		<div class="ad-serving-info">
-			<div class="ad-serving-info-top">
-				<div class="ad-serving-info-top-title">PPC</div>
+			<div class="ad-serving-info-top" v-if="isCheck == 1 || isCheck == 3">
+				<div class="ad-serving-info-top-title">{{advertTitle}}</div>
 				<ul class="ad-serving-info-top-item">
 					<li class="ad-serving-info-top-item-li">
 						<h5>{{$t('adServing.averagePrice')}} (AFDT)</h5>
@@ -93,6 +93,7 @@
 				deadline:'',
 				totalClicks:'',
 				yesterdayClicks:'',
+				advertTitle:'',
 			}
 		},
 		computed: {
@@ -145,7 +146,9 @@
 						deadline,
 						totalClicks,
 						yesterdayClicks,
+						advertTitle
 					} = res.data;
+					console.log(res);
 					this.form = res.data;
 					this.advertId = advertId;
 					this.averagePrice = averagePrice;
@@ -159,6 +162,7 @@
 					this.deadline = deadline;//截止日期
 					this.totalClicks = totalClicks;//累计点击
 					this.yesterdayClicks = yesterdayClicks;//昨日点击
+					this.advertTitle = advertTitle;
 				})
 			},
 			changePrice(){
