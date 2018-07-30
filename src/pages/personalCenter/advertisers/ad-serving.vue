@@ -148,7 +148,6 @@
 						yesterdayClicks,
 						advertTitle
 					} = res.data;
-					console.log(res);
 					this.form = res.data;
 					this.advertId = advertId;
 					this.averagePrice = averagePrice;
