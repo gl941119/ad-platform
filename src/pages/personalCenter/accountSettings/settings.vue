@@ -35,7 +35,7 @@
 								<el-input :placeholder="$t('setting.enterNickname')" v-model="nickName"></el-input>
 								<span v-show="errors.has('nickName')" class="help is-danger">{{ errors.first('nickName') }}</span>
 								<div class="el-collapse-item__content-box_buttonBox">
-									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
+									<button class="cancle" @click="cancle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="changeNickName">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
-									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
+									<button class="cancle" @click="cancle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="toBindEmail">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
@@ -97,7 +97,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
-									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
+									<button class="cancle" @click="cancle">{{$t('buttonAll.cancle')}}</button>
 									<button v-if="!existPassword" @click="setPassword">{{$t('buttonAll.confirm')}}</button>
 									<button v-if="existPassword" @click="changePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
@@ -128,7 +128,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
-									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
+									<button class="cancle" @click="cancle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="setTradePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
@@ -152,7 +152,7 @@
 									</div>
 								</div>
 								<div class="el-collapse-item__content-box_buttonBox">
-									<button class="cancle" @click="cnacle">{{$t('buttonAll.cancle')}}</button>
+									<button class="cancle" @click="cancle">{{$t('buttonAll.cancle')}}</button>
 									<button @click="changeTradePassword">{{$t('buttonAll.confirm')}}</button>
 								</div>
 							</div>
