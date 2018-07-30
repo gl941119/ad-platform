@@ -78,6 +78,16 @@
     width: 100%;
     @include content-flex(space-between);
 }
+.crowdsale-item-progress .el-progress-bar__outer, .crowdsale-item-progress .el-progress-bar__inner {
+    border-radius: 0;
+}
+.crowdsale-item-progress .el-progress-bar__outer {
+    background-color: #E0E0E0;
+    box-shadow:0 0 4px 0px rgba(0,0,0,0.5) inset;
+}
+.crowdsale-item-progress .el-progress-bar__inner {
+    background:linear-gradient(90deg,rgba(161,72,208,1),rgba(213,77,189,1),rgba(231,78,176,1));
+}
 //settings el-collapse last style
 .settings_box .border-none .el-collapse-item__header{
     border: 0;
