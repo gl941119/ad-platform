@@ -40,7 +40,7 @@
         <div>
             <div v-show="status===1&&progress<100" class="crowdsale-item-footer">
                 <span class="crowdsale-item-footer-text">09天后即将开始</span>
-                <a class="crowdsale-item-footer-website" href="javascript:;">查看官网</a>
+                <a class="crowdsale-item-footer-website" href="javascript:;">查看更多</a>
                 <el-button class="crowdsale-item-footer-btn">{{$t('home.begin')}}</el-button>
             </div>
             <div v-show="status===2&&progress<100" class="crowdsale-item-instant clearfix">
@@ -58,11 +58,11 @@
                     <span>天</span>
                 </div>
                 <el-button @click="instantBuy" class="crowdsale-item-instant-btn">{{$t('home.immediately')}}</el-button>
-                <a class="crowdsale-item-instant-website" href="javascript:;">查看官网</a>
+                <a class="crowdsale-item-instant-website" href="javascript:;">查看更多</a>
             </div>
             <div v-show="status===3||progress===100" class="crowdsale-item-end clearfix">
                 <div class="crowdsale-item-end-btn">{{$t('home.over')}}</div>
-                <a class="crowdsale-item-end-website" href="javascript:;">查看官网</a>
+                <a class="crowdsale-item-end-website" href="javascript:;">查看更多</a>
             </div>
         </div>
     </div>
