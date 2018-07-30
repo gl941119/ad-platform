@@ -84,6 +84,10 @@
                 <el-progress type="circle" :show-text="false" :width="62" color="#FF9500" :percentage="progress"></el-progress>
             </div>
         </div>
+        <div class="crowdsale-detail-disclaimer clearfix">
+            <el-checkbox class="crowdsale-detail-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
+            <a class="crowdsale-detail-disclaimer-item">免责声明</a>
+        </div>
     </div>
     <div class="crowdsale-footer">
         <el-button v-show="status===1&&progress<100" :class="{'reserve-btn':status===3||progress===100}" class="crowdsale-footer-btn">{{remainTime}}{{showText}}</el-button>
@@ -107,6 +111,7 @@
                 utils: new Utils(),
                 timer: undefined,
                 progress: 0,
+                disclaimerChecked: false,
             }
         },
         mounted() {
@@ -158,8 +163,10 @@
             handleTime(data, systemTime) {
                 let {
                     status,
-                    remainTime
-                } = this.utils.handleTime(data, systemTime);
+                    remainTime,
+                    dayArr
+                } = this.utils.handleTime(data, systemTime, this.$t('crowdFunding.day'));
+                // console.log('data-?>',data.id, data, remainTime, dayArr);
                 this.status = status;
                 switch (status) {
                     case 1:
@@ -189,6 +196,7 @@
                                 this.$message({message: this.$t('messageNotice.noAuth'), type: 'warning'})
                                 break;
                             case 1:
+                                this.disclaimerChecked = true;
                                 this.$store.commit('saveInstantBuyDataId', this.detailData.id);
                                 this.$store.commit('setInstantBuyVisible', true);
                                 this.$store.commit('valueChange');
@@ -264,7 +272,6 @@
         }
         &-detail {
             width: 100%;
-            height: 418px;
             background: #fff;
             padding: 16px 12px 0;
             &-head {
@@ -352,9 +359,22 @@
                     margin-bottom: 5px;
                 }
             }
+            &-disclaimer {
+                padding-bottom: 5px;
+                &-item {
+                    float: left;
+                }
+                &>a {
+                    color: #666666;
+                    font-size: 12px;
+                    line-height: 17px;
+                    margin-left: 15px;
+                }
+            }
         }
         &-footer {
             &-btn {
+                margin: 0;
                 display: block;
                 border: none;
                 height: 35px;

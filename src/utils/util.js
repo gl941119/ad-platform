@@ -111,7 +111,7 @@ export default class Util {
      * @param {Date} systemTime timestamp
      * @returns {Object} { status: 0default/1->未开始/2->正在开始/3->已结束, remainTime: String, dayArr: Array }
      */
-    handleTime(data, systemTime) {
+    handleTime(data, systemTime, text = null) {
         let {
             startTime,
             endTime
@@ -125,11 +125,11 @@ export default class Util {
         if (startDiff < 0) {
             status = 1;
             dayArr = this.formatDuring(-startDiff);
-            remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+            remainTime = dayArr[0] > 0 ? dayArr[0] + text : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
         } else if (startDiff > 0 && endDiff > 0) {
             dayArr = this.formatDuring(endDiff);
             status = 2;
-            remainTime = dayArr[0] > 0 ? dayArr[0] + '天' : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
+            remainTime = dayArr[0] > 0 ? dayArr[0] + text : `${dayArr[1]}:${dayArr[2]}:${dayArr[3]}`;
         }
         return {status, remainTime, dayArr}
     }
