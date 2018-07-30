@@ -275,7 +275,7 @@
 				<span class="is-danger" v-if="fileEmpty">{{$t('tokenInfo.emptyAbout')}}</span>
 			</li>
 		</ul>
-		<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement">免责声明</span>
+		<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement"><span class="disclaimer" @click="disclaimer">免责声明</span></span>
 		<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
 		<div class="submit_box">
 			<button class="submit" @click="submit">{{$t('buttonAll.submits')}}</button>
@@ -380,6 +380,11 @@
 			conceptCom,
 		},
 		methods: {
+			disclaimer(){//免责声明
+				this.$router.push({
+					name:'disclaimer',
+				})
+			},
 			data(){//时间
 				if(this.timeInterval.length<=0){
 					this.isData = true;
@@ -563,5 +568,9 @@
 		color:rgba(102,102,102,1);
 		margin-left: 5px;
 		vertical-align: middle;
+	}
+	.disclaimer:hover{
+		cursor: pointer;
+		color: #409EFF;
 	}
 </style>

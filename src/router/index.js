@@ -14,6 +14,7 @@ const Settings = () => import('@/pages/personalCenter/accountSettings/settings.v
 const Project = () => import('@/pages/personalCenter/crowdfundingProject/project.vue');
 const NewProject = () => import('@/pages/personalCenter/crowdfundingProject/newCrowdfunding.vue');
 const CrowdfundingDetail = () => import('@/pages/personalCenter/crowdfundingProject/details.vue');
+const Disclaimer = () => import('@/pages/personalCenter/crowdfundingProject/disclaimer.vue');
 const Advertisers = () => import('@/pages/personalCenter/advertisers/advertisers');
 const Adserving = () => import('@/pages/personalCenter/advertisers/ad-serving');
 	
@@ -107,6 +108,11 @@ const router = new VueRouter({
 				},
 			],
         },
+        {
+			path: '/disclaimer',//众筹免责声明
+			name: 'disclaimer',
+			component: Disclaimer,
+		},
         {path: '*', redirect: '/'}
 	]
 })

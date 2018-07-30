@@ -259,7 +259,7 @@
 								</div>
 							</li>
 						</ul>
-						<div class="withdraw" v-if="authStatus == 2 && authStatus == 3">
+						<div class="withdraw" v-if="authStatus == 2 || authStatus == 3">
 							<div class="withdraw_box" style="text-align: center;width: 400px;height: 200px;">
 								<p class="notic"><i class="custom-element-icon-weibiaoti1psd"></i><span class="noticText">{{$t('setting.tips')}}</span></p>
 								<p class="notic" v-if="authStatus == 2">{{$t('setting.review')}}</p>
