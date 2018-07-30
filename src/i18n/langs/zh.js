@@ -9,7 +9,6 @@ const zh = {
 		bierTalk:'BierTalk',
 		login:'登 录',
 		register:'注 册',
-		help:'帮助',
 	},
 	login:{
 		login:'登 录',
