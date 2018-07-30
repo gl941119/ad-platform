@@ -25,7 +25,7 @@
         </div>
         <div class="ad-crowdsale-box" v-if="crowdSaleDatas.length>0">
             <div class="ad-crowdsale-box-content">
-                <crowdsale-detial v-for="(detail, i) in crowdSaleDatas" :key="i" :detail-data="detail" :system-time="sysTime"></crowdsale-detial>
+                <crowdsale-detial v-for="detail in crowdSaleDatas" :key="detail.id" :detail-data="detail" :system-time="sysTime"></crowdsale-detial>
             </div>
             <el-pagination class="ad-crowdsale-box-pagination"
                 background

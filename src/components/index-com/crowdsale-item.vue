@@ -12,45 +12,59 @@
         <p class="crowdsale-item-abstract">
             {{crowdsaleDatas.proDesc}}
         </p>
-        <div class="crowdsale-item-list">
-            <div class="crowdsale-item-list-left">
-                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept1Id">
-                    <span>{{crowdsaleDatas.concept1Id}}</span>
-                </div>
-                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept2Id">
-                    <span>{{crowdsaleDatas.concept2Id}}</span>
-                </div>
-                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept3Id">
-                    <span>{{crowdsaleDatas.concept3Id}}</span>
-                </div>
-                <div class="crowdsale-item-list-left-label" v-show="crowdsaleDatas.concept4Id">
-                    <span>{{crowdsaleDatas.concept4Id}}</span>
-                </div>
-                <div class="crowdsale-item-list-left-label">
-                    <span>{{$t('home.thisIssuance')}}：</span>
-                    <span>{{crowdsaleDatas.currCirculation}}</span>
-                </div>
+        <div class="crowdsale-item-tap clearfix">
+            <div class="crowdsale-item-tap-label curr-circulation">
+                <span>{{$t('home.thisIssuance')}}：</span>
+                <span>{{crowdsaleDatas.currCirculation}}</span>
             </div>
-            <div class="crowdsale-item-list-right">
-                <div v-show="status===1&&progress<100" :class="{'event-over': status===3||progress===100}" class="crowdsale-item-list-right-content">
-                    <div>{{showText}}</div>
-                    <div class="crowdsale-item-list-right-content-divide"></div>
-                    <div>{{remainTime}}</div>
-                </div>
-                <div @click="instantBuy" v-show="status===2&&progress<100" :class="{'event-over': status===3||progress===100}" class="crowdsale-item-list-right-content">
-                    <div>{{showText}}</div>
-                    <div class="crowdsale-item-list-right-content-divide"></div>
-                    <div>{{remainTime}}</div>
-                </div>
-                <div v-show="status===3||progress===100" :class="{'event-over': status===3||progress===100}" class="crowdsale-item-list-right-content">
-                    {{$t('home.over')}}
-                </div>
+            <div class="crowdsale-item-tap-label" v-show="crowdsaleDatas.concept1Id">
+                <span>{{crowdsaleDatas.concept1Id}}</span>
+            </div>
+            <div class="crowdsale-item-tap-label" v-show="crowdsaleDatas.concept2Id">
+                <span>{{crowdsaleDatas.concept2Id}}</span>
+            </div>
+            <div class="crowdsale-item-tap-label" v-show="crowdsaleDatas.concept3Id">
+                <span>{{crowdsaleDatas.concept3Id}}</span>
+            </div>
+            <div class="crowdsale-item-tap-label" v-show="crowdsaleDatas.concept4Id">
+                <span>{{crowdsaleDatas.concept4Id}}</span>
             </div>
         </div>
-        <div v-if="status===2||status===3" class="crowdsale-item-progress">
-            <el-progress :percentage="progress" :show-text="false" color="#FF9500"></el-progress>
+        <div class="crowdsale-item-progress">
+            <el-progress :stroke-width="32" :percentage="progress" :show-text="false" color="#FF9500"></el-progress>
         </div>
-        <div v-else style="height:6px;margin-top:12px;"></div>
+        <div class="crowdsale-item-disclaimer clearfix">
+            <a class="crowdsale-item-disclaimer-item">免责声明</a>
+            <el-checkbox class="crowdsale-item-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
+        </div>
+        <div>
+            <div v-show="status===1&&progress<100" class="crowdsale-item-footer">
+                <span class="crowdsale-item-footer-text">09天后即将开始</span>
+                <a class="crowdsale-item-footer-website" href="javascript:;">查看官网</a>
+                <el-button class="crowdsale-item-footer-btn">{{$t('home.begin')}}</el-button>
+            </div>
+            <div v-show="status===2&&progress<100" class="crowdsale-item-instant clearfix">
+                <i class="float-left crowdsale-item-instant-icon custom-element-icon-gaojingshandian"></i>
+                <span class="float-left crowdsale-item-instant-text">剩余时间</span>
+                <div v-show="remainTime[0]<=0" class="float-left clearfix crowdsale-item-instant-time">
+                    <span>{{remainTime[1]}}</span>
+                    <span>:</span>
+                    <span>{{remainTime[2]}}</span>
+                    <span>:</span>
+                    <span>{{remainTime[3]}}</span>
+                </div>
+                <div v-show="remainTime[0]>0" class="float-left crowdsale-item-instant-day">
+                    <span>{{remainTime[0]}}</span>
+                    <span>天</span>
+                </div>
+                <el-button @click="instantBuy" class="crowdsale-item-instant-btn">{{$t('home.immediately')}}</el-button>
+                <a class="crowdsale-item-instant-website" href="javascript:;">查看官网</a>
+            </div>
+            <div v-show="status===3||progress===100" class="crowdsale-item-end clearfix">
+                <div class="crowdsale-item-end-btn">{{$t('home.over')}}</div>
+                <a class="crowdsale-item-end-website" href="javascript:;">查看官网</a>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -62,10 +76,10 @@
         data() {
             return {
                 status: 0,
-                showText: '',
                 remainTime: '',
                 utils: new Utils(),
                 progress: 65,
+                disclaimerChecked: false,
             }
         },
         mounted() {
@@ -91,21 +105,10 @@
             handleTime(data, systemTime) {
                 let {
                     status,
-                    remainTime
+                    dayArr
                 } = this.utils.handleTime(data, systemTime);
                 this.status = status;
-                switch (status) {
-                    case 1:
-                        this.showText = this.$t('home.begin')
-                        break;
-                    case 2:
-                        this.showText = this.$t('home.immediately')
-                        break;
-                    case 3:
-                        this.showText = this.$t('home.over')
-                        break;
-                }
-                this.remainTime = remainTime;
+                this.remainTime = dayArr;
             },
             countDown(data) {
                 let sysTime = this.systemTime;
@@ -122,6 +125,7 @@
                                 this.$message({message: this.$t('messageNotice.noAuth'), type: 'warning'})
                                 break;
                             case 1:
+                                this.disclaimerChecked = true;
                                 this.$store.commit('saveInstantBuyDataId', this.crowdsaleDatas.id);
                                 this.$store.commit('setInstantBuyVisible', true);
                                 this.$store.commit('valueChange');
@@ -167,6 +171,35 @@
 <style lang="scss" scoped>
     @import '../../assets/css/variable.scss';
     @import '../../assets/css/global.scss';
+    %instant-buy-btn {
+        border: 1px solid #FF9500;
+        background: #FF9500;
+        height: 32px;
+        width: 76px;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 0;
+        font-weight: bold;
+        &:hover {
+            color: #000;
+        }
+        &:active {
+            border: 1px solid #DCDFE6;
+            background: #fff;
+            color: #5E6166;
+        }
+    }
+    %footer-text {
+        font-size:14px;
+        color: #666;
+    }
+    %custom-num {
+        background: #000;
+        color: #fff;
+        line-height: 22px;
+        padding: 0px 6px;
+        border-radius: 3px;
+    }
     .crowdsale-item {
         padding: 15px 16px 12px;
         width: $crowdsaleWidth;
@@ -174,8 +207,9 @@
         margin-bottom: 14px;
         &-title {
             @include content-flex();
-            height: 25px;
             @include item-title();
+            font-size: 16px;
+            height: 22px;
             &-border {
                 height: 100%;
                 border: 1px solid #E2E2E2;
@@ -196,70 +230,129 @@
         }
         &-abstract {
             @extend %text-abstract;
-            height: 56px;
-            line-height: 19px;
-            @include multi-line-hide();
+            height: 77px;
+            line-height: 20px;
+            @include multi-line-hide(4);
         }
-        &-list {
-            @include content-flex();
-            height: 71px;
-            margin-top: 10px;
-            &-left {
-                width: 226px;
-                height: 100%;
-                @include content-flex();
-                flex-wrap: wrap;
-                &-label {
-                    width: 112px;
-                    background: #E0E0E0;
-                    border-radius: 3px;
-                    text-align: center;
-                    margin-bottom: 4px;
-                    @include text-ellipsis();
-                    & span {
-                        font-size: 12px;
-                        display: inline-block;
-                        transform: scale(0.85);
-                    }
-                    &:nth-child(2n) {
-                        margin-left: 2px;
-                    }
-                    &:last-child {
-                        width: 100%;
-                        margin: 0;
-                    }
+        &-tap {
+            width: 345px;
+            height: 35px;
+            margin: 10px 0;
+            &-label {
+                width: 112px;
+                height: 16px;
+                line-height: 16px;
+                float: left;
+                margin-right: 2px;
+                margin-bottom: 3px;
+                background: #E0E0E0;
+                border-radius: 3px;
+                text-align: center;
+                @include text-ellipsis();
+                & span {
+                    font-size: 12px;
+                    display: inline-block;
+                    transform: scale(0.8);
                 }
-            }
-            &-right {
-                height: 100%;
-                margin-left: 21px;
-                flex: 1;
-                &-content {
-                    height: 100%;
-                    background: #FF9500;
-                    @include content-flex(center);
-                    flex-direction: column;
-                    color: #fff;
-                    border-radius: 5px;
-                    font-size: 18px;
-                    cursor: pointer;
-                    &:last-child{
-                        cursor: auto;
-                    }
-                    &-divide {
-                        width: 63px;
-                        height: 1px;
-                        background: #fff;
-                        margin: 5px 0;
-                    }
-                    &.event-over {
-                        background: #999999;
-                    }
+                &.curr-circulation {
+                    width: 226px;
                 }
             }
         }
         &-progress {
             margin-top: 12px;
+        }
+        &-disclaimer {
+            margin: 5px 0;
+            &-item {
+                float: right;
+            }
+            &>a {
+                color: #666666;
+                font-size: 12px;
+                line-height: 17px;
+                margin-left: 15px;
+            }
+        }
+        &-footer {
+            width: 100%;
+            height: 32px;
+            @include content-flex(space-between);
+            &-text {
+                @extend %footer-text;
+                line-height: 20px;
+            }
+            &-website {
+                font-size:12px;
+                color: #666;
+                margin-right: -110px;
+            }
+            &-btn {
+               @extend %instant-buy-btn;
+            }
+        }
+        &-instant {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            &>.float-left {
+                float: left;
+            }
+            &-icon {
+                color: #EA1E04;
+                font-size: 26px;
+            }
+            &-text {
+                @extend %footer-text;
+                margin: 0 10px;
+            }
+            &-time {
+                @extend %footer-text;
+                @include content-flex();
+                &>span {
+                    &:nth-child(2n+1) {
+                        @extend %custom-num;
+                    }
+                    &:nth-child(2n) {
+                        margin: 0 2px;
+                    }
+                }
+            }
+            &-day {
+                &>span {
+                    @extend %footer-text;
+                    &:first-child {
+                        @extend %custom-num;
+                    }
+                }
+            }
+            &-website {
+                font-size:12px;
+                color: #666;
+                float: right;
+                margin-right: 18px;
+            }
+            &-btn {
+                float: right;
+                @extend %instant-buy-btn;
+            }
+        }
+        &-end {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            &-btn {
+                float: right;
+                height: 32px;
+                padding: 0 12px;
+                color: #fff;
+                background: #999;
+            }
+            &-website {
+                float:  right;
+                @extend %footer-text;
+                margin-right: 18px;
+            }
         }
     }
 </style>
