@@ -357,7 +357,7 @@
 			close(){
 				this.active = '';
 			},
-			cnacle(){
+			cancle(){
 				this.activeName = '';
 				this.oldPassword = '';
 				this.newPassword = '';
@@ -417,9 +417,7 @@
 								type:'success'
 							});
 							this.info();
-							/*this.oncePassword = '';
-							this.newPassword = '';
-							this.codePassword = '';*/
+							this.cancle();
 						})
 					} else {
 						this.$message({
@@ -451,9 +449,7 @@
 								type:'success'
 							});
 							this.info();
-							/*this.codeTradePassword = '';
-							this.onceSetTradePassword = '';
-							this.tradePassword = '';*/
+							this.cancle();
 						})
 					} else {
 						this.$message({
@@ -531,7 +527,7 @@
 						}
 					}, 1000);
 					this.$message({
-						message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+						message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
 						type: 'success'
 					});
 				})
@@ -549,7 +545,7 @@
 					});
 					this.disabledTradePassword = false;
 					let timerTradePassword = setInterval(() => {
-						this.TradePassword--;
+						this.numTradePassword--;
 						if(this.numTradePassword < 1) {
 							clearInterval(timerTradePassword);
 							this.disabledTradePassword = true;
@@ -584,10 +580,8 @@
 								type:'success'
 							});
 							this.info();
-							/*this.newTradePassword = '';
-							this.oldTradePassword = '';
-							this.onceTradePassword = '';
-							this.codeTradePassword = '';*/
+							this.cancle();
+							this.disabledTradePassword = true;
 						})
 					} else {
 						this.$message({
@@ -616,10 +610,6 @@
 						flag: true
 					}).then(res => {
 						this.info();
-						/*this.oldPassword = '';
-						this.newPassword = '';
-						this.codePassword = '';
-						this.oncePassword = '';*/
 						this.out();
 					})
 				} else {
@@ -666,6 +656,7 @@
 							type:'success'
 						});
 						this.info();
+						this.cancle();
 					})
 				} else {
 					this.$message({
@@ -693,6 +684,7 @@
 	                            type: 'success'
 	                        });
 	                        this.info();
+	                        this.cancle();
 						}).catch(e => {
 	                        console.error('change nickname error_>', e);
 	                    })
