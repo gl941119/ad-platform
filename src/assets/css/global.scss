@@ -62,10 +62,9 @@
     overflow: hidden;
     -webkit-line-clamp: $line;
     -moz-line-clamp: $line;
+    text-overflow: ellipsis;
     /*! autoprefixer: off */
     -webkit-box-orient: vertical;
-    /*! autoprefixer: on */
-    text-overflow: ellipsis;
 }
 
 // modify crowdsale-detail select style
