@@ -9,7 +9,6 @@ const en = {
 		bierTalk:'BierTalk', 
 		login:'Login',
 		register:'Register',
-		help:'帮助', 
 	},
 	login:{
 		login:'Login',

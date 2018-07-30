@@ -13,11 +13,11 @@
 				<span class="withdraw_box_back" @click="recharge"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
 					<li class="withdraw_item_li"><label>{{$t('project.moneyAccount')}}：</label>
-						<span>111111111111111 AFDT</span>
+						<span>0x1ac6bc75a9E1D32a91e025257eAEFC0E8965A16F</span>
 					</li>
 					<li class="withdraw_item_li" style="height: 126px;"><label>{{$t('crowdFunding.qrCode')}}：</label>
 						<div class="img">
-							<img src="../../../assets/imgs/swiper-img/swiper2.jpg" />
+							<img src="../../../assets/imgs/img/code.png" />
 						</div>
 					</li>
 					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}：</label>

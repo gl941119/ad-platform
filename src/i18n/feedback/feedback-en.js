@@ -33,4 +33,6 @@ export default {
 	'1031':'the advertisement has not been defined',
 	'1032':'the uploading files cannot be read',
 	'1033':'upload failure',
+	'1034':'获取验证码失败，请重试',
+	'1035':'验证码错误，请重试',
 }
