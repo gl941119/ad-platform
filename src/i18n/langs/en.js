@@ -126,6 +126,11 @@ const en = {
 		timeLeft:'the rest time of this crowdfunding',
 		sorry:'Sorry，nothing with this category，Try other content',
 		day:'Day',
+		disclaimer:'免责声明',
+		more:'查看更多',
+		remain:'剩余时间',
+		later:'后',
+		instantStart:'即将开始',
 	},
 	projectList:{
 		tokenName:'Token Name',

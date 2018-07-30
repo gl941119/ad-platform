@@ -275,7 +275,7 @@
 				<span class="is-danger" v-if="fileEmpty">{{$t('tokenInfo.emptyAbout')}}</span>
 			</li>
 		</ul>
-		<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement"><span class="disclaimer" @click="disclaimer">免责声明</span></span>
+		<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement"><span class="disclaimer" @click="disclaimer">{{$t('crowdFunding.disclaimer')}}</span></span>
 		<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
 		<div class="submit_box">
 			<button class="submit" @click="submit">{{$t('buttonAll.submits')}}</button>

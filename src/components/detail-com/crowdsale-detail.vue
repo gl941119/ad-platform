@@ -86,7 +86,7 @@
         </div>
         <div class="crowdsale-detail-disclaimer clearfix">
             <el-checkbox class="crowdsale-detail-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
-            <a class="crowdsale-detail-disclaimer-item">免责声明</a>
+            <a class="crowdsale-detail-disclaimer-item">{{$t('crowdFunding.disclaimer')}}</a>
         </div>
     </div>
     <div class="crowdsale-footer">

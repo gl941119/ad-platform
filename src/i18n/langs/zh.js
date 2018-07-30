@@ -126,6 +126,11 @@ const zh = {
 		warn:'风险警示：AFD对众筹项目方合规性已尽审查义务，投资行为所天然具备的风险属性望投资者知悉并谨慎对待',
 		sorry:'抱歉，该分类暂无，试试搜索其他内容',
 		day:'天',
+		disclaimer:'免责声明',
+		more:'查看更多',
+		remain:'剩余时间',
+		later:'后',
+		instantStart:'即将开始',
 	},
 	projectList:{
 		tokenName:'Token名称',

@@ -34,18 +34,18 @@
             <el-progress :stroke-width="32" :percentage="progress" :show-text="false" color="#FF9500"></el-progress>
         </div>
         <div class="crowdsale-item-disclaimer clearfix">
-            <a class="crowdsale-item-disclaimer-item">免责声明</a>
+            <a class="crowdsale-item-disclaimer-item">{{$t('crowdFunding.disclaimer')}}</a>
             <el-checkbox class="crowdsale-item-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
         </div>
         <div>
             <div v-show="status===1&&progress<100" class="crowdsale-item-footer">
-                <span class="crowdsale-item-footer-text">09天后即将开始</span>
-                <a class="crowdsale-item-footer-website" href="javascript:;">查看更多</a>
+                <span class="crowdsale-item-footer-text">{{remainTime[0]}}{{$t('crowdFunding.day')}}{{$t('crowdFunding.later')}}{{$t('crowdFunding.instantStart')}}</span>
+                <a class="crowdsale-item-footer-website" href="javascript:;">{{$t('crowdFunding.more')}}</a>
                 <el-button class="crowdsale-item-footer-btn">{{$t('home.begin')}}</el-button>
             </div>
             <div v-show="status===2&&progress<100" class="crowdsale-item-instant clearfix">
                 <i class="float-left crowdsale-item-instant-icon custom-element-icon-gaojingshandian"></i>
-                <span class="float-left crowdsale-item-instant-text">剩余时间</span>
+                <span class="float-left crowdsale-item-instant-text">{{$t('crowdFunding.remain')}}</span>
                 <div v-show="remainTime[0]<=0" class="float-left clearfix crowdsale-item-instant-time">
                     <span>{{remainTime[1]}}</span>
                     <span>:</span>
@@ -55,14 +55,14 @@
                 </div>
                 <div v-show="remainTime[0]>0" class="float-left crowdsale-item-instant-day">
                     <span>{{remainTime[0]}}</span>
-                    <span>天</span>
+                    <span>{{$t('crowdFunding.day')}}</span>
                 </div>
                 <el-button @click="instantBuy" class="crowdsale-item-instant-btn">{{$t('home.immediately')}}</el-button>
-                <a class="crowdsale-item-instant-website" href="javascript:;">查看更多</a>
+                <a class="crowdsale-item-instant-website" href="javascript:;">{{$t('crowdFunding.more')}}</a>
             </div>
             <div v-show="status===3||progress===100" class="crowdsale-item-end clearfix">
                 <div class="crowdsale-item-end-btn">{{$t('home.over')}}</div>
-                <a class="crowdsale-item-end-website" href="javascript:;">查看更多</a>
+                <a class="crowdsale-item-end-website" href="javascript:;">{{$t('crowdFunding.more')}}</a>
             </div>
         </div>
     </div>
