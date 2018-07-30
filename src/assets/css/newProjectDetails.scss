@@ -46,8 +46,9 @@
                     width:240px;
                     height:40px;
                     border-radius:4px;
-                    padding: 10px;
+                    padding-left: 15px;
                     border:1px solid rgba(220,223,230,1);
+                    color: #606266;
                 }
                 .team{
                     width: 100%;
@@ -109,11 +110,12 @@
         }
     }
     .is-danger{
+        width: 345px;
         font-size:14px;
         color:rgba(250,85,85,1);
-        line-height: 40px;
         padding-left: 12px;
-        display: block;
+        display: flex;
+        align-items: center;
     }
     .teamDanger{
         line-height: 32px;
