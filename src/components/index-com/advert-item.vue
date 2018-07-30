@@ -83,11 +83,10 @@ export default {
                     }
                 });
                 this.$refs.advertSelect.blur();
-            }).catch(e => {
-                // console.log('e-->', e);
+            }).catch(msg => {
                 this.$emit('update-data');
                 this.$refs.advertSelect.blur();
-                if(e&& e.islogin){
+                if(msg.data&& msg.data.islogin){
                     this.$store.commit('setDialogModalVisible', true);
                 }
                 // this.$router.push({name: 'index'})

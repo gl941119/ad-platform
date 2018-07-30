@@ -124,7 +124,7 @@ function requestHandle(params) {
                         Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
                         // location.href = "/index";
                     }
-                    reject(data);
+                    reject(res.data);
                     Message.error({
                         message: utils.judgeLanguage(utils.getCurrLanguage(store, Cache), message),
                     });

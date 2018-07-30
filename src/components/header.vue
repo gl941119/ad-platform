@@ -44,7 +44,7 @@
 					<el-form-item :label="$t('login.verifyCode')" prop="verifyCode" class="login-verify" :label-width="getLabelWidth(language, 'login')">
 						<el-input :placeholder="$t('login.enterCode')" auto-complete="off" class="login-verify-input" :class="{'english-lang': language==='EN'}" @keyup.enter.native="loginSubmit" v-model="loginModal.form.verifyCode"></el-input>
 						<div class="login-verify-btn" @click="changeCode">
-							<custom-identify :identify-code="code" :content-width="120" :font-size-min="20"></custom-identify>
+                            <img width="120" height="40" :src="'data:image/png;base64, ' + base64Str">
 						</div>
 					</el-form-item>
 					<div class="register-foot">
@@ -115,13 +115,14 @@
 
 			return {
 				utils: new Utils(),
-				code: '',
 				source: '0123456789',
 				codeLen: 4,
 				disabled: true,
 				num: 60,
 				telegramBot: Config.TelegramBot,
-				title: this.$t('register.userRegister'),
+                title: this.$t('register.userRegister'),
+                validateKey: undefined,
+                base64Str: undefined,
 				registerModel: {
 					registerVisible: false,
 					rule: {
@@ -198,8 +199,7 @@
             dialogModalVisible: {
                 get(){
                     if(this.$store.state.dialogModalVisible) {
-                        this.title = this.$t('login.userLogin');
-                        this.registerModel.registerVisible = false;
+                        this.toLogin();
                     }
                     return this.$store.state.dialogModalVisible;
                 },
@@ -230,10 +230,11 @@
 				Cache.setLocal('bier_langChange', value);
 			},
 			toLogin() {
-				this.dialogModalVisible = true;
-				this.title = this.$t('login.userLogin');
-				this.registerModel.registerVisible = false;
-				this.createCode(this.source, this.codeLen);
+                this.createCode().then(() => {
+                    this.dialogModalVisible = true;
+                    this.title = this.$t('login.userLogin');
+                    this.registerModel.registerVisible = false;
+                })
 			},
 			toPersonCenter() {
 				this.$router.push({
@@ -301,8 +302,7 @@
 							},
 							flag: true
 						}).then(res => {
-							this.dialogModalVisible = false;
-							this.handleLoginFunc(email, password);
+                            this.toLogin();
 							this.$message({
 								message: this.utils.judgeLanguage(this.language, res.message),
 								type: 'success'
@@ -315,23 +315,16 @@
 						});
 					}
 				});
-			},
+            },
+            // login button
 			loginSubmit() {
 				let {
 					email,
 					password,
 					verifyCode
-				} = this.loginModal.form;
-				if(email && password) {
-					if(verifyCode === this.code) {
-						this.handleLoginFunc(email, password);
-					} else {
-						this.createCode(this.source, this.codeLen);
-						this.$message({
-							message: this.$t('messageCode.verificationCode'),
-							type: 'warning'
-						});
-					}
+                } = this.loginModal.form;
+				if(email && password && verifyCode) {
+                    this.handleLoginFunc(email, password, verifyCode);
 				} else {
 					this.$message({
 						message: this.$t('messageNotice.notEmpty'),
@@ -339,18 +332,26 @@
 					});
 				}
 			},
-			handleLoginFunc(email, password) {
+			handleLoginFunc(email, password, validateCode) {
 				Request({
 					url: 'Login',
 					data: {
 						email: validateFun.encrypt(email),
-						password: validateFun.encrypt(password),
+                        password: validateFun.encrypt(password),
+                        validateCode,
+                        validateKey: this.validateKey,
 					},
                     type: 'post',
                     flag: true,
 				}).then(res => {
+                    // console.log('res_>', res);
 					this.handleLoginSucc(res.data);
-				})
+				}).catch(e => {
+                    // console.log('err',e);
+                    if(e.message === '1035'){
+                        this.createCode();
+                    }
+                })
 			},
 			handleLoginSucc(data) {
 				let {
@@ -381,10 +382,18 @@
 				this.registerModel.registerVisible = true;
 			},
 			changeCode() {
-				this.createCode(this.source, this.codeLen);
+				this.createCode();
 			},
-			createCode(source, len) {
-				this.code = this.utils.makeCode(source, len);
+			createCode() {
+                return new Promise((resolve, reject) => {
+                    Request({
+                        url: 'GetVerifyFromSer',
+                        type: 'get'
+                    }).then(res => {
+                        Object.assign(this, res.data);
+                        resolve();
+                    })
+                });
 			}
 		},
 		components: {
@@ -468,7 +477,11 @@
 			top: 0;
 			right: 0;
 			height: 40px;
-			cursor: pointer;
+            cursor: pointer;
+            &>img {
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
 		}
 	}
 	
