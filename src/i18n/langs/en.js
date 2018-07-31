@@ -119,7 +119,7 @@ const en = {
 		order:'Subscribe',
 		residue:'The rest',
 		limit:' Scope of change ',
-		walletAddress:'Wallet',
+		walletAddress:'合约地址',
 		qrCode:'QR Code',
 		buySuccess:'Success！',
 		warn:' Risk warning: AFD  has fulfilled its obligation to review compliance with crowdfunding projects. Investors are expected to be aware of and be cautious about the risk nature of their investments ',
