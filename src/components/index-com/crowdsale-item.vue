@@ -85,13 +85,14 @@
         mounted() {
             this.handleTime(this.crowdsaleDatas, this.systemTime);
             this.countDown(this.crowdsaleDatas);
-            // console.log('crowdsaleDatas_>', this.crowdsaleDatas);
+            console.log('crowdsaleDatas_>', this.crowdsaleDatas);
             let {croAchieve, topLimit} = this.crowdsaleDatas;
             // 进度的判断
-            if(topLimit && topLimit <= 0){
+            if(!topLimit || topLimit <= 0){
                 this.progress = 0;
             }else{
                 let progress = (croAchieve / topLimit).toFixed(2);
+                console.log('progress_>',croAchieve,topLimit, progress);
                 progress = progress > 1 ? 1 : progress;
                 this.progress = progress * 100;
             }

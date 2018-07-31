@@ -120,7 +120,7 @@
             // console.log('detail corwdsale_>', this.detailData.id, this.detailData);
             let {croAchieve, topLimit} = this.detailData;
             // 进度的判断
-            if(topLimit && topLimit <= 0){
+            if(!topLimit || topLimit <= 0){
                 this.progress = 0;
             }else{
                 let progress = (croAchieve / topLimit).toFixed(2);
