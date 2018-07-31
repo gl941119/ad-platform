@@ -18,13 +18,13 @@
     <div class="platform-index-item">
         <div class="platform-index-item-crowdsale">
             <div class="platform-index-item-crowdsale-title">{{$t('crowdFunding.crowdfunding')}}</div>
-            <crowdsale-item v-for="(crowdsale, i) in crowdsaleItemdata" :key="i" :crowdsale-datas="crowdsale" :system-time="sysTime">
+            <crowdsale-item v-for="crowdsale in crowdsaleItemdata" :key="crowdsale.id" :crowdsale-datas="crowdsale" :system-time="sysTime">
             </crowdsale-item>
             <learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more>
         </div>
         <div class="platform-index-item-ad">
             <div class="platform-index-item-ad-title">{{$t('header.project')}}</div>
-            <advert-item v-for="(advert, _i) in totalAdvertItemDatas" :key="_i"
+            <advert-item v-for="(advert, _i) in totalAdvertItemDatas" :key="advert.id"
                 :advert-datas="advert" :item-index="_i" :system-time="sysTime" @update-data="updateAdvertData">
             </advert-item>
             <learn-more v-if="totalAdvertItemDatas.length<30&&advertItemDatas.length>0" :type="2" @seemore="learnMoreItem"></learn-more>
