@@ -72,7 +72,7 @@
     import Cache from '../../utils/cache.js';
     import Request from '../../utils/require.js';
     export default {
-        props: ['crowdsaleDatas', 'systemTime'], // croAchieve-> 众筹量 currCirculation-> 总量 mostNumber-> 单笔最大
+        props: ['crowdsaleDatas', 'systemTime'], // croAchieve-> 众筹量 currCirculation-> 总量 mostNumber-> 单笔最大 topLimit -> 硬顶
         data() {
             return {
                 status: 0,
@@ -86,12 +86,12 @@
             this.handleTime(this.crowdsaleDatas, this.systemTime);
             this.countDown(this.crowdsaleDatas);
             // console.log('crowdsaleDatas_>', this.crowdsaleDatas);
-            let {croAchieve, currCirculation} = this.crowdsaleDatas;
+            let {croAchieve, topLimit} = this.crowdsaleDatas;
             // 进度的判断
-            if(currCirculation <= 0){
+            if(topLimit && topLimit <= 0){
                 this.progress = 0;
             }else{
-                let progress = Math.round(croAchieve / currCirculation)
+                let progress = (croAchieve / topLimit).toFixed(2);
                 progress = progress > 1 ? 1 : progress;
                 this.progress = progress * 100;
             }

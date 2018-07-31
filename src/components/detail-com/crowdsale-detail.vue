@@ -117,13 +117,14 @@
         mounted() {
             this.handleTime(this.detailData, this.systemTime);
             this.countDown(this.detailData);
-            let {croAchieve, currCirculation} = this.detailData;
-            // console.log('detail corwdsale_>', this.detailData);
+            // console.log('detail corwdsale_>', this.detailData.id, this.detailData);
+            let {croAchieve, topLimit} = this.detailData;
             // 进度的判断
-            if(currCirculation <= 0){
+            if(topLimit && topLimit <= 0){
                 this.progress = 0;
             }else{
-                let progress = Math.round(croAchieve / currCirculation)
+                let progress = (croAchieve / topLimit).toFixed(2);
+                // console.log('progress_>',croAchieve,topLimit, progress);
                 progress = progress > 1 ? 1 : progress;
                 this.progress = progress * 100;
             }
