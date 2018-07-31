@@ -558,19 +558,4 @@
 	.last{
 		width: 350px;
 	}
-	.checkbox{
-		width:24px;
-		height:24px;
-		background:rgba(102,102,102,1);
-	}
-	.statement{
-		font-size:18px;
-		color:rgba(102,102,102,1);
-		margin-left: 5px;
-		vertical-align: middle;
-	}
-	.disclaimer:hover{
-		cursor: pointer;
-		color: #409EFF;
-	}
 </style>

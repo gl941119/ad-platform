@@ -17,6 +17,7 @@ const CrowdfundingDetail = () => import('@/pages/personalCenter/crowdfundingProj
 const Disclaimer = () => import('@/pages/personalCenter/crowdfundingProject/disclaimer.vue');
 const Advertisers = () => import('@/pages/personalCenter/advertisers/advertisers');
 const Adserving = () => import('@/pages/personalCenter/advertisers/ad-serving');
+const AdvertisersDisclaimer = () => import('@/pages/personalCenter/advertisers/disclaimer');
 	
 Vue.use(VueRouter);
 
@@ -109,9 +110,14 @@ const router = new VueRouter({
 			],
         },
         {
-			path: '/disclaimer',//众筹免责声明
+			path: '/crowdfunding/disclaimer',//众筹免责声明
 			name: 'disclaimer',
 			component: Disclaimer,
+		},
+		{
+			path: '/advertisers/disclaimer',//众筹免责声明
+			name: 'advertisersDisclaimer',
+			component: AdvertisersDisclaimer,
 		},
         {path: '*', redirect: '/'}
 	]
