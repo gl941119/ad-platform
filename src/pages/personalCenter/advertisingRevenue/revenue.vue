@@ -20,14 +20,16 @@
 					</li>
 					<li class="withdraw_item_li">
 						<label>{{$t('project.withdrawal')}}：</label>
-						<input class="tixian" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{required:true,regex:/^\d{3,}/}" name="money" v-on:change="getHandlingFee" :placeholder="$t('project.enterMoney')" v-model="money" />
+						<input class="tixian" autocomplete="off" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{required:true,regex:/^\d{3,}/}" name="money" v-on:change="getHandlingFee" :placeholder="$t('project.enterMoney')" v-model="money" />
 					</li>
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
 					<span class="is-danger" v-if="insufficient" >{{$t('accountFlow.insufficient')}}</span>
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
-						<input class="tixian" :class="[errors.has('password')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="password" :placeholder="$t('passwordInfo.enterTradePassword')" type="password" v-model="password" />
+						<input type="password" style="display:none;"  />
+						<!--<input class="tixian" type="text" onfocus="this.type='password'" />-->
+						<input type="text" onfocus="this.type='password'" class="tixian" :class="[errors.has('tradePassword')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="tradePassword" :placeholder="$t('passwordInfo.enterTradePassword')" v-model="tradePassword" />
 					</li>
-					<span class="is-danger" v-show="errors.has('password')">{{ errors.first('password') }}</span>
+					<span class="is-danger" v-show="errors.has('tradePassword')">{{ errors.first('tradePassword') }}</span>
 					<div style="text-align: center;">
 						<button class="right_now" @click="withdrawls">{{$t('project.withdraw')}}</button>
 					</div>
@@ -121,7 +123,7 @@
 				flowDatas:[],
 				balance: '',
 				money: '',
-				password:'',
+				tradePassword:'',
 				currentPage: 1,
 				current: 1,
 				size: 30,
@@ -160,7 +162,6 @@
 		methods: {
 			withdrawls(){
 				this.$validator.validateAll().then((result) => {
-					console.log(!this.insufficient);
 					if(!this.insufficient){
 						if(result){
 							Request({
@@ -169,12 +170,12 @@
 									accountId: this.accountId,
 									amount: this.money,
 									cost: this.handlingFee,
-									password: validateFun.encrypt(this.password)
+									password: validateFun.encrypt(this.tradePassword)
 								},
 								flag:true,
 							}).then(res => {
 								this.money = '',
-								this.password = '',
+								this.tradePassword = '',
 								this.$message({
 									message:this.$t('accountFlow.withdraw'),
 									type:'success'
