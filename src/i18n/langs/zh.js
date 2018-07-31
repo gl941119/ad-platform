@@ -119,7 +119,7 @@ const zh = {
 		order:'立即预约',
 		residue:'本轮发行剩余',
 		limit:'单账号兑换限制',
-		walletAddress:'钱包地址',
+		walletAddress:'合约地址',
 		qrCode:'二 维 码',
 		buySuccess:'抢购成功',
 		timeLeft:'本轮众筹剩余时间',
