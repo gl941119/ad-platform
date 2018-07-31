@@ -85,14 +85,14 @@
         mounted() {
             this.handleTime(this.crowdsaleDatas, this.systemTime);
             this.countDown(this.crowdsaleDatas);
-            console.log('crowdsaleDatas_>', this.crowdsaleDatas);
+            // console.log('crowdsaleDatas_>', this.crowdsaleDatas);
             let {croAchieve, topLimit} = this.crowdsaleDatas;
             // 进度的判断
             if(!topLimit || topLimit <= 0){
                 this.progress = 0;
             }else{
                 let progress = (croAchieve / topLimit).toFixed(2);
-                console.log('progress_>',croAchieve,topLimit, progress);
+                // console.log('progress_>',croAchieve,topLimit, progress);
                 progress = progress > 1 ? 1 : progress;
                 this.progress = progress * 100;
             }
@@ -158,7 +158,6 @@
                         },
                         type: 'get'
                     }).then(res => {
-                        console.log('authStatus_>', res.data);
                         resolve(res.data);
                     })
                 });
@@ -352,6 +351,7 @@
             &-website {
                 float:  right;
                 @extend %footer-text;
+                font-size:12px;
                 margin-right: 18px;
             }
         }

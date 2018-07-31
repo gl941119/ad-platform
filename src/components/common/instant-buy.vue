@@ -39,10 +39,6 @@
     import getDetail from '../../service/getData.js';
     import Utils from '../../utils/util.js';
     import {mainNetContract} from '../../utils/index.js'; 
-   /*import {
-        handleContract
-    } from '../../utils/contract.js';*/
-//     import ico_abi from '../../../build/contracts/LavevelICO.json';
     export default {
         data() {
             return {
@@ -105,20 +101,9 @@
                     this.immediateBuyDatas = Object.assign(immediateBuyDatas, result, {
                         remain: total - raisedAmount,
                     });
-                    console.log('res--->', this.immediateBuyDatas);
+                    // console.log('res--->', this.immediateBuyDatas);
                     this.loadingData = false;
                 })
-                // .then(res => {
-                //     let {
-                //         raisedAmount,
-                //         total,
-                //     } = res;
-                //     this.immediateBuyDatas = Object.assign(this.immediateBuyDatas, res, {
-                //         remain: total - raisedAmount,
-                //     });
-                //     this.loadingData = false;
-                //     // console.log('get getDetail data contractData------>', this.immediateBuyDatas);
-                // })
                 .catch(e => {
                     console.error('contract_abi_and_address error_>', e);
                     this.$message.error({message: this.$t('home.instant')});
