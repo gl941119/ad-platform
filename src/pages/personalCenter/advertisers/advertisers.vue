@@ -222,6 +222,11 @@
 				<span class="is-danger" v-show="errors.has('websiteAddress')">{{ errors.first('websiteAddress') }}</span>
 			</li>
 		</ul>
+		<div v-if="value == -1" >
+			<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement">
+			<span class="disclaimer" @click="disclaimer">{{$t('crowdFunding.disclaimer')}}</span></span>
+			<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
+		</div>
 		<div class="submit_box">
 			<button v-if="value == -1" @click="submit" class="submit">{{$t('buttonAll.submits')}}</button>
 			<button v-if="value == 2" @click="saveSubmit" class="submit">{{$t('buttonAll.saveChange')}}</button>
@@ -327,6 +332,11 @@
 			}
 		},
 		methods: {
+			disclaimer(){//免责声明
+				this.$router.push({
+					name:'advertisersDisclaimer',
+				})
+			},
 			isDetails(){
 				var value = this.$route.params.value;
 				this.isCheck = value;
