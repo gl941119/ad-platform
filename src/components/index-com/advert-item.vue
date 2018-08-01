@@ -7,13 +7,25 @@
             <div class="advert-item-left-text" :class="{'english-lang': language!=='zh'}"><a :href="advertDatas.whitePaper" target="_self">{{$t('home.whitePaper')}}</a></div>
         </div>
         <div class="advert-item-middle">
-            <div class="advert-item-middle-title clearfix">
-                <div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}<span v-show="language==='zh'&&advertDatas.shotCnName">/{{advertDatas.shotCnName}}</span></div>
-                <div class="advert-item-middle-title-symbol">{{advertDatas.fullEnName}}</div>
-                <div class="advert-item-middle-title-icon" v-show="itemIndex < 30">
-                    <i class="custom-element-icon-hot"></i>
+            <div class="advert-item-middle-father">
+                <div class="advert-item-middle-title">
+                    <div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}<span v-show="language==='zh'&&advertDatas.shotCnName">/{{advertDatas.shotCnName}}</span></div>
+                    <div class="advert-item-middle-title-symbol">{{advertDatas.fullEnName}}</div>
+                </div>
+                <div class="advert-item-middle-father-member">
+                    <el-tooltip placement="top" effect="light">
+                        <div style="max-width: 200px;" slot="content">
+                            <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
+                            <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
+                        </div>
+                        <div  class="advert-item-middle-father-member-title">
+                            <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
+                            <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
+                        </div>
+                    </el-tooltip>
                 </div>
             </div>
+            
             <div class="advert-item-middle-divide"></div>
             <div class="advert-item-middle-text">
                 {{advertDatas.proDesc}}
@@ -29,6 +41,7 @@
                 </el-option>
             </el-select>
             <div class="advert-item-right-icons">
+                <i v-show="itemIndex < 30" class="custom-element-icon-hot hot"></i>
                 <a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
                 <a :href="advertDatas.telegrameUrl" target="_self"><i class="custom-element-icon-duihua"></i></a>
             </div>
@@ -134,21 +147,32 @@ export default {
         }
     }
     &-middle {
+        &-father {
+            @include content-flex(flex-start);
+            &-member {
+                margin-left: 15px;
+                font-size: 14px;
+                color: #898989;
+                display: flex;
+                &-title {
+                    max-width: 182px;
+                    @include text-ellipsis;
+                }
+            }
+        }
         &-title {
             padding-top: 3px;
             width: 311px;
+            @include content-flex(flex-start);
             &-text {
-                float: left;
                 @include item-title();
+                flex: none;
             }
             &-symbol {
-                float: left;
                 margin-left: 22px;
+                flex: auto;
                 @include item-title(false);
-            }
-            &-icon {
-                float: right;
-                color: #FF2400;
+                @include text-ellipsis;
             }
         }
         &-divide {
@@ -179,6 +203,10 @@ export default {
             & a {
                 color: #aaa;
                 margin-left: 20px;
+            }
+            & i.hot {
+                color: #FF2400;
+                margin-right: 45px;
             }
         }
     }
