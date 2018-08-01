@@ -241,9 +241,6 @@
 					name: 'personalCenter'
 				});
 			},
-			getUserName() {
-				return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username')
-			},
 			sendVerifyCode() {
 				if(this.registerModel.form.email) {
 					Request({
@@ -373,7 +370,6 @@
 				nickname && Cache.setSession('bier_usernickname', nickname);
 				Cache.setSession('bier_token', token);
 				heardUrl && Cache.setSession('bier_heardUrl', heardUrl);
-				this.userName = this.getUserName();
 				this.dialogModalVisible = false;
 			},
 			goToRegister() {

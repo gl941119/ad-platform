@@ -133,7 +133,7 @@
                     startTime,
                     endTime
                 }, systemTime);
-                this.remainTime = `${dayArr[0]} this.$t('crowdFunding.day') ${dayArr[1]} this.$t('crowdFunding.hour') ${dayArr[2]} this.$t('crowdFunding.minute') ${dayArr[3]} this.$t('crowdFunding.second')`;
+                this.remainTime = `${dayArr[0]} ${this.$t('crowdFunding.day')} ${dayArr[1]} ${this.$t('crowdFunding.hour')} ${dayArr[2]} ${this.$t('crowdFunding.minute')} ${dayArr[3]} ${this.$t('crowdFunding.second')}`;
             },
             finish() {
                 this.instantBuyVisible = false;
