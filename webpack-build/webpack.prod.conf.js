@@ -81,8 +81,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DllReferencePlugin({
       manifest: require('../dll/vue-manifest.json')
     }),
+    // new webpack.DllReferencePlugin({
+    //   manifest: require('../dll/ui-manifest.json')
+    // }),
     new webpack.DllReferencePlugin({
-      manifest: require('../dll/ui-manifest.json')
+      manifest: require('../dll/vendor-manifest.json')
     }),
     // html模板打包
     new HtmlWebpackPlugin({
