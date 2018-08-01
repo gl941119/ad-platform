@@ -515,7 +515,7 @@
 							}
 						}, 1000);
 						this.$message({
-							message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
+							message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
 							type: 'success'
 						});
 					})
@@ -543,7 +543,7 @@
 						}
 					}, 1000);
 					this.$message({
-						message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
+						message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
 						type: 'success'
 					});
 				})
@@ -569,7 +569,7 @@
 						}
 					}, 1000);
 					this.$message({
-						message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+						message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
 						type: 'success'
 					});
 				})
