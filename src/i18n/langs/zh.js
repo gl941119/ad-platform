@@ -156,6 +156,7 @@ const zh = {
 		inviteUser:'邀请用户',
 		info:'受邀用户今后点击广告创造的价值将会以AFDT的形式奖励给您',
 		code:'邀请码',
+		inviteLink:'邀请链接',
 		copy:'复制',
 		timer:'邀请时间',
 		userAccout:'用户账号',

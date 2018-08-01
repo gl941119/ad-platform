@@ -7,7 +7,7 @@
 				<span id="inviteCode"><span style="position: absolute;z-index: -1">http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
 			</p>
 			<p class="invite_top_code" style="display: inline-block;">
-				<span>邀请链接：</span>
+				<span>{{$t('invite.inviteLink')}}：</span>
 				<span>http://www.afdchain.com/?inviteCode={{inviteCode}}</span>
 			</p>
 			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">{{$t('share.shareCopy')}}</el-button>
