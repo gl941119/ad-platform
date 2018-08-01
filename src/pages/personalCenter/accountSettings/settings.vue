@@ -555,10 +555,6 @@
 						codeType: 4,
 					},
 				}).then(res => {
-					this.$message({
-						message:this.$t('messageNotice.getSuccess'),
-						type:'success'
-					});
 					this.disabledTradePassword = false;
 					let timerTradePassword = setInterval(() => {
 						this.numTradePassword--;
