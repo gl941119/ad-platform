@@ -6,6 +6,10 @@
 				<span>{{$t('invite.code')}}：</span>
 				<span id="inviteCode"><span style="position: absolute;z-index: -1">http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
 			</p>
+			<p class="invite_top_code">
+				<span>邀请链接：</span>
+				<span>http://www.afdchain.com/?inviteCode={{inviteCode}}</span>
+			</p>
 			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">{{$t('share.shareCopy')}}</el-button>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
@@ -104,7 +108,6 @@
 	&_top {
 		margin: 30px 0;
 		&_code {
-			display: inline-block;
 			height: 40px;
 			line-height: 40px;
 			margin: 10px 0;
@@ -131,7 +134,6 @@
 	}
 	.purse_address_bind {
 		display: inline-block;
-		margin-left: 20px;
 		width: 100px;
 		border-radius: 5px;
 		background:rgba(255,149,0,1);
