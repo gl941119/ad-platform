@@ -93,7 +93,7 @@
         },
 		watch: {
 			slangChange(val, oldval) {
-				Promise.all([this.getCrowdSaleInfo(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
+				Promise.all([this.getCrowdSaleInfo(0, 0, this.currpage), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
             	})
 			}
 		},

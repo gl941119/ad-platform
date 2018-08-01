@@ -71,7 +71,7 @@ import Config from '../../utils/config.js';
 		},
 		watch: {
 			slangChange(val, oldval) {
-				Promise.all([this.getAdvertInfoInit(), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
+				Promise.all([this.getAdvertInfoInit(this.currpage), this.getAllConcept(), this.getSystemTime(), this.findAdvertisement()]).then(() => {
             	})
 			}
 		},
