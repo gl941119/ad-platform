@@ -363,7 +363,7 @@ const zh = {
 		emptyTeamAddress:'主要成员所在地不能为空（限制不超过100个字符的数字）',
 		emptyName:'全名不能为空（限制不超过32个字符的数字）',
 		emptyTitle:'头衔不能为空（限制不超过16个字符的数字）',
-		emptyDesc:'简介不能为空（限制不超过100个字符的数字）',
+		emptyDesc:'简介不能为空（限制不超过512个字符的数字）',
 		emptyCore:'核心团队成员不能为空',
 		emptyConsultant:'顾问团队成员不能为空',
 	},
@@ -378,7 +378,7 @@ const zh = {
 		enterTechnology1:'请输入技术1',
 		enterTechnology2:'请输入技术2',
 		emptyProjectName:'项目名称不能为空（限制不超过80个字符）',
-		emptyProjectDesc:'项目简介不能为空（限制不超过100个字符）',
+		emptyProjectDesc:'项目简介不能为空（限制不超过512个字符）',
 	},
 	tokenInfo:{
 		token:'代币发行',

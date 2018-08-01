@@ -365,7 +365,7 @@ const en = {
 		emptyTeamAddress:'team member location（within 100 numeric characters）',
 		emptyName:'Full name cannot be empty（within 32 numeric characters）',
 		emptyTitle:'Title cannot be empty （within 16 numeric characters）',
-		emptyDesc:'Introduction cannot be empty（within 100 characters）',
+		emptyDesc:'Introduction cannot be empty（within 512 characters）',
 	},
 	projectInfo:{
 		info:'Project Status ',
@@ -378,7 +378,7 @@ const en = {
 		enterTechnology1:'Please enter technology 1',
 		enterTechnology2:'Please enter technology 2',
 		emptyProjectName:'Project name cannot be empty',
-		emptyProjectDesc:'Project description cannot be empty (limited to 100 characters)',
+		emptyProjectDesc:'Project description cannot be empty (limited to 512 characters)',
 	},
 	tokenInfo:{
 		token:'Token issue',
