@@ -282,8 +282,9 @@
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	import Utils from '../../../utils/util';
-	import Country from '../../../utils/countrys';
 	import validateFun from '../../../utils/validate.js';
+	import CountryZh from '../../../i18n/country/countrys-zh.js'
+	import CountryEn from '../../../i18n/country/countrys-en.js'
 	export default {
 		data() {
 			return {
@@ -306,7 +307,6 @@
 				codeTradePassword: '',
 				/*身份验证*/
 				country: "",
-				countryData: Country.country,
 				idNum: "",
 				idType: "",
 				idTypeData: [{
@@ -343,6 +343,7 @@
                         this.$store.state.token ||
                         Cache.getSession('bier_token')
 				},
+				countryData:[],
 			}
 		},
 		computed: {
@@ -352,7 +353,8 @@
 					lang = lang.toUpperCase();
 				}
 				return lang;
-			}
+			},
+			
 		},
 		watch:{
 			slangChange(val, oldval){
@@ -363,10 +365,21 @@
 					value: this.$t('setting.passport'),
 					label: this.$t('setting.passport')
 				}]
+				if(val == "en" || val == "EN"){
+					this.countryData = CountryEn.country;
+				}else{
+					this.countryData = CountryZh.country;
+				}
 			},
 		},
 		mounted() {
 			this.info();
+			var lang = this.$store.state.slangChange || this.$i18n.locale;
+			if(lang == "en" || lang == "EN"){
+				this.countryData = CountryEn.country;
+			}else{
+				this.countryData = CountryZh.country;
+			}
 		},
 		methods: {
 			close(){

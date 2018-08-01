@@ -22,7 +22,7 @@
 						<div v-else>0%-{{scope.row.croAchieve}}</div>
 					</template>
 				</el-table-column>
-				<el-table-column prop="city" :label="$t('initiated.status')">
+				<el-table-column :label="$t('initiated.status')">
 					<template slot-scope="scope">
 						<div v-if="scope.row.isCheck==0" @click="openDetail(scope.row.id,0)">{{$t('initiated.review')}}</div>
 						<div v-if="scope.row.isCheck==1" @click="openDetail(scope.row.id,1)">{{$t('initiated.over')}}</div>

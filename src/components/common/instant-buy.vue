@@ -1,5 +1,5 @@
 <template>
-    <el-dialog :close-on-click-modal="false" :visible.sync="instantBuyVisible" width="360px">
+    <el-dialog :close-on-click-modal="false" :visible.sync="instantBuyVisible" width="480px">
         <div class="instant-buy" v-loading="loadingData">
             <div class="instant-buy-box">
                 <div>
@@ -20,13 +20,20 @@
                 </div>
             </div>
             <div class="instant-buy-content">
+                <div>* {{$t('crowdFunding.afdAccount')}}</div>
                 <div>
-                    <span>{{$t('crowdFunding.walletAddress')}}：</span>
+                    <span>{{$t('crowdFunding.walletAddress')}} :</span>
                     <span class="instant-buy-content-address">{{immediateBuyDatas.contractId}}</span>
                 </div>
-                <div>
-                    <span>{{$t('crowdFunding.qrCode')}}：</span>
+                <div class="instant-buy-content-website">
+                    <span>{{$t('crowdFunding.qrCode')}} :</span>
                     <span v-if="immediateBuyDatas.qrCode"><img width="90" :src="'data:image/png;base64, ' + immediateBuyDatas.qrCode"></span>
+                    <div class="instant-buy-content-website-anchor">
+                        <p>{{$t('crowdFunding.purchaseRoute')}}:</p>
+                        <p><a href="https://www.okex.com" target="_blank">OKEX</a></p>
+                        <p><a href="https://www.hbg.com" target="_blank">{{$t('crowdFunding.fireIcon')}}</a></p>
+                        <p><a href="https://otcbtc.com" target="_blank">OTCBTC</a></p>
+                    </div>
                 </div>
             </div>
             <div class="instant-buy-foot">
@@ -126,7 +133,7 @@
                     startTime,
                     endTime
                 }, systemTime);
-                this.remainTime = `${dayArr[0]} 天 ${dayArr[1]} 时 ${dayArr[2]} 分 ${dayArr[3]} 秒`;
+                this.remainTime = `${dayArr[0]} ${this.$t('crowdFunding.day')} ${dayArr[1]} ${this.$t('crowdFunding.hour')} ${dayArr[2]} ${this.$t('crowdFunding.minute')} ${dayArr[3]} ${this.$t('crowdFunding.second')}`;
             },
             finish() {
                 this.instantBuyVisible = false;
@@ -150,23 +157,38 @@
             & > div {
                 color: #909399;
                 line-height: 20px;
-                &:first-child {
-                    margin: 18px 0;
-                }
+                margin: 16px 0;
                 &>span:first-child {
                     display: inline-block;
                     font-size: 14px;
-                    width: 5em;
+                    width: 6em;
                 }
             }
             &-address {
                 word-break: break-word;
                 text-overflow: ellipsis;  
             }
+            &-website {
+                position: relative;
+                &-anchor {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    margin-right: 15px;
+                    & p {
+                        margin: 2px 0;
+                        & a {
+                            color: #909399;
+                            font-size: 14px;
+                            line-height: 20px;
+                        }
+                    } 
+                }
+            }
         }
         &-foot {
             text-align: center;
-            margin-top: 16px;
+            margin-top: 25px;
             &-btn {
                 width: 116px;
                 @include my-button();

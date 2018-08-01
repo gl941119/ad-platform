@@ -14,10 +14,8 @@
 <script>
     import Request from '../../utils/require.js';
     import Cache from '../../utils/cache';
-    import Config from '../../utils/config.js';
 	import Utils from '../../utils/util.js';
     
-
     export default {
         data() {
             return {

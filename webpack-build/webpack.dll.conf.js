@@ -4,8 +4,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: {
-    vue: ['vue/dist/vue.esm.js', 'vue-router', 'vuex', 'axios'],
-    ui: ['element-ui', 'vue-awesome-swiper']
+    vue: ['vue/dist/vue.esm.js', 'vue-router', 'vuex', 'vee-validate', 'axios'],
+    vendor: ['vue-awesome-swiper', 'vue-i18n', 'crypto-js']
   },
   output: {
     path: path.join(__dirname, '../dll'),
@@ -13,6 +13,7 @@ module.exports = {
     library: '[name]'
     },
   devtool: '#source-map',
+  mode: 'production',
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
