@@ -38,7 +38,7 @@
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:100" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
+									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addCore" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -73,7 +73,7 @@
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
+									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addConsultant" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -393,7 +393,7 @@
 				}
 			},
 			proDesc(){//项目简介
-				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length>100){
+				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length>512){
 					this.proDescr = true;
 				}else{
 					this.proDescr = false;

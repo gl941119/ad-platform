@@ -117,7 +117,7 @@
 //			this.echart();
 		},
 		methods: {
-			echart(){
+			/*echart(){
 				var myChart = echarts.init(document.getElementById('main'));
 				// 绘制图表
 				var option = {
@@ -125,31 +125,35 @@
 		                text: 'ECharts 入门示例'
 		            },
 		            tooltip : {
-		            	trigger: 'axis',
-		            	textStyle: {
-							color: '#fff',
-							width: '100%',
-							height: '100%',
-						}
+		            	
 		            },
 		            legend: {
-		                data:['销量']
+		                data:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+		                type: 'plain',
 		            },
 		            xAxis: {
 		            	type: 'category',
         				boundaryGap: false,
+        				//坐标轴分隔线
         				splitLine: {
 							show: true,
 							lineStyle:{
-		            			color:'#EEEEEE',
-		            			width:2,
+		            			color:'#979797',
+		            			width:1,
 		            		}
 		            	},
-		            	nameTextStyle:{
-		            		color:'#f66',
-		            	},
+		            	//坐标轴字体
 		            	axisLabel:{
 		            		show:true,
+		            		color:'rgba(94,97,102,1)',
+		            	},
+		            	//坐标轴轴线
+		            	axisLine:{
+		            		show:true,
+		            		lineStyle:{
+		            			color:'#979797',
+		            			width:1,
+		            		}
 		            	},
 		                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
 		            },
@@ -161,15 +165,20 @@
 		            	axisLine:{
 		            		show:true,
 		            		lineStyle:{
-		            			color:'#EEEEEE',
-		            			width:2,
+		            			color:'#979797',
+		            			width:1,
 		            		}
+		            	},
+		            	axisLabel:{
+		            		show:true,
+		            		color:'rgba(94,97,102,1)',
 		            	},
 		            },
 		            series: [{
 		                name: '销量',
 		                type: 'line',
         				smooth: true,
+        				//区域线的渐变
         				itemStyle: {
 			                normal: {
 			                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
@@ -181,6 +190,7 @@
 			                    }])
 			                }
 			            },
+			            //区域的渐变
 			            areaStyle: {
 			                normal: {
 			                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
@@ -193,12 +203,13 @@
 			                }
 			            },
 		                data: [5, 20, 36, 10, 10, 20],
-		            }]
+		            }],
+		            focusNodeAdjacency : true,
 		        };
 		
 		        // 使用刚指定的配置项和数据显示图表。
 		        myChart.setOption(option);
-			},
+			},*/
 			recharge(){
 				this.$router.push({
 					name:'main'

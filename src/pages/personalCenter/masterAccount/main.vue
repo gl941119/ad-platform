@@ -38,10 +38,11 @@
 					</el-date-picker>
 					<el-date-picker v-model="endTime" type="date" :placeholder="$t('accountFlow.endTime')">
 					</el-date-picker>
-					<button @click="mainData" class="search">{{$t('accountFlow.search')}}</button>
+					<button @click="mainDatas()" class="search">{{$t('accountFlow.search')}}</button>
+					<!--<button @click="mainDatas()"  v-if="value == 2" class="search">{{$t('accountFlow.search')}}</button>-->
 				</div>
 			</div>
-			<el-tabs type="border-card">
+			<el-tabs type="border-card" @tab-click = 'type'>
 			  <el-tab-pane value='1'>
 			    <span slot="label">{{$t('accountFlow.rechargeRecord')}}</span>
 			    <el-table :data="flowData" style="width: 100%">
@@ -55,16 +56,16 @@
 			<div class="advertising_revenu_account_flow_data_pages">
 				<el-pagination 
 					background
-					@current-change="handleCurrent" 
-					:current-page="current" 
+					@current-change="handleCurrentChange" 
+					:current-page="currentPage" 
 					:page-size="size" 
 					layout="prev, pager, next" 
-					:total="total">
+					:total="totals">
 				</el-pagination>
 			</div>
 			  </el-tab-pane>
 			  <el-tab-pane value='2' :label="$t('accountFlow.expenses')">
-			  	<el-table :data="flowDatas" style="width: 100%">
+			  	<el-table :data="flowData" style="width: 100%">
 				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
 				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
@@ -95,12 +96,9 @@
 		data() {
 			return {
 				flowData: [],
-				flowDatas: [],
 				balance: '',
 				currentPage: 1,
-				current: 1,
 				size: 30,
-				total: 0,
 				totals: 0,
 				rechargeView: false,
 				startTime: '',
@@ -108,6 +106,7 @@
 				util: new Utils(),
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				id:'',
+				value:'1',
 			}
 		},
 		mounted() {
@@ -127,39 +126,21 @@
 				}).then(res => {
 					this.balance = res.data.balance;
 					this.id = res.data.id;
-					this.mainData();
 					this.mainDatas();
 				})
 			},
-			mainData() {
-				if(this.startTime){
-					var startTime = this.util.format(this.startTime, 'yyyy-MM-dd HH:mm:ss');
-				}
-				if(this.endTime){
-					var endTime = this.util.format(this.endTime, 'yyyy-MM-dd HH:mm:ss');
-				}
-				Request({
-					url: 'QueryMainAccountFlow',
-					data: {
-						mainId: this.id,
-						page: this.current,
-						pageSize: this.size,
-						flowType: 1,
-						startTime: startTime,
-						endTime: endTime
-					},
-					type: 'get'
-				}).then(res => {
-					this.flowData = res.data;
-					this.total = res.total;
-				})
+			type(tab, event){
+				this.value = tab.$attrs.value;
+				this.startTime = '';
+				this.endTime = '';
+				this.mainDatas();
 			},
 			mainDatas() {
 				if(this.startTime){
-					var startTime = this.util.format(this.startTime, 'yyyy-MM-dd HH:mm:ss');
+					var startTime = this.util.dateFormat(this.startTime, 'time');
 				}
 				if(this.endTime){
-					var endTime = this.util.format(this.endTime, 'yyyy-MM-dd HH:mm:ss');
+					var endTime = this.util.dateFormat(this.endTime, 'time');
 				}
 				Request({
 					url: 'QueryMainAccountFlow',
@@ -167,19 +148,15 @@
 						mainId: this.id,
 						page: this.currentPage,
 						pageSize: this.size,
-						flowType: 2,
+						flowType: this.value,
 						startTime: startTime,
 						endTime: endTime
 					},
 					type: 'get'
 				}).then(res => {
-					this.flowDatas = res.data;
+					this.flowData = res.data;
 					this.totals = res.total;
 				})
-			},
-			handleCurrent(page) {
-				this.current = page;
-				this.mainData();
 			},
 			handleCurrentChange(page) {
 				this.currentPage = page;

@@ -41,7 +41,7 @@
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:100" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
+								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
@@ -88,7 +88,7 @@
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:512" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
@@ -358,7 +358,7 @@
 				}
 			},
 			desc(){//项目简介
-				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length>100){
+				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length>512){
 					this.proDescr = true;
 				}else{
 					this.proDescr = false;
