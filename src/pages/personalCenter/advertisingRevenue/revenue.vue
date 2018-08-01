@@ -59,7 +59,7 @@
 			<el-tabs type="border-card" @tab-click = 'type'>
 				<el-tab-pane value="1">
 				    <span slot="label">{{$t('accountFlow.withdrawals')}}</span>
-				    <el-table :data="flowData" style="width: 100%">
+				    <el-table :data="flowDatas" style="width: 100%">
 						<el-table-column prop="createTime" width="150" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
 						<el-table-column prop="desc" :label="$t('accountFlow.desc')" >
@@ -86,9 +86,9 @@
 					    </el-pagination>
 					</div>
 				</el-tab-pane>
-				<el-tab-pane>
-				    <span slot="label" value="2">{{$t('accountFlow.income')}}</span>
-				    <el-table :data="flowData" style="width: 100%">
+				<el-tab-pane  value="2">
+				    <span slot="label">{{$t('accountFlow.income')}}</span>
+				    <el-table :data="flowDatas" style="width: 100%">
 						<el-table-column prop="createTime" width="150" :label="$t('accountFlow.dataTime')">
 						</el-table-column>
 						<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
@@ -119,7 +119,7 @@
 	export default {
 		data() {
 			return {
-				flowData: [],
+				flowDatas: [],
 				balance: '',
 				money: '',
 				tradePassword:'',
