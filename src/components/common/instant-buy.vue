@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="instant-buy-content">
-                <div>*众筹转账必须使用阿凡达账号绑定的eth钱包地址</div>
+                <div>* {{$t('crowdFunding.afdAccount')}}</div>
                 <div>
                     <span>{{$t('crowdFunding.walletAddress')}} :</span>
                     <span class="instant-buy-content-address">{{immediateBuyDatas.contractId}}</span>
@@ -29,9 +29,9 @@
                     <span>{{$t('crowdFunding.qrCode')}} :</span>
                     <span v-if="immediateBuyDatas.qrCode"><img width="90" :src="'data:image/png;base64, ' + immediateBuyDatas.qrCode"></span>
                     <div class="instant-buy-content-website-anchor">
-                        <p>ETH场外交易的平台购买途径:</p>
+                        <p>{{$t('crowdFunding.purchaseRoute')}}:</p>
                         <p><a href="https://www.okex.com" target="_blank">OKEX</a></p>
-                        <p><a href="https://www.hbg.com" target="_blank">火币官网</a></p>
+                        <p><a href="https://www.hbg.com" target="_blank">{{$t('crowdFunding.fireIcon')}}</a></p>
                         <p><a href="https://otcbtc.com" target="_blank">OTCBTC</a></p>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     startTime,
                     endTime
                 }, systemTime);
-                this.remainTime = `${dayArr[0]} 天 ${dayArr[1]} 时 ${dayArr[2]} 分 ${dayArr[3]} 秒`;
+                this.remainTime = `${dayArr[0]} this.$t('crowdFunding.day') ${dayArr[1]} this.$t('crowdFunding.hour') ${dayArr[2]} this.$t('crowdFunding.minute') ${dayArr[3]} this.$t('crowdFunding.second')`;
             },
             finish() {
                 this.instantBuyVisible = false;
