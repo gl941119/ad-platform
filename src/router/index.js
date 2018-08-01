@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 const IndexCom = () => import('@/pages/index/index');
 const CrowdSaleCom = () => import('@/pages/crowdsale-detail/crowdsale');
+const IcoDetailCom = () => import('@/pages/crowdsale-detail/ico-detail');
 const AdvertisementCom = () => import('@/pages/advert-detail/advertisement');
 const PersonalCenter = () => import('@/pages/personalCenter/personal');
 const Purse = () => import('@/pages/personalCenter/purse/purse');
@@ -37,6 +38,11 @@ const router = new VueRouter({
 			path: '/crowdsale',
 			name: 'crowdsale',
 			component: CrowdSaleCom,
+		},
+		{
+			path: '/icodetail/:id',
+			name: 'icodetail',
+			component: IcoDetailCom,
 		},
 		{
 			path: '/advertisement',

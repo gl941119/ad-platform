@@ -46,7 +46,6 @@
     import crowdsaleDetialCom from '@/components/detail-com/crowdsale-detail';
     import Request from '../../utils/require.js';
     import Config from '../../utils/config.js';
-    // const headerImg = require('../../assets/imgs/detail-img/crowdsale.png');
     export default {
         data() {
             return {
