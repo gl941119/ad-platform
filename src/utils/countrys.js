@@ -108,6 +108,15 @@ export default {
 		value:'中国',
 		label:'中国'
 	},{
+		value:'中国澳门',
+		label:'中国澳门'
+	},{
+		value:'中国香港',
+		label:'中国香港'
+	},{
+		value:'中国台湾',
+		label:'中国台湾'
+	},{
 		value:'哥伦比亚',
 		label:'哥伦比亚'
 	},{
@@ -204,9 +213,6 @@ export default {
 		value:'洪都拉斯',
 		label:'洪都拉斯'
 	},{
-		value:'中国香港',
-		label:'中国香港'
-	},{
 		value:'匈牙利',
 		label:'匈牙利'
 	},{
@@ -290,9 +296,6 @@ export default {
 	},{
 		value:'卢森堡',
 		label:'卢森堡'
-	},{
-		value:'澳门',
-		label:'澳门'
 	},{
 		value:'马达加斯加',
 		label:'马达加斯加'
@@ -494,9 +497,6 @@ export default {
 	},{
 		value:'叙利亚',
 		label:'叙利亚'
-	},{
-		value:'中国台湾',
-		label:'中国台湾'
 	},{
 		value:'塔吉克斯坦',
 		label:'塔吉克斯坦'

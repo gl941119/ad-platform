@@ -25,11 +25,6 @@ Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 })
-//语言过滤
-Vue.filter('lang', function(item) {
-	var langs = i18n.locale || store.state.slangChange;	
-    return item[langs];
-});
 //时间转换
 Vue.filter('cal', function(input) {
   if(input==""){

@@ -172,6 +172,8 @@ const zh = {
 		binded:'已绑定',
 		goBind:'去绑定',
 		authentication:'身份验证',
+		auth: '身份证',
+		passport: '护照',
 		fillInformation:'填写认证信息',
 		country:'填写国家或地区',
 		pleaseSelect:'请选择',
@@ -478,6 +480,6 @@ const zh = {
 		itemNoExist:'广告项目不存在',
 		noSetConcept:'广告项目还未设置概念',
 	},
-	...zhLocale
+	...zhLocale,
 };
 export default zh
