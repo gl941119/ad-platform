@@ -6,7 +6,7 @@
 				<span>{{$t('invite.code')}}：</span>
 				<span id="inviteCode"><span style="position: absolute;z-index: -1">http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
 			</p>
-			<p class="invite_top_code">
+			<p class="invite_top_code" style="display: inline-block;">
 				<span>邀请链接：</span>
 				<span>http://www.afdchain.com/?inviteCode={{inviteCode}}</span>
 			</p>
@@ -108,8 +108,8 @@
 	&_top {
 		margin: 30px 0;
 		&_code {
-			height: 40px;
-			line-height: 40px;
+			height: 20px;
+			line-height: 20px;
 			margin: 10px 0;
 			color: #333333;
 		}
@@ -135,6 +135,7 @@
 	.purse_address_bind {
 		display: inline-block;
 		width: 100px;
+		margin-left: 20px;
 		border-radius: 5px;
 		background:rgba(255,149,0,1);
 		border-radius:4px;
