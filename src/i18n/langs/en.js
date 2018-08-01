@@ -174,6 +174,8 @@ const en = {
 		binded:' Binded',
 		goBind:' Go bind',
 		authentication:'Authentication ',
+		auth: '身份证',
+		passport: '护照',
 		fillInformation:'Fill in the information ',
 		country:'Your country',
 		pleaseSelect:'Please select ',
@@ -477,6 +479,6 @@ const en = {
 		itemNoExist:'the advertisement project is not existed',
 		noSetConcept:'the advertisement has not been defined',
 	},
-	...enLocale
+	...enLocale,
 };
 export default en

@@ -80,7 +80,7 @@
 								<h3 v-if="!existPassword">{{$t('passwordInfo.setPassword')}}</h3>
 								<h3 v-if="existPassword">{{$t('passwordInfo.changePassword')}}</h3>
 								<p>
-									<el-input v-if="existPassword" :placeholder="$t('passwordInfo.oldPassword')" v-model="oldPassword"></el-input>
+									<el-input v-if="existPassword" type="password" :placeholder="$t('passwordInfo.oldPassword')" v-model="oldPassword"></el-input>
 								</p>
 								<p>
 									<el-input type="password" :placeholder="$t('passwordInfo.newPassword')" v-model="newPassword"></el-input>
@@ -135,7 +135,7 @@
 							<div v-if="existTradePassword" class="el-collapse-item__content-box">
 								<h3>{{$t('passwordInfo.changeTradePassword')}}</h3>
 								<p>
-									<el-input :placeholder="$t('passwordInfo.oldTradePassword')" v-model="oldTradePassword"></el-input>
+									<el-input type="password" :placeholder="$t('passwordInfo.oldTradePassword')" v-model="oldTradePassword"></el-input>
 								</p>
 								<p>
 									<el-input type="password" :placeholder="$t('passwordInfo.newTradePassword')" v-model="newTradePassword"></el-input>
@@ -310,11 +310,11 @@
 				idNum: "",
 				idType: "",
 				idTypeData: [{
-					value: '身份证',
-					label: '身份证'
+					value: this.$t('setting.auth'),
+					label: this.$t('setting.auth')
 				}, {
-					value: '护照',
-					label: '护照'
+					value: this.$t('setting.passport'),
+					label: this.$t('setting.passport')
 				}],
 				realName: "",
 				imageUrl: '',
@@ -345,11 +345,26 @@
 				},
 			}
 		},
-		// computed:{
-		// 	nickName(){
-		// 		return this.$store.state.usernickname || Cache.getSession('bier_usernickname');
-		// 	}
-		// },
+		computed: {
+			slangChange() {
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
+			}
+		},
+		watch:{
+			slangChange(val, oldval){
+				this.idTypeData = [{
+					value: this.$t('setting.auth'),
+					label: this.$t('setting.auth')
+				}, {
+					value: this.$t('setting.passport'),
+					label: this.$t('setting.passport')
+				}]
+			},
+		},
 		mounted() {
 			this.info();
 		},
@@ -500,7 +515,7 @@
 							}
 						}, 1000);
 						this.$message({
-							message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
+							message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
 							type: 'success'
 						});
 					})
@@ -528,7 +543,7 @@
 						}
 					}, 1000);
 					this.$message({
-						message: this.utils.judgeLanguage(this.$store.state.slangChange, res.message),
+						message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
 						type: 'success'
 					});
 				})
@@ -540,10 +555,6 @@
 						codeType: 4,
 					},
 				}).then(res => {
-					this.$message({
-						message:this.$t('messageNotice.getSuccess'),
-						type:'success'
-					});
 					this.disabledTradePassword = false;
 					let timerTradePassword = setInterval(() => {
 						this.numTradePassword--;
@@ -554,7 +565,7 @@
 						}
 					}, 1000);
 					this.$message({
-						message: this.utils.judgeLanguage(store.state.slangChange, res.message),
+						message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
 						type: 'success'
 					});
 				})
