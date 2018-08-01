@@ -229,7 +229,7 @@
                         },
                         type: 'get'
                     }).then(res => {
-                        console.log('authStatus_>', res.data);
+                        // console.log('authStatus_>', res.data);
                         resolve(res.data);
                     })
                 });

@@ -539,7 +539,7 @@
 				this.$message('上传失败');
 			},
 			handleRemove(file, fileList) {
-				console.log(file, fileList);
+				// console.log(file, fileList);
 			},
 			getFile(res) {
 				this.fileUrl = res.data;

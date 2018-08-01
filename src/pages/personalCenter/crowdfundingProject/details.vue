@@ -492,7 +492,6 @@
 				}
 			},
 			changeDetails() {
-				console.log(this.checkeData)
 				if(this.checkeData.length>0){
 					if(this.checkeData[0]){
 						var concept1Id = this.checkeData[0].conceptId || this.checkeData[0].id;

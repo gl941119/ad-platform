@@ -409,7 +409,8 @@
 					data: user,
 					flag: true,
 				}).then(res => {
-					console.log('bind success->', res);
+                    // console.log('bind success->', res);
+                    this.info();
 				})
 			},
 			setPassword() { //设置密码
