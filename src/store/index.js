@@ -16,6 +16,7 @@ export default new Vuex.Store({
         instantBuyDataId: undefined,
         change: false,
         bullsData: undefined,
+        globalShow: true, // global share
 		slangChange: '',
 		heardUrl:'',
 	},
@@ -52,6 +53,9 @@ export default new Vuex.Store({
         },
         setBullsData(state, val) {
             state.bullsData = val;
+        },
+        setGlobalShow(state, val) {
+            state.globalShow = val;
         },
 		setHeardUrl(state, val) {
 			state.heardUrl = val;

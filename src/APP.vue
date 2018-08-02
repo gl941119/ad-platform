@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <share-layout></share-layout>
+        <share-layout v-if="globalShow"></share-layout>
         <header-com></header-com>
         <router-view></router-view>
         <custom-share></custom-share>
@@ -16,6 +16,11 @@
         name: 'app',
         data() {
             return {};
+        },
+        computed: {
+            globalShow(){
+                return this.$store.state.globalShow;
+            }
         },
         components: {
             'header-com': headerCom,

@@ -19,7 +19,10 @@ const Disclaimer = () => import('@/pages/personalCenter/crowdfundingProject/disc
 const Advertisers = () => import('@/pages/personalCenter/advertisers/advertisers');
 const Adserving = () => import('@/pages/personalCenter/advertisers/ad-serving');
 const AdvertisersDisclaimer = () => import('@/pages/personalCenter/advertisers/disclaimer');
-	
+
+// mass
+const ForgetPasswordCom = () => import('@/pages/mass/forget-password');
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -124,6 +127,11 @@ const router = new VueRouter({
 			path: '/advertisers/disclaimer',//众筹免责声明
 			name: 'advertisersDisclaimer',
 			component: AdvertisersDisclaimer,
+		},
+		{
+			path: '/resetpwd',//众筹免责声明
+			name: 'resetpwd',
+			component: ForgetPasswordCom,
 		},
         {path: '*', redirect: '/'}
 	]
