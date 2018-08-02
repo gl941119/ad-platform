@@ -3,10 +3,15 @@
 		<div class="advertising_revenue_top">
 			<h3>AFDT</h3>
 			<ul class="advertising_revenue_top_item">
+				<div class="info">
+					<p>{{$t('header.info')}}</p>
+					<!--<p>系统维护 暂停提币</p>-->
+					<!--<p>system maintenance，suspended withdrawals</p>-->
+				</div>
 				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
 				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
-			<button class="advertising_revenue_top_money" @click="withdraw()">{{$t('project.withdraw')}}</button>
+			<el-button class="advertising_revenue_top_money changeColor" @click="withdraw()" disabled>{{$t('project.withdraw')}}</el-button>
 		</div>
 		<!--提現-->
 		<div class="withdraw" v-if="withdrawView">
@@ -305,5 +310,20 @@
 		position: absolute;
 	    right: 50%;
 	    margin-right: -58px;
+	}
+	.changeColor{
+		background: #c0c4cc !important;
+	}
+	.info{
+		position: absolute;
+		left: 800px;
+		top: 187px;
+		p{
+			text-align: center;
+			font-size:24px;
+			font-family:PingFangSC-Light;
+			color:rgba(208,2,27,1);
+			line-height:33px;
+		}
 	}
 </style>

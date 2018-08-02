@@ -12,6 +12,7 @@ const en = {
         tips: 'Tips',
         tipMsg: 'Telegram need VPN',
         got: 'I got it',
+        info:'system maintenance，suspended withdrawals'
 	},
 	login:{
 		login:'Login',

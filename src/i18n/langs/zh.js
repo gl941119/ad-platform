@@ -12,6 +12,7 @@ const zh = {
         tips: '提示',
         tipMsg: '电报群需翻墙',
         got: '我知道了',
+        info:'系统维护 暂停提币'
 	},
 	login:{
 		login:'登 录',
