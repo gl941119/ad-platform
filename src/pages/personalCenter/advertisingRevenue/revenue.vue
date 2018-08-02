@@ -131,7 +131,7 @@
 				startTime: '',
 				endTime: '',
 				util: new Utils(),
-				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
+				accountId: this.$store.state.id,
 				authStatus:'',
 				id:'',
 				insufficient:false,//余额不足

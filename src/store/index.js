@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Cache from '../utils/cache';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		id: undefined,
-		username: undefined,
-		usernickname: undefined,
-        token: undefined,
+		id: Cache.getSession('bier_userid'),
+		username: Cache.getSession('bier_username'),
+		usernickname: Cache.getSession('bier_usernickname'),
+        token: Cache.getSession('bier_token'),
         dialogVisible: false, // share component visible
         conceptId: 0, // advert concept id
         instantBuyVisible: false, // buy dialog visible
@@ -16,8 +17,9 @@ export default new Vuex.Store({
         instantBuyDataId: undefined,
         change: false,
         bullsData: undefined,
-		slangChange: '',
-		heardUrl:'',
+        globalShow: Cache.getSession('globalShow') || 'show', // global share
+		slangChange: Cache.getLocal('bier_langChange'),
+		heardUrl: Cache.getSession('bier_heardUrl'),
 		inviteCode:'',
 	},
 	mutations: {
@@ -53,6 +55,9 @@ export default new Vuex.Store({
         },
         setBullsData(state, val) {
             state.bullsData = val;
+        },
+        setGlobalShow(state, val) {
+            state.globalShow = val;
         },
 		setHeardUrl(state, val) {
 			state.heardUrl = val;

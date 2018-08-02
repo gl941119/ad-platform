@@ -19,6 +19,7 @@
                             <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
                         </div>
                         <div  class="advert-item-middle-father-member-title">
+                            <span>核心成员:</span>
                             <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
                             <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
                         </div>
@@ -65,7 +66,7 @@ export default {
             return this.$store.state.conceptId;
         },
         language(){
-            return this.utils.getCurrLanguage(this.$store, Cache);
+            return this.utils.getCurrLanguage(this.$store);
         }
     },
     methods: {
@@ -155,14 +156,14 @@ export default {
                 color: #898989;
                 display: flex;
                 &-title {
-                    max-width: 182px;
+                    max-width: 210px;
                     @include text-ellipsis;
                 }
             }
         }
         &-title {
             padding-top: 3px;
-            width: 311px;
+            width: 265px;
             @include content-flex(flex-start);
             &-text {
                 @include item-title();
@@ -176,7 +177,7 @@ export default {
             }
         }
         &-divide {
-            width: 311px;
+            width: 265px;
             height: 1px;
             background: #EAEAEA;
             margin: 0 0 10px;

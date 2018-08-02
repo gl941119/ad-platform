@@ -88,7 +88,7 @@
                 fullscreen: true,
                 });
                 this.totalAdvertItemDatas = [];
-		        Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo(), this.findAdvertisement()])
+		        Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo(1), this.findAdvertisement()])
                 .then(() => {
                     this.swiperInstance.init();
                     loading.close();
@@ -222,7 +222,7 @@
                 return bullsData;
             },
             updateAdvertData(){
-                this.getAdvertInfo(this.page);
+                this.getAdvertInfo(1);
             },
             handleCarouselData(data){
                 return data.filter(item => item.advertPosition === 1).sort((a, b) => a.advertSort - b.advertSort)

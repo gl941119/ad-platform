@@ -165,8 +165,8 @@ export default class Util {
 		}
     }
     
-    getCurrLanguage(store, local){
-        return store.state.slangChange || local.getLocal('bier_langChange') || 'EN';
+    getCurrLanguage(store){
+        return store.state.slangChange || 'EN';
     }
 	
 	// 读取反馈代码

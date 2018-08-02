@@ -47,11 +47,13 @@
                             <img width="120" height="40" :src="'data:image/png;base64, ' + base64Str">
 						</div>
 					</el-form-item>
-					<div class="register-foot">
-						<el-button type="default" size="small" class="register-foot-btn" round @click="loginSubmit">{{$t('login.login')}}</el-button>
-						<el-button type="default" size="small" class="register-foot-btn" round @click="goToRegister">{{$t('register.register')}}</el-button>
+					<div class="register-foot" :style="{'padding-left': getLabelWidth(language, 'login')}">
+						<el-button type="text" size="small" class="register-foot-text" @click="goToRegister">{{$t('register.register')}}</el-button>
+						<el-button type="text" size="small" class="register-foot-text" @click="goToForgetPwd">忘记密码</el-button>
+						<el-button type="default" size="small" class="register-foot-btn" @click="loginSubmit">{{$t('login.login')}}</el-button>
 					</div>
 					<div class="register-other">
+                        <span class="register-other-text">快速登录</span>
 						<telegram-login mode="callback" :telegram-login="telegramBot" @callback="callbackFunction"></telegram-login>
 					</div>
 				</el-form>
@@ -88,6 +90,10 @@
 						<el-input :placeholder="$t('register.registerInviteCode')" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
 					</el-form-item>
 					<div class="register-foot">
+                        <div class="register-foot-disclaimer">
+                            <el-checkbox class="register-foot-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
+                            <a class="register-foot-disclaimer-item">{{$t('crowdFunding.disclaimer')}}</a>
+                        </div>
 						<el-button type="default" size="small" class="register-foot-btn" round @click="registerSubmit">{{$t('register.register')}}</el-button>
 					</div>
 				</el-form>
@@ -123,6 +129,7 @@
                 title: this.$t('register.userRegister'),
                 validateKey: undefined,
                 base64Str: undefined,
+                disclaimerChecked: true,
 				registerModel: {
 					registerVisible: false,
 					rule: {
@@ -189,12 +196,12 @@
         computed: {
             userName: {
                 get(){
-                    return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
+                    return this.$store.state.usernickname || this.$store.state.username;
                 },
                 set(){}
             },
             heardUrl() {
-                return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
+                return this.$store.state.heardUrl || Config.headPortrait[5];
             },
             dialogModalVisible: {
                 get(){
@@ -208,7 +215,7 @@
                 }
             },
             language(){
-                return this.utils.getCurrLanguage(this.$store, Cache);
+                return this.utils.getCurrLanguage(this.$store);
             }
         },
         mounted(){
@@ -235,7 +242,13 @@
                     this.title = this.$t('login.userLogin');
                     this.registerModel.registerVisible = false;
                 })
-			},
+            },
+            goToForgetPwd(){
+                this.dialogModalVisible = false;
+                this.$store.commit('setGlobalShow', 'hide');
+                Cache.setSession('globalShow', 'hide');
+                this.$router.push({name: 'resetpwd'});
+            },
 			toPersonCenter() {
 				this.$router.push({
 					name: 'personalCenter'
@@ -262,7 +275,7 @@
 							message: this.utils.judgeLanguage(this.language, res.message),
 							type: 'success'
 						});
-					})
+					}).catch(console.error)
 				} else {
 					this.$message({
 						message: 'email is empty',
@@ -286,32 +299,36 @@
 					verifyCode,
 					password,
 					inviteCode
-				} = this.registerModel.form;
-				this.$refs.registerModelForm.validate((valid) => {
-					if(valid) {
-						Request({
-							url: 'Register',
-							data: {
-								authCode: verifyCode,
-								email,
-								password,
-								inviteCode
-							},
-							flag: true
-						}).then(res => {
-                            this.toLogin();
-							this.$message({
-								message: this.utils.judgeLanguage(this.language, res.message),
-								type: 'success'
-							});
-						});
-					} else {
-						this.$message({
-							message: this.$t('messageNotice.formatMatch'),
-							type: 'warning'
-						});
-					}
-				});
+                } = this.registerModel.form;
+                if(this.disclaimerChecked) {
+                    this.$refs.registerModelForm.validate((valid) => {
+                        if(valid) {
+                            Request({
+                                url: 'Register',
+                                data: {
+                                    authCode: verifyCode,
+                                    email,
+                                    password,
+                                    inviteCode
+                                },
+                                flag: true
+                            }).then(res => {
+                                this.toLogin();
+                                this.$message({
+                                    message: this.utils.judgeLanguage(this.language, res.message),
+                                    type: 'success'
+                                });
+                            });
+                        } else {
+                            this.$message({
+                                message: this.$t('messageNotice.formatMatch'),
+                                type: 'warning'
+                            });
+                        }
+                    });
+                } else {
+                    this.$message({message: '请阅读免责声明', type: 'warning'});
+                }
             },
             // login button
 			loginSubmit() {
@@ -503,9 +520,29 @@
 	}
 	
 	.register-foot {
-		@include content-flex(flex-end);
+        @include content-flex(center);
+        position: relative;
+        &-disclaimer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            &-item {
+                margin-left: 13px;
+                color: #909399;
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+        &-text {
+            color: #666;
+            font-size: 14px;
+            &:hover,&:active,
+			&:focus {
+                color: #999;
+            }
+        }
 		&-btn {
-			width: 110px;
+			width: 90px;
 			background: #FF9500;
 			border: none;
 			color: #fff;
@@ -524,10 +561,25 @@
     .register-other {
         min-height: 30px;
         position: relative;
+        margin-top: 30px;
+        border-top: 2px solid #E0E0E0;
+        &-text {
+            position: absolute;
+            width: 78px;
+            text-align: center;
+            line-height: 28px;
+            height: 28px;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            font-size: 12px;
+            color: #999;
+        }
     }
 	
 	.login-modal .register-foot {
-		@include content-flex(space-around);
+		@include content-flex(space-between);
 	}
 	
 	.router-link-active {

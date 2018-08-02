@@ -6,6 +6,7 @@
  * bier_langChange    ->      langChange localStorage
  * bier_heardUrl    ->      heardUrl
  * setBalance    ->      balance
+ * globalShow    ->      global share
  */
 export default {
     getSession(name) {
