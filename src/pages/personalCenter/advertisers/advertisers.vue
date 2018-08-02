@@ -39,7 +39,7 @@
 								<input class="team" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:16" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.desc')">
+						<el-table-column property="address" align="center" :label="$t('team.desc')" width="200">
 							<template slot-scope="scope">
 								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
 							</template>
@@ -86,7 +86,7 @@
 								<input class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:16" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title">
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.desc')">
+						<el-table-column property="address" align="center" :label="$t('team.desc')" width="200">
 							<template slot-scope="scope">
 								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:512" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
 							</template>
