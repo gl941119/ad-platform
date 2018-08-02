@@ -137,6 +137,8 @@ const en = {
 		afdAccount:'众筹转账必须使用阿凡达账号绑定的eth钱包地址',
 		purchaseRoute:'ETH场外交易的平台购买途径',
 		fireIcon:'火币官网',
+		financing:'融资服务居间协议',
+		publishingProtocol:'广告发布协议',
 	},
 	projectList:{
 		tokenName:'Token Name',
