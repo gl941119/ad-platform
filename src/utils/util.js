@@ -202,4 +202,16 @@ export default class Util {
         window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
     }
 
+    newWin(url, id) {
+        var a = document.createElement('a');
+        a.setAttribute('href', url);
+        a.setAttribute('target', '_blank');
+        a.setAttribute('id', id);
+        // 防止反复添加
+        if (!document.getElementById(id)) {
+            document.body.appendChild(a);
+        }
+        a.click();
+    }
+
 }

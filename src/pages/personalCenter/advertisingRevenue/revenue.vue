@@ -144,6 +144,13 @@
                     return this.money*1/1000;
                 },
             },
+            slangChange() {
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
+			}
         },
 		mounted() {
 			this.BasicInformation();
@@ -155,6 +162,9 @@
 				}else{
 					this.insufficient = false;
 				}
+			},
+			slangChange(val, oldval) {
+				this.revenueDatas();
 			}
 		},
 		methods: {

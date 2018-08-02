@@ -211,7 +211,7 @@
 					    <i class="custom-element-icon-duihao1 icons"></i>
 						<i v-if="authStatus == 1" class="custom-element-icon-duihao1 icons green"></i>
 					</template>
-						<ul v-if="authStatus!=1" class="el-collapse-item__content_authentication">
+						<ul v-if="authStatusShow" class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
 								<input :class="[errors.has('realName')?'llo':'']" :data-vv-as="$t('setting.limitName')" v-validate="{ required: true, regex: /^([\u4E00-\u9FA5]+|[a-zA-Z]+)$/}" name="realName" class="el-collapse-item__content_authentication_li_info" v-model="realName" />
@@ -219,7 +219,7 @@
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileType')}}</label>
-								<el-select v-model="idType" @blur="cardType" @change="cardType" :placeholder="$t('setting.pleaseSelect')">
+								<el-select v-model="idType" @change="cardType" @blur="cardType" :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
@@ -233,7 +233,7 @@
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.country')}}</label>
-								<el-select @blur="countrys"  @change="countrys" v-model="country" filterable :placeholder="$t('setting.pleaseSelect')">
+								<el-select @blur="countrys" @change="countrys" v-model="country" filterable :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
@@ -287,15 +287,20 @@
 								<span class="is-danger" v-if="imgShow">请上传三张不同的证件照片</span>
 							</li>
 						</ul>
-						<div class="withdraw" v-if="authStatus == 2 || authStatus == 3">
+						<div class="withdraw" v-if="authStatus == 2">
 							<div class="withdraw_box" style="text-align: center;width: 400px;height: 200px;">
 								<p class="notic"><i class="custom-element-icon-weibiaoti1psd"></i><span class="noticText">{{$t('setting.tips')}}</span></p>
 								<p class="notic" v-if="authStatus == 2">{{$t('setting.review')}}</p>
-								<p class="notic" v-if="authStatus == 3">{{$t('setting.nopass')}}</p>
-								<button class="commit" style="margin: 0;" @click="close">{{$t('buttonAll.affirm')}}</button>
+								<button class="commit" @click="close">{{$t('buttonAll.affirm')}}</button>
 							</div>
 						</div>
-						<button class="commit" v-if="authStatus != 1" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
+						<div v-if="editShow" style="text-align: center;">
+							<p class="notic"><i class="custom-element-icon-weibiaoti1psd"></i><span class="noticText">{{$t('setting.tips')}}</span></p>
+							<p class="notic">{{$t('setting.nopass')}}</p>
+							<p class="notic">{{noPassReason}}</p>
+							<button class="commit" @click="edit()">{{$t('buttonAll.affirm')}}</button>
+						</div>
+						<button class="commit" style="margin: 26px 0 0 144px;" v-if="authStatusShow" @click="authentication">{{$t('buttonAll.submitVerification')}}</button>
 					<div v-if="authStatus == 1">
 						<p class="notic"><i class="custom-element-icon-shenfenrenzheng auth"></i><span class="noticText">{{$t('setting.tips')}}</span></p>
 						<p class="notic">{{$t('setting.pass')}}</p>
@@ -368,6 +373,7 @@
                 existImg:'',
                 existNickname:'',
                 authStatus:'',
+                noPassReason:'',
                 uploadImg: Config.UploadImg,
                 requestToken: {
 					token:
@@ -380,6 +386,9 @@
 				countryShow:false,
 				numType:false,
 				imgShow:false,
+				editShow:false,
+				authStatusShow:false,
+				editShow:false,
 			}
 		},
 		computed: {
@@ -418,6 +427,10 @@
 			}
 		},
 		methods: {
+			edit(){
+				this.authStatusShow = true;
+				this.editShow = false;
+			},
 			close(){
 				this.active = '';
 			},
@@ -441,6 +454,13 @@
 					type: 'get',
 				}).then(res => {
 					this.authStatus = res.data.authStatus;
+					if(res.data.authStatus == 0 || res.data.authStatus == 2){
+						this.authStatusShow = true;
+					}
+					if(res.data.authStatus == 3){
+						this.editShow = true;
+					}
+					this.noPassReason = res.data.noPassReason;
 					this.bindEmail = res.data.Email;
 					this.existEmail = res.data.existEmail;
 					this.existPassword = res.data.existPassword;
@@ -805,13 +825,8 @@
 					}
 				})
 			},
-			name(){
-				if(!this.realName || this.realName.length>64){
-					this.$message(this.$t('setting.limitName'));
-				}
-			},
 			text(){
-				if(this.idType){
+				if(this.idType != ''){
 					this.numType = false;
 					this.cardTypeShow = false;
 					if(this.idType == '身份证'){
@@ -832,7 +847,6 @@
 				}else{
 					this.numType = true;
 				}
-					
 			},
 			getImgBack(res, file){
 				this.imageBack =  res.data;
@@ -844,7 +858,7 @@
 				this.imageHandheld = res.data;
 			},
 			cardType(){
-				if(!this.idCard){
+				if(!this.idType){
 					this.cardTypeShow = true;
 				}else{
 					this.cardTypeShow = false;
@@ -907,6 +921,10 @@
 		&_authentication {
 			&_li {
 				height: 70px;
+				.is-danger{
+					font-size: 14px;
+			    	color: #fa5555;
+				}
 				label{
 					vertical-align: middle;
 					display:inline-block; 
@@ -1029,7 +1047,7 @@
 		border-radius: 4px;
 		font-size: 14px;
 		color: rgba(255, 255, 255, 1);
-		margin: 26px 0 0 144px;
+		margin: 0;
 	}
 	.avatar-uploader-icon {
 		font-size: 28px;
@@ -1113,4 +1131,5 @@
 	.green{
 		color: #2a9c2b;
 	}
+	
 </style>

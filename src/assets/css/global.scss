@@ -67,6 +67,12 @@
     -webkit-box-orient: vertical;
 }
 
+// header visible dialog
+.telegram-dialog .el-dialog__body {
+    border-top: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF;
+}
+
 // modify crowdsale-detail select style
 .crowdsale-detail-head-right-select input.el-input__inner {
     padding: 0 30px 0 10px;
