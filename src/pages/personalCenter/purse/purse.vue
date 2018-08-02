@@ -6,6 +6,7 @@
 				<p>{{$t('purse.bindWalletAddress')}}{{$t('purse.main')}}</p>
 				<p>{{$t('purse.one')}}</p>
 				<p>{{$t('purse.two')}}</p>
+				<p>{{$t('purse.three')}}</p>
 				<div class="purse_address">
 					<label>{{$t('purse.eth')}}</label>
 					<div class="input">

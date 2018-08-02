@@ -246,6 +246,7 @@ const en = {
 		main:'This means that: ',
 		one:'1、The ETH wallet address will be used to receive the platform token AFDT based on the ERC20 protocol ',
 		two:'2、If you need to advertise, you need to deposit from this address for verification',
+		three:'3、不能绑定交易所的钱包地址',
 		eth:'ETH wallet address ',
 		wallet:'Wallet',
 	},
