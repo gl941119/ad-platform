@@ -46,11 +46,11 @@
 			  <el-tab-pane value='1'>
 			    <span slot="label">{{$t('accountFlow.rechargeRecord')}}</span>
 			    <el-table :data="flowData" style="width: 100%">
-				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+				<el-table-column prop="createTime" width="150" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
-				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
+				<el-table-column prop="desc" :label="$t('accountFlow.desc')" >
 				</el-table-column>
-				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+				<el-table-column prop="money" width="200" :label="$t('accountFlow.amountOfMoney')">
 				</el-table-column>
 			</el-table>
 			<div class="advertising_revenu_account_flow_data_pages">
@@ -66,11 +66,11 @@
 			  </el-tab-pane>
 			  <el-tab-pane value='2' :label="$t('accountFlow.expenses')">
 			  	<el-table :data="flowData" style="width: 100%">
-				<el-table-column prop="createTime" :label="$t('accountFlow.dataTime')">
+				<el-table-column prop="createTime" width="150" :label="$t('accountFlow.dataTime')">
 				</el-table-column>
-				<el-table-column prop="desc" :label="$t('accountFlow.desc')" width="300">
+				<el-table-column prop="desc" :label="$t('accountFlow.desc')">
 				</el-table-column>
-				<el-table-column prop="money" :label="$t('accountFlow.amountOfMoney')">
+				<el-table-column prop="money" width="200" :label="$t('accountFlow.amountOfMoney')">
 				</el-table-column>
 			</el-table>
 			<div class="advertising_revenu_account_flow_data_pages">

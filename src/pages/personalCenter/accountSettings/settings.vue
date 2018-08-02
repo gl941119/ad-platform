@@ -214,25 +214,30 @@
 						<ul v-if="authStatus!=1" class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.name')}}</label>
-								<input class="el-collapse-item__content_authentication_li_info" @blur="name" v-model="realName" />
+								<input :class="[errors.has('realName')?'llo':'']" :data-vv-as="$t('setting.limitName')" v-validate="{ required: true, regex: /^([\u4E00-\u9FA5]+|[a-zA-Z]+)$/}" name="realName" class="el-collapse-item__content_authentication_li_info" v-model="realName" />
+								<span class="is-danger" v-show="errors.has('realName')">{{ errors.first('realName') }}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileType')}}</label>
-								<el-select v-model="idType" clearable :placeholder="$t('setting.pleaseSelect')">
+								<el-select v-model="idType" @blur="cardType" @change="cardType" :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
+								<span class="is-danger" v-if="cardTypeShow">请选择证件类型</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileNumber')}}</label>
-								<input class="el-collapse-item__content_authentication_li_info" @blur="text" v-model="idNum" />
+								<input class="el-collapse-item__content_authentication_li_info" @blur="text" name="idNum" v-model="idNum" />
+								<span class="is-danger" v-if="numType">请先选择证件类型</span>
+								<span class="is-danger" v-if="idCard">请输入正确的证件号码</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.country')}}</label>
-								<el-select v-model="country" filterable clearable :placeholder="$t('setting.pleaseSelect')">
+								<el-select @blur="countrys"  @change="countrys" v-model="country" filterable :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
+								<span class="is-danger" v-if="countryShow">请选择国家</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li last">
 								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
@@ -243,9 +248,31 @@
 										:headers="requestToken"
 										:limit="1"
 										accept=".jpg,.png"
-										:on-success="getImg">
-										<img v-if="imageUrl" :src="imageUrl" class="avatar">
-										<i v-else class="el-icon-plus custom-element-icon-shangchuanzhaopian avatar-uploader-icon"></i>
+										:on-success="getImgBack">
+										<img v-if="imageBack" :src="imageBack" class="avatar">
+										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+									</el-upload>
+									<el-upload class="avatar-uploader" 
+										:show-file-list="false" 
+										:action="uploadImg"
+										:headers="requestToken"
+										:limit="1"
+										accept=".jpg,.png"
+										:on-success="getImgPositive">
+										<img v-if="imagePositive" :src="imagePositive" class="avatar">
+										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+									</el-upload>
+								</div>
+								<div class="langer">
+									<el-upload class="avatar-uploader" 
+										:show-file-list="false" 
+										:action="uploadImg"
+										:headers="requestToken"
+										:limit="1"
+										accept=".jpg,.png"
+										:on-success="getImgHandheld">
+										<img v-if="imageHandheld" :src="imageHandheld" class="avatar">
+										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 									</el-upload>
 								</div>
 								<div class="el-collapse-item__content_authentication_li_precautions">
@@ -257,6 +284,7 @@
 										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticFour')}}</li>
 									</ol>
 								</div>
+								<span class="is-danger" v-if="imgShow">请上传三张不同的证件照片</span>
 							</li>
 						</ul>
 						<div class="withdraw" v-if="authStatus == 2 || authStatus == 3">
@@ -317,7 +345,10 @@
 					label: this.$t('setting.passport')
 				}],
 				realName: "",
-				imageUrl: '',
+				imgUrl:'',
+				imageBack: 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg',
+				imagePositive:'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg',
+				imageHandheld:'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
@@ -344,6 +375,11 @@
                         Cache.getSession('bier_token')
 				},
 				countryData:[],
+				cardTypeShow:false,
+				idCard:false,//身份证不符合规范
+				countryShow:false,
+				numType:false,
+				imgShow:false,
 			}
 		},
 		computed: {
@@ -665,7 +701,7 @@
                 Cache.removeSession('bier_userid');
 				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
 			},
-			toBindEmail() { //绑定邮箱
+			toBindEmail() {//绑定邮箱
 				if(this.bindEmail) {
 					Request({
 						url: 'QueryAccountSettings',
@@ -726,30 +762,47 @@
 					});
 				}
 			},
+			imgTest(){
+				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg') {
+					this.imgShow = true;
+				}
+				if(this.imageBack != 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' && this.imagePositive != 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' && this.imageHandheld != 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg'){
+					this.imgShow = false;
+				}
+			},
 			authentication() {
-				Request({
-					url: 'QueryAuthentication',
-					data: {
-						id: this.accountId,
-						country: this.country,
-						idType: this.idType,
-						idNum: this.idNum,
-						realname: this.realName,
-						idImg: this.imageUrl
-					},
-					type: 'post',
-					flag: true
-				}).then(res => {
-						/*this.country = '';
-						this.idType = '';
-						this.idNum = '';
-						this.realName = '';
-						this.imageUrl = '';*/
-						this.$message({
-							message:this.$t('messageNotice.certificationSuccess'),
-							type:'success'
-						});
-						this.info();
+				var img = this.imageBack + ',' + this.imagePositive +","+ this.imageHandheld;
+				this.$validator.validateAll().then((result) => {
+					this.cardType();
+					this.text();
+					this.countrys();
+					this.imgTest();
+					if(result){
+						Request({
+							url: 'QueryAuthentication',
+							data: {
+								id: this.accountId,
+								country: this.country,
+								idType: this.idType,
+								idNum: this.idNum,
+								realname: this.realName,
+								idImg: this.img
+							},
+							type: 'post',
+							flag: true
+						}).then(res => {
+								this.country = '';
+								this.idType = '';
+								this.idNum = '';
+								this.realName = '';
+								this.imageUrl = '';
+								/*this.$message({
+									message:this.$t('messageNotice.certificationSuccess'),
+									type:'success'
+								});*/
+								this.info();
+						})
+					}
 				})
 			},
 			name(){
@@ -758,13 +811,52 @@
 				}
 			},
 			text(){
-				if(this.idNum.length>32){
-					this.$message(this.$t('setting.limit'));
+				if(this.idType){
+					this.numType = false;
+					this.cardTypeShow = false;
+					if(this.idType == '身份证'){
+						var value = /^\d{15}|\d{17}(\d{1}|X|x)$/.test(this.idNum);
+						if(!value){
+							this.idCard = true;
+						}else{
+							this.idCard = false;
+						}
+					}else if(this.idType == '护照'){
+						var value = /^([PSE]{1}\\d{7}|[GS]{1}\\d{8})$/.test(this.idNum);
+						if(!value){
+							this.idCard = true;
+						}else{
+							this.idCard = false;
+						}
+					}
+				}else{
+					this.numType = true;
+				}
+					
+			},
+			getImgBack(res, file){
+				this.imageBack =  res.data;
+			},
+			getImgPositive(res, file){
+				this.imagePositive = res.data;
+			},
+			getImgHandheld(res, file) {
+				this.imageHandheld = res.data;
+			},
+			cardType(){
+				if(!this.idCard){
+					this.cardTypeShow = true;
+				}else{
+					this.cardTypeShow = false;
 				}
 			},
-			getImg(res) {
-				this.imageUrl = res.data;
-			},
+			countrys(){
+				if(!this.country){
+					this.countryShow = true;
+				}else{
+					this.countryShow = false;
+				}
+			}
 		}
 	}
 </script>
@@ -940,18 +1032,30 @@
 		margin: 26px 0 0 144px;
 	}
 	.avatar-uploader-icon {
-		font-size: 130px;
-		color: #8c939d;
-		width: 400px;
-		height: 300px;
-		line-height: 300px;
-		text-align: center;
-		border: 1px solid #EEEEEE;
+		font-size: 28px;
+	    color: #8c939d;
+	    width: 175px;
+	    height: 110px;
+	    line-height: 110px;
+	    text-align: center;
+	    margin-bottom: 10px;
 	}
 	.avatar {
-		width: 400px;
-		height: 300px;
+		width: 175px;
+		height: 110px;
 		display: block;
+	}
+	.langer{
+		position: absolute;
+	    top: 59px;
+	    left: 329px;
+		.avatar-uploader-icon {
+		    height: 229px;
+		    line-height: 229px;
+		}
+		.avatar {
+			height: 229px;
+		}
 	}
 	.el-button-getCode {
 		position: absolute;
