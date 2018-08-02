@@ -53,6 +53,7 @@
 		},
 		mounted(){
 			this.queryWallet();
+
 		},
 		methods: {
 			bind(){

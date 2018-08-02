@@ -211,23 +211,35 @@
 					//              let ymd = this.util.dateFormat(res.data.startTime),//年月日
 					//              	time = this.util.dateFormat(res.data.startTime,"time"),//all
 					//              	pureTime = this.util.dateFormat(res.data.startTime,"pureTime")//时分秒
-
 					//发行量
 					this.totalCrowdfund = res.data.totalCrowdfund
 					this.currCirculation = res.data.currCirculation
-
 					//时间
 					this.startTime.time = this.util.dateFormat(res.data.startTime, "time")
-					this.startTime.day = new Date(res.data.startTime).getDate()
-					this.startTime.hours = new Date(res.data.startTime).getHours()
-					this.startTime.mins = new Date(res.data.startTime).getMinutes()
-					this.startTime.secs = new Date(res.data.startTime).getSeconds()
-
 					this.endTime.time = this.util.dateFormat(res.data.endTime, "time")
-					this.endTime.day = new Date(res.data.endTime).getDate()
-					this.endTime.hours = new Date(res.data.endTime).getHours()
-					this.endTime.mins = new Date(res.data.endTime).getMinutes()
-					this.endTime.secs = new Date(res.data.endTime).getSeconds()
+					let current = new Date().getTime(),
+						_start = current-res.data.startTime ,
+						_end =    res.data.endTime-current;
+					let _startTime = this.util.formatDuring(_start),
+					    _endTime = this.util.formatDuring(_end);
+					if(!(current-_start<0)){
+						this.startTime.day = _startTime[0]
+						this.startTime.hours = _startTime[1]
+						this.startTime.mins = _startTime[2]
+						this.startTime.secs = _startTime[3]
+						this.endTime.day = _endTime[0]
+						this.endTime.hours = _endTime[1]
+						this.endTime.mins =_endTime[2]
+						this.endTime.secs = _endTime[3]
+						
+					}
+						
+
+				
+
+			
+					
+					
 
 					//团队
 					this.team = res.data.listMemberResults.concat(res.data.listConsultantsResults)
