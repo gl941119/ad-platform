@@ -4,7 +4,7 @@
 			<h3 class="invite_top_title">{{$t('invite.inviteUser')}}</h3>
 			<p class="invite_top_code">
 				<span>{{$t('invite.code')}}：</span>
-				<span id="inviteCode"><span style="position: absolute;z-index: -1">http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
+				<span id="inviteCode"><span style="position: absolute;z-index: -1">{{$t('invite.inviteInfo')}}http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
 			</p>
 			<p class="invite_top_code" style="display: inline-block;">
 				<span>{{$t('invite.inviteLink')}}：</span>

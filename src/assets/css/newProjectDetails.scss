@@ -27,16 +27,26 @@
                 font-family: PingFangSC-Regular;
                 color: rgba(96, 98, 102, 1);
                 line-height: 20px;
+                .require{
+                    line-height: 40px;
+                    padding-right: 5px;
+                    box-sizing: border-box;
+                }
                 >label{
                     width: 130px;
                     height: 40px;
                     display: flex;
                     align-items: center;
+                    .required{
+                        line-height: 40px;
+                        padding-right: 5px;
+                        box-sizing: border-box;
+                    }
                 }
                 .label{
                     width: 105px;
                     overflow: hidden;
-                    margin-right: 15px;
+                    margin-right: 24px;
                     input{
                         width: 105px;
                         height: 38px;
