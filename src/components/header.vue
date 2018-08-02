@@ -196,12 +196,12 @@
         computed: {
             userName: {
                 get(){
-                    return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
+                    return this.$store.state.usernickname || this.$store.state.username;
                 },
                 set(){}
             },
             heardUrl() {
-                return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
+                return this.$store.state.heardUrl || Config.headPortrait[5];
             },
             dialogModalVisible: {
                 get(){
@@ -215,7 +215,7 @@
                 }
             },
             language(){
-                return this.utils.getCurrLanguage(this.$store, Cache);
+                return this.utils.getCurrLanguage(this.$store);
             }
         },
         mounted(){
@@ -245,7 +245,8 @@
             },
             goToForgetPwd(){
                 this.dialogModalVisible = false;
-                this.$store.commit('setGlobalShow', false);
+                this.$store.commit('setGlobalShow', 'hide');
+                Cache.setSession('globalShow', 'hide');
                 this.$router.push({name: 'resetpwd'});
             },
 			toPersonCenter() {
@@ -274,7 +275,7 @@
 							message: this.utils.judgeLanguage(this.language, res.message),
 							type: 'success'
 						});
-					})
+					}).catch(console.error)
 				} else {
 					this.$message({
 						message: 'email is empty',

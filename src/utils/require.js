@@ -126,7 +126,7 @@ function requestHandle(params) {
                     }
                     reject(res.data);
                     Message.error({
-                        message: utils.judgeLanguage(utils.getCurrLanguage(store, Cache), message),
+                        message: utils.judgeLanguage(utils.getCurrLanguage(store), message),
                     });
                 }
             },

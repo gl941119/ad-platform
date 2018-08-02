@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <share-layout v-if="globalShow"></share-layout>
+        <share-layout v-if="globalShow==='show'"></share-layout>
         <header-com></header-com>
         <router-view></router-view>
         <custom-share></custom-share>
@@ -18,7 +18,7 @@
             return {};
         },
         computed: {
-            globalShow(){
+            globalShow() {
                 return this.$store.state.globalShow;
             }
         },

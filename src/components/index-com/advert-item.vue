@@ -66,7 +66,7 @@ export default {
             return this.$store.state.conceptId;
         },
         language(){
-            return this.utils.getCurrLanguage(this.$store, Cache);
+            return this.utils.getCurrLanguage(this.$store);
         }
     },
     methods: {

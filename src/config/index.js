@@ -17,6 +17,9 @@ export default {
     SendVerifyCode: 'blockchainadvert/account/sendRegistCode', // email verify
     TelegramAuthorizeCB: 'blockchainadvert/authorize/telegram',
     SignOut: 'blockchainadvert/account/signout',
+    SendForgetPwdCode: 'blockchainadvert/account/sendForgetPasswordCode',
+    SetNewPassword: 'blockchainadvert/account/setNewPassword',
+
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',//收益账户
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',//收益账户流水
     QueryMainBasicInformation: 'blockchainadvert/advert-main/account-id',//主账户

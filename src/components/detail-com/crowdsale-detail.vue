@@ -146,7 +146,7 @@
                 }];
             },
             accountId(){
-                return this.$store.state.id || Cache.getSession('bier_userid');
+                return this.$store.state.id;
             }
         },
         methods: {
