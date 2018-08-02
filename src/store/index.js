@@ -18,6 +18,7 @@ export default new Vuex.Store({
         bullsData: undefined,
 		slangChange: '',
 		heardUrl:'',
+		inviteCode:'',
 	},
 	mutations: {
 		setUserId(state, val) {
@@ -58,6 +59,9 @@ export default new Vuex.Store({
 		},
 		setLanguage(state, val) {
 			state.slangChange = val;
+        },
+        setInviteCode(state, val) {
+			state.inviteCode = val;
         },
 	},
 });

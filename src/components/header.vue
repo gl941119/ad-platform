@@ -341,8 +341,8 @@
                     type: 'post',
                     flag: true,
 				}).then(res => {
-                    // console.log('res_>', res);
 					this.handleLoginSucc(res.data);
+					this.queryCode(res.data.id);
 				}).catch(e => {
                     // console.log('err',e);
                     if(e.message === '1035'){
@@ -350,6 +350,18 @@
                     }
                 })
 			},
+			queryCode(value) {
+                Request({
+                    url: 'QueryInviteCode',
+                    data: {
+                        accountId: value,
+                    },
+                    type: 'get'
+                }).then(res => {
+					this.$store.commit('setInviteCode', res.data.inviteCode);
+					Cache.setSession('bier_inviteCode', res.data.inviteCode);
+                })
+            },
 			handleLoginSucc(data) {
 				let {
 					id,

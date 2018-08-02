@@ -22,7 +22,6 @@
             	utils: new Utils(),
                 accountId:this.$store.state.id || Cache.getSession('bier_userid'),
                 token:this.$store.state.token|| Cache.getSession("bier_token"),
-                inviteCode:''
             }
         },
 
@@ -34,12 +33,21 @@
                 set(){
                     this.$store.commit('setDialogVisible', false);
                 }
+            },
+            inviteCode:{
+            	get(){
+                    let code = this.$store.state.inviteCode|| Cache.getSession("bier_inviteCode");
+            		return code;
+                },
+            	set(){
+            		
+            	}
             }
         },
-        mounted(){
-            if(this.token){
-	            this.queryCode();
-	        }
+        watch:{
+        	inviteCode(val){
+        		this.inviteCode = val;
+        	}
         },
         methods: {
         	clickCopy(value){
@@ -49,18 +57,6 @@
                      type:'success'
                 });
         	},
-            queryCode(value) {
-                Request({
-                    url: 'QueryInviteCode',
-                    data: {
-                        accountId: this.accountId,
-                    },
-                    type: 'get'
-                }).then(res => {
-                    this.inviteCode = res.data.inviteCode;
-                })
-            }
-            
         }
     }
 </script>
