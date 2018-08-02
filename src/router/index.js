@@ -23,7 +23,8 @@ const AdvertisersDisclaimer = () => import('@/pages/personalCenter/advertisers/d
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-	routes: [{
+    routes: [
+        {
 			path: '/',
 			redirect: {
 				name: 'index'
@@ -126,7 +127,10 @@ const router = new VueRouter({
 			component: AdvertisersDisclaimer,
 		},
         {path: '*', redirect: '/'}
-	]
+    ],
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
 })
 
 export default router;
