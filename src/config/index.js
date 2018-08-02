@@ -7,7 +7,7 @@ export default {
     QueryAdvertDetailInfo: 'blockchainadvert/advertservice/secondary',
     QueryAdvertInfoForPage: 'blockchainadvert/advertservice/secondPage',
     ClickAdvertToProfit: 'blockchainadvert/share/click-advert',
-    QueryCrowdDataById: 'blockchainadvert/crowd-funding/id',
+    QueryCrowdDataById: 'blockchainadvert/crowd-funding/id', //根据主ID获取单个众筹
     GetQrCode: 'blockchainadvert/common/createRrCode',
     FindAdvertisement: 'blockchainadvert/advertservice/findAdvertisement',
     // Login and Register
