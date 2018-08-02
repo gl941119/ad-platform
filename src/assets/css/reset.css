@@ -53,7 +53,6 @@ a:focus{outline: none;}
 }
 
 /* font family */
-
 @font-face {font-family: "customFontFamily";
     src: url('../fonts/iconfont.eot?t=1533182265017'); /* IE9*/
     src: url('../fonts/iconfont.eot?t=1533182265017#iefix') format('embedded-opentype'), /* IE6-IE8 */

@@ -19,6 +19,7 @@ export default new Vuex.Store({
         globalShow: true, // global share
 		slangChange: '',
 		heardUrl:'',
+		inviteCode:'',
 	},
 	mutations: {
 		setUserId(state, val) {
@@ -62,6 +63,9 @@ export default new Vuex.Store({
 		},
 		setLanguage(state, val) {
 			state.slangChange = val;
+        },
+        setInviteCode(state, val) {
+			state.inviteCode = val;
         },
 	},
 });

@@ -5,22 +5,22 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('team.teamName')}}</label>
+				<span class="require">*</span><label>{{$t('team.teamName')}}</label>
 				<input :class="[errors.has('teamName')?'llo':'']" :data-vv-as="$t('team.emptyTeamName')" v-validate data-vv-rules="required|max:80" name="teamName" :placeholder="$t('team.enterTeamName')" :disabled="disabled"  v-model="newCrowdfunding.teamName" />
 				<span class="is-danger" v-show="errors.has('teamName')">{{ errors.first('teamName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('team.teamPhone')}}</label>
+				<span class="require">*</span><label>{{$t('team.teamPhone')}}</label>
 				<input :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:36" name="teamContact" :placeholder="$t('team.enterTeamPhone')" :disabled="disabled" v-model="newCrowdfunding.teamContact" />
 				<span class="is-danger" v-show="errors.has('teamContact')">{{ errors.first('teamContact') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('team.teamAddress')}}</label>
+				<span class="require">*</span><label>{{$t('team.teamAddress')}}</label>
 				<input :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:100" name="teamLocation" :placeholder="$t('team.enterTeamAddress')" :disabled="disabled" v-model="newCrowdfunding.teamLocation" />
 				<span class="is-danger" v-show="errors.has('teamLocation')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li coreMembers">
-				<label>{{$t('team.coreMember')}}</label>
+				<span class="require">*</span><label>{{$t('team.coreMember')}}</label>
 				<el-button type="text" @click="queryCore">{{$t('team.openCoreMember')}}</el-button>
 				<span class="is-danger" v-if="coreTeams">{{$t('team.emptyCore')}}</span>
 			</li>
@@ -67,7 +67,7 @@
 				</el-dialog>
 			</div>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('team.consultant')}}</label>
+				<span class="require">*</span><label>{{$t('team.consultant')}}</label>
 				<el-button type="text" @click="queryConsultant">{{$t('team.openConsultant')}}</el-button>
 				<span class="is-danger" v-if="consultantTeams">{{$t('team.emptyConsultant')}}</span>
 			</li>
@@ -117,12 +117,12 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('projectInfo.projectName')}}</label>
+				<span class="require">*</span><label>{{$t('projectInfo.projectName')}}</label>
 				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:18" name="proName" :placeholder="$t('projectInfo.enterProjectName')" :disabled="disabled" v-model="newCrowdfunding.proName" />
 				<span class="is-danger" v-show="errors.has('proName')">{{ errors.first('proName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('projectInfo.projectDesc')}}</label>
+				<span class="require">*</span><label>{{$t('projectInfo.projectDesc')}}</label>
 				<div class="textarea">
 					<el-input @blur="desc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" :placeholder="$t('projectInfo.enterProjectDesc')" :disabled="disabled" v-model="newCrowdfunding.proDesc" >
 					</el-input>
@@ -130,12 +130,12 @@
 				<span class="is-danger" v-if="proDescr">{{$t('projectInfo.emptyProjectDesc')}}</span>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
-				<label>{{$t('projectInfo.concept')}}</label>
+				<span class="require" style="color: #FFFFFF;">*</span><label>{{$t('projectInfo.concept')}}</label>
 				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
 				<i v-if="isCheck != 1 && isCheck != 3" class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
-				<label>{{$t('projectInfo.technology')}}</label>
+				<span class="require" style="color: #FFFFFF;">*</span><label>{{$t('projectInfo.technology')}}</label>
 				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
 				<i v-if="isCheck != 1 && isCheck != 3" class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
 			</li>
@@ -169,21 +169,21 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('tokenInfo.tokenIntro')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('tokenInfo.english')}}</label>
+				<span class="require">*</span><label>{{$t('tokenInfo.english')}}</label>
 				<input class="langer" :class="[errors.has('shotEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyEnglish')" v-validate data-vv-rules="required|max:8" name="shotEnName" :placeholder="$t('tokenInfo.enterEnglish')" :disabled="disabled" v-model="newCrowdfunding.shotEnName" />
 				<span class="is-danger" v-show="errors.has('shotEnName')">{{ errors.first('shotEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('tokenInfo.chinese')}}</label>
+				<span class="require" style="color: #FFFFFF;">*</span><label>{{$t('tokenInfo.chinese')}}</label>
 				<input class="langer" :placeholder="$t('tokenInfo.enterChinese')" :disabled="disabled" v-model="newCrowdfunding.shotCnName" />
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('tokenInfo.englishName')}}</label>
+				<span class="require">*</span><label>{{$t('tokenInfo.englishName')}}</label>
 				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:18" name="fullEnName" :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName" />
 				<span class="is-danger" v-show="errors.has('fullEnName')">{{ errors.first('fullEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('tokenInfo.logo')}}</label>
+				<span class="require">*</span><label>{{$t('tokenInfo.logo')}}</label>
 				<div>
 					<el-upload class="avatar-uploader" 
 						:show-file-list="false" 
@@ -203,18 +203,18 @@
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('aboutLink.linkInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('aboutLink.website')}}</label>
+				<span class="require">*</span><label>{{$t('aboutLink.website')}}</label>
 				<input class="langer" :class="[errors.has('website')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWebsite')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="website" :placeholder="$t('aboutLink.enterWebsite')" :disabled="disabled" v-model="newCrowdfunding.website" />
 				<span class="is-danger" v-show="errors.has('website')">{{ errors.first('website') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<label>{{$t('aboutLink.whitePaper')}}</label>
+				<span class="require">*</span><label>{{$t('aboutLink.whitePaper')}}</label>
 				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="whitePaper" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
 				<span class="is-danger" v-show="errors.has('whitePaper')">{{ errors.first('whitePaper') }}</span>
 			</li>
 			<li style="position: relative;">
 				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
-					<label class="label">
+					<span class="require" style="color: #FFFFFF;">*</span><label class="label">
 						<input :placeholder="$t('aboutLink.enterWebsiteName')" :disabled="disabled" v-model="websites[index].websiteName" >
 					</label>
 					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress"  :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
@@ -224,7 +224,7 @@
 		</ul>
 		<div v-if="value == -1" >
 			<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement">
-			<span class="disclaimer" @click="disclaimer">{{$t('crowdFunding.disclaimer')}}</span></span>
+			<span class="disclaimer" @click="disclaimer">{{$t('crowdFunding.publishingProtocol')}}</span></span>
 			<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
 		</div>
 		<div class="submit_box">

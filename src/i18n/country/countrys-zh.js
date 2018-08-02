@@ -99,6 +99,9 @@ export default {
 		value:'开曼群岛',
 		label:'开曼群岛'
 	},{
+		value:'中非共和国',
+		label:'中非共和国'
+	},{
 		value:'乍得',
 		label:'乍得'
 	},{
@@ -107,15 +110,6 @@ export default {
 	},{
 		value:'中国',
 		label:'中国'
-	},{
-		value:'中国澳门',
-		label:'中国澳门'
-	},{
-		value:'中国香港',
-		label:'中国香港'
-	},{
-		value:'中国台湾',
-		label:'中国台湾'
 	},{
 		value:'哥伦比亚',
 		label:'哥伦比亚'
@@ -204,6 +198,9 @@ export default {
 		value:'危地马拉',
 		label:'危地马拉'
 	},{
+		value:'几内亚',
+		label:'几内亚'
+	},{
 		value:'圭亚那',
 		label:'圭亚那'
 	},{
@@ -212,6 +209,9 @@ export default {
 	},{
 		value:'洪都拉斯',
 		label:'洪都拉斯'
+	},{
+		value:'中国香港',
+		label:'中国香港'
 	},{
 		value:'匈牙利',
 		label:'匈牙利'
@@ -296,6 +296,9 @@ export default {
 	},{
 		value:'卢森堡',
 		label:'卢森堡'
+	},{
+		value:'中国澳门',
+		label:'中国澳门'
 	},{
 		value:'马达加斯加',
 		label:'马达加斯加'
@@ -494,6 +497,9 @@ export default {
 	},{
 		value:'瑞士',
 		label:'瑞士'
+	},{
+		value:'中国台湾',
+		label:'中国台湾'
 	},{
 		value:'叙利亚',
 		label:'叙利亚'
