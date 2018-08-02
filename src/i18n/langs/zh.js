@@ -8,7 +8,10 @@ const zh = {
 		sunday:'周日狂欢夜',
 		bierTalk:'BierTalk',
 		login:'登 录',
-		register:'注 册',
+        register: '注 册',
+        tips: '提示',
+        tipMsg: '电报群需翻墙',
+        got: '我知道了',
 	},
 	login:{
 		login:'登 录',

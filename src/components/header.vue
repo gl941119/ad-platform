@@ -22,7 +22,7 @@
 						</el-select>
 					</div>
 					<div class="header-content-tab-right-item">
-						<span>|</span><a href="https://t.me/AFDchain99" target="_blank"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
+						<span>|</span><a href="javascript:;" @click="goToTelegram"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<!-- <div class="header-content-tab-right-item">
 						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div> -->
 					<div class="header-content-tab-right-item head-img">
@@ -99,6 +99,11 @@
 				</el-form>
 			</div>
 		</el-dialog>
+
+        <el-dialog class="telegram-dialog" :title="$t('header.tips')" :visible.sync="telegramVisible" width="360px">
+            <div class="telegram-dialog-content">{{$t('header.tipMsg')}}</div>
+            <div class="telegram-dialog-footer" @click="IGotIt" slot="footer">{{$t('header.got')}}</div>
+        </el-dialog>
 	</header>
 </template>
 <script>
@@ -130,6 +135,7 @@
                 validateKey: undefined,
                 base64Str: undefined,
                 disclaimerChecked: true,
+                telegramVisible: false,
 				registerModel: {
 					registerVisible: false,
 					rule: {
@@ -235,7 +241,15 @@
 				this.$i18n.locale = value;
 				this.$store.commit('setLanguage', value);
 				Cache.setLocal('bier_langChange', value);
-			},
+            },
+            goToTelegram(){
+                // https://t.me/AFDchain99
+                this.telegramVisible = true;
+            },
+            IGotIt(){
+                this.telegramVisible = false;
+                this.utils.newWin('https://t.me/AFDchain99', 'telegramID');
+            },
 			toLogin() {
                 this.createCode().then(() => {
                     this.dialogModalVisible = true;
@@ -584,5 +598,23 @@
 	
 	.router-link-active {
 		background: #333;
-	}
+    }
+    
+    .telegram-dialog {
+        &-content {
+            font-size: 20px;
+            text-align: center;
+            color: #FF9500;
+            margin: 20px 0;
+        }
+        &-footer {
+            color: #333333;
+            font-size: 20px;
+            margin: -10px -20px -20px;
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+            cursor: pointer;
+        }
+    }
 </style>

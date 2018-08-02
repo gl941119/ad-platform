@@ -8,7 +8,10 @@ const en = {
 		sunday:'GalaNight',
 		bierTalk:'BierTalk', 
 		login:'Login',
-		register:'Register',
+        register: 'Register',
+        tips: 'Tips',
+        tipMsg: 'Telegram need VPN',
+        got: 'I got it',
 	},
 	login:{
 		login:'Login',
