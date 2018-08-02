@@ -18,46 +18,46 @@
 				<p class="time">{{$t('tokenInfo.dataTime')}}</p>
 				<div class="main">
 					<div class="main-start">
-						<p>开始时间</p>
+						<p>{{$t('tokenInfo.startTime')}}</p>
 						<span class="main-start-time">{{startTime.time}}</span>
 						<div class="main-start-lump">
 							<div class="day">
 								<div>{{startTime.day}}</div>
-								<p>Day</p>
+								<p>{{$t('crowdFunding.day')}}</p>
 							</div>
 							<div class="hours">
 								<div>{{startTime.hours}}</div>
-								<p>Hours</p>
+								<p>{{$t('crowdFunding.hour')}}</p>
 							</div>
 							<div class="mins">
 								<div>{{startTime.mins}}</div>
-								<p>Mins</p>
+								<p>{{$t('crowdFunding.minute')}}</p>
 							</div>
 							<div class="secs">
 								<div>{{startTime.secs}}</div>
-								<p>Secs</p>
+								<p>{{$t('crowdFunding.second')}}</p>
 							</div>
 						</div>
 					</div>
 					<div class="main-end">
-						<p>结束时间</p>
+						<p>{{$t('tokenInfo.endTime')}}</p>
 						<span class="main-end-time">{{endTime.time}}</span>
 						<div class="main-end-lump changeColor">
 							<div class="day">
 								<div>{{endTime.day}}</div>
-								<p>Day</p>
+								<p>{{$t('crowdFunding.day')}}</p>
 							</div>
 							<div class="hours">
 								<div>{{endTime.hours}}</div>
-								<p>Hours</p>
+								<p>{{$t('crowdFunding.hour')}}</p>
 							</div>
 							<div class="mins">
 								<div>{{endTime.mins}}</div>
-								<p>Mins</p>
+								<p>{{$t('crowdFunding.minute')}}</p>
 							</div>
 							<div class="secs">
 								<div>{{endTime.secs}}</div>
-								<p>Secs</p>
+								<p>{{$t('crowdFunding.second')}}</p>
 							</div>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 				<p class="title">links</p>
 				<div class="container">
 					<div>
-						<a href="#"><i class="custom-element-icon-qq-copy"></i></a>
+						<a href="https://t.me/AFDchain99"><i class="custom-element-icon-telegram"></i></a>
 					</div>
 					<!--<div>
 						<a href="#"><i class="custom-element-icon-zhifubao"></i></a>
