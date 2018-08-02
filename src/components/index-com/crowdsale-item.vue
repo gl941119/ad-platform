@@ -40,7 +40,7 @@
         <div>
             <div v-show="status===1&&progress<100" class="crowdsale-item-footer">
                 <span class="crowdsale-item-footer-text">{{remainTime[0]}}{{$t('crowdFunding.day')}}{{$t('crowdFunding.later')}}{{$t('crowdFunding.instantStart')}}</span>
-                <a class="crowdsale-item-footer-website" href="javascript:;">{{$t('crowdFunding.more')}}</a>
+                <a class="crowdsale-item-footer-website" @click="displayDetail" href="javascript:;">{{$t('crowdFunding.more')}}</a>
                 <el-button class="crowdsale-item-footer-btn">{{$t('home.begin')}}</el-button>
             </div>
             <div v-show="status===2&&progress<100" class="crowdsale-item-instant clearfix">
@@ -58,11 +58,11 @@
                     <span>{{$t('crowdFunding.day')}}</span>
                 </div>
                 <el-button @click="instantBuy" class="crowdsale-item-instant-btn">{{$t('home.immediately')}}</el-button>
-                <a class="crowdsale-item-instant-website" href="javascript:;">{{$t('crowdFunding.more')}}</a>
+                <a class="crowdsale-item-instant-website" @click="displayDetail" href="javascript:;">{{$t('crowdFunding.more')}}</a>
             </div>
             <div v-show="status===3||progress===100" class="crowdsale-item-end clearfix">
                 <div class="crowdsale-item-end-btn">{{$t('home.over')}}</div>
-                <a class="crowdsale-item-end-website" href="javascript:;">{{$t('crowdFunding.more')}}</a>
+                <a class="crowdsale-item-end-website" @click="displayDetail" href="javascript:;">{{$t('crowdFunding.more')}}</a>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
         },
         computed: {
             accountId(){
-                return this.$store.state.id || Cache.getSession('bier_userid');
+                return this.$store.state.id;
             }
         },
         methods: {
@@ -161,6 +161,9 @@
                         resolve(res.data);
                     })
                 });
+            },
+            displayDetail(){
+                this.$router.push({name: 'icodetail', params: { id: this.crowdsaleDatas.id }})
             },
         },
         destroyed() {

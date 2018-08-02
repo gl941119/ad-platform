@@ -61,7 +61,7 @@
                 return this.$store.state.heardUrl || Cache.getSession('bier_heardUrl') || Config.headPortrait[5];
             },
             username(){
-            	return this.$store.state.usernickname || Cache.getSession('bier_usernickname') || this.$store.state.username || Cache.getSession('bier_username');
+            	return this.$store.state.usernickname || this.$store.state.username;
             }
 		},
 		mounted(){

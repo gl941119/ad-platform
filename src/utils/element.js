@@ -39,6 +39,8 @@ import {
     Loading,
     MessageBox,
     Message,
+    Steps,
+    Step,
     Collapse,
     CollapseItem,
     Tabs,
@@ -78,6 +80,8 @@ Vue.use(Col);
 Vue.use(Upload);
 Vue.use(Progress);
 Vue.use(Container);
+Vue.use(Steps);
+Vue.use(Step);
 Vue.use(Header);
 Vue.use(Aside);
 Vue.use(Main);
