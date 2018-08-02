@@ -203,7 +203,6 @@ import Config from '../../utils/config.js';
                 @include body-center();
                 @include content-flex(space-between, flex-start);
                 &-imgs {
-                    
                     overflow: hidden;
                     margin-top: 12px;
                     @include content-flex(flex-start, flex-start);
@@ -211,7 +210,7 @@ import Config from '../../utils/config.js';
                     & a {
                         margin-bottom: 24px;
                         & img {
-                            height: 162px;
+                            // height: 162px;
                             width: 416px;
                         }
                     }
