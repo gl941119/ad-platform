@@ -58,7 +58,6 @@
 					</div>
 				</el-form>
 			</div>
-
 			<div v-show="registerModel.registerVisible">
 				<el-form class="register" :model="registerModel.form" ref="registerModelForm" :rules="registerModel.rule">
 					<el-form-item :label="$t('register.registerEmail')" prop="email" :label-width="getLabelWidth(language, 'register')">
