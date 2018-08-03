@@ -36,7 +36,8 @@ var _hmt = window._hmt || [];
 router.beforeEach((to, from, next) => {
     let token = store.state.token;
     if (to.path) {
-        console.log('to_>', to.fullPath);
+        // console.log('to_>', to.fullPath);
+        _hmt.push(['_setAutoPageview', false]);
         _hmt.push(['_trackPageview', '/#' + to.fullPath]);
     }
     if (to.matched.some(record => record.meta.requiresAuth)) {

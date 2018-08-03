@@ -204,7 +204,7 @@
 				</span>
 		</el-dialog>
 		<div class="settings_box">
-			<el-collapse class="top" v-model="active" accordion>
+			<el-collapse class="top" v-model="active" @change="change" accordion>
 				<el-collapse-item class="border-none" name="1">
 					<template slot="title">
 					    {{$t('setting.fillInformation')}}
@@ -213,12 +213,12 @@
 					</template>
 						<ul v-if="authStatusShow" class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.name')}}</label>
+								<label><span class="require">*</span>{{$t('setting.name')}}</label>
 								<input :class="[errors.has('realName')?'llo':'']" :data-vv-as="$t('setting.limitName')" v-validate="{ required: true, regex: /^([\u4E00-\u9FA5]+|[a-zA-Z]+)$/}" name="realName" class="el-collapse-item__content_authentication_li_info" v-model="realName" />
 								<span class="is-danger" v-show="errors.has('realName')">{{ errors.first('realName') }}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.identityFileType')}}</label>
+								<label><span class="require">*</span>{{$t('setting.identityFileType')}}</label>
 								<el-select v-model="idType" @focus="cardType" @change="cardType":placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
@@ -226,13 +226,13 @@
 								<span class="is-danger" v-if="cardTypeShow">{{$t('setting.limitIdType')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.identityFileNumber')}}</label>
+								<label><span class="require">*</span>{{$t('setting.identityFileNumber')}}</label>
 								<input class="el-collapse-item__content_authentication_li_info" @blur="text" name="idNum" v-model="idNum" />
 								<span class="is-danger" v-if="numType">{{$t('setting.pleaseIdType')}}</span>
 								<span class="is-danger" v-if="idCard">{{$t('setting.limit')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.country')}}</label>
+								<label><span class="require">*</span>{{$t('setting.country')}}</label>
 								<el-select @change="countrys" @focus="countrys" v-model="country" filterable :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
@@ -240,7 +240,7 @@
 								<span class="is-danger" v-if="countryShow">{{$t('setting.limitCountry')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li last">
-								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
+								<h4 class="el-collapse-item__content_authentication_li_identityUpload"><span class="require">*</span>{{$t('setting.identityFile')}}</h4>
 								<div>
 									<el-upload class="avatar-uploader" 
 										:show-file-list="false" 
@@ -356,7 +356,7 @@
 				imgUrl:'',
 				imageBack: 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg',
 				imagePositive:'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg',
-				imageHandheld:'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg',
+				imageHandheld:'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
@@ -402,7 +402,6 @@
 				}
 				return lang;
 			},
-			
 		},
 		watch:{
 			slangChange(val, oldval){
@@ -431,6 +430,11 @@
 			}
 		},
 		methods: {
+			change(activeNames){
+				if(activeNames == 1){
+					this.info();
+				}
+			},
 			edit(){
 				this.authStatusShow = true;
 				this.editShow = false;
@@ -464,6 +468,13 @@
 					}
 					if(res.data.authStatus == 3){
 						this.editShow = true;
+						this.authStatusShow = false;
+						this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
+						this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
+						this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg';
+					}
+					if(res.data.authStatus == 1){
+						this.authStatusShow = false;
 					}
 					this.noPassReason = res.data.noPassReason;
 					this.bindEmail = res.data.Email;
@@ -788,10 +799,10 @@
 				}
 			},
 			imgTest(){
-				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg') {
+				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg') {
 					this.imgShow = true;
 				}
-				if(this.imageBack != 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' && this.imagePositive != 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' && this.imageHandheld != 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg'){
+				if(this.imageBack != 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' && this.imagePositive != 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' && this.imageHandheld != 'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg'){
 					this.imgShow = false;
 				}
 			},
@@ -935,6 +946,10 @@
 					width:200px; 
 					text-align:right;
 					margin-right: 20px;
+					.require{
+						color: #ff9500;
+						padding-right: 5px;
+					}
 				}
 				&_info{
 					width: 222px;
