@@ -32,7 +32,7 @@ const en = {
 		passwordReset:'Reset login password',
 		enterEmail:'Email',
 		resetPassword:'Reset login password',
-		finish:'Finish'',
+		finish:'Finish',
 		success:'Password reset successful',
 		againLogin:'Login again',
 		pleaseEnterEmail:'Email',
