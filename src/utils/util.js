@@ -202,16 +202,10 @@ export default class Util {
         window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
     }
 
-    newWin(url, id) {
-        var a = document.createElement('a');
-        a.setAttribute('href', url);
-        a.setAttribute('target', '_blank');
-        a.setAttribute('id', id);
-        // 防止反复添加
-        if (!document.getElementById(id)) {
-            document.body.appendChild(a);
-        }
-        a.click();
+    newWin(url) {
+        console.log('url_>', url);
+        var tempWindow = window.open('', '_blank', ''); //打开一个新的空白窗口
+        tempWindow.location.href = url;  //对新打开的页面进行重定向
     }
 
 }

@@ -247,7 +247,7 @@
             },
             IGotIt(){
                 this.telegramVisible = false;
-                this.utils.newWin('https://t.me/AFDchain99', 'telegramID');
+                this.utils.newWin('https://t.me/AFDchain99');
             },
 			toLogin() {
                 this.createCode().then(() => {
