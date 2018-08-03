@@ -223,13 +223,13 @@
 									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
-								<span class="is-danger" v-if="cardTypeShow">请选择证件类型</span>
+								<span class="is-danger" v-if="cardTypeShow">{{$t('setting.limitIdType')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.identityFileNumber')}}</label>
 								<input class="el-collapse-item__content_authentication_li_info" @blur="text" name="idNum" v-model="idNum" />
-								<span class="is-danger" v-if="numType">请先选择证件类型</span>
-								<span class="is-danger" v-if="idCard">请输入正确的证件号码</span>
+								<span class="is-danger" v-if="numType">{{$t('setting.pleaseIdType')}}</span>
+								<span class="is-danger" v-if="idCard">{{$t('setting.limit')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label>{{$t('setting.country')}}</label>
@@ -237,7 +237,7 @@
 									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
-								<span class="is-danger" v-if="countryShow">请选择国家</span>
+								<span class="is-danger" v-if="countryShow">{{$t('setting.limitCountry')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li last">
 								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
@@ -247,7 +247,7 @@
 										:action="uploadImg"
 										:headers="requestToken"
 										:limit="1"
-										accept=".jpg,.png"
+										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgBack">
 										<img v-if="imageBack" :src="imageBack" class="avatar">
 										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -257,7 +257,7 @@
 										:action="uploadImg"
 										:headers="requestToken"
 										:limit="1"
-										accept=".jpg,.png"
+										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgPositive">
 										<img v-if="imagePositive" :src="imagePositive" class="avatar">
 										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -269,7 +269,7 @@
 										:action="uploadImg"
 										:headers="requestToken"
 										:limit="1"
-										accept=".jpg,.png"
+										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgHandheld">
 										<img v-if="imageHandheld" :src="imageHandheld" class="avatar">
 										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -282,9 +282,12 @@
 										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticTwo')}}</li>
 										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticThree')}}</li>
 										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticFour')}}</li>
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticFive')}}</li>
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticSix')}}</li>
+										<li class="el-collapse-item__content_authentication_li_precautions_item_li">{{$t('setting.noticSeven')}}</li>
 									</ol>
 								</div>
-								<span class="is-danger" v-if="imgShow">请上传三张不同的证件照片</span>
+								<span class="is-danger" v-if="imgShow">{{$t('setting.imgFile')}}</span>
 							</li>
 						</ul>
 						<div class="withdraw" v-if="authStatus == 2">
@@ -415,6 +418,7 @@
 				}else{
 					this.countryData = CountryZh.country;
 				}
+				this.info();
 			},
 		},
 		mounted() {
