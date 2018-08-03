@@ -19,6 +19,7 @@ export default {
     SignOut: 'blockchainadvert/account/signout',
     SendForgetPwdCode: 'blockchainadvert/account/sendForgetPasswordCode',
     SetNewPassword: 'blockchainadvert/account/setNewPassword',
+    JudgeEmail: 'blockchainadvert/account/emailIsRegistered',
 
     QueryRevenueBasicInformation: 'blockchainadvert/advert-income/account-id',//收益账户
     QueryRevenueAccountFlow: 'blockchainadvert/income-flow/income-id',//收益账户流水

@@ -76,7 +76,12 @@ export default {
         nextStep(){
             switch (this.currActive) {
                 case 0:
-                    this.currActive = 1;
+                    Request({
+                        url: 'JudgeEmail',
+                        data: {email: this.forgetPwd.email},
+                    }).then(res => {
+                        this.currActive = 1;
+                    }).catch(console.error);
                     break;
                 case 1:
                     let {email, verify, password} = this.forgetPwd;
