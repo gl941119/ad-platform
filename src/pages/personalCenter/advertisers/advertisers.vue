@@ -11,12 +11,12 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamPhone')}}</label>
-				<input :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:36" name="teamContact" :placeholder="$t('team.enterTeamPhone')" :disabled="disabled" v-model="newCrowdfunding.teamContact" />
+				<input :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:64" name="teamContact" :placeholder="$t('team.enterTeamPhone')" :disabled="disabled" v-model="newCrowdfunding.teamContact" />
 				<span class="is-danger" v-show="errors.has('teamContact')">{{ errors.first('teamContact') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamAddress')}}</label>
-				<input :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:100" name="teamLocation" :placeholder="$t('team.enterTeamAddress')" :disabled="disabled" v-model="newCrowdfunding.teamLocation" />
+				<input :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:128" name="teamLocation" :placeholder="$t('team.enterTeamAddress')" :disabled="disabled" v-model="newCrowdfunding.teamLocation" />
 				<span class="is-danger" v-show="errors.has('teamLocation')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li coreMembers">
@@ -31,17 +31,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:32" name="coreName" :placeholder="$t('team.enterName')" v-model="scope.row.name" />
+								<input class="team" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="coreName" :placeholder="$t('team.enterName')" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<input class="team" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:16" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title" />
+								<input class="team" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')" width="200">
 							<template slot-scope="scope">
-								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
+								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:128" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
@@ -78,17 +78,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:32" name="consultantName" :placeholder="$t('team.enterName')" v-model="scope.row.name">
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:64" name="consultantName" :placeholder="$t('team.enterName')" v-model="scope.row.name">
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:16" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title">
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:64" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title">
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')" width="200">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:512" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:128" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
@@ -118,7 +118,7 @@
 			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('projectInfo.projectName')}}</label>
-				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:18" name="proName" :placeholder="$t('projectInfo.enterProjectName')" :disabled="disabled" v-model="newCrowdfunding.proName" />
+				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:64" name="proName" :placeholder="$t('projectInfo.enterProjectName')" :disabled="disabled" v-model="newCrowdfunding.proName" />
 				<span class="is-danger" v-show="errors.has('proName')">{{ errors.first('proName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -179,12 +179,15 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.englishName')}}</label>
-				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:18" name="fullEnName" :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName" />
+				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:64" name="fullEnName" :placeholder="$t('tokenInfo.enterFullEnglish')" :disabled="disabled" v-model="newCrowdfunding.fullEnName" />
 				<span class="is-danger" v-show="errors.has('fullEnName')">{{ errors.first('fullEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.logo')}}</label>
-				<div>
+				<div v-if="isCheck == 0 || isCheck == 1 || isCheck == 3">
+					<img :src="imageUrl" class="avatar">
+				</div>
+				<div v-else>
 					<el-upload class="avatar-uploader" 
 						:show-file-list="false" 
 						 :action="uploadImg"
@@ -215,21 +218,24 @@
 			<li style="position: relative;">
 				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 					<span class="require" style="color: #FFFFFF;">*</span><label class="label">
-						<input :placeholder="$t('aboutLink.enterWebsiteName')" :disabled="disabled" v-model="websites[index].websiteName" >
+						<input :placeholder="$t('aboutLink.enterWebsiteNameZh')" :disabled="disabled" v-model="websites[index].websiteName" >
+					</label>
+					<label class="label">
+						<input :placeholder="$t('aboutLink.enterWebsiteNameEn')" :disabled="disabled" v-model="websites[index].websiteEnName" >
 					</label>
 					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress"  :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
 				<span class="is-danger" v-show="errors.has('websiteAddress')">{{ errors.first('websiteAddress') }}</span>
 			</li>
 		</ul>
-		<div v-if="value == -1" >
+		<div v-if="isCheck == -1" >
 			<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement">
 			<span class="disclaimer" @click="disclaimer">{{$t('crowdFunding.publishingProtocol')}}</span></span>
 			<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
 		</div>
 		<div class="submit_box">
-			<button v-if="value == -1" @click="submit" class="submit">{{$t('buttonAll.submits')}}</button>
-			<button v-if="value == 2" @click="saveSubmit" class="submit">{{$t('buttonAll.saveChange')}}</button>
+			<button v-if="isCheck == -1" @click="submit" class="submit">{{$t('buttonAll.submits')}}</button>
+			<button v-if="isCheck == 2" @click="saveSubmit" class="submit">{{$t('buttonAll.saveChange')}}</button>
 		</div>
 	</div>
 </template>
@@ -288,7 +294,6 @@
 				CrowdTeamDialogVisible: false,
 				multipleSelection:[],
 				conceptResultList:[],
-				value:this.$route.params.value,
 				disabled:false,
 				isCheck:'',
 				uploadImg: Config.UploadImg,
@@ -301,14 +306,6 @@
 				img:false,//logo提示
 				coreTeams:false,//核心团队是否为空
 				consultantTeams:false,//顾问团队是否为空
-				isAddress:false,
-				isAddressOne:false,
-				isAddressTwo:false,
-				isAddressThree:false,
-				isAddressFour:false,
-				isAddressFive:false,
-				isAddressSix:false,
-				isAddressSeven:false,
 			}
 		},
 		components: {
@@ -387,41 +384,41 @@
 							that.consultantTeams = false;
 						}
 					})
-					if(result){
-						Request({
-							url: 'QueryNewProject',
-							data: {
-								accountId: this.newCrowdfunding.accountId,
-								teamName: this.newCrowdfunding.teamName,
-								teamContact: this.newCrowdfunding.teamContact,
-								teamLocation: this.newCrowdfunding.teamLocation,
-								proName: this.newCrowdfunding.proName,
-								proDesc: this.newCrowdfunding.proDesc,
-								listConceptManage:this.checkedData || this.conceptResultList,
-								technology1: this.newCrowdfunding.technology1,
-								technology2: this.newCrowdfunding.technology2,
-								website: this.newCrowdfunding.website,
-								whitePaper: this.newCrowdfunding.whitePaper,
-								shotEnName: this.newCrowdfunding.shotEnName,
-								shotCnName: this.newCrowdfunding.shotCnName,
-								fullEnName: this.newCrowdfunding.fullEnName,
-								title: this.newCrowdfunding.title,
-								logo: this.imageUrl,
-								listMermber: this.coreTeam,
-								listConsultants: this.consultantTeam,
-								websites:this.websites,
-							},
-							type: 'post',
-							flag: true,
-						}).then(res => {
-							this.$message({
-								message:this.$t('messageNotice.addSuccess'),
-								type:'success'
-							});
-							this.$router.push({
-								name: 'adserving',
-							});
-						})
+						if(result){
+							Request({
+								url: 'QueryNewProject',
+								data: {
+									accountId: this.newCrowdfunding.accountId,
+									teamName: this.newCrowdfunding.teamName,
+									teamContact: this.newCrowdfunding.teamContact,
+									teamLocation: this.newCrowdfunding.teamLocation,
+									proName: this.newCrowdfunding.proName,
+									proDesc: this.newCrowdfunding.proDesc,
+									listConceptManage:this.checkedData || this.conceptResultList,
+									technology1: this.newCrowdfunding.technology1,
+									technology2: this.newCrowdfunding.technology2,
+									website: this.newCrowdfunding.website,
+									whitePaper: this.newCrowdfunding.whitePaper,
+									shotEnName: this.newCrowdfunding.shotEnName,
+									shotCnName: this.newCrowdfunding.shotCnName,
+									fullEnName: this.newCrowdfunding.fullEnName,
+									title: this.newCrowdfunding.title,
+									logo: this.imageUrl,
+									listMermber: this.coreTeam,
+									listConsultants: this.consultantTeam,
+									websites:this.websites,
+								},
+								type: 'post',
+								flag: true,
+							}).then(res => {
+								this.$message({
+									message:this.$t('messageNotice.addSuccess'),
+									type:'success'
+								});
+								this.$router.push({
+									name: 'adserving',
+								});
+							})
 					}
 				});
 			},
@@ -434,6 +431,7 @@
 				}
 				var value = this.newCrowdfunding.id;
 				var arr = [];
+				var that = this;
 				if(this.websites.length>0){
 					this.websites.forEach(function(item, index){
 						item.advertProjId = value;
@@ -444,40 +442,40 @@
 				}
 				this.$validator.validateAll().then((result) => {
 					this.desc();
-					if(result){
-						Request({
-							url: 'ChangeProject',
-							data: {
-								id: this.newCrowdfunding.id,
-								accountId: this.newCrowdfunding.accountId,
-								teamName: this.newCrowdfunding.teamName,
-								teamContact: this.newCrowdfunding.teamContact,
-								teamLocation: this.newCrowdfunding.teamLocation,
-								proName: this.newCrowdfunding.proName,
-								proDesc: this.newCrowdfunding.proDesc,
-								conceptManageList:concept,
-								technology1: this.newCrowdfunding.technology1,
-								technology2: this.newCrowdfunding.technology2,
-								website: this.newCrowdfunding.website,
-								whitePaper: this.newCrowdfunding.whitePaper,
-								shotEnName: this.newCrowdfunding.shotEnName,
-								shotCnName: this.newCrowdfunding.shotCnName,
-								fullEnName: this.newCrowdfunding.fullEnName,
-								title: this.newCrowdfunding.title,
-								logo: this.imageUrl,
-								websites:arr,
-							},
-							type: 'post',
-							flag: true,
-						}).then(res => {
-							this.$router.push({
-								name: 'adserving',
-							});
-							this.$message({
-								message:this.$t('messageNotice.changeSuccess'),
-								type:'success'
-							});
-						})
+						if(result){
+							Request({
+								url: 'ChangeProject',
+								data: {
+									id: this.newCrowdfunding.id,
+									accountId: this.newCrowdfunding.accountId,
+									teamName: this.newCrowdfunding.teamName,
+									teamContact: this.newCrowdfunding.teamContact,
+									teamLocation: this.newCrowdfunding.teamLocation,
+									proName: this.newCrowdfunding.proName,
+									proDesc: this.newCrowdfunding.proDesc,
+									conceptManageList:concept,
+									technology1: this.newCrowdfunding.technology1,
+									technology2: this.newCrowdfunding.technology2,
+									website: this.newCrowdfunding.website,
+									whitePaper: this.newCrowdfunding.whitePaper,
+									shotEnName: this.newCrowdfunding.shotEnName,
+									shotCnName: this.newCrowdfunding.shotCnName,
+									fullEnName: this.newCrowdfunding.fullEnName,
+									title: this.newCrowdfunding.title,
+									logo: this.imageUrl,
+									websites:arr,
+								},
+								type: 'post',
+								flag: true,
+							}).then(res => {
+								this.$router.push({
+									name: 'adserving',
+								});
+								this.$message({
+									message:this.$t('messageNotice.changeSuccess'),
+									type:'success'
+								});
+							})
 					}
 				});
 			},

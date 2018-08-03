@@ -9,12 +9,12 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamPhone')}}</label>
-				<input :disabled="disabled" :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:36" name="teamContact" v-model="details.teamContact" />
+				<input :disabled="disabled" :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:64" name="teamContact" v-model="details.teamContact" />
 				<span class="is-danger" v-show="errors.has('teamContact')">{{ errors.first('teamContact') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamAddress')}}</label>
-				<input :disabled="disabled" :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:512" name="teamLocation" v-model="details.teamLocation" />
+				<input :disabled="disabled" :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:128" name="teamLocation" v-model="details.teamLocation" />
 				<span class="is-danger" v-show="errors.has('teamLocation')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -28,17 +28,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:32" name="coreName" v-model="scope.row.name" />
+								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:64" name="coreName" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:16" name="coreTitle" v-model="scope.row.title" />
+								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:512" name="coreDesc" v-model="scope.row.desc" />
+								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:128" name="coreDesc" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -74,17 +74,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:32" name="consultantName" v-model="scope.row.name" />
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:64" name="consultantName" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
 						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:16" name="consultantTitle" v-model="scope.row.title" />
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:64" name="consultantTitle" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:100" name="consultantDesc" v-model="scope.row.desc" />
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:128" name="consultantDesc" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -114,7 +114,7 @@
 			<h5 >{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('projectInfo.projectName')}}</label>
-				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:32" name="proName" :disabled="disabled" v-model="details.proName" />
+				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:64" name="proName" :disabled="disabled" v-model="details.proName" />
 				<span class="is-danger" v-show="errors.has('proName')">{{ errors.first('proName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -185,29 +185,32 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.englishName')}}</label>
-				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:18" name="fullEnName" :disabled="disabled" v-model="details.fullEnName" />
+				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:64" name="fullEnName" :disabled="disabled" v-model="details.fullEnName" />
 				<span class="is-danger" v-show="errors.has('fullEnName')">{{ errors.first('fullEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.logo')}}</label>
-				<el-upload class="avatar-uploader" 
-					:show-file-list="false" 
-					 :action="uploadImg"
-					 :headers="requestToken"
-					 :on-error="imgError"
-					 accept=".jpg,.png"
-					 :limit="1"
-					:on-success="handleAvatarSuccess">
-					<img v-if="details.logo" :src="details.logo" class="avatar">
-					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-				</el-upload>
+				<img v-if="isCheck == 0 || isCheck == 1" :src="details.logo" class="avatar">
+				<div v-else>
+					<el-upload class="avatar-uploader" 
+						:show-file-list="false" 
+						 :action="uploadImg"
+						 :headers="requestToken"
+						 :on-error="imgError"
+						 accept=".jpg,.png"
+						 :limit="1"
+						:on-success="handleAvatarSuccess">
+						<img v-if="details.logo" :src="details.logo" class="avatar">
+						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+					</el-upload>
+				</div>
 			</li>
 		</ul>
 		<ul class="newCrowdfunding_item">
 			<h5>{{$t('tokenInfo.title')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.title')}}</label>
-				<input class="langer" :class="[errors.has('title')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyTitle')" v-validate data-vv-rules="required|max:18" name="title" :disabled="disabled" v-model="details.title" />
+				<input class="langer" :class="[errors.has('title')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyTitle')" v-validate data-vv-rules="required|max:64" name="title" :disabled="disabled" v-model="details.title" />
 				<span class="is-danger" v-show="errors.has('title')">{{ errors.first('title') }}</span>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.issueTotal')}}</label>
@@ -264,7 +267,7 @@
 			<h5>{{$t('tokenInfo.files')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.companyName')}}</label>
-				<input class="langer" :disabled="disabled" :class="[errors.has('companyName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanyName')" v-validate data-vv-rules="required|max:20" name="companyName" :placeholder="$t('tokenInfo.enterCompanyName')" v-model="details.companyName" />
+				<input class="langer" :disabled="disabled" :class="[errors.has('companyName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanyName')" v-validate data-vv-rules="required|max:64" name="companyName" :placeholder="$t('tokenInfo.enterCompanyName')" v-model="details.companyName" />
 				<span class="is-danger" v-show="errors.has('companyName')">{{ errors.first('companyName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
