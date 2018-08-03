@@ -204,7 +204,7 @@
 				</span>
 		</el-dialog>
 		<div class="settings_box">
-			<el-collapse class="top" v-model="active" accordion>
+			<el-collapse class="top" v-model="active" @change="change" accordion>
 				<el-collapse-item class="border-none" name="1">
 					<template slot="title">
 					    {{$t('setting.fillInformation')}}
@@ -402,7 +402,6 @@
 				}
 				return lang;
 			},
-			
 		},
 		watch:{
 			slangChange(val, oldval){
@@ -431,6 +430,11 @@
 			}
 		},
 		methods: {
+			change(activeNames){
+				if(activeNames == 1){
+					this.info();
+				}
+			},
 			edit(){
 				this.authStatusShow = true;
 				this.editShow = false;
@@ -464,6 +468,13 @@
 					}
 					if(res.data.authStatus == 3){
 						this.editShow = true;
+						this.authStatusShow = false;
+						this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
+						this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
+						this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg';
+					}
+					if(res.data.authStatus == 1){
+						this.authStatusShow = false;
 					}
 					this.noPassReason = res.data.noPassReason;
 					this.bindEmail = res.data.Email;
