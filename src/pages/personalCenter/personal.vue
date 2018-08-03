@@ -78,7 +78,12 @@
 					flag:true,
 				}).then(res => {
 					this.isCheck = res.data.isCheck;
-				})
+                }).catch(e => {
+                    // console.log('errr_>', e);
+                    if(e.data && e.data.islogin){
+                        this.$router.push({name: 'index'});
+                    }
+                })
 			},
 			out() {
 				Request({

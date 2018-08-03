@@ -412,7 +412,8 @@
 				nickname && Cache.setSession('bier_usernickname', nickname);
 				Cache.setSession('bier_token', token);
 				heardUrl && Cache.setSession('bier_heardUrl', heardUrl);
-				this.dialogModalVisible = false;
+                this.dialogModalVisible = false;
+                this.$router.push({name: 'index'});
 			},
 			goToRegister() {
 				this.title = this.$t('register.userRegister');

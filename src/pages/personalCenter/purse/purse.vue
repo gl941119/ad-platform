@@ -96,7 +96,11 @@
 						this.disabled = true;
 						this.QueryBalance();
 					}
-				})
+				}).catch(e => {
+                    if(e.data && e.data.islogin){
+                        this.$router.push({name: 'index'});
+                    }
+                })
 			},
 			QueryBalance(){
 				Request({
