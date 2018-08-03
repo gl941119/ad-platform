@@ -356,7 +356,7 @@
 				imgUrl:'',
 				imageBack: 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg',
 				imagePositive:'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg',
-				imageHandheld:'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg',
+				imageHandheld:'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
@@ -471,7 +471,7 @@
 						this.authStatusShow = false;
 						this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
 						this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
-						this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg';
+						this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg';
 					}
 					if(res.data.authStatus == 1){
 						this.authStatusShow = false;
@@ -799,10 +799,10 @@
 				}
 			},
 			imgTest(){
-				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg') {
+				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg') {
 					this.imgShow = true;
 				}
-				if(this.imageBack != 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' && this.imagePositive != 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' && this.imageHandheld != 'http://imgs.afdchain.com/web-upload/picture/8f7002f8f14e48efae52c946cb442031.jpg'){
+				if(this.imageBack != 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' && this.imagePositive != 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' && this.imageHandheld != 'http://imgs.afdchain.com/web-upload/picture/fc4deb6e3cfa4e6c95c5af57eca9a931.jpg'){
 					this.imgShow = false;
 				}
 			},
@@ -864,7 +864,6 @@
 				}
 			},
 			getImgBack(res, file){
-				console.log(res);
 				this.imageBack =  res.data;
 			},
 			getImgPositive(res, file){
