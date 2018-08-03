@@ -30,6 +30,11 @@
 							      	</el-input-number>
 							    </el-form-item>
 						    </div>
+						    <el-form-item :label="$t('passwordInfo.tradePassword')" :label-width="formLabelWidth">
+						        <input class="passwordInput" type="password" style="display:none;"  />
+								<input class="passwordInput" type="text" onfocus="this.type='password'" :class="[errors.has('tradePassword')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="tradePassword" :placeholder="$t('passwordInfo.tradePassword')" v-model="tradePassword" />
+								<span class="is-danger" v-show="errors.has('tradePassword')">{{ errors.first('tradePassword') }}</span>
+						    </el-form-item>
 						  	</el-form>
 							<div slot="footer" class="dialog-footer">
 							    <el-button type="primary" @click="changePrice">{{$t('buttonAll.revise')}}</el-button>
@@ -75,6 +80,7 @@
     import Request from '../../../utils/require.js';
     import Config from '../../../utils/config.js';
     import echarts from '@/utils/echarts'
+    import validateFun from '../../../utils/validate.js';
 	export default {
 		data() {
 			return {
@@ -96,6 +102,8 @@
 				totalClicks:'',
 				yesterdayClicks:'',
 				advertTitle:'',
+				tradePassword:'',
+				existTradePassword:false,
 			}
 		},
 		computed: {
@@ -113,10 +121,19 @@
 			}
 		},
 		mounted(){
-			this.queryDetail();
+			this.info();
 //			this.echart();
 		},
 		methods: {
+			info(){
+				Request({
+					url: 'QuerySettings',
+					type: 'get',
+				}).then(res => {
+					this.existTradePassword = res.data.existTradePassword;
+					this.queryDetail();
+				})
+            },
 			/*echart(){
 				var myChart = echarts.init(document.getElementById('main'));
 				// 绘制图表
@@ -261,24 +278,30 @@
 				})
 			},
 			changePrice(){
-				var that = this;
-				Request({
-					url: 'ChangePrice',
-					data: {
-						accountId: this.accountId,
-						advertPrice:this.form.advertPrice,
-						advertId:this.advertId,
-						conceptManageList:this.form.conceptManageList,
-					},
-					type: 'post',
-					flag: true,
-				}).then(res => {
-					if(res.success){
-						that.dialogTableVisible = false;
+				if(this.existTradePassword){
+					Request({
+						url: 'ChangePrice',
+						data: {
+							accountId: this.accountId,
+							advertPrice:this.form.advertPrice,
+							advertId:this.advertId,
+							conceptManageList:this.form.conceptManageList,
+							tradePassword:validateFun.encrypt(this.tradePassword),
+						},
+						type: 'post',
+						flag: true,
+					}).then(res => {
+						this.tradePassword = '';
+						this.queryDetail();
+						this.dialogTableVisible = false;
 						this.$message(this.$t('messageNotice.changeSuccess'));
-						that.queryDetail();
-					}
-				})
+					})
+				}else{
+					this.$message({
+						message:this.$t('adServing.pleaseSetPassword'),
+						type:'warn'
+					})
+				}
 			},
 		}
 	}
@@ -306,6 +329,21 @@
 
 		}
 	}
+}
+.passwordInput{
+	height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    width: 80%;
+}
+.is-danger{
+	display: block;
+	color: #f66;
 }
 	.ad-serving-info{
 		padding: 20px 36px;

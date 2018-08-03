@@ -362,6 +362,7 @@ const zh = {
 		stop:'数据截止到 ',
 		yestoday:'昨日点击（次）',
 		accountMoney:'广告账户余额',
+		pleaseSetPassword:'请前往账号设置中，设置交易密码',
 	},
 	projectNotic:{
 		title:'项目内容',
