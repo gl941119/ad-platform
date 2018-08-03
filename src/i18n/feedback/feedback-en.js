@@ -37,4 +37,5 @@ export default {
 	'1035':'Verification code error,please try again',
 	'1036':'Lack of balance',
 	'1037':'Transaction password error',
+	'1038':'Email is not registered',
 }
