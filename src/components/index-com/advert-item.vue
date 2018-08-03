@@ -19,7 +19,7 @@
                             <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
                         </div>
                         <div  class="advert-item-middle-father-member-title">
-                            <span>核心成员:</span>
+                            <span>{{$t('team.coreMember')}}:</span>
                             <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
                             <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
                         </div>

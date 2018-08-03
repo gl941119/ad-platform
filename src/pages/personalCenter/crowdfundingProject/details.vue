@@ -245,11 +245,6 @@
 				<span class="is-danger" v-show="errors.has('topLimit')">{{ errors.first('topLimit') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<span class="require">*</span><label>{{$t('tokenInfo.lowLimit')}}</label>
-				<input class="langer" :class="[errors.has('lowLimit')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyLowLimit')" v-validate data-vv-rules="required|numeric|max:10" name="lowLimit" :disabled="disabled" v-model="details.lowLimit" />
-				<span class="is-danger" v-show="errors.has('lowLimit')">{{ errors.first('lowLimit') }}</span>
-			</li>
-			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.dataTime')}}</label>
 				<div v-if="disabled">
 					<span>{{details.startTime | cal}}</span> ~ <span>{{details.endTime |cal }}</span>
@@ -531,7 +526,6 @@
 								id: this.details.id,
 								license: this.details.license,
 								logo: this.details.logo,
-								lowLimit: this.details.lowLimit,
 								mostNumber: this.details.mostNumber,
 								price: this.details.price,
 								proDesc: this.details.proDesc,

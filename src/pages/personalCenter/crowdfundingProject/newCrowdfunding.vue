@@ -226,11 +226,6 @@
 				<span class="is-danger" v-show="errors.has('topLimit')">{{ errors.first('topLimit') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<span class="require">*</span><label>{{$t('tokenInfo.lowLimit')}}</label>
-				<input class="langer" :class="[errors.has('lowLimit')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyLowLimit')" v-validate data-vv-rules="required|numeric|max:10" name="lowLimit" :placeholder="$t('tokenInfo.enterLowLimit')" v-model="newCrowdfunding.lowLimit" />
-				<span class="is-danger" v-show="errors.has('lowLimit')">{{ errors.first('lowLimit') }}</span>
-			</li>
-			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.dataTime')}}</label>
 				<div>
 					<el-date-picker v-model="timeInterval" 
@@ -342,7 +337,6 @@
 					price: "", //众筹价格
 					targetCurrency: "", //目标货币
 					topLimit: '', //发行上限
-					lowLimit: '', //发行下限
 					companyName:'',
 					companyCode:'',
 				},
@@ -454,7 +448,6 @@
 									mostNumber: this.newCrowdfunding.mostNumber,
 									targetCurrency: this.newCrowdfunding.targetCurrency,
 									topLimit: this.newCrowdfunding.topLimit,
-									lowLimit: this.newCrowdfunding.lowLimit,
 									startTime: startTime,
 									endTime: endTime,
 									license: this.fileUrl,
