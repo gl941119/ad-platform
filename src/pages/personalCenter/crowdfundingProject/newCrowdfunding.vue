@@ -11,12 +11,12 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamPhone')}}</label>
-				<input :placeholder="$t('team.enterTeamPhone')" :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:36" name="teamContact" v-model="newCrowdfunding.teamContact" />
+				<input :placeholder="$t('team.enterTeamPhone')" :class="[errors.has('teamContact')?'llo':'']" :data-vv-as="$t('team.emptyTeamPhone')" v-validate data-vv-rules="required|max:64" name="teamContact" v-model="newCrowdfunding.teamContact" />
 				<span class="is-danger" v-show="errors.has('teamContact')">{{ errors.first('teamContact') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamAddress')}}</label>
-				<input :placeholder="$t('team.enterTeamAddress')" :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:100" name="teamLocation" v-model="newCrowdfunding.teamLocation" />
+				<input :placeholder="$t('team.enterTeamAddress')" :class="[errors.has('teamLocation')?'llo':'']" :data-vv-as="$t('team.emptyTeamAddress')" v-validate data-vv-rules="required|max:128" name="teamLocation" v-model="newCrowdfunding.teamLocation" />
 				<span class="is-danger" v-show="errors.has('teamLocation')">{{ errors.first('teamLocation') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -30,15 +30,15 @@
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.name')}}</label>
-									<input class="mini" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:32" name="coreName" :placeholder="$t('team.enterName')" v-model="coreTeam[index].name"/>
+									<input class="mini" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="coreName" :placeholder="$t('team.enterName')" v-model="coreTeam[index].name"/>
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.title')}}</label>
-									<input class="mini" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:16" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="coreTeam[index].title" />
+									<input class="mini" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="coreTeam[index].title" />
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
+									<input class="desc" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:200" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="coreTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addCore" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -65,15 +65,15 @@
 							<ol class="newCrowdfunding_item_li_coreTeamMembers_member_info_item">
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.name')}}</label>
-									<input class="mini" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:32" name="consultantName" :placeholder="$t('team.enterName')" v-model="consultantTeam[index].name" />
+									<input class="mini" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="consultantName" :placeholder="$t('team.enterName')" v-model="consultantTeam[index].name" />
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li">
 									<label>{{$t('team.title')}}</label>
-									<input class="mini" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:16" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="consultantTeam[index].title" />
+									<input class="mini" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="consultantTeam[index].title" />
 								</li>
 								<li class="newCrowdfunding_item_li_coreTeamMembers_member_info_item_li last">
 									<label>{{$t('team.desc')}}</label>
-									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:512" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
+									<input class="desc" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:200" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="consultantTeam[index].desc" />
 								</li>
 								<div style="display: flex;flex-direction: column;">
 									<i @click="addConsultant" style="margin: 10px 0;" class="custom-element-icon-jia-copy"></i>
@@ -94,7 +94,7 @@
 			<h5>{{$t('projectInfo.info')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('projectInfo.projectName')}}</label>
-				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:32" name="proName" :placeholder="$t('projectInfo.enterProjectName')" v-model="newCrowdfunding.proName" />
+				<input class="langer" :class="[errors.has('proName')?'llo':'']" :data-vv-as="$t('projectInfo.emptyProjectName')" v-validate data-vv-rules="required|max:64" name="proName" :placeholder="$t('projectInfo.enterProjectName')" v-model="newCrowdfunding.proName" />
 				<span class="is-danger" v-show="errors.has('proName')">{{ errors.first('proName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -167,7 +167,7 @@
 			</li>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.englishName')}}</label>
-				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:18" name="fullEnName" :placeholder="$t('tokenInfo.enterFullEnglish')" v-model="newCrowdfunding.fullEnName" />
+				<input class="langer" :class="[errors.has('fullEnName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyFullEnglish')" v-validate data-vv-rules="required|max:64" name="fullEnName" :placeholder="$t('tokenInfo.enterFullEnglish')" v-model="newCrowdfunding.fullEnName" />
 				<span class="is-danger" v-show="errors.has('fullEnName')">{{ errors.first('fullEnName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -244,7 +244,7 @@
 			<h5>{{$t('tokenInfo.files')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('tokenInfo.companyName')}}</label>
-				<input class="langer" :class="[errors.has('companyName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanyName')" v-validate data-vv-rules="required|max:20" name="companyName" :placeholder="$t('tokenInfo.enterCompanyName')" v-model="newCrowdfunding.companyName" />
+				<input class="langer" :class="[errors.has('companyName')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyCompanyName')" v-validate data-vv-rules="required|max:64" name="companyName" :placeholder="$t('tokenInfo.enterCompanyName')" v-model="newCrowdfunding.companyName" />
 				<span class="is-danger" v-show="errors.has('companyName')">{{ errors.first('companyName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">

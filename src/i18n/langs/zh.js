@@ -392,7 +392,7 @@ const zh = {
 		emptyTeamAddress:'主要成员所在地不能为空（限制不超过128个字符）',
 		emptyName:'全名不能为空（限制不超过64个字符）',
 		emptyTitle:'头衔不能为空（限制不超过64个字符）',
-		emptyDesc:'简介不能为空（限制不超过128个字符）',
+		emptyDesc:'简介不能为空（限制不超过200个字符）',
 		emptyCore:'核心团队成员不能为空',
 		emptyConsultant:'顾问团队成员不能为空',
 	},

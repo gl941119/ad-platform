@@ -34,14 +34,14 @@
 								<input class="team" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="coreName" :placeholder="$t('team.enterName')" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
-						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+						<el-table-column property="name" align="center" :label="$t('team.title')" >
 							<template slot-scope="scope">
 								<input class="team" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.desc')" width="200">
+						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:128" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
+								<input class="team" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:200" name="coreDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">
@@ -81,14 +81,14 @@
 								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:64" name="consultantName" :placeholder="$t('team.enterName')" v-model="scope.row.name">
 							</template>
 						</el-table-column>
-						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+						<el-table-column property="name" align="center" :label="$t('team.title')">
 							<template slot-scope="scope">
 								<input class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:64" name="consultantTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title">
 							</template>
 						</el-table-column>
-						<el-table-column property="address" align="center" :label="$t('team.desc')" width="200">
+						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:128" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:200" name="consultantDesc" :placeholder="$t('team.enterDesc')" v-model="scope.row.desc">
 							</template>
 						</el-table-column>
 						<el-table-column v-if="isCheck != 1 && isCheck != 3" property="address" align="center" :label="$t('team.operating')">

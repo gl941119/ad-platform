@@ -28,17 +28,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:64" name="coreName" v-model="scope.row.name" />
+								<input class="team" :disabled="disabled" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="coreName" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
-						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+						<el-table-column property="name" align="center" :label="$t('team.title')" >
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" v-model="scope.row.title" />
+								<input class="team" :disabled="disabled" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:128" name="coreDesc" v-model="scope.row.desc" />
+								<input class="team" :disabled="disabled" :class="[errors.has('coreDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:200" name="coreDesc" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
@@ -74,17 +74,17 @@
 						</el-table-column>
 						<el-table-column property="year" align="center" :label="$t('team.name')">
 							<template slot-scope="scope">
-								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.enterName')" v-validate data-vv-rules="required|max:64" name="consultantName" v-model="scope.row.name" />
+								<input class="team" :disabled="disabled" :class="[errors.has('consultantName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="consultantName" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
-						<el-table-column property="name" align="center" :label="$t('team.title')" width="200">
+						<el-table-column property="name" align="center" :label="$t('team.title')">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.enterTitle')" v-validate data-vv-rules="required|max:64" name="consultantTitle" v-model="scope.row.title" />
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="consultantTitle" v-model="scope.row.title" />
 							</template>
 						</el-table-column>
 						<el-table-column property="address" align="center" :label="$t('team.desc')">
 							<template slot-scope="scope">
-								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.enterDesc')" v-validate data-vv-rules="required|max:128" name="consultantDesc" v-model="scope.row.desc" />
+								<input  class="team" :disabled="disabled" :class="[errors.has('consultantDesc')?'llo':'']" :data-vv-as="$t('team.emptyDesc')" v-validate data-vv-rules="required|max:200" name="consultantDesc" v-model="scope.row.desc" />
 							</template>
 						</el-table-column>
 						<el-table-column v-if="!disabled" property="address" align="center" :label="$t('team.operating')">
