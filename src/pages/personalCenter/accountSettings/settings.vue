@@ -213,12 +213,12 @@
 					</template>
 						<ul v-if="authStatusShow" class="el-collapse-item__content_authentication">
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.name')}}</label>
+								<label><span class="require">*</span>{{$t('setting.name')}}</label>
 								<input :class="[errors.has('realName')?'llo':'']" :data-vv-as="$t('setting.limitName')" v-validate="{ required: true, regex: /^([\u4E00-\u9FA5]+|[a-zA-Z]+)$/}" name="realName" class="el-collapse-item__content_authentication_li_info" v-model="realName" />
 								<span class="is-danger" v-show="errors.has('realName')">{{ errors.first('realName') }}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.identityFileType')}}</label>
+								<label><span class="require">*</span>{{$t('setting.identityFileType')}}</label>
 								<el-select v-model="idType" @focus="cardType" @change="cardType":placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
@@ -226,13 +226,13 @@
 								<span class="is-danger" v-if="cardTypeShow">{{$t('setting.limitIdType')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.identityFileNumber')}}</label>
+								<label><span class="require">*</span>{{$t('setting.identityFileNumber')}}</label>
 								<input class="el-collapse-item__content_authentication_li_info" @blur="text" name="idNum" v-model="idNum" />
 								<span class="is-danger" v-if="numType">{{$t('setting.pleaseIdType')}}</span>
 								<span class="is-danger" v-if="idCard">{{$t('setting.limit')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
-								<label>{{$t('setting.country')}}</label>
+								<label><span class="require">*</span>{{$t('setting.country')}}</label>
 								<el-select @change="countrys" @focus="countrys" v-model="country" filterable :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in countryData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
@@ -240,7 +240,7 @@
 								<span class="is-danger" v-if="countryShow">{{$t('setting.limitCountry')}}</span>
 							</li>
 							<li class="el-collapse-item__content_authentication_li last">
-								<h4 class="el-collapse-item__content_authentication_li_identityUpload">{{$t('setting.identityFile')}}</h4>
+								<h4 class="el-collapse-item__content_authentication_li_identityUpload"><span class="require">*</span>{{$t('setting.identityFile')}}</h4>
 								<div>
 									<el-upload class="avatar-uploader" 
 										:show-file-list="false" 
@@ -853,6 +853,7 @@
 				}
 			},
 			getImgBack(res, file){
+				console.log(res);
 				this.imageBack =  res.data;
 			},
 			getImgPositive(res, file){
@@ -935,6 +936,10 @@
 					width:200px; 
 					text-align:right;
 					margin-right: 20px;
+					.require{
+						color: #ff9500;
+						padding-right: 5px;
+					}
 				}
 				&_info{
 					width: 222px;
