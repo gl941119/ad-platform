@@ -44,21 +44,25 @@
             <div class="advert-item-right-icons">
                 <i v-show="itemIndex < 30" class="custom-element-icon-hot hot"></i>
                 <a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
-                <a :href="advertDatas.telegrameUrl" target="_self"><i class="custom-element-icon-duihua"></i></a>
+                <a href="javascript:;" @click="telegramDialog"><i class="custom-element-icon-duihua"></i></a>
             </div>
         </div>
+        <el-dialog class="telegram-dialog" :title="$t('header.tips')" :visible.sync="telegramVisible" width="360px">
+            <div class="telegram-dialog-content">{{$t('header.tipMsg')}}</div>
+            <div class="telegram-dialog-footer" @click="IGotIt" slot="footer">{{$t('header.got')}}</div>
+        </el-dialog>
     </div>
 </template>
 <script>
 import Request from '../../utils/require.js';
 import Utils from '../../utils/util.js';
-import Cache from '../../utils/cache.js';
 export default {
     props: ['advertDatas', 'systemTime', 'isWhiteBack', 'itemIndex'],
     data(){
         return {
             advertValue: '',
             utils: new Utils(),
+            telegramVisible: false,
         }
     },
     computed: {
@@ -106,7 +110,13 @@ export default {
                 // this.$router.push({name: 'index'})
             })
         },
-        
+        telegramDialog(){
+            this.telegramVisible = true;
+        },
+        IGotIt(){
+            this.telegramVisible = false;
+            this.utils.newWin(this.advertDatas.telegrameUrl);
+        },
     }
 }
 </script>
@@ -210,6 +220,23 @@ export default {
                 margin-right: 45px;
             }
         }
+    }
+}
+.telegram-dialog {
+    &-content {
+        font-size: 20px;
+        text-align: center;
+        color: #FF9500;
+        margin: 20px 0;
+    }
+    &-footer {
+        color: #333333;
+        font-size: 20px;
+        margin: -10px -20px -20px;
+        text-align: center;
+        height: 60px;
+        line-height: 60px;
+        cursor: pointer;
     }
 }
 </style>

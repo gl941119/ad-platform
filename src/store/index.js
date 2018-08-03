@@ -20,7 +20,7 @@ export default new Vuex.Store({
         globalShow: Cache.getSession('globalShow') || 'show', // global share
 		slangChange: Cache.getLocal('bier_langChange'),
 		heardUrl: Cache.getSession('bier_heardUrl'),
-		inviteCode:'',
+		inviteCode: '',
 	},
 	mutations: {
 		setUserId(state, val) {
