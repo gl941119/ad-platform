@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="header-content">
 			<div class="header-content-logo" style="margin-left: 65px;"><img height="30" src="../assets/imgs/img/logo.png"></div>
-			<div class="header-content-tab clearfix">
+			<div class="header-content-tab">
 				<div class="header-content-tab-left">
 					<router-link class="header-content-tab-left-menu" :to="{ name: 'index' }">{{$t('header.home')}}</router-link>
 					<router-link class="header-content-tab-left-menu" :to="{ name: 'crowdsale' }">{{$t('header.daico')}}</router-link>
@@ -450,14 +450,15 @@
 			width: $contentWidth;
 			height: $headerBarHeight;
 			margin: 0 auto;
-			color: #fff;
+            color: #fff;
+            background-color: #13161f;
 			@include content-flex();
 			&-tab {
 				margin-left: 62px;
 				height: 100%;
-				flex: auto;
+                flex: auto;
+                @include content-flex(space-between);                
 				&-left {
-					float: left;
 					&-menu {
 						display: inline-block;
 						height: 100%;
@@ -468,7 +469,6 @@
 				}
 				&-right {
 					color: #fff;
-					float: right;
 					@include header-layout;
 					@include content-flex();
 					&-item {
