@@ -1,16 +1,16 @@
 <template>
     <div class="forget-password">
         <div class="forget-password-container">
-            <div class="forget-password-container-title">密码重置</div>
+            <div class="forget-password-container-title">{{$t('forgetPassword.passwordReset')}}</div>
             <el-steps class="forget-password-container-steps" :active="currActive" simple>
-                <el-step title="输入邮箱" icon="custom-element-icon-icon-test2"></el-step>
-                <el-step title="重置密码" icon="custom-element-icon-icon-test"></el-step>
-                <el-step title="完成" icon="custom-element-icon-icon-test1"></el-step>
+                <el-step :title="$t('forgetPassword.enterEmail')" icon="custom-element-icon-icon-test2"></el-step>
+                <el-step :title="$t('forgetPassword.resetPassword')" icon="custom-element-icon-icon-test"></el-step>
+                <el-step :title="$t('forgetPassword.finish')" icon="custom-element-icon-icon-test1"></el-step>
             </el-steps>
             <div v-show="currActive===2" class="forget-password-container-succ">
                 <i class="custom-element-icon-duihao"></i>
-                <div>密码修改成功</div>
-                <div>请重新登录</div>
+                <div>{{$t('forgetPassword.success')}}</div>
+                <div>{{$t('forgetPassword.againLogin')}}</div>
             </div>
             <el-form class="forget-password-container-form" 
             @validate="forgetPwdValidate"
@@ -18,25 +18,25 @@
             ref="forgetPwdForm"
             :model="forgetPwd">
                 <el-form-item v-show="currActive===0 || currActive===1" prop="email" class="forget-password-container-form-item">
-                    <el-input placeholder="请输入邮箱"
+                    <el-input :placeholder="$t('forgetPassword.pleaseEnterEmail')"
                                 name="email" auto-complete="off" 
                                 v-model="forgetPwd.email"></el-input>
                                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
                 </el-form-item>
                 <el-form-item v-show="currActive===1" class="forget-password-container-form-item">
-                    <el-input class="verify" placeholder="请输入验证码" auto-complete="off" 
+                    <el-input class="verify" :placeholder="$t('forgetPassword.enterCode')" auto-complete="off" 
                                 v-model="forgetPwd.verify"></el-input>
                     <el-button @click="sendVerify" v-if="disabledVerify" class="btn">{{$t('register.sendCode')}}</el-button>
                     <el-button v-else disabled class="btn-disabled">(<span>{{num}}</span>s){{$t('register.again')}}</el-button>  
                 </el-form-item>
                 <el-form-item v-show="currActive===1" prop="password" class="forget-password-container-form-item">
-                    <el-input placeholder="设置登录密码，8-16位字符，字母和数字"
+                    <el-input :placeholder="$t('forgetPassword.setPassword')"
                     type="password"
                     auto-complete="off" 
                                 v-model="forgetPwd.password"></el-input>
                 </el-form-item>
                 <el-form-item class="forget-password-container-form-btn">
-                    <el-button :disabled="btnDisabled" type="primary" size="small" @click="nextStep">下一步</el-button>
+                    <el-button :disabled="btnDisabled" type="primary" size="small" @click="nextStep">{{$t('forgetPassword.next')}}</el-button>
                 </el-form-item>
             </el-form>
         </div>

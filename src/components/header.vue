@@ -49,11 +49,11 @@
 					</el-form-item>
 					<div class="register-foot" :style="{'padding-left': getLabelWidth(language, 'login')}">
 						<el-button type="text" size="small" class="register-foot-text" @click="goToRegister">{{$t('register.register')}}</el-button>
-						<el-button type="text" size="small" class="register-foot-text" @click="goToForgetPwd">忘记密码</el-button>
+						<el-button type="text" size="small" class="register-foot-text" @click="goToForgetPwd">{{$t('forgetPassword.forget')}}</el-button>
 						<el-button type="default" size="small" class="register-foot-btn" @click="loginSubmit">{{$t('login.login')}}</el-button>
 					</div>
 					<div class="register-other">
-                        <span class="register-other-text">快速登录</span>
+                        <span class="register-other-text">{{$t('login.quicklyLogin')}}</span>
 						<telegram-login mode="callback" :telegram-login="telegramBot" @callback="callbackFunction"></telegram-login>
 					</div>
 				</el-form>

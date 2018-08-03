@@ -333,6 +333,7 @@
 					font-size:16px;
 					h5{
 						color:rgba(96,98,102,1);
+						min-height: 32px;
 					}
 					&-data{
 						color:rgba(102,102,102,1);
