@@ -69,7 +69,7 @@ export default {
                 email: '',
                 verify: '',
                 password: '',
-            }
+            },
         }
     },
     methods: {
@@ -94,7 +94,7 @@ export default {
                                 }).then(res => {
                                     this.currActive = 2;
                                     this.$message({
-                                        message: this.utils.judgeLanguage(this.language, res.message),
+                                        message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
                                         type: 'success'
                                     });
                                 }).catch(console.error)
@@ -140,7 +140,7 @@ export default {
                         }
                     }, 1000);
                     this.$message({
-                        message: this.utils.judgeLanguage(this.language, res.message),
+                        message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
                         type: 'success'
                     });
                 })
