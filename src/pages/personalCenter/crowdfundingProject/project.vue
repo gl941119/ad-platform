@@ -71,6 +71,20 @@
 				return str += "%";
 			}
 		},
+		computed: {
+			slangChange() {
+				var lang = this.$store.state.slangChange || this.$i18n.locale;
+				if(lang == 'en'){
+					lang = lang.toUpperCase();
+				}
+				return lang;
+			}
+		},
+		watch: {
+			slangChange(val, oldval) {
+				this.crowdfunding();
+			}
+		},
 		methods: {
 			newProject(){
 				this.$router.push({

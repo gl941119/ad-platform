@@ -418,6 +418,7 @@
 				}else{
 					this.countryData = CountryZh.country;
 				}
+				this.info();
 			},
 		},
 		mounted() {
