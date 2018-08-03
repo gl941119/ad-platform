@@ -215,6 +215,7 @@
 				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="whitePaper" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
 				<span class="is-danger" v-show="errors.has('whitePaper')">{{ errors.first('whitePaper') }}</span>
 			</li>
+			
 			<li style="position: relative;">
 				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 					<span class="require" style="color: #FFFFFF;">*</span><label class="label">
@@ -226,6 +227,7 @@
 					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress"  :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
 				<span class="is-danger" v-show="errors.has('websiteAddress')">{{ errors.first('websiteAddress') }}</span>
+			
 			</li>
 		</ul>
 		<div v-if="isCheck == -1" >
@@ -422,7 +424,7 @@
 					}
 				});
 			},
-			saveSubmit() {
+			saveSubmit() {//点击提交
 				var concept = [];
 				if(this.checkedData.length>0){
 					concept = this.checkedData;
@@ -430,54 +432,51 @@
 					concept = this.conceptResultList;
 				}
 				var value = this.newCrowdfunding.id;
-				var arr = [];
-				var that = this;
-				if(this.websites.length>0){
-					this.websites.forEach(function(item, index){
-						item.advertProjId = value;
-						if(item.websiteName){
-							arr.push(item);
-						}
-					})
-				}
-				this.$validator.validateAll().then((result) => {
-					this.desc();
-						if(result){
-							Request({
-								url: 'ChangeProject',
-								data: {
-									id: this.newCrowdfunding.id,
-									accountId: this.newCrowdfunding.accountId,
-									teamName: this.newCrowdfunding.teamName,
-									teamContact: this.newCrowdfunding.teamContact,
-									teamLocation: this.newCrowdfunding.teamLocation,
-									proName: this.newCrowdfunding.proName,
-									proDesc: this.newCrowdfunding.proDesc,
-									conceptManageList:concept,
-									technology1: this.newCrowdfunding.technology1,
-									technology2: this.newCrowdfunding.technology2,
-									website: this.newCrowdfunding.website,
-									whitePaper: this.newCrowdfunding.whitePaper,
-									shotEnName: this.newCrowdfunding.shotEnName,
-									shotCnName: this.newCrowdfunding.shotCnName,
-									fullEnName: this.newCrowdfunding.fullEnName,
-									title: this.newCrowdfunding.title,
-									logo: this.imageUrl,
-									websites:arr,
-								},
-								type: 'post',
-								flag: true,
-							}).then(res => {
-								this.$router.push({
-									name: 'adserving',
-								});
-								this.$message({
-									message:this.$t('messageNotice.changeSuccess'),
-									type:'success'
-								});
-							})
-					}
-				});
+				
+				
+			
+			
+
+				
+				
+//				this.$validator.validateAll().then((result) => {
+//					this.desc();
+//						if(result){
+//							Request({
+//								url: 'ChangeProject',
+//								data: {
+//									id: this.newCrowdfunding.id,
+//									accountId: this.newCrowdfunding.accountId,
+//									teamName: this.newCrowdfunding.teamName,
+//									teamContact: this.newCrowdfunding.teamContact,
+//									teamLocation: this.newCrowdfunding.teamLocation,
+//									proName: this.newCrowdfunding.proName,
+//									proDesc: this.newCrowdfunding.proDesc,
+//									conceptManageList:concept,
+//									technology1: this.newCrowdfunding.technology1,
+//									technology2: this.newCrowdfunding.technology2,
+//									website: this.newCrowdfunding.website,
+//									whitePaper: this.newCrowdfunding.whitePaper,
+//									shotEnName: this.newCrowdfunding.shotEnName,
+//									shotCnName: this.newCrowdfunding.shotCnName,
+//									fullEnName: this.newCrowdfunding.fullEnName,
+//									title: this.newCrowdfunding.title,
+//									logo: this.imageUrl,
+//									websites:arr,
+//								},
+//								type: 'post',
+//								flag: true,
+//							}).then(res => {
+//								this.$router.push({
+//									name: 'adserving',
+//								});
+//								this.$message({
+//									message:this.$t('messageNotice.changeSuccess'),
+//									type:'success'
+//								});
+//							})
+//					}
+//				});
 			},
 			queryDetails(){
 				Request({
