@@ -13,7 +13,7 @@
 				</el-table-column>
 				<el-table-column :label="$t('initiated.lowTop')">
 					<template slot-scope="scope">
-						{{scope.row.topLimit}}/{{scope.row.lowLimit}}
+						{{scope.row.topLimit}}
 					</template>
 				</el-table-column>
 				<el-table-column :label="$t('initiated.degree')">
@@ -24,8 +24,8 @@
 				</el-table-column>
 				<el-table-column :label="$t('initiated.status')">
 					<template slot-scope="scope">
-						<div v-if="scope.row.isCheck==0" @click="openDetail(scope.row.id,0)">{{$t('initiated.review')}}</div>
-						<div v-if="scope.row.isCheck==1" @click="openDetail(scope.row.id,1)">{{$t('initiated.over')}}</div>
+						<el-button type="text" style="color: #606266;" v-if="scope.row.isCheck==0" @click="openDetail(scope.row.id,0)">{{$t('initiated.review')}}</el-button>
+						<el-button type="text" style="color: #606266;" v-if="scope.row.isCheck==1" @click="openDetail(scope.row.id,1)">{{$t('initiated.over')}}</el-button>
 						<div v-if="scope.row.isCheck==2">
 							{{$t('initiated.refuse')}}
 							<el-tooltip :content="scope.row.description" placement="top" effect="light">

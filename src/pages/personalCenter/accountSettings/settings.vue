@@ -437,6 +437,7 @@
 			},
 			close(){
 				this.active = '';
+				this.info();
 			},
 			cancle(){
 				this.activeName = '';
@@ -831,16 +832,17 @@
 			},
 			text(){
 				if(!this.idType){
+					this.numType = true;//请先选择身份证件类型
+				}else{
 					this.numType = false;
-					this.cardTypeShow = false;
-					if(this.idType == '身份证'){
+					if(this.idType == '身份证' || this.idType == 'ID card'){
 						var value = /^\d{15}|\d{17}(\d{1}|X|x)$/.test(this.idNum);
 						if(!value){
 							this.idCard = true;
 						}else{
 							this.idCard = false;
 						}
-					}else if(this.idType == '护照'){
+					}else if(this.idType == '护照' || this.idType == 'Passport'){
 						var value = /^([PSE]{1}\\d{7}|[GS]{1}\\d{8})$/.test(this.idNum);
 						if(!value){
 							this.idCard = true;
@@ -848,8 +850,6 @@
 							this.idCard = false;
 						}
 					}
-				}else{
-					this.numType = true;
 				}
 			},
 			getImgBack(res, file){

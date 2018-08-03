@@ -8,8 +8,8 @@
 				</el-button>
 			</el-tooltip>
 		</div>
-		<div class="ad-serving-info">
-			<div class="ad-serving-info-top" v-if="isCheck == 1 || isCheck == 3">
+		<div class="ad-serving-info" v-if="isCheck == 1 || isCheck == 3">
+			<div class="ad-serving-info-top">
 				<div class="ad-serving-info-top-title">{{advertTitle}}</div>
 				<ul class="ad-serving-info-top-item">
 					<li class="ad-serving-info-top-item-li">
