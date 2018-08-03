@@ -11,7 +11,6 @@ import filters from './filters';
 import i18n from './i18n/i18n';
 
 import './utils/element';
-import Cache from './utils/cache';
 import './assets/css/reset.css';
 import 'swiper/dist/css/swiper.css';
 import { VeeValidate, Veeconfig } from './utils/validation';
@@ -25,26 +24,21 @@ Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 })
-//时间转换
-Vue.filter('cal', function(input) {
-  if(input==""){
 
-    return "";
-  }else{
-    var d = new Date(input);
-    var year = d.getFullYear();
-    var monthT = d.getMonth() + 1;
-    var month = monthT < 10 ? '0' + monthT : '' + monthT;
-    var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
-    /*  var hour = d.getHours();
-        var minutes = d.getMinutes();
-        var seconds = d.getSeconds();*/
-    return year + '-' + month + '-' + day;
-  }
-});
+var _hmt = window._hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?24ba14ce3347946c7d59f64e6f853724";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+
 router.beforeEach((to, from, next) => {
-    let token = store.state.token || Cache.getSession('bier_token');
-
+    let token = store.state.token;
+    if (to.path) {
+        console.log('to_>', to.fullPath);
+        _hmt.push(['_trackPageview', '/#' + to.fullPath]);
+    }
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!token) {
             next({name: 'index'});

@@ -240,14 +240,14 @@
 				<span class="is-danger" v-show="errors.has('targetCurrency')">{{ errors.first('targetCurrency') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
-				<span class="required">*</span><label>{{$t('tokenInfo.topLimit')}}</label>
+				<span class="require">*</span><label>{{$t('tokenInfo.topLimit')}}</label>
 				<input class="langer" :class="[errors.has('topLimit')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyTopLimit')" v-validate data-vv-rules="required|numeric|max:10" name="topLimit" :disabled="disabled" v-model="details.topLimit" />
 				<span class="is-danger" v-show="errors.has('topLimit')">{{ errors.first('topLimit') }}</span>
 			</li>
-			<li class="newCrowdfunding_item_li">
+			<li class="newCrowdfunding_item_li hahh">
 				<span class="require">*</span><label>{{$t('tokenInfo.dataTime')}}</label>
-				<div v-if="disabled">
-					<span>{{details.startTime | cal}}</span> ~ <span>{{details.endTime |cal }}</span>
+				<div v-if="disabled" style="line-height:40px;">
+					<span>{{details.startTime | dateFormat}}</span> ~ <span>{{details.endTime | dateFormat}}</span>
 				</div>
 				<div v-if="!disabled" >
 					<el-date-picker v-model="timeInterval" 
@@ -775,5 +775,5 @@
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/newProjectDetails.scss';
 	@import '../../../assets/css/withdraw.scss';
-	@import '../../../assets/css/upload.css';
+    @import '../../../assets/css/upload.css';
 </style>
