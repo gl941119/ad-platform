@@ -24,7 +24,7 @@
 				</div>
 				<!-- <crowdsale-item v-for="crowdsale in crowdsaleItemdata" :key="crowdsale.id" :crowdsale-datas="crowdsale" :system-time="sysTime">
 				</crowdsale-item> -->
-                <div class="temp-crowd" v-for="item in 6">
+                <div class="temp-crowd" v-for="item in 5">
                 	<div>
                 		<img src="../../assets/imgs/img/index_corwd.png"/>
                 	</div>
