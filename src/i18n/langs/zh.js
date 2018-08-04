@@ -468,6 +468,7 @@ const zh = {
 		emptyCompanycode:'企业代码不能为空（限制不超过20个字符）',
 		emptyAbout:'相关牌照不能为空',
 		emptyStatement:'请先选择免责声明',
+		uploadError:'上传失败',
 	},
 	aboutLink:{
 		linkInfo:'相关链接',

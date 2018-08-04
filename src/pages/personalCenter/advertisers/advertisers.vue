@@ -737,7 +737,10 @@
 				this.img = false;
 			},
 			imgError(){
-				this.$message('上传错误')
+				this.$message({
+					message:this.$t('tokenInfo.uploadError'),
+					type:'warning'  
+				});
 			},
 			conceptFun() { //概念弹出窗
 				this.concept = !this.concept;

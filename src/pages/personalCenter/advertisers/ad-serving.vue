@@ -299,7 +299,7 @@
 				}else{
 					this.$message({
 						message:this.$t('adServing.pleaseSetPassword'),
-						type:'warn'
+						type:'warning'
 					})
 				}
 			},

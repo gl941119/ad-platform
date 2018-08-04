@@ -470,6 +470,7 @@ const en = {
 		emptyCompanycode:'Company ID cannot be empty (limited to 20 characters)',
 		emptyAbout:' The relevant licence cannot be empty',
 		emptyStatement:'please choose the disclaimer',
+		uploadError:'Upload failed',
 	},
 	aboutLink:{
 		linkInfo:'Related Links',
