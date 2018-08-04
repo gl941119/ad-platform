@@ -164,7 +164,7 @@ const zh = {
 		price:'支付价格',
 		status:'状态',
 		updateTime:'状态更新时间',
-		notic:'所有众筹成功后相应的币会直接充值到您的钱包中，未成功的相应款项将会原路返还至您原来的账户',
+		notic:'众筹成功后相应的代币会直接充值到您的钱包中，未成功的众筹，ETH将原路返还至您的钱包地址',
 		currency:'打币成功',
 		coin:'退币成功',
 		currencyIn:'打币中',
@@ -174,7 +174,7 @@ const zh = {
 	},
 	invite:{
 		inviteUser:'邀请用户',
-		info:'受邀用户今后持续点击广告的价值都将会以AFDT的形式奖励给您',
+		info:'受邀用户今后持续点击广告的收益都将会以AFDT的形式分润给您',
 		code:'邀请码',
 		inviteLink:'邀请链接',
 		copy:'复制',
@@ -468,6 +468,7 @@ const zh = {
 		emptyCompanycode:'企业代码不能为空（限制不超过20个字符）',
 		emptyAbout:'相关牌照不能为空',
 		emptyStatement:'请先选择免责声明',
+		uploadError:'上传失败',
 	},
 	aboutLink:{
 		linkInfo:'相关链接',
@@ -483,6 +484,11 @@ const zh = {
 		emptyWebsite:'官网不能为空（符合网站地址）',
 		emptyWhitePaper:'白皮书地址不能为空（符合网站地址）',
 		emptyAddress:'自定义站点地址需符合网站地址',
+		englishLimit:'站点英文名称只能输入英文字母或数字',
+		chineseLimit:'站点中文名称只能输入汉字或数字',
+		enterChineseName:'请输入站点中文名称',
+		enterEnglishName:'请输入站点英文名称',
+		enterAddress:'请输入站点地址',
 	},
 	messageCode:{
 		exceptions:'系统异常',

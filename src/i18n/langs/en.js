@@ -164,7 +164,7 @@ const en = {
 		price:'Price',
 		status:'Condition',
 		updateTime:'turnover time',
-		notic :' After successful crowdfunding, the corresponding Token will be directly recharged into your wallet, and the relevant unsuccessful funds will be returned the same way ',
+		notic :'After successful crowdfunding, the corresponding token will be directly recharged into your wallet. If failed, ETH will return the original route to your wallet address',
 		currency:'successful transaction',
 		coin:'successful return',
 		currencyIn:'transaction in process',
@@ -174,7 +174,7 @@ const en = {
 	},
 	invite:{
 		inviteUser:'Invite',
-		info :' Invited users will be rewarded with AFDT tokens for the value created by clicking ads in the future',
+		info :'The revenue of the invited users to continue to click on the ads in the future will be distributed to you in the form of AFDT',
 		code:'Invitecode',
 		inviteLink:'Invite link',
 		copy:'Copy',
@@ -470,6 +470,7 @@ const en = {
 		emptyCompanycode:'Company ID cannot be empty (limited to 20 characters)',
 		emptyAbout:' The relevant licence cannot be empty',
 		emptyStatement:'please choose the disclaimer',
+		uploadError:'Upload failed',
 	},
 	aboutLink:{
 		linkInfo:'Related Links',
@@ -485,6 +486,11 @@ const en = {
 		emptyWebsite:' The official website can not be empty (qualified website address)',
 		emptyWhitePaper:' Whitepaper address cannot be empty（qualified website address）',
 		emptyAddress:'user-defined address need be website address',
+		englishLimit:'Site English names can only be entered in English letters or numbers',
+		chineseLimit:'Site Chinese name can only input Chinese characters or numbers',
+		enterChineseName:'Please enter the Chinese name of the site',
+		enterEnglishName:'Please enter the English name of the site',
+		enterAddress:'Please enter the site address',
 	},
 	messageCode:{//后台返回数据
 		exceptions:' System exception',
