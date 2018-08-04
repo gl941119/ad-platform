@@ -117,3 +117,17 @@
 .statement_item li{
     list-style: decimal;
 }
+//changePrice
+.el-form-item .el-form-item__label {
+    line-height: normal; 
+    float: left;
+    font-size: 14px;
+    color: #606266;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+}

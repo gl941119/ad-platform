@@ -343,7 +343,10 @@
 }
 .is-danger{
 	display: block;
-	color: #f66;
+    color: #f66;
+    max-height: 0px;
+    line-height: 20px;
+    margin-top: 15px;
 }
 	.ad-serving-info{
 		padding: 20px 36px;
