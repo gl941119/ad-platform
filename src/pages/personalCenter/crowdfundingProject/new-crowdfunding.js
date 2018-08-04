@@ -108,7 +108,6 @@ export default {
                 this.isData = false;
             }
             let [start, end] = this.timeInterval;
-            console.log('this.timeInterval_>', start);
             Cache.setSession('timeInterval', [new Date(start).getTime(), new Date(end).getTime()]);
         },
         proDesc() { //项目简介
@@ -119,7 +118,6 @@ export default {
             }
         },
         submit() {
-            console.log('this.timeInterval_>', this.timeInterval);
             var startTime = this.util.dateFormat(this.timeInterval[0], "time");
             var endTime = this.util.dateFormat(this.timeInterval[1], 'time');
             if (this.checkedData[0]) {
@@ -266,7 +264,6 @@ export default {
             // console.log(file, fileList);
         },
         getFile(res, file) {
-            console.log('success_>', res, file);
             this.fileUrl = res.data;
             this.fileEmpty = false;
             this.companyFileList.push({ name: file.name, url: this.fileUrl });
@@ -274,7 +271,6 @@ export default {
         },
         // 增加缓存
         addCache() {
-            console.log('coreTeam>', this.newCrowdfunding);
             // console.log('consultantTeam>', this.consultantTeam);
             Cache.setSession('coreTeam', this.coreTeam);
             Cache.setSession('consultantTeam', this.consultantTeam);
@@ -284,7 +280,6 @@ export default {
             let newCrowdfunding = Cache.getSession('newCrowdfunding');
             this.newCrowdfunding = newCrowdfunding && JSON.parse(newCrowdfunding) || {};
             this.newCrowdfunding.accountId = this.$store.state.id;
-            console.log('newCrowdfunding_>', this.newCrowdfunding);
             // 技术
             let { technology1, technology2 } = this.newCrowdfunding;
             let technologyArr = [];
