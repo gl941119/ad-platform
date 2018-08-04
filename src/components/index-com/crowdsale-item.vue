@@ -1,7 +1,7 @@
 <template>
     <div class="crowdsale-item">
         <div class="crowdsale-item-title">
-            <span>{{crowdsaleDatas.title}}</span>
+            <span :title='crowdsaleDatas.title'>{{crowdsaleDatas.title}}</span>
             <!-- <span class="crowdsale-item-title-border"></span>
             <span class="crowdsale-item-title-ad">{{$t('home.advertising')}}</span> -->
         </div>
@@ -213,6 +213,12 @@
             @include item-title();
             font-size: 16px;
             height: 22px;
+            span{
+            	overflow:hidden;
+				white-space:nowrap; 
+				text-overflow:ellipsis; 
+            }
+            
             &-border {
                 height: 100%;
                 border: 1px solid #E2E2E2;
