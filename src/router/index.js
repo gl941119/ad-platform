@@ -22,6 +22,8 @@ const AdvertisersDisclaimer = () => import('@/pages/personalCenter/advertisers/d
 
 // mass
 const ForgetPasswordCom = () => import('@/pages/mass/forget-password');
+const UserRegisterTermCom = () => import('@/pages/mass/user-register-term');
+
 
 Vue.use(VueRouter);
 
@@ -130,9 +132,14 @@ const router = new VueRouter({
 			component: AdvertisersDisclaimer,
 		},
 		{
-			path: '/resetpwd',//众筹免责声明
+			path: '/resetpwd', // 忘记密码
 			name: 'resetpwd',
 			component: ForgetPasswordCom,
+		},
+		{
+			path: '/userterm', // 用户协议
+			name: 'userterm',
+			component: UserRegisterTermCom,
 		},
         {path: '*', redirect: '/'}
     ],

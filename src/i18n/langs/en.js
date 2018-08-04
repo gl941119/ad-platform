@@ -54,7 +54,9 @@ const en = {
 		enterRegisterPassword:'Password',
 		enterRegisterCode:'SecurityCode',
 		enterOncePassword:'ConfirmPassword',
-		registerInviteCode:'InviteCode',
+        registerInviteCode: 'InviteCode',
+        disclaimer: 'AFDCHAIN Terms of User',
+        agree: 'Agree & Register'
 	},
 	passwordNotic:{
 		one:'1. Password length must be between 8 and 16 characters.',

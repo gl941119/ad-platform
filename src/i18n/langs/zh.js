@@ -54,7 +54,9 @@ const zh = {
 		enterRegisterPassword:'请输入密码',
 		enterRegisterCode:'请输入验证码',
 		enterOncePassword:'请输入确认密码',
-		registerInviteCode:'请输入邀请码，可选',
+        registerInviteCode: '请输入邀请码，可选',
+        disclaimer: 'AFDCHAIN用户协议',
+        agree: '同意并注册'
 	},
 	passwordNotic:{
 		one:'1、密码长度必须介于8到16个字符之间。',

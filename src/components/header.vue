@@ -88,11 +88,11 @@
 					<el-form-item :label="$t('register.registerVerifyCode')" :label-width="getLabelWidth(language, 'register')">
 						<el-input :placeholder="$t('register.registerInviteCode')" auto-complete="off" v-model="registerModel.form.inviteCode"></el-input>
 					</el-form-item>
+                    <div class="register-disclaimer">
+                        <el-checkbox class="register-foot-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
+                        <a href="javascript:;" @click="goTodisclaimer" class="register-foot-disclaimer-item">{{$t('register.disclaimer')}}</a>
+                    </div>
 					<div class="register-foot">
-                        <div class="register-foot-disclaimer">
-                            <el-checkbox class="register-foot-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
-                            <a class="register-foot-disclaimer-item">{{$t('crowdFunding.disclaimer')}}</a>
-                        </div>
 						<el-button type="default" size="small" class="register-foot-btn" round @click="registerSubmit">{{$t('register.register')}}</el-button>
 					</div>
 				</el-form>
@@ -136,7 +136,7 @@
                 disclaimerChecked: true,
                 telegramVisible: false,
 				registerModel: {
-					registerVisible: false,
+					registerVisible: this.$store.state.registerVisible,
 					rule: {
 						email: [{
 							validator: emailValidate,
@@ -210,8 +210,13 @@
             },
             dialogModalVisible: {
                 get(){
-                    if(this.$store.state.dialogModalVisible) {
+                    if(this.$store.state.dialogModalVisible === true) {
                         this.toLogin();
+                    }
+                    if(this.$store.state.dialogModalVisible === 'register'){
+                        this.goToRegister();
+                        this.$store.commit('setRegisterVisible', true);
+                        return true;
                     }
                     return this.$store.state.dialogModalVisible;
                 },
@@ -266,7 +271,11 @@
 				this.$router.push({
 					name: 'personalCenter'
 				});
-			},
+            },
+            goTodisclaimer(){
+                this.$store.commit('setDialogModalVisible', false);
+                this.$router.push({name: 'userterm'});
+            },
 			sendVerifyCode() {
 				if(this.registerModel.form.email) {
 					Request({
@@ -416,6 +425,7 @@
                 this.$router.push({name: 'index'});
 			},
 			goToRegister() {
+                console.log('regi--------------');
 				this.title = this.$t('register.userRegister');
 				this.$refs.registerModelForm && this.$refs.registerModelForm.resetFields();
 				this.registerModel.registerVisible = true;
@@ -616,5 +626,10 @@
             line-height: 60px;
             cursor: pointer;
         }
+    }
+
+    .register-disclaimer {
+        margin-left: 1em;
+        margin-bottom: 22px;
     }
 </style>

@@ -19,7 +19,8 @@ export default new Vuex.Store({
         bullsData: undefined,
         globalShow: Cache.getSession('globalShow') || 'show', // global share
 		slangChange: Cache.getLocal('bier_langChange'),
-		heardUrl: Cache.getSession('bier_heardUrl'),
+        heardUrl: Cache.getSession('bier_heardUrl'),
+        registerVisible: false,
 		inviteCode: '',
 	},
 	mutations: {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
         },
         setDialogModalVisible(state, val) {
             state.dialogModalVisible = val;
+        },
+        setRegisterVisible(state, val) {
+            state.registerVisible = val;
         },
         saveInstantBuyDataId(state, id) {
             state.instantBuyDataId = id;
