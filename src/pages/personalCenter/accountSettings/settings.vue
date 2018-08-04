@@ -247,6 +247,7 @@
 										:action="uploadImg"
 										:headers="requestToken"
 										:limit="1"
+										:on-error="imgError"
 										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgBack">
 										<img v-if="imageBack" :src="imageBack" class="avatar">
@@ -257,6 +258,7 @@
 										:action="uploadImg"
 										:headers="requestToken"
 										:limit="1"
+										:on-error="imgError"
 										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgPositive">
 										<img v-if="imagePositive" :src="imagePositive" class="avatar">
@@ -269,6 +271,7 @@
 										:action="uploadImg"
 										:headers="requestToken"
 										:limit="1"
+										:on-error="imgError"
 										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgHandheld">
 										<img v-if="imageHandheld" :src="imageHandheld" class="avatar">
@@ -862,6 +865,12 @@
 						}
 					}
 				}
+			},
+			imgError(){
+				this.$message({
+					message:this.$t('tokenInfo.uploadError'),
+					type:'warning'  
+				});
 			},
 			getImgBack(res, file){
 				this.imageBack =  res.data;

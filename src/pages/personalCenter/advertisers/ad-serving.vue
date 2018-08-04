@@ -299,7 +299,7 @@
 				}else{
 					this.$message({
 						message:this.$t('adServing.pleaseSetPassword'),
-						type:'warn'
+						type:'warning'
 					})
 				}
 			},
@@ -375,7 +375,7 @@
 					}
 					&-data{
 						color:rgba(102,102,102,1);
-						margin: 20px 0;
+						margin: 17px 0;
 					}
 					&-button{
 						button{
