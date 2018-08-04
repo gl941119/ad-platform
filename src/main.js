@@ -2,7 +2,8 @@ import Vue from 'vue'
 import router from '@/router'
 import store from '@/store'
 import App from './App'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import VueAnalytics from 'vue-analytics';
 import advertItemCom from '@/components/index-com/advert-item';
 import learnMoreCom from '@/components/index-com/learn-more';
 import instantBuyCom from '@/components/common/instant-buy';
@@ -23,8 +24,19 @@ Vue.component('instant-buy', instantBuyCom); // 有多处用到，则注册全�
 Vue.component('telegram-login', telegramLoginCom);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
-})
+});
 
+// google analytic
+Vue.use(VueAnalytics, {
+    id: 'UA-123355471-1',
+    disableScriptLoader: true, // 必须在html中完成初始化，这里显式禁止去下载ga脚本
+    router, // 确保路由切换时可以自动统计
+    autoTracking: {
+        pageviewOnLoad: false // 当通过网址进来时已经GA在初始化时就发起一次pageview的统计，这里不要重复统计
+    }
+});
+
+// baiDu analytic
 var _hmt = window._hmt || [];
 (function() {
     var hm = document.createElement("script");

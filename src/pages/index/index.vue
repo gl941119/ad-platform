@@ -22,8 +22,11 @@
 					</div>
 					{{$t('crowdFunding.crowdfunding')}}
 				</div>
-				<crowdsale-item v-for="crowdsale in crowdsaleItemdata" :key="crowdsale.id" :crowdsale-datas="crowdsale" :system-time="sysTime">
-				</crowdsale-item>
+				<!-- <crowdsale-item v-for="crowdsale in crowdsaleItemdata" :key="crowdsale.id" :crowdsale-datas="crowdsale" :system-time="sysTime">
+				</crowdsale-item> -->
+                <div class="temp-crowd">
+
+                </div>
 				<learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more>
 			</div>
 			<div class="platform-index-item-ad">
@@ -312,4 +315,8 @@
 			}
 		}
 	}
+    .temp-crowd {
+        background: #D3DCE6;
+        height: 200px;
+    }
 </style>
