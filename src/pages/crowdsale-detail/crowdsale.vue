@@ -173,6 +173,7 @@
     @import '../../assets/css/variable.scss';
     @import '../../assets/css/global.scss';
     .ad-crowdsale {
+    	background-color:$wrapBackgroundColor;
         height: 100%;
         width: 100%;
         &-container {
