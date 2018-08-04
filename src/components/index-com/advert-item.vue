@@ -18,7 +18,7 @@
                             <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
                             <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
                         </div>
-                        <div  class="advert-item-middle-father-member-title">
+                        <div v-show="advertDatas.advertTeamMemberResults.length>0&&advertDatas.advertTeamConsultantsResults.length>0" class="advert-item-middle-father-member-title">
                             <span>{{$t('team.coreMember')}}:</span>
                             <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
                             <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
