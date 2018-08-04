@@ -172,6 +172,7 @@ import Config from '../../utils/config.js';
     @import '../../assets/css/variable.scss';
     @import '../../assets/css/global.scss';
     .advertisement {
+    	background-color:$wrapBackgroundColor;
         height: 100%;
         width: 100%;
         &-container {
