@@ -53,6 +53,60 @@
 		</el-dialog>
 	</div>
 </template>
+    <div :class="{'white-back': isWhiteBack}" class="advert-item">
+        <div class="advert-item-left">
+            <div class="advert-item-left-logo">
+                <img :src="advertDatas.logo">
+            </div>
+            <div class="advert-item-left-text" :class="{'english-lang': language!=='zh'}"><a :href="advertDatas.whitePaper" target="_self">{{$t('home.whitePaper')}}</a></div>
+        </div>
+        <div class="advert-item-middle">
+            <div class="advert-item-middle-father">
+                <div class="advert-item-middle-title">
+                    <div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}<span v-show="language==='zh'&&advertDatas.shotCnName">/{{advertDatas.shotCnName}}</span></div>
+                    <div class="advert-item-middle-title-symbol">{{advertDatas.fullEnName}}</div>
+                </div>
+                <div class="advert-item-middle-father-member">
+                    <el-tooltip placement="top" effect="light">
+                        <div style="max-width: 200px;" slot="content">
+                            <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
+                            <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
+                        </div>
+                        <div v-show="advertDatas.advertTeamMemberResults.length>0&&advertDatas.advertTeamConsultantsResults.length>0" class="advert-item-middle-father-member-title">
+                            <span>{{$t('team.coreMember')}}:</span>
+                            <span v-for="member in advertDatas.advertTeamMemberResults" :key="member.id">{{member.name}}, </span>
+                            <span v-for="member in advertDatas.advertTeamConsultantsResults" :key="member.id">{{member.name}}, </span>
+                        </div>
+                    </el-tooltip>
+                </div>
+            </div>
+            
+            <div class="advert-item-middle-divide"></div>
+            <div class="advert-item-middle-text">
+                {{advertDatas.proDesc}}
+            </div>
+        </div>
+        <div class="advert-item-right">
+            <el-select ref="advertSelect" class="advert-item-right-select" @focus="focusAdvert" @change="handleAdvertFunc" v-model="advertValue" :placeholder="$t('home.buy')">
+                <el-option
+                    v-for="(item, index) in advertDatas.websiteResultList"
+                    :key="index"
+                    :label="item&&item.websiteName"
+                    :value="item&&item.id">
+                </el-option>
+            </el-select>
+            <div class="advert-item-right-icons">
+                <i v-show="itemIndex < 30" class="custom-element-icon-hot hot"></i>
+                <a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
+                <a href="javascript:;" @click="telegramDialog"><i class="custom-element-icon-duihua"></i></a>
+            </div>
+        </div>
+        <el-dialog class="telegram-dialog" :title="$t('header.tips')" :visible.sync="telegramVisible" width="360px">
+            <div class="telegram-dialog-content">{{$t('header.tipMsg')}}</div>
+            <div class="telegram-dialog-footer" @click="IGotIt" slot="footer">{{$t('header.got')}}</div>
+        </el-dialog>
+    </div>
+</template>
 <script>
 	import Request from '../../utils/require.js';
 	import Utils from '../../utils/util.js';

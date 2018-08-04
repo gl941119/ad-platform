@@ -982,7 +982,7 @@
 					}
 					&_item {
 						&_li {
-							margin-top: 20px;
+							margin-top: 3px;
 						}
 					}
 				}
