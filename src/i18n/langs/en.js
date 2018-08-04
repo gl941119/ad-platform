@@ -164,7 +164,7 @@ const en = {
 		price:'Price',
 		status:'Condition',
 		updateTime:'turnover time',
-		notic :' After successful crowdfunding, the corresponding Token will be directly recharged into your wallet, and the relevant unsuccessful funds will be returned the same way ',
+		notic :'After successful crowdfunding, the corresponding token will be directly recharged into your wallet. If failed, ETH will return the original route to your wallet address',
 		currency:'successful transaction',
 		coin:'successful return',
 		currencyIn:'transaction in process',
@@ -174,7 +174,7 @@ const en = {
 	},
 	invite:{
 		inviteUser:'Invite',
-		info :' Invited users will be rewarded with AFDT tokens for the value created by clicking ads in the future',
+		info :'The revenue of the invited users to continue to click on the ads in the future will be distributed to you in the form of AFDT',
 		code:'Invitecode',
 		inviteLink:'Invite link',
 		copy:'Copy',
