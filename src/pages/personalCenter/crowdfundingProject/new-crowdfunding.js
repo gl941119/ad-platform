@@ -97,9 +97,9 @@ export default {
     },
     methods: {
         disclaimer() { //免责声明
-            this.$router.push({
-                name: 'disclaimer',
-            })
+			this.$router.push({
+				name: 'disclaimer',
+			})
         },
         data() { //时间
             if (this.timeInterval.length <= 0) {
