@@ -24,8 +24,11 @@
 				</div>
 				<!-- <crowdsale-item v-for="crowdsale in crowdsaleItemdata" :key="crowdsale.id" :crowdsale-datas="crowdsale" :system-time="sysTime">
 				</crowdsale-item> -->
-                <div class="temp-crowd">
-
+                <div class="temp-crowd" v-for="item in 5">
+                	<div>
+                		<img src="../../assets/imgs/img/index_corwd.png"/>
+                	</div>
+					
                 </div>
 				<learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more>
 			</div>
@@ -317,6 +320,21 @@
 	}
     .temp-crowd {
         background: #D3DCE6;
-        height: 200px;
+        height: 300px;
+        position: relative;
+        >div{
+        	width: 100%;
+        	height: 240px;
+        	background: white;
+        	position: absolute;
+        	bottom: 0px;
+        	text-align: center;
+        	img{
+        		margin-top: 21px;
+        		width: 200px;
+        		height: 200px;
+        	}
+        }
+        
     }
 </style>

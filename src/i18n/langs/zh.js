@@ -114,7 +114,7 @@ const zh = {
 	},
 	share:{
 		shareTiltle:'分享',
-		shareOne:'点击挖矿，分享成为矿场主！',
+		shareOne:'嘿 韭菜们，被割了吗？我养你啊！输入我的邀请码即得99AFDT，速度上车注册。',
 		shareCopy:'点我复制',
 	},
 	crowdFunding:{
@@ -184,7 +184,7 @@ const zh = {
 		userAccout:'用户账号',
 		recently:'最近登录',
 		divided:'分润',
-		inviteInfo:'朋友，接受我的邀请可得99个币哦！',
+		inviteInfo:'嘿 韭菜们，被割了吗？我养你啊！输入我的邀请码即得99AFDT，速度上车注册。',
 	},
 	setting:{//账号设置
 		setInfo:'设置信息',

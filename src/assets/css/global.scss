@@ -114,7 +114,10 @@
     color: #999999;  
 }
 //disclaimer
-.statement_item li{
+.statement_info .statement_info_item{
+    padding-left: 13px;
+}
+.statement_info .statement_info_item li{
     list-style: decimal;
 }
 //changePrice

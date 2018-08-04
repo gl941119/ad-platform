@@ -1,0 +1,46 @@
+.statement{
+    width: 1200px;
+    margin: 0 auto;
+    .statement_box{
+        width:850px;
+        height: 654px;
+        margin: 60px auto 0;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        background:rgba(255,255,255,1);
+        box-shadow:0px 2px 12px 0px rgba(0,0,0,0.06);
+        border:1px solid rgba(51,51,51,1);
+        overflow-y:scroll;
+        color: #666666;
+        font-size:12px;
+        .statement_info{
+            h3{
+                color:#333333;
+                line-height:17px;
+            }
+            .statement_info_title{
+                margin-bottom: 20px;
+            }
+            .statement_info_item{
+                padding-left: 10px !important;
+                li{
+                    list-style: decimal !important;
+                }
+            }
+        }
+    }
+    &_confirm{
+        text-align: center;
+        button{
+            margin: 20px 0;
+            background: #ff9500;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 16px;
+            color: #FFFFFF;
+            width: 100px;
+            border: 0;
+            margin-top: 20px;
+        }
+    }
+}

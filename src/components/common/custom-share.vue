@@ -2,7 +2,7 @@
     <el-dialog :title="$t('share.shareTiltle')" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
             <p class="show-share-title"> 
-            	{{$t('share.shareOne')}}http://www.afdchain.com
+            	{{$t('share.shareOne')}}</br>http://www.afdchain.com
             </p>
             <p class="show-share-title" id="show-share-title" style="opacity: 0;">{{$t('share.shareOne')}}http://www.afdchain.com/?inviteCode={{inviteCode}}</p>
             <div class="show-share-btn">
@@ -62,8 +62,8 @@
 </script>
 <style lang="scss" scoped>
     .show-share {
-        width: 262px;
-        height: 160px;
+        width: 320px;
+        height: 230px;
         border: 1px solid #979797;
         margin: 0 auto 36px;
         position: relative;

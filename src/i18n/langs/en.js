@@ -114,7 +114,7 @@ const en = {
 	},
 	share:{
 		shareTiltle:'Share',
-		shareOne:'Click to mining AFDT，Share our website to get more from your friend！',
+		shareOne:'Hey investor,have you suffered a loss?I will feed you! Enter my invitation code and register quickly to get 99AFDT.',
 		shareCopy:'copy',
 	},
 	crowdFunding:{
@@ -184,7 +184,7 @@ const en = {
 		userAccout:'Users',
 		recently:' Last login time',
 		divided:'Earnings for me',
-		inviteInfo:'Accepting my invitation can get 99 coins!',
+		inviteInfo:'Hey investor,have you suffered a loss?I will feed you! Enter my invitation code and register quickly to get 99AFDT.',
 	},
 	setting:{//账号设置
 		setInfo:'Set',
