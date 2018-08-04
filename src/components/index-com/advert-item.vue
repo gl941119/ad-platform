@@ -13,11 +13,9 @@
 				<div class="advert-item-middle-title">
 					<div class="advert-item-middle-title-text">{{advertDatas.shotEnName}}<span v-show="language==='zh'&&advertDatas.shotCnName">/{{advertDatas.shotCnName}}</span></div>
 					<div class="advert-item-middle-title-symbol">{{advertDatas.fullEnName}}</div>
-					<i v-show="itemIndex < 30" class="custom-element-icon-huo1 hot"></i>
+					<i v-show="itemIndex < 10" class="custom-element-icon-huo1 hot"></i>
 				</div>
-
 			</div>
-
 			<div class="advert-item-middle-divide"></div>
 			<div class="advert-item-middle-father-member">
 				<el-tooltip placement="top" effect="light">

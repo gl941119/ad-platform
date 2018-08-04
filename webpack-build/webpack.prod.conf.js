@@ -97,7 +97,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         collapseWhitespace: true, // 折叠空白区域
         removeAttributeQuotes: true // 尽可能删除属性周围的引号
       },
-      chunksSortMode: 'dependency' // 允许控制chunk的排序在插入到HTML之前
+      chunksSortMode: 'dependency', // 允许控制chunk的排序在插入到HTML之前
+      ga: 'UA-123355471-1' // 添加ga选项，以便在index.html中可以引用
     }),
     // 该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境。
     new webpack.HashedModuleIdsPlugin(),
