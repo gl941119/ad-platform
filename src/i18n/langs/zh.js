@@ -484,6 +484,11 @@ const zh = {
 		emptyWebsite:'官网不能为空（符合网站地址）',
 		emptyWhitePaper:'白皮书地址不能为空（符合网站地址）',
 		emptyAddress:'自定义站点地址需符合网站地址',
+		englishLimit:'站点英文名称只能输入英文字母或数字',
+		chineseLimit:'站点中文名称只能输入汉字或数字',
+		enterChineseName:'请输入站点中文名称',
+		enterEnglishName:'请输入站点英文名称',
+		enterAddress:'请输入站点地址',
 	},
 	messageCode:{
 		exceptions:'系统异常',

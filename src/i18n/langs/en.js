@@ -486,6 +486,11 @@ const en = {
 		emptyWebsite:' The official website can not be empty (qualified website address)',
 		emptyWhitePaper:' Whitepaper address cannot be empty（qualified website address）',
 		emptyAddress:'user-defined address need be website address',
+		englishLimit:'Site English names can only be entered in English letters or numbers',
+		chineseLimit:'Site Chinese name can only input Chinese characters or numbers',
+		enterChineseName:'Please enter the Chinese name of the site',
+		enterEnglishName:'Please enter the English name of the site',
+		enterAddress:'Please enter the site address',
 	},
 	messageCode:{//后台返回数据
 		exceptions:' System exception',

@@ -211,17 +211,19 @@
 			<li style="position: relative;">
 				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 					<span class="require" style="color: #FFFFFF;">*</span><label class="label">
-						<input :placeholder="$t('aboutLink.enterWebsiteNameZh')" :disabled="disabled" v-model="websites[index].websiteName" >
+						<input :class="[errors.has('websiteName')?'llo':'']" :data-vv-as="$t('aboutLink.chineseLimit')" v-validate.continues="{ required: false, regex: /^[0-9\u4e00-\u9fa5]+$/}" name="websiteName"  :placeholder="$t('aboutLink.enterWebsiteNameZh')" :disabled="disabled" v-model="websites[index].websiteName" >
 					</label>
 					<label class="label">
-						<input :placeholder="$t('aboutLink.enterWebsiteNameEn')" :disabled="disabled" v-model="websites[index].websiteEnName" >
+						<input :class="[errors.has('websiteEnName')?'llo':'']" :data-vv-as="$t('aboutLink.englishLimit')" v-validate.continues="{ required: false, regex: /^[A-Za-z0-9]+$/}" name="websiteEnName" :placeholder="$t('aboutLink.enterWebsiteNameEn')" :disabled="disabled" v-model="websites[index].websiteEnName" >
 					</label>
-					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
+					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyAddress')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
-					<span class="is-danger" v-if="isWebsiteName" style="float:left;">请输入中文名称</span>
-					<span class="is-danger" v-if="isWebsiteEnName" style="float:left;">请输入英文名称</span>
-					<span class="is-danger" v-if="isWebsiteAddress" style="float:left;">请输入地址</span>
-					<span class="is-danger" v-show="errors.has('websiteAddress')"style="float:left;">{{ errors.first('websiteAddress') }}</span>
+				<span class="is-danger" v-show="errors.has('websiteName')">{{ errors.first('websiteName') }}</span>
+				<span class="is-danger" v-show="errors.has('websiteEnName')">{{ errors.first('websiteEnName') }}</span>
+				<span class="is-danger" v-show="errors.has('websiteAddress')">{{ errors.first('websiteAddress') }}</span>
+				<span class="is-danger" v-if="isWebsiteName">{{$t('aboutLink.enterChineseName')}}</span>
+				<span class="is-danger" v-if="isWebsiteEnName">{{$t('aboutLink.enterEnglishName')}}</span>
+				<span class="is-danger" v-if="isWebsiteAddress">{{$t('aboutLink.enterAddress')}}</span>
 			</li>
 		</ul>
 		<div v-if="isCheck == -1">
@@ -382,6 +384,34 @@
 							that.consultantTeams = false;
 						}
 					})
+					this.isWebsiteName = false;
+					this.isWebsiteEnName = false;
+					this.isWebsiteAddress = false;
+					let web = this.websites;
+					let arr=[];
+					let num=[];
+					for(let i=0,len=web.length;i<len;i++){
+						if(web[i].websiteAddress&&web[i].websiteName&&web[i].websiteEnName){
+							arr.push(web[i]);
+							continue;
+						}
+						if(!(web[i].websiteAddress)&&!(web[i].websiteName)&&!(web[i].websiteEnName)){
+							num.push(i);
+							continue;
+						}
+						if(!(web[i].websiteName)){
+							that.isWebsiteName = true;
+						}
+						if(!web[i].websiteEnName){
+							that.isWebsiteEnName = true;
+						}
+						if(!web[i].websiteAddress){
+							that.isWebsiteAddress = true;
+						}
+					}
+					if(that.isWebsiteName || that.isWebsiteEnName || that.isWebsiteAddress){
+						return;
+					}
 					if(result) {
 						Request({
 							url: 'QueryNewProject',
@@ -404,7 +434,7 @@
 								logo: this.imageUrl,
 								listMermber: this.coreTeam,
 								listConsultants: this.consultantTeam,
-								websites: this.websites,
+								websites: arr,
 							},
 							type: 'post',
 							flag: true,
@@ -421,9 +451,6 @@
 				});
 			},
 			saveSubmit() { //点击提交
-				
-				
-				
 				var concept = [];
 				if(this.checkedData.length > 0) {
 					concept = this.checkedData;
@@ -431,75 +458,73 @@
 					concept = this.conceptResultList;
 				}
 				var value = this.newCrowdfunding.id;
-
-			
 				this.isWebsiteName = false;
 				this.isWebsiteEnName = false;
 				this.isWebsiteAddress = false;
-				let web = this.websites,
-					that = this,
-					arr=[],
-					num=[];
-				
+				let web = this.websites;
+				var that = this;
+				let arr=[];
+				let num=[];
 				for(let i=0,len=web.length;i<len;i++){
 					if(web[i].websiteAddress&&web[i].websiteName&&web[i].websiteEnName){
-						arr.push(web[i])
+						arr.push(web[i]);
 						continue;
 					}
 					if(!(web[i].websiteAddress)&&!(web[i].websiteName)&&!(web[i].websiteEnName)){
-						num.push(i)
+						num.push(i);
 						continue;
 					}
 					if(!(web[i].websiteName)){
 						that.isWebsiteName = true;
-					
 					}
 					if(!web[i].websiteEnName){
 						that.isWebsiteEnName = true;
-					
 					}
 					if(!web[i].websiteAddress){
 						that.isWebsiteAddress = true;
 					}
 				}
-								this.$validator.validateAll().then((result) => {
-									this.desc();
-										if(result){
-											Request({
-												url: 'ChangeProject',
-												data: {
-													id: this.newCrowdfunding.id,
-													accountId: this.newCrowdfunding.accountId,
-													teamName: this.newCrowdfunding.teamName,
-													teamContact: this.newCrowdfunding.teamContact,
-													teamLocation: this.newCrowdfunding.teamLocation,
-													proName: this.newCrowdfunding.proName,
-													proDesc: this.newCrowdfunding.proDesc,
-													conceptManageList:concept,
-													technology1: this.newCrowdfunding.technology1,
-													technology2: this.newCrowdfunding.technology2,
-													website: this.newCrowdfunding.website,
-													whitePaper: this.newCrowdfunding.whitePaper,
-													shotEnName: this.newCrowdfunding.shotEnName,
-													shotCnName: this.newCrowdfunding.shotCnName,
-													fullEnName: this.newCrowdfunding.fullEnName,
-													title: this.newCrowdfunding.title,
-													logo: this.imageUrl,
-													websites:arr,
-												},
-												type: 'post',
-												flag: true,
-											}).then(res => {
-												this.$router.push({
-													name: 'adserving',
-												});
-												this.$message({
-													message:this.$t('messageNotice.changeSuccess'),
-													type:'success'
-												});
-											})
-									}
-								});
+				if(that.isWebsiteName || that.isWebsiteEnName || that.isWebsiteAddress){
+					return;
+				}
+				this.$validator.validateAll().then((result) => {
+					this.desc();
+					if(result){
+						Request({
+							url: 'ChangeProject',
+							data: {
+								id: this.newCrowdfunding.id,
+								accountId: this.newCrowdfunding.accountId,
+								teamName: this.newCrowdfunding.teamName,
+								teamContact: this.newCrowdfunding.teamContact,
+								teamLocation: this.newCrowdfunding.teamLocation,
+								proName: this.newCrowdfunding.proName,
+								proDesc: this.newCrowdfunding.proDesc,
+								conceptManageList:concept,
+								technology1: this.newCrowdfunding.technology1,
+								technology2: this.newCrowdfunding.technology2,
+								website: this.newCrowdfunding.website,
+								whitePaper: this.newCrowdfunding.whitePaper,
+								shotEnName: this.newCrowdfunding.shotEnName,
+								shotCnName: this.newCrowdfunding.shotCnName,
+								fullEnName: this.newCrowdfunding.fullEnName,
+								title: this.newCrowdfunding.title,
+								logo: this.imageUrl,
+								websites:arr,
+							},
+							type: 'post',
+							flag: true,
+						}).then(res => {
+							this.$router.push({
+								name: 'adserving',
+							});
+							this.$message({
+								message:this.$t('messageNotice.changeSuccess'),
+								type:'success'
+							});
+						})
+					}
+				});
 			},
 			queryDetails() {
 				Request({
