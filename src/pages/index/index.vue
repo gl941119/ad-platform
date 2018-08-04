@@ -330,6 +330,7 @@
         	bottom: 0px;
         	text-align: center;
         	img{
+        		margin-top: 21px;
         		width: 200px;
         		height: 200px;
         	}
