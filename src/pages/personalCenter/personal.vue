@@ -143,6 +143,7 @@
 	}
 	.el-container {
 		width: 100%;
+		min-height: 910px;
 		background: #f5f5f5;
 	}
 	.bodyBackground{
