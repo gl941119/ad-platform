@@ -6,7 +6,7 @@
 			<h5>{{$t('team.teamInfo')}}</h5>
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('team.teamName')}}</label>
-				<input :class="[errors.has('teamName')?'llo':'']" :data-vv-as="$t('team.emptyTeamName')" v-validate data-vv-rules="required|max:80" name="teamName" :placeholder="$t('team.enterTeamName')" :disabled="disabled"  v-model="newCrowdfunding.teamName" />
+				<input :class="[errors.has('teamName')?'llo':'']" :data-vv-as="$t('team.emptyTeamName')" v-validate data-vv-rules="required|max:80" name="teamName" :placeholder="$t('team.enterTeamName')" :disabled="disabled" v-model="newCrowdfunding.teamName" />
 				<span class="is-danger" v-show="errors.has('teamName')">{{ errors.first('teamName') }}</span>
 			</li>
 			<li class="newCrowdfunding_item_li">
@@ -34,7 +34,7 @@
 								<input class="team" :class="[errors.has('coreName')?'llo':'']" :data-vv-as="$t('team.emptyName')" v-validate data-vv-rules="required|max:64" name="coreName" :placeholder="$t('team.enterName')" v-model="scope.row.name" />
 							</template>
 						</el-table-column>
-						<el-table-column property="name" align="center" :label="$t('team.title')" >
+						<el-table-column property="name" align="center" :label="$t('team.title')">
 							<template slot-scope="scope">
 								<input class="team" :class="[errors.has('coreTitle')?'llo':'']" :data-vv-as="$t('team.emptyTitle')" v-validate data-vv-rules="required|max:64" name="coreTitle" :placeholder="$t('team.enterTitle')" v-model="scope.row.title" />
 							</template>
@@ -124,7 +124,7 @@
 			<li class="newCrowdfunding_item_li">
 				<span class="require">*</span><label>{{$t('projectInfo.projectDesc')}}</label>
 				<div class="textarea">
-					<el-input @blur="desc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" :placeholder="$t('projectInfo.enterProjectDesc')" :disabled="disabled" v-model="newCrowdfunding.proDesc" >
+					<el-input @blur="desc" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" :placeholder="$t('projectInfo.enterProjectDesc')" :disabled="disabled" v-model="newCrowdfunding.proDesc">
 					</el-input>
 				</div>
 				<span class="is-danger" v-if="proDescr">{{$t('projectInfo.emptyProjectDesc')}}</span>
@@ -145,7 +145,7 @@
 			<div class="withdraw_box">
 				<span class="withdraw_box_back" @click="conceptFun"><i class="el-icon-close"></i></span>
 				<div>
-					<conceptCom :id = "conceptId" @listenCondept="listenCondept"></conceptCom>
+					<conceptCom :id="conceptId" @listenCondept="listenCondept"></conceptCom>
 				</div>
 			</div>
 		</div>
@@ -188,14 +188,7 @@
 					<img :src="imageUrl" class="avatar">
 				</div>
 				<div v-else>
-					<el-upload class="avatar-uploader" 
-						:show-file-list="false" 
-						 :action="uploadImg"
-						 :headers="requestToken"
-						 :on-error="imgError"
-						 accept=".jpg,.png"
-						 :limit="1"
-						 :on-success="getImg">
+					<el-upload class="avatar-uploader" :show-file-list="false" :action="uploadImg" :headers="requestToken" :on-error="imgError" accept=".jpg,.png" :limit="1" :on-success="getImg">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 					</el-upload>
@@ -215,7 +208,6 @@
 				<input class="langer" :class="[errors.has('whitePaper')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate="{ required: true, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="whitePaper" :placeholder="$t('aboutLink.enterWhitePaper')" :disabled="disabled" v-model="newCrowdfunding.whitePaper" />
 				<span class="is-danger" v-show="errors.has('whitePaper')">{{ errors.first('whitePaper') }}</span>
 			</li>
-			
 			<li style="position: relative;">
 				<div class="newCrowdfunding_item_li" v-for="(item, index) in websites" :key="index">
 					<span class="require" style="color: #FFFFFF;">*</span><label class="label">
@@ -224,13 +216,15 @@
 					<label class="label">
 						<input :placeholder="$t('aboutLink.enterWebsiteNameEn')" :disabled="disabled" v-model="websites[index].websiteEnName" >
 					</label>
-					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress"  :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
+					<input class="langer" :class="[errors.has('websiteAddress')?'llo':'']" :data-vv-as="$t('aboutLink.emptyWhitePaper')" v-validate.continues="{ required: false, regex: /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/}" name="websiteAddress" :placeholder="$t('aboutLink.enterWebsiteAddress')" :disabled="disabled" v-model="websites[index].websiteAddress" />
 				</div>
-				<span class="is-danger" v-show="errors.has('websiteAddress')">{{ errors.first('websiteAddress') }}</span>
-			
+					<span class="is-danger" v-if="isWebsiteName" style="float:left;">请输入中文名称</span>
+					<span class="is-danger" v-if="isWebsiteEnName" style="float:left;">请输入英文名称</span>
+					<span class="is-danger" v-if="isWebsiteAddress" style="float:left;">请输入地址</span>
+					<span class="is-danger" v-show="errors.has('websiteAddress')"style="float:left;">{{ errors.first('websiteAddress') }}</span>
 			</li>
 		</ul>
-		<div v-if="isCheck == -1" >
+		<div v-if="isCheck == -1">
 			<input class="checkbox" :class="[errors.has('statement')?'llo':'']" :data-vv-as="$t('tokenInfo.emptyStatement')" v-validate data-vv-rules="required" name="statement" type='checkbox'><span class="statement">
 			<span class="disclaimer" @click="disclaimer">{{$t('crowdFunding.publishingProtocol')}}</span></span>
 			<span class="is-danger" v-show="errors.has('statement')">{{ errors.first('statement') }}</span>
@@ -245,11 +239,11 @@
 <script>
 	import conceptCom from '@/components/personal-com/concept';
 	import customIdentifyCom from '@/components/common/custom-identify';
-    import Cache from '../../../utils/cache.js';
-    import Utils from '../../../utils/util.js';
-    import Request from '../../../utils/require.js';
-    import Config from '../../../utils/config.js';
-    import validateFun from '../../../utils/validate.js';
+	import Cache from '../../../utils/cache.js';
+	import Utils from '../../../utils/util.js';
+	import Request from '../../../utils/require.js';
+	import Config from '../../../utils/config.js';
+	import validateFun from '../../../utils/validate.js';
 	export default {
 		data() {
 			return {
@@ -268,7 +262,7 @@
 					desc: '',
 				},
 				newCrowdfunding: {
-					id:'',
+					id: '',
 					accountId: this.$store.state.id || Cache.getSession('bier_userid'), //用户id
 					teamName: "", //团队名称
 					teamContact: "", //团队联系方式
@@ -283,43 +277,45 @@
 					shotCnName: "", //中文简写
 					fullEnName: "", //英文全名
 				},
-				websites:[{},{},{},{},{},{},{},{}],
-				website:[{},{},{},{},{},{},{},{}],
+				websites: [{}, {}, {}, {}, {}, {}, {}, {}],
+				website: [{}, {}, {}, {}, {}, {}, {}, {}],
 				checkedData: [],
 				concept: false,
-				conceptId:[],
+				conceptId: [],
 				technology: false,
 				imageUrl: '', //logo地址
 				conceptDatas: '',
 				technologyDatas: '',
 				centerDialogVisible: false,
 				CrowdTeamDialogVisible: false,
-				multipleSelection:[],
-				conceptResultList:[],
-				disabled:false,
-				isCheck:'',
+				multipleSelection: [],
+				conceptResultList: [],
+				disabled: false,
+				isCheck: '',
 				uploadImg: Config.UploadImg,
 				requestToken: {
-					token:
-                        this.$store.state.token ||
-                        Cache.getSession('bier_token')
+					token: this.$store.state.token ||
+						Cache.getSession('bier_token')
 				},
-				proDescr:false,//项目简介提示
-				img:false,//logo提示
-				coreTeams:false,//核心团队是否为空
-				consultantTeams:false,//顾问团队是否为空
+				proDescr: false, //项目简介提示
+				img: false, //logo提示
+				coreTeams: false, //核心团队是否为空
+				consultantTeams: false, //顾问团队是否为空
+				isWebsiteName:false,
+				isWebsiteEnName:false,
+				isWebsiteAddress:false
 			}
 		},
 		components: {
 			conceptCom,
 		},
-		mounted(){
+		mounted() {
 			this.isDetails();
 		},
 		computed: {
 			slangChange() {
 				var lang = this.$store.state.slangChange || this.$i18n.locale;
-				if(lang == 'en'){
+				if(lang == 'en') {
 					lang = lang.toUpperCase();
 				}
 				return lang;
@@ -331,158 +327,185 @@
 			}
 		},
 		methods: {
-			disclaimer(){//免责声明
+			disclaimer() { //免责声明
 				this.$router.push({
-					name:'advertisersDisclaimer',
+					name: 'advertisersDisclaimer',
 				})
 			},
-			isDetails(){
+			isDetails() {
 				var value = this.$route.params.value;
 				this.isCheck = value;
-				switch(value){
+				switch(value) {
 					case '0':
 						this.queryDetails();
 						break;
 					case '1':
 						this.queryDetails();
-						this.disabled = true;//不允许修改
+						this.disabled = true; //不允许修改
 						break;
 					case '2':
 						this.queryDetails();
 						break;
 					case '3':
 						this.queryDetails();
-						this.disabled = true;//不允许修改
+						this.disabled = true; //不允许修改
 						break;
 				}
 			},
-			desc(){//项目简介
-				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length>512){
+			desc() { //项目简介
+				if(!this.newCrowdfunding.proDesc || this.newCrowdfunding.proDesc.length > 512) {
 					this.proDescr = true;
-				}else{
+				} else {
 					this.proDescr = false;
 				}
 			},
 			submit() {
 				this.$validator.validateAll().then((result) => {
 					this.desc();
-					if(!this.imageUrl){
+					if(!this.imageUrl) {
 						this.img = true;
 					}
 					var that = this;
-					this.coreTeam.forEach(function(item, index){
+					this.coreTeam.forEach(function(item, index) {
 						var arr = Object.keys(item);
-						if(arr.length <= 0){
+						if(arr.length <= 0) {
 							that.coreTeams = true;
-						}else{
+						} else {
 							that.coreTeams = false;
 						}
 					})
-					this.consultantTeam.forEach(function(item, index){
+					this.consultantTeam.forEach(function(item, index) {
 						var arr = Object.keys(item);
-						if(arr.length <= 0){
+						if(arr.length <= 0) {
 							that.consultantTeams = true;
-						}else{
+						} else {
 							that.consultantTeams = false;
 						}
 					})
-						if(result){
-							Request({
-								url: 'QueryNewProject',
-								data: {
-									accountId: this.newCrowdfunding.accountId,
-									teamName: this.newCrowdfunding.teamName,
-									teamContact: this.newCrowdfunding.teamContact,
-									teamLocation: this.newCrowdfunding.teamLocation,
-									proName: this.newCrowdfunding.proName,
-									proDesc: this.newCrowdfunding.proDesc,
-									listConceptManage:this.checkedData || this.conceptResultList,
-									technology1: this.newCrowdfunding.technology1,
-									technology2: this.newCrowdfunding.technology2,
-									website: this.newCrowdfunding.website,
-									whitePaper: this.newCrowdfunding.whitePaper,
-									shotEnName: this.newCrowdfunding.shotEnName,
-									shotCnName: this.newCrowdfunding.shotCnName,
-									fullEnName: this.newCrowdfunding.fullEnName,
-									title: this.newCrowdfunding.title,
-									logo: this.imageUrl,
-									listMermber: this.coreTeam,
-									listConsultants: this.consultantTeam,
-									websites:this.websites,
-								},
-								type: 'post',
-								flag: true,
-							}).then(res => {
-								this.$message({
-									message:this.$t('messageNotice.addSuccess'),
-									type:'success'
-								});
-								this.$router.push({
-									name: 'adserving',
-								});
-							})
+					if(result) {
+						Request({
+							url: 'QueryNewProject',
+							data: {
+								accountId: this.newCrowdfunding.accountId,
+								teamName: this.newCrowdfunding.teamName,
+								teamContact: this.newCrowdfunding.teamContact,
+								teamLocation: this.newCrowdfunding.teamLocation,
+								proName: this.newCrowdfunding.proName,
+								proDesc: this.newCrowdfunding.proDesc,
+								listConceptManage: this.checkedData || this.conceptResultList,
+								technology1: this.newCrowdfunding.technology1,
+								technology2: this.newCrowdfunding.technology2,
+								website: this.newCrowdfunding.website,
+								whitePaper: this.newCrowdfunding.whitePaper,
+								shotEnName: this.newCrowdfunding.shotEnName,
+								shotCnName: this.newCrowdfunding.shotCnName,
+								fullEnName: this.newCrowdfunding.fullEnName,
+								title: this.newCrowdfunding.title,
+								logo: this.imageUrl,
+								listMermber: this.coreTeam,
+								listConsultants: this.consultantTeam,
+								websites: this.websites,
+							},
+							type: 'post',
+							flag: true,
+						}).then(res => {
+							this.$message({
+								message: this.$t('messageNotice.addSuccess'),
+								type: 'success'
+							});
+							this.$router.push({
+								name: 'adserving',
+							});
+						})
 					}
 				});
 			},
-			saveSubmit() {//点击提交
+			saveSubmit() { //点击提交
+				
+				
+				
 				var concept = [];
-				if(this.checkedData.length>0){
+				if(this.checkedData.length > 0) {
 					concept = this.checkedData;
-				}else{
+				} else {
 					concept = this.conceptResultList;
 				}
 				var value = this.newCrowdfunding.id;
-				
-				
-			
-			
 
+			
+				this.isWebsiteName = false;
+				this.isWebsiteEnName = false;
+				this.isWebsiteAddress = false;
+				let web = this.websites,
+					that = this,
+					arr=[],
+					num=[];
 				
-				
-//				this.$validator.validateAll().then((result) => {
-//					this.desc();
-//						if(result){
-//							Request({
-//								url: 'ChangeProject',
-//								data: {
-//									id: this.newCrowdfunding.id,
-//									accountId: this.newCrowdfunding.accountId,
-//									teamName: this.newCrowdfunding.teamName,
-//									teamContact: this.newCrowdfunding.teamContact,
-//									teamLocation: this.newCrowdfunding.teamLocation,
-//									proName: this.newCrowdfunding.proName,
-//									proDesc: this.newCrowdfunding.proDesc,
-//									conceptManageList:concept,
-//									technology1: this.newCrowdfunding.technology1,
-//									technology2: this.newCrowdfunding.technology2,
-//									website: this.newCrowdfunding.website,
-//									whitePaper: this.newCrowdfunding.whitePaper,
-//									shotEnName: this.newCrowdfunding.shotEnName,
-//									shotCnName: this.newCrowdfunding.shotCnName,
-//									fullEnName: this.newCrowdfunding.fullEnName,
-//									title: this.newCrowdfunding.title,
-//									logo: this.imageUrl,
-//									websites:arr,
-//								},
-//								type: 'post',
-//								flag: true,
-//							}).then(res => {
-//								this.$router.push({
-//									name: 'adserving',
-//								});
-//								this.$message({
-//									message:this.$t('messageNotice.changeSuccess'),
-//									type:'success'
-//								});
-//							})
-//					}
-//				});
+				for(let i=0,len=web.length;i<len;i++){
+					if(web[i].websiteAddress&&web[i].websiteName&&web[i].websiteEnName){
+						arr.push(web[i])
+						continue;
+					}
+					if(!(web[i].websiteAddress)&&!(web[i].websiteName)&&!(web[i].websiteEnName)){
+						num.push(i)
+						continue;
+					}
+					if(!(web[i].websiteName)){
+						that.isWebsiteName = true;
+					
+					}
+					if(!web[i].websiteEnName){
+						that.isWebsiteEnName = true;
+					
+					}
+					if(!web[i].websiteAddress){
+						that.isWebsiteAddress = true;
+					}
+				}
+								this.$validator.validateAll().then((result) => {
+									this.desc();
+										if(result){
+											Request({
+												url: 'ChangeProject',
+												data: {
+													id: this.newCrowdfunding.id,
+													accountId: this.newCrowdfunding.accountId,
+													teamName: this.newCrowdfunding.teamName,
+													teamContact: this.newCrowdfunding.teamContact,
+													teamLocation: this.newCrowdfunding.teamLocation,
+													proName: this.newCrowdfunding.proName,
+													proDesc: this.newCrowdfunding.proDesc,
+													conceptManageList:concept,
+													technology1: this.newCrowdfunding.technology1,
+													technology2: this.newCrowdfunding.technology2,
+													website: this.newCrowdfunding.website,
+													whitePaper: this.newCrowdfunding.whitePaper,
+													shotEnName: this.newCrowdfunding.shotEnName,
+													shotCnName: this.newCrowdfunding.shotCnName,
+													fullEnName: this.newCrowdfunding.fullEnName,
+													title: this.newCrowdfunding.title,
+													logo: this.imageUrl,
+													websites:arr,
+												},
+												type: 'post',
+												flag: true,
+											}).then(res => {
+												this.$router.push({
+													name: 'adserving',
+												});
+												this.$message({
+													message:this.$t('messageNotice.changeSuccess'),
+													type:'success'
+												});
+											})
+									}
+								});
 			},
-			queryDetails(){
+			queryDetails() {
 				Request({
 					url: 'QueryProject',
 					data: {
-						accountId:this.newCrowdfunding.accountId,			
+						accountId: this.newCrowdfunding.accountId,
 					},
 					type: 'get',
 					flag: true,
@@ -498,8 +521,8 @@
 					}
 					var arr = [];
 					var concept = [];
-					if(res.data.conceptResultList){
-						res.data.conceptResultList.forEach(function(item,index){
+					if(res.data.conceptResultList) {
+						res.data.conceptResultList.forEach(function(item, index) {
 							arr.push(item.name);
 							concept.push(item.conceptId);
 						})
@@ -509,11 +532,11 @@
 					this.conceptId = concept;
 					this.technologyDatas = technologyArr.join('-');
 					var that = this;
-					if(res.data.websiteResultList.length>0){
+					if(res.data.websiteResultList.length > 0) {
 						let number = -1;
-						res.data.websiteResultList.forEach(function(item, index){
+						res.data.websiteResultList.forEach(function(item, index) {
 							number++;
-							that.websites.splice(number,1,item);
+							that.websites.splice(number, 1, item);
 						})
 					}
 				})
@@ -521,14 +544,14 @@
 			queryCore() {
 				var value = this.$route.params.value;
 				this.centerDialogVisible = true;
-				if(value == 1 || value == 2){
+				if(value == 1 || value == 2) {
 					Request({
 						url: 'QueryAdCoreMember',
 						data: {
 							advertId: this.newCrowdfunding.id
 						},
 						type: 'get',
-						flag:true,
+						flag: true,
 					}).then(res => {
 						this.coreTeam = res.data;
 					})
@@ -537,7 +560,7 @@
 			saveLink() {
 				var id = this.$route.params.id;
 				this.$validator.validateAll().then((result) => {
-					if(result){
+					if(result) {
 						Request({
 							url: 'ChangeAdCoreMember',
 							data: {
@@ -553,8 +576,8 @@
 						}).then(res => {
 							this.centerDialogVisible = false;
 							this.$message({
-								message:this.$t('messageNotice.changeSuccess'),
-								type:'success'
+								message: this.$t('messageNotice.changeSuccess'),
+								type: 'success'
 							});
 						})
 					}
@@ -562,7 +585,7 @@
 			},
 			addLink() {
 				this.$validator.validateAll().then((result) => {
-					if(result){
+					if(result) {
 						Request({
 							url: 'AddAdCoreMember',
 							data: {
@@ -576,8 +599,8 @@
 						}).then(res => {
 							this.centerDialogVisible = false;
 							this.$message({
-								message:this.$t('messageNotice.addSuccess'),
-								type:'success'
+								message: this.$t('messageNotice.addSuccess'),
+								type: 'success'
 							});
 						})
 					}
@@ -595,23 +618,23 @@
 					flag: true,
 				}).then(res => {
 					this.$message({
-						message:this.$t('messageNotice.deleteSuccess'),
-						type:'success'
+						message: this.$t('messageNotice.deleteSuccess'),
+						type: 'success'
 					});
-						this.centerDialogVisible = false;
-						this.queryDetails();
+					this.centerDialogVisible = false;
+					this.queryDetails();
 				})
 			},
 			queryConsultant() {
 				var value = this.$route.params.value;
-				if(value == 1 || value == 2){
+				if(value == 1 || value == 2) {
 					Request({
 						url: 'QueryAdConsultant',
 						data: {
 							advertId: this.newCrowdfunding.id,
 						},
 						type: 'get',
-						flag:true,
+						flag: true,
 					}).then(res => {
 						this.consultantTeam = res.data;
 					})
@@ -621,7 +644,7 @@
 			addLinkConsultant() {
 				var id = this.$route.params.id;
 				this.$validator.validateAll().then((result) => {
-					if(result){
+					if(result) {
 						Request({
 							url: 'AddAdConsultant',
 							data: {
@@ -635,8 +658,8 @@
 						}).then(res => {
 							this.CrowdTeamDialogVisible = false;
 							this.$message({
-								message:this.$t('messageNotice.addSuccess'),
-								type:'success'
+								message: this.$t('messageNotice.addSuccess'),
+								type: 'success'
 							});
 						})
 					}
@@ -655,15 +678,15 @@
 				}).then(res => {
 					this.CrowdTeamDialogVisible = false;
 					this.$message({
-						message:this.$t('messageNotice.deleteSuccess'),
-						type:'success'
+						message: this.$t('messageNotice.deleteSuccess'),
+						type: 'success'
 					});
 				})
 			},
 			saveLinkConsultant() {
 				var id = this.$route.params.id;
 				this.$validator.validateAll().then((result) => {
-					if(result){
+					if(result) {
 						Request({
 							url: 'ChangeAdConsultant',
 							data: {
@@ -679,8 +702,8 @@
 						}).then(res => {
 							this.CrowdTeamDialogVisible = false;
 							this.$message({
-								message:this.$t('messageNotice.changeSuccess'),
-								type:'success'
+								message: this.$t('messageNotice.changeSuccess'),
+								type: 'success'
 							});
 						})
 					}
@@ -707,8 +730,8 @@
 				var length = this.coreTeam.length;
 				if(length <= 1) {
 					this.$message({
-						message:this.$t('messageNotice.noDelete'),
-						type:'warning'
+						message: this.$t('messageNotice.noDelete'),
+						type: 'warning'
 					});
 				} else {
 					this.coreTeam.splice(value, 1);
@@ -724,8 +747,8 @@
 				var length = this.consultantTeam.length;
 				if(length <= 1) {
 					this.$message({
-						message:this.$t('messageNotice.noDelete'),
-						type:'warning'
+						message: this.$t('messageNotice.noDelete'),
+						type: 'warning'
 					});;
 				} else {
 					this.consultantTeam.splice(value, 1);
@@ -735,7 +758,7 @@
 				this.imageUrl = res.data;
 				this.img = false;
 			},
-			imgError(){
+			imgError() {
 				this.$message('上传错误')
 			},
 			conceptFun() { //概念弹出窗
