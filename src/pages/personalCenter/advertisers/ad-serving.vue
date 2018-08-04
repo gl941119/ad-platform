@@ -32,8 +32,8 @@
 						    </div>
 						    <el-form-item :label="$t('passwordInfo.tradePassword')" :label-width="formLabelWidth">
 						        <input class="passwordInput" type="password" style="display:none;"  />
-								<input class="passwordInput" type="text" onfocus="this.type='password'" :class="[errors.has('tradePassword')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="tradePassword" :placeholder="$t('passwordInfo.tradePassword')" v-model="tradePassword" />
-								<span class="is-danger" v-show="errors.has('tradePassword')">{{ errors.first('tradePassword') }}</span>
+								<input class="passwordInput" type="text" onfocus="this.type='password'" @blur="blurFun" :placeholder="$t('passwordInfo.tradePassword')" v-model="tradePassword" />
+								<span class="is-danger" v-if="tradePasswordShow">{{$t('messageNotice.emptyTradePassword')}}</span>
 						    </el-form-item>
 						  	</el-form>
 							<div slot="footer" class="dialog-footer">
@@ -103,6 +103,7 @@
 				yesterdayClicks:'',
 				advertTitle:'',
 				tradePassword:'',
+				tradePasswordShow:false,
 				existTradePassword:false,
 			}
 		},
@@ -125,6 +126,13 @@
 //			this.echart();
 		},
 		methods: {
+			blurFun(){
+				if(!this.tradePassword){
+					this.tradePasswordShow = true;
+				}else{
+					this.tradePasswordShow = false;
+				}
+			},
 			info(){
 				Request({
 					url: 'QuerySettings',
@@ -279,23 +287,26 @@
 			},
 			changePrice(){
 				if(this.existTradePassword){
-					Request({
-						url: 'ChangePrice',
-						data: {
-							accountId: this.accountId,
-							advertPrice:this.form.advertPrice,
-							advertId:this.advertId,
-							conceptManageList:this.form.conceptManageList,
-							tradePassword:validateFun.encrypt(this.tradePassword),
-						},
-						type: 'post',
-						flag: true,
-					}).then(res => {
-						this.tradePassword = '';
-						this.queryDetail();
-						this.dialogTableVisible = false;
-						this.$message(this.$t('messageNotice.changeSuccess'));
-					})
+					this.blurFun();
+					if(this.tradePassword){
+						Request({
+							url: 'ChangePrice',
+							data: {
+								accountId: this.accountId,
+								advertPrice:this.form.advertPrice,
+								advertId:this.advertId,
+								conceptManageList:this.form.conceptManageList,
+								tradePassword:validateFun.encrypt(this.tradePassword),
+							},
+							type: 'post',
+							flag: true,
+						}).then(res => {
+							this.tradePassword = '';
+							this.queryDetail();
+							this.dialogTableVisible = false;
+							this.$message(this.$t('messageNotice.changeSuccess'));
+						})
+					}
 				}else{
 					this.$message({
 						message:this.$t('adServing.pleaseSetPassword'),
