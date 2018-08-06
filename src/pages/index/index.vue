@@ -24,11 +24,13 @@
 				</div>
 				<!-- <crowdsale-item v-for="crowdsale in crowdsaleItemdata" :key="crowdsale.id" :crowdsale-datas="crowdsale" :system-time="sysTime">
 				</crowdsale-item> -->
-                <div class="temp-crowd" v-for="item in 5">
-                	<div>
-                		<img src="../../assets/imgs/img/index_corwd.png"/>
+                <div class="temp-crowd" v-for="item in 5" :key="item">
+                	<div v-if="slangChange === 'EN'">
+                		<img src="../../assets/imgs/img/index_corwd_en.png"/>
                 	</div>
-					
+                    <div v-else>
+                		<img src="../../assets/imgs/img/index_corwd.png"/>
+                    </div>
                 </div>
 				<!-- <learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more> -->
 			</div>
@@ -199,7 +201,8 @@
 						})
 					}
 				});
-			},
+            },
+            // carousel image from server
 			findAdvertisement() {
 				return new Promise((resolve, reject) => {
 					Request({
@@ -327,20 +330,15 @@
     .temp-crowd {
         background: #D3DCE6;
         height: 300px;
-        position: relative;
-        >div{
+        padding-top: 60px;
+        &>div{
+            @include content-flex(center);
         	width: 100%;
         	height: 240px;
         	background: white;
-        	position: absolute;
-        	bottom: 0px;
-        	text-align: center;
-        	img{
-        		margin-top: 21px;
+        	& img{
         		width: 200px;
-        		height: 200px;
         	}
         }
-        
     }
 </style>

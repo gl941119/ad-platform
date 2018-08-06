@@ -10,21 +10,27 @@
 				<span>http://www.afdchain.com/?type=register&inviteCode={{inviteCode}}</span>
 				<el-button data-clipboard-target="#inviteCode" class="purse_address_bind" @click="inviteCodeCopy()">{{$t('invite.copyLink')}}</el-button>
 			</p>
-			<p class="invite_top_code">
+			<!-- <p class="invite_top_code">
 				<span style="margin-right: 30px;">{{$t('invite.inviteImg')}}：</span>
-				<el-button data-clipboard-text="http://imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png" class="purse_address_bind" @click="copyImg()">{{$t('invite.copyImg')}}</el-button>
-			</p>
+				<el-button :data-clipboard-text="copyLink" class="purse_address_bind" @click="copyImg()">{{$t('invite.copyImg')}}</el-button>
+			</p> -->
+            <p>或复制下图邀请</p>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<div class="invite_data">
 			<div class="invite_data_title">{{$t('invite.inviteUser')}}</div>
 			<el-container>
 				<el-aside class="invite_data_aside">
-					<div style="width: 277px;height: 492px;position: relative;">
-						<img style="width: 277px;height: 492px;" src="http://imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png"/>
-						<div class="invite_data_data_imgBox">
+					<div>
+					<!-- <div style="width: 277px;height: 492px;position: relative;"> -->
+                        <div id="container">
+                            <canvas id="inviteImg"></canvas>
+                            <!-- hahhahahha -->
+						 <!-- <img style="width:0;height:0;" id="paperImg" :src="'http://imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png?timeStamp=' + timeStamp" /> -->
+                        </div>
+						<!--<div class="invite_data_data_imgBox">
 							<img width="50" :src="'data:image/png;base64, ' + imageQrAddress">
-						</div>
+						</div> -->
 					</div>
 				</el-aside>
 				<el-main class="invite_data_data">
@@ -34,11 +40,13 @@
 						<el-table-column :label="$t('invite.userAccout')">
 							<template slot-scope="scope">
 								<div v-if="scope.row.nickname">{{scope.row.nickname}}</div>
-								<div v-else>{{scope.row.email}}</div>
+								<div v-else>{{scope.row.email|email}}</div>
 							</template>
 						</el-table-column>
 						<el-table-column prop="createTime" :label="$t('invite.timer')">
 						</el-table-column>
+                        <el-table-column prop="earnings" :label="$t('invite.getAfd')">    
+                        </el-table-column>
 					</el-table>
 					<div class="invite_data_data_pages">
 						<el-pagination
@@ -71,11 +79,13 @@
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				copyValue:'',
 				imageQr:'',
-				imageQrAddress:'',
+                imageQrAddress:'',
+                timeStamp: new Date().getTime(),
 			}
 		},
 		mounted() {
-			this.queryCode();
+            this.queryCode();
+            
 		},
 		computed: {
             language:{
@@ -87,11 +97,21 @@
             		this.language = val;
             	}
             },
+            slangChange(){
+                return this.$store.state.slangChange;
+            }
         },
         watch:{
         	language(val){
-        		this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
-        	}
+                this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+                this.queryCode();
+            },
+        },
+        filters: {
+            email: function(value) {
+                var reg = /(.{3}).+(@.+)/g;
+                if(value) return value.replace(reg, "$1****$2");
+            }
         },
 		methods: {
 			copyImg(){
@@ -121,46 +141,47 @@
 		        })
 			},
 			queryCode() {
-				Request({
-					url: 'QueryInviteCode',
-					data: {
-						accountId: this.accountId,
-					},
-					type: 'get'
-				}).then(res => {
-					this.inviteCode = res.data.inviteCode;
-					this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
-					this.imageQr = 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
-					this.queryInviteData();
-					this.queryQr();
-				})
+                Request({
+                    url: 'QueryInviteCode',
+                    data: {
+                        accountId: this.accountId,
+                    },
+                    type: 'get'
+                }).then(res => {
+                    this.inviteCode = res.data.inviteCode;
+                    this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+                    this.imageQr = 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+                    this.queryInviteData();
+                    this.queryQr();
+                })
 			},
 			queryQr(){
-				Request({
-					url: 'GetQrCode',
-					data: {
-		                contents: this.imageQr,
-		                width: 120,
-		                height: 120,
-		            },
-		            type: 'get',
-				}).then(res => {
-					this.imageQrAddress = res.data;
-				})
+                Request({
+                    url: 'GetQrCode',
+                    data: {
+                        contents: this.imageQr,
+                        width: 70,
+                        height: 70,
+                    },
+                    type: 'get',
+                }).then(res => {
+                    this.imageQrAddress = res.data;
+                    this.handle();
+                })
 			},
 			queryInviteData() {
-				Request({
-					url: 'QueryInviteData',
-					data: {
-						page:this.currentPage,
-						pageSize:this.size,
-						inviteCode:this.inviteCode,
-					},
-					type: 'get'
-				}).then(res => {
-					this.inviteData = res.data;
-					this.total = res.total;
-				})
+                Request({
+                    url: 'QueryInviteData',
+                    data: {
+                        page:this.currentPage,
+                        pageSize:this.size,
+                        inviteCode:this.inviteCode,
+                    },
+                    type: 'get'
+                }).then(res => {
+                    this.inviteData = res.data;
+                    this.total = res.total;
+                })
 			},
 			handleCurrentChange(page) {
 				this.size = page;
@@ -169,7 +190,28 @@
 			handleSizeChange(page) {
 				this.currentPage = page;
 				this.queryInviteData();
-			}
+            },
+            handle(){
+                let canvas = document.getElementById('inviteImg');
+                canvas.width = 277;
+                canvas.height = 492;
+                var ctx = canvas.getContext('2d');
+                let img = new Image();
+                img.crossOrigin = "Anonymous";
+                console.log('language_>', this.slangChange);
+                img.src = this.slangChange === 'EN' ? 'https://s3-ap-southeast-1.amazonaws.com/imgs.afdchain.com/web-upload/picture/84f258b6ce9641228187ece15436624b.png' : 'https://s3-ap-southeast-1.amazonaws.com/imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png';
+                let InviteQr = new Image();
+                InviteQr.src = 'data:image/png;base64, ' + this.imageQrAddress;
+                img.onload = function load(params) {
+                    ctx.drawImage(img, 0, 0);
+                    ctx.drawImage(InviteQr, 108, 393);
+                }
+                InviteQr.onload = function inviteCode(params) {
+                    ctx.drawImage(InviteQr, 108, 393);
+                    // let url = canvas.toDataURL("image/png");
+                    // console.log('url_>', url);
+                }
+            },
 		}
 	}
 </script>

@@ -47,10 +47,14 @@ var _hmt = window._hmt || [];
 
 router.beforeEach((to, from, next) => {
     let token = store.state.token;
-    if (to.path) {
-        // console.log('to_>', to.fullPath);
-        _hmt.push(['_setAutoPageview', false]);
-        _hmt.push(['_trackPageview', '/#' + to.fullPath]);
+    try {
+        if (to.path) {
+            // console.log('to_>', to.fullPath);
+            _hmt.push(['_setAutoPageview', false]);
+            _hmt.push(['_trackPageview', '/#' + to.fullPath]);
+        }
+    } catch (error) {
+        console.error('router skip error_>', error)
     }
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!token) {
