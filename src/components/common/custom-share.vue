@@ -14,12 +14,10 @@
 <script>
     import Request from '../../utils/require.js';
     import Cache from '../../utils/cache';
-	import Utils from '../../utils/util.js';
 	import Clipboard from 'clipboard';
     export default {
         data() {
             return {
-            	utils: new Utils(),
                 accountId:this.$store.state.id || Cache.getSession('bier_userid'),
                 token:this.$store.state.token|| Cache.getSession("bier_token"),
                 copyValue:'',

@@ -43,7 +43,6 @@
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	import Config from '../../../utils/config.js';
-	import Utils from '../../../utils/util.js';
 	import Clipboard from 'clipboard';
 	export default {
 		data() {
@@ -54,7 +53,6 @@
 				size: 5,
 				total:0,
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
-				utils: new Utils(),
 				copyValue:'',
 			}
 		},
