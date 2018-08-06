@@ -4,9 +4,9 @@
             <p class="show-share-title"> 
             	{{$t('share.shareOne')}}</br>http://www.afdchain.com
             </p>
-            <p class="show-share-title" id="show-share-title" style="opacity: 0;">{{$t('share.shareOne')}}http://www.afdchain.com/?inviteCode={{inviteCode}}</p>
+            <input class="show-share-title" id="show-share-title" :value="copyValue"  style="opacity: 0;" />
             <div class="show-share-btn">
-                <el-button class="show-share-btn-text" size="mini" @click="clickCopy('show-share-title')">{{$t('share.shareCopy')}}</el-button>
+                <el-button class="show-share-btn-text" data-clipboard-target="#show-share-title" size="mini" @click="clickCopy()">{{$t('share.shareCopy')}}</el-button>
             </div>
         </div>
     </el-dialog>
@@ -15,13 +15,14 @@
     import Request from '../../utils/require.js';
     import Cache from '../../utils/cache';
 	import Utils from '../../utils/util.js';
-    
+	import Clipboard from 'clipboard';
     export default {
         data() {
             return {
             	utils: new Utils(),
                 accountId:this.$store.state.id || Cache.getSession('bier_userid'),
                 token:this.$store.state.token|| Cache.getSession("bier_token"),
+                copyValue:'',
             }
         },
 
@@ -42,20 +43,48 @@
             	set(){
             		
             	}
-            }
+            },
+            language:{
+            	get(){
+            		var language = this.$t('share.shareOne');
+            		return language;
+            	},
+            	set(val){
+            		this.language = val;
+            	}
+            },
         },
         watch:{
         	inviteCode(val){
         		this.inviteCode = val;
+        	},
+        	language(val){
+        		this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
         	}
         },
+        mounted(){
+        	this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+        },
         methods: {
-        	clickCopy(value){
-                this.utils.copy(value);
-                this.$message({
-                     message: this.$t('messageNotice.copy'),
-                     type:'success'
-                });
+        	clickCopy(){
+        		let clipboard = new Clipboard('.show-share-btn-text');
+		        clipboard.on('success', e => {
+			        this.$message({
+	                    message: this.$t('messageNotice.copy'),
+	                    type:'success'
+	                });
+		          	// 释放内存
+		          	clipboard.destroy()
+		        })
+		        clipboard.on('error', e => {
+		          	// 不支持复制
+		          	this.$message({
+	                    message: this.$t('messageNotice.defaultCopy'),
+	                    type:'warning'
+	                });
+		          	// 释放内存
+		          	clipboard.destroy()
+		        })
         	},
         }
     }
