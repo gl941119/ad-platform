@@ -127,12 +127,12 @@
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<span class="require" style="color: #FFFFFF;">*</span><label >{{$t('projectInfo.concept')}}</label>
-				<input class="langer" v-model="conceptDatas" :disabled="disabled" />
+				<input class="langer padding" v-model="conceptDatas" :disabled="disabled" />
 				<i v-if="!disabled" class="custom-element-icon-jia-copy example" @click="conceptFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li exec">
 				<span class="require" style="color: #FFFFFF;">*</span><label >{{$t('projectInfo.technology')}}</label>
-				<input class="langer" v-model="technologyDatas" :disabled="disabled" />
+				<input class="langer padding" v-model="technologyDatas" :disabled="disabled" />
 				<i v-if="!disabled" class="custom-element-icon-jia-copy example" @click="technologyFun"></i>
 			</li>
 			<li class="newCrowdfunding_item_li">
