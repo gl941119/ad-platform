@@ -229,7 +229,7 @@
             }
         },
         mounted(){
-        	var arr = window.location.search;
+        	var arr = window.location.hash;
         	this.registerModel.form.inviteCode = arr.split('=')[2];
         },
 		methods: {

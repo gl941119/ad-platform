@@ -120,7 +120,7 @@ const en = {
 	},
 	crowdFunding:{
 		all:' All stages',
-		allConcept:' All concept',
+		allConcept:'Category',
 		start:'Coming',
 		underway:'Running',
 		readWhitePaper:'Whitepaper',
