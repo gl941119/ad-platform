@@ -7,14 +7,14 @@
 			</p>
 			<p class="invite_top_code" style="display: inline-block;">
 				<span>{{$t('invite.inviteLink')}}：</span>
-				<span>http://www.afdchain.com/?type=register&inviteCode={{inviteCode}}</span>
+				<span>http://www.afdchain.com/#/index?type=register&inviteCode={{inviteCode}}</span>
 				<el-button data-clipboard-target="#inviteCode" class="purse_address_bind" @click="inviteCodeCopy()">{{$t('invite.copyLink')}}</el-button>
 			</p>
 			<!-- <p class="invite_top_code">
 				<span style="margin-right: 30px;">{{$t('invite.inviteImg')}}：</span>
 				<el-button :data-clipboard-text="copyLink" class="purse_address_bind" @click="copyImg()">{{$t('invite.copyImg')}}</el-button>
 			</p> -->
-            <p>或复制下图邀请</p>
+            <p>{{$t('invite.copyImg')}}</p>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<div class="invite_data">
@@ -103,7 +103,7 @@
         },
         watch:{
         	language(val){
-                this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+                this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
                 this.queryCode();
             },
         },
@@ -149,8 +149,8 @@
                     type: 'get'
                 }).then(res => {
                     this.inviteCode = res.data.inviteCode;
-                    this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
-                    this.imageQr = 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+                    this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
+                    this.imageQr = 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
                     this.queryInviteData();
                     this.queryQr();
                 })

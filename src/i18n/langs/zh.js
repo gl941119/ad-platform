@@ -181,7 +181,7 @@ const zh = {
 		inviteImg:'邀请图片',
 		inviteLink:'邀请链接',
 		copyLink:'点我复制链接',
-		copyImg:'点我复制图片',
+		copyImg:'或复制下图邀请',
 		num:'编号',
 		timer:'加入日期',
 		userAccout:'受邀用户',

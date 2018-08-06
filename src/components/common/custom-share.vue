@@ -57,11 +57,11 @@
         		this.inviteCode = val;
         	},
         	language(val){
-        		this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+        		this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
         	}
         },
         mounted(){
-        	this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+        	this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
         },
         methods: {
         	clickCopy(){
