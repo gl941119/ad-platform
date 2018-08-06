@@ -6,7 +6,7 @@
 				<el-button class="my_crowdfunding_title_button" @click="newProject()" type="text">{{$t('initiated.newCrowd')}}
 				</el-button>
 			</div>
-			<el-table :data="crowdfundingData" style="width: 100%" @sort-change="sortChange" :default-sort="{prop: 'date', order: 'descending'}">
+			<el-table :data="crowdfundingData" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}">
 				<el-table-column prop="shotEnName" :label="$t('initiated.token')">
 				</el-table-column>
 				<el-table-column prop="proDesc" :label="$t('initiated.desc')" width="300">
@@ -40,7 +40,7 @@
 				</el-table-column>
 			</el-table>
 			<div class="my_crowdfunding_data_pages">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40, 50]" :page-size="size" layout="sizes, prev, pager, next, jumper" :total="total">
+				<el-pagination background @current-change="handleCurrentChange" :current-page="currentPage" :page-size="size" layout="prev, pager, next" :total="total">
 				</el-pagination>
 			</div>
 		</div>
@@ -117,13 +117,6 @@
 			handleCurrentChange(page) {
 				this.currentPage = page;
 				this.crowdfunding();
-			},
-			handleSizeChange(page) {
-				this.size = page;
-				this.crowdfunding();
-			},
-			sortChange() {
-
 			},
 		}
 	}
