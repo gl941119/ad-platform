@@ -425,7 +425,6 @@
                 this.$router.push({name: 'index'});
 			},
 			goToRegister() {
-                console.log('regi--------------');
 				this.title = this.$t('register.userRegister');
 				this.$refs.registerModelForm && this.$refs.registerModelForm.resetFields();
 				this.registerModel.registerVisible = true;
