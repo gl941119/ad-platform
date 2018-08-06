@@ -1,6 +1,6 @@
 const url = {
     // localTestUrl: 'http://192.168.1.119:8091/',
-    localTestUrl: 'http://192.168.1.254:8091/',
+    localTestUrl: 'http://192.168.1.15:8091/',
     // localTestUrl: 'http://192.168.1.15:8091/',
     productUrl: 'http://192.168.1.254:8091/',
     // productUrl: 'http://api.afdchain.com/',
@@ -29,4 +29,5 @@ export default {
         "https://s3-us-west-2.amazonaws.com/static-afd/upload-folder/picture/57dc9b4a9a974552957f2ac654f011f8.png"
     ],
     UploadImg: (process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl) + 'blockchainadvert/common/upload-file',
+    UploadAuthImg: (process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl) + 'blockchainadvert/common/uploadImageWithWatermark',
 };
