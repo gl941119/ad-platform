@@ -148,14 +148,13 @@
 			&-text {
 				margin-top: 28px;
 				text-align: center;
-				/*font-size: $headerFontSize;*/
+                font-size: 14px;
 				& a {
-					font-size: 14px;
 					color: #3C599F;
 					text-decoration: underline;
 				}
 				&.english-lang {
-					font-size: 13px;
+					font-size: 12px;
 				}
 			}
 		}

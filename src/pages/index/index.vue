@@ -54,8 +54,9 @@
 	import Config from '../../utils/config.js';
 	import axios from 'axios';
 	export default {
-		data() {
+        data() {
 			return {
+                type: this.$route.query.type,
 				swiperOptions: {
 					autoplay: {
 						delay: 2000,
@@ -84,7 +85,11 @@
 				spinner: 'el-icon-loading',
 				background: 'rgba(0, 0, 0, 0.5)',
 				fullscreen: true,
-			});
+            });
+            // 跳出注册
+            if(this.type === 'register') {
+                this.$store.commit('setDialogModalVisible', 'register');
+            }
 			Promise.all([this.getSystemTime(), this.getBulls(), this.getData(), this.getAdvertInfo(), this.findAdvertisement()])
 				.then(() => {
 					this.swiperInstance.init();
@@ -281,6 +286,7 @@
 				flex: 1;
 				width: 1070px;
 				height: 100%;
+                overflow: hidden;
 				&-swiper {
 					height: 100%;
 					& .swiper-text {
