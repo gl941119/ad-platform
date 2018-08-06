@@ -188,7 +188,7 @@
 					<img :src="imageUrl" class="avatar">
 				</div>
 				<div v-else>
-					<el-upload class="avatar-uploader" :show-file-list="false" :action="uploadImg" :headers="requestToken" :on-error="imgError" accept=".jpg,.png" :limit="1" :on-success="getImg">
+					<el-upload class="avatar-uploader" :show-file-list="false" :action="uploadImg" :headers="requestToken" :on-error="imgError" accept=".jpg,.png" :on-success="getImg">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 					</el-upload>

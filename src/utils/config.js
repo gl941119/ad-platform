@@ -29,4 +29,5 @@ export default {
         "https://s3-us-west-2.amazonaws.com/static-afd/upload-folder/picture/57dc9b4a9a974552957f2ac654f011f8.png"
     ],
     UploadImg: (process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl) + 'blockchainadvert/common/upload-file',
+    UploadAuthImg: (process.env.NODE_ENV === 'development' ? url.localTestUrl : url.productUrl) + 'blockchainadvert/common/uploadImageWithWatermark',
 };
