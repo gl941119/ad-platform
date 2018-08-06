@@ -180,28 +180,6 @@ export default class Util {
 				break;
 		}
 	}
-	copy(value) {
-        var text = document.getElementById(value);
-        if (document.body.createTextRange) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(text);
-            range.select();
-        } else if (window.getSelection) {
-            var selection = window.getSelection();
-            var range = document.createRange();
-            range.selectNodeContents(text);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        } else {
-            console.log('please press Ctrl/Cmd+C to copy');
-        }
-        document.execCommand('Copy', 'false', null);
-        this.slct();
-    }
-    slct() {
-        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
-    }
-
     newWin(url) {
         console.log('url_>', url);
         var tempWindow = window.open('', '_blank', ''); //打开一个新的空白窗口

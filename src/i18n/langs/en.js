@@ -90,6 +90,7 @@ const en = {
 		giveyou:'Hints',
 		nomore:'maximum is 4',
 		copy:'Copy successfully',
+		defaultCopy:'The browser does not support point copying',
 		noAuth:'You have not done the authentication，please go to you ID setting to do the authentication',
 		onAuth:'Your authentication is being audited ，cannot do the operation temporary',
 		refuseAuth:'your authentication have not been passed，the operation will be launch after the pass of your authentication',

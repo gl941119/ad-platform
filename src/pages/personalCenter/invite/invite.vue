@@ -2,15 +2,14 @@
 	<div class="invite">
 		<div class="invite_top">
 			<h3 class="invite_top_title">{{$t('invite.inviteUser')}}</h3>
-			<p class="invite_top_code">
-				<span>{{$t('invite.code')}}：</span>
-				<span id="inviteCode"><span style="position: absolute;z-index: -1">{{$t('invite.inviteInfo')}}http://www.afdchain.com/?inviteCode=</span>{{inviteCode}}</span>
+			<p>
+				<input style="opacity: 0;" id="inviteCode" :value="copyValue"/>
 			</p>
 			<p class="invite_top_code" style="display: inline-block;">
 				<span>{{$t('invite.inviteLink')}}：</span>
-				<span>http://www.afdchain.com/?inviteCode={{inviteCode}}</span>
+				<span>http://www.afdchain.com/?type=register&inviteCode={{inviteCode}}</span>
 			</p>
-			<el-button class="purse_address_bind" @click="inviteCodeCopy('inviteCode')">{{$t('share.shareCopy')}}</el-button>
+			<el-button data-clipboard-target="#inviteCode" class="purse_address_bind" @click="inviteCodeCopy()">{{$t('share.shareCopy')}}</el-button>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<!--<div class="invite_data">
@@ -19,22 +18,21 @@
 				<el-table-column prop="createTime" :label="$t('invite.timer')">
 				</el-table-column>
 				<el-table-column prop="email" :label="$t('invite.userAccout')">
-				</el-table-column>-->
-				<!--<el-table-column prop="province" :label="$t('invite.recently')">
-				</el-table-column>-->
-				<!--<el-table-column prop="earnings" :label="$t('invite.divided')">
+				</el-table-column>
+				<el-table-column prop="province" :label="$t('invite.recently')">
+				</el-table-column>
+				<el-table-column prop="earnings" :label="$t('invite.divided')">
 				</el-table-column>
 			</el-table>
 			<div class="invite_data_data_pages">
 				<el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[10, 20, 30, 40, 50]"
-      :page-size="size"
-      layout="sizes, prev, pager, next, jumper" v
-      :total="total">
-    </el-pagination>
+					background
+			      @current-change="handleCurrentChange"
+			      :current-page="currentPage"
+			      :page-size="size"
+			      layout="prev, pager, next"
+			      :total="total">
+			    </el-pagination>
 			</div>
 		</div>-->
 	</div>
@@ -43,7 +41,7 @@
 	import Request from '../../../utils/require.js';
 	import Cache from '../../../utils/cache';
 	import Config from '../../../utils/config.js';
-	import Utils from '../../../utils/util.js';
+	import Clipboard from 'clipboard';
 	export default {
 		data() {
 			return {
@@ -53,16 +51,48 @@
 				size: 5,
 				total:0,
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
-				utils: new Utils(),
+				copyValue:'',
 			}
 		},
 		mounted() {
 			this.queryCode();
 		},
+		computed: {
+            language:{
+            	get(){
+            		var language = this.$t('invite.inviteInfo');
+            		return language;
+            	},
+            	set(val){
+            		this.language = val;
+            	}
+            },
+        },
+        watch:{
+        	language(val){
+        		this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
+        	}
+        },
 		methods: {
-			inviteCodeCopy(value){
-				this.utils.copy(value);
-        		this.$message({message: this.$t('messageNotice.copy'),type:'success'});
+			inviteCodeCopy(){
+				let clipboard = new Clipboard('.purse_address_bind');
+		        clipboard.on('success', e => {
+			        this.$message({
+	                     message: this.$t('messageNotice.copy'),
+	                     type:'success'
+	                });
+		          	// 释放内存
+		          	clipboard.destroy()
+		        })
+		        clipboard.on('error', e => {
+		          	// 不支持复制
+		          	this.$message({
+	                    message: this.$t('messageNotice.defaultCopy'),
+	                    type:'warning'
+	                });
+		          	// 释放内存
+		          	clipboard.destroy()
+		        })
 			},
 			queryCode() {
 				Request({
@@ -73,6 +103,7 @@
 					type: 'get'
 				}).then(res => {
 					this.inviteCode = res.data.inviteCode;
+					this.copyValue = this.language + 'http://www.afdchain.com/?type=register&inviteCode='+this.inviteCode;
 //					this.queryInviteData();
 				})
 			},
