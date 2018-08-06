@@ -185,6 +185,7 @@ const zh = {
 		num:'编号',
 		timer:'加入日期',
 		userAccout:'受邀用户',
+		getAfd:'获取AFD',
 		inviteInfo:'嘿 韭菜们，被割了吗？我养你啊！输入我的邀请码即得99AFDT，速度上车注册。',
 	},
 	setting:{//账号设置

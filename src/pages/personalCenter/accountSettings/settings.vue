@@ -357,9 +357,9 @@
 				}],
 				realName: "",
 				imgUrl:'',
-				imageBack: 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg',
-				imagePositive:'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg',
-				imageHandheld:'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png',
+				imageBack: '',
+				imagePositive:'',
+				imageHandheld:'',
 				accountId: this.$store.state.id || Cache.getSession('bier_userid'),
 				username: this.$store.state.username || Cache.getSession('bier_username'),
 				token: this.$store.state.token || Cache.getSession('bier_token'),
@@ -417,8 +417,14 @@
 				}]
 				if(val == "en" || val == "EN"){
 					this.countryData = CountryEn.country;
+					this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg';
+					this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg';
+					this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg';
 				}else{
 					this.countryData = CountryZh.country;
+					this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
+					this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
+					this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
 				}
 				this.info();
 			},
@@ -428,8 +434,14 @@
 			var lang = this.$store.state.slangChange || this.$i18n.locale;
 			if(lang == "en" || lang == "EN"){
 				this.countryData = CountryEn.country;
+				this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg';
+				this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg';
+				this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg';
 			}else{
 				this.countryData = CountryZh.country;
+				this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
+				this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
+				this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
 			}
 		},
 		methods: {
@@ -472,9 +484,6 @@
 					if(res.data.authStatus == 3){
 						this.editShow = true;
 						this.authStatusShow = false;
-						this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
-						this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
-						this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
 					}
 					if(res.data.authStatus == 1){
 						this.authStatusShow = false;
@@ -802,10 +811,9 @@
 				}
 			},
 			imgTest(){
-				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png') {
+				if(this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' || this.imageBack == 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' || this.imagePositive == 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png' || this.imageHandheld == 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg') {
 					this.imgShow = true;
-				}
-				if(this.imageBack != 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg' && this.imagePositive != 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg' && this.imageHandheld != 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png'){
+				}else{
 					this.imgShow = false;
 				}
 			},
