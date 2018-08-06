@@ -230,7 +230,7 @@
         },
         mounted(){
         	var arr = window.location.search;
-        	this.registerModel.form.inviteCode = arr.split('=')[1];
+        	this.registerModel.form.inviteCode = arr.split('=')[2];
         },
 		methods: {
             getLabelWidth(lang, type){
