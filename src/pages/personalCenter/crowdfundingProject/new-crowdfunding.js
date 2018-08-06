@@ -261,13 +261,13 @@ export default {
             this.$message.error({ message: this.$t('tokenInfo.uploadError') });
         },
         handleRemove(file, fileList) {
-            // console.log(file, fileList);
+            this.fileUrl = '';
+            Cache.removeSession('fileUrl');
         },
         getFile(res, file) {
             this.fileUrl = res.data;
             this.fileEmpty = false;
-            this.companyFileList.push({ name: file.name, url: this.fileUrl });
-            Cache.setSession('companyFileList', this.companyFileList);
+            Cache.setSession('fileUrl', this.fileUrl);
         },
         // 增加缓存
         addCache() {
@@ -317,8 +317,8 @@ export default {
             let companyFileList = Cache.getSession('companyFileList');
             if (companyFileList) {
                 this.companyFileList = companyFileList && JSON.parse(companyFileList) || [];
-                this.fileUrl = this.companyFileList[0].url;
             }
+            this.fileUrl = Cache.getSession('fileUrl');;
         },
         clearCache() {
             Cache.removeSession('timeInterval');
@@ -328,6 +328,7 @@ export default {
             Cache.removeSession('coreTeam');
             Cache.removeSession('consultantTeam');
             Cache.removeSession('newCrowdfunding');
+            Cache.removeSession('fileUrl');
         },
     }
 }
