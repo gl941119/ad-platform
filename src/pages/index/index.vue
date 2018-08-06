@@ -30,7 +30,7 @@
                 	</div>
 					
                 </div>
-				<learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more>
+				<!-- <learn-more :type="1" @seemore="toCrowdDetailPage"></learn-more> -->
 			</div>
 			<div class="platform-index-item-ad">
 				<div class="platform-index-item-ad-title">

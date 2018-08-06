@@ -5,7 +5,7 @@
 			<div class="header-content-tab">
 				<div class="header-content-tab-left">
 					<router-link class="header-content-tab-left-menu" :to="{ name: 'index' }">{{$t('header.home')}}</router-link>
-					<router-link class="header-content-tab-left-menu" :to="{ name: 'crowdsale' }">{{$t('header.daico')}}</router-link>
+					<!-- <router-link class="header-content-tab-left-menu" :to="{ name: 'crowdsale' }">{{$t('header.daico')}}</router-link> -->
 					<router-link class="header-content-tab-left-menu" :to="{ name: 'advertisement' }">{{$t('header.project')}}</router-link>
 					<!-- <router-link class="header-content-tab-left-menu"
                                     :to="{ name: 'news' }">{{$t('header.medium')}}</router-link> -->

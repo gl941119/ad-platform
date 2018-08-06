@@ -18,7 +18,7 @@ export default new Vuex.Store({
         change: false,
         bullsData: undefined,
         globalShow: Cache.getSession('globalShow') || 'show', // global share
-		slangChange: Cache.getLocal('bier_langChange'),
+		slangChange: Cache.getLocal('bier_langChange') || 'EN',
         heardUrl: Cache.getSession('bier_heardUrl'),
         registerVisible: false,
 		inviteCode: '',

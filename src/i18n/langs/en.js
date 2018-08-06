@@ -101,7 +101,7 @@ const en = {
 		number:' ',
 		immediately:'Buy now!',
 		over:'End',
-		buy:'Trade',
+		buy:'Exchange',
 		whitePaper:'Whitepaper',
 		chName:'Chinese name',
 		readMore:'More',
