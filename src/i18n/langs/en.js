@@ -181,7 +181,7 @@ const en = {
 		inviteImg:'Invitation picture',
 		inviteLink:'Invite link',
 		copyLink:'Click me to copy the link',
-		copyImg:'Click me to copy the picture',
+		copyImg:'Or copy the invitation below',
 		num:'No.',
 		timer:'Date of joining',
 		userAccout:'Invited users',

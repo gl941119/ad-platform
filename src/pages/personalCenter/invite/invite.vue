@@ -14,7 +14,7 @@
 				<span style="margin-right: 30px;">{{$t('invite.inviteImg')}}：</span>
 				<el-button :data-clipboard-text="copyLink" class="purse_address_bind" @click="copyImg()">{{$t('invite.copyImg')}}</el-button>
 			</p> -->
-            <p>或复制下图邀请</p>
+            <p>{{$t('invite.copyImg')}}</p>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
 		<div class="invite_data">
