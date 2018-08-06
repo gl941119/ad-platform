@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
     let token = store.state.token;
     try {
         if (to.path) {
-            console.log('to_>', to.fullPath);
+            // console.log('to_>', to.fullPath);
             _hmt.push(['_setAutoPageview', false]);
             _hmt.push(['_trackPageview', '/#' + to.fullPath]);
         }
