@@ -18,7 +18,7 @@
 						<div class="ad-serving-info-top-item-li-button"> 
 							<el-button v-if="isCheck == 1" type="text" @click="dialogTableVisible = true">{{$t('adServing.adjustment')}}</el-button>
 						</div>
-						<el-dialog width="20%" :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
+						<el-dialog width="350px" :title="$t('adServing.strategy')" :visible.sync="dialogTableVisible">
 						  <el-form :model="form">
 						    <el-form-item :label="$t('adServing.all')" :label-width="formLabelWidth">
 						        <el-input-number v-model="form.advertPrice" :step="0.05" :min="0.1" controls-position="right">
@@ -341,17 +341,6 @@
 		}
 	}
 }
-.passwordInput{
-	height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 15px;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    width: 80%;
-}
 .is-danger{
 	display: block;
     color: #f66;
@@ -400,6 +389,17 @@
 							color: #FFFFFF;
     						border: 0;
 						}
+					}
+					.passwordInput{
+						width: 180px;
+						height: 40px;
+					    line-height: 40px;
+					    outline: none;
+					    padding: 0 15px;
+					    border-radius: 4px;
+					    border: 1px solid #dcdfe6;
+					    box-sizing: border-box;
+					    color: #606266;
 					}
 				}
 				&-li:last-child{
