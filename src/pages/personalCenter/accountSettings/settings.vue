@@ -415,34 +415,20 @@
 					value: this.$t('setting.passport'),
 					label: this.$t('setting.passport')
 				}]
-				if(val == "en" || val == "EN"){
-					this.countryData = CountryEn.country;
-					this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg';
-					this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg';
-					this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg';
-				}else{
-					this.countryData = CountryZh.country;
-					this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
-					this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
-					this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
-				}
+				this.countryData = val === 'EN' ? CountryEn.country : CountryZh.country;
+				this.imageBack = val === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg' : 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
+				this.imagePositive = val === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg' : 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
+				this.imageHandheld = val === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg' : 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
 				this.info();
 			},
 		},
 		mounted() {
 			this.info();
 			var lang = this.$store.state.slangChange || this.$i18n.locale;
-			if(lang == "en" || lang == "EN"){
-				this.countryData = CountryEn.country;
-				this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg';
-				this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg';
-				this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg';
-			}else{
-				this.countryData = CountryZh.country;
-				this.imageBack = 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
-				this.imagePositive = 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
-				this.imageHandheld = 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
-			}
+			this.countryData = val === 'EN' ? CountryEn.country : CountryZh.country;
+			this.imageBack = val === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/3a608515b6be401093195914e26a8ee3.jpg' : 'http://imgs.afdchain.com/web-upload/picture/ba09b1708ff94c528da7bbaf7d09eec4.jpg';
+			this.imagePositive = val === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/6f587e8f796b4633bbee1b3bc2c3ae22.jpg' : 'http://imgs.afdchain.com/web-upload/picture/c4abe2f1abf741a786a5b9758e5782c5.jpg';
+			this.imageHandheld = val === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/18aad30a8ea848d9971a65f4a3b0cc05.jpg' : 'http://imgs.afdchain.com/web-upload/picture/d9c5275b29c842dd974e1a31ee1bf41b.png';
 		},
 		methods: {
 			change(activeNames){
