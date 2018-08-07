@@ -10,10 +10,6 @@
 				<span>http://www.afdchain.com/#/index?type=register&inviteCode={{inviteCode}}</span>
 				<el-button data-clipboard-target="#inviteCode" class="purse_address_bind" @click="inviteCodeCopy()">{{$t('invite.copyLink')}}</el-button>
 			</p>
-			<!-- <p class="invite_top_code">
-				<span style="margin-right: 30px;">{{$t('invite.inviteImg')}}：</span>
-				<el-button :data-clipboard-text="copyLink" class="purse_address_bind" @click="copyImg()">{{$t('invite.copyImg')}}</el-button>
-			</p> -->
             <p>{{$t('invite.copyImg')}}</p>
 			<div class="invite_top_intro">{{$t('invite.info')}}</div>
 		</div>
@@ -22,15 +18,9 @@
 			<el-container>
 				<el-aside class="invite_data_aside">
 					<div>
-					<!-- <div style="width: 277px;height: 492px;position: relative;"> -->
                         <div id="container">
                             <canvas id="inviteImg"></canvas>
-                            <!-- hahhahahha -->
-						 <!-- <img style="width:0;height:0;" id="paperImg" :src="'http://imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png?timeStamp=' + timeStamp" /> -->
                         </div>
-						<!--<div class="invite_data_data_imgBox">
-							<img width="50" :src="'data:image/png;base64, ' + imageQrAddress">
-						</div> -->
 					</div>
 				</el-aside>
 				<el-main class="invite_data_data">
@@ -114,9 +104,6 @@
             }
         },
 		methods: {
-			copyImg(){
-				
-			},
 			indexMethod(index) { //表格序号
 				return index + 1;
 			},
@@ -198,7 +185,7 @@
                 var ctx = canvas.getContext('2d');
                 let img = new Image();
                 img.crossOrigin = "Anonymous";
-                console.log('language_>', this.slangChange);
+//              console.log('language_>', this.slangChange);
                 img.src = this.slangChange === 'EN' ? 'https://s3-ap-southeast-1.amazonaws.com/imgs.afdchain.com/web-upload/picture/84f258b6ce9641228187ece15436624b.png' : 'https://s3-ap-southeast-1.amazonaws.com/imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png';
                 let InviteQr = new Image();
                 InviteQr.src = 'data:image/png;base64, ' + this.imageQrAddress;
