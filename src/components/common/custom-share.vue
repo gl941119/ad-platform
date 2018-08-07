@@ -23,7 +23,6 @@
                 copyValue:'',
             }
         },
-
         computed: {
             dialogVisible: {
                 get(){
@@ -35,7 +34,7 @@
             },
             inviteCode:{
             	get(){
-                    let code = this.$store.state.inviteCode|| Cache.getSession("bier_inviteCode");
+                    let code = this.$store.state.inviteCode || Cache.getSession("bier_inviteCode");
             		return code;
                 },
             	set(){
@@ -55,13 +54,14 @@
         watch:{
         	inviteCode(val){
         		this.inviteCode = val;
+                this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+ this.inviteCode;
         	},
         	language(val){
-        		this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
+        		this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+ this.inviteCode;
         	}
         },
         mounted(){
-        	this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+this.inviteCode;
+        	this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+ this.inviteCode;
         },
         methods: {
         	clickCopy(){
