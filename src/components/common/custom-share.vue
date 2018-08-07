@@ -2,7 +2,7 @@
     <el-dialog :title="$t('share.shareTiltle')" :close-on-click-modal="false" :lock-scroll="false" :visible.sync="dialogVisible" width="360px">
         <div id="thisDiv" class="show-share">
             <p class="show-share-title"> 
-            	{{$t('share.shareOne')}}</br>http://www.afdchain.com
+            	{{$t('share.shareOne')}}<br/>http://www.afdchain.com
             </p>
             <input class="show-share-title" id="show-share-title" :value="copyValue"  style="opacity: 0;" />
             <div class="show-share-btn">
