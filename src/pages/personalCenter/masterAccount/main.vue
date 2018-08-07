@@ -13,7 +13,7 @@
 				<span class="withdraw_box_back" @click="recharge"><i class="el-icon-close"></i></span>
 				<ul class="withdraw_item">
 					<li class="withdraw_item_li"><label>{{$t('project.moneyAccount')}}：</label>
-						<span>0x1ac6bc75a9e1d32a91e025257eaefc0e8965a16f</span>
+						<span>0x045F1cEe5a770A01d3d5bDd7D2d110f78938167e</span>
 					</li>
 					<li class="withdraw_item_li" style="height: 126px;"><label>{{$t('crowdFunding.qrCode')}}：</label>
 						<div class="img">
