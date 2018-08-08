@@ -38,7 +38,7 @@
 					</el-date-picker>
 					<el-date-picker v-model="endTime" type="date" :placeholder="$t('accountFlow.endTime')">
 					</el-date-picker>
-					<button @click="mainDatas()" class="search">{{$t('accountFlow.search')}}</button>
+					<button @click="search()" class="search">{{$t('accountFlow.search')}}</button>
 					<!--<button @click="mainDatas()"  v-if="value == 2" class="search">{{$t('accountFlow.search')}}</button>-->
 				</div>
 			</div>
@@ -127,6 +127,10 @@
 			}
 		},
 		methods: {
+            search(){
+                this.currentPage = 1;
+                this.mainDatas();
+            },
 			close(){
 				this.rechargeView = false
 			},

@@ -55,7 +55,7 @@
 					</el-date-picker>
 					<el-date-picker v-model="endTime" type="date" :placeholder="$t('accountFlow.endTime')">
 					</el-date-picker>
-					<button class="search" @click="revenueDatas">{{$t('accountFlow.search')}}</button>
+					<button class="search" @click="search">{{$t('accountFlow.search')}}</button>
 				</div>
 			</div>
 			<el-tabs type="border-card" @tab-click = 'type'>
@@ -170,6 +170,10 @@
 			}
 		},
 		methods: {
+            search(){
+                this.currentPage = 1;
+                this.revenueDatas();
+            },            
 			withdrawls(){
 				this.$validator.validateAll().then((result) => {
 					if(!this.insufficient){
