@@ -730,9 +730,13 @@
 				this.$store.commit('setUserName', undefined);
 				this.$store.commit('setUserNickName', undefined);
                 this.$store.commit('setToken', undefined);
+                this.$store.commit('setHeardUrl', undefined);
+                this.$store.commit('setInviteCode', '');
                 Cache.removeSession('bier_username');
                 Cache.removeSession('bier_token');
                 Cache.removeSession('bier_userid');
+                Cache.removeSession('bier_userid');
+                Cache.removeSession('bier_inviteCode');
 				Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
 			},
 			toBindEmail() {//绑定邮箱
