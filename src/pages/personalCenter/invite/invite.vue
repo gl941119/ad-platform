@@ -186,7 +186,7 @@
                 let img = new Image();
                 img.crossOrigin = "Anonymous";
 //              console.log('language_>', this.slangChange);
-                img.src = this.slangChange === 'EN' ? 'https://s3-ap-southeast-1.amazonaws.com/imgs.afdchain.com/web-upload/picture/84f258b6ce9641228187ece15436624b.png' : 'https://s3-ap-southeast-1.amazonaws.com/imgs.afdchain.com/web-upload/picture/bb09761b1d54424a9698c489a5e2cb09.png';
+                img.src = this.slangChange === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/c49155a333464877ae9fc7d50a3c390d.jpg' : 'http://imgs.afdchain.com/web-upload/picture/52e82101aa124895b3ffc9e102112853.jpg';
                 let InviteQr = new Image();
                 InviteQr.src = 'data:image/png;base64, ' + this.imageQrAddress;
                 img.onload = function load(params) {
