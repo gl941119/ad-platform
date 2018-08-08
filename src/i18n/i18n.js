@@ -9,7 +9,7 @@ if(lang == 'en'){
 	lang = lang.toUpperCase();
 }
 const i18n = new VueI18n({
-  locale: lang || 'EN',
+  locale: lang || 'zh',
   messages,
 });
 locale.i18n((key, value) => i18n.t(key, value));//解决i18n与vue——i18n的兼容性
