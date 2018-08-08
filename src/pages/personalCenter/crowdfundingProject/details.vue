@@ -286,6 +286,7 @@
 						:data="params"
 						:headers="requestToken"
 						:limit="1"
+                        :on-remove="handleRemove"
 						accept=".jpg,.jpeg,.png,,.pdf"
 						 multiple>
 						<el-button size="small">{{$t('tokenInfo.upload')}}</el-button>
@@ -746,7 +747,10 @@
 			},
 			getFile(res) {
 				this.details.license = res.data;
-			},
+            },
+            handleRemove(file, fileList) {
+                this.details.license = '';
+            },
 			conceptFun() { //概念弹出窗
 				this.concept = !this.concept;
 			},
