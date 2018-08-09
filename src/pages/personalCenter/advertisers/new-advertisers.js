@@ -545,8 +545,8 @@ export default {
 				this.$message({
 					message: this.$t('messageNotice.noDelete'),
 					type: 'warning'
-				});;
-			} else {
+                });
+            } else {
 				this.consultantTeam.splice(value, 1);
 			}
 		},

@@ -318,7 +318,7 @@ export default {
             if (companyFileList) {
                 this.companyFileList = companyFileList && JSON.parse(companyFileList) || [];
             }
-            this.fileUrl = Cache.getSession('fileUrl');;
+            this.fileUrl = Cache.getSession('fileUrl')
         },
         clearCache() {
             Cache.removeSession('timeInterval');

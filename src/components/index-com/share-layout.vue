@@ -15,7 +15,10 @@
         methods: {
             showShare() {
                 if(!(this.$store.state.token||Cache.getSession("bier_token"))){
-                  
+                    this.$message({
+                        message:this.$t('share.warning'),
+                        type:'warning'
+                    });
                     return;
                 }
                 this.$store.commit('setDialogVisible', true);
