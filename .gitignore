@@ -6,3 +6,5 @@ dist
 dll
 build
 *.sh
+.idea
+

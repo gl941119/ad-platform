@@ -6,18 +6,18 @@
                 {{$t('footer.partner')}}
             </div>
             <div class="main">
-                <img src="@/assets/imgs/img/partner (1).jpg">
-                <img src="@/assets/imgs/img/partner (2).jpg">
-                <img src="@/assets/imgs/img/partner (3).jpg">
-                <img src="@/assets/imgs/img/partner (4).jpg">
-                <img src="@/assets/imgs/img/partner (5).jpg">
-                <img src="@/assets/imgs/img/partner (6).jpg">
-                <img src="@/assets/imgs/img/partner (7).jpg">
-                <img src="@/assets/imgs/img/partner (9).jpg">
-                <img src="@/assets/imgs/img/partner (10).jpg">
-                <img src="@/assets/imgs/img/partner (11).jpg">
-                <img src="@/assets/imgs/img/partner (12).jpg">
-                <img src="@/assets/imgs/img/partner (1).png">
+                <img src="@/assets/imgs/img/partner1.jpg">
+                <img src="@/assets/imgs/img/partner2.jpg">
+                <img src="@/assets/imgs/img/partner3.jpg">
+                <img src="@/assets/imgs/img/partner4.jpg">
+                <img src="@/assets/imgs/img/partner5.jpg">
+                <img src="@/assets/imgs/img/partner6.jpg">
+                <img src="@/assets/imgs/img/partner7.jpg">
+                <img src="@/assets/imgs/img/partner9.jpg">
+                <img src="@/assets/imgs/img/partner10.jpg">
+                <img src="@/assets/imgs/img/partner11.jpg">
+                <img src="@/assets/imgs/img/partner12.jpg">
+                <img src="@/assets/imgs/img/partner1.png">
             </div>
         </div>
         <div class="footer" id='callMy'>
