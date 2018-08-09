@@ -126,7 +126,8 @@
 			return {
 				utils: new Utils(),
 				source: '0123456789',
-				codeLen: 4,
+                codeLen: 4,
+                id: this.$store.state.id,
 				disabled: true,
 				num: 60,
 				telegramBot: Config.TelegramBot,
@@ -196,7 +197,7 @@
 							trigger: 'blur'
 						}],
 					}
-        	}
+            },
         },
         computed: {
             userName: {
@@ -226,11 +227,12 @@
             },
             language(){
                 return this.utils.getCurrLanguage(this.$store);
-            }
+            },
         },
         mounted(){
         	var arr = window.location.hash;
-        	this.registerModel.form.inviteCode = arr.split('=')[2];
+            this.registerModel.form.inviteCode = arr.split('=')[2];
+            this.getUserInfo()
         },
 		methods: {
             getLabelWidth(lang, type){
@@ -412,18 +414,23 @@
 				} = data;
 				this.$store.commit('setUserId', id);
 				this.$store.commit('setUserName', email);
-				this.$store.commit('setUserNickName', nickname);
-				this.$store.commit('setToken', token);
+                this.$store.commit('setUserNickName', nickname);
+                // cookie 中不保存 token
+				token && this.$store.commit('setToken', token);
 				this.$store.commit('setHeardUrl', heardUrl);
-				
+				var exp = new Date();
+                exp.setTime(exp.getTime() + 1000 * 60 * 10); //这里表示保存10分钟
+                document.cookie = "login_identify=" + id + ";expires=" + exp.toGMTString();
+                token && (document.cookie = 'login_token=' + token + ";expires=" + exp.toGMTString());
+
 				Cache.setSession('bier_userid', id);
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);
-				Cache.setSession('bier_token', token);
+				token && Cache.setSession('bier_token', token);
 				heardUrl && Cache.setSession('bier_heardUrl', heardUrl);
                 this.dialogModalVisible = false;
                 this.$router.push({name: 'index'});
-			},
+            },
 			goToRegister() {
 				this.title = this.$t('register.userRegister');
 				this.$refs.registerModelForm && this.$refs.registerModelForm.resetFields();
@@ -442,7 +449,17 @@
                         resolve();
                     })
                 });
-			}
+            },
+            getUserInfo() {
+                this.id &&
+                    Request({
+                        url: 'GetUserInfoById',
+                        type: 'get',
+                        data: {id: this.id}
+                    }).then(res => {
+                        this.handleLoginSucc(res.data);
+                    }).catch(console.error)
+            },
 		},
 		components: {
 			'custom-identify': customIdentifyCom,
