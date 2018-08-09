@@ -118,6 +118,7 @@ const en = {
 		shareTiltle:'Share',
 		shareOne:'Hey investor,have you suffered a loss?Come to AFD Chain ,I will feed you! Enter my invitation code and register quickly to get 99AFDT.',
 		shareCopy:'copy',
+        warning:'You have not logged in AFD Planet yet. To ensure that you can get more revenue, please log in and share later.'
 	},
 	crowdFunding:{
 		all:' All stages',

@@ -118,6 +118,7 @@ const zh = {
 		shareTiltle:'分享',
 		shareOne:'嘿 韭菜们，被割了吗？来阿凡达，我养你啊！输入我的邀请码即得99AFDT，速度上车注册。',
 		shareCopy:'点我复制',
+        warning:'您还没有登录阿凡达星球，为保证您能获得更多收益，请登录以后再分享'
 	},
 	crowdFunding:{
 		all:'全部阶段',

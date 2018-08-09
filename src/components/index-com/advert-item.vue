@@ -41,8 +41,8 @@
 			</el-select>
 			<div class="advert-item-right-icons">
 
-				<a href="javascript:;" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
-				<a href="javascript:;" @click="telegramDialog"><i class="custom-element-icon-duihua"></i></a>
+				<a href="javascript:" @click="showShare"><i class="custom-element-icon-fenxiang"></i></a>
+				<a href="javascript:" @click="telegramDialog"><i class="custom-element-icon-duihua"></i></a>
 			</div>
 		</div>
 		<el-dialog class="telegram-dialog" :title="$t('header.tips')" :visible.sync="telegramVisible" width="360px">
@@ -192,7 +192,7 @@
 				width: 311px;
 				height: 1px;
 				background: #EAEAEA;
-				margin: 0 0 10px;
+				margin: 6px 0 6px;
 			}
 			&-text {
 				margin-top: 11px;

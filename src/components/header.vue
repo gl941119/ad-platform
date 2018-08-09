@@ -22,16 +22,17 @@
 						</el-select>
 					</div>
 					<div class="header-content-tab-right-item">
-						<span>|</span><a href="javascript:;" @click="goToTelegram"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
+						<span>|</span><a href="javascript:" @click="goToTelegram"><i class="custom-element-icon-telegram"></i></a><span>|</span></div>
 					<!-- <div class="header-content-tab-right-item">
 						<a href="javascript:;"><i class="custom-element-icon-questionsign"></i></a><span>|</span></div> -->
 					<div class="header-content-tab-right-item head-img">
-						<a v-show="!userName" @click="toLogin" href="javascript:;"><i class="custom-element-icon-touxiang" style="margin-right:8px;"></i><span class="header-content-tab-right-item-username">{{$t('header.login')}}</span></a>
-						<a v-show="userName" @click="toPersonCenter" href="javascript:;"><img class="header-content-tab-right-item-img" :src="heardUrl"><span class="header-content-tab-right-item-username">{{userName}}</span></a>
+						<a v-show="!userName" @click="toLogin" href="javascript:"><i class="custom-element-icon-touxiang" style="margin-right:8px;"></i><span class="header-content-tab-right-item-username">{{$t('header.login')}}</span></a>
+						<a v-show="userName" @click="toPersonCenter" href="javascript:"><img class="header-content-tab-right-item-img" :src="heardUrl"><span class="header-content-tab-right-item-username">{{userName}}</span></a>
 					</div>
 				</div>
 			</div>
 		</div>
+        <!--登录dialog-->
 		<el-dialog :title="title" :close-on-click-modal="false" :visible.sync="dialogModalVisible" :width="$t('login.modelWidth')">
 			<div v-show="!registerModel.registerVisible">
 				<el-form class="login-modal" :model="loginModal.form" ref="loginModalForm">
@@ -52,6 +53,7 @@
 						<el-button type="text" size="small" class="register-foot-text" @click="goToForgetPwd">{{$t('forgetPassword.forget')}}</el-button>
 						<el-button type="default" size="small" class="register-foot-btn" @click="loginSubmit">{{$t('login.login')}}</el-button>
 					</div>
+                    <!--快速登陸-->
 					<div class="register-other">
                         <span class="register-other-text">{{$t('login.quicklyLogin')}}</span>
 						<telegram-login mode="callback" :telegram-login="telegramBot" @callback="callbackFunction"></telegram-login>
@@ -90,7 +92,7 @@
 					</el-form-item>
                     <div class="register-disclaimer">
                         <el-checkbox class="register-foot-disclaimer-item" v-model="disclaimerChecked"></el-checkbox>
-                        <a href="javascript:;" @click="goTodisclaimer" class="register-foot-disclaimer-item">{{$t('register.disclaimer')}}</a>
+                        <a href="javascript:" @click="goTodisclaimer" class="register-foot-disclaimer-item">{{$t('register.disclaimer')}}</a>
                     </div>
 					<div class="register-foot">
 						<el-button type="default" size="small" class="register-foot-btn" round @click="registerSubmit">{{$t('register.register')}}</el-button>
@@ -371,7 +373,7 @@
 					});
 				}
 			},
-			handleLoginFunc(email, password, validateCode) {
+			handleLoginFunc(email, password, validateCode) {//登录
 				Request({
 					url: 'Login',
 					data: {
@@ -423,7 +425,6 @@
                 exp.setTime(exp.getTime() + 1000 * 60 * 10); //这里表示保存10分钟
                 document.cookie = "login_identify=" + id + ";expires=" + exp.toGMTString();
                 token && (document.cookie = 'login_token=' + token + ";expires=" + exp.toGMTString());
-
 				Cache.setSession('bier_userid', id);
 				Cache.setSession('bier_username', email);
 				nickname && Cache.setSession('bier_usernickname', nickname);
