@@ -534,7 +534,9 @@ const en = {
     footer:{
         partner:'cooperative partner',
         Wechat:'Wechat public number',
-        Cooperation:'Cooperation'
+        Cooperation:'Cooperation',
+        AFD:'AFD CHAIN FOUNDATION',
+        LTD:'LTD'
     },
 	...enLocale,
 };

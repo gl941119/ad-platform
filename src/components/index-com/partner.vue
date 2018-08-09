@@ -56,8 +56,8 @@
         </div>
         <div class="coypRight">
             <span>Copyright © 2018 </span>
-            <span>AFD基金会</span>
-            <span>版权所有</span>
+            <span>{{$t('footer.AFD')}}</span>
+            <span>{{$t('footer.LTD')}}</span>
         </div>
     </div>
 </template>

@@ -107,7 +107,7 @@
         }
         &-btn {
             padding: 10px 20px;
-            background: #fff;
+            /*background: #fff;*/
           
             &-text {
                 display: block;

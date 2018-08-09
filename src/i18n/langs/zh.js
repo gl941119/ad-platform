@@ -532,7 +532,9 @@ const zh = {
     footer:{
 	    partner:'合作伙伴',
         Wechat:'微信公众号',
-        Cooperation:'商务合作'
+        Cooperation:'商务合作',
+        AFD:'AFD基金会',
+        LTD:'版权所有'
 
       
     },
