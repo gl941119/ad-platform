@@ -246,7 +246,6 @@
 										:show-file-list="false" 
 										:action="uploadImg"
 										:headers="requestToken"
-										:limit="1"
 										:on-error="imgError"
 										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgBack">
@@ -257,7 +256,6 @@
 										:show-file-list="false" 
 										:action="uploadImg"
 										:headers="requestToken"
-										:limit="1"
 										:on-error="imgError"
 										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgPositive">
@@ -270,7 +268,6 @@
 										:show-file-list="false" 
 										:action="uploadImg"
 										:headers="requestToken"
-										:limit="1"
 										:on-error="imgError"
 										accept=".jpg,.png,.jpeg,.jpe,.jfif,.jif"
 										:on-success="getImgHandheld">
@@ -732,6 +729,8 @@
                 this.$store.commit('setToken', undefined);
                 this.$store.commit('setHeardUrl', undefined);
                 this.$store.commit('setInviteCode', '');
+                Cache.removeCookie('login_identify');
+                Cache.removeCookie('login_token');
                 Cache.removeSession('bier_username');
                 Cache.removeSession('bier_token');
                 Cache.removeSession('bier_userid');
@@ -813,7 +812,10 @@
 					this.cardType();
 					this.text();
 					this.countrys();
-					this.imgTest();
+                    this.imgTest();
+                    if(this.imgShow == true){
+                        return ;
+                    }
 					if(result){
 						Request({
 							url: 'QueryAuthentication',
@@ -855,7 +857,7 @@
 							this.idCard = false;
 						}
 					}else if(this.idType == '护照' || this.idType == 'Passport'){
-						var value = /^([PSE]{1}\\d{7}|[GS]{1}\\d{8})$/.test(this.idNum);
+						var value = /^[A-Za-z0-9]+$/.test(this.idNum);
 						if(!value){
 							this.idCard = true;
 						}else{

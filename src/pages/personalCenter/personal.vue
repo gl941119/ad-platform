@@ -85,7 +85,7 @@
                     }
                 })
 			},
-			out() {
+			out() {               
 				Request({
 					url: 'SignOut',
 					type: 'get',
@@ -106,6 +106,8 @@
                 this.$store.commit('setToken', undefined);
                 this.$store.commit('setHeardUrl', undefined);
                 this.$store.commit('setInviteCode', '');
+                Cache.removeCookie('login_identify');
+                Cache.removeCookie('login_token');
                 Cache.removeSession('bier_username');
                 Cache.removeSession('bier_token');
                 Cache.removeSession('bier_heardUrl');
