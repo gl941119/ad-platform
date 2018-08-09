@@ -130,6 +130,7 @@
 				source: '0123456789',
                 codeLen: 4,
                 id: this.$store.state.id,
+                token: this.$store.state.token,
 				disabled: true,
 				num: 60,
 				telegramBot: Config.TelegramBot,
@@ -452,7 +453,7 @@
                 });
             },
             getUserInfo() {
-                this.id &&
+                this.id && 
                     Request({
                         url: 'GetUserInfoById',
                         type: 'get',
@@ -460,6 +461,7 @@
                     }).then(res => {
                         // console.log('GetUserInfoById_>', res);
                         this.handleLoginSucc(res.data);
+                        this.queryCode(this.id);
                     }).catch(console.error)
             },
 		},
