@@ -10,6 +10,8 @@ import instantBuyCom from '@/components/common/instant-buy';
 import telegramLoginCom from '@/components/third-party/telegram-login';
 import filters from './filters';
 import i18n from './i18n/i18n';
+import 'vue-croppa/dist/vue-croppa.css'
+import Croppa from 'vue-croppa'
 
 import './utils/element';
 import './assets/css/reset.css';
@@ -18,6 +20,7 @@ import { VeeValidate, Veeconfig } from './utils/validation';
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(VeeValidate, Veeconfig);
+Vue.use(Croppa);
 Vue.component('advert-item', advertItemCom); // 有多处用到，则注册全局组件
 Vue.component('learn-more', learnMoreCom); // 有多处用到，则注册全局组件
 Vue.component('instant-buy', instantBuyCom); // 有多处用到，则注册全局组件
@@ -47,6 +50,7 @@ var _hmt = window._hmt || [];
 
 router.beforeEach((to, from, next) => {
     let token = store.state.token;
+
     try {
         if (to.path) {
             // console.log('to_>', to.fullPath);
