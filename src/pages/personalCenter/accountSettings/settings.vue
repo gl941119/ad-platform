@@ -219,7 +219,7 @@
 							</li>
 							<li class="el-collapse-item__content_authentication_li">
 								<label><span class="require">*</span>{{$t('setting.identityFileType')}}</label>
-								<el-select v-model="idType" @focus="cardType" @change="cardType":placeholder="$t('setting.pleaseSelect')">
+								<el-select v-model="idType" @focus="cardType" @change="cardType" :placeholder="$t('setting.pleaseSelect')">
 									<el-option v-for="item in idTypeData" :key="item.value" :label="item.label" :value="item.value">
 									</el-option>
 								</el-select>
