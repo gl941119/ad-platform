@@ -453,7 +453,7 @@
                 });
             },
             getUserInfo() {
-                this.id && this.token &&
+                this.id && 
                     Request({
                         url: 'GetUserInfoById',
                         type: 'get',
