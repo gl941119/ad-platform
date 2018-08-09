@@ -454,13 +454,15 @@
 	@import '../assets/css/variable.scss';
 	.header {
 		width: 100%;
-		background-color: #13161f;
+		/*background-color: #13161f;*/
+        background: #646464;
 		&-content {
 			width: $contentWidth;
 			height: $headerBarHeight;
 			margin: 0 auto;
             color: #fff;
-            background-color: #13161f;
+            /*background-color: #13161f;*/
+            background: #646464;
 			@include content-flex();
 			&-tab {
 				margin-left: 62px;
@@ -606,7 +608,8 @@
 	}
 	
 	.router-link-active {
-		background: #333;
+		/*background: #333;*/
+        border-bottom: 2px solid #FFFFFF;
     }
     
     .telegram-dialog {

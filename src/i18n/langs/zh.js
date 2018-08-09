@@ -12,7 +12,8 @@ const zh = {
         tips: '提示',
         tipMsg: '电报群需翻墙',
         got: '我知道了',
-        info:'系统维护 暂停提币'
+        info:'系统维护 暂停提币',
+        more:'更多'
 	},
 	login:{
 		login:'登 录',
@@ -528,6 +529,13 @@ const zh = {
 		itemNoExist:'广告项目不存在',
 		noSetConcept:'广告项目还未设置概念',
 	},
+    footer:{
+	    partner:'合作伙伴',
+        Wechat:'微信公众号',
+        Cooperation:'商务合作'
+
+      
+    },
 	...zhLocale,
 };
 export default zh

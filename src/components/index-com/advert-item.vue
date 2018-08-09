@@ -134,11 +134,11 @@
 			margin-bottom: 16px;
 		}
 		&-left {
-			width: 79px;
+			width: 85px;
 			&-logo {
 				@include body-center(38px);
 				height: 38px;
-				margin-top: 10px;
+				margin-top: 38px;
 				&>img {
 					height: 100%;
 					width: 100%;
@@ -146,7 +146,7 @@
 				}
 			}
 			&-text {
-				margin-top: 28px;
+				margin-top: 10px;
 				text-align: center;
                 font-size: 14px;
 				& a {
@@ -175,6 +175,7 @@
 			&-title {
 				padding-top: 3px;
 				width: 311px;
+                
 				@include content-flex(flex-start);
 				&-text {
 					@include item-title();
@@ -216,6 +217,7 @@
 				& a {
 					color: #aaa;
 					margin-left: 20px;
+                    font-size: 20px !important;
 				}
 			}
 		}
@@ -242,7 +244,7 @@
 	i.hot {
 		color: #F2584A;
         margin-left: 48px;
-        font-size: 24px;
+        font-size: 22px;
 	}
 	
 	.el-select-dropdown__item:hover span {

@@ -12,7 +12,8 @@ const en = {
         tips: 'Tips',
         tipMsg: 'Telegram need VPN',
         got: 'I got it',
-        info:'system maintenance，suspended withdrawals'
+        info:'system maintenance，suspended withdrawals',
+        more:'more'
 	},
 	login:{
 		login:'Login',
@@ -530,6 +531,11 @@ const en = {
 		itemNoExist:'the advertisement project is not existed',
 		noSetConcept:'the advertisement has not been defined',
 	},
+    footer:{
+        partner:'cooperative partner',
+        Wechat:'Wechat public number',
+        Cooperation:'Cooperation'
+    },
 	...enLocale,
 };
 export default en

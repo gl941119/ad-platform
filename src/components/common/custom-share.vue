@@ -88,10 +88,14 @@
     }
 </script>
 <style lang="scss" scoped>
+    el-dialog{
+        width: 360px;
+        height: 314px !important;
+    }
     .show-share {
         width: 320px;
         height: 230px;
-        border: 1px solid #979797;
+      
         margin: 0 auto 36px;
         position: relative;
         padding: 35px 10px;
@@ -99,14 +103,12 @@
             color: #FF9500;
             font-size: 20px;
             line-height: 30px;
+            text-align: center;
         }
         &-btn {
-            position: absolute;
             padding: 10px 20px;
             background: #fff;
-            left: 50%;
-            top: 0;
-            transform: translate(-50%, -50%);
+          
             &-text {
                 display: block;
                 margin: 0 auto;
