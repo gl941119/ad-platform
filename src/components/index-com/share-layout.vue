@@ -7,12 +7,17 @@
     </div>
 </template>
 <script>
+    import Cache from '@/utils/cache'
     export default {
         data() {
             return {}
         },
         methods: {
             showShare() {
+                if(!(this.$store.state.token||Cache.getSession("bier_token"))){
+                  
+                    return;
+                }
                 this.$store.commit('setDialogVisible', true);
             }
         }

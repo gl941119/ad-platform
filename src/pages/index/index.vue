@@ -39,19 +39,23 @@
 					<div class="platform-index-item-crowdsale-title-linear">
 					</div>
 					{{$t('header.project')}}
+                    <router-link  tag="a" :to="{name: 'advertisement'}" class="platform-index-item-ad-title-more">{{$t('header.more')}}></router-link>
+                   
 				</div>
 				<advert-item v-for="(advert, _i) in totalAdvertItemDatas" :key="advert.id" :advert-datas="advert" :item-index="_i" :system-time="sysTime" @update-data="updateAdvertData">
 				</advert-item>
-				<learn-more v-if="totalAdvertItemDatas.length<30&&advertItemDatas.length>0" :type="2" @seemore="learnMoreItem"></learn-more>
-				<learn-more v-else :type="1" @seemore="toAdvertDetailPage"></learn-more>
+				<!--<learn-more v-if="totalAdvertItemDatas.length<30&&advertItemDatas.length>0" :type="2" @seemore="learnMoreItem"></learn-more>-->
+				<!--<learn-more v-else :type="1" @seemore="toAdvertDetailPage"></learn-more>-->
 			</div>
 		</div>
+        <partner></partner>
 	</div>
 </template>
 <script>
 	import customCarouselCom from '@/components/custom-carousel';
 	import crowdsaleItemCom from '@/components/index-com/crowdsale-item';
 	import advertItemCom from '@/components/index-com/advert-item';
+	import Partner from '@/components/index-com/partner';
 	import Request from '../../utils/require.js';
 	import Config from '../../utils/config.js';
 	import axios from 'axios';
@@ -131,6 +135,7 @@
 			'custom-carousel': customCarouselCom,
 			'crowdsale-item': crowdsaleItemCom,
 			'advert-item': advertItemCom,
+            Partner
 		},
 		methods: {
 			getData() {
@@ -263,6 +268,8 @@
 	@import '../../assets/css/global.scss';
 	%platform-index-title {
 		@extend %platform-title;
+        box-sizing: border-box;
+        padding-left: 6px;
 		margin: 14px 0 9px;
 		height: 34px;
 		background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.45));
@@ -313,9 +320,11 @@
 				&-title {
 					@extend %platform-index-title;
 					&-linear {
+                        margin-left: -6px;
 						height: 2px;
 						background: linear-gradient(-90deg, rgba(60, 89, 159, 0), rgba(60, 89, 159, 0.45), rgba(60, 89, 159, 1));
 					}
+                   
 				}
 			}
 			&-ad {
@@ -323,6 +332,15 @@
 				flex: 1;
 				&-title {
 					@extend %platform-index-title;
+                    &-more{
+                        float: right;
+                        margin-right: 24px;
+                        font-size:12px;
+                        font-family:'PingFangSC-Light';
+                        color:rgba(111,111,111,1);
+                        line-height:34px;
+                        
+                    }
 				}
 			}
 		}
