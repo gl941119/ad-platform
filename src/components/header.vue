@@ -457,7 +457,7 @@
                         type: 'get',
                         data: {id: this.id}
                     }).then(res => {
-                        console.log('GetUserInfoById_>', res);
+                        // console.log('GetUserInfoById_>', res);
                         this.handleLoginSucc(res.data);
                     }).catch(console.error)
             },
