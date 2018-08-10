@@ -235,7 +235,9 @@
         mounted(){
         	var arr = window.location.hash;
             this.registerModel.form.inviteCode = arr.split('=')[2];
-            this.getUserInfo()
+            var token = Cache.getSession('bier_token')
+            var id = Cache.getSession('bier_userid')
+            !token && !id && this.getUserInfo()
         },
 		methods: {
             getLabelWidth(lang, type){
@@ -453,13 +455,16 @@
                 });
             },
             getUserInfo() {
-                this.id && 
+                var id = Cache.getCookie('login_identify')
+                var token = Cache.getCookie('login_token')
+                token && id &&  
                     Request({
                         url: 'GetUserInfoById',
                         type: 'get',
                         data: {id: this.id}
                     }).then(res => {
                         // console.log('GetUserInfoById_>', res);
+                        console.log(111)
                         this.handleLoginSucc(res.data);
                         this.queryCode(this.id);
                     }).catch(console.error)

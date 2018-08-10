@@ -50,8 +50,10 @@ var _hmt = window._hmt || [];
     s.parentNode.insertBefore(hm, s)
 })()
 
+
+
 router.beforeEach((to, from, next) => {
-    let token = store.state.token
+    let token = store.state.token;
     try {
         if (to.path) {
             // console.log('to_>', to.fullPath);
@@ -65,7 +67,7 @@ router.beforeEach((to, from, next) => {
         if (!token) {
             next({name: 'index'})
         } else {
-            next()
+            next();
         }
     } else {
         next()
