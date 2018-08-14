@@ -190,7 +190,7 @@
                     // let url = canvas.toDataURL("image/png");
                     // console.log('url_>', url);
                 }
-                img.src = this.slangChange === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/3171052368274da39416f15e24b9d28a.jpg' : 'http://imgs.afdchain.com/web-upload/picture/1207cec46460423bb3aab58adbd86184.jpg';
+                img.src = this.slangChange === 'EN' ? 'http://imgs.afdchain.com/web-upload/picture/3171052368274da39416f15e24b9d28a.jpg' : 'http://imgs.afdchain.com/web-upload/picture/a13c5166b4044721832aa214f00c711c.jpg';
                 InviteQr.src = 'data:image/png;base64, ' + this.imageQrAddress;
             },
         }
