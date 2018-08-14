@@ -328,7 +328,7 @@ const en = {
 		myWallet:' My wallet',
 		withdrawal:'Withdrawal',
 		enterMoney:'please input your withdraw amount',
-		emptyMoney:'withdraw amount at least is 100',
+		emptyMoney:'withdraw amount at least is 1000',
 		notic:'After the recharge amount is received, the corresponding amount will automatically appear in the advertiser\'s account. ',
 		requireWithdraw:'withdraw application was submitted',
 	},
