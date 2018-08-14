@@ -211,7 +211,10 @@
 			findAdvertisement() {
 				return new Promise((resolve, reject) => {
 					Request({
-						url: 'FindAdvertisement',
+                        url: 'FindAdvertisement',
+                        data:{
+                            advertType:'0'
+                        },
 						type: 'get',
 					}).then(res => {
 						// console.log('FindAdvertisement->', res);

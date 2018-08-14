@@ -127,6 +127,9 @@ import Config from '../../utils/config.js';
                 return new Promise((resolve, reject) => {
                     Request({
                         url: 'FindAdvertisement',
+                        data:{
+                            advertType:'0'
+                        },
                         type: 'get',
                     }).then(res => {
                         this.headerImg = this.handleCarouselData(res.data);
