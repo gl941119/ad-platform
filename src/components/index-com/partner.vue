@@ -1,6 +1,6 @@
 <template>
     <div style="width: 1400px;margin:0 auto;">
-        <div class="partner">
+        <!-- <div class="partner">
             <div class="title">
                 <div class="linear"></div>
                 {{$t('footer.partner')}}
@@ -19,7 +19,7 @@
                 <img src="@/assets/imgs/img/partner12.jpg">
                 <img src="@/assets/imgs/img/partner1.png">
             </div>
-        </div>
+        </div> -->
         <div class="footer" id='callMy'>
             <div class="footerLogo">
                 <img src="@/assets/imgs/img/logo.png" />
@@ -74,15 +74,15 @@
         margin: 0 auto;
         padding-top: 8px;
         overflow: hidden;
-        background:rgba(255,255,255,1);
-        >.title{
-            height:33px;
-            line-height:28px;
-            font-size:20px;
-            font-family:PingFangSC-Semibold;
-            color:rgba(60,89,159,1);
+        background: rgba(255, 255, 255, 1);
+        >.title {
+            height: 33px;
+            line-height: 28px;
+            font-size: 20px;
+            font-family: PingFangSC-Semibold;
+            color: rgba(60, 89, 159, 1);
             text-align: center;
-            .linear{
+            .linear {
                 width: 80px;
                 height: 2px;
                 margin: 0 auto;
@@ -108,9 +108,7 @@
 
     .footer {
         width: 1440px;
-       
         background: rgba(100, 100, 100, 1);
-
         color: rgba(255, 255, 255, 1);
         overflow: hidden;
         .footerLogo {
@@ -128,80 +126,70 @@
                 font-family: "PingFangSC-Regular";
                 line-height: 25px;
                 white-space: nowrap;
-                
             }
-
         }
-        .call{
+        .call {
             float: right;
             height: 188px;
-            ul{
+            ul {
                 float: left;
                 margin-top: 20px;
                 width: 150px;
                 margin-right: 150px;
-                li{
+                li {
                     /* margin-top: 69px; */
                     width: 56px;
-                    font-size:14px;
-                    font-family:"PingFangSC-Medium";
+                    font-size: 14px;
+                    font-family: "PingFangSC-Medium";
                     white-space: nowrap;
-
                 }
-                li:first-child{
-                    margin-top:69px;
-                    a{
+                li:first-child {
+                    margin-top: 69px;
+                    a {
                         display: inline-block;
                         color: rgb(44, 165, 224);
                         width: 24px;
                         height: 24px;
                     }
-                    a:first-child{
-                        
-                        
-                    }
-                    a:last-child{
+                    a:first-child {}
+                    a:last-child {
                         /*margin-left:22px;*/
- 
                     }
                 }
-                li:last-child{
+                li:last-child {
                     margin-top: 10px;
                 }
-                .bian{
-                    letter-spacing:29px
+                .bian {
+                    letter-spacing: 29px
                 }
             }
-            >div{
+            >div {
                 float: left;
                 width: 64px;
                 height: 188px;
                 margin-right: 48px;
                 box-sizing: border-box;
                 padding-top: 50px;
-                p{
+                p {
                     margin-top: 10px;
-                    font-size:12px;
-                    font-family:PingFangSC-Medium;
-                    color:rgba(255,255,255,1);
-                    line-height:17px;
+                    font-size: 12px;
+                    font-family: PingFangSC-Medium;
+                    color: rgba(255, 255, 255, 1);
+                    line-height: 17px;
                     text-align: center;
                 }
-                img{
+                img {
                     width: 64px;
                     height: 64px;
                 }
-                .Wechatp{
+                .Wechatp {
                     width: 126px;
                     text-align: center;
                     white-space: nowrap;
                     margin-left: -35px;
                 }
             }
-
-
         }
-        
     }
 
     .coypRight {
@@ -209,13 +197,11 @@
         height: 40px;
         line-height: 40px;
         background: rgba(51, 51, 51, 1);
-        font-size:12px;
-        color:rgba(255,255,255,1);
+        font-size: 12px;
+        color: rgba(255, 255, 255, 1);
         text-align: center;
-        
         span:first-child {
             font-family: "ArialMT";
-
         }
         span:nth-child(2) {
             font-family: "PingFangSC";
@@ -224,5 +210,4 @@
             font-family: "ArialMT";
         }
     }
-
 </style>

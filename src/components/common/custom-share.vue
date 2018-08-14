@@ -14,88 +14,88 @@
 <script>
     import Request from '../../utils/require.js';
     import Cache from '../../utils/cache';
-	import Clipboard from 'clipboard';
+    import Clipboard from 'clipboard';
     export default {
         data() {
             return {
-                accountId:this.$store.state.id || Cache.getSession('bier_userid'),
-                token:this.$store.state.token|| Cache.getSession("bier_token"),
-                copyValue:'',
+                accountId: this.$store.state.id || Cache.getSession('bier_userid'),
+                token: this.$store.state.token || Cache.getSession("bier_token"),
+                copyValue: '',
             }
         },
         computed: {
             dialogVisible: {
-                get(){
+                get() {
                     return this.$store.state.dialogVisible;
                 },
-                set(){
+                set() {
                     this.$store.commit('setDialogVisible', false);
                 }
             },
-            inviteCode:{
-            	get(){
+            inviteCode: {
+                get() {
                     let code = this.$store.state.inviteCode || Cache.getSession("bier_inviteCode");
-            		return code;
+                    return code;
                 },
-            	set(){
-            		
-            	}
+                set() {
+
+                }
             },
-            language:{
-            	get(){
-            		var language = this.$t('share.shareOne');
-            		return language;
-            	},
-            	set(val){
-            		this.language = val;
-            	}
+            language: {
+                get() {
+                    var language = this.$t('share.shareOne');
+                    return language;
+                },
+                set(val) {
+                    this.language = val;
+                }
             },
         },
-        watch:{
-        	inviteCode(val){
-        		this.inviteCode = val;
-                this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+ this.inviteCode;
-        	},
-        	language(val){
-        		this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+ this.inviteCode;
-        	}
+        watch: {
+            inviteCode(val) {
+                this.inviteCode = val;
+                this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode=' + this.inviteCode;
+            },
+            language(val) {
+                this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode=' + this.inviteCode;
+            }
         },
-        mounted(){
-        	this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode='+ this.inviteCode;
+        mounted() {
+            this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode=' + this.inviteCode;
         },
         methods: {
-        	clickCopy(){
-        		let clipboard = new Clipboard('.show-share-btn-text');
-		        clipboard.on('success', e => {
-			        this.$message({
-	                    message: this.$t('messageNotice.copy'),
-	                    type:'success'
-	                });
-		          	// 释放内存
-		          	clipboard.destroy()
-		        })
-		        clipboard.on('error', e => {
-		          	// 不支持复制
-		          	this.$message({
-	                    message: this.$t('messageNotice.defaultCopy'),
-	                    type:'warning'
-	                });
-		          	// 释放内存
-		          	clipboard.destroy()
-		        })
-        	},
+            clickCopy() {
+                let clipboard = new Clipboard('.show-share-btn-text');
+                clipboard.on('success', e => {
+                    this.$message({
+                        message: this.$t('messageNotice.copy'),
+                        type: 'success'
+                    });
+                    // 释放内存
+                    clipboard.destroy()
+                })
+                clipboard.on('error', e => {
+                    // 不支持复制
+                    this.$message({
+                        message: this.$t('messageNotice.defaultCopy'),
+                        type: 'warning'
+                    });
+                    // 释放内存
+                    clipboard.destroy()
+                })
+            },
         }
     }
 </script>
 <style lang="scss" scoped>
-    el-dialog{
+    el-dialog {
         width: 360px;
         height: 314px !important;
     }
+
     .show-share {
         width: 320px;
-        height: 230px;
-      
+        max-height: 400px;
         margin: 0 auto 36px;
         position: relative;
         padding: 35px 10px;
@@ -108,7 +108,6 @@
         &-btn {
             padding: 10px 20px;
             /*background: #fff;*/
-          
             &-text {
                 display: block;
                 margin: 0 auto;
@@ -116,7 +115,7 @@
                 background: #FF9500;
                 border: none;
                 color: #fff;
-                box-shadow:0px 2px 4px 0px #955700;
+                box-shadow: 0px 2px 4px 0px #955700;
                 &:hover,
                 &:active,
                 &:focus {
