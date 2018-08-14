@@ -108,230 +108,235 @@
 	</header>
 </template>
 <script>
-	import customIdentifyCom from '@/components/common/custom-identify';
-	import Cache from '../utils/cache.js';
-	import Utils from '../utils/util.js';
-	import Request from '../utils/require.js';
-	import Config from '../utils/config.js';
-	import validateFun from '../utils/validate.js';
-	function passTest(str) {
-		// return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.*?[~/`!@#$%^&*()_+|{}?;:><\-\]\\[\/].*$/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
-		return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
-	}
-	
-	export default {
-		data() {
-			let emailValidate = validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val));
-			let passwordValidate = validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this))
-			let passwordAgainValidate = validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password)
+    import customIdentifyCom from '@/components/common/custom-identify';
+    import Cache from '../utils/cache.js';
+    import Utils from '../utils/util.js';
+    import Request from '../utils/require.js';
+    import Config from '../utils/config.js';
+    import validateFun from '../utils/validate.js';
 
-			return {
-				utils: new Utils(),
-				source: '0123456789',
+    function passTest(str) {
+        // return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.*?[~/`!@#$%^&*()_+|{}?;:><\-\]\\[\/].*$/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
+        return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
+    }
+
+    export default {
+        data() {
+            let emailValidate = validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val));
+            let passwordValidate = validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this))
+            let passwordAgainValidate = validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password)
+
+            return {
+                utils: new Utils(),
+                source: '0123456789',
                 codeLen: 4,
                 id: this.$store.state.id,
                 token: this.$store.state.token,
-				disabled: true,
-				num: 60,
-				telegramBot: Config.TelegramBot,
+                disabled: true,
+                num: 60,
+                telegramBot: Config.TelegramBot,
                 title: this.$t('register.userRegister'),
                 validateKey: undefined,
                 base64Str: undefined,
                 disclaimerChecked: true,
                 telegramVisible: false,
-				registerModel: {
-					registerVisible: this.$store.state.registerVisible,
-					rule: {
-						email: [{
-							validator: emailValidate,
-							trigger: 'blur'
-						}],
-						verifyCode: [{
-							required: true,
-							message: this.$t('messageNotice.codeEmpty'),
-							trigger: 'blur'
-						}],
-						password: [{
-							validator: passwordValidate,
-							trigger: 'blur'
-						}],
-						passwordAgain: [{
-							validator: passwordAgainValidate,
-							trigger: 'blur'
-						}],
-					},
-					form: {
-						email: '',
-						verifyCode: '',
-						password: '',
-						passwordAgain: '',
-						inviteCode: '',
-					}
-				},
-				loginModal: {
-					loginVisible: false,
-					form: {
-						email: '',
-						password: '',
-						verifyCode: '',
-					}
-				},
-				select: this.$i18n.locale,
-			}
+                registerModel: {
+                    registerVisible: this.$store.state.registerVisible,
+                    rule: {
+                        email: [{
+                            validator: emailValidate,
+                            trigger: 'blur'
+                        }],
+                        verifyCode: [{
+                            required: true,
+                            message: this.$t('messageNotice.codeEmpty'),
+                            trigger: 'blur'
+                        }],
+                        password: [{
+                            validator: passwordValidate,
+                            trigger: 'blur'
+                        }],
+                        passwordAgain: [{
+                            validator: passwordAgainValidate,
+                            trigger: 'blur'
+                        }],
+                    },
+                    form: {
+                        email: '',
+                        verifyCode: '',
+                        password: '',
+                        passwordAgain: '',
+                        inviteCode: '',
+                    }
+                },
+                loginModal: {
+                    loginVisible: false,
+                    form: {
+                        email: '',
+                        password: '',
+                        verifyCode: '',
+                    }
+                },
+                select: this.$i18n.locale,
+            }
         },
         watch: {
-        	language(val, old){
-        		this.registerModel.rule = {
-						email: [{
-							validator: validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val)),
-							trigger: 'blur'
-						}],
-						verifyCode: [{
-							required: true,
-							message: this.$t('messageNotice.codeEmpty'),
-							trigger: 'blur'
-						}],
-						password: [{
-							validator: validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this)),
-							trigger: 'blur'
-						}],
-						passwordAgain: [{
-							validator: validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password),
-							trigger: 'blur'
-						}],
-					}
+            language(val, old) {
+                this.registerModel.rule = {
+                    email: [{
+                        validator: validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val)),
+                        trigger: 'blur'
+                    }],
+                    verifyCode: [{
+                        required: true,
+                        message: this.$t('messageNotice.codeEmpty'),
+                        trigger: 'blur'
+                    }],
+                    password: [{
+                        validator: validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this)),
+                        trigger: 'blur'
+                    }],
+                    passwordAgain: [{
+                        validator: validateFun.validateTest(this.$t('messageNotice.oncePasswordEmpty'), this.$t('messageNotice.oncePasswordEqual'), val => val === this.registerModel.form.password),
+                        trigger: 'blur'
+                    }],
+                }
             },
         },
         computed: {
             userName: {
-                get(){
+                get() {
                     return this.$store.state.usernickname || this.$store.state.username;
                 },
-                set(){}
+                set() {}
             },
             heardUrl() {
                 return this.$store.state.heardUrl || Config.headPortrait[5];
             },
             dialogModalVisible: {
-                get(){
-                    if(this.$store.state.dialogModalVisible === true) {
+                get() {
+                    if (this.$store.state.dialogModalVisible === true) {
                         this.toLogin();
                     }
-                    if(this.$store.state.dialogModalVisible === 'register'){
+                    if (this.$store.state.dialogModalVisible === 'register') {
                         this.goToRegister();
                         this.$store.commit('setRegisterVisible', true);
                         return true;
                     }
                     return this.$store.state.dialogModalVisible;
                 },
-                set(val){
+                set(val) {
                     this.$store.commit('setDialogModalVisible', val)
                 }
             },
-            language(){
+            language() {
                 return this.utils.getCurrLanguage(this.$store);
             },
         },
-        mounted(){
-        	var arr = window.location.hash;
+        mounted() {
+            var arr = window.location.hash;
             this.registerModel.form.inviteCode = arr.split('=')[2];
-            var token = Cache.getSession('bier_token')
-            var id = Cache.getSession('bier_userid')
+            var token = Cache.getSession('bier_token');
+            var id = Cache.getSession('bier_userid');
             !token && !id && this.getUserInfo()
         },
-		methods: {
-            getLabelWidth(lang, type){
+        methods: {
+            getLabelWidth(lang, type) {
                 return type === 'login' ?
-                (lang === 'EN' ? '8em' : '6em') :
-                (lang === 'EN' ? '10em' : '6em')
+                    (lang === 'EN' ? '8em' : '6em') :
+                    (lang === 'EN' ? '10em' : '6em')
             },
-			change(value){
-				if(value=='en'){
-					value = value.toUpperCase();
-				}
-				this.$i18n.locale = value;
-				this.$store.commit('setLanguage', value);
-				Cache.setLocal('bier_langChange', value);
+            change(value) {
+                if (value == 'en') {
+                    value = value.toUpperCase();
+                }
+                this.$i18n.locale = value;
+                this.$store.commit('setLanguage', value);
+                Cache.setLocal('bier_langChange', value);
             },
-            goToTelegram(){
+            goToTelegram() {
                 // https://t.me/AFDchain99
                 this.telegramVisible = true;
             },
-            IGotIt(){
+            IGotIt() {
                 this.telegramVisible = false;
                 this.utils.newWin('https://t.me/AFDchain99');
             },
-			toLogin() {
+            toLogin() {
                 this.createCode().then(() => {
                     this.dialogModalVisible = true;
                     this.title = this.$t('login.userLogin');
                     this.registerModel.registerVisible = false;
                 })
             },
-            goToForgetPwd(){
+            goToForgetPwd() {
                 this.dialogModalVisible = false;
                 this.$store.commit('setGlobalShow', 'hide');
                 Cache.setSession('globalShow', 'hide');
-                this.$router.push({name: 'resetpwd'});
+                this.$router.push({
+                    name: 'resetpwd'
+                });
             },
-			toPersonCenter() {
-				this.$router.push({
-					name: 'personalCenter'
-				});
+            toPersonCenter() {
+                this.$router.push({
+                    name: 'personalCenter'
+                });
             },
-            goTodisclaimer(){
+            goTodisclaimer() {
                 this.$store.commit('setDialogModalVisible', false);
-                this.$router.push({name: 'userterm'});
+                this.$router.push({
+                    name: 'userterm'
+                });
             },
-			sendVerifyCode() {
-				if(this.registerModel.form.email) {
-					Request({
-						url: 'SendVerifyCode',
-						data: {
-							email: this.registerModel.form.email,
-						}
-					}).then(res => {
-						this.disabled = false;
-						let timer = setInterval(() => {
-							this.num--;
-							if(this.num < 1) {
-								clearInterval(timer);
-								this.disabled = true;
-								this.num = 60;
-							}
-						}, 1000);
-						this.$message({
-							message: this.utils.judgeLanguage(this.language, res.message),
-							type: 'success'
-						});
-					}).catch(console.error)
-				} else {
-					this.$message({
-						message: 'email is empty',
-						type: 'warning'
-					})
-				}
-			},
-			callbackFunction(user) {
-				// console.log('hanguishuai_bot_>', user);
-				Request({
-					url: 'TelegramAuthorizeCB',
-					data: user,
-					flag: true,
-				}).then(res => {
-					this.handleLoginSucc(res.data);
-				})
-			},
-			registerSubmit() {
-				let {
-					email,
-					verifyCode,
-					password,
-					inviteCode
+            sendVerifyCode() {
+                if (this.registerModel.form.email) {
+                    Request({
+                        url: 'SendVerifyCode',
+                        data: {
+                            email: this.registerModel.form.email,
+                        }
+                    }).then(res => {
+                        this.disabled = false;
+                        let timer = setInterval(() => {
+                            this.num--;
+                            if (this.num < 1) {
+                                clearInterval(timer);
+                                this.disabled = true;
+                                this.num = 60;
+                            }
+                        }, 1000);
+                        this.$message({
+                            message: this.utils.judgeLanguage(this.language, res.message),
+                            type: 'success'
+                        });
+                    }).catch(console.error)
+                } else {
+                    this.$message({
+                        message: 'email is empty',
+                        type: 'warning'
+                    })
+                }
+            },
+            callbackFunction(user) {
+                // console.log('hanguishuai_bot_>', user);
+                Request({
+                    url: 'TelegramAuthorizeCB',
+                    data: user,
+                    flag: true,
+                }).then(res => {
+                    this.handleLoginSucc(res.data);
+                })
+            },
+            registerSubmit() {
+                let {
+                    email,
+                    verifyCode,
+                    password,
+                    inviteCode
                 } = this.registerModel.form;
-                if(this.disclaimerChecked) {
+                if (this.disclaimerChecked) {
                     this.$refs.registerModelForm.validate((valid) => {
-                        if(valid) {
+                        if (valid) {
                             Request({
                                 url: 'Register',
                                 data: {
@@ -356,47 +361,50 @@
                         }
                     });
                 } else {
-                    this.$message({message: '请阅读免责声明', type: 'warning'});
+                    this.$message({
+                        message: '请阅读免责声明',
+                        type: 'warning'
+                    });
                 }
             },
             // login button
-			loginSubmit() {
-				let {
-					email,
-					password,
-					verifyCode
+            loginSubmit() {
+                let {
+                    email,
+                    password,
+                    verifyCode
                 } = this.loginModal.form;
-				if(email && password && verifyCode) {
+                if (email && password && verifyCode) {
                     this.handleLoginFunc(email, password, verifyCode);
-				} else {
-					this.$message({
-						message: this.$t('messageNotice.notEmpty'),
-						type: 'warning'
-					});
-				}
-			},
-			handleLoginFunc(email, password, validateCode) {//登录
-				Request({
-					url: 'Login',
-					data: {
-						email: validateFun.encrypt(email),
+                } else {
+                    this.$message({
+                        message: this.$t('messageNotice.notEmpty'),
+                        type: 'warning'
+                    });
+                }
+            },
+            handleLoginFunc(email, password, validateCode) { //登录
+                Request({
+                    url: 'Login',
+                    data: {
+                        email: validateFun.encrypt(email),
                         password: validateFun.encrypt(password),
                         validateCode,
                         validateKey: this.validateKey,
-					},
+                    },
                     type: 'post',
                     flag: true,
-				}).then(res => {
-					this.handleLoginSucc(res.data);
-					this.queryCode(res.data.id);
-				}).catch(e => {
+                }).then(res => {
+                    this.handleLoginSucc(res.data);
+                    this.queryCode(res.data.id);
+                }).catch(e => {
                     // console.log('err',e);
-                    if(e.message === '1035'){
+                    if (e.message === '1035') {
                         this.createCode();
                     }
                 })
-			},
-			queryCode(value) {
+            },
+            queryCode(value) {
                 Request({
                     url: 'QueryInviteCode',
                     data: {
@@ -404,46 +412,51 @@
                     },
                     type: 'get'
                 }).then(res => {
-					this.$store.commit('setInviteCode', res.data.inviteCode);
-					Cache.setSession('bier_inviteCode', res.data.inviteCode);
+                    this.$store.commit('setInviteCode', res.data.inviteCode);
+                    Cache.setSession('bier_inviteCode', res.data.inviteCode);
                 })
             },
-			handleLoginSucc(data) {
-				let {
-					id,
-					email,
-					nickname,
-					token,
-					phone,
-					heardUrl,
-				} = data;
-				this.$store.commit('setUserId', id);
-				this.$store.commit('setUserName', email);
+            handleLoginSucc(data) {
+                let {
+                    id,
+                    email,
+                    nickname,
+                    token,
+                    phone,
+                    heardUrl,
+                } = data;
+                if (token === 'undefined') {
+                    var tokens = Cache.getCookie('login_token');
+                }
+                this.$store.commit('setUserId', id);
+                this.$store.commit('setUserName', email);
                 this.$store.commit('setUserNickName', nickname);
                 // cookie 中不保存 token
-				token && this.$store.commit('setToken', token);
-				this.$store.commit('setHeardUrl', heardUrl);
-				var exp = new Date();
+                token && this.$store.commit('setToken', token);
+                this.$store.commit('setHeardUrl', heardUrl);
+                var exp = new Date();
                 exp.setTime(exp.getTime() + 1000 * 60 * 10); //这里表示保存10分钟
                 document.cookie = "login_identify=" + id + ";expires=" + exp.toGMTString();
                 token && (document.cookie = 'login_token=' + token + ";expires=" + exp.toGMTString());
-				Cache.setSession('bier_userid', id);
-				Cache.setSession('bier_username', email);
-				nickname && Cache.setSession('bier_usernickname', nickname);
-				token && Cache.setSession('bier_token', token);
-				heardUrl && Cache.setSession('bier_heardUrl', heardUrl);
+                Cache.setSession('bier_userid', id);
+                Cache.setSession('bier_username', email);
+                nickname && Cache.setSession('bier_usernickname', nickname);
+                token && Cache.setSession('bier_token', token);
+                heardUrl && Cache.setSession('bier_heardUrl', heardUrl);
                 this.dialogModalVisible = false;
-                this.$router.push({name: 'index'});
+                this.$router.push({
+                    name: 'index'
+                });
             },
-			goToRegister() {
-				this.title = this.$t('register.userRegister');
-				this.$refs.registerModelForm && this.$refs.registerModelForm.resetFields();
-				this.registerModel.registerVisible = true;
-			},
-			changeCode() {
-				this.createCode();
-			},
-			createCode() {
+            goToRegister() {
+                this.title = this.$t('register.userRegister');
+                this.$refs.registerModelForm && this.$refs.registerModelForm.resetFields();
+                this.registerModel.registerVisible = true;
+            },
+            changeCode() {
+                this.createCode();
+            },
+            createCode() {
                 return new Promise((resolve, reject) => {
                     Request({
                         url: 'GetVerifyFromSer',
@@ -457,69 +470,72 @@
             getUserInfo() {
                 var id = Cache.getCookie('login_identify')
                 var token = Cache.getCookie('login_token')
-                token && id &&  
+                token && id &&
                     Request({
                         url: 'GetUserInfoById',
                         type: 'get',
-                        data: {id: this.id}
+                        data: {
+                            id: this.id
+                        }
                     }).then(res => {
                         // console.log('GetUserInfoById_>', res);
-                        console.log(111)
                         this.handleLoginSucc(res.data);
+                        this.$store.commit('setToken', token);
+                        Cache.setSession('bier_token', token);
                         this.queryCode(this.id);
                     }).catch(console.error)
             },
-		},
-		components: {
-			'custom-identify': customIdentifyCom,
-		}
-	}
+        },
+        components: {
+            'custom-identify': customIdentifyCom,
+        }
+    }
 </script>
 <style lang="scss" scoped>
-	@import '../assets/css/global.scss';
-	@import '../assets/css/variable.scss';
-	.header {
-		width: 100%;
-		/*background-color: #13161f;*/
+    @import '../assets/css/global.scss';
+    @import '../assets/css/variable.scss';
+    .header {
+        width: 100%;
+        /*background-color: #13161f;*/
         background: #646464;
-		&-content {
-			width: $contentWidth;
-			height: $headerBarHeight;
-			margin: 0 auto;
+        &-content {
+            width: $contentWidth;
+            height: $headerBarHeight;
+            margin: 0 auto;
             color: #fff;
             /*background-color: #13161f;*/
             background: #646464;
-			@include content-flex();
-			&-tab {
-				margin-left: 62px;
-				height: 100%;
+            @include content-flex();
+            &-tab {
+                margin-left: 62px;
+                height: 100%;
                 flex: auto;
-                @include content-flex(space-between);                
-				&-left {
-					&-menu {
-						display: inline-block;
-						height: 100%;
-						margin-right: 36px;
-						color: #fff;
-						@include header-layout;
-					}
-				}
-				&-right {
-					color: #fff;
-					@include header-layout;
-					@include content-flex();
-					&-item {
-						& a {
-							color: #fff;
-							height: 100%;
-							display: inline-block;
+                @include content-flex(space-between);
+                &-left {
+                    &-menu {
+                        display: inline-block;
+                        height: 100%;
+                        margin-right: 36px;
+                        color: #fff;
+                        @include header-layout;
+                    }
+                }
+                &-right {
+                    color: #fff;
+                    @include header-layout;
+                    @include content-flex();
+                    &-item {
+                        & a {
+                            color: #fff;
+                            height: 100%;
+                            display: inline-block;
                             padding: 0 25px;
                         }
-                        &.head-img a{
+                        &.head-img a {
                             @include content-flex();
                         }
-						&:last-child a {
-							padding-right: 0;
+                        &:last-child a {
+                            padding-right: 0;
                         }
                         &-img {
                             width: 30px;
@@ -531,46 +547,48 @@
                             width: 4em;
                             @include text-ellipsis();
                         }
-					}
-				}
-			}
-		}
-	}
-	.languae{
-		width: 100px;
-		margin-right: 20px;
-	}
-	.login-verify {
-		position: relative;
-		&-input {
-			width: 115px;
-		}
+                    }
+                }
+            }
+        }
+    }
+
+    .languae {
+        width: 100px;
+        margin-right: 20px;
+    }
+
+    .login-verify {
+        position: relative;
+        &-input {
+            width: 115px;
+        }
         &-input.english-lang {
             width: 130px;
         }
-		&-btn {
-			position: absolute;
-			top: 0;
-			right: 0;
-			height: 40px;
+        &-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 40px;
             cursor: pointer;
             &>img {
                 border: 1px solid #ccc;
                 border-radius: 3px;
             }
-		}
-	}
-	
-	.register-verify {
-		position: relative;
-		&-btn {
-			position: absolute;
-			top: 1px;
-			right: 6px;
-		}
-	}
-	
-	.register-foot {
+        }
+    }
+
+    .register-verify {
+        position: relative;
+        &-btn {
+            position: absolute;
+            top: 1px;
+            right: 6px;
+        }
+    }
+
+    .register-foot {
         @include content-flex(center);
         position: relative;
         &-disclaimer {
@@ -587,28 +605,29 @@
         &-text {
             color: #666;
             font-size: 14px;
-            &:hover,&:active,
-			&:focus {
+            &:hover,
+            &:active,
+            &:focus {
                 color: #999;
             }
         }
-		&-btn {
-			width: 90px;
-			background: #FF9500;
-			border: none;
-			color: #fff;
-			&:hover,
-			&:active,
-			&:focus {
-				background: #FF9500;
-				color: #fff;
-			}
-			&:active {
-				background: #FCA529;
-			}
-		}
+        &-btn {
+            width: 90px;
+            background: #FF9500;
+            border: none;
+            color: #fff;
+            &:hover,
+            &:active,
+            &:focus {
+                background: #FF9500;
+                color: #fff;
+            }
+            &:active {
+                background: #FCA529;
+            }
+        }
     }
-    
+
     .register-other {
         min-height: 30px;
         position: relative;
@@ -628,16 +647,16 @@
             color: #999;
         }
     }
-	
-	.login-modal .register-foot {
-		@include content-flex(space-between);
-	}
-	
-	.router-link-active {
-		/*background: #333;*/
+
+    .login-modal .register-foot {
+        @include content-flex(space-between);
+    }
+
+    .router-link-active {
+        /*background: #333;*/
         border-bottom: 2px solid #FFFFFF;
     }
-    
+
     .telegram-dialog {
         &-content {
             font-size: 20px;
