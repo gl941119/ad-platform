@@ -188,7 +188,7 @@ const zh = {
         timer: '加入日期',
         userAccout: '受邀用户',
         getAfd: '获取AFD',
-        inviteInfo: '嘿 韭菜们，被割了吗？我养你啊！输入我的邀请码即得99AFDT，速度上车注册。',
+        inviteInfo: '被割了吗？来阿凡达，我养你啊！送上熊市屯币攻略，邀你注册瓜分99999个AFDT，填邀请码注册就送66AFDT ，每邀请一位再送33AFDT，每日挖币，再享分红！',
     },
     setting: { //账号设置
         setInfo: '设置信息',

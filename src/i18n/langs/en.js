@@ -188,7 +188,7 @@ const en = {
         timer: 'Date of joining',
         userAccout: 'Invited users',
         getAfd: 'Get AFD',
-        inviteInfo: 'Hey investor,have you suffered a loss?I will feed you! Enter my invitation code and register quickly to get 99AFDT.',
+        inviteInfo: 'Hey investor,have you suffered a loss?Come to AFD Chain ,I will feed you!Send a bear market strategy to you，invite you to register and divide 99999 AFDT.Registration with invitation code can get 66AFDT ，and 33AFDT for each invitation.Mining every day and enjoy bonuses!',
     },
     setting: { //账号设置
         setInfo: 'Set',
