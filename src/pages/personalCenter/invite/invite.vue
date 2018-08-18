@@ -57,7 +57,7 @@
             return {
                 inviteCode: '',
                 inviteData: [],
-                currentPage: 0,
+                currentPage: 1,
                 size: 5,
                 total: 0,
                 accountId: this.$store.state.id || Cache.getSession('bier_userid'),
@@ -165,10 +165,6 @@
                 })
             },
             handleCurrentChange(page) {
-                this.size = page;
-                this.queryInviteData();
-            },
-            handleSizeChange(page) {
                 this.currentPage = page;
                 this.queryInviteData();
             },
