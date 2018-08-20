@@ -10,7 +10,7 @@
 				<div class="purse_address">
 					<label>{{$t('purse.eth')}}</label>
 					<div class="input">
-						<el-input v-model="purseAddress"></el-input>
+						<el-input v-model="purseAddress" :disabled="disabled"></el-input>
 					</div>
 					<el-button class="purse_address_bind" :disabled="disabled" @click="bind">{{$t('buttonAll.bind')}}</el-button>
 				</div>
@@ -53,7 +53,6 @@
 		},
 		mounted(){
 			this.queryWallet();
-
 		},
 		methods: {
 			bind(){
