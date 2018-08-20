@@ -7,7 +7,7 @@
 				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
 				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
-			<el-button class="advertising_revenue_top_money changeColor" @click="withdraw()" disabled>{{$t('project.withdraw')}}</el-button>
+			<el-button class="advertising_revenue_top_money changeColor" @click="withdraw()">{{$t('project.withdraw')}}</el-button>
 			<span class="advertising_revenue_top_info">{{$t('header.info')}}</span>
 		</div>
 		<!--提現-->
@@ -143,7 +143,7 @@
 		computed: {
             handlingFee: {
                 get(){
-                    return this.money*1/1000;
+                    return this.money*2/1000;
                 },
             },
             slangChange() {
@@ -313,12 +313,12 @@
 	    margin-right: -58px;
 	}
 	/*暂停提币样式*/
-	.changeColor{
-		background: #c0c4cc !important;
-		span{
-			cursor: default !important;
-		}
-	}
+	// .changeColor{
+	// 	background: #c0c4cc !important;
+	// 	span{
+	// 		cursor: default !important;
+	// 	}
+	// }
 	.advertising_revenue_top_info{
 		margin-left: 50px;
 		font-size:24px;
