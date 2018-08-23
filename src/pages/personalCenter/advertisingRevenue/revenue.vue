@@ -276,7 +276,7 @@
 	@import '../../../assets/css/withdraw.scss';
     @import '../../../assets/css/newProject.scss';
     .minWidth{
-        min-width: 50px;
+        min-width: 70px;
     }
 	.advertising_revenue{
 		background: #FFFFFF;
