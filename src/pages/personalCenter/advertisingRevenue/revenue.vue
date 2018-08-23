@@ -4,7 +4,7 @@
 			<h3>AFDT</h3>
 			<ul class="advertising_revenue_top_item">
 					
-				<li class="advertising_revenue_top_item_li active">{{balance}} AFDT</li>
+				<li class="advertising_revenue_top_item_li minWidth">{{balance}} AFDT</li>
 				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
 			<el-button class="advertising_revenue_top_money changeColor" @click="withdraw()" disabled>{{$t('project.withdraw')}}</el-button>
@@ -274,7 +274,10 @@
 	@import '../../../assets/css/global.scss';
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
-	@import '../../../assets/css/newProject.scss';
+    @import '../../../assets/css/newProject.scss';
+    .minWidth{
+        min-width: 50px;
+    }
 	.advertising_revenue{
 		background: #FFFFFF;
 		padding: 20px;
