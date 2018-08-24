@@ -100,7 +100,7 @@
 				</el-form>
 			</div>
 		</el-dialog>
-
+        <!--问答弹窗-->
         <el-dialog class="telegram-dialog" :title="$t('header.tips')" :visible.sync="telegramVisible" width="360px">
             <div class="telegram-dialog-content">{{$t('header.tipMsg')}}</div>
             <div class="telegram-dialog-footer" @click="IGotIt" slot="footer">{{$t('header.got')}}</div>

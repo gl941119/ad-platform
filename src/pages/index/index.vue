@@ -339,7 +339,6 @@
                         font-family:'PingFangSC-Light';
                         color:rgba(111,111,111,1);
                         line-height:34px;
-                        
                     }
 				}
 			}

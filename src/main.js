@@ -62,6 +62,7 @@ router.beforeEach((to, from, next) => {
         console.error('router skip error_>', error)
     }
     if (to.matched.some(record => record.meta.requiresAuth)) {
+        console.log(to.matched.some(record => record.meta.requiresAuth),token)
         if (!token) {
             next({name: 'index'})
         } else {
