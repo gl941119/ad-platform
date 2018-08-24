@@ -355,6 +355,8 @@ const en = {
         passReview: 'Pending transfer (approval)',
         onReview: 'Pending review',
         refuseReview: 'Unqualified review',
+        fail: 'Transfer failed',
+        transfer: 'Transfer',
     },
     adServing: {
         adSer: 'Ad serving',

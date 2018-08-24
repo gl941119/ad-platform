@@ -353,6 +353,8 @@ const zh = {
         passReview: '待转账（审核通过）',
         onReview: '待审核',
         refuseReview: '审核不通过',
+        fail: '转账失败',
+        transfer: '转账中',
     },
     adServing: {
         adSer: '广告投放',

@@ -72,6 +72,8 @@
 								<div v-if="scope.row.status==2">{{$t('accountFlow.passReview')}}</div>
 								<div v-if="scope.row.status==3">{{$t('accountFlow.onReview')}}</div>
 								<div v-if="scope.row.status==4">{{$t('accountFlow.refuseReview')}}</div>
+                                <div v-if="scope.row.status==5">{{$t('accountFlow.fail')}}</div>
+								<div v-if="scope.row.status==6">{{$t('accountFlow.transfer')}}</div>
 							</template>
 						</el-table-column>
 						<el-table-column prop="money" width="200" :label="$t('accountFlow.amountOfMoney')">
