@@ -903,7 +903,10 @@
 	@import '../../../assets/css/global.scss';
 	@import '../../../assets/css/variable.scss';
 	@import '../../../assets/css/withdraw.scss';
-	@import '../../../assets/css/upload.css';
+    @import '../../../assets/css/upload.css';
+    button{
+        cursor: pointer;
+    }
 	.accountSettings {
 		padding: 0 28px;
 		&_content {
