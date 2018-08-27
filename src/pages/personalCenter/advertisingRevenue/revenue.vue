@@ -29,7 +29,7 @@
 					<li class="withdraw_item_li"><label>{{$t('passwordInfo.tradePassword')}}：</label>
 						<input type="password" style="display:none;"  />
 						<!--<input class="tixian" type="text" onfocus="this.type='password'" />-->
-						<input type="text" onfocus="this.type='password'" class="tixian" :class="[errors.has('tradePassword')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="tradePassword" :placeholder="$t('passwordInfo.enterTradePassword')" v-model="tradePassword" />
+						<input type="password" onfocus="this.type='password'" class="tixian" :class="[errors.has('tradePassword')?'llo':'']" :data-vv-as="$t('messageNotice.emptyTradePassword')" v-validate data-vv-rules="required" name="tradePassword" :placeholder="$t('passwordInfo.enterTradePassword')" v-model="tradePassword" />
 					</li>
 					<span class="is-danger" v-show="errors.has('tradePassword')">{{ errors.first('tradePassword') }}</span>
 					<div style="text-align: center;">
@@ -191,7 +191,8 @@
 								flag:true,
 							}).then(res => {
 								this.money = '',
-								this.tradePassword = '',
+                                this.tradePassword = '',
+                                this.withdrawView = false;
 								this.$message({
 									message:this.$t('accountFlow.withdraw'),
 									type:'success'
@@ -259,7 +260,8 @@
 						break;
 					case 1:
 						this.withdrawView = !this.withdrawView;
-						this.money = '';
+                        this.money = '';
+                        this.tradePassword = '';
 						break;
 					case 2:
 						this.$message(this.$t('messageNotice.onAuth'))
@@ -279,6 +281,7 @@
     @import '../../../assets/css/newProject.scss';
     .minWidth{
         min-width: 70px;
+        color:black;
     }
 	.advertising_revenue{
 		background: #FFFFFF;
