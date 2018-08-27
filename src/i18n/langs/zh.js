@@ -323,6 +323,7 @@ const zh = {
         useBalance: '可用余额',
         freeze: '冻结',
         handlingFee: '手续费',
+        arrival: '实际到账',
         revenue: '广告收益账户',
         myWallet: '我的钱包',
         withdrawal: '提现金额',

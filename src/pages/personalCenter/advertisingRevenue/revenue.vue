@@ -7,7 +7,7 @@
 				<li class="advertising_revenue_top_item_li minWidth">{{balance}} AFDT</li>
 				<!--<li class="advertising_revenue_top_item_li"><span class="advertising_revenue_top_item_li_line">|</span>{{$t('project.freeze')}} 1000.61254223 AFDT</li>-->
 			</ul>
-			<el-button class="advertising_revenue_top_money changeColor" @click="withdraw()" disabled>{{$t('project.withdraw')}}</el-button>
+			<el-button class="advertising_revenue_top_money changeColor" @click="withdraw()">{{$t('project.withdraw')}}</el-button>
 			<span class="advertising_revenue_top_info">{{$t('header.info')}}</span>
 		</div>
 		<!--提現-->
@@ -17,6 +17,7 @@
 				<ul class="withdraw_item">
 					<li class="withdraw_item_li"><label>{{$t('project.useBalance')}}</label><span class="span">{{balance}}</span></li>
 					<li class="withdraw_item_li"><label>{{$t('project.handlingFee')}}</label><span class="span">{{handlingFee}} AFDT</span></li>
+                    <li class="withdraw_item_li"><label>{{$t('project.arrival')}}</label><span class="span">{{arrival}} AFDT</span></li>
 					<li class="withdraw_item_li">
 						<span>{{$t('project.revenue')}}</span><i class="custom-element-icon-jiantou1-copy"></i><span>{{$t('project.myWallet')}}</span>
 					</li>
@@ -147,6 +148,12 @@
                 get(){
                     return this.money*2/1000;
                 },
+            },
+            arrival:{
+                get(){
+                    let arrival = this.money - this.handlingFee;
+                    return arrival;
+                }
             },
             slangChange() {
 				var lang = this.$store.state.slangChange || this.$i18n.locale;
