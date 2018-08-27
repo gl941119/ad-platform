@@ -324,7 +324,7 @@ const en = {
         useBalance: 'Available Balance ',
         freeze: 'Freeze',
         handlingFee: ' Fee',
-        arrival: 'Actually paid-in amount',
+        arrival: 'Amount to account',
         revenue: ' Advertising revenue account ',
         myWallet: ' My wallet',
         withdrawal: 'Withdrawal',
