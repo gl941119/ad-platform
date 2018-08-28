@@ -2,7 +2,7 @@ import "babel-polyfill";
 import Vue from 'vue'
 import router from '@/router'
 import store from '@/store'
-import App from './App'
+import App from './APP'
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import VueAnalytics from 'vue-analytics';
 import advertItemCom from '@/components/index-com/advert-item';
