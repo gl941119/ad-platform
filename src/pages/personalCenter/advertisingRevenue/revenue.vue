@@ -229,7 +229,8 @@
 			type(tab, event){
 				this.value = tab.$attrs.value;
 				this.startTime = '';
-				this.endTime = '';
+                this.endTime = '';
+                this.currentPage = 1;
 				this.revenueDatas();
 			},
 			revenueDatas() {
