@@ -164,7 +164,7 @@
 			}
         },
 		mounted() {
-			this.BasicInformation();
+			this.basicInformation();
 		},
 		watch:{
 			money(){
@@ -212,7 +212,7 @@
 			getHandlingFee() {
 				return  this.money*2/1000;
 			},
-			BasicInformation() {
+			basicInformation() {
 				Request({
 					url: 'QueryRevenueBasicInformation',
 					data: {
