@@ -12,6 +12,7 @@
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'purse'}"><span>{{$t('personal.purse')}}</span></router-link>
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'revenue'}"><span>{{$t('personal.revenue')}}</span></router-link>
+                        <!-- arr -->
 						<!-- <router-link tag="li" v-if="isCheck == 1 || isCheck == 3" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">{{$t('personal.main')}}</router-link> -->
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
