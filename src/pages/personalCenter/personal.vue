@@ -12,7 +12,7 @@
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'purse'}"><span>{{$t('personal.purse')}}</span></router-link>
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'revenue'}"><span>{{$t('personal.revenue')}}</span></router-link>
-						<router-link tag="li" v-if="isCheck == 1 || isCheck == 3" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">{{$t('personal.main')}}</router-link>
+						<!-- <router-link tag="li" v-if="isCheck == 1 || isCheck == 3" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">{{$t('personal.main')}}</router-link> -->
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'crowdfunding'}">{{$t('personal.crowdfunding')}}</router-link>
@@ -21,7 +21,7 @@
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'settings'}">{{$t('personal.settings')}}</router-link>
 					</ul>
 					<ul class="bierinc-main-container-aside-menu">
-						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'adserving'}">{{$t('personal.adserving')}}</router-link>
+						<!-- <router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'adserving'}">{{$t('personal.adserving')}}</router-link> -->
 						<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'project'}">{{$t('personal.project')}}</router-link>
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">投资人</router-link>-->
 						<!--<router-link tag="li" class="bierinc-main-container-aside-menu-li" :to="{ name: 'main'}">合伙人</router-link>-->
