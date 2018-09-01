@@ -141,3 +141,7 @@
 .register-container-right-inputBox-item .el-input{
     width: 372px; 
 }
+input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #999999;
+}

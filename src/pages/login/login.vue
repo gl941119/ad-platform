@@ -27,8 +27,9 @@
                         <el-button class="register-container-right-inputBox-item-verifyCode" :class="{'sendCode':!disabled}" v-else disabled type="text">(<span>{{num}}</span>s){{$t('register.again')}}</el-button>
                     </div>
                     <div v-if="index===1" class="register-container-right-inputBox-item" slot="reference">
-                        <input style="display:none;" type="password"/>
-                        <input name='password' onfocus="this.type='password'" v-validate="{required: true, regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!+-^%*#?&]{8,16}$/}" class="register-container-right-inputBox-item-input" placeholder="请输入密码" autocomplete="off"
+                        <input style="display:none;" name="text" type="text"/>
+                        <input style="display:none;" name="pasword" type="password"/>
+                        <input name='password' type="password" v-validate="{required: true, regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!+-^%*#?&]{8,16}$/}" class="register-container-right-inputBox-item-input" placeholder="请输入密码" autocomplete="off"
                             v-model="register.password" />
                         <span class="is-danger" v-show="errors.has('password')">{{errors.first('password')}}</span>
                         <i class="custom-element-icon-mima"></i>
