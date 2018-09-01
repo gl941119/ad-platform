@@ -3,25 +3,25 @@ import Web3 from 'web3';
 export function mainNetContract(abi, address) {
     // console.log('window.web3->', window.web3);
     // let web3;
-    var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
+    var web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/006a20906c5c42f5a009c20d63988dd7'));
     // var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
-     // if (typeof web3 !== 'undefined') {
-     //     console.log('test');
-     // } else {
-     //     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-     //     console.log('net-->');
-     //     web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
-     // }
+    // if (typeof web3 !== 'undefined') {
+    //     console.log('test');
+    // } else {
+    //     // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+    //     console.log('net-->');
+    //     web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
+    // }
 
-    let customContract = web3.eth.contract(abi).at(address);
+    const customContract = web3.eth.contract(abi).at(address);
     // console.log('custom instance ->',customContract);
-    let start = customContract.START();
-    let days = customContract.DAYS();
-    let raisedAmount = customContract.raisedAmount();
-    let cap = customContract.CAP();
-    let rate = customContract.RATE();
-    let minContribution = customContract.minContribution();
-    let maxContribution = customContract.maxContribution();
+    const start = customContract.START();
+    const days = customContract.DAYS();
+    const raisedAmount = customContract.raisedAmount();
+    const cap = customContract.CAP();
+    const rate = customContract.RATE();
+    const minContribution = customContract.minContribution();
+    const maxContribution = customContract.maxContribution();
     return {
         startTime: start.toNumber(),
         sustainDay: days.toNumber(),
@@ -30,23 +30,8 @@ export function mainNetContract(abi, address) {
         rate: rate.toNumber(),
         minContribution: web3.fromWei(minContribution, 'ether').toNumber(),
         maxContribution: web3.fromWei(maxContribution, 'ether').toNumber(),
-    }
+    };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // let myWeb3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/006a20906c5c42f5a009c20d63988dd7"));
 // console.log('hhah-,m->', myWeb3, myWeb3.currentProvider);
@@ -60,9 +45,9 @@ export function mainNetContract(abi, address) {
 // console.log('ADFFFFFFF->', myName, mySymbol);
 // let total = myContractInstance.totalSupply();
 // console.log('gggggggg->', total);
-    // .then(result => {
-    //     console.log('ADFFFFFFF->', result);
-    // })
+// .then(result => {
+//     console.log('ADFFFFFFF->', result);
+// })
 
 // wei是以太坊上的的最小单位，ether小数点后18位为一个wei
 // var balanceWei = myWeb3.eth.getBalance("0xdad085eb10fefc2c2ddac7dc9d22c7dbf1a78480").toNumber();
