@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+const Register = () => import('@/pages/login/register');
+const Login = () => import('@/pages/login/login');
 
 const IndexCom = () => import('@/pages/index/index');
 const CrowdSaleCom = () => import('@/pages/crowdsale-detail/crowdsale');
@@ -39,6 +41,16 @@ const router = new VueRouter({
 			path: '/index',
 			name: 'index',
 			component: IndexCom,
+        },
+        {
+			path: '/register',
+			name: 'register',
+			component: Register,
+        },
+        {
+			path: '/login',
+			name: 'login',
+			component: Login,
 		},
 		{
 			path: '/crowdsale',

@@ -39,5 +39,7 @@ export default {
 	'1037':'Transaction password error',
     '1038': 'Email is not registered',
     '1039':'Please mining first',
-	'1040':'Please set the transaction password in the account settings',
+    '1040':'Please set the transaction password in the account settings',
+    '1041':'错误的手机号码',
+    '1042':'系统繁忙，请稍后重试',
 }
