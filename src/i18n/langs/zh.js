@@ -328,7 +328,7 @@ const zh = {
         myWallet: '我的钱包',
         withdrawal: '提现金额',
         enterMoney: '请输入提现金额',
-        emptyMoney: '提现金额至少为1000',
+        emptyMoney: '提现金额至少为10000',
         notic: '充值金额到账后，相应金额会自动出现在广告主账户中',
     },
     accountFlow: {

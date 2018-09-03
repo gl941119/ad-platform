@@ -23,7 +23,7 @@
 					</li>
 					<li class="withdraw_item_li">
 						<label>{{$t('project.withdrawal')}}：</label>
-						<input class="tixian" autocomplete="off" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{required:true,regex:/^\d{4,}/}" name="money" v-on:change="getHandlingFee" :placeholder="$t('project.enterMoney')" v-model="money" />
+						<input class="tixian" autocomplete="off" :class="[errors.has('money')?'llo':'']" :data-vv-as="$t('project.emptyMoney')" v-validate="{required:true,regex:/^\d{5,}/}" name="money" v-on:change="getHandlingFee" :placeholder="$t('project.enterMoney')" v-model="money" />
 					</li>
 					<span class="is-danger" v-show="errors.has('money')">{{ errors.first('money') }}</span>
 					<span class="is-danger" v-if="insufficient" >{{$t('accountFlow.insufficient')}}</span>
