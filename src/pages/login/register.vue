@@ -116,8 +116,12 @@
                             this.num = 60;
                         }
                     }, 1000);
+                    // this.$message({
+                    //     message: this.utils.judgeLanguage(this.language, res.message),
+                    //     type: 'success'
+                    // });
                     this.$message({
-                        message: this.utils.judgeLanguage(this.language, res.message),
+                        message: '验证码发送成功',
                         type: 'success'
                     });
                 }).catch(console.error)
