@@ -1,9 +1,9 @@
 const protocol = window.location.protocol;
 const url = {
-    localTestUrl: protocol === 'http:' ? 'http://192.168.1.129:8080/' : 'https://192.168.1.129:8090/',
-    // localTestUrl: 'https://192.168.1.129:8080/',
-    productUrl: protocol === 'http:' ? 'http://192.168.1.254:8080/' : 'https://192.168.1.254:8090/',
-    // productUrl: 'https://192.168.1.254:8080/',
+    // localTestUrl: protocol === 'http:' ? 'http://192.168.1.129:8080/' : 'https://192.168.1.129:8090/',
+    localTestUrl: 'http://192.168.1.129:8080/',
+    // productUrl: protocol === 'http:' ? 'http://192.168.1.254:8080/' : 'https://192.168.1.254:8090/',
+    productUrl: 'http://192.168.1.129:8080/',
 };
 
 export default {

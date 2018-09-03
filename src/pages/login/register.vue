@@ -5,19 +5,14 @@
                 <img src="../../assets/imgs/img/register.png" />
             </div>
             <div class="register-container-right">
-                <ul class="register-container-right-item">
-                    <li v-for="(item, index) in liData" :key="index" @click="clickLi(index)" :class="{'active':item.style}" class="register-container-right-item-li">{{item.value}}</li>
-                </ul>
                 <div class="register-container-right-inputBox">
-                    <div class="register-container-right-inputBox-item" v-if="index===0">
+                    <div class="register-container-right-inputBox-item">
                         <el-select v-model="numberArea" disabled>
                         </el-select>
                     </div>
                     <div class="register-container-right-inputBox-item">
-                        <input v-if="index===0" v-validate="{required: true, regex: /^((13|14|15|17|18)[0-9]{1}\d{8})$/}" name="phoneNumber" class="register-container-right-inputBox-item-input" placeholder="请输入您的常用手机号码" autocomplete="off" v-model="register.phoneNumber" />
+                        <input v-validate="{required: true, regex: /^((13|14|15|17|18)[0-9]{1}\d{8})$/}" name="phoneNumber" class="register-container-right-inputBox-item-input" placeholder="请输入您的常用手机号码" autocomplete="off" v-model="register.phoneNumber" />
                         <span class="is-danger" v-show="errors.has('phoneNumber')">{{errors.first('phoneNumber')}}</span>
-                        <input v-if="index===1" class="register-container-right-inputBox-item-input" placeholder="请输入您的常用邮箱" autocomplete="off" v-model="register.email" />
-                        <span class="is-danger" v-show="errors.has('email')">{{errors.first('email')}}</span>
                         <i class="custom-element-icon-zhanghu"></i>
                     </div>
                     <div class="register-container-right-inputBox-item">
@@ -78,23 +73,14 @@
         data() {
             return {
                 utils: new Utils(),
-                liData: [{
-                    value: '手机号',
-                    style: true,
-                }, {
-                    value: '邮箱',
-                    style: false,
-                }],
                 register: {
                     phoneNumber: '',
-                    email: '',
                     code: '',
                     password: '',
                     oncePassword: '',
                     inviteCode: '',
                 },
                 numberArea: '+86 中国大陆',
-                index: 0,
                 disclaimerChecked: false,
                 disabled: true,
                 num: 60,
@@ -103,7 +89,6 @@
         methods: {
             sendVerifyCode() {
                 let {
-                    email,
                     phoneNumber,
                 } = this.register;
                 if (this.index === 0) {
@@ -114,20 +99,12 @@
                         });
                         return;
                     }
-                }else{
-                    if(!email){
-                        this.$message({
-                            message:'邮箱不能为空',
-                            type:'warning',
-                        });
-                        return;
-                    }
                 }
                 Request({
                     url: 'SendVerifyCode',
                     data: {
-                        email: email || phoneNumber,
-                        registerType: this.index,
+                        email: phoneNumber,
+                        registerType: 0,
                     }
                 }).then(res => {
                     this.disabled = false;
@@ -157,7 +134,6 @@
                             return;
                         }
                         let {
-                            email,
                             phoneNumber,
                             code,
                             password,
@@ -167,10 +143,10 @@
                             url: 'Register',
                             data: {
                                 authCode: code,
-                                email: email || phoneNumber,
+                                email: phoneNumber,
                                 password,
                                 inviteCode,
-                                registerType: this.index,
+                                registerType: 0,
                             },
                             flag: true
                         }).then(res => {
@@ -184,19 +160,6 @@
                         });
                     }
                 });
-            },
-            clickLi(index) {
-                this.index = index;
-                this.liData.forEach((item, index) => {
-                    item.style = false;
-                });
-                this.liData[index].style = true;
-                this.register.phoneNumber = '';
-                this.register.email = '';
-                this.register.code = '';
-                this.register.password = '';
-                this.register.oncePassword = '';
-                this.register.inviteCode = '';
             },
         }
     }
@@ -217,45 +180,7 @@
 
             &-right {
                 float: left;
-
-                &-item {
-                    height: 36px;
-
-                    &-li {
-                        width: 187px;
-                        height: 36px;
-                        float: left;
-                        border: 1px solid rgba(187, 187, 187, 1);
-                        text-align: center;
-                        line-height: 36px;
-                        font-size: 14px;
-                        color: rgba(51, 51, 51, 1);
-                        box-sizing: border-box;
-
-                        &.active {
-                            color: rgba(255, 149, 0, 1);
-                            border: 1px solid rgba(255, 149, 0, 1);
-                            border-right: 1px solid #ff9500 !important;
-                            border-left: 1px solid #ff9500 !important;
-                        }
-                    }
-                    &-li:hover {
-                        cursor: pointer;
-                    }
-                    &-li:first-child {
-                        border-right: 0;
-                        border-radius: 4px 0 0 4px;
-                    }
-
-                    &-li:last-child {
-                        border-left: 0;
-                        border-radius: 0 4px 4px 0;
-                    }
-                }
-
                 &-inputBox {
-                    padding-top: 60px;
-
                     &-item {
                         margin-bottom: 24px;
                         position: relative;
