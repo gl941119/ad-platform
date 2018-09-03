@@ -13,7 +13,7 @@
                 </ul>
                 <div class="register-container-right-inputBox">
                     <div class="register-container-right-inputBox-item">
-                        <input v-if="index===0" v-validate="{required: true, regex: /^((13|14|15|17|18)[0-9]{1}\d{8})$/}" name="phoneNumber" class="register-container-right-inputBox-item-input" placeholder="请输入手机号" autocomplete="off" v-model="register.phoneNumber" />
+                        <input v-if="index===0" v-validate="{required: true}" name="phoneNumber" class="register-container-right-inputBox-item-input" placeholder="请输入手机号" autocomplete="off" v-model="register.phoneNumber" />
                         <span class="is-danger" v-show="errors.has('phoneNumber')">{{errors.first('phoneNumber')}}</span>
                         <input v-if="index===1" name="account" class="register-container-right-inputBox-item-input" placeholder="请输入邮箱或手机号" autocomplete="off" v-model="register.account" />
                         <span class="is-danger" v-show="errors.has('account')">{{errors.first('account')}}</span>
@@ -29,7 +29,7 @@
                     <div v-if="index===1" class="register-container-right-inputBox-item" slot="reference">
                         <input style="display:none;" name="text" type="text"/>
                         <input style="display:none;" name="pasword" type="password"/>
-                        <input name='password' type="password" v-validate="{required: true, regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!+-^%*#?&]{8,16}$/}" class="register-container-right-inputBox-item-input" placeholder="请输入密码" autocomplete="off"
+                        <input name='password' type="password" v-validate="{required: true}" class="register-container-right-inputBox-item-input" placeholder="请输入密码" autocomplete="off"
                             v-model="register.password" />
                         <span class="is-danger" v-show="errors.has('password')">{{errors.first('password')}}</span>
                         <i class="custom-element-icon-mima"></i>
