@@ -8,10 +8,7 @@ const dictionary = {
     zh: {
         messages: {
             required: (field) => field + '不能为空',
-            regex: (field) => field,
-            max: (field) => field,
             email: () => '请输入正确的邮箱格式',
-            numeric: (field) => field,
         },
         attributes: {
             email: '邮箱',
