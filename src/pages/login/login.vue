@@ -194,6 +194,10 @@
                             flag: true,
                         }).then(res => {
                             this.handleLoginSucc(res.data);
+                            this.$message({
+                                message: this.utils.judgeLanguage(this.language, res.message),
+                                type: 'success'
+                            });
                             if(this.disclaimerChecked){
                                 var exp = new Date();
                                 exp.setTime(exp.getTime() + 1000 * 60 * 60 * 24 * 7); //这里表示保存7天
