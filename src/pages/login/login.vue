@@ -417,6 +417,7 @@
 
                         &-span {
                             vertical-align: middle;
+                            line-height: 19px;
                             &.statement {
                                 float: right;
                                 background: transparent;
