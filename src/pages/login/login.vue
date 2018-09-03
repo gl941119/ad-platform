@@ -252,7 +252,6 @@
 
         &-container {
             margin-top: 48px;
-
             &-left {
                 width: 348px;
                 float: left;

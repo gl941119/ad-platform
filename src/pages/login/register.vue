@@ -264,7 +264,7 @@
 
                         &-span {
                             vertical-align: middle;
-
+                            line-height: 19px;
                             &.statement {
                                 color: #1367CE;
                             }
