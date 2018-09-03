@@ -129,8 +129,12 @@
                             this.num = 60;
                         }
                     }, 1000);
+                    // this.$message({
+                    //     message: this.utils.judgeLanguage(this.language, res.message),
+                    //     type: 'success'
+                    // });
                     this.$message({
-                        message: this.utils.judgeLanguage(this.language, res.message),
+                        message: '验证码发送成功',
                         type: 'success'
                     });
                 }).catch(console.error)
@@ -151,10 +155,14 @@
                             },
                             flag: true,
                         }).then(res => {
+                            // this.$message({
+                            //     message: this.utils.judgeLanguage(this.language, res.message),
+                            //     type: 'success'
+                            // });
                             this.$message({
-                                message: this.utils.judgeLanguage(this.language, res.message),
-                                type: 'success'
-                            });
+                        message: '登录成功',
+                        type: 'success'
+                    });
                             this.handleLoginSucc(res.data);
                             if(this.disclaimerChecked){
                                 var exp = new Date();
@@ -194,8 +202,12 @@
                             flag: true,
                         }).then(res => {
                             this.handleLoginSucc(res.data);
+                            // this.$message({
+                            //     message: this.utils.judgeLanguage(this.language, res.message),
+                            //     type: 'success'
+                            // });
                             this.$message({
-                                message: this.utils.judgeLanguage(this.language, res.message),
+                                message: '登录成功',
                                 type: 'success'
                             });
                             if(this.disclaimerChecked){
