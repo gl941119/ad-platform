@@ -18,7 +18,6 @@
     export default {
         data() {
             return {
-                accountId: this.$store.state.id || Cache.getSession('bier_userid'),
                 token: this.$store.state.token || Cache.getSession("bier_token"),
                 copyValue: '',
             }
@@ -34,8 +33,7 @@
             },
             inviteCode: {
                 get() {
-                    let code = this.$store.state.inviteCode || Cache.getSession("bier_inviteCode");
-                    return code;
+                    return this.$store.state.inviteCode;
                 },
                 set() {
 
@@ -50,8 +48,14 @@
                     this.language = val;
                 }
             },
+            accountId(){
+                return this.$store.state.id;
+            },
         },
         watch: {
+            accountId(val){
+                this.getInviteCode(val)
+            },
             inviteCode(val) {
                 this.inviteCode = val;
                 this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode=' + this.inviteCode;
@@ -64,6 +68,18 @@
             this.copyValue = this.language + 'http://www.afdchain.com/#/index?type=register&inviteCode=' + this.inviteCode;
         },
         methods: {
+            getInviteCode(value){
+                Request({
+                    url: 'QueryInviteCode',
+                    data: {
+                        accountId: value,
+                    },
+                    type: 'get'
+                }).then(res => {
+                    this.$store.commit('setInviteCode', res.data.inviteCode);
+                    Cache.setSession('bier_inviteCode', res.data.inviteCode);
+                })
+            },
             clickCopy() {
                 let clipboard = new Clipboard('.show-share-btn-text');
                 clipboard.on('success', e => {

@@ -56,7 +56,7 @@
                     <div class="register-container-right-inputBox-text agree">
                         <el-checkbox class="register-container-right-inputBox-text-checkbox" v-model="disclaimerChecked"></el-checkbox>
                         <span class="register-container-right-inputBox-text-span">我已阅读并同意</span>
-                        <span class="register-container-right-inputBox-text-span statement">《AFDChin用户协议》</span>
+                        <span @click="$router.push({name: 'userterm'})" class="register-container-right-inputBox-text-span statement">《AFDChin用户协议》</span>
                     </div>
                     <div class="register-container-right-inputBox-item">
                         <button class="register-container-right-inputBox-item-button" @click="registerSubmit">立即注册</button>
@@ -270,6 +270,7 @@
                             vertical-align: middle;
                             line-height: 19px;
                             &.statement {
+                                cursor: pointer;
                                 color: #1367CE;
                             }
                         }

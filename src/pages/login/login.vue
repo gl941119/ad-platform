@@ -37,7 +37,7 @@
                     <div v-if="index===1" class="register-container-right-inputBox-code">
                         <input placeholder="验证码" v-model="verifyCode" @keyup.enter="nowLogin()"/>
                         <div class="register-container-right-inputBox-code-img">
-                            <img width="102" height="38" :src="'data:image/png;base64, ' + base64Str">
+                            <img v-if="base64Str" width="102" height="38" :src="'data:image/png;base64, ' + base64Str">
 						</div>
                         <button  @click="getCode">看不清，换一张</button>
                     </div>

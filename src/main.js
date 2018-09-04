@@ -65,6 +65,11 @@ router.beforeEach((to, from, next) => {
     } catch (error) {
         console.error('router skip error_>', error);
     }
+    if (to.matched.some(rec => rec.meta.hideShare)) {
+        store.commit('setGlobalShow', 'hide');
+    } else {
+        store.commit('setGlobalShow', 'show');
+    }
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!token) {
             next({ name: 'index' });

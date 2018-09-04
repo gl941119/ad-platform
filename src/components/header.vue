@@ -58,9 +58,6 @@
                 select: this.$i18n.locale,
             }
         },
-        watch: {
-            
-        },
         computed: {
             userName: {
                 get() {

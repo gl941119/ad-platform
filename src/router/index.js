@@ -26,138 +26,141 @@ const AdvertisersDisclaimer = () => import('@/pages/personalCenter/advertisers/d
 const ForgetPasswordCom = () => import('@/pages/mass/forget-password');
 const UserRegisterTermCom = () => import('@/pages/mass/user-register-term');
 
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
         {
-			path: '/',
-			redirect: {
-				name: 'index'
-			},
-		},
-		{
-			path: '/index',
-			name: 'index',
-			component: IndexCom,
+            path: '/',
+            redirect: {
+                name: 'index',
+            },
         },
         {
-			path: '/register',
-			name: 'register',
-			component: Register,
+            path: '/index',
+            name: 'index',
+            component: IndexCom,
         },
         {
-			path: '/login',
-			name: 'login',
-			component: Login,
-		},
-		{
-			path: '/crowdsale',
-			name: 'crowdsale',
-			component: CrowdSaleCom,
-		},
-		{
-			path: '/icodetail/:id',
-			name: 'icodetail',
-			component: IcoDetailCom,
-		},
-		{
-			path: '/advertisement',
-			name: 'advertisement',
-			component: AdvertisementCom,
-		},
-		{
-			path: '/personalCenter',//个人中心
+            path: '/register',
+            name: 'register',
+            component: Register,
+            meta: { hideShare: true },
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
+            meta: { hideShare: true },
+        },
+        {
+            path: '/crowdsale',
+            name: 'crowdsale',
+            component: CrowdSaleCom,
+        },
+        {
+            path: '/icodetail/:id',
+            name: 'icodetail',
+            component: IcoDetailCom,
+        },
+        {
+            path: '/advertisement',
+            name: 'advertisement',
+            component: AdvertisementCom,
+        },
+        {
+            path: '/personalCenter', // 个人中心
             name: 'personalCenter',
-            meta: {requiresAuth: true},
-			component: PersonalCenter,
-			redirect: {
-				name: 'purse'
-			},
-			children: [
-				{
-					path: 'purse',//钱包
-					name: 'purse',
-					component: Purse,
-				},
-				{
-					path: 'revenue',//广告收益账户
-					name: 'revenue',
-					component: Revenue,
-				},
-				{
-					path: 'main',//广告主账户
-					name: 'main',
-					component: Main,
-				},
-				{
-					path: 'crowdfunding',//我的众筹
-					name: 'crowdfunding',
-					component: Crowdfunding,
-				},
-				{
-					path: 'invite',//邀请用户
-					name: 'invite',
-					component: Invite,
-				},
-				{
-					path: 'settings',//账号设置
-					name: 'settings',
-					component: Settings,
-				},
-				{
-					path: 'project',//众筹项目
-					name: 'project',
-					component: Project,
-				},
-				{
-					path: 'newCrowdfunding',//申请新的众筹
-					name: 'newCrowdfunding',
-					component: NewProject,
-				},
-				{
-					path: 'crowdfundingDetail/:id/:value',//众筹详情
-					name: 'crowdfundingDetail',
-					component: CrowdfundingDetail,
-				},
-				{
-					path: 'adserving',//广告主-整体情况查询
-					name: 'adserving',
-					component: Adserving,
-				},
-				{
-					path: 'advertisers/:value',//广告主-广告投放管理
-					name: 'advertisers',
-					component: Advertisers,
-				},
-			],
+            meta: { requiresAuth: true },
+            component: PersonalCenter,
+            redirect: {
+                name: 'purse',
+            },
+            children: [
+                {
+                    path: 'purse', // 钱包
+                    name: 'purse',
+                    component: Purse,
+                },
+                {
+                    path: 'revenue', // 广告收益账户
+                    name: 'revenue',
+                    component: Revenue,
+                },
+                {
+                    path: 'main', // 广告主账户
+                    name: 'main',
+                    component: Main,
+                },
+                {
+                    path: 'crowdfunding', // 我的众筹
+                    name: 'crowdfunding',
+                    component: Crowdfunding,
+                },
+                {
+                    path: 'invite', // 邀请用户
+                    name: 'invite',
+                    component: Invite,
+                },
+                {
+                    path: 'settings', // 账号设置
+                    name: 'settings',
+                    component: Settings,
+                },
+                {
+                    path: 'project', // 众筹项目
+                    name: 'project',
+                    component: Project,
+                },
+                {
+                    path: 'newCrowdfunding', // 申请新的众筹
+                    name: 'newCrowdfunding',
+                    component: NewProject,
+                },
+                {
+                    path: 'crowdfundingDetail/:id/:value', // 众筹详情
+                    name: 'crowdfundingDetail',
+                    component: CrowdfundingDetail,
+                },
+                {
+                    path: 'adserving', // 广告主-整体情况查询
+                    name: 'adserving',
+                    component: Adserving,
+                },
+                {
+                    path: 'advertisers/:value', // 广告主-广告投放管理
+                    name: 'advertisers',
+                    component: Advertisers,
+                },
+            ],
         },
         {
-			path: '/crowdfunding/disclaimer',//众筹免责声明
-			name: 'disclaimer',
-			component: Disclaimer,
-		},
-		{
-			path: '/advertisers/disclaimer',//众筹免责声明
-			name: 'advertisersDisclaimer',
-			component: AdvertisersDisclaimer,
-		},
-		{
-			path: '/resetpwd', // 忘记密码
-			name: 'resetpwd',
-			component: ForgetPasswordCom,
-		},
-		{
-			path: '/userterm', // 用户协议
-			name: 'userterm',
-			component: UserRegisterTermCom,
-		},
-        {path: '*', redirect: '/'}
+            path: '/crowdfunding/disclaimer', // 众筹免责声明
+            name: 'disclaimer',
+            component: Disclaimer,
+        },
+        {
+            path: '/advertisers/disclaimer', // 众筹免责声明
+            name: 'advertisersDisclaimer',
+            component: AdvertisersDisclaimer,
+        },
+        {
+            path: '/resetpwd', // 忘记密码
+            name: 'resetpwd',
+            component: ForgetPasswordCom,
+            meta: { hideShare: true },
+        },
+        {
+            path: '/userterm', // 用户协议
+            name: 'userterm',
+            component: UserRegisterTermCom,
+            meta: { hideShare: true },
+        },
+        { path: '*', redirect: '/' },
     ],
-    scrollBehavior (to, from, savedPosition) {
-        return { x: 0, y: 0 }
-    }
-})
+    scrollBehavior(to, from, savedPosition) {
+        return { x: 0, y: 0 };
+    },
+});
 
 export default router;
