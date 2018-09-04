@@ -1,4 +1,4 @@
-﻿import enLocale from './enE'
+﻿import enLocale from './enE';
 const en = {
     header: {
         home: 'Home',
@@ -13,7 +13,7 @@ const en = {
         tipMsg: 'Telegram need VPN',
         got: 'I got it',
         info: 'system maintenance，suspended withdrawals',
-        more: 'more'
+        more: 'more',
     },
     login: {
         login: 'Login',
@@ -31,12 +31,12 @@ const en = {
     forgetPassword: {
         forget: 'Forgot Password',
         passwordReset: 'Reset login password',
-        enterEmail: 'Email',
+        enterEmail: 'Email or Phone',
         resetPassword: 'Reset login password',
         finish: 'Finish',
         success: 'Password reset successful',
-        againLogin: 'Login again',
-        pleaseEnterEmail: 'Email',
+        againLogin: 'will automatically go to the login',
+        pleaseEnterEmail: 'Email or Phone',
         enterCode: 'Verification code',
         setPassword: 'Set login password, 8-16 characters, letters and numbers',
         next: 'Next',
@@ -57,7 +57,7 @@ const en = {
         enterOncePassword: 'ConfirmPassword',
         registerInviteCode: 'InviteCode',
         disclaimer: 'AFDCHAIN Terms of User',
-        agree: 'Agree & Register'
+        agree: 'Agree & Register',
     },
     passwordNotic: {
         one: '1. Password length must be between 8 and 16 characters.',
@@ -66,8 +66,8 @@ const en = {
         four: '4. The password cannot be the same as the account number.',
     },
     messageNotice: {
-        emailEmpty: ' Email cannot be empty',
-        emailFormat: ' The Email format is incorrect',
+        emailEmpty: ' Email or Phone cannot be empty',
+        emailFormat: ' The Email or Phone format is incorrect',
         oncePasswordEmpty: 'Confirm password cannot be empty',
         oncePasswordEqual: 'The ‘Confirm password’ does not match',
         passwordEmpty: 'Password cannot be EMPTY',
@@ -118,7 +118,7 @@ const en = {
         shareTiltle: 'Share',
         shareOne: 'Hey investor,have you suffered a loss?Come to AFD Chain ,I will feed you!Send a bear market strategy to you，invite you to register and divide 99999 AFDT.Registration with invitation code can get 66AFDT ，and 33AFDT for each invitation.Mining every day and enjoy bonuses!',
         shareCopy: 'copy',
-        warning: 'You have not logged in AFD Planet yet. To ensure that you can get more revenue, please log in and share later.'
+        warning: 'You have not logged in AFD Planet yet. To ensure that you can get more revenue, please log in and share later.',
     },
     crowdFunding: {
         all: ' All stages',
@@ -190,7 +190,7 @@ const en = {
         getAfd: 'Get AFD',
         inviteInfo: 'Hey investor,have you suffered a loss?Come to AFD Chain ,I will feed you!Send a bear market strategy to you，invite you to register and divide 99999 AFDT.Registration with invitation code can get 66AFDT ，and 33AFDT for each invitation.Mining every day and enjoy bonuses!',
     },
-    setting: { //账号设置
+    setting: { // 账号设置
         setInfo: 'Set',
         headUrl: 'Profile Pic.',
         nickname: 'Nickname',
@@ -236,7 +236,7 @@ const en = {
         nopass: 'The authentication application was not passed，please be noted',
         pass: 'The authentication was passed successfully',
     },
-    passwordInfo: { //更改密码、交易密码
+    passwordInfo: { // 更改密码、交易密码
         passwords: 'password',
         oldPassword: 'The original password ',
         newPassword: 'The new password ',
@@ -258,7 +258,7 @@ const en = {
         changeTradePassword: 'Change transaction password ',
         enterTradePassword: 'Please enter your transaction password ',
     },
-    personal: { //个人中心
+    personal: { // 个人中心
         purse: 'Wallet',
         revenue: 'Advertising revenue account ',
         main: "Advertiser's account ",
@@ -314,7 +314,7 @@ const en = {
         refuse: 'Review failed',
         statusUpdate: 'Status update time',
     },
-    project: { //广告收益账户以及主账户
+    project: { // 广告收益账户以及主账户
         balance: 'Balance',
         ethWalletAddress: 'ETH wallet address',
         withdraw: 'Withdrawal',
@@ -419,7 +419,7 @@ const en = {
         enterTechnology1: 'Please enter technology 1',
         enterTechnology2: 'Please enter technology 2',
         emptyProjectName: 'Project name cannot be empty (limited to 64 characters)',
-        emptyProjectDesc: 'Project description cannot be empty (limited to 512 characters)'
+        emptyProjectDesc: 'Project description cannot be empty (limited to 512 characters)',
     },
     tokenInfo: {
         token: 'Token issue',
@@ -501,7 +501,7 @@ const en = {
         enterEnglishName: 'Please enter the English name of the site',
         enterAddress: 'Please enter the site address',
     },
-    messageCode: { //后台返回数据
+    messageCode: { // 后台返回数据
         exceptions: ' System exception',
         success: 'Successful operation',
         failure: 'Operation failed ',
@@ -540,8 +540,9 @@ const en = {
         Wechat: 'Wechat public number',
         Cooperation: 'Cooperation',
         AFD: 'AFD CHAIN FOUNDATION',
-        LTD: 'LTD'
+        LTD: 'LTD',
     },
     ...enLocale,
 };
 export default en
+;
