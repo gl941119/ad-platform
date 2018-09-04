@@ -145,3 +145,8 @@ input:-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: #999999;
 }
+
+// el-step
+.el-steps--simple {
+    padding: 16px 6% !important;
+}
