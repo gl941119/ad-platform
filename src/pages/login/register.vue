@@ -81,7 +81,7 @@
                     inviteCode: '',
                 },
                 numberArea: '+86 中国大陆',
-                disclaimerChecked: false,
+                disclaimerChecked: true,
                 disabled: true,
                 num: 60,
             }
