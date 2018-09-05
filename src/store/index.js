@@ -21,7 +21,8 @@ export default new Vuex.Store({
         slangChange: Cache.getLocal('bier_langChange') || 'zh',
         heardUrl: Cache.getSession('bier_heardUrl'),
         registerVisible: false,
-        inviteCode: Cache.getSession('bier_inviteCode'),
+        inviteCode: Cache.getSession('bier_inviteCode'), // 自己生成的邀请码
+        registerCode: Cache.getSession('bier_register_code'), // 注册邀请码
     },
     mutations: {
         setUserId(state, val) {
@@ -71,6 +72,9 @@ export default new Vuex.Store({
         },
         setInviteCode(state, val) {
             state.inviteCode = val;
+        },
+        setRegisterCode(state, val) {
+            state.registerCode = val;
         },
     },
 });

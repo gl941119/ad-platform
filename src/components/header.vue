@@ -73,11 +73,17 @@
             },
         },
         mounted() {
-            // var arr = window.location.hash;
-            // this.registerModel.form.inviteCode = arr.split('=')[2];
             var token = Cache.getSession('bier_token');
             var id = Cache.getSession('bier_userid');
             !token && !id && this.getUserInfo()
+            var arr = window.location.hash;
+            var inviteCode = arr.split('=')[2];
+            console.log('invite code ->', arr, arr.split('='),  inviteCode);
+            if(inviteCode){
+                this.$store.commit('setRegisterCode', inviteCode);
+                Cache.setSession('bier_register_code', inviteCode);
+                this.$router.push({name:'register'});
+            }
         },
         methods: {
             goRegister(){

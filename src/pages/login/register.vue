@@ -78,7 +78,7 @@
                     code: '',
                     password: '',
                     oncePassword: '',
-                    inviteCode: '',
+                    inviteCode: this.$store.state.registerCode,
                 },
                 numberArea: '+86 中国大陆',
                 disclaimerChecked: true,
