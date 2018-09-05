@@ -54,6 +54,7 @@
         },
         watch: {
             accountId(val){
+                val &&
                 this.getInviteCode(val)
             },
             inviteCode(val) {
