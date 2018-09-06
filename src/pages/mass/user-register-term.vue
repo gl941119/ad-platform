@@ -26,7 +26,7 @@
         },
         methods: {
             goToIndex(){
-                this.$router.push({name: 'index'});
+                this.$router.push({name: 'register'});
                 this.$store.commit('setDialogModalVisible', 'register');
             }
         }

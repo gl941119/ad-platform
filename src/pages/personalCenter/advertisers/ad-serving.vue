@@ -202,7 +202,7 @@
 		            series: [{
 		                name: '销量',
 		                type: 'line',
-        				smooth: true,
+        				smooth: true,//是否平滑线展示
         				//区域线的渐变
         				itemStyle: {
 			                normal: {

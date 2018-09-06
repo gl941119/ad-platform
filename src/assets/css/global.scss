@@ -137,3 +137,16 @@
 .el-dialog .el-dialog__body {
     padding: 20px;
 }
+// register-numberArea
+.register-container-right-inputBox-item .el-input{
+    width: 372px; 
+}
+input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #999999;
+}
+
+// el-step
+.el-steps--simple {
+    padding: 16px 6% !important;
+}

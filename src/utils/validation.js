@@ -1,38 +1,38 @@
+import Vue from 'vue';
 import VeeValidate, {
-	Validator
+    Validator,
 } from 'vee-validate';
-import zh_CN from 'vee-validate/dist/locale/zh_CN';
-/**自定义验证信息 */
+import zh from 'vee-validate/dist/locale/zh_CN';
+/** 自定义验证信息 */
 const dictionary = {
-	zh_CN: {
-		messages: {
-//			title:()=>'请输入标题',
-			required: (field) => field,
-			regex:(field) => field,
-			max:(field) => field,
-			  email: (field) => field,
-			  numeric:(field) => field,
-		},
-		attributes: {
-			// userCode: '用户名',
-			// password: '密码',
-			// title:'标题',
-		}
-	}
+    zh: {
+        messages: {
+            required: (field) => field + '不能为空',
+            email: () => '请输入正确的邮箱格式',
+        },
+        attributes: {
+            email: '邮箱',
+            password: '密码',
+            oncePassword: '确认密码',
+            code: '验证码',
+            phoneNumber: '手机号',
+        },
+    },
 };
 
-/**配置验证器 */
-const Veeconfig = {
+Validator.localize({ zh });
+
+/** 配置验证器 */
+const VeeConfig = {
     errorBagName: 'errors', // change if property conflicts.
     fieldsBagName: 'fieldBags',
-	delay: 0,
-	locale: 'zh_CN',
-	dictionary: dictionary,
-	messages: null,
-  	events: 'blur',
-	strict: true
+    delay: 0,
+    messages: null,
+    locale: 'zh',
+    dictionary,
+    events: 'blur',
+    strict: true,
 };
-//Validator.updateDictionary(dictionary);
 
 // Validator.extend('phone', {
 //   messages: {
@@ -43,7 +43,4 @@ const Veeconfig = {
 //   }
 // });
 
-export {
-	VeeValidate,
-	Veeconfig
-}
+Vue.use(VeeValidate, VeeConfig);

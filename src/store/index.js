@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import Cache from '../utils/cache';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-	state: {
-		id: Cache.getSession('bier_userid') || Cache.getCookie('login_identify'),
-		username: Cache.getSession('bier_username'),
-		usernickname: Cache.getSession('bier_usernickname'),
+    state: {
+        id: Cache.getSession('bier_userid') || Cache.getCookie('login_identify'),
+        username: Cache.getSession('bier_username'),
+        usernickname: Cache.getSession('bier_usernickname'),
         token: Cache.getSession('bier_token') || Cache.getCookie('login_token'),
         dialogVisible: false, // share component visible
         conceptId: 0, // advert concept id
@@ -18,23 +18,24 @@ export default new Vuex.Store({
         change: false,
         bullsData: undefined,
         globalShow: Cache.getSession('globalShow') || 'show', // global share
-		slangChange: Cache.getLocal('bier_langChange') || 'zh',
+        slangChange: Cache.getLocal('bier_langChange') || 'zh',
         heardUrl: Cache.getSession('bier_heardUrl'),
         registerVisible: false,
-		inviteCode: '',
-	},
-	mutations: {
-		setUserId(state, val) {
-			state.id = val;
-		},
-		setUserName(state, val) {
-			state.username = val;
-		},
-		setUserNickName(state, val) {
-			state.usernickname = val;
-		},
-		setToken(state, val) {
-			state.token = val;
+        inviteCode: Cache.getSession('bier_inviteCode'), // 自己生成的邀请码
+        registerCode: Cache.getSession('bier_register_code'), // 注册邀请码
+    },
+    mutations: {
+        setUserId(state, val) {
+            state.id = val;
+        },
+        setUserName(state, val) {
+            state.username = val;
+        },
+        setUserNickName(state, val) {
+            state.usernickname = val;
+        },
+        setToken(state, val) {
+            state.token = val;
         },
         setDialogVisible(state, val) {
             state.dialogVisible = val;
@@ -63,14 +64,17 @@ export default new Vuex.Store({
         setGlobalShow(state, val) {
             state.globalShow = val;
         },
-		setHeardUrl(state, val) {
-			state.heardUrl = val;
-		},
-		setLanguage(state, val) {
-			state.slangChange = val;
+        setHeardUrl(state, val) {
+            state.heardUrl = val;
+        },
+        setLanguage(state, val) {
+            state.slangChange = val;
         },
         setInviteCode(state, val) {
-			state.inviteCode = val;
+            state.inviteCode = val;
         },
-	},
+        setRegisterCode(state, val) {
+            state.registerCode = val;
+        },
+    },
 });

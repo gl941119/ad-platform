@@ -13,6 +13,8 @@ export default {
     // Login and Register
     Register:'blockchainadvert/account/registered',
     Login: 'blockchainadvert/account/accountLogin',
+    QuicklyLogin: 'blockchainadvert/account/smslogin',
+    QuicklyLoginCode: 'blockchainadvert/account/send-smscode',
     GetVerifyFromSer: 'blockchainadvert/account/getValidateCode', // get verify from service
     SendVerifyCode: 'blockchainadvert/account/sendRegistCode', // email verify
     TelegramAuthorizeCB: 'blockchainadvert/authorize/telegram',

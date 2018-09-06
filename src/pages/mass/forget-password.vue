@@ -10,10 +10,9 @@
             <div v-show="currActive===2" class="forget-password-container-succ">
                 <i class="custom-element-icon-duihao"></i>
                 <div>{{$t('forgetPassword.success')}}</div>
-                <div>{{$t('forgetPassword.againLogin')}}</div>
+                <div>{{skip}}s {{$t('forgetPassword.againLogin')}}</div>
             </div>
             <el-form class="forget-password-container-form" 
-            @validate="forgetPwdValidate"
             :rules="forgetPwd.rule"
             ref="forgetPwdForm"
             :model="forgetPwd">
@@ -21,7 +20,6 @@
                     <el-input :placeholder="$t('forgetPassword.pleaseEnterEmail')"
                                 name="email" auto-complete="off" 
                                 v-model="forgetPwd.email"></el-input>
-                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
                 </el-form-item>
                 <el-form-item v-show="currActive===1" class="forget-password-container-form-item">
                     <el-input class="verify" :placeholder="$t('forgetPassword.enterCode')" auto-complete="off" 
@@ -51,16 +49,24 @@ function passTest(str) {
     // return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.*?[~/`!@#$%^&*()_+|{}?;:><\-\]\\[\/].*$/.test(str) && /^.{8,16}$/.test(str) && str !== this.registerModel.form.email
     return /^.*?[\d]+.*$/.test(str) && /^.*?[A-Za-z]/.test(str) && /^.{8,16}$/.test(str) && str !== this.forgetPwd.email
 }
+function validAccount(val) {
+    const reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+    const phoneReg = /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+    if (reg.test(val) || phoneReg.test(val)) {
+        return true;
+    }
+    return false;
+}
 export default {
     data(){
-        let emailValidate = validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), val => /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val));
+        let emailValidate = validateFun.validateTest(this.$t('messageNotice.emailEmpty'), this.$t('messageNotice.emailFormat'), validAccount);
         let passwordValidate = validateFun.validateTest(this.$t('messageNotice.passwordEmpty'), this.$t('messageNotice.passwordFormat'), passTest.bind(this));
         return {
             utils: new Utils(),
             currActive: 0,
-            btnDisabled: true,
             disabledVerify: true,
             num: 60,
+            skip: 10,
             forgetPwd: {
                 rule: {
                     email: [{validator: emailValidate, trigger: 'change'}],
@@ -72,13 +78,23 @@ export default {
             },
         }
     },
+    computed: {
+        btnDisabled(){
+            return !validAccount(this.forgetPwd.email);
+        }
+    },
     methods: {
         nextStep(){
+            const val = this.forgetPwd.email.indexOf('@');
+            const type = val > -1 ? 1 : 0;
             switch (this.currActive) {
                 case 0:
                     Request({
                         url: 'JudgeEmail',
-                        data: {email: this.forgetPwd.email},
+                        data: {
+                            email: this.forgetPwd.email,
+                            registerType: type,
+                        },
                     }).then(res => {
                         this.currActive = 1;
                     }).catch(console.error);
@@ -98,6 +114,14 @@ export default {
                                     flag: true
                                 }).then(res => {
                                     this.currActive = 2;
+                                    const timer = setInterval(() => {
+                                    this.skip--;
+                                    if (this.skip < 1) {
+                                        clearInterval(timer);
+                                        this.$router.push({name: 'login'});
+                                        this.skip = 10;
+                                    }
+                                }, 1000);
                                     this.$message({
                                         message: this.utils.judgeLanguage(this.$store.state.slangChange || this.$i18n.locale, res.message),
                                         type: 'success'
@@ -117,7 +141,7 @@ export default {
                 case 2:
                     this.$router.push({name: 'index'})
                     break;
-            
+
                 default:
                     break;
             }
@@ -129,10 +153,13 @@ export default {
         },
         sendVerify(){
             if(this.forgetPwd.email){
+                const val = this.forgetPwd.email.indexOf('@');
+                const type = val > -1 ? 1 : 0;
                 Request({
                     url: 'SendForgetPwdCode',
                     data: {
                         email: this.forgetPwd.email,
+                        registerType: type,
                     }
                 }).then(res => {
                     this.disabledVerify = false;
@@ -206,6 +233,7 @@ export default {
                 }
                 & .btn-disabled {
                     width: 130px;
+                    padding: 12px 5px;
                     background: #D8D8D8;
                     color: #fff;
                 }
@@ -220,7 +248,7 @@ export default {
             }
         }
         &-succ {
-            width: 150px;
+            width: 800px;
             margin: 70px auto 0;
             text-align: center;
             & i {
